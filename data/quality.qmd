@@ -1,0 +1,545 @@
+# Data Quality {#sec-data-quality}
+
+## Data Profiling {#sec-data-profiling}
+
+### The First Date with your Data
+
+Data profiling is one of the first steps to take when you encounter a data set for the first time. It is how you kick-start the exploratory data analysis (EDA). [@Borne_2021_profiling] refers to it as “having that first date with your data.” We are not looking to derive new insights from the data or to build amazing machine learning models at this stage; we want to create a high-level report of the data’s content and condition. We want to know what we are dealing with. Common questions and issues addressed during profiling are
+
+-   Which variables (attributes) are in the data?
+
+-   How many rows and columns are there?
+
+-   Which variables are quantitative (represent numbers), and which variables are qualitative (represent class memberships)
+
+-   Are qualitative variables coded as strings, objects, numbers?
+
+-   Are there complex data types such as JSON documents, images, audio, video encoded in the data?
+
+-   What are the ranges (min, max) of the variables. Are these reasonable or do they suggest outliers or measurement errors?
+
+-   What is the distribution of quantitative variables?
+
+-   What is the mean, median, and standard deviation of quantitative variables?
+
+-   What are the unique values of qualitative variables?
+
+-   Do coded fields such as ZIP codes, account numbers, email addresses, state codes have the correct format?
+
+-   Are there attributes that have only a single value?
+
+-   Are there duplicate entries?
+
+-   Are there missing values in one or more variables?
+
+-   What are the strengths and direction of pairwise associations between the variables?
+
+-   Are some attributes perfectly correlated, for example, birthdate and age or temperatures in degree Celsius and degree Fahrenheit.
+
+### California Housing Prices
+
+In this subsection we consider a data set on housing prices in California, based on the 1990 census and available on [Kaggle](https://www.kaggle.com/datasets/camnugent/california-housing-prices). The data contain information about geographic location, housing, and population within blocks. California has over 8,000 census tracts and a tract can have multiple block groups. There are over 20,000 census block groups and over 700,000 census blocks in California.
+
+The variables in the data are:
+
+| Variable           | Description                                                                                         |
+|--------------------|-----------------------------------------------------------------------------------------------------|
+| longitude          | A measure of how far west a house is; a higher value is farther west                                |
+| latitude           | A measure of how far north a house is; a higher value is farther north                              |
+| housing_median_age | Median age of a house within a block; a lower number is a newer building                            |
+| total_rooms        | Total number of rooms within a block                                                                |
+| total_bedrooms     | Total number of bedrooms within a block                                                             |
+| population         | Total number of people residing within a block                                                      |
+| households         | Total number of households, a group of people residing within a home unit, for a block              |
+| median_income      | Median income for households within a block of houses (measured in tens of thousands of US Dollars) |
+| median_house_value | Median house value for households within a block (measured in US Dollars)                           |
+| ocean_proximity    | Location of house with respect to ocean/sea                                                         |
+
+: Variables in the California Housing Prices data set. {.striped}
+
+The variable description is important metadata to understand the data. A variable such as `totalRooms` could be understood as the number of rooms in a building and the `medianHouseValue` could then mean the median of the houses that have that number of rooms. However, since the data are not for individual houses but blocks, `totalRooms` represents the sum of all the rooms in all the houses in that block.
+
+We start data profiling a pandas DataFrame of the data with getting basic info and a listing of the first few observations.
+
+```{python}
+import numpy as np
+import pandas as pd
+CA_houses = pd.read_csv("../datasets/CaliforniaHousing_1990.csv")
+
+CA_houses.info()
+CA_houses.head()
+
+```
+
+We can immediately answer several questions about the data:
+
+-   There are 20,640 rows and 10 columns
+
+-   Except for `ocean_proximity`, which is of object type (string), all other variables are stored as 64-bit floats. Variables `total_rooms`, `total_bedrooms`, `population`, and `households` are naturally integers; since they appeared in the CSV file with a decimal point, they were assigned a floating point data type.
+
+-   Only the `total_bedrooms` variable has missing values, 20,640 – 20,433 = 207 values for this variable are unobserved. This shows a high level of completeness of the data set. (More on missing values in the next section).
+
+-   The listing of the first five observations confirms that variables are counts or sums at the block-level, rather than data for individual houses.
+
+-   The `latitude` and `longitude` values differ in the second decimal place, suggesting that blocks (=rows of the data set) have unique geographic location, but we cannot be sure.
+
+-   The `ocean_proximity` entries are in all caps. We want to see the other values in that column to make sure the entries are consistent. Knowing the format of strings is important for filtering (selecting) or grouping observations.
+
+The next step is to use pandas `describe()` function to compute basic summaries of the variables.
+
+```{python}
+CA_houses.describe()
+```
+
+For each of the numeric variables, `describe()` computes the number of non-missing values (count), the sample mean (mean), the sample standard deviation (std), the minimum (min), maximum (max) and three percentiles (25%, 50%, 75%).
+
+The results confirm that all variables have complete data (no missing values) except for `total_bedrooms`. The min and max values are useful to see the range (range = max – min) for the variables and to spot outliers and unusual values. It is suspicious that there is one or more blocks with a single household. This is not necessarily the same record that has 2 `total_rooms` and a population of 3.
+
+```{python}
+CA_houses[CA_houses["households"] == 1]
+```
+
+This is indeed a suspicious record. There is a single household in the block, but thirteen people are living in the block in a house with eight rooms and one bedroom. An unusual configuration that should be examined for possible data entry errors.
+
+### Profiling Tools
+
+You can accelerate the data profiling task by using packages such as ydata_profiling (fka pandas_profiling), lux, or sweetviz. Sweetviz, for example, generates detailed interactive visualizations in a web browser or a notebook that help to address some of the profiling questions we raised at the beginning of the section.
+
+To create a profile report for the housing prices data with sweetviz, use the following:
+
+```{python}
+import sweetviz as sv
+my_report = sv.analyze(CA_houses)
+my_report.show_html(filepath='Profiling_CA_1.html', open_browser=False)
+
+```
+
+@fig-data-profiling1 displays the main screen of the visualization. You can access the entire interactive html report [here](Profiling_CA_1.html). For each numeric variable sweetviz reports the number of observed and missing values, the number of distinct values, and a series of summary statistics similar to the output from `describe()`.  A histogram is also produced that gives an idea of the distribution of the variable in the data set. For example, `housing_median_age` has a fairly symmetric distribution, whereas `total_rooms` and `total_bedrooms` are highly concentrated despite a wide range.
+
+![Sweetviz visualization for California Housing Prices. Main screen, some numeric variables.](images/DataProfiling_1.png){#fig-data-profiling1 .lightbox fig-align="center" width="80%"}
+
+@fig-data-profiling1a shows the bottom of the main screen that displays information on the ocean_proximity variable. We now see that there are five unique values for the variable with the majority in the category `<1H OCEAN`.
+
+![Profiling information for qualitative variable `ocean_proximity`.](images/DataProfiling_1a.png){#fig-data-profiling1a .lightbox fig-align="center" width="80%"}
+
+Clicking on any variable brings up more details. For `housing_median_age` that detail is shown in @fig-data-profiling2. It includes a detailed histogram of the distribution, largest, smallest, and most frequent values.
+
+![Sweetviz detail for the variable `housing_median_age`.](images/DataProfiling_2.png){#fig-data-profiling2 .lightbox fig-align="center" width="80%"}
+
+The graphics are interactive, the number of histogram columns can be changed to the desired resolution.
+
+Sweetviz displays pairwise associations between variables. You can see those for `housing_median_age` in @fig-data-profiling2 or for all pairs of variables by clicking on Associations (@fig-data-profiling3).
+
+![Sweetviz visualization of pairwise associations in California Housing Prices data.](images/DataProfiling_3.png){#fig-data-profiling3 .lightbox fig-align="center" width="75%"}
+
+Associations are calculated and displayed differently depending on whether the variables in a pair are quantitative or not. For pairs of quantitative variables, sweetviz computes the Pearson correlation coefficient. It ranges from –1 to +1; a coefficient of 0 indicates no (linear) relationship between the two variables, they are uncorrelated. A coefficient of +1 indicates a perfect positive correlation, knowing one variable allows you to perfectly predict the other variable. Similarly, a Pearson coefficient of –1 means that the variables are perfectly correlated and one variable decreases as the other increases.
+
+Strong positive correlations are present between `households` and the variables `total_rooms`, `total_bedrooms`, and `population`. That is expected as these variables are accumulated across all households in a block. There is a moderate positive association between median income and median house value. More expensive houses are associated with higher incomes—not surprising. A strong negative correlation exists between `longitude` and `latitude`, a consequence of the geography of California: as you move further west (east) the state reaches further south (north). 
+
+Associations between quantitative and qualitative variables are calculated as the [correlation ratio](https://en.wikipedia.org/wiki/Correlation_ratio) that ranges from 0 to 1 and displayed as squares in the Associations matrix. The correlation ratio is based on means within the categories of the qualitative variables. A ratio of 0 means that the means of the quantitative variable are identical for all categories. Since the data contains only one qualitative variable, `ocean_proximity`, squares appear only in the last row and column of the Associations matrix.
+
+If the data contains an obvious target variable for modeling, you can indicate that when creating the profiling report. Sweetviz then adds information on that variable to the visualizations. Suppose that we are interested in modeling the median house value as a function of other attributes. The following statement requests a report with `median_house_value` as the target.
+
+```{python}
+housevalue_report = sv.analyze(CA_houses, target_feat="median_house_value")
+housevalue_report.show_html(filepath='Profiling_CA_2.html', open_browser=False)
+
+```
+
+@fig-data-profiling4 shows the detail on `ocean_proximity` from this analysis; the complete report is [here](Profiling_CA_2.html). The average of the block’s median housing values in the five groups of ocean proximity are shown on top of the histogram. The highest average median house value is found on the island, the lowest average in the inland category.
+
+![Profiling details for `ocean_proximity` with target `median_house_value`.](images/DataProfiling_4.png){#fig-data-profiling4 .lightbox fig-align="center" width="75%"}
+
+## Missing Values {#sec-missing-values}
+
+When observations do not have values assigned to them, we say that the value is missing. This is a fact of life in data analytics; whenever you work with a set of data you should expect values to be missing.
+
+::: definition
+::: definition-header
+Definition: Missing Value
+:::
+
+::: definition-container
+A **missing value** is an observation that has no value assigned to it.
+:::
+:::
+
+Missingness is obvious when you see incomplete columns in the data. The problem can be inconspicuous when entire records are missing from the data. A survey that fails to include a key demographic misses the records of those who should have been sampled in the survey.
+
+You should check the software packages used for data analysis on how they handle missing values—by default and how the behavior can be affected through options. In many cases the default behavior is **casewise** deletion, also known as *complete-case analysis*: any record that have a missing value in one or more of the analysis variables is excluded from the analysis. **Pairwise** deletion removes only those records that have missing values for a specific analysis. To see the difference, consider the data in @tbl-missing-data and suppose you want to compute the matrix of correlations among the variables.
+
+| $X_1$ | $X_2$ | $X_3$ |
+|:-----:|:-----:|:-----:|
+|  1.0  |  3.0  |   .   |
+|  2.9  |   .   |  3.4  |
+|  3.8  |   .   |  8.2  |
+|  0.5  |  3.7  |   .   |
+
+: Three variables with different missing value patterns. {#tbl-missing-data .striped}
+
+A complete-case analysis of $X_1$, $X_2$ , and $X_3$ would result in a data frame without observations since each row of the table has a missing value in one column. Pairwise deletion computes the correlation between $X_1$ and $X_2$ based on the first and last observation, the correlation between $X_1$ and $X_3$ based on the second and third observation and fail to compute a correlation between $X_2$ and $X_3$.
+
+What are some possible causes for missing values:
+
+-   Members of the target population not included (missing records)
+-   Data entry errors
+-   Variable transformations that lead to invalid values: division by zero, logarithm of zeros or negative values
+-   Measurement equipment malfunction
+-   Measurement equipment limits exceeded
+-   Attrition (drop-outs) of subject in longitudinal studies (death, moving, refusal, changes in medical condition, …)
+-   Nonresponse of subjects in surveys
+-   Variables not measured
+-   Not all combinations of factors are observable. For example, the data set of your Netflix movie ratings is extremely sparse, unless you “finished Netflix” and rated all movies.
+-   Regulation requires removal of sensitive information
+
+Data transformations can introduce missing values into data sets when mathematical operations are not valid. To accommodate nonlinear relationships between target and input variables, transformations of inputs such as ratios, square roots, and logarithms are common. These transformations are sometimes applied to change the distribution of data, for example, to create more symmetry by taking logarithms of right-skewed data (@fig-data-homes-log-transform).
+
+![Distribution of home values and logarithm of home values in Albemarle County, VA. The log-transformed data is more symmetric distributed. Since all home values are positive, the transformation does not lead to missing values.](images/HomesLogTransform.png){#fig-data-homes-log-transform .lightbox fig-align="center" width="90%"}
+
+The log-transformation is meaningful in the home values example, it is not unreasonable to proceed with an analysis that assumes log(value) is normally distributed. Suppose you are log-transforming another highly skewed variable, the amount of individual’s annual medical out-of-pocket expenses. Most people have a moderate amount of out-of-pocket expenses, a smaller percentage have very high annual expenses. However, many will have no out-of-pocket expenses at all. Taking the logarithm will invalidate the records of those individuals. To get around the numerical issue of taking logarithms of zeros, transformations are sometimes changed to log(expenses + 1). This avoids missing values but fudges the data by pretending that everyone has at least some medical expenses.
+
+Removing missing values from the analysis is appropriate only when the reason for the missingness is unrelated to any other information in the study. The relationship between absence of information and the study is known as the **missing value process**.
+
+### Missing Value Process
+
+::: callout-important
+Making the wrong assumption about the missing value process can bias the results. A complete case analysis is not necessarily unbiased only if the data are missing completely at random. But the bias can at least be corrected in that case.
+:::
+
+You need to be aware of three types of missing data based on that process:
+
+-   **MCAR**: Data is said to be **m**issing **c**ompletely **a**t **r**andom when the missingness is unrelated to any study variable, including the target variable. There are no systematic differences between the records with missing data and the records with complete data. MCAR is a very strong assumption, and it is the best you can hope for. If the data are MCAR, you can safely delete records with missing values because the complete cases are a representative sample of the whole. Case deletion reduces the size of the available data but does not introduce bias into the analysis.
+
+-   **MAR**: Data is said to be **m**issing **a**t **r**andom when the pattern of missingness is related to the observed data but not to the unobserved data. Suppose you are conducting a survey regarding depression and mental health. If one group is less likely to provide information in the survey for reasons unrelated to their level of depression, then the group’s data is missing at random. Complete-case analysis of a data set that contains MAR data can result in bias.
+
+-   **MNAR**: Data is said to be **m**issing **n**ot **a**t **r**andom if the absence of information is systematically related to the unobserved data. For example, employees do not report salaries in a workspace survey or a group that is less likely to report in a depression survey because of their level of depression.
+
+A complete-case analysis if the data are MAR or MNAR does not necessarily bias the results. If the missingness is related to the primary target variable, then the results are biased. In the MAR case that bias can be corrected. As noted by the [NIH](https://www.ncbi.nlm.nih.gov/books/NBK493614/) in the context of patient studies,
+
+> *The import of the MAR vs. MNAR distinction is therefore not to indicate that there definitively will or will not be bias in a complete case analysis, but instead to indicate – if the complete case analysis is biased – whether that bias can be fully removed in analysis.*
+
+Missing values are represented in data sets in different ways. The two basic methods are to use masks or extra bits to indicate whether a value is available and to use sentinel value, special entries that indicate that a value is not available (missing).
+
+::: definition
+::: definition-header
+Definition: Sentinel Value
+:::
+
+::: definition-container
+In programming, a sentinel value is a special placeholder that indicates a special condition in the data or the program. Applications of sentinel values are to indicate when to break out of loops or to indicate unobserved values.
+:::
+:::
+
+Sentinel values such as –9999 to indicate a missing value are dangerous, they can be mistaken too easily for a valid numerical entry. The only sentinel value one should use is NaN (not-a-number), a specially defined IEEE floating-point value. Software implements special logic for handling NaNs. Unfortunately, NaN is available only for floating point data types, so software uses different techniques to implement missing values across all data types. For example, in databases you find masking based on the concept of NULL values to indicate absence (=nullity) of a value.
+
+::: callout-caution
+Do not use sentinel values that could be confused with real data values to indicate that a value is missing.
+:::
+
+### Missing Values in Pandas
+
+Python has the singleton object None which can be used to indicate missingness and it supports the IEEE `NaN` (not a number) to indicate missing values for floating-point types. Pandas uses the sentinel value approach based on `NaN` for floating-point and `None` for all other data types. This choice has some side effects, `None` and `NaN` do not behave the same way.
+
+```{python}
+import numpy as np
+import pandas as pd
+
+x1 = np.array([1, None, 3, 4])
+x2 = np.array([1, 2, 3, 4])
+display(x1)
+display(x2)
+```
+
+The array with `None` value is represented internally as an array of Python objects. Operating on objects is slower than on basic data types such as integers. Having missing values in non-floating-point columns thus incurs some drag on performance.
+
+For floating point data use `np.nan` to indicate missingness.
+
+```{python}
+f1 = np.array([1, np.nan, 3, 4])
+f1
+```
+
+The behavior of `None` and `NaN` in operations is different. For example, arithmetic operations on `NaN`s result in `NaN`s, whereas arithmetic on `None` values results in errors.
+
+```{python}
+f1.sum()
+```
+
+```{python}
+#| error: true
+x1.sum()
+```
+
+While `None` values result in errors and stop program execution, `NaN`s are contagious; they turn everything they come in touch with into `NaN`s—but the program keeps executing. Pandas mixes `None` and `NaN` values and follows casting rules when `np.nan` is stored.
+
+```{python}
+x2 = pd.Series([1,2,3,4], dtype=int)
+display(x2)
+x2[2] = np.nan
+display(x2)
+
+```
+
+The integer series is converted to a float series when a `NaN` was inserted. The same happens when you use `None` instead of `NaN`:
+
+```{python}
+x3 = pd.Series([1,2,3,4], dtype=int)
+x3[1] = None
+x3
+
+```
+
+### Working with Missing Values in Data Sets
+
+The following statements create a Pandas DataFrame from a CSV file that contains information about 7,303 traffic collisions in New York City. You can use the info() attribute of the DataFrame for information about the columns, including missing value counts.
+
+```{python}
+collisions = pd.read_csv("../datasets/nyc_collision_factors.csv")
+collisions.info()
+
+```
+
+Columns `DATE` and `TIME` contain no null (missing) values, their count equals the number of observation (7,303). The number of cyclists injured or killed in the accidents in columns 14 and 15 contain only missing values. Is this a situation where the data was not entered, or should the entries be zeros? We should get back with the domain experts who put the data together to find out how to handle these columns.
+
+@tbl-pandas-missing displays Pandas DataFrame methods to operate on missing values.
+
+| Method          | Description                                                                      | Notes                                                                     |
+|:----------------|----------------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| `isnull()`      | Returns a boolean same-sized object indicating if the missing values are missing | `isna()` is an alias                                                      |
+| `notnull()`     | Opposite of `isnull()`, indicating if values are not missing                     | `notna()` is an alias                                                     |
+| `dropna()`      | Remove missing values, dropping either rows (`axis=0`) or columns (`axis=1`)     | `how={'any','all'}` to determine when to drop a row or column             |
+| `fillna()`      | Replace missing values with designated values                                    | `method=` to propagate last valid value or backfill with next valid value |
+| `interpolate()` | Fill in missing values using an interpolation method                             |                                                                           |
+
+: Methods to operate on missing values in pandas DataFrames. {#tbl-pandas-missing .striped}
+
+The `isnull()` method can be used to return a data frame of Boolean (True/False) values that indicate missingness. You can sum across rows or columns of the data frame to count the missing values:
+
+```{python}
+collisions.isnull().sum()
+```
+
+If you choose to remove records with missing values, you can use the `dropna()` method. The `how=’any’|’all’` option specifies whether to remove records if any variable is missing (complete-case analysis) or if all variables is missing. Because the columns referring to cyclists contain only missing values, a complete-case analysis will result in an empty DataFrame.
+
+```{python}
+coll_no_miss = collisions.dropna(how='any')
+display(len(collisions))
+display(len(coll_no_miss))
+
+```
+
+Suppose we verified that the missing values in columns 14 & 15 were meant to indicate that no cyclists were injured or killed. Then we can replace the missing values with zeros using the `fillna()` method.
+
+```{python}
+collisions["NUMBER OF CYCLISTS INJURED"].fillna(0,inplace=True)
+collisions["NUMBER OF CYCLISTS KILLED"].fillna(0,inplace=True)
+
+```
+
+Techniques for imputing missing values are discussed in more detail below.
+
+The `notnull()` method is useful to select records without missing values. Since it returns a boolean same-sized object, you can use it to filter:
+
+```{python}
+bool_series = pd.notnull(collisions["CONTRIBUTING FACTOR VEHICLE 5"]) 
+collisions.loc[bool_series, ["DATE", "TIME", "BOROUGH", "ON STREET NAME"]] 
+
+```
+
+### Visualizing Missing Value Patterns
+
+The [Missingno](https://github.com/ResidentMario/missingno) Python package has some nice methods to inspect the missing value patterns in data. This is helpful to see the missing value distribution across multiple columns. The `matrix()` method displays the missing value pattern for the DataFrame.
+
+```{python}
+import missingno as msno
+msno.matrix(collisions)
+
+```
+
+Columns without missing values (DATE, TIME) are shown as a solid gray bar. Missing values are displayed in white. The following graph shows the result of `matrix()` prior to filling in zeros in the cyclist columns. The sparkline at right summarizes the general shape of the data completeness and points out the rows with the maximum and minimum number of missing values in the dataset. At best 11 of the columns have missing values, at worst 23 of the 26 values are missing.
+
+@tbl-sales-data contains data on property sales. The total value of the property is the sum of the first two columns, the last column is the ratio between sales price and total value. A missing value in one of the first two columns triggers a missing value in the `Total` column. If either `Total` or `Sales` are not present, the appraisal ratio in the last column must be missing.
+
+|   Land | Improvements |  Total |   Sale | Appraisal Ratio |
+|-------:|-------------:|-------:|-------:|----------------:|
+|  30000 |        64831 |  94831 | 118500 |            1.25 |
+|  30000 |        50765 |  80765 |  93900 |            1.16 |
+|  46651 |        18573 |  65224 |      . |               . |
+|  45990 |        91402 | 137392 | 184000 |            1.34 |
+|  42394 |            . |      . | 168000 |               . |
+|      . |       133351 |      . | 169000 |               . |
+|  63596 |         2182 |  65778 |      . |               . |
+|  56658 |       153806 | 210464 | 255000 |            1.21 |
+|  51428 |        72451 | 123879 |      . |               . |
+|  93200 |            . |      . | 422000 |               . |
+|  76125 |        78172 | 275297 | 290000 |            1.14 |
+| 154360 |        61934 | 216294 | 237000 |            1.10 |
+|  65376 |            . |      . | 286500 |               . |
+|  42400 |            . |      . |      . |               . |
+|  40800 |        92606 | 133406 | 168000 |            1.26 |
+
+: Data with column dependencies that propagate missing values. {#tbl-sales-data .striped}
+
+The `heatmap()` method shows a matrix of nullity correlations between the columns of the data. Note that the CSV file contains dots (“.”) for the missing values. To make sure the data are correctly converted to numerical types and the dots are interpreted as missing values, the `na_values=` and `skipinitalspace=` options are added to `pd.read_csv()`.
+
+```{python}
+land = pd.read_csv("../datasets/landsales.csv", 
+                   na_values=".",
+                   skipinitialspace=True)
+
+msno.heatmap(land)
+
+```
+
+The nullity correlations are Pearson correlation coefficients computed from the `isnull()` boolean object for the data, excluding columns that are completely observed or completely unobserved. A correlation of –1 means that presence/absence of two variables is perfectly correlated: if one variable appears the other variable does not appear. A correlation of +1 similarly means that the presence of one variable goes together with the presence of another variable. The `total` is not perfectly correlated with `land` or `improve` columns because a null value in either or both of these can cause a null value for the total. Similarly, the large correlations between appraisal & total and appraisal & sale are indicative that their missing values are likely to occur together.
+
+### Data Imputation
+
+In a previous example we used the `fillna()` method to replace missing values with actual values: the unobserved values for the number of cyclists in the collisions data set were interpreted as no cyclists were injured, replacing `NaN`s with zeros. This is an example of data imputation.
+
+::: definition
+::: definition-header
+Definition: Data Imputation
+:::
+
+::: definition-container
+Data imputation is the process of replacing unobserved (missing) values with usable values.\
+:::
+:::
+
+Imputation must be carried out with care. It is tempting to replace absent values with numbers and to complete the data: records are not removed from the analysis, the sample size is maintained, and calculations no longer fail. Imputing values that are not representative introduces bias into the data.
+
+Completing missing values based on information in other columns often seems simple on the surface, but it is fraught with difficulties—there be dragons! Suppose using address information to fill in missing zip codes. It is not sufficient to know that the city is Blacksburg. If we are talking about Blacksburg, SC, then we know the ZIP code is 29702. If it is Blacksburg, VA, however, then there are four possible ZIP codes; we need the street address to resolve to a unique value. Inferring a missing attribute such as gender should never be done. You cannot safely do it using names. Individuals might have chosen to not report gender information. You cannot afford to get it wrong.
+
+If string-type data is missing, and you want to include them into the analysis, you can replace the missing values with an identifying string such as “Unobserved” or “Unknown”. That allows you to break out results for these observations in group-by observations, for example.
+
+If you decide to proceed with imputation of missing values based on algorithms, here are some options:
+
+-   **Random replacement**. Also called hot-deck imputation, the missing value is replaced with a randomly selected similar record in the same data set that has complete information.
+
+-   **LOCF**. The missing value is replaced with the last complete observation preceding it: the **l**ast **o**bservation is **c**arried **f**orward. It is also called a forward fill. This method requires that the order of the observations in the data is somehow meaningful. If observations are grouped by city, it is probable that a missing value for the city column represents the same city as the previous record, unless the missing value falls on the record boundary between two cities.
+
+-   **Backfill**. This is the opposite of LOCF; the next complete value following one or more missing values is propagated backwards.
+
+-   **Mean/Median imputation**. This technique applies to numeric data; the missing value is replaced based on the sample mean, the sample median, or other statistical measures of location calculated from the non-missing values in a column. If the data consists of groups or classes, then group-specific means can be used. For example, if the data comprises age groups or genders, then missing values for a numeric variable can be replaced with averages for the variabler by age groups or genders.
+
+-   **Interpolation methods**. For numerical data, missing values can be interpolated from nearby values. Interpolation calculations are based on linear, polynomial, or spline methods. Using the interpolate() method in pandas, you can choose between interpolating across rows or columns of the DataFrame.
+
+-   **Regression imputation**. The column with missing values is treated as the target variable of a regression model, using one or more other columns as input variables of the regression. The missing values are then treated as unobserved observations for which the target is predicted.
+
+-   **Matrix completion**. Based on principal component analysis, missing values in a $r \times c$ numerical array are replaced with a low-rank approximation of the missing values based on the observed values.
+
+-   **Generative imputation**. If the data consists of images or text and portions are unobserved, for example, parts of the image are obscured, then generative methods can be used to fill in missing pixels in the image or missing words in text.
+
+To demonstrate some of these techniques, consider this simple 6 x 3 DataFrame.
+
+```{python}
+np.random.seed(42)
+df = pd.DataFrame(np.random.standard_normal((6, 3)))
+df.iloc[:4,1] = np.nan
+df.iloc[1:3,2] = np.nan
+df
+
+```
+
+You can choose a common fill value for all columns or vary the value by column.
+
+```{python}
+df.fillna({1:0.3, 2:0})
+```
+
+Missing values in the second column are replaced with 0.3, those in the last column with zero. Forward (LOCF) and backward imputation are available by setting the `method=` parameter of `fillna()`:
+
+```{python}
+df.fillna(method="ffill")
+```
+
+Notice that the forward fill does not replace the `NaN`s in the second column as there is no non-missing last value to be carried forward. The second and third row in the third column are imputed by carrying forward 0.647689 from the first row. With a backfill imputation the DataFrame is fully completed, since both columns have an observed value after the last missing value.
+
+```{python}
+df.fillna(method="bfill")
+```
+
+To replace the missing values with the column-specific sample means, simply use
+
+```{python}
+df.fillna(df.mean())
+```
+
+The sample means of the non-missing observations in the second and third columns are -1.463056 and -0.307178, respectively. Imputing with the sample mean has the nice property to preserve the sample mean of the completed data:\]
+
+```{python}
+df.fillna(df.mean()).mean()
+```
+
+You can use other location statistics than the mean. The following statement imputes with the column-specific sample median:
+
+```{python}
+df.fillna(df.median())
+```
+
+To demonstrate imputation by interpolation, consider this simple series:
+
+```{python}
+s = pd.Series([0, 2, np.nan, 8])
+s
+
+```
+
+The default interpolation method is linear interpolation. You can choose other method, for example, spline or polynomial interpolation, with the `method=` option.
+
+```{python}
+s.interpolate()
+s.interpolate(method='polynomial', order=2)
+
+```
+
+To see interpolation operate on a DataFrame, consider this example:
+
+```{python}
+df = pd.DataFrame([(0.0, np.nan, -1.0, 1.0),
+                    (np.nan, 2.0, np.nan, np.nan),
+                    (2.0, 3.0, np.nan, 9.0),
+                    (np.nan, 4.0, -4.0, 16.0)],
+                   columns=list('abcd'))
+df
+
+```
+
+The default interpolation method is linear with a forward direction across rows.
+
+```{python}
+df.interpolate()
+```
+
+Because there was no observed value preceding the missing value in column `b`, the `NaN` cannot be interpolated. Because there was no value past the last missing value in column `a`, the `NaN` is replaced with the last value carried forward.
+
+To interpolate in the forward and backward direction, use `limit_direction=’both’`:
+
+```{python}
+df.interpolate(method='linear', limit_direction='both')
+```
+
+To interpolate across the columns, set the `axis=` option to `axis=1`:
+
+```{python}
+df.interpolate(method='linear', limit_direction='forward', axis=1)
+```
+
+Imputation seems convenient and relatively simple, and there are many methods to choose from. As you can see from this discussion, there are also many issues and pitfalls. Besides introducing potential bias by imputing with bad values, an important issue is the level of uncertainty associated with imputed values. Unless the data were measured with error or entered incorrectly, you have confidence in the observed values. You cannot have the same level of confidence in the imputed values. The imputed values are estimates based on processes that involve randomness. One source of randomness is that our data represents a random sample—a different set of data gives a different estimate for the missing value. Another source of randomness is the imputation method itself. For example, hot-deck imputation chooses the imputed value based on randomly selected observations with complete data.
+
+Accounting for these multiple levels of uncertainty is non-trivial. If you pass imputed data to any statistical algorithm, it will assume that all values are known with the same level of confidence. There are ways to take imputation uncertainty into account. You can assign weights to the observations where the weight is proportional to your level of confidence. Assigning smaller weights to imputed values reduces their impact on the analysis. A better approach is to use **bootstrap** techniques to capture the true uncertainty and bias in the quantities derived from imputed data. This is more computer intensive than a weighted analysis but very doable with today’s computing power.
+
+::: definition
+::: definition-header
+Definition: Bootstrap
+:::
+
+::: definition-container
+To bootstrap a data set is to repeatedly sample from the data with replacement. Suppose you have a data set of size $n$ rows. $B$ = 1,000 bootstrap samples are 1,000 data sets of size $n$, each drawn independently from each other, and the observations in each bootstrap sample are drawn with replacement.
+
+Bootstrapping is a statistical technique to derive the sample distribution of a random quantity by simulation. You apply the technique to each bootstrap sample and average the results.
+:::
+:::
+
+I hope you take away from this discussion that imputation is possible, imputation is not always necessary, and imputation must be done with care.

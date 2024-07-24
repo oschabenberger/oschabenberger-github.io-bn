@@ -1,0 +1,658 @@
+# Data Sources and File Formats
+
+## Databases
+
+According to [Wikipedia](https://en.wikipedia.org/wiki/Database), a database is an “organized collection of data stored and accessed electronically through the use of a database management system” (DBMS). The three elements are the data, a form of data storage, and DBMS software that allows a user to interact with the system. The terms database and DBMS are often used interchangeably.
+
+Databases play a central role in the IT stack of an organization and choosing the wrong database for an application can have dire consequences with respect to availability, scalability, security, data quality, data validity, etc. The site [DB-engines](https://db-engines.com/en/) collects information about databases and ranks them by popularity based on a somewhat transparent [algorithm](https://db-engines.com/en/ranking_definition). If you think there are a lot of data science tools to choose from, wait until you wade into the world of databases—DB-engines lists over 400.
+
+Unless you build your own tech stack, write your own application, or start your own company, you will probably not select a database. In most situations the databases have been chosen and implemented as part of the backend tech stack. Often there will be more than one, for example, MongoDB for documents, MySQL for transactions, Redshift or Spark for analytics, Redis as a memory cache—the dreaded *database sprawl* in organizations. Databases are part of the backend infrastructure of organizations, the part that does not change frequently. The so-called Gartner spaghetti graph in @fig-data-Gartner shows market share of databases between 2011 and 2021. While there is some stability near the top of the market, several items are noteworthy:
+
+-   A change of guard at the top. Oracle has dominated the market for a long time and is being challenged and/or surpassed by Microsoft, Amazon Web Services, and Google Cloud Platform. The cloud providers are leading the way with compelling cloud database offerings.
+
+-   Gartner depicts pure-play cloud database vendors in light blue. The spaghetti chart shows the revenue shift in databases to the cloud.
+
+-   The vertical axis displays market share across all software markets. Database expenses make up about 35% of the overall software expenses. That share of the overall software market continues to increase (the chart is fanning out more toward the right).
+
+-   Market share is calculated based on revenue, it does not account for free offerings, such as open-source databases.
+
+-   After a peak around 2017, Hadoop-based providers of big data resources are on the decline, for example, Cloudera.
+
+-   Some cloud database providers had an impressive rise since their inception, AWS since 2013, Alibaba Cloud since 2014, Google Cloud since 2015, Tencent since 2016, Snowflake since 2016.
+
+-   A surprising amount of movement in a market segment that is supposed to be relatively stable. Organizations are loath to change database management systems that are key to their operations. Migrating a database that is the backbone of an essential part of the business is the last thing a CIO wants to do. Databases are not as sticky as they used to be.
+
+![Database market share 2011—2021, according to Gardner. [Source](https://www.techrepublic.com/article/new-gartner-report-shows-massive-growth-database-market-fueled-cloud/).](/images/data/GartnerDMBSMarketShare.jpeg){#fig-data-Gartner .lightbox fig-align="center" width="80%"}
+
+It is important for anyone involved with data to understand some basics of database architectures and the strengths and weaknesses of the different database designs. A NoSQL key-value store can be a great way to work with unstructured data but can be a terrible choice for analytics compared to a relational column store. Many modern DBMS are multi-model, supporting multiple data models in a single backend, for example, key-value pairs, relational, and time-series data. There are so many databases because there are so many use cases for working with data; databases try to optimize for specific data access patterns and use cases.
+
+Databases can be organized in several ways.
+
+### Relational and Non-relational databases
+
+In a relational DBMS (a RDBMS) the data are organized in 2-dimensional tables of rows and columns. A database consists of a collection of named tables, each with a named collection of attributes (columns). Typically, RDBMS use SQL (Structured Query Language) to manipulate the contents of the DBMS. Each row in a table has a unique key and can be linked to rows in other tables. Relationships are logical connections between tables through keys. The structure of a table (columns, primary keys) is known as the table schema, and it is defined before the table is populated with data—this is also called a schema-on-write design (@fig-data-schema-on-write).
+
+![Schema on write with PostgreSQL. The CREATE TABLE statement creates the table named titanic and defines the schema: names, order, and data types of columns and default values. The \\copy statement populates the database table with data.](images/SchemaOnWrite.png){#fig-data-schema-on-write .lightbox fig-align="center" width="80%"}
+
+The relational principle has dominated the world of databases since the 1980s. Seven relational databases are among the top ten databases according to DB-engines: Oracle, MySQL, Microsoft SQL Server, PostgreSQL, IBM DB2, Microsoft Access, and SQLite.
+
+With the advent of Big Data more data was collected in ways that did not fit well with the relational paradigm: key-value pairs, documents, time series data. More fluid and dynamic relationships between data points were better captured with graph structures rather than rigid relational structures. Big Data analytics also asked for more flexibility in defining data structures on top of the raw data. The relational model was thought to be too restrictive. If the schema must be declared when the table is created and before rows are added (schema-on-write) it makes it difficult to bring new data in on the fly. Schema-on-write in relational databases requires to define the schema for the table **and** to structure the data based on the data. Changing the structure of the data, for example from text to numbers, requires changes to the schema and results in table copies.
+
+Schema-on-read, on the other hand, applies structure to the data when it is read (@fig-data-schema-on-read). That gives users the ability to structure the same source data differently, depending on the application. Schema-on-read led to a new class of data frameworks and databases that broke with the highly structured relational logical data model. These non-relational databases store data in key-value pairs and documents rather than tables and were also called NoSQL databases because they eschewed the structured nature of SQL-based schema-on-write. However, there is still a structuring step in non-relational databases. It just happens on demand when the data is read instead of at the beginning before the first row of data is inserted.
+
+![An example of schema on read with Hadoop and its file system (HDFS). The data are loaded into Hadoop with the hdfs dfs command. No schema is defined at this stage. The data is then processed with the hadoop command. The customer-mapper.py Python script determines how the data is interpreted for this job; the Python script applies the schema on read.](images/SchemaOnReadHadoop.png){#fig-data-schema-on-read .lightbox width="75%"}
+
+Non-relational databases are sometimes called *schemaless* databases; that goes a bit too far as some structure is needed to read the data from a key-value or document store into an application. The best translation of “NoSQL” is “not-only-SQL”, these databases still need a structured way to interact with the database.
+
+It is easy to see how the push for more flexibility through schema-on-read goes hand in hand with the greater flexibility achieved by moving from the ETL to the ELT processing paradigm. Non-relational databases also gained popularity because they support horizontal scaling more easily than their relational counterparts. When a system scales horizontally—also called *scaling out*—additional machines are added to support increasing workload. Vertical scaling—also called *scaling up*—adds more computing resources (CPU, RAM, GPU, …) to existing machines.
+
+You can explain the difference between the scaling models by thinking of a building with a fixed number of rooms. To increase the total number of rooms you can either add more floors (scaling up) or add more buildings (scaling out). Both types of scaling reach limits, a single building cannot be made arbitrarily tall and adding buildings consumes land. The limits for horizontal scaling are much higher than for vertical scaling.
+
+![Scaling up (vertically) and scaling out (horizontally). Scaling up adds more rooms to an existing building, scaling out adds more buildings.](images/ScalingUp_and_Out.png){#fig-data-scaling .lightbox fig-align="center"}
+
+Because non-relational systems partition data on just a primary key and do not need to maintain relationships between tables, scaling them horizontally is relatively simple. As the database grows (contains more keys) add new machines to hold the additional keys. The data can be re-partitioned by re-hashing keys across the larger cluster.
+
+With relational systems it is necessary to maintain the relationships between the tables. When data are distributed over multiple machines, this becomes more difficult. With relational databases, the response to growing data sizes historically was to scale up. [NewSQL](#_NewSQL_Databases) databases are relational databases designed with horizontal scaling in mind.
+
+Non-relational (NoSQL) databases are categorized by their underlying data models into pure [document](https://db-engines.com/en/ranking/document+store) stores, [key-value stores](https://db-engines.com/en/ranking/key-value+store), and [graph](https://db-engines.com/en/ranking/graph+dbms) databases—more on these designs below. NoSQL is primarily used in transactional databases for OLTP (online transactional processing) and applications where interactions with the database are limited to CRUD operations (Create, Read, Update, Delete). They are not performant for analytical jobs.
+
+### Transactional (OLTP) and Analytical (OLAP) Databases
+
+A transactional database is a repository to record the transactions of the business, the ways in which an organization interacts with others and exchanges goods and services. Business interactions that are recorded in transactional systems are, for example, purchases, returns, debits, credits, signups, subscriptions, dividends, interest, trades, payroll, donations.
+
+Databases that support business transactions are optimized for a high volume of concurrent write operations: adding new rows, updating rows, inserting rows. These transactions are often executed in real time, hence the name online transaction processing (OLTP).
+
+The concept of a database transaction is different from a business transaction. A database transaction is a single logical unit of work that, if successful, changes the state of the database. It can comprise multiple database operations such as reading, writing, indexing, updating logs. A business transaction, a customer orders an item online, can be associated with one or more database transactions.
+
+Database transactions are not just reserved for OLTP systems, although supporting transactional integrity with so-called ACID properties is a must for them. Analytic databases, graph databases, NoSQL databases typically support transactions. In relational SQL systems, look for BEGIN statements to flag the start of a transaction, the COMMIT statement to commit the results of a transaction and the ROLLBACK statement to reset the state of the database prior to the transaction.
+
+The ACID properties refer to atomicity, consistency, isolation, and durability to ensure the integrity of the transaction.
+
+-   **Atomicity**: all changes are performed as if they were a single operation. Either all of them are performed or none of them.
+
+-   **Consistency**: When the transaction starts and when it finishes, the data are in a consistent state.
+
+-   **Isolation**: intermediate states of the transaction are invisible to the rest of the system. When multiple transactions happen at the same time, it appears as if they execute serially.
+
+-   **Durability**: After a transaction completes, changes to the data are not undone.
+
+Take as an example the transfer of funds from one account to another. Atomicity requires that if a debit is made from one account a credit in the same amount is made to the other account. Consistency requires that the sum of the balances in the two accounts is the same at the start of the transaction and at the end. Isolation implies that a concurrent transaction sees the amount to be transferred either in the debited account or in the credited account. If a concurrent transaction would see the amount in neither account or in both accounts the database fails the isolation test. Durability means that if the database fails for some reason after the transaction completes, the changes made to the accounts will persist.
+
+Examples of transactional (OLTP) relational databases are MySQL, PostgreSQL, Microsoft SQL Server, Oracle Database. These systems are also called Systems of Record (SoR) because they store the official records of an organization—the ground truth. While NoSQL databases can support transactions, they relax some of the criteria to support greater scalability. The According to the [CAP theorem](https://en.wikipedia.org/wiki/CAP_theorem), a distributed database that partitions data across different machines cannot be fully ACID compliant and guarantee availability. When a network partition fails one must choose between availability of the system and consistency. A relaxed condition is *eventual consistency*, where the data achieves a consistent state sometime in the future. Eventually, all reads will return the most recently written data value. For systems of records in financial services eventual consistency is not acceptable; SoRs must be ACID compliant.
+
+Why are these arcane details of database architecture important for a data scientist?
+
+-   Database designers make tradeoffs when optimizing for a use case. You should be aware how these tradeoffs can affect data integrity if that matters for your project—it might not be an issue at all.
+
+-   Using an OLTP system for analytical work is usually a bad idea. Transactional systems need to respond to frequent data updates and tend to return small record sets when queried (look up a customer, look up an account balance). The best way of storing information for this pattern is as a **row-store**: the data for a record is stored in a chunk of memory which makes retrieval of a record or set of record very efficient.
+
+### Row and Column Storage
+
+The following table shows seven of the 150 observations from the famous Iris data set that is used in statistics and machine learning courses to apply regression, classification, and clustering methods. The full data set contains 50 observations for each of three Iris species: *Iris setosa*, *Iris versicolor*, and *Iris virginica*. Four measurements of the flowers, the length and width of the petals (the large leaves on the flowers) and the sepals (the small leaves) were taken on each plant.
+
+|                 |                |                 |                |             |
+|-----------------|----------------|-----------------|----------------|-------------|
+| **SepalLength** | **SepalWidth** | **PetalLength** | **PetalWidth** | **Species** |
+| 5.1             | 3.5            | 1.4             | 0.2            | setosa      |
+| 4.9             | 3.0            | 1.4             | 0.2            | setosa      |
+| 4.7             | 3.2            | 1.3             | 0.2            | setosa      |
+| 4.6             | 3.1            | 1.5             | 0.2            | setosa      |
+| 5.0             | 3.6            | 1.4             | 0.2            | setosa      |
+| 7.0             | 3.2            | 4.7             | 1.4            | versicolor  |
+| 6.4             | 3.2            | 4.5             | 1.5            | versicolor  |
+
+: Flower measurements for five *Iris setosa* and two *Iris versicolor* from the famous iris data set.
+
+Suppose we store this data in a row-store with a fixed record length. The numerical measurements can be stored in 4-byte floats. The longest string in the Species column is 10 characters long. To align the records on 4-byte boundaries for faster access, we set the record length to 4 x 4 + 12 = 28. @fig-data-rowstore1 shows the first row of data set is laid out across 28 bytes.
+
+![Layout in memory of row 1 of Iris data set with four-byte storage of floating-point numbers and 12-byte storage for the species string. (It seems that the number 5.1 uses 3 bytes for storage. It uses all 4 x 8 = 32 bits of the 4 bytes to store the number. The most significant bit stores the sign, the next 8 bits store the exponent, the following 23 bits store the mantissa of the float.)](images/RowStore_1.png){#fig-data-rowstore1 .lightbox fig-align="center" width="80%"}
+
+Suppose that the data is stored in one big chunk of memory, each row starts 28 bytes after the previous row.
+
+![The first three rows of the Iris data set in row-store form with contiguous memory.](images/RowStore_2.png){#fig-data-rowstore2 .lightbox fig-align="center"}
+
+Looking up rows is extremely fast. To read the data for the third observation jump to byte 56 and read the next 28 bytes. Adding new records in row-oriented storage is also fast: allocate a new chunk of 28 bytes and fill in the fields. However, if we want to perform an analytic operation such as computing the average petal length, we must jump through the memory and grab values at position 8, 8 + 28, 8 + 56, …., 8 + 150 x 28. That is very inefficient, especially when tables have many columns and records are long.
+
+To support fast analytic processing, analytical databases are optimized for an access pattern where data is mostly read and infrequently written (changed). The ease of appending or looking up entire rows is then not as important as the efficiency of accessing memory for a column. Analytical queries are deep in that they process information from many records in the table—rather than looking up records—and they can return large result sets. Also, analytical queries tend to operate on a small subset of the columns of a table rather than all the columns.
+
+The best-performing format for storing information for this workload is a **column-store**: each column in the table is stored in one or more chunks of memory.
+
+![The seven observations of the Iris data set in column-store format.](images/ColumnStore.png){#fig-data-columnstore .lightbox fig-align="center" width="80%"}
+
+@fig-data-columnstore shows the five columns in the Iris data set in column store format. Computing the average of, say, sepal length, can now be done efficiently by scanning the memory for that column. The data for the other columns does not have to be loaded into memory for this operation.
+
+Columnar storage has other advantages for analytic databases: the data types are homogeneous within a block of memory (all characters, all integers, all floats, etc.) and compress well. Except for sepal length, all columns have repeated values. These can be stored along with an integer that counts the number of times a value appears. This simple technique—called run-length encoding—can greatly reduce the storage requirements when the data are ordered and have repeat values.
+
+The following is a non-exhaustive list of analytic databases that use columnar storage:
+
+-   Amazon Redshift
+
+-   Google BigQuery
+
+-   Azure Cosmos DB
+
+-   DuckDB
+
+-   Vertica
+
+-   ScyllaDB
+
+-   DataStax
+
+-   ClickHouse
+
+-   Apache Druid
+
+-   Apache Cassandra
+
+-   Apache HBase
+
+### Hybrid (HTAP) Databases
+
+Some databases combine row-oriented storage with column-oriented storage in the same database engine; this paradigm is called hybrid transactional-analytical processing (HTAP). The idea behind HTAP databases is that you do not need two separate databases, one for transactional workloads and one for analytical workloads. The ability to perform both workloads efficiently in the same database reduces data movement and data duplication between databases. This reduces the dreaded *database sprawl* in organizations. The term HTAP was coined by industry analyst firm Gartner. Forrester, Gartner’s competitor, refers to this processing paradigm as *translytical*.
+
+Another motivation of HTAP databases is that transactional systems, where information about the business is recorded in real time, also need support for real-time analytics to produce insights “in the moment”. Transactional systems are becoming more analytical, the results and side effects of algorithms triggered by a transaction can be the most important piece of information of the transaction.
+
+::: example
+::: example-header
+Ride Share Booking
+:::
+
+::: example-container
+Suppose you land at the San Francisco airport and use your favorite ride share app to book a ride into the city. This starts a transaction with the ride share company. The data recorded as part of the transaction includes customer information, origin and destination of the trip, time of day, etc. In real-time, as the transaction occurs, the backend of the app calculates the price for the ride based on location, traffic density, ride demand, available drivers, vehicle type, etc.
+
+This is an analytical operation that invokes a price-optimization algorithm. Based on the real-time prices offered to you in the app you choose the preferred ride. The optimized price is recorded as part of the transaction.
+:::
+:::
+
+The following are examples of HTAP databases:
+
+-   PingCAP
+
+<!-- -->
+
+-   Aerospike
+
+<!-- -->
+
+-   SingleStoreDB (formerly MemSQL)
+
+-   InterSystems
+
+-   Oracle Exadata
+
+-   Splice Machine
+
+-   GridGrain
+
+-   Redis Lab
+
+-   SAP/HANA
+
+-   VoltDB
+
+-   Snowflake (since the addition of Unistore in 2022)
+
+-   Greenplum
+
+### NewSQL Databases
+
+As a broad generalization we can state that non-relational NoSQL databases sacrifice consistency for horizontal scalability and that traditional relational SQL databases are ACID compliant but do not scale well horizontally, they are designed for scale-up.
+
+NewSQL databases try to bridge this gap, providing horizontal scalability and transactional integrity (ACID compliance). There are variations in the types of transactional guarantees they provide, so it is a good idea to read the fine print. For example, a transaction might be defined by a single read or write to the database rather than the operations wrapped in a BEGIN—COMMIT block.
+
+NewSQL databases tend to have in common:
+
+-   **Data partitioning**: the data are divided into partitions (also called shards). Partitions can reside on different machines.
+
+-   **Horizontal scaling**: because of sharding, the database can accommodate an increase in size by adding more machines.
+
+-   **Replication**: The data appears in the database more than once. Replicates can be stored on the same or different machines, availability zones or regions. For example, one machine can serve as the primary node for some partitions and as a backup node for replicates of other partitions. This provides failure resilience and the ability to recover the database from disasters.
+
+-   **Concurrency control**: to maintain data integrity under concurrent transactions.
+
+-   **Failure resilience**: the databases recover to a previous consistent state when machines fail or the database crashes.
+
+The following are examples of NewSQL databases:
+
+-   CockroachDB
+
+-   VoltDB
+
+-   SingleStoreDB
+
+-   ClustrixDB
+
+-   Pivotal Gemfire
+
+-   NuoDB
+
+### Non-relational Database Designs
+
+Because non-relational (NoSQL) databases have become popular and play an important role in data analytics, we want to spend a few moments on their principal architecture. The primary designs for NoSQL databases are
+
+-   Key-value stores
+
+-   Document stores
+
+-   Graph databases
+
+Non-relational databases can be multi-model and support more than one design. Many graph databases on the DB-Engines [list](https://db-engines.com/en/ranking/graph+dbms) support document store, key-value, and graph models.
+
+#### Key-value stores
+
+In a key-value store, every item in the database has only two fields, a key and a value. For example, the key could be a product number and the value could be a product name. This seems restrictive, but the value does not have to be a scalar, it can be, for example, a JSON documents with subfields.\
+
++----------------+------------------------------+
+| Key            | Value2                       |
++:==============:+==============================+
+| "username"     | "oschabenberger"             |
++----------------+------------------------------+
+| "account type" | "personal"                   |
++----------------+------------------------------+
+| 345625         | {\                           |
+|                |     name: “MacBook Pro 16”,\ |
+|                |     processor: “M2”,\        |
+|                |     memory: 32GB”\           |
+|                | }                            |
++----------------+------------------------------+
+| 165437         | {\                           |
+|                |     name: “Paper towel”,\    |
+|                |     available: true,\        |
+|                |     discount: 10%”\          |
+|                | }                            |
++----------------+------------------------------+
+
+: Examples of keys and values in key-value stores. The schema-less nature of the store is apparent in the last two table rows. Two keys can be associated with values of different types. Database items do not have to conform to a specific structure except that an item consists of a key and a value.
+
+To achieve horizontal scaling (scaling out) of key-value stores, the data are partitioned across multiple machines based on a hash table. For a database with *n* machines the hash is essentially a mapping from the key to the integers from 0 to *n*-1 that determines on which machine a particular key is kept. As the database grows (more keys added) more machines can be easily added. Such scaling out is more difficult in relational systems where the relationships between the tables must be maintained as the data is distributed over more machines. That is why not building tables on relations supports horizontal scaling. While documents are grouped into collections (the NoSQL version of a table), there is no association or relationship between one document or any other. The relative ease to scale horizontally is one reason why non-relational databases became so popular for handling large and growing databases.
+
+Disadvantages of key-value stores are also apparent: items can only be looked up by their (primary) key. Queries that filter on other attributes are less efficient than in relational systems: what is the average order amount of customers who ordered fewer than 5 items in the last 12 month? It is difficult to join data based on keys. They are not as performant for analytical work as relational systems, especially those with columnar storage layers. A good application for key-value stores are CRUD applications where items are merely created, read, updated, and deleted.
+
+#### Document stores
+
+A document store extends the simple design of the key-value store. The value is now stored as a document-oriented set of fields in JSON, XML, YAML, BSON, or similar format. While the data in a key-value store is transparent to the application but deliberately opaque to the database, in a document store the values are transparent to the database. This enables more complex queries than just using the primary key, the fields in the document can be queried.
+
+![Examples of documents in MongoDB. A simple document on the left and a more complex document on the right. The first field, \_id, is a unique identifier of the document.](images/MongoDB_Document.png){#fig-data-documentstore .lightbox fig-align="center"}
+
+The fields of the documents do not have to be identical across records in the database. For example, documents containing customer names have a field for a middle initial only if the individual has a middle initial. Documents do not contain empty fields. In contrast, a relational system that stores a middle initial will have this field for all records and NULL values are used to signal an empty field when a middle initial is missing.
+
+Like key-value stores, document databases are great for CRUD applications, but do not perform well for analytical queries and cannot represent relationships and associations. Each document exists as an independent unit unrelated to other documents.
+
+#### Graph databases
+
+In graph databases relationships are a first-class citizen. The relationships are not expressed through keys in tables, but through edges that connect nodes (vertices). Nodes are the entities of interest in the database such as people, products, cities. Nodes have attributes (called properties) stored as key-value pairs or documents (@fig-data-simplegraph).
+
+![A simple graph with 6 nodes and 7 edges.](images/SimpleGraph.png){#fig-data-simplegraph .lightbox fig-align="center" width="80%"}
+
+Because of this storage model graph databases are considered NoSQL databases. Labeling them as non-relational databases is only correct with respect to the traditional table-based relational systems. Relationships are a central property of graph databases, and they are more flexible and dynamic compared to RDBMS. Relationships emerge as patterns through the connections of the nodes rather than predefined elements of the database.
+
+[This](https://db-engines.com/en/ranking/graph+dbms) list shows the DB-Engines ranking of graph database systems. Note that many of them also support key-value or document stores.
+
+## Cloud Databases
+
+According to [statista](https://www.statista.com/statistics/1062879/worldwide-cloud-storage-of-corporate-data/), the share of corporate data stored in the cloud has increased from 30% in 2015 to 60% in 2022. The total addressable market (TAM) in cloud computing is estimated to exceed \$200 billion per year and is growing by double digits.
+
+The market for storing data in the cloud as files, blocks, or generic objects is a staggering \$78 billions of that TAM (2022) and the market for cloud databases is \$21 billions in 2023. The cumulative aggregate growth rate (CAGR) for cloud storage and cloud databases is 18% and 22%, respectively. What do we take away from these numbers?
+
+-   Cloud computing is one of the most fundamental revolutions in computing in the last 20 years.
+
+-   Half of the addressable market is in storing data, either in databases or in some other form of cloud storage (files, blocks, objects). Getting your data into their cloud is a key element in the business model of the cloud service providers (CSP). Data has gravity and its “gravitational constant” seems to increase as it comes to rest in a cloud data center.
+
+-   The economics of inexpensive cloud storage will continue to erode Big Data storage systems like Hadoop (HDFS).
+
+-   Transactional and operational systems are unlikely to be supported by object storage, while it is least expensive it is also least performant. That is where databases optimized for transactions and/or analytic of cloud data come in.
+
+A database is said to be *cloud-ready* if it can be run on cloud infrastructure. That is true for most databases. It is said to be *cloud-native* if the database was designed for the cloud and takes advantage of the full functionality of the cloud, for example, horizontal scaling (scale-out) with increased workload, separation of storage and compute, container deployment and Kubernetes orchestration, multi-tenancy, disaster recovery, bottomless storage.
+
+Among cloud databases we can broadly distinguish three service models according to who takes on the responsibility for maintaining the infrastructure, the database instance, and the access to the database: self-managed databases, managed services (DBaaS), and serverless databases.
+
+### Self-managed
+
+A self-managed cloud database is not much different from a database installed on premises, except that it uses cloud infrastructure. As the name suggests, you are responsible for administering and maintaining all aspects of the deployment. The CSP will provide the infrastructure and make sure that it is operational, but you must make sure that the database running on the platform is operational, updated. You can install any database of your choice, including not cloud-native databases.
+
+Some cloud-native databases offer a self-managed option, but a managed service or serverless offering is more typical when databases were designed specifically for the cloud.
+
+### Managed Service
+
+Also known as database-as-a-service (DBaaS), this deployment methodology is a special case of software as a service, where the software managed on behalf of the user is a database system. In exchange for a subscription, the service provider handles the management of the database, including provisioning, support, and maintenance. The service provider chooses the hardware instances on which the database runs, frequently using shared resources for multiple databases and customers.
+
+Here are examples of relational and NoSQL databases offered as a managed service:
+
+-   Relational
+
+    -   [SingleStoreDB](https://www.singlestore.com/)
+
+    -   [CockroachDB](https://www.cockroachlabs.com/)
+
+    -   [Amazon RDS](https://aws.amazon.com/rds/) (Relational Database Service)
+
+    -   [Azure SQL](https://azure.microsoft.com/en-us/products/azure-sql/database)
+
+    -   [MotherDuck](https://motherduck.com/) (SaaS for DuckDB)
+
+    -   Azure DB for [MySQL](https://azure.microsoft.com/en-us/products/mysql), [PostgreSQL](https://azure.microsoft.com/en-us/products/postgresql/), …
+
+    -   [Google BigQuery](https://cloud.google.com/bigquery)
+
+    -   [Google Spanner](https://cloud.google.com/spanner)
+
+    -   [Oracle Database](https://www.oracle.com/database/)
+
+-   NoSQL
+
+    -   [MongoDB Atlas](https://www.mongodb.com/atlas)
+
+    -   [Azure Cosmos DB](https://azure.microsoft.com/en-us/products/cosmos-db)
+
+    -   [Couchbase](https://www.couchbase.com/)
+
+    -   [Google Datastore](https://cloud.google.com/datastore)
+
+    -   [Google BigTable](https://cloud.google.com/bigtable?hl=en)
+
+    -   [Google FireStore](https://cloud.google.com/firestore)
+
+    -   [Redis](https://redis.com/)
+
+    -   [Amazon DynamoDB](https://aws.amazon.com/dynamodb/)
+
+Cloud service providers have been pushing non-relational systems because horizontal scaling fits well with their business model: adding cloud infrastructure drives revenue for the cloud provider.
+
+### Serverless Systems
+
+We need to explain what we mean by “serverless computing” because all code executes on a computer (a server) somewhere. Serverless computing does not do away with servers. It eliminates for software developers the particulars of worrying about which servers their code runs on. This sounds a bit like the SaaS model, but there are important distinctions between a serverless and a serverful (e.g., SaaS) system:
+
+-   In serverless computing you execute code without managing resource allocation. You provide a piece of code to the CSP, and the cloud automatically provisions the resources necessary to execute the code.
+
+-   n serverless computing you pay for the time the code is executing, not for the resources reserved to (eventually) execute the code. The provider of a serverless service is then encouraged to scale back computing resources as much as possible when not in use (known as scale-to-zero).
+
+Serverless computing can be seen as the latest form of virtualization in computing. The user writes a cloud function and ties it to a trigger that runs the function, for example, when a customer opens an online shopping cart. The serverless system then takes care of everything else such as instance selection, logging, scaling, security, etc.
+
+Not all applications are suitable for serverless computing and for some time databases where thought to be among the backend services that do not fit with the serverless paradigm (see, for example, [this](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-3.pdf) view from Berkeley):
+
+-   Serverless computing is essentially stateless computing: the state necessary to execute code is either sent over an API along with the request or is stored somewhere server-side between function calls.
+
+-   Databases have a lot of state, such as connection protocols, metadata, access controls, schemas, etc.
+
+-   Databases often use connection-based protocols which assume a stable connection over a port between a host and a client. That conflicts with the design of serverless systems.
+
+-   Databases have a cold-start problem. A cold start is the time required to instantiate an environment and to get things up and running when a function is called for the first time. In a serverful environment you encounter a cold start only once at the beginning. In a serverless environment cold starts happen the first time you invoke a service and every time the system has scaled back. For example, if the serverless database quiesces after 5 minutes of inactivity and you submit queries every 10 minutes then every query must go through an instantiation of the database environment, including loading the data.
+
+Despite these challenges there has been a lot of progress in serverless database systems in recent years. Here is an incomplete list of relational and NoSQL serverless cloud databases. Notice that the list contains databases listed earlier; some providers make DBaaS and serverless options available:
+
+-   Relational
+
+    -   [MotherDuck](https://motherduck.com/) (collaborative serverless platform built on DuckDB)
+
+    -   [Neon Serverless Postgres](https://neon.tech/)
+
+    -   [PlanetScale DB](https://planetscale.com/) (Serverless MySQL)
+
+    -   [CockroachDB Serverless](https://www.cockroachlabs.com/lp/serverless/)
+
+    -   [Amazon Aurora Serverless](https://aws.amazon.com/rds/aurora/serverless/)
+
+-   NoSQL
+
+    -   [Fauna DB](https://fauna.com/)
+
+    -   [Google FireStore](https://firebase.google.com/docs/firestore)
+
+    -   [Amazon DynamoDB](https://aws.amazon.com/dynamodb/?nc2=h_ql_prod_fs_ddb)
+
+    -   [MongoDB Serverless](https://www.mongodb.com/use-cases/serverless)
+
+A special shout-out to DuckDB, a lightweight, embedded, analytical RDBMS that runs inside a host process, for example, inside a Python or R session. DuckDB integrates very well with other systems; it makes working with a relational system from Python or R very easy. MotherDuck is a serverless platform and cloud database built on DuckDB. The integration between the two makes working with databases locally and in the cloud particularly easy. And since DuckDB is optimized for analytic workloads, DuckDB & MotherDuck are great choices for data scientists. We will cover more about DuckDB and MotherDuck in the chapters that follow.
+
+## Data Warehouse, Mart, Lake, and Lakehouse
+
+We used the term data warehouse frequently throughout this document and made several references to data lake. What are they and how do data marts fit into the picture?
+
+Data warehouses and data lakes represent two distinct philosophies to store data and to make it available in enterprises. Many organizations have both a data warehouse and a data lake, some enterprises have several of each. The Data lakehouse is a recent development aimed at combining the pros of warehouses and lakes into a single architecture.
+
+### Data Warehouse
+
+The main differences between a data warehouse, also called an enterprise data warehouse (EDW), and a data lake are the level of curation of the data, the storage technology, and the level of access. The data in data warehouses is highly organized and curated and access to it tends to be more tightly controlled than in a data lake.
+
+A data warehouse contains structured data for business intelligence, reporting, and visualization. Data warehouses are updated with data from transactional source systems such as CRM, ERP, Salesforce on a regular schedule. Data are extracted to a staging area where they are transformed, normalized, and enriched before being loaded into the data warehouse. This process of extracting—transformation—loading is abbreviated as the [ETL](#_ETL_and_ELT) approach.
+
+![An enterprise data warehouse (EDW) is loaded with data transformed and curated in a staging area.](images/DataWarehouse.png){#fig-data-edw .lightbox fig-align="center" width="80%"}
+
+Data warehouses consist of schema-on-write tables—dimension and fact tables—and indexes that support consistency (ACID) and are optimized for analytical queries. Fact tables hold numerical data and primary keys; the dimension tables hold the descriptive information for all fields included in a fact table. A typical example is to store `orders` in a fact table and `customers` and `products` information in dimension tables. When relations between the fact and dimension tables are represented by a single join, the arrangement is called a **star schema** due to the central role of the fact table.
+
+![One fact table (Orders) and four dimension tables in a star schema. PK denotes primary keys, FK denotes foreign keys. The fact table has foreign keys that support relations with the dimension table. [Source](https://towardsdatascience.com/star-schema-924b995a9bdf).](images/StarSchema.png){#fig-data-starschema .lightbox fig-align="center" width="80%"}
+
+The star schema is one of the simplest ways of organizing data in a data warehouse. The **snowflake** schema has a more complex structure with normalized dimension tables (without duplicates) and possibly multiple levels of joins.
+
+![Snowflake schema with up to two levels of relational joins. [Source](https://www.simplilearn.com/star-schema-vs-snowflake-schema-article).](images/Snowflake_Schema.png){#fig-data-snowflakeschema .lightbox fig-align="center"}
+
+The snowflake schema in the preceding figure can require two levels of table joins to query data. For example, to calculate revenue by country requires a join of the fact table with the join of the \`Dealer\` and `Country` tables. In a star schema the location and country information would be incorporated into the \`Dealer\` table; that would increase the size of that dimension table due to multiple locations within countries and multiple dealers at locations, but it would simplify the relationship among the tables.
+
+Data warehouses uses SQL as the primary interface, are highly relational, ACID compliant, and schema-dependent—these are attributes of relational database management systems. But you should not equate EDWs with any specific RDBMS. Data warehouses are built on relational database technology but not every RDMBS can serve as a data warehouse. Examples of data warehouses include:
+
+-   Teradata (on-premises) and Teradata Vantage (cloud-based)
+
+-   Google BigQuery
+
+-   Amazon Redshift
+
+-   Microsoft SQL Server
+
+-   Oracle Exadata
+
+-   IBM Db2 and IBM Infosphere
+
+-   IBM Netezza
+
+-   SAP/HANA and SAP Datasphere
+
+-   Snowflake
+
+-   Yellowbrick
+
+### Data Mart
+
+A data mart is a section of a data warehouse where data is curated for a specific line of business, team, or organizational unit. For example, a data warehouse might contain a data mart for the Marketing organization, a data mart for the R&D organization, and a data mart for the Finance team. These teams have very different needs and different levels of access privileges.
+
+![A data warehouses supports different data marts. The teams access their data marts rather than the data warehouse directly.](images/DataMarts.png){#fig-data-datamarts .lightbox fig-align="center"}
+
+### Data Lake
+
+Data warehouses have dominated enterprise data storage and analysis for decades. They are not without drawbacks and their disadvantages were amplified during the rise of Big Data with new data types, new workloads, and the need for more flexibility. Data warehouses are often expensive, custom-built appliances that do not scale out easily. They use read-on-write schemas with proprietary storage formats. First Hadoop with the Hadoop Distributed File System (HDFS) and then cloud object storage (Amazon S3, Azure Blob Storage, Google Cloud Storage) presented a much cheaper storage option to reimagine data storage, data curation, and data access. Open-source data formats such as Parquet, ORC, and Avro presented an alternative to storing data in a proprietary format and promised multi-use of the data.
+
+Data lakes were born as centralized repositories where data is stored in raw form. The name suggests that data are like water in a lake, free flowing.
+
+A common data lake architecture is the **medallion** system named after bronze, silver, and gold medals awarded in competition. The structure and quality improve as one moves from the bronze to the silver to the gold tier. The bronze layer contains the raw data in formats such as CSV, JSON, XML, XLS and is not accessible by the end user. From here the data are cleansed and enriched and formatted into open-source formats such as parquet or Avro. The data in the silver layer is validated and standardized, schemas are defined but can evolve as needed. Users of the silver layer are data scientists and data analysts who perform self-service analysis, data science, and machine learning. Data engineers also use the silver layer to structure and curate data even more for project-specific databases that you find in the gold layer.
+
+![Medallion data lake design.](images/DataLake.png){#fig-data-datalake-medallion .lightbox fig-align="center" width="80%"}
+
+The data can be structured, unstructured, or semi-structured. Data lakes support many storage and file formats—CSV, JSON, Parquet, ORC, and Avro are common file formats for data sets. The data is kept in the lake in raw form until it is needed. RDBMS use databases and tables to organize the data. NoSQL databases use document collections and key-value pairs to organize the data. File systems use folders and files to organize files. A data lake uses a flat structure where elements have unique identifiers and are tagged with metadata. Like a NoSQL database, data lakes are schema-on-read systems.
+
+Data lakes are another result of the Big Data era. Increasingly heavy analytical workloads that burned CPU cycles and consumed memory were not welcome in databases and data warehouses that were meant to serve existing business reporting needs. A new data architecture was needed where data scientists and machine learning engineers can go to work, unencumbered by the rigidity of existing data infrastructure and not encumbering the existing data infrastructure with additional number crunching.
+
+The data lake is manifestation of the belief that great insights will (magically) result when you throw together all your data. When data are stored in a data lake without a pre-defined reason and in arbitrary formats, and poorly organized, they can quickly turn into *data swamps*.
+
+Here are some vendors of data lake solutions:
+
+-   [Microsoft Azure Data Lake](https://azure.microsoft.com/en-us/solutions/data-lake)
+
+-   [Google Cloud’s Data Lake](https://cloud.google.com/solutions/data-lake)
+
+-   [AWS Lake Formation](https://aws.amazon.com/lake-formation/?c=a&sec=srvm&loc=0)
+
+-   [Cloudera Data Lake Service](https://www.cloudera.com/products/sdx/data-lake-service.html)
+
+-   [IBM data lake solution](https://www.ibm.com/data-lake)
+
+-   [Delta Lake](https://delta.io/) (an open-source metadata layer that sits on top of open file formats like Delta and Parquet)
+
+Data lakes are flexible, scale horizontally (scale-out), and are quite cost effective. They are often built on cheap but scalable object/block/file storage systems that helps reduce costs at the expense of performance. A data warehouse on the other hand is a highly optimized, highly performant system for business intelligence. EDWs often come in the form of packaged appliances (Teradata, Oracle Exadata, IBM Netezza) that makes scaling more difficult. These systems are easier to scale up (adding more memory, more CPUs, etc.) rather than scale horizontally (scale out by adding more machines). EDWs support ACID transactions and allow updates, inserts, and deletes of data. Altering data in a data lake is very difficult, it supports mostly append operations.
+
+Data science and machine learning is more directed toward the data lake whereas business intelligence is directed at the warehouse. Can the two worlds come together, enabling cost-effective and performant business intelligence and data science on all data in a central place? Maybe. That is the premise and promise of the data **lakehouse**!
+
+### Data Lakehouse
+
+The term data lakehouse was coined by [Databricks](https://www.databricks.com/glossary/data-lakehouse):
+
+> *a new, open data management architecture that combines the flexibility, cost-efficiency, and scale of data lakes with the data management and ACID transactions of data warehouses, enabling business intelligence (BI) and machine learning (ML) on all data.*
+
+The lakehouse adds a layer on top of the low-cost storage of a data lake that provides data structures and data management akin to a data warehouse.
+
+![Data warehouse, data lake, and data lakehouse as seen by Databricks. [Source](https://www.databricks.com/glossary/data-lakehouse).](images/data-lakehouse-new.png){#fig-data-lakehouse .lightbox fig-align="center"}
+
+This is a compelling vision that, if it delivers what it promises, would be a major step into the right direction: to reduce the number of data architectures while enabling more teams to work with data.
+
+It is early days for the data lakehouse but there is considerable momentum. Some vendors are quick to point out that their cloud data warehouses also operate as a lakehouse. Other vendors position SQL query engines on top of S3 object storage as lakehouse solutions. Then there are solutions designed as a data lakehouse, e.g.,
+
+-   [Databricks Lakehouse](https://sourceforge.net/software/product/Databricks/)
+
+-   [Oracle Cloud Infrastructure Data Lakehouse](https://sourceforge.net/software/product/Oracle-Cloud-Infrastructure-Data-Lakehouse/)
+
+-   [Blossom Sky](https://www.blossomsky.io/)
+
+-   [DataLakeHouse.io](https://www.datalakehouse.io/)
+
+## File Formats
+
+If you are working with proprietary data analytics tools such as SAS or JMP, you probably do not worry much about the ways in which data are stored, read, and written by the software, except that you want the tool to support import and export to your favorite non-proprietary format.
+
+Most data science is performed on open-source or open standard file formats. Proprietary formats are not easily exchanged between tools and applications. Data science spans many technologies and storing data in a form accessible by only a subset of the tools is counterproductive. You end up reformatting the data into an exchangeable format at some point anyway.
+
+The most important file formats in data science are CSV, JSON, Parquet, ORC, and Avro. CSV and JSON are text-based, human-readable formats, whereas Parquet, ORC, and Avro are binary formats. The last three were designed specifically to handle Big Data use cases, Parquet and ORC in particular are associated with the Hadoop ecosystem. Parquet, ORC, and Avro are Apache open-source projects.
+
+Although CSV and JSON are ubiquitous, they were never meant for large data volumes.
+
+You will encounter many other data formats in data science work, but these five file formats cover a lot of ground, you should have a basic understanding of their advantages and disadvantages.
+
+### CSV
+
+In data science projects you will invariably work with *comma-separated values* (CSV) files. Not because that is a great file format, but because CSV files are ubiquitous for rectangular data sets made up of rows and columns. Each line of the file stores one record with values in plain text separated by commas.
+
+@fig-data-csvfile shows the contents of a CSV file with ten observations. The first line lists the column names. Strings are enclosed in quotes and values are separated by commas.
+
+![A CSV file with ten records.](images/CSVfilesExample.png){#fig-data-csvfile .lightbox fig-align="center"}
+
+Among the advantages of CSV files are
+
+-   **Ubiquitous**: every data tool can read and write CSV files. It is thus a common format to exchange (export/import) data between tools and applications.
+
+-   **Human readable**: since the column names and values are stored in plain text, it is easy to look at the contents of a CSV file. When data are stored in binary form, you need to know exactly how the data are laid out in the file to access it.
+
+-   **Compression**: since the data are stored in plain text it is easy to compress CSV files.
+
+-   **Excel**: CSV files are easily exported from and imported to Microsoft Excel.
+
+-   **Simple**: the structure of the files is straightforward to understand and can represent tabular data well if the data types can be converted to text characters.
+
+There are some considerable disadvantages of CSV files, however:
+
+-   **Human readable**: To prevent exposing the contents of the file you need to use access controls and/or encryption. It is not a recommended file format for sensitive data.
+
+-   **Simple structure**: Complex data types such as documents with multiple fields and sub-fields cannot be stored in CSV files.
+
+-   **Plain text**: Some data types cannot be represented as plain text, for example, images, audio, and video. If you kluge binary data into a text representation the systems writing and reading the data need to know how to kluge and un-kluge the information—it is not a recommended practice.
+
+-   **Efficiency**: much more efficient formats for storing data exist, especially large data sets.
+
+<!-- -->
+
+-   **Broken**: CSV files can be easily broken by applications. Examples include inserting line breaks, limiting line width, not handling embedded quotes correctly, blank lines.
+
+-   **Missing values** (NaNs): The writer and reader of CSV files need to agree how to represent missing values and values representing not-a-number. Inconsistency between writing and reading these values can have disastrous results. For example, it is a bad but common practice to code missing values with special numbers such as 99999; how does the application reading the file know this is the code for a missing value?
+
+-   **Encodings**: When CSV files contain more than plain ASCII text, for example, emojis or Unicode characters, the file cannot be read without knowing the correct encoding (UTF-8, UTF-16, EBCDIC, US-ASCII, etc.). Storing encoding information in the header section of the CSV file throws off CSV reader software that does not anticipate the extra information.
+
+-   **Metadata**: The only metadata supported by the CSV format are the column names in the first row of the file. This information is optional and you will find CSV files without column names. Additional metadata common about columns in a table such as data types, format masks, number-to-string maps, cannot be stored in a CSV file.
+
+-   **Data Types**: Data types need to be inferred by the CSV reader software when scanning the file. There is no metadata in the CSV header to identify data types, only column names.
+
+-   **Loss of Precision**: Floating point numbers are usually stored in CSV files with fewer decimal places than their internal representation in the computer. A double-precision floating point number occupies 64-bits (8 bytes) and has 15 digits of precision. Although it is not necessary, floating-point numbers are often rounded or truncated when they are converted to plain text.
+
+Despite these drawbacks, CSV is one of the most common file formats. It is the lowest common denominator format to exchange data between disparate systems.
+
+### JSON
+
+[JSON](https://www.json.org/json-en.html) stands for JavaScript Object Notation, and although it was borne out of interoperability concerns for JavaScript applications and is based on a JavaScript standard, it is a language-agnostic data format. Initially used to pass information in human readable form between applications over APIs (Application Programmer Interfaces), JSON has grown into a general-purpose format for text-based, structured information. It is the standard for communicating on the web. The correct pronunciation of JSON is apparently akin to the name “Jason”, but “JAY-sawn” has become common.
+
+A binary, non-human readable form of JSON was created at MongoDB and is called BSON (binary JSON).
+
+In contrast to CSV, JSON is not based on rows of data but three basic data elements:
+
+-   **Value**: a string, number, reserved word, or one of the following:
+
+-   **Object**: a collection of name—value pairs similar to a key-value store.
+
+-   **Array**: An ordered list of values
+
+All modern programming languages support key—values and arrays, they might be calling it by different names (object, record, dictionary, struct, list, sequence, map, hash table, …). This makes JSON documents highly interchangeable between programming languages—JSON documents are easy to parse (read) and write by computers. Any modern data processing system can read and write JSON data, making it a frequent choice to share data between systems and applications.
+
+A value in JSON can be a string in double quotes, a number, true, false, or null, an object or an array. Objects are unordered collection of name—value pairs. An array is an ordered collection of values. Since values can contain objects and arrays, JSON allows highly nested data structures that do not fit the row structure of CSV files.
+
+![Elements of a JSON document. Because values can contain objects and arrays, JSON documents can be highly structured and deeply nested.](images/JSON_Structure.png){#fig-data-json-structure .lightbox fig-align="center" width="80%"}
+
+JSON documents are self-describing, the schema to make the data intelligible is built into the structures. It is also a highly flexible format that does not impose any structure on the data, except that it must comply with the JSON rules and data types—JSON is schema-free.
+
+![A simple JSON document. The entire document is a name—value pair with name “menu”. The value is an object with names “id”, “value”, and “popup”. The value of “popup” is an object with name “menuitem” whose value is an array. The elements of the array are objects with names “value” and “onclick”.](images/JSON_Example.png){#fig-data-json-example .lightbox fig-align="center" width="80%"}
+
+Many databases support JSON as a data type, allowing you to store hierarchical information in a cell of a row-column layout, limited only by the maximum size of a text data type in the database. Non-relational document databases often use JSON as the format for their documents.
+
+Since so much data is stored in JSON format, you need to get familiar and comfortable with working with JSON files. Data science projects are more likely consumers of JSON files rather than producer of files.
+
+### Apache Parquet
+
+The [Apache Parquet](https://parquet.apache.org/) open-source file format is a binary format—data are not stored in plain text but in binary form. Originally conceived as a column-based file format in the Hadoop ecosystem, it has become popular as a general file format for analytical data inside and outside of Hadoop and its file system HDFS: for example, as an efficient analytic file format for data exported to data lakes or in data processing with Spark.
+
+Working with Parquet files for large data is an order of magnitude faster than working with CSV files. The drawbacks of CSV files discussed previously all melt away with Parquet files.
+
+Parquet was designed from the ground up with complex data structures and read-heavy analytics in mind. It uses principally columnar storage but does it cleverly by storing chunks of columns in row groups rather than entire columns.
+
+![The Parquet file architecture. Chunks of columns are stored in row groups. The footer contains important metadata. [Source](https://towardsdatascience.com/parquet-file-format-everything-you-need-to-know-4eed5c0019e7): Parquet File Format: Everything You Need to Know, by Nikola Ilic.](images/ParquetStorage.png){#fig-data-parquet .lightbox fig-align="center" width="80%"}
+
+This hybrid storage model is very efficient when queries select specific columns and filter rows at the same time; a common pattern in data science: compute the correlation between `homeValue` and `NumberOfRooms` for homes where `ZipCode = 24060`.
+
+Parquet stores metadata about the row chunks to speed access to rows, the metadata tells the reader which row chunks to skip. Also, a single write to the Parquet format can generate multiple `.parquet` files. The total data is divided into multiple files collected within a folder. Like NoSQL and NewSQL databases, data are partitioned, but since Parquet is a file format and not a database engine, the partitioning results in multiple files. This is advantageous for parallel processing frameworks like Spark that can work on multiple partitions (files) concurrently.
+
+Parquet uses several compression techniques to reduce the size of the files such as run-length encoding, dictionary encoding, Snappy, GZip, LZO, LZ4, ZSTD. Because of columnar storage compression methods can be specified on a per-column basis; Parquet files compress much more than text-oriented CSV files.
+
+Because of its complex file structure, Parquet files are relatively slow to write. The file format is optimized for the WORM paradigm: write-once, read many times.
+
+|                             |        CSV        |     JSON      |    Parquet    |
+|-----------------------------|:-----------------:|:-------------:|:-------------:|
+| **Columnar**                |        No         |      No       |      Yes      |
+| **Compression**             |        Yes        |      Yes      |      Yes      |
+| **Human Readable**          |        Yes        |      Yes      |      No       |
+| **Nestable**                |        No         |      Yes      |      Yes      |
+| **Complex Data Structures** |        No         |      Yes      |      Yes      |
+| **Named Columns**           | Yes, if in header | Based on scan | Yes, metadata |
+| **Data Types**              |   Based on scan   | Based on scan | Yes, metadata |
+
+: Comparison of popular file formats in data science.
+
+### Apache ORC
+
+The [Apache ORC](https://orc.apache.org/) (Optimized Row Columnar) open-source file format, like the Parquet file format, was originally associated with the Hadoop Big Data ecosystem. ORC files have a purely columnar storage format unlike the row-group/column chunk hybrid storage in Parquet files.
+
+ORC files are split into individual files that contain a collection of records; with columnar storage within the file. ORC files are organized into stripes, a stripe combines an index, the data in columnar form, and a footer with metadata. Stripes are essential to ORC files; they are treated independently of each other to support parallel data processing.
+
+![Layout of an ORC file in stripes. [Source](https://www.upsolver.com/blog/the-file-format-fundamentals-of-big-data).](images/ORC-file-structure.png){#fig-data-orc-structure .lightbox fig-align="center"}
+
+A stripe is by default 64 MB in size and ORC files can have multiple stripes. This gives you an idea that these file types were designed to store large amounts of data.
+
+The ORC format was optimized for Hive, the data warehouse in the Hadoop ecosystem. For example, Hive and ORC together support ACID transactions on top of Hadoop. You will find that outside of Hadoop, support for ORC files is not as generous as for Parquet files. For example, you can read a multi-file Parquet file with Pandas in a single line of code. To read multi-file ORC files you need to append the results of reading the individual files. The Pandas functions `read_orc()` and `to_orc()` to read and write ORC files are not supported on Windows.
+
+### Apache Avro
+
+[Apache Avro](https://avro.apache.org/) is an open-source, row-based, schema-based, file format. It is often used in conjunction with the streaming platform Apache Kafka, but Avro files are useful for batch processing as well. The storage format in Avro files is mixed in that the schema information is stored in JSON format while the data is stored in binary form. The schema is thus human readable.
+
+Like the Parquet format, Avro files are self-describing, the information to access and to deserialize the records is stored in the file itself. Avro files can be compressed but they do not compress as well as column stores. Heterogeneous data types within a row do not compress as well as homogeneous data within a column. Furthermore, column-oriented storage can choose optimal compression algorithms based on the data type of a column whereas row-oriented storage uses the same compression algorithm across all data types.
+
+Like other row stores, Avro files are great for applications that write more than they read; the exact opposite of column stores.
+
+### The Apache Arrow Project
+
+If you work with large data sets, you perform data analytics, you process batch and streaming data, you want to perform in-memory analytics and query processing, then you should pay attention to [Apache Arrow](https://arrow.apache.org/docs/index.html). This is an open-source development platform for in-memory analytics that supports many programming environments, including R and Python, the primary languages for data science.
+
+Main contributors to the Python pandas project are also involved with Arrow, so there is a lot of portability between Arrow tables and pandas DataFrames. The pyarrow package is the backend for some of the read and write functions in pandas that handle Big Data formats such as Parquet and ORC.
+
+Newer releases of Pandas are leaning more on pyarrow, e.g., Pandas 2.0.

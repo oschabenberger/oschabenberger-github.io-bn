@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.552">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Foundations of Data Science - 17&nbsp; Personal Information and Personal Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../references.html" rel="next">
+<link href="../ethics/bias_harm.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ethics/intro.html">Applied Ethics in Data Science</a></li><li class="breadcrumb-item"><a href="../ethics/privacy.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Foundations of Data Science</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../proj.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Science and Data Science Projects</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">History and Evolution of Data Science</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/lifecycle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Data Science Project Lifecycle</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../databasics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basic Data Preparation and Understanding</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/sources_and_files.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Sources and File Formats</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/data_access.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Quality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/summarization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Summarization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Visualization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/sqlbasics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">SQL Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Integration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../stat_learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/general.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">General Topics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/mathstat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/linalg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/featproc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Feature and Target Processing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Applied Ethics in Data Science</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/bias_harm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/privacy.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#privacy-and-confidentiality" id="toc-privacy-and-confidentiality" class="nav-link active" data-scroll-target="#privacy-and-confidentiality"><span class="header-section-number">17.1</span> Privacy and Confidentiality</a></li>
+  <li><a href="#data-privacy-regulations" id="toc-data-privacy-regulations" class="nav-link" data-scroll-target="#data-privacy-regulations"><span class="header-section-number">17.2</span> Data Privacy Regulations</a></li>
+  <li><a href="#what-is-personal-data" id="toc-what-is-personal-data" class="nav-link" data-scroll-target="#what-is-personal-data"><span class="header-section-number">17.3</span> What is Personal Data?</a></li>
+  <li><a href="#safeguarding-personal-information" id="toc-safeguarding-personal-information" class="nav-link" data-scroll-target="#safeguarding-personal-information"><span class="header-section-number">17.4</span> Safeguarding Personal Information</a>
+  <ul>
+  <li><a href="#lawful-fair-and-transparent" id="toc-lawful-fair-and-transparent" class="nav-link" data-scroll-target="#lawful-fair-and-transparent">Lawful, Fair, and Transparent</a></li>
+  <li><a href="#data-minimization" id="toc-data-minimization" class="nav-link" data-scroll-target="#data-minimization">Data Minimization</a></li>
+  <li><a href="#confidentiality" id="toc-confidentiality" class="nav-link" data-scroll-target="#confidentiality">Confidentiality</a></li>
+  <li><a href="#storage-limitation" id="toc-storage-limitation" class="nav-link" data-scroll-target="#storage-limitation">Storage Limitation</a></li>
+  <li><a href="#purpose-limitation" id="toc-purpose-limitation" class="nav-link" data-scroll-target="#purpose-limitation">Purpose Limitation</a></li>
+  <li><a href="#anonymization-and-pseudonymization" id="toc-anonymization-and-pseudonymization" class="nav-link" data-scroll-target="#anonymization-and-pseudonymization">Anonymization and Pseudonymization</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ethics/intro.html">Applied Ethics in Data Science</a></li><li class="breadcrumb-item"><a href="../ethics/privacy.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-ethics-privacy" class="quarto-section-identifier"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="privacy-and-confidentiality" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="privacy-and-confidentiality"><span class="header-section-number">17.1</span> Privacy and Confidentiality</h2>
+<p>Working with data requires compliance with data privacy regulations, an increasingly complex field. It is our job to safeguard <strong>all</strong> information, not just information about individuals. In the everyday use of the words, we might not make a distinction between <strong>privacy</strong> and <strong>confidentiality</strong>. Legally, and technically, there is an important distinction. Privacy is about people; it is about the individual’s <em>rights</em> regarding their information. Confidentiality is about an individual’s <em>data</em> and how it is protected from others.</p>
+<p>Confidentiality can be required explicitly: confidentiality clauses in employee agreements can limit information we are allowed to share about our employer. In the course of employment, we are learning trade secrets and proprietary information about products that constitute a competitive advantage. Data collection in research projects follows detailed protocols to ensure integrity and trust in the information. Non-disclosure agreements (NDAs) place restrictions on information that can be shared.</p>
+<p>Besides explicit confidentiality agreement, there is an expectation of confidentiality beyond privacy. Many consumers understand that organizations have access to their data. Their concern is how the organization uses the data, and ensures that it remains a secret. An organization that meets the letter of data privacy regulations can still run afoul of the confidentiality expectations of its employees and customers.</p>
+<p>The <a href="https://www.datascienceassn.org/code-of-conduct.html">Code of Conduct of the Data Science Association</a> has this to say about confidential information:</p>
+<blockquote class="blockquote">
+<p><em>(a) Confidential information is information that the data scientist creates, develops, receives, uses or learns in the course of employment as a data scientist for a client, either working directly in-house as an employee of an organization or as an independent professional. It includes information that is not generally known by the public about the client, including client affiliates, employees, customers or other parties with whom the client has a relationship and who have an expectation of confidentiality. The data scientist has a professional duty to protect all confidential information, regardless of its form or format, from the time of its creation or receipt until its authorized disposal.</em></p>
+</blockquote>
+<blockquote class="blockquote">
+<p><em>(b) Confidential information is a valuable asset. Protecting this information is critical to a data scientists reputation for integrity and relationship with clients, and ensures compliance with laws and regulations governing the client’s industry.</em></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>…</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><em>(h) A data scientist shall protect client confidential information after termination of work for the client.</em></p>
+</blockquote>
+<blockquote class="blockquote">
+<p><em>(i) A data scientist shall return any and all confidential information in possession or control upon termination of the data scientist - client relationship and, if requested, execute an affidavit affirming compliance with obligations relating to confidential information.</em></p>
+</blockquote>
+<hr>
+<p>Special safeguards and regulations apply to personal data and personal information—information that is about people or relatable to people. This is the realm of <strong>data privacy</strong>. Not safeguarding personal information can lead to harm for both sides: identity theft, fraud, violation of rights, etc., for the individual whose personal data is mishandled; fines, legal action, loss of license, embarrassment, loss of business, etc., for the individual mishandling the personal information.</p>
+<div class="example">
+<div class="example-header">
+<p>Example: Henrietta Lacks and the HeLa Cell Line</p>
+</div>
+<div class="example-container">
+<p>Henrietta Lacks was born on August 1, 1920, in Roanoke, VA. She is probably one of the most important medical pioneers of the 20<sup>th</sup> century, with contributions that study the effect of toxins, drugs, hormones, and viruses on the growth of cancer cells. Not through her own medical work, but through the cells that were taken from her—without consent.</p>
+<p>Mrs.&nbsp;Lacks had moved to Maryland and in 1951 visited Johns Hopkins Hospital in Baltimore complaining of vaginal bleeding. A malignant tumor was found on her cervix, and she started radiation therapy. On October 4, 1951, the cervical cancer took her life.</p>
+<p>Cancer cells retrieved from her through a biopsy were sent to the tissue lab of Dr.&nbsp;George Gey. To his astonishment, Dr.&nbsp;Gey found that Mrs.&nbsp;Lacks’ cells behaved differently than cancer cells from other patients. While other cells would die within days of culturing, Mrs.&nbsp;Lacks’s cells continued to live and doubled about once a day.</p>
+<p>The cells, called the HeLa cell line, is the first immortalized human cell line and continues to live to today. It has been used in countless medical research projects. As was practice at the time, no consent was required from the patient to culture the cells, and to distribute them. This would be unthinkable today. Even so, it was an unethical practice back then.</p>
+<p>After her death, Dr.&nbsp;Gey instructed his lab assistant to collect more cells while her body was in the autopsy facility.</p>
+<p><a href="https://www.hopkinsmedicine.org/henriettalacks/">Johns Hopkins claims</a> to have never sold or profited from the HeLa cell line and has given them away freely and widely for scientific research. Johns Hopkins admits that it could have done more to work with the Lacks family. They were not informed until 1975 about the existence of the HeLa cell line—another disturbing aspect about handling medical information without consent. The Lacks family found out about the cells because researchers contacted them and asked for blood samples hoping to use those to distinguish HeLa cells from other cell lines and through a conversation at a dinner party.</p>
+<p>More than 10,000 patents involve HeLa cells. They were used to develop the polio vaccine, and in everything from AIDS research to gene mapping to testing cosmetics.</p>
+<p>In October 2023, a statute of Henrietta Lacks was dedicated at Lacks Plaza in Roanoke. Small-scale statutes were <a href="https://news.vt.edu/articles/2023/10/fbri_vtcsom_lacksunveiling_1023.html">dedicated at the Fralin Biomedical Research Institute at VTC</a>, Virginia Tech Carilion School of Medicine, and Carilion Clinic. HeLa cells live at Fralin Biomedical Research Institute and in labs all over the world.</p>
+</div>
+</div>
+</section>
+<section id="data-privacy-regulations" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="data-privacy-regulations"><span class="header-section-number">17.2</span> Data Privacy Regulations</h2>
+<p>Since the late 2010s, data privacy regulations have appeared in many parts of the world. They are often similar but frequently different enough to create a messy landscape of laws that can be difficult to navigate. The most important regulations are</p>
+<ul>
+<li><p><strong>GDPR</strong>: the <a href="https://gdpr-info.eu/">General Data Protection Regulations</a> of the European Union</p></li>
+<li><p><strong>CCPA</strong>: the <a href="https://oag.ca.gov/privacy/ccpa">California Consumer Privacy Act</a></p></li>
+<li><p><strong>CPRA</strong>: the California Privacy Rights Act</p></li>
+<li><p><strong>VCDPA</strong>: the Virginia Consumer Data Protection Act</p></li>
+<li><p><strong>CPA</strong>: the Colorado Privacy Act</p></li>
+</ul>
+<p><a href="https://pro.bloomberglaw.com/insights/privacy/privacy-laws-us-vs-eu-gdpr/#the-basics-of-each-law">This</a> article in Bloomberg Law provides a good overview of the four pieces of legislation.</p>
+<div id="fig-privacy-laws" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-privacy-laws-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/BasicsofPrivacyLaws.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1"><img src="images/BasicsofPrivacyLaws.png" class="img-fluid figure-img" style="width:80.0%" data-fig.align="center"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-privacy-laws-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17.1: Basics of major data privay regulations. <a href="https://pro.bloomberglaw.com/insights/privacy/privacy-laws-us-vs-eu-gdpr/#the-basics-of-each-law">Source.</a>
+</figcaption>
+</figure>
+</div>
+<div id="fig-privacy-laws-data" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-privacy-laws-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/DataProtectedByPrivacyLaws.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2"><img src="images/DataProtectedByPrivacyLaws.png" class="img-fluid figure-img" style="width:80.0%" data-fig.align="center"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-privacy-laws-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17.2: Data protected by major data privay regulations. <a href="https://pro.bloomberglaw.com/insights/privacy/privacy-laws-us-vs-eu-gdpr/#the-basics-of-each-law">Source.</a>
+</figcaption>
+</figure>
+</div>
+<p>There is substantial overlap between the regulations, and also important differences. For example, the U.S. laws, which are based on bottom-up common law, are <strong>opt-out</strong> laws, whereas the top-down GDPR is an <strong>opt-in</strong> law. Consider consent, for example. An opt-out law assumes that consent is automatically given unless someone opts out. Under GDPR, consent is automatically withheld unless someone opts in explicitly (<a href="#fig-privacy-laws" class="quarto-xref">Figure&nbsp;<span>17.1</span></a>).</p>
+<p>The type of personal data protected under the regulations differs as well. The California statutes extend personal data to data about a household. When modeling consumer behavior, for example, modeling at the aggregate household level does not relieve you from worrying about personal data privacy of California residents. The U.S. laws exclude publicly available data from the definition of personal data, while GDPR includes publicly available data (<a href="#fig-privacy-laws-data" class="quarto-xref">Figure&nbsp;<span>17.2</span></a>).</p>
+<div id="fig-privacy-laws-compliance" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-privacy-laws-compliance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/PrivacyLawsCompliance.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="quarto-lightbox-gallery-3"><img src="images/PrivacyLawsCompliance.png" class="img-fluid figure-img" style="width:80.0%" data-fig.align="center"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-privacy-laws-compliance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17.3: Who must comply with major data privay regulations. <a href="https://pro.bloomberglaw.com/insights/privacy/privacy-laws-us-vs-eu-gdpr/#the-basics-of-each-law">Source.</a>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="what-is-personal-data" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="what-is-personal-data"><span class="header-section-number">17.3</span> What is Personal Data?</h2>
+<p>Things get complicated quickly because the definition of personal data varies and because there are many regulations to pay attention to. The <a href="https://gdpr-info.eu/">General Data Protection Regulations</a> (GDPR) of the European Union applies a very broad and non-prescriptive definition of personal information. HIPAA, The U.S. Health Insurance Portability and Accountability Act defines items specifically as PII, personally identifiable information. The primary focus of HIPAA is to protect personal information related to health. The National Institute of Standards and Technology, NIST, applies a different definition to PII. For example, your computer’s IP address is not PII under NIST standards but is personal data under GDPR. In 2011, the California State Supreme Court ruled that a person’s ZIP code is PII. The <a href="https://oag.ca.gov/privacy/ccpa">California Consumer Privacy Protection Act</a> (CPPA) distinguishes personal information such as internet browsing history from sensitive personal information, for example, an account log-in or union membership.</p>
+<p>We can never cover all the bases and thus recommend taking a conservative stance and a broad definition of personal information. If in doubt, consider a piece of data that can be linked to a person as personal information that is protected and needs to be safeguarded. The broad coverage of GDPR is a good place to start. In addition, you need to know the data privacy regulations that apply in a particular domain or to data from a specific group. The following are some federal laws that govern specific types of data:</p>
+<ul>
+<li><p>The <a href="#0">Privacy Act of 1974</a> governs how federal agencies can collect and use data about individuals in its system of records.</p></li>
+<li><p>The <a href="#0">Health Insurance Portability and Accounting Act</a> (HIPAA) governs the collection of health information.</p></li>
+<li><p>The <a href="#0">Children’s Online Privacy Protection Act</a> (COPPA) governs the collection of information about minors.</p></li>
+<li><p>The <a href="#0">Gramm Leach Bliley Act</a> (GLBA) governs personal information collected by banks and financial institutions.</p></li>
+<li><p>The <a href="#0">Fair Credit Reporting Act</a> (FCRA), which regulates the collection and use of credit information.</p></li>
+<li><p>The <a href="#0">Family Educational Rights and Privacy Act</a> (FERPA), which protects the privacy of student education records.</p></li>
+</ul>
+<p>The GDPR defines personal data in Article 4:</p>
+<blockquote class="blockquote">
+<p><em>‘personal data’ means any information relating to an identified or identifiable natural person (‘data subject’);</em></p>
+</blockquote>
+<p>There is a lot to unpack here. What does “relating to” mean? What is the difference between an “identified” and an “identifiable” natural person?</p>
+<p>An identifiable person can be identified by reference to a name, ID, location data, or by one or more other attributes specific to the identity of that person, such as genetic, mental, physical, cultural, or social information. To be identifiable, it is sufficient that you can distinguish them from other individuals. Personal data is not just what makes us unique, it is sufficient for the data to distinguish us from others. Your online shopping cart makes you an identifiable person because it can be used to distinguish you from people with a different shopping cart. It does not matter that there could be other shoppers whose cart looks exactly like yours.</p>
+<p>The name is an identifier, but it might not make you identifiable—there are many “John Smiths”. It is still personal information.</p>
+<p>What is the meaning of “relating to”? A careful reading of the GDPR definition of personal data suggests that identifying data might not be personal data if it does not relate to the person. Wait, what? A few examples will make this clearer:</p>
+<ul>
+<li><p>Information about an individual or about their activities is obviously personal data, it explicitly relates to the individual. Your birthday is your personal data. However, March 28, 2003, is just a date. It is not personal data until it is someone’s birthday, anniversary, wedding day, arrest day, etc.</p></li>
+<li><p>Consider a job listing that includes salary information. The salary is not personal information, it relates to no specific individual. As soon as the position is filled, the salary information becomes personal information because it now relates to the new employee.</p></li>
+<li><p>An organization has an org chart with job titles. The job title in the org chart is not personal data until it is related to a specific individual or a group of employees.</p></li>
+<li><p>Data about a house is not, by itself, personal data. But an individual’s tax record or utility bill are personal data. As soon as the information about the house is tied to an owner, it becomes personal data—it now relates to the owner. You can conduct analyses of house values in a geographical area. The houses in the study are selected because of their properties—four bedrooms and a double garage—not because they are occupied by a specific entity. But if the data about the house is used with respect to an individual, then it is personal data.</p></li>
+<li><p>A factory collects information about a machine on the factory floor. This is not personal data if the purpose of analysis is to understand the operating characteristics of the machine. If the data is used to assess the productivity of the machine operator, then it is personal data.</p></li>
+</ul>
+<p>The definition of personal data in GDPR is non-prescriptive. The regulations do not explicitly state that a social security number is personal information—it is. Whether information is personal data depends on the context. Does it relate to distinguishable individuals? If so, it is personal data. GDPR is adaptable because of this approach, if we determine that an IP address is personal data in a context, then a MAC address is as well. The downside of a non-prescriptive definition is that context matters, and we need to know how to apply it.</p>
+<p>Data does not have to be correct to constitute personal data. A social-security number entered into a database is still personal data, even if someone fat-fingered some digits.</p>
+<div class="example">
+<div class="example-header">
+<p>Example: <a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/personal-information-what-is-it/what-is-personal-data/what-is-the-meaning-of-relates-to/">Inaccurate</a> Personal Data</p>
+</div>
+<div class="example-container">
+<p>John and William live in an apartment building; John lives on the ground floor and William lives on the top floor. They both wear glasses.</p>
+<p>The landlord receives a complaint that the man wearing glasses who lives on the ground floor has engaged in bad behavior. However, the complaint actually is about William’s activity.</p>
+<p>The landlord records the information about the behavior relating to John. The information is inaccurate, but it is nevertheless personal data related to John. At the same time, this is also personal data about William, even though it’s been recorded about John.</p>
+</div>
+</div>
+</section>
+<section id="safeguarding-personal-information" class="level2" data-number="17.4">
+<h2 data-number="17.4" class="anchored" data-anchor-id="safeguarding-personal-information"><span class="header-section-number">17.4</span> Safeguarding Personal Information</h2>
+<p>If you google how to safeguard personal information you get a wealth of similar responses—almost all of them are about how <strong>you</strong> can safeguard your personal information: use strong passwords, use two-factor authentication, don’t overshare online, turn off location services, watch out for phishing attempts, don’t follow unknown or suspicious links, keep your social security card in a safe place at home, …</p>
+<p>But how do we safeguard <strong>other</strong>’s personal information that makes it into data sets we work with? There are a number of principles you can follow as an ethical data scientist. These (and more) are enshrined as the data protection principles of GDPR.</p>
+<section id="lawful-fair-and-transparent" class="level3">
+<h3 class="anchored" data-anchor-id="lawful-fair-and-transparent">Lawful, Fair, and Transparent</h3>
+<p>Act in the best interest of the data subjects, always on a legal basis and with best intentions. That means you had consent to collect and analyze the data and the scope of analysis does not exceed what can reasonably be expected.</p>
+</section>
+<section id="data-minimization" class="level3">
+<h3 class="anchored" data-anchor-id="data-minimization">Data Minimization</h3>
+<p>Only collect and keep the amount of personal data that is needed, in terms of the number of records and the number of variables. If you gather data to deliver a newsletter electronically, then all you need is the name and email address. Maybe you do not even need to know the name of the subscriber. Having their job title might be an interesting piece of information but it is not necessary to send out the newsletter—it should not be collected.</p>
+<p>Suppose you analyze data on houses to develop a predictive model for residential real estate prices, and the data set contains information about the owners of the properties. This information is not necessary for the purpose and should be removed from the data frame you work with.</p>
+</section>
+<section id="confidentiality" class="level3">
+<h3 class="anchored" data-anchor-id="confidentiality">Confidentiality</h3>
+<p>Only people who should have access to data are working with the data. If you are in control of data, you have a responsibility to protect the personal data you are processing. A common means of violating this principle is sharing data with others not knowing that the data contains personal information. If you receive a request for access to data that you have access to, ask yourself whether the requestor is authorized to use the data. If in doubt, put security concerns ahead of trying to be helpful.</p>
+</section>
+<section id="storage-limitation" class="level3">
+<h3 class="anchored" data-anchor-id="storage-limitation">Storage Limitation</h3>
+<p>Do not store personal data you do not need anymore. This is related to the data minimization principle, do not keep what you do not need.</p>
+<p>Destroying data is trickier than you might think. There can be multiple copies of records, on multiple devices, including backups in the cloud, backups on tapes, etc. The same information can be stored at different levels of data preparation, for example in different layers of a data lake with medallion architecture. You can destroy data by removing it from storage devices using erasure, degaussing (destroying the magnetic field), or overwriting. Or you can destroy the storage device, for example by shredding hard drives.</p>
+<p>The GDPR include a right to data deletion, any data subject can ask that their personal data be deleted. You need to know what personal data you have on someone, where it is, and how to destroy that data.</p>
+<p>If you gather email addresses for the purpose of sending an electronic newsletter, and you decide to stop sending newsletter, you have to delete the email addresses because the purpose for which the personal data was given no longer exists.</p>
+</section>
+<section id="purpose-limitation" class="level3">
+<h3 class="anchored" data-anchor-id="purpose-limitation">Purpose Limitation</h3>
+<p>Use the data only for the purpose it was intended for. If the purpose expands or changes you need to re-secure consent. You cannot reuse personal data for other purposes. If you tell an online user that you store their IP address to document their consent, then you cannot use the IP address to send them marketing material.</p>
+</section>
+<section id="anonymization-and-pseudonymization" class="level3">
+<h3 class="anchored" data-anchor-id="anonymization-and-pseudonymization">Anonymization and Pseudonymization</h3>
+<p>Anonymization: remove personal information from a data set. The anonymized data should eliminate direct re-identification, for example, by combining other information in the data set.</p>
+<p>Pseudonymization: pseudonymizing data is a weaker safeguard than anonymizing it. Pseudonymization replaces the original value of personal information with a mask or by encryption. If the pseudonymization is reversible, for example with an encryption key, the data is still considered personal information.</p>
+
+
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Figure&nbsp;17.1: Basics of major data privay regulations. <a href="https://pro.bloomberglaw.com/insights/privacy/privacy-laws-us-vs-eu-gdpr/#the-basics-of-each-law">Source.</a></span>
+<span class="glightbox-desc lightbox-desc-2">Figure&nbsp;17.2: Data protected by major data privay regulations. <a href="https://pro.bloomberglaw.com/insights/privacy/privacy-laws-us-vs-eu-gdpr/#the-basics-of-each-law">Source.</a></span>
+<span class="glightbox-desc lightbox-desc-3">Figure&nbsp;17.3: Who must comply with major data privay regulations. <a href="https://pro.bloomberglaw.com/insights/privacy/privacy-laws-us-vs-eu-gdpr/#the-basics-of-each-law">Source.</a></span>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../ethics/bias_harm.html" class="pagination-link" aria-label="Bias and Harm in Algorithms">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Foundations of Data Science by Oliver Schabenberger</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"zoom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

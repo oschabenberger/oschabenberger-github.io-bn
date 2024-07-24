@@ -1,0 +1,288 @@
+# History and Evolution of Data Science {#sec-history}
+
+## What is Data Science?
+
+It is revealing that there is no single agreed-upon definition of data science. The lack of a clear definition is understandable if one considers that,
+
+-   data science is a young discipline, its boundaries—what is in and what is out—are still evolving.
+
+-   data science is a cross-functional discipline that combines domain expertise with foundations in statistics, mathematics, and computer science. Views of data science differ based on how these components are weighted.
+
+-   data science is defined by what data scientists do. That encompasses everything from finding data, handling data, processing data at scale, to applying statistics and machine learning, to writing code and implementing algorithms to interpreting, visualizing, and communicating data and results.
+
+We can begin to develop an understanding of data science by considering the three foundational disciplines: statistics, mathematics, and computer science. What problems associated with data required their combination and could not be solved by the discipline in isolation? Maybe we should put the question slightly differently: What problems are we able to solve at the intersection of these disciplines?
+
+First, data is information collected about the real world. Data science then is concerned with real-world problems and phenomena. We test hypotheses about real-world problems, but we do not solve hypothetical problems or prove theorems. Typical questions addressed by data scientists based on data are:
+
+-   What is and what has been (description)
+-   What will be (prediction)
+-   What category does this item belong to (classification)
+-   What can I say about X (hypothesis testing)
+-   What should I do (prescription)
+-   Which things are similar (segmentation, clustering)
+-   Which things occur together (association)
+-   What is the best way to do something (optimization)
+
+**Statistics** is concerned with describing the world and with drawing conclusions about the world using incomplete information. The information—data—is incomplete for various reasons. We might have drawn a sample from a population rather than observed every entity. We might have assigned treatments at random to subjects in an experiment in order to balance out the influence of variables not controlled in the experiment. We have incomplete information about the input variables that relate to an output variable. We have incomplete information about the true relationship between inputs and outputs.
+
+**Computer Science** is concerned with computation, information, and automation. Key to computer science are data structures—efficient ways to store and process information—and algorithms—specifications to solve a specific problem through computation. Because today data is almost always stored in digital form it is now immediately accessible to processing via computation. A remarkable contribution of computer science to data science over the last decades is to broaden its view from methods and algorithms to organize and store data to methods and algorithms that draw conclusions from the data through computation. Computer science has discovered data as a source of learning, not just as a medium of storage and processing.
+
+The algorithmic approach to understanding data rather than a probabilistic approach is one of the great contributions of computer science to data science. Another major contribution is software engineering and software development. Data science projects are software projects, they involve the use of software tools and create code written in languages such as Python, SQL, R, Julia, Scala, Java, JavaScript, and others.
+
+**Mathematics** is concerned with the study of numbers, formulas (algebra), shapes and structures (geometry), and patterns (analysis). Statistics is often considered a form of applied mathematics. Relationships between inputs and outputs in data science are often modeled through continuous functions, their properties are studied through linear algebra, and they are related to data through differentiation, integration, and numerical analysis.
+
+:::{.definition}
+::::{.definition-header}
+Data Science
+::::
+::::{.definition-container}
+At the intersection of the foundation disciplines, performing data science means drawing conclusions from data about real-world problems using computation and automation in the presence of uncertainty.
+::::
+:::
+
+Rather than thinking of data science as a new domain of knowledge, we think of it as a set of skills that are applied to a subject matter domain (=area of expertise). This view is informed less by a scientific discipline around data than the recognition that today all subject matter domains, including the sciences, are using data to answer questions.
+
+Which skills are most important? Is it the hard technical skills in statistics, machine learning, software development? Or is it the ability to communicate across organizational functions in a team-based environment? Or is it the ability to understand and analyze real-world problems in a specific domain? A data scientist will eventually need to acquire all those skills, but they are not interchangeable. Subject matter skills can be acquired by working in a particular domain. Working on data science problems in financial services, for example, you will pick up the specifics and idiosyncrasies of credit and debit card transactions, anti-money laundering, electronic payments, and so on.
+
+Domain-specific knowledge takes the least time to learn to contribute to solving data science problems. Learning the statistical and mathematical foundations and how to develop good software is the more difficult task. When you join an organization as a data scientist, you will be surrounded by people who understand the domain inside and out---it is what they do. You, however, might be the only person who understands how to apply machine learning to forecast data and who knows how to write analytical software that works.
+
+## The Sexiest Job and John W. Tukey
+
+In 2009, Hal Varian, Chief Economist at Google declared that the sexy job in the next ten years would be statisticians. As a statistician, I agreed of course. In 2012, Thomas Davenport and DJ Patil published “Data Scientist: Sexiest Job of the 21^st^ Century” in Harvard Business Review [@DavenportPatil_2012]. These articles were not describing the work of the typical statistician, but a more general approach to extracting information from large data sets and presenting the insights to others. A new kind of profession was emerging in response to a greater abundance of data in the world that did not fit neatly into existing categories like mathematician, statistician, business analyst, or “quant”. Varian said,
+
+> *The ability to take data—to be able to understand it, to process it, to extract value from it, to visualize it, to communicate it—that’s going to be a hugely important skill in the next decades…*
+
+The approach seemed fresh in placing the data at the center of the investigation rather than the traditional approach of choosing the problem first and collecting data second to answer the problem. It emphasized learning from data through visualization and communicating about data---data literacy. What can we learn from the data we have, what do the data tell us? Alas, this shift in focus was not new, it was first proposed by a famous statistician, John W. Tukey.
+
+:::{.callout-tip title="Data and Datum" collapse="true"}
+You might have noticed that data is used in the plural form, "data are...". This is grammatically correct since data is the plural form of datum. It is common to use data as a singular noun, "data is...". I might fall into that trap every now and then but prefer to use the plural form. After all, using data as singular would be wasting a perfectly good noun: datum.
+:::
+
+
+Tukey is known to statisticians as the founder of **exploratory** data analysis (EDA), as compared to **confirmatory** data analysis. His famous book “Exploratory Data Analysis” [@TukeyEDA] established the idea that much can be learned by using the data itself and that data can suggest hypotheses to test. In confirmatory analysis, on the other hand, you start with a hypothesis and then collect data to verify whether the hypothesis might be true.
+
+Much of the statistical work leading up to this point had been confirmatory, based on the concept that data are the realization of a data-generating mechanism—usually a random process. Hypotheses are tested by capturing this mechanism in a statistical model, deriving estimates for the parameters of the model. Once the statistical model is accepted as the abstraction of the data-generating mechanism it becomes the lens through which the problem of interest is viewed. The model is applied to test hypotheses and to calculate predictions along with measures of uncertainty.
+
+In 1962, John W. Tukey published a pre-cursor to EDA, “[The Future of Data Analysis](https://projecteuclid.org/journals/annals-of-mathematical-statistics/volume-33/issue-1/The-Future-of-Data-Analysis/10.1214/aoms/1177704711.full)”, in which he laid the foundation of modern data science, he called it data analysis, and argued why this is a scientific discipline [@TukeyDA].
+
+> *For a long time I have thought I was a statistician, interested in the inference from the particular to the general. But as I have watched mathematical statistics evolve, I have had cause to wonder and to doubt.*
+>
+> *All in all, I have come to feel that my central interest is in data analysis, which I take to include, among other things: procedures for analyzing data, techniques for interpreting the results of such procedures, ways of planning the gathering of data to make its analysis easier, more precise and more accurate, and all the machinery and results of (mathematical) statistics which apply to analyzing data.*
+
+Tukey asked that we give up familiar constraints and look for stories and meaning in data sets. Data analysis can precede probability models; for example, one can identify an interesting function of the data and make progress by asking what the function might reasonably be estimating.
+
+This was a liberating view that contrasted against the rigor of probability models and the search for optimal estimators in favor of putting the data first, accepting “good enough”, giving advice when there is reasonable evidence for the advice to be sound, and being prepared that in a reasonable fraction of cases that advice will be wrong.
+
+> *Data analysis must progress by approximate answers, at best, since its knowledge of what the problem really is will at best be approximate. Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise.*
+
+## Data Mining and Data Science
+
+Data mining is the process of searching large data sets for trends and patterns using computers and automation. We can see a direct link to data analysis in the sense of Tukey, working with a dataset to extract interesting patterns in data, to discover new information in the data, to classify observations, identify associations, detect outliers or anomalies, and to identify groups of similar observations (clustering).
+
+With the dramatic growth of datasets in rows and columns, it became impossible to conduct this type of exploratory discovery (in the sense of Tukey) manually. There was also growing interest in using special tools and algorithms to discover hidden nuggets of information and relationships in datasets that would otherwise go undetected. Data mining relies on computing power and automation to find patterns in data at scale.
+
+The overall process of discovering knowledge from data was formalized as Knowledge Discovery in Databases ([KDD](https://www.techopedia.com/definition/25827/knowledge-discovery-in-databases-kdd)). Data mining is the part of the KDD process that uses algorithms to discover patterns.
+
+This approach is not without problems or critics. The statistical viewpoint likened the approach to “[data dredging](https://en.wikipedia.org/wiki/Data_dredging)” or “data fishing”: looking for relationships even if they are meaningless and then forming hypotheses about why the relationships exist. For example, associations and correlations can be spurious, caused by latent or mediating variables. A strong correlation is not evidence of a causal relationship and might lead to the formulation of bad hypotheses or poor decisions.
+
+::: example
+::: example-header
+Example: Chocolate Consumption and Nobel Laureates
+:::
+
+::: example-container
+The New England Journal of Medicine published in 2012 an article that relates the chocolate consumption per capita to the number of Nobel prize winners in various countries, a highly significant statistical relationship that explains almost 2/3 of the country-to-country variation in Nobel laureates
+
+```{r, fig.align="center"}
+#| label: fig-proj-choclolate
+#| echo: false
+#| fig-cap: |
+#|   Messerli, F.H. (2012) “Chocolate Consumption, Cognitive Function, and Nobel Laureates”. 
+#|   New England Journal of Medicine, 367:1562-1564
+#| fig-alt: |
+#|   A diagram displaying the relationship between chocolate consumption and
+#|   number of Nobel laureates in countries.
+#| lightbox:
+#| out.width: 75%
+
+knitr::include_graphics("images/ChocolateNobel.jpg")
+```
+
+If the relationship were causal—which it is not—an increase of 0.4 kg per year per capita would produce one additional Nobel laureate. In the U.S. that amounts to an extra 125 million kg of chocolate per year. If the relationship between chocolate consumption and number of Nobel laureates is not causal, how can we then explain the obvious relationship seen in the figure? Could it be explained by chocolate consumption improving cognition which creates a fertile ground from which Nobel laureates sprout? A look at how the data was collected sheds light and casts doubt on the study: only four years of chocolate consumption were considered on a limited number of chocolate products and no data prior to 2002 was used. The number of laureates is a cumulative measure that spans a much longer time frame.
+
+It appears that the data were organized in such a way as to suggest a relationship between the variables.
+:::
+:::
+
+Another criticism of the data mining approach is that traditional statistical decisioning based on p-values is not adequate. Many statistical tests get overpowered by very large data sizes, making even small differences statistically significant. The repeated application of statistical tests across hundreds or thousands of variables leads to inflated error rates unless multiplicity adjustments are made.
+
+::: example
+::: example-header
+Example: Market Basket Analysis
+:::
+
+::: example-container
+Market basket analysis uses Association Rule Mining (ARM) to find associations between items that occur in databases. An application is to identify items that are purchased together, for example, customers who buy whole milk might be more likely to also purchase yogurt and cereals as compared to a completely random choice of products. The name market basket analysis stems from this application, but ARM has many other use cases. Association rules can be used in diagnosing medical conditions based on co-occurrence of symptoms, in text analytics to extract meaning of documents based on the co-occurrence of words, in survey analysis to find associations between answers to different questions. A rule is represented as a logical $\{A\}\Rightarrow\{B\}$, where $\{A\}$ is a set of items called the antecedent (head) of the rule and $\{B\}$ is a set of items called the consequent (body) of the rule. ARM discovers rules such as $\{\text{whole milk}\}\Rightarrow\{\text{yogurt, cereals}\}$ and arranges them by measures of rule quality such as support, confidence, and lift. The support of an item set is the frequency with which its items appear, the confidence is a measure of predictability of the rule, and the lift measures how much more likely the item set appears compared to a random allocation of items. When applied to large databases the number of possible association rules is astronomical. Suppose there are 500 items in a store. There are more than 62 million rules with just two items in the antecedent and a single item in the consequent. If all associations between items are completely random, at a 1% Type-I error rate we would declare over 600,000 associations as “significant”.
+:::
+:::
+
+This criticism is valid, of course, if the results of data mining are used in a confirmatory fashion. But when one puts data first, not a probability model that might have created the data, then data mining techniques are incredibly useful and necessary to help us learn about data, to formulate hypotheses, and to plot the path of inquiry—rather than to confirm a result. Data mining is part of the data science methodology and not a separate discipline. The Data Science Process Alliance, concerned with project management in data science, uses the cross industry standard process for data mining (CRISP-DM) as the foundation for the data science process—data mining and data science today are intertwined.
+
+## 2001: An Odyssey
+
+Two influential papers appeared in 2001 that paved the way from statistics to data science.
+
+In “Data Science: An Action Plan for Expanding the Technical Areas of the Field of Statistics” William S. Cleveland makes the case to enlarge the major focus areas in statistics to a field called data science [@Cleveland2001]. The new discipline places more emphasis on
+
+-   Multidisciplinary projects. Collaboration with domain experts is a source of innovation. Data is the engine for invention in data science.
+
+-   Model building. Effort should increase toward methods for building models compared to formal, mathematical-statistical inference in models.
+
+-   Computational methods and computing with data that includes databases, networks, and analytical software.
+
+-   Communication and pedagogy.
+
+In “[Statistical Modeling: The Two Cultures](https://projecteuclid.org/journals/statistical-science/volume-16/issue-3/Statistical-Modeling--The-Two-Cultures-with-comments-and-a/10.1214/ss/1009213726.full)”, Leo Breiman contrasts statistical (data) modeling and algorithmic modeling [@BreimanTwoCultures]. The former assumes that the data are generated by a stochastic data model. According to Breiman, 98% of statisticians subscribe to this approach. Algorithmic modeling, on the other hand, makes no assumption about the underlying data model, treats the data mechanism as unknown, and is more common in fields outside of statistics. In Breiman’s words
+
+> *Perhaps the damaging consequence of the insistence on data models is that statisticians have ruled themselves out of some of the most interesting and challenging statistical problems that have arisen out of the rapidly increasing ability of computers to store and manipulate data. These problems are increasingly present in many fields, both scientific and commercial, and solutions are being found by nonstatisticians*.
+
+The goal of algorithmic models is more predictive accuracy than confirmatory inference and hypothesis testing. The model is supposed to approximate an unknown relationship between inputs and outputs well enough to provide satisfactory accuracy in predicting outputs of previously unseen inputs. Neural networks and decision trees are examples of algorithmic tools that found rapid adoption outside of statistics. Machine learning as it emerged from computer science is a manifestation of algorithmic modeling.
+
+In data modeling, theory focuses on the probabilistic properties of the model and of quantities derived from it. In algorithmic modeling, the focus is on the properties of the algorithm itself: starting values, optimization, convergence behavior, parallelization, hyperparameter tuning, and so on.
+
+Breiman’s article was widely discussed—the invited comments by leading statisticians at the end of the paper give a sample of opinions.
+
+Meanwhile, computer scientists had realized that data is not just an abstract concept, that data is more than information to be structured, stored, secured, and transmitted. They realized that data had intrinsic value; processing data can derive insight from data. That knowledge filled a void left by statisticians with limited knowledge of computing environments. Computer scientists, on the other hand, had limited knowledge about how to approach the analysis of data. The fields were ripe for a merger.
+
+## The Big Data Era
+
+An early use of the term Big Data was in a paper by Michael Cox and David Ellsworth (“Application-controlled demand paging for out-of-core visualization”) in the Proceedings of the IEEE 8^th^ Conference on Visualization. The authors noted that data set sizes have grown bigger to the point that they do not fit in main memory and termed the problem *big data*.
+
+Did we really need another term to describe increasing data size? Whether data fits into main memory of a computer depends on the size of the data and the size of the memory. And since the invention of digital computers both have constantly increased. There had to be more to it than just an increase in the volume of data.
+
+Indeed, in the 2000s a new class of applications and uses of data emerged as several developments in data and computing coalesced:
+
+-   More and more data were now captured in digital form, the amount of data generated in digital form increased sharply.
+
+-   A growing interest in the analysis of rich data types such as text, documents, audio, and video.
+
+-   A continuum of data in motion; from data at rest in the cloud or data center to streaming data.
+
+-   Large-scale data collection enabled through the internet.
+
+-   A shorter shelf life of new kinds of data such as behavioral data (online shopping, social media activity, web browsing, behavioral data) compared to more stable demographic data (age, ZIP code).
+
+-   The beginnings of data-driven application where the data defines how the system operates.
+
+-   Greater automation of data-processing.
+
+The Big Data phenomenon was never just about the size of the data alone, or even the “3Vs”, volume, velocity, and variety. Big Data was about doing something different with data than had been done before, using different data types, different model types, different algorithms, and different computing environments. Building a recommendation system at Netflix or Amazon from data on millions of customers and items viewed or bought is an example of this new type of applications.
+
+Big Data [was]{.underline} about reaching the limits of the ability to store, access, and process data. The volume of data can be a limiting factor, of course and call for specialized approaches. Traditional statistical modeling with hypothesis testing might be useful when deciding about 20 possible input variables. What happens when there are 30,000 potential input variables? Computing $p$-values in a random sample of size 100 makes sense, but when the data set contains 10 million observations the statistical test is so powerful that nearly any hypothesis can be rejected. What should be used instead? How do you engage multiple computers to solve massive analytic problems in parallel?
+
+If the definition of Big Data is “whatever does not fit on a single machine” and needs some form of distributed computing, then the frontier is continuously receding. Today (2023), a storage-optimized instance in the Amazon Elastic Compute Cloud (AWS EC2, i4g.16xlarge), features 64 cores (vCPUs) and 512 GB of memory. AWS launched EC2 in 2006 with single-core machines that featured 2 GB of RAM. That is an increase of more than two orders of magnitude. And, in case that is not powerful enough, p5.48xlarge instances feature 192 cores and 2 TB of memory. A lot of Big Data work can be done on a single machine today.
+
+Jordan Tigani, CEO and founder of database company MotherDuck and founding engineer of Google BigQuery has captured this development in the blog “[Big Data Is Dead](https://motherduck.com/blog/big-data-is-dead/)”:
+
+> *The world in 2023 looks different from when the Big Data alarm bells started going off. The data cataclysm that had been predicted hasn’t come to pass. Data sizes may have gotten marginally larger, but hardware has gotten bigger at an even faster rate. Vendors are still pushing their ability to scale, but practitioners are starting to wonder how any of that relates to their real world problems.*
+>
+> *Of course, just because the amount of data being generated is increasing doesn’t mean that it becomes a problem for everyone; data is not distributed equally. Most applications do not need to process massive amounts of data. This has led to a resurgence in data management systems with traditional architectures.*
+
+The amount of data an organization stores is typically much greater than the amount of data being analyzed: because more recent data is more important, because data are being processed for analytics, and so on.
+
+Whatever we think of the term Big Data, the era has contributed to the rise of data science as a discipline. New data-driven applications with new types of data challenged us to approach data analytics in a new way. Algorithmic approaches that put the problem first (I need to predict customer churn) are winning in this environment over data modeling approaches that first build an abstraction of the data mechanism based on probability principles.
+
+## Data Science Today
+
+The people who identify as data scientists often have unusual career paths; they do not necessarily come to data science through one of the foundational disciplines. They turn out to be problem solvers with an acumen for technology, programming, and communication.
+
+Big Data created an epic wave and data scientists are the people who know how to surf. Thanks to the Big Data wave, tools and techniques to process and analyze large and complex datasets are now standard in data science. Knowledge in data storage, parallel computing, distributed systems, scalable data processing frameworks, and cloud computing is part and parcel of data science.
+
+Ten years after they published “Data Scientist: Sexiest Job of the 21^st^ Century”, Thomas Davenport and DJ Patil revisited in a [2022 Harvard Business Review article](https://hbr.org/2022/07/is-data-scientist-still-the-sexiest-job-of-the-21st-century) whether the assessment still holds [@DavenportPatil_2022]. They conclude that over the last 10 years there has been continuity in the developments but also important changes.
+
+The job of the data scientist continues to gain importance as the amount of data, analytics, and AI in business, government, and society is bound to only increase. A decade ago, the data scientist was a *unicorn* who combined rare skills in statistics, machine learning, and coding to wrangle information from large datasets. Thanks to many graduate and undergraduate programs, online courses and certifications, there is today a more structured approach to acquire data science skills. While these skills continue to range widely, there is also more differentiation of the data scientist role against other professions. In response to specialization and the need to fill a gap in managing data in the data science project lifecycle, AI engineers, ML engineers, and data engineers are on the rise. In the words of Davenport and Patil:
+
+> *We expect to see continued differentiation of responsibilities and roles that all once fell under the data scientist category. Companies will need detailed skill classification and certification processes for these diverse jobs, and must ensure that all of the needed roles are present on large-scale data science projects. Professional data scientists themselves will focus on algorithmic innovation, but will also need to be responsible for ensuring that amateurs don’t get in over their heads. Most importantly, data scientists must contribute towards appropriate collection of data, responsible analysis, fully-deployed models, and successful business outcomes.*
+
+Among the important changes in technology in the past decade the authors list
+
+-   Cloud computing and cloud data storage (data lake, data warehouse, lakehouse)
+-   Auto machine learning and citizen data science
+-   Large language models
+-   Model operations
+-   Ethics of data science
+
+Twenty years after the arrival of Big Data, data science continues to evade a precise definition because it is defined by those who practice it, rather than by a list of activities. Hacker’s art, statistics, programming, visualization, modeling, subject-matter experience, and communication to solve problems with data through computation are key ingredients. Data science will continue to evolve as its ingredients change and with the emergence of new methods and tools. Most recently, since late 2022, large language models based on transformer technology created a sea change in natural language understanding that is believed to disrupt many occupations. Data scientists embrace such disruptions to draw better conclusions from data.
+
+## Data Science versus Data in Science
+
+The majority of data science projects and applications take place in non-academic settings, often lumped together under the generic term *industry*. Most data science jobs are thus found in industry.
+
+There is a difference between data science in research settings and commercial settings. The boundaries typically align with academia and industry, but it is not unusual for commercial enterprises to have Research & Development divisions that engage in scientific research in support of the enterprise’s mission and products.
+
+Rather than pitting industry against academia, consider how data science projects differ between research and commercial settings. There is a lot of hype about how organizations become more data driven, replacing decisions made on gut feeling with hard evidence based on data---the data science team is at the heart of that digital transformation, disrupting the old ways of doing business with novel approaches based on machine learning and AI. In most situations, it is just that: hype.
+
+In research and commercial settings, the goal is to provide value through using data. How that value is measured is fundamentally different. Research adds value by increasing our body of knowledge. Commercial enterprises are interested in increasing the value of the company.
+
+Most data science jobs in commercial settings exist not to disrupt the business model but to support an existing business by solving the current data-related problems. The problems tend to be narrow and specific with result metrics that are tied to the objectives of the enterprise. Objectives such as “increase revenue”, “retain customers”, “increase productivity”, “reduce cost” are universal and boring. Because questions are not open ended and the time to find a solution is of the essence, there is a tendency to reuse rather than to develop new approaches and/or algorithms. Solutions have merit if they meet the goals and can be implemented; they must make a difference in the practice of the business.
+
+In research settings, on the other hand, questions are more open-ended without a clear solution path. The goal of research is to find answers to new questions. Time is allotted to deep thinking and to uncovering mechanisms. This often involves novel approaches, custom algorithms implemented by the research team in specialized software. Solutions are developed only as necessary to prove the result of the research. They do not have to be implemented or practical. A research team might find a better active ingredient to fight disease and leave the task of productizing a drug to someone else.
+
+Research projects have carefully designed protocols about data, what data to use, how to measure attributes, how to sample observations. Experiments are designed to collect data under controlled conditions in order to draw cause-and-effect conclusions.
+
+In commercial settings you are more likely to work with the data that is collected as a by-product of the normal business operations. True experimentation with data collected under controlled conditions is rare, sometimes confined to A/B testing of one data product against another. It is thus common in commercial situations to be working with data collected for a different purpose. The data in the enterprise CRM (customer relationship management) system was collected to track interactions with customers, the data in the Salesforce instance tracks revenue opportunities, and ServiceNow records IT assets and tickets. Is that the best data to optimize digital marketing campaigns? Weak correlations, low signal-to-noise ratios, poor data quality are common problems.
+
+The goal of this section is not to put a damper on working as a data scientist in commercial enterprises. It is a good idea to ask what role data and software play in the organization. If the core business and the core product is built on data and software, then it is likely that data science contributes directly to the mission and the bottom line of the company—it is essential to the business. In many organizations the core business is not built on data and technology—at least not yet. A bank’s core business is to deposit and lend money. A retailer’s core business is to sell goods. An insurance’s core business is risk assessment and underwriting. Data science supports the core functions through traditional data functions such as reporting, data analysis, forecasting—it is important but not essential. Increasingly, however, these core functions are becoming the focus of data science itself providing a fertile ground for interesting and novel approaches: micro-lending (banks), recommendation systems (retailers), reinforcement learning for underwriting (insurance). At this point data science helps transform a traditional business model as its products become essential to operating the business.
+
+## What is in a Model?
+
+The term *model* is pervasive in our field, and we come to this conversation with different notions of what constitutes a model. Before going any further in the discussion, we'll discuss the concept of a model in the context of data science.
+
+```{r, fig.align="center"}
+#| label: fig-proj-simplemodel
+#| echo: false
+#| fig-cap: |
+#|   A simple representation of a model that processes inputs with 
+#|   algorithmic logic and produces output.
+#| fig-alt: |
+#|   A diagram displaying the model input and output
+#| out.width: 75%
+
+knitr::include_graphics("images/BasicModel.png")
+```
+
+From the 30,000 foot view a model is simply a mechanism to process some input and produce a corresponding output (@fig-proj-simplemodel).
+
+The input to drive the model algorithm is almost always some form of data. The algorithm that processes the inputs can be based on data, but that is not necessarily so. Suppose the problem we are trying to solve is to ascertain an individuals annual federal income tax. The problem is solved with a model that takes as **input** the individuals financial situation. This information is typically known without error as information about income, property taxes, expenses, etc. is well documented. The **algorithm** processing this input is a translation of the relevant information in the federal income tax laws into machine instructions. The **output** is the amount of money owed to the government or expected as a refund.
+
+Now suppose that for some reason the input data in the tax problem is not known without error. For example, income from tips, medical expenses or charitable contributions might be best guesses rather than exact amounts. Income data could be noisy because foreign income is converted at fluctuating exchange rates. If the input data is the realization of stochastic (random) influences, should we modify the algorithm?
+
+When the input data to an algorithm is the result of observing random variation, we are looking to the algorithms of the model to find the signal in the data, to de-noise it. The signal located in the data is then transformed into the model output. Most models we build in data science are of this kind because the data we work with is inherently noisy. The reasons for the random variations are many: selecting observation from a larger population at random, applying treatments to randomly chosen experimental units, variations in measurement instruments and procedures, variations in the environment in which a phenomenon is observed, and so on. The algorithms we use depend on the goals of the analysis, properties of the data, assumptions we are willing to make, attributes we look for in competitive models, and personal preferences.
+
+Much of data science methodology is to select the right approach (algorithm) based on input data, learning methodology (supervised, unsupervised, semi-supervised, self-supervised) and analysis goal (prediction, recommendation, classification, clustering, dimension reduction, sequential decisioning), to train the model, and to deploy the model. @fig-proj-dsmodels is an attempt at structuring the input, algorithm, and output components of a model in the data science context. The diagram is complex and woefully incomplete and is intended to give you an idea of the diversity of methods and the many ways we can look at things. For example, in discussing input data we could highlight how data are stored, how fast it is moving, the degree to which the data is structured, the data types, and so forth. There are many other categorizations of data one could have listed.
+
+The categorization of algorithms—what many consider the models in the narrow sense—leaves out semi-supervised learning, self-supervised learning, transfer learning, and other learning methods. Volumes of books and papers have been written about every item in the list of algorithms and many algorithms are represented by a simple description. Multilayer networks, for example, include artificial neural networks, deep networks such as convolutional and recurrent networks, and transformer architectures such as GPT.
+
+![Structuring and categorizing input, algorithm, and output in data science models.](images/DataScienceModels.png){#fig-proj-dsmodels .lightbox fig-alt="Structuring and categorizing input, algorithm, and output in data science models." fig-align="center"}
+
+George E.P. Box is credited with coining the much-used phrase “all models are wrong, but some are useful” [@GEPBox1976]. The phrase appears partially (“all models are wrong”) twice in his 1976 paper on [Science and Statistics](http://www-sop.inria.fr/members/Ian.Jermyn/philosophy/writings/Boxonmaths.pdf):
+
+> *Since all models are wrong the scientist cannot obtain a "correct" one by excessive elaboration.*
+>
+> *Since all models are wrong the scientist must be alert to what is importantly wrong.*
+
+The takeaway is that any model is an abstraction of a phenomenon and we strive to find a useful abstraction. The model does not attempt to reproduce the phenomenon. The tax algorithm converts the essence of the tax code into machine instructions, it is not an electronic copy of the entire law. The purpose is to accurately calculate an entity’s tax, anything else can be stripped away. An algorithm processing noisy data that reproduces the data is uninteresting. The goal is to abstract the data in such a way to allow separating the signal from the noise and to convert the signal into the desired output.
+
+The first G.E.P. Box quote instructs us not to overdo it in building models; this translates to the problem of **overfitting** in data science, crafting a model that follows the training data too closely and as a result does not generalize well to new data points. If the goal is to predict, classify, or cluster the unseen; generalizability of the model is key. A model to forecast stock prices or trading volumes is judged by how well it can predict the future, not by how well it can predict the past. The adequate level of generalization for that model must be wrung from current and past stock prices. Finding the appropriate level of abstraction is resolved by striking the right balance in the **bias-and-variance tradeoff**.
+
+John von Neumann is said to have remarked
+
+> *With four parameters I can fit an elephant and with five I can make him wiggle his trunk.*
+
+If the point of the model is to capture the essence of the elephant, then four parameters would be enough.
+
+The second G.E.P. Box quote instructs us that models are abstracting away features of the phenomenon. If these are important features, the model is not useful. In the best case this model does not meet its goal and is revised or abandoned. In the worst case the model leads to bad decisions and harmful outcomes.
+
+No matter how complex the model, we need to strive to understand how it works (interpret the model), not just what it does. If a model is not intrinsically interpretable then we need to strive to explain the forces that drive the model, keeping in mind that we are then making statements about the model and not about the underlying phenomenon we have abstracted.
+
+It might seem like a daunting task to command the plethora of complexity displayed in the previous figure, understand all the pros and cons, grok the idiosyncrasies of software implementations, write code to train the model(s), communicate the results, and possibly implement a solution within a business context. That is what we are here for; let us get started.

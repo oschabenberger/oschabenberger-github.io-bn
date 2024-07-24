@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.552">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Foundations of Data Science - 3&nbsp; The Data Science Project Lifecycle</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../databasics.html" rel="next">
+<link href="../proj/history.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../proj.html">Data Science and Data Science Projects</a></li><li class="breadcrumb-item"><a href="../proj/lifecycle.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Data Science Project Lifecycle</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Foundations of Data Science</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../proj.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Science and Data Science Projects</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">History and Evolution of Data Science</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/lifecycle.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Data Science Project Lifecycle</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../databasics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basic Data Preparation and Understanding</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/sources_and_files.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Sources and File Formats</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/data_access.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Quality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/summarization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Summarization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Visualization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/sqlbasics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">SQL Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Integration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../stat_learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/general.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">General Topics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/mathstat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/linalg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/featproc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Feature and Target Processing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Applied Ethics in Data Science</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/bias_harm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">3.1</span> Introduction</a></li>
+  <li><a href="#discovery" id="toc-discovery" class="nav-link" data-scroll-target="#discovery"><span class="header-section-number">3.2</span> Discovery</a></li>
+  <li><a href="#data-engineering" id="toc-data-engineering" class="nav-link" data-scroll-target="#data-engineering"><span class="header-section-number">3.3</span> Data Engineering</a></li>
+  <li><a href="#model-planning" id="toc-model-planning" class="nav-link" data-scroll-target="#model-planning"><span class="header-section-number">3.4</span> Model Planning</a>
+  <ul>
+  <li><a href="#types-of-algorithms" id="toc-types-of-algorithms" class="nav-link" data-scroll-target="#types-of-algorithms">Types of Algorithms</a></li>
+  <li><a href="#pre-built-and-pre-trained-models" id="toc-pre-built-and-pre-trained-models" class="nav-link" data-scroll-target="#pre-built-and-pre-trained-models">Pre-built and Pre-trained Models</a></li>
+  </ul></li>
+  <li><a href="#model-building" id="toc-model-building" class="nav-link" data-scroll-target="#model-building"><span class="header-section-number">3.5</span> Model Building</a></li>
+  <li><a href="#communication" id="toc-communication" class="nav-link" data-scroll-target="#communication"><span class="header-section-number">3.6</span> Communication</a></li>
+  <li><a href="#operationalization-deployment" id="toc-operationalization-deployment" class="nav-link" data-scroll-target="#operationalization-deployment"><span class="header-section-number">3.7</span> Operationalization (Deployment)</a></li>
+  <li><a href="#management-and-monitoring" id="toc-management-and-monitoring" class="nav-link" data-scroll-target="#management-and-monitoring"><span class="header-section-number">3.8</span> Management and Monitoring</a></li>
+  <li><a href="#case-study-airbnbs-party-pooper" id="toc-case-study-airbnbs-party-pooper" class="nav-link" data-scroll-target="#case-study-airbnbs-party-pooper"><span class="header-section-number">3.9</span> Case Study: Airbnb’s Party Pooper</a>
+  <ul>
+  <li><a href="#discovery-1" id="toc-discovery-1" class="nav-link" data-scroll-target="#discovery-1">Discovery</a></li>
+  <li><a href="#data-engineering-model-planning" id="toc-data-engineering-model-planning" class="nav-link" data-scroll-target="#data-engineering-model-planning">Data Engineering &amp; Model Planning</a></li>
+  <li><a href="#model-building-1" id="toc-model-building-1" class="nav-link" data-scroll-target="#model-building-1">Model Building</a></li>
+  <li><a href="#operationalization" id="toc-operationalization" class="nav-link" data-scroll-target="#operationalization">Operationalization</a></li>
+  <li><a href="#model-management-and-monitoring" id="toc-model-management-and-monitoring" class="nav-link" data-scroll-target="#model-management-and-monitoring">Model Management and Monitoring</a></li>
+  </ul></li>
+  <li><a href="#thinking-data-science" id="toc-thinking-data-science" class="nav-link" data-scroll-target="#thinking-data-science"><span class="header-section-number">3.10</span> Thinking Data Science</a>
+  <ul>
+  <li><a href="#dealing-with-uncertainty" id="toc-dealing-with-uncertainty" class="nav-link" data-scroll-target="#dealing-with-uncertainty">Dealing with Uncertainty</a></li>
+  <li><a href="#perspective-about-data" id="toc-perspective-about-data" class="nav-link" data-scroll-target="#perspective-about-data">Perspective about Data</a></li>
+  <li><a href="#intuition-for-data" id="toc-intuition-for-data" class="nav-link" data-scroll-target="#intuition-for-data">Intuition for Data</a>
+  <ul class="collapse">
+  <li><a href="#outliers-in-box-and-whisker-plot" id="toc-outliers-in-box-and-whisker-plot" class="nav-link" data-scroll-target="#outliers-in-box-and-whisker-plot">Outliers in Box and Whisker Plot</a></li>
+  <li><a href="#prediction-error-in-test-and-training-data" id="toc-prediction-error-in-test-and-training-data" class="nav-link" data-scroll-target="#prediction-error-in-test-and-training-data">Prediction Error in Test and Training Data</a></li>
+  <li><a href="#sec-storks-babies" id="toc-sec-storks-babies" class="nav-link" data-scroll-target="#sec-storks-babies">Storks and Babies</a></li>
+  <li><a href="#cluster-assignment" id="toc-cluster-assignment" class="nav-link" data-scroll-target="#cluster-assignment">Cluster Assignment</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../proj.html">Data Science and Data Science Projects</a></li><li class="breadcrumb-item"><a href="../proj/lifecycle.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Data Science Project Lifecycle</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Data Science Project Lifecycle</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">3.1</span> Introduction</h2>
+<p>A data scientist finds an interesting set of data, builds a clever analytical model, and changes the world.</p>
+<p>This sounds great; unfortunately, data science projects do not unfold this way in the real world. At least not most of them; almost none of them. In this section we examine the typical structure of data science projects in non-research settings—that is, a project to solve a specific problem in an organization. Let’s call it the <em>business</em> problem, acknowledging that such problems arise in industry, government, and non-profit organizations alike. The next chapter takes a closer look at data science in research settings.</p>
+<p>Data science models play a big part in this, but it is not where we start. Building a model is just one step in the lifecycle of a data science project.</p>
+<p>Projects involve many steps, diverse teams, and projects can fail at any step. The model building phase is not where most unsuccessful projects go off the rails. Industry analyst firm Gartner estimated in 2016 that about 60% of data science projects are failing and admitted two years later that was an underestimate; the real failure rate was closer to 85%. That is a sobering statistic, and many reasons are cited for the failures:</p>
+<ul>
+<li><p>Difficulties inherent in integrating data-driven solutions with existing processes and applications</p></li>
+<li><p>Management resistance and internal politics about project ownership, budget, etc.</p></li>
+<li><p>Lack of skills</p></li>
+<li><p>Lack of quality data</p></li>
+<li><p>Security and governance challenges</p></li>
+</ul>
+<p>The most important reason for failure of data science projects is called the “last-mile problem” of data science: the struggle to deploy the result of the data analysis (models) into processes and applications where they are used by the organization and are serving the intended end user. It is one thing to build from historical data a model that can predict customer churn accurately. If the goal is to provide a customer service representative with a real-time prediction of a customer’s tendency to cancel a service and to recommend an action, e.g., to give a discount, the project is not complete until the model is incorporated into the system through which customers and representatives interact.</p>
+<p>It is best to recognize the reality that data science projects will likely fail unless they are carefully planned and executed. Successful projects combine technical skills with soft skills such as communication, trust building, transparency, and empathy. Successful projects are a team sport that incorporate collaboration and communication throughout the project cycle with data scientists taking on multiple roles. The data scientist is at times evangelist, planner, presenter, data wrangler, modeler, software developer, engineer, facilitator, implementer, storyteller, auditor.</p>
+<p>It is often said that data scientists spend 80% of their time wrangling and cleaning data. That is not true, but the narrative reveals that a data scientists’ job entails much more than the technical aspects of building models on prepared data sets. A good portion of the job is to meet people, interact about project requirements, communicate insights, manage projects, etc. In the terminology of people management, data scientists are “T-shaped people” who combine depth of expertise with broad cross-functional competencies (<a href="#fig-proj-tshaped" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>).</p>
+<div id="fig-proj-tshaped" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Breadth and depth of experience displayed in the shape of a &quot;T&quot;">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-proj-tshaped-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/TShapedPeople.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1"><img src="images/TShapedPeople.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%" alt="Breadth and depth of experience displayed in the shape of a &quot;T&quot;"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-tshaped-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: The concept of “T-shaped” competencies, combining deep expertise in one area with breadth in multiple disciplines and systems.
+</figcaption>
+</figure>
+</div>
+<p>This allows data scientists to understand and communicate about many disciplines and systems (the horizontal bar of the generalist) combined with deep expertise in at least one discipline or system, e.g., cloud-based machine learning (the vertical bar of the expert). As a data scientist you work both independently and collaboratively.</p>
+<p>The associated skill sets are exercised during the key stages in the data science project lifecycle.</p>
+<p>Our methodology calls out seven phases in the project: discovery, data engineering, model planning, model building, communication, deployment, and monitoring (<a href="#fig-proj-lifecycle" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>).</p>
+<div id="fig-proj-lifecycle" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Diagram of a process">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-proj-lifecycle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/DSProjectLifeCycle.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2"><img src="images/DSProjectLifeCycle.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:55.0%" alt="Diagram of a process"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-lifecycle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.2: The stages of the data science project lifecycle.
+</figcaption>
+</figure>
+</div>
+<p>Other process models for data science exist, for example <a href="https://www.datascience-pm.com/crisp-dm-2/">CRISP-DM</a>, the cross-industry standard process for data mining is the foundation of the data science process model according to the <a href="https://www.datascience-pm.com/">Data Science Process Alliance</a>. CRISP-DM is shown in <a href="#fig-proj-crispdm" class="quarto-xref">Figure&nbsp;<span>3.3</span></a>.</p>
+<div id="fig-proj-crispdm" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-proj-crispdm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/CRISP-DM.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-glightbox="description: .lightbox-desc-3"><img src="images/CRISP-DM.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-crispdm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.3: The CRISP-DM model for the data science process.
+</figcaption>
+</figure>
+</div>
+<p>The process models use similar terms and stages, what matters is not the labels but that there is a general flow that results in a data-driven solution to a real-world problem, that the stages are iterative, and that a project does not start with modeling data. To deliver a production data project that is used repeatably by an organization requires many steps before and after the data modeling phase.</p>
+</section>
+<section id="discovery" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="discovery"><span class="header-section-number">3.2</span> Discovery</h2>
+<p>During the <strong>Discovery</strong> phase the business problem is identified and defined with enough specificity to facilitate answering the question: “Does the problem translate to data science?” A problem statement such as “We need to increase revenue” is not specific enough. The question “does a modified user interface for the checkout process increase online sales?” is more specific; it provides information about the target (online sales) and how it is related to measurable changes.</p>
+<p>The question “Can wildlife species be identified with at least 80% accuracy from drone video?” is very specific, it identifies the goal (wildlife identification), the methodology (drone video), and what success looks like (accuracy greater than 80%). Many questions still need to be addressed before this results in a successful data science project. How will the video be taken (geographic location, flight height, type of camera, time of day, etc.)? Will wildlife be identified based on tracks, signs of habitation, animal images? Are there existing models for object detection that can be used directly or enhanced via transfer learning?</p>
+<p>The data scientist can help to increase specificity of the problem formulation by asking the right questions. Domain experts think and communicate in terms of subject matter. Data scientists can link the problem to data and analytic methods where that is possible. To measure the level of financial risk exposure the Chief Risk Officer of a bank is interested in forecasting VaR, the value at risk in their investment portfolio for the next two weeks. The data scientist can translate this into a simulation study: based on historical data of investment position values states of the market are simulated and the portfolio is evaluated against the simulated future market states. VaR is calculated as the 95<sup>th</sup> percentile of the distribution of simulated values.</p>
+<p>Data science is powerful but not all questions are solved by analyzing data. The best approach might be to build a handcrafted expert system by translating existing knowledge and logic into software (think “TurboTax”) or to develop a piece of hardware. We need to be honest and transparent if data science cannot provide what is asked for. The adage that <em>if you have only a hammer then everything looks like a nail</em> applies here.</p>
+<p>The results of a data science project need to be relevant and solve a real-world problem. A client once conveyed the following anecdote: he was approached by the data science team that proudly demonstrated a new algorithm to predict a customer’s age based on their online behavior. The executive responded “That’s cool. But we do know their date of birth.”</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/AssociationRule_1.jpg" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>The recommender system no one needs.</figcaption>
+</figure>
+</div>
+<p>During the <strong>Discovery</strong> phase we are beginning to deepen our data understanding. What type of data might be needed to solve the problem, and what data sources are available to us? Exploratory data analysis and visualizations inform us about the shape of the data, the distribution of the variables and possible relationships. Data quality issues will surface during this phase.</p>
+<p>It is important to carefully document what you find and the decisions that are being made. Why are certain data included or excluded? How are variables defined, what metadata is available? What data quality issues have surfaced (outliers, missing values, inconsistent variable definitions, etc.)? This information is important during the next stage when we use data engineering to prepare data for analysis. Just because two tables have a field <code>customer_id</code> does not imply that we can join the tables on that field. Missing values can be replaced by actual or computed values, but such data imputation is not without pitfalls either.</p>
+<p>During the <strong>Discovery</strong> phase it is also not too soon to consider the ethical concerns and implications of the project. If data will be used or collected from individuals, do we have the consent to do so? Are there potential biases that could lead to poor outcomes by perpetuating stereotypes or by withholding resources? As algorithms and models are becoming more complex, less interpretable, and more easily automated, our need for transparency increases. Data scientists play an important role in recognizing and avoiding the introduction or continuation of bias in data-based decision making. We are devoting an entire chapter to the important topic of ethical decisioning with data.</p>
+</section>
+<section id="data-engineering" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="data-engineering"><span class="header-section-number">3.3</span> Data Engineering</h2>
+<p>If the real-world problem translates into a data science activity, we progress to the next stage.</p>
+<p>During the <strong>Data Engineering</strong> stage these considerations are made concrete. Are the data available to us? What is their size and quality? Are additional attributes required, if so, where do they come from? Do we need to collect more data, or can we obtain data from a 3<sup>rd</sup> party source (for free, for fee)?</p>
+<p>How is raw data converted into usable form? How is data from multiple sources integrated, cleansed, and processed? It is not uncommon these days to have data stored in multiple clouds as well as on-premises systems—how do these data come together for analysis in one place?</p>
+<p>In data science projects that go beyond reporting and building dashboards, the projects that involve data scientists building models to cluster, predict or classify, it is unusual to work directly with the raw data. Instead, data will be organized, cleansed, and stored to fit the subsequent modeling needs. How will the data be prepared for analysis and where is that data stored? Traditionally, analytic tables are two-dimensional arrays of rows and columns, where columns have simple data types such as integers, doubles, or strings. Increasingly, data can be served to analytics as JSON structures, in Parquet format, or in feature stores designed for machine learning. Data engineers and data scientists need to agree on the “best” format considering efficiency, tooling, cost, etc.</p>
+<p>The answer and approach to many of these questions depends on what you want to do with the data. We are looking down the road to the modeling phases and it is a great time to emphasize that the data science project cycle is not a single clockwise motion but an iterative process.</p>
+<p>What data sources you consider is informed by the types of models you are imagining (<em>Model Planning</em> and <em>Model Building</em> stages). On the other hand, the types of data that can be made available at sufficient quantity and quality will inform the types of models you can plan for.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/DSProject_Iteration.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-glightbox="description: .lightbox-desc-4" title="The data science project cycle is iterative. You might have to move back to an earlier stage based on information discovered at a later stage."><img src="images/DSProject_Iteration.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%" alt="The data science project cycle is iterative. You might have to move back to an earlier stage based on information discovered at a later stage."></a></p>
+</figure>
+</div>
+<figcaption>The data science project cycle is iterative. You might have to move back to an earlier stage based on information discovered at a later stage.</figcaption>
+</figure>
+</div>
+<p>It is often stated that 80% of the data science project is data engineering or data preparation. That is not true. What is true is that you should spend effort here because not having the right data prepared in the right way can invalidate the subsequent steps and jeopardize the project. It is also true that in smaller organizations you might not find dedicated data engineering teams that could do the heavy lifting in preparing high-quality data for analysis; some of that work then falls to the data scientist.</p>
+<p>Imagine that you find a very strong relationship between patient well-being and a health metric in a long-term study only to find out when you communicate the results that the definition of the health metric was changed half-way through the study.</p>
+<p>Imagine that you fail to find evidence for the effects of climate change in a multi-national study and discover later that during merging of data from different countries measurements in imperial and metric units were intermingled and that temperatures in degrees Fahrenheit were not converted to degrees Celsius.</p>
+<p>When data are missing, we must ask questions about why the data points are unobserved. Are entire records missing, for example, when a group of the population was not included in the data collection? Were measurements unobservable because of limited precision of the instruments? Did subjects drop out of the study, if so, is the dropout related to the purpose of the study? Is the reason why survey recipients did not answer questions related to the study itself?</p>
+<p>Some typical tasks during the <strong>Data Engineering</strong> stage involve</p>
+<ul>
+<li><p><strong>Data Sources</strong>: Final selection of the data sources.</p></li>
+<li><p><strong>Data Quality</strong>: The result of this is clean and consistent data with known properties. Modifications to raw data are documented. Any remaining data quality issues are documented.</p></li>
+<li><p><strong>Data Integration</strong>: Merging and joining of data sets, creation of new attributes (feature engineering), re-formatting of data, renaming of columns.</p></li>
+<li><p><strong>Data Delivery</strong>: The result of data preparation is made available in an agreed-upon format, for example, as Parquet files stored in S3 or as tables in a database.</p></li>
+</ul>
+</section>
+<section id="model-planning" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="model-planning"><span class="header-section-number">3.4</span> Model Planning</h2>
+<p>A model is a generic term for a system that takes inputs, processes them according to algorithmic logic and produces outputs (<a href="history.html#fig-proj-simplemodel" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>). Chat GPT is a model (a large language model) that takes input in the form of text prompts, passes the prompts through a pre-trained transformer algorithm, and generates text responses. The Chat GPT model contains parameters, unknown quantities for which we need to find values before the model can be used. This is known as training the model. Once trained, the algorithmic logic of the model can be applied—this step is often referred to as <em>model inference</em> in machine learning or <em>scoring</em> in statistics.</p>
+<section id="types-of-algorithms" class="level3">
+<h3 class="anchored" data-anchor-id="types-of-algorithms">Types of Algorithms</h3>
+<p>Statistical models and machine learning models are trained on data. The training process shapes the capabilities of the model based on the training data. As a rule, more complex models require larger training data sets. The following table shows the increasing complexity (as measured by the number of parameters) of Open AI’s GPT foundation models. GPT-3.5 has 175 billion parameters and essentially was trained on all text data available on the internet.</p>
+<table class="table">
+<caption>Evolution of number of parameters in Open AI’s generative pre-trained transformer foundation models.</caption>
+<colgroup>
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 63%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Version of GPT</th>
+<th>Released</th>
+<th>Number of Parameters</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GPT-1</td>
+<td>June 2018</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>GPT-2</td>
+<td>February 2019</td>
+<td>117 million</td>
+</tr>
+<tr class="odd">
+<td>GPT-3.5</td>
+<td>November 2022</td>
+<td>1.5 billion</td>
+</tr>
+<tr class="even">
+<td>GPT-4</td>
+<td>March 2023</td>
+<td>Rumored to consist of 8 sub-models with 220 billion parameters each, 1.7 trillion total</td>
+</tr>
+</tbody>
+</table>
+<p>In general, models do not have to rely on data to craft their algorithms. Expert systems, also known as hand-crafted knowledge systems, are translating through software the logic applied by experts to make decisions into computer instructions. Tax preparation software is an example of such an expert system. The input to the system is data about your financial situation, the algorithm represents the logic of the tax code translated into machine instructions, the output is your tax liability or refund. You would not want to use a model that is trained on data to predict your tax liability. The training data would be past tax returns, including fraudulent ones and returns that are not at all like yours. The algorithm would not attempt to reproduce the tax code, but to predict the average tax liability of returns similar to those used in training. That might be useful for government planning purposes to estimate budgets but not to ascertain an individual’s precise tax liability.</p>
+<p>The algorithms in models can also derive from rules based on operating an organization; these are called business rules. They often take the form of “when this, do that” logic. For example,</p>
+<ul>
+<li><p>If a job completes more than 5 business days after the request date, apply a 10% discount.</p></li>
+<li><p>A manager is defined as an employee to whom more than two people report directly.</p></li>
+<li><p>Customers are grouped based on their payment behavior: those who pay monthly balances in full, those who pay in installments, and those who have late payments.</p></li>
+</ul>
+<p>A real-world problem can involve one or more model types, not all of which depend on data science. The solution to the problem can require incorporating, blending (an ensemble), or switching between models.</p>
+<p>During the <strong>Model Planning</strong> stage, we examine alternative approaches to capture the key decision in a data science project. What kind of model can produce a solution: a mathematical model, physical model, statistical model, machine learning model, expert system, etc.? What alternatives are available within the relevant classes? For example, if the goal is to classify a two-level target variable, we might consider logistic regression, classification trees, random forests, gradient boosted trees, support vector machines, regularized regression and so on. What are their pros and cons?</p>
+</section>
+<section id="pre-built-and-pre-trained-models" class="level3">
+<h3 class="anchored" data-anchor-id="pre-built-and-pre-trained-models">Pre-built and Pre-trained Models</h3>
+<p>Not all models have to be built from scratch with an organization’s own data sources. A pre-built model is a model that was trained by someone else and is ready to use. Deployment options might be to invoke the model as a cloud service through an API (application programming interface) or to run the model in a container on premises. A sentiment model that classifies the writer’s opinion in a piece of text as positive, neutral, or negative, is an example of a pre-built model. Amazon Web Services (AWS) makes this capability available through the <a href="https://docs.aws.amazon.com/comprehend/latest/dg/how-sentiment.html">Amazon Comprehend API</a>.</p>
+<p>The terms <em>pre-trained</em> and <em>pre-built</em> models are often used interchangeably; <a href="https://aws.amazon.com/marketplace/solutions/machine-learning/pre-trained-models">AWS</a> promotes pre-trained SageMaker models in a marketplace where vendors offer access to what we would call pre-built models. A pre-built model cannot be altered and is ready to use. You rely on someone else to train the model and to package it for use. A pre-built model is pre-trained in the sense that the model builder trained the model on some data. It is important that the training data are representative for your application. A pre-built model for sentiment analysis that was trained on data from a different language will not perform well.</p>
+<p>A pre-trained model is a statistical or machine learning model that was trained on data and the model is made available in that state with the ability to continue training. GPT (Generative Pre-trained Transformer) models are an example of pre-training large language models by Open AI. Each model in the GPT family has been pre-trained to a certain point. For example, text-davinci-003 in the <a href="https://platform.openai.com/docs/models/gpt-3-5">GPT-3.5 family</a> was trained on text data found on the internet through June 2021. These large models are also called <em>foundation models</em>, because they are used to build more specific applications with additional training. Chat-GPT, for example, is a question-answer application built on top of the GPT foundation models.</p>
+<p>You can accept the pre-trained model as the final model and build applications with it—the pre-trained model has become the pre-built model. Or you can continue training the model with additional data. For example, you can continue to train text-davinci-003 by adding more recent data than June 2021. Or you can add data from sources more relevant to your domain than what can be scraped from the internet. OpenAI calls this process <a href="https://platform.openai.com/docs/guides/fine-tuning"><em>fine tuning</em></a> of models. You will also see the term <em>transfer learning</em> in this context: transferring the capabilities of a model from one domain to another.</p>
+<p>Pre-training is common in computer vision and natural language applications where many capable models already exist, building a model from scratch is difficult because of the massive amounts of data and computing resources required, and transferring capabilities by training on additional data has shown to be effective. Convolutional neural networks such as AlexNet, VGG, or GoogLeNet, ResNet trained on an existing corpus of images serve as the starting point</p>
+<p>During <strong>Model Planning</strong> you should decide which models are trained from scratch, pre-trained and fine-tuned, and pre-built. Beware of the <em>Not Invented Here</em> (NIH) attitude: the tendency to avoid using or buying other products and instead to build everything from scratch. There is strong bias against ideas or capabilities from the outside. If a model does not fall into the core specialty or competency of an organization, then it is best to look outside for pre-built or pre-trained models (if you have additional data to train for your context).</p>
+<p>During <strong>Model Planning</strong> we need to also consider the infrastructure available and/or necessary to train, test, and deploy models. Failure to consider deployment constraints at this stage will come back to haunt you during the <strong>Deployment</strong> stage. Imagine training a deep learning model with millions of parameters using PyTorch to find out later that it needs to be deployed on a small medical device with limiting processing capabilities.</p>
+</section>
+</section>
+<section id="model-building" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="model-building"><span class="header-section-number">3.5</span> Model Building</h2>
+<p>The <strong>Model Building</strong> stage is where many data scientists and ML engineers prefer to spend their time. Here you train candidate models on data. You evaluate and validate them and determine the optimal values for tuning parameters (bandwidths, number of inputs, learning rate, depth of trees, regularization penalties, …). You use train:test data splits or cross-validation to choose between competing approaches and to balance the bias—variance tradeoff. You use bagging to improve the predictive accuracy of a weak learning technique and bootstrapping to estimate the variability of quantities. It is the fun part of data science; it is where we nerd out.</p>
+<p>Many programs teaching data science focus on the model building stage; it is a rich field that can fill semesters with material. New techniques increase the list of candidates all the time. Fifteen years ago, deep learning models were not a consideration, we lacked affordable compute power and sufficiently large data sets to train deep neural networks well. In the 2000s recurrent neural networks such as long short-term memory models became all the rage in natural language understanding and convolutional neural networks were the go-to architectures for computer vision applications. In the early 2020s, both network types have been mostly replaced by networks based on transformer architectures. How quickly things change.</p>
+<p>With greater automation (AutoML, for example), tasks in the <strong>Model Building</strong> stage will be done more efficiently and at greater scale. Effort will shift from building and evaluating the models to applying the models, to building applications with them, and to helping others to reap the benefits of AI. There will always be room for algorithmic innovation in data science. But the goal post moves with advances in technology. Spending all your time building models at the expense of other stages of the project cycle does not reduce the failure rate of data science projects.</p>
+<p>During <strong>Model Planning</strong> and <strong>Model Building</strong> we consider the tradeoffs between model choices. The model with the highest accuracy or lowest prediction error is not necessarily the best solution. Interpretability of a model can tip the scale toward a less accurate model. A single decision tree, trained and pruned, is easy to visualize and to explain. A random forest of 500 trees cannot be visualized and is more difficult to explain, although it will likely perform better than the single tree. A neural network with thousands (or millions) of parameters is an inscrutable black box and is not intrinsically interpretable. Trying to explain how the network comes up with a decision, which factors drive it, is the best we can hope for. How do you convince stakeholders of the quality of your data-analytical work if they cannot understand it?</p>
+<div class="example">
+<div class="example-header">
+<p>Example: Concentration of a drug in patient’s body over time</p>
+</div>
+<div class="example-container">
+<p>The data in the following graph show the concentration of a drug in the body of patients over time. The drug is administered at time 0, followed by a period of absorption by the body, and a period of elimination from the body. Three candidate models are fit to the data, represented as different lines: A simple linear regression model (dashed line) A local 2nd degree polynomial smoothing model (LOESS, blue line) A nonlinear, first-order compartmental, model (black line) that expresses concentration as follows: <span class="math display">\[
+    C= \frac{D k_a k_e}{C(k_a-k_e)}  (\exp⁡(-tk_e)  -\exp⁡( tk_a))
+    \]</span> The quantities in the compartmental model represent <span class="math inline">\(D\)</span>: the dose of the drug</p>
+<ul>
+<li><p><span class="math inline">\(k_a\)</span>: the rate of absorption by the body</p></li>
+<li><p><span class="math inline">\(k_e\)</span>: the rate of elimination from the body</p></li>
+<li><p><span class="math inline">\(C\)</span>: the clearance (volume of blood or plasma cleared of the drug per time unit)</p></li>
+<li><p><span class="math inline">\(t\)</span>: time since administration of the drug</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Theophylline.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" data-glightbox="description: .lightbox-desc-5" title="Drug concentration due to absorption and elimination in the body over time and three possible approaches to modeling."><img src="images/Theophylline.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%" alt="Drug concentration due to absorption and elimination in the body over time and three possible approaches to modeling."></a></p>
+</figure>
+</div>
+<figcaption>Drug concentration due to absorption and elimination in the body over time and three possible approaches to modeling.</figcaption>
+</figure>
+</div>
+<p>The simple linear regression (dashed) model is very simple, it consists of an intercept at time 0 and a slope. It is easy to explain but for data between 0 and 10 units of time the model is inadequate. The drug concentration over the entire observation period cannot be captured by a straight line. However, once the drug concentration is down to 50—60% of the maximum a straight line might be a reasonable model. The LOESS model (blue) is very flexible and follows the data more closely. It picks up some interesting cyclical behavior between time 12 and time 20. Is it a spurious effect of the model/data interaction or does it capture a real biological effect?</p>
+<p>The compartmental model has a clear biological interpretation, its quantities relate to well-understood processes. That enables us to ask questions such as “at what time has 30% of the maximal absorbed amount cleared the body?”</p>
+<p>Suppose that the LOESS model predicts drug concentration in patients that did not participate in the study (unseen data) more accurately than the nonlinear compartmental model. Would we recommend the LOESS model over the nonlinear model? Does the answer change if testing hypothesis about the absorption/elimination rates is important?</p>
+<p>Whatever your decision you need to be able to communicate it and convince stakeholders of the value of your work.</p>
+</div>
+</div>
+</section>
+<section id="communication" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="communication"><span class="header-section-number">3.6</span> Communication</h2>
+<p>The <strong>Communication</strong> stage is an essential part of the project life cycle. The solution we have derived so far does not speak for itself. We made choices and tradeoffs and settled on a particular approach. We learned some new things. Now that we have seen the data engineered to solve the problem through data science what are the data telling us? Were we able to solve the problem? What have we learned?</p>
+<p>Suppose that our data science solution checks all boxes and is the greatest things since sliced bread. It will not see the light of day unless we communicate it to the stakeholders of the problem.</p>
+<p>Communication can take many forms: memos, emails, reports, dashboards, presentations. The best scenario is to get a chance to present the results in person, connecting the data analysis to the original problem, letting data (not math or code) tell the story. During the <em>Discovery</em> stage we translated the business problem into a data science project. Now we need to translate the data science solution back to the business problem and communicate in the language of the business. The stakeholders need to understand the solution, why it matters, and why they should care. If the model output is not presented in the original problem context, why would anyone outside of the data science team trust it?</p>
+<p>Lasswell’s model of communication analyzes communication by asking “Who says what to whom in what channel and with what effect?”</p>
+<p>The communication needs to present a solution and why the team thinks it is viable. This does not need to be done as a live analytics demo, but the audience should be empowered to judge the solution. Decision makers need to be able to decide whether to move forward with implementation, whether to return to an earlier stage in the project cycle, or whether to stop. Model accuracy, test error, or specificity are metrics that matter to the data scientist, the business executive considers KPIs such as bookings, revenue, funnel size and conversion rates.</p>
+<p>Do not overestimate the persuasiveness of a black-box algorithm and do not underestimate how much information a simple bar chart or box plot conveys to a non-data scientist.</p>
+<p>A lot is at stake at this stage.</p>
+</section>
+<section id="operationalization-deployment" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="operationalization-deployment"><span class="header-section-number">3.7</span> Operationalization (Deployment)</h2>
+<p>The <strong>Operationalization</strong> (Deployment) and <strong>Monitoring</strong> stages are combined into <strong>Model Operations</strong>, or ModelOps, the discipline that implements algorithmic logic and monitors it over time. We call out deployment as a stage within ModelOps because so many projects fail here.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/LifeCycle_ModelOps.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" data-glightbox="description: .lightbox-desc-6" title="Model operations combine deployment, management, and monitoring of analytic assets."><img src="images/LifeCycle_ModelOps.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%" alt="Model operations combine deployment, management, and monitoring of analytic assets."></a></p>
+</figure>
+</div>
+<figcaption>Model operations combine deployment, management, and monitoring of analytic assets.</figcaption>
+</figure>
+</div>
+<p>Deployment can be simple, sometimes a report or a table in a spreadsheet is all that is needed. It can also be highly complex such as implementing a real-time prediction system across an organization in collaboration with the IT department.</p>
+<div class="example">
+<div class="example-header">
+<p>Example: Predicting Sepsis in Preemies</p>
+</div>
+<div class="example-container">
+<p>One of the major causes of death in premature babies (preemies) is sepsis. The fatality rate of early-onset sepsis in babies with low birth weight is 3—40%, up to 4 times higher than in full-term infants. Preemies have weaker immune system; their skin and gut are also more fragile. The presence of tubes for ventilation or IVs into veins increases the risk of infection.</p>
+<p>Doctors and nurses watch for signs of sepsis such as very high or low temperature, changes in skin color and changes in behavior. Those are non-specific signs, and it would be great if we can develop an early-warning system that alerts doctors when the probability that a preemie might develop system exceeds a threshold.</p>
+<p>A statistical model is developed based on data that integrates sensor information from incubators in neonatal intensive care units (temperature, breathing, vitals, …), computer vision (movement, skin color, …), and clinical records. Data from these three sources was captured over a period of six months and formatted by the data engineering team into a large data frame for the data science team.</p>
+<p>The model developed by the data scientists based on the provided data is a success in that it can predict the probability of sepsis in preemies based on the integrated data with greater accuracy and more quickly than one would be able based on the clinical records alone.</p>
+<p>What difficulties might have to be overcome to deploy the model in the NICU of a hospital?</p>
+<ol type="1">
+<li><p>The hospital has incubators from different manufacturers. Not all incubators are equipped with sensors and cameras.</p></li>
+<li><p>The model was developed based on 6-month historical data. It will be deployed in a real-time system where data from sensors and cameras must be prepared and merged with clinical records on the fly. The data engineering pipeline needs to be integrated into the operations.</p></li>
+<li><p>How is the sensor and camera data be made available? Is it part of an existing data flow from the NICU? Is it collected over WiFi, Bluetooth, or some other network technology?</p></li>
+<li><p>How does the data get to the model inference engine that calculates the predicted probabilities for sepsis?</p></li>
+<li><p>How do the predicted probabilities of sepsis surface in the workflow of NICU nurses and doctors? A continuous real-time display added to the NICU machinery? Or is it accessed as a separate piece of information on a laptop or mobile device?</p></li>
+<li><p>How do predicted probabilities map to sepsis risk and medical intervention?</p></li>
+</ol>
+</div>
+</div>
+<p>This section is concerned with the more complex deployment alternatives and the shocking reality that roughly only half of all production-ready models are ever placed in production. Of those that are, many take three months or more to be deployed. If the model has a short shelf life due to seasonal variations it might already be obsolete when it finally sees the light of day.</p>
+<p>Why is the success rate so low and why does it take so long to finally move into production?</p>
+<p>Many organizations have separate systems for development, testing, and production (dev-test-prod). Differences in architecture, operating systems, network support, language support, security, and access controls can cause delays. When a model is developed in Python or R and needs to run in production on a device that does not support their runtime or containers, then the model must be recoded. Translating a machine learning pipeline from Python or R into a language such as C/C++ or Rust is time-consuming and error prone, requiring testing and <strong>verification</strong> (confirmation that the model was correctly implemented). If, on the other hand, you are deploying on premises on standard hardware, then you can wrap the Python models in a web-service framework (Flask, Django) and deploy through a Docker container.</p>
+<p>Most algorithms are trained in batch on historical data. Many algorithms are deployed in a real-time system online where they process data points as they arise or periodically in small batches. Technical choices need to be made about how the online system accesses the algorithm:</p>
+<ul>
+<li>Type of connection and communication
+<ul>
+<li>one-way stateless webhooks over HTTP</li>
+<li>two-way stateful WebSockets over WS</li>
+<li>an asynchronous publish/subscribe (pub/sub) architecture</li>
+</ul></li>
+<li>Type of API
+<ul>
+<li>RESTful</li>
+<li>SOAP</li>
+<li>Remote procedure calls (RPC, gRPC),</li>
+<li>Event-driven</li>
+<li>Flask</li>
+</ul></li>
+</ul>
+<p>Models can be large, neural networks can have millions or even billions of parameters (GPT-1 has 120 million, GPT-2 has 1.5 billion, GPT-3.5 has 175 billion parameters.) While such large models can be accurate, the process of applying the model to a new data point (a process known as scoring or inferencing the model) can be slow. Loading a large model into memory can require too many resources. Model compression techniques such as pruning, distillation, or quantization are then used to reduce the size of the model without sacrificing prediction or classification accuracy. A model modified in any form after its derivation needs to go through <strong>validation</strong>: confirming that the model still works as intended.</p>
+<p>At the operationalization stage the primary responsibility for the data science assets shifts from the data science team to the user-facing teams and the IT department. The model turns into a data product, a technological product that depends on data to function.</p>
+<p>Many organizations have internal processes that examine and approve products (built in-house or by a third party) for</p>
+<ul>
+<li><p>Compliance with regulatory requirements: Payment Card Industry Data Security Standard (PCI DSS), Federal Information Security Management Act (FISMA), General Data Protection Regulation (GDPR) of the EU, Health Insurance Portability and Accountability Act (HIPAA), etc.</p></li>
+<li><p>Privacy</p></li>
+<li><p>Security</p></li>
+<li><p>Transparency</p></li>
+</ul>
+<p>The output of a data science project is also a product—a data product and has to go through these processes as well; that takes time.</p>
+<p>When the data product replaces an existing solution, <strong>A/B testing</strong> is common to verify that the new solution is indeed superior. Just because a model passes unit tests does not mean it is moving the needle for the business. When data scientists build models, they measure model performance against historical data sets based on statistical metrics such as mean-squared prediction error, mis-classification rate, sensitivity, specificity, area-under-the-curve, etc. The business measures success in terms of OKRs (Objectives and Key Results) and/or KPIs (Key Performance Indicators) such as customer conversion rates, subscriptions, click-thru rates, bookings, revenue. In an A/B test users are randomly divided into two cohorts, experiencing the current and the new solution, respectively. The solution performance is evaluated through business metrics and technical criteria (speed, resource requirements, scalability).</p>
+</section>
+<section id="management-and-monitoring" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="management-and-monitoring"><span class="header-section-number">3.8</span> Management and Monitoring</h2>
+<p>Once a model is deployed in production it enters the second phase of ModelOps, lifecycle model management and model governance. Governance includes the application of DevOps engineering principles such as continuous integration and continuous deployment (CI/CD), versioning of model, data, and code, and automation. The newly deployed model might be challenged by a new solution in a few months and becomes itself the target of A/B testing.</p>
+<p>New data collected since the initial model deployment can be added to the training data and the model parameters can be re-estimated (continuous training); this leads to a situation where a more recent version of the model is A/B tested against an existing deployment of the same model.</p>
+<p>Continuous monitoring of the model is necessary to detect <strong>model drift</strong>. This is the condition where model performance deteriorates over time. Performance is tracked using statistical measures (accuracy, sensitivity, mean-squared error, …) and KPIs. There are two primary causes for drift in analytical models:</p>
+<ul>
+<li><p><strong>Concept drift</strong>. The task the model was designed to perform changes over time. This happens when the nature of the target variable of the model changes or when fundamental assumptions of the model no longer hold. When the definition of the target changes, e.g., a new definition of spam email or changes in regulations that broaden the meaning of money laundering, a model derived under the previous definition might now be invalid. The distribution of the target can change over time or seasonally from symmetric to skewed, causing model drift. The COVID pandemic has fundamentally voided common assumptions that flow into many types of models: consumer behavior, liquidity of financial instruments, valuations of commercial real estate, gas and power consumption patterns, etc.<br>
+<br>
+In “Learning under Concept Drift: A Review”, Lu et al.&nbsp;(<a href="#0">Arxiv:2004.05785</a>, 2020) distinguish four types of concept drift depending on how the change over time takes place (<a href="#fig-proj-conceptdrift" class="quarto-xref">Figure&nbsp;<span>3.4</span></a>).</p>
+<div id="fig-proj-conceptdrift" class="lightbox quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-proj-conceptdrift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/Concept Drift.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" data-glightbox="description: .lightbox-desc-7"><img src="images/Concept Drift.png" class="img-fluid figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-conceptdrift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.4: The four types of concept drift according to Lu et al.
+</figcaption>
+</figure>
+</div></li>
+<li><p><strong>Data drift</strong>. The data has drifted when the distributions of the input variables into a model change or when the relationships between the inputs change (<a href="#fig-proj-datadrift" class="quarto-xref">Figure&nbsp;<span>3.5</span></a>). The data to which the model is applied in production is then not representative of the data on which it was trained. Data drift is a major source of bias in models. The model itself remains correct and is possibly unbiased based on the training data set. Bias is introduced when it is applied to data that is systematically different from the training data.</p>
+<div id="fig-proj-datadrift" class="lightbox quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-proj-datadrift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/DataDrift.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" data-glightbox="description: .lightbox-desc-8"><img src="images/DataDrift.png" class="img-fluid figure-img" style="width:85.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-datadrift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.5: An example of data drift. The training data for input variable X has a symmetric distribution with a mean of 2. The data seen by the model in production has a right-skewed distribution and a mean of 5. The production model will see values of X with different frequencies as during training and will see values of X it never encountered during training. We do not know whether the model applies for X &gt; 10, for example.
+</figcaption>
+</figure>
+</div></li>
+</ul>
+</section>
+<section id="case-study-airbnbs-party-pooper" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="case-study-airbnbs-party-pooper"><span class="header-section-number">3.9</span> Case Study: Airbnb’s Party Pooper</h2>
+<p>This case study is based on a Sept 2023 <a href="https://www-cnbc-com.cdn.ampproject.org/c/s/www.cnbc.com/amp/2023/09/19/airbnb-party-preventer-naba-banerjee-reduced-parties-55percent-in-two-years.html">CNBC article</a>.</p>
+<p>Airbnb operates an online marketplace for short- and long-term stays at private homes. The company acts as a middleman to connect homeowners with renters and charges a commission for the bookings. Some years ago, Airbnb became concerned about party bookings that cause “significant disruption to neighbors and the surrounding community.” The COVID-19 pandemic made things worse as folks were looking for creative ways to get together. The pandemic and Airbnb hosts’ fears of property damage were main drivers behind the company taking a stand against party bookings.</p>
+<section id="discovery-1" class="level3">
+<h3 class="anchored" data-anchor-id="discovery-1">Discovery</h3>
+<p>Naba Banerjee joined Airbnb’s trust and safety team in 2020 and was charged with finding a solution. The business problem was clear: Prevent party bookings by blocking reservations but avoid blocking legitimate bookings.</p>
+<p>She approached it in three phases: What can be done right now, within the next year, and in the future. This hints at an iterative process; one that starts with an immediate simpler intervention, followed by more deeply developed solutions. It also hints at the fact that whatever solution is being put into place will need to be monitored for performance and updated. Some Airbnb guests will try to circumvent the solution and get past the party-blocking methodology.</p>
+</section>
+<section id="data-engineering-model-planning" class="level3">
+<h3 class="anchored" data-anchor-id="data-engineering-model-planning">Data Engineering &amp; Model Planning</h3>
+<p>All solution phases were driven by data. In the short term, for the right-now solution, they studied the patterns and signals of bookings that were reported as parties. The data for this effort was already available on their internal platform, it just needed to be analyzed. There was no modeling effort involved. It was about understanding the data they had on party bookings, profiling and describing the data, looking for signals that correlate highly with the booking label “party”. The data product of this phase was a simple business rule: ban high-risk reservations by users under age 25, in particular if they have received poor reviews from hosts or do not have much history on Airbnb. This measure, combined with removing the option for hosts to list their homes for gatherings of more than 16 people, was effective.</p>
+</section>
+<section id="model-building-1" class="level3">
+<h3 class="anchored" data-anchor-id="model-building-1">Model Building</h3>
+<p>Banerjee and her team had developed a classification model at this point. It was classifying booking attempts as high-risk party bookings or benign bookings based on a black-and-white categorization of bookings. The next step, the mid-term solution, was to build a more sophisticated analytic model that takes into account more factors and that produces a risk score, a probability that the booking is a party booking. Whether to block a booking based on the risk score can vary based on risk tolerance—regionally and temporally. For example, a risk score of <em>x</em>% might not lead to a reservation block during most periods, but around Halloween, New Year’s Eve and Fourth of July will deny the same reservation.</p>
+<p>The model developed at Airbnb takes into account many factors such as the closeness of the reservation to the user’s birthday, the user’s age, length of stay, proximity to where the user lives, day of the week, location of the listing, etc. The type of model selected was a neural network trained using supervised learning on bookings labeled as parties or property damage. The performance of the model was tested against past incidences as well as hypothetical test cases and normal, “good” behavior. Airbnb developed multiple models to predict the likelihood of a party booking, to predict property damage, etc.</p>
+</section>
+<section id="operationalization" class="level3">
+<h3 class="anchored" data-anchor-id="operationalization">Operationalization</h3>
+<p>This is a good example of the <em>data—analytics—decision</em> chain of intelligence. Building the predictive risk model was applying advanced analytics to data. The outcome of the <em>data—analytics</em> sequence was a machine learning model that can produce a risk score for any booking. But the machine learning model itself does not block a booking. It produces a risk score that—to complete the <em>analytics—decision</em> loop—must be translated into a decision: make the reservation or block the reservation. In Airbnb’s case the decision rule is nuanced temporally and geographically. The risk of parties is higher in the U.S. and Canada, followed by Australia, Europe, and Asia. It might also take other factors into account besides the likelihood of a party booking, e.g., the extent of property damage. Furthermore, in situations where the decision is not clear, the booking goes through human review to determine the party risk.</p>
+<p>To implement the model the prediction logic and the decision logic (<em>analytics—decision</em>) had to be incorporated into the online booking system in real time. As soon as a reservation is attempted to be made, the system needs to calculate the risk score, make a decision and inform the user either by continuing the process or blocking it with the dialog (<a href="#fig-proj-airbnbblocker" class="quarto-xref">Figure&nbsp;<span>3.6</span></a>).</p>
+<div id="fig-proj-airbnbblocker" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-proj-airbnbblocker-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/AirbnbPartyBlocker.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" data-glightbox="description: .lightbox-desc-9"><img src="images/AirbnbPartyBlocker.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-airbnbblocker-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.6: The Airbnb reservation system blocks a suspected party booking. <a href="https://www-cnbc-com.cdn.ampproject.org/c/s/www.cnbc.com/amp/2023/09/19/airbnb-party-preventer-naba-banerjee-reduced-parties-55percent-in-two-years.html">Source</a>.
+</figcaption>
+</figure>
+</div>
+<p>The implementation was initially rolled out in Australia where Airbnb experienced an uptick in party bookings in early 2021 after travel had stopped because of the pandemic. The system was rolled out there as a pilot in October 2021 using A/B testing methods—some regions of Australia used the system while other regions did not. Party bookings dropped by 35% in the regions where the risk model was deployed.</p>
+<p>In Fall of 2022 the system went live globally. Over Labor Day weekend alone, the system blocked or redirected 5,000 potential party bookings.</p>
+</section>
+<section id="model-management-and-monitoring" class="level3">
+<h3 class="anchored" data-anchor-id="model-management-and-monitoring">Model Management and Monitoring</h3>
+<p>Airbnb continuously monitors the performance of the model using statistics such as <strong>precision</strong> and <strong>recall</strong> for classification models. Recall, also called the sensitivity of the classification model, is the true positive rate of the model: the ratio of the actual party bookings that the model should have predicted as party bookings. Precision, on the other hand, is the ratio of the actual party bookings relative to any bookings that were predicted to be parties—which includes some false positives.</p>
+<p>The model can drift as user’s behavior changes. Party-inclined users are trying to find ways to circumvent the booking block. The model has to be re-evaluated and cannot be static. A decline in the sensitivity of the model would suggest that the model is not as capable in detecting party bookings.</p>
+<p>Airbnb also points out that the system has been evaluated by the company’s anti-discrimination team for potential bias. You want to make sure that the system does not have unintended consequences such as unfairly disenfranchising bookings by one group over another.</p>
+<p>What is the next phase of solution development at Airbnb for this problem? You guessed it, something that has to do with large language models (LLMs) like ChatGPT.</p>
+</section>
+</section>
+<section id="thinking-data-science" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="thinking-data-science"><span class="header-section-number">3.10</span> Thinking Data Science</h2>
+<p>The data scientist takes on different roles and personas throughout the project. Whether you are writing analytic code or communicating with team members or working with the IT department on implementation, you always think like a data scientist. What does that mean?</p>
+<section id="dealing-with-uncertainty" class="level3">
+<h3 class="anchored" data-anchor-id="dealing-with-uncertainty">Dealing with Uncertainty</h3>
+<p>In “<a href="https://learning.oreilly.com/library/view/think-like-a/9781633430273/">Think Like a Data Scientist</a>”, Brian Godsey lists awareness in the face of uncertainty as one of the biggest strengths of a data scientist. Once source of uncertainty is the inherent complexity of data science projects that involve many parts of the organization. A data science project is full of problems, the real-world problem that needs to be solved and problems that arise during the projects. Deadlines will be missed. Data will not be as available as expected or of lower quality as expected. Budgets can change and goals are reprioritized. Models that work well on paper fall apart when they get in contact with reality. The list goes on and on. The data scientist thinks through problems not from the perspective of the data but from the perspective what data can help us to accomplish. What matters is that we solve the business problem, not that we build a neural network.</p>
+<p>Another source of uncertainty is the inherent variability of the raw material, data. Variability is contagious, it makes everything produced from data also variable. The point of data processing is to separate the signal from the noise and to find the systematic patterns and relationships in the data, the insights that help make decisions.</p>
+<p>Data scientists are sometimes compared to software developers. They do share certain traits; both are using tools, languages, and frameworks to build complex systems with software. But analytic code is different from non-analytic code in that it is processing an uncertain input. A JSON parser also processes variability, each JSON document is different from the next. Does it not also deal with uncertain input? If the parser is free of bugs, the result of parsing is known with certainty. For example, we are convinced that the sentence “<em>this book is certainly concerned with uncertainty</em>” has been correctly extracted from the JSON file. Assessing the sentiment of the sentence, however, is a data science task: a sentiment model is applied to the text and returns a set of probabilities indicating how likely the model believes the sentiment of the text is negative, neutral, or positive. Subsequent steps taken in the software are based on interpreting what is probable.</p>
+<p>There is uncertainty about which method to use. Whether a software developer uses a quicksort or merge sort algorithm to order an array has impact on the performance of the code but not on the result. Whether you choose a decision tree or a support vector machine to classify the data in the array impacts the performance <strong>and</strong> the result of the code. A chosen value for a tuning parameter, e.g., the learning rate, can produce stable results with one data set and highly volatile results with another.</p>
+<p>Further uncertainty is introduced through analytic steps that are themselves random. Splitting data into training and test data sets, creating random folds for cross-validation, drawing bootstrap samples to estimate variability or to stabilize analytics through bagging, random starting values in clustering or neural networks, selecting the predictors in random forests, Monte Carlo estimation, are some examples where data analysis involves drawing random numbers. The data scientist needs to ensure that random number sequences that create different numerical results do not affect the quality of the answers. The results are frequently made repeatable by fixing the seed or starting value of the random number generator. While this makes the program flow repeatable, it is yet another quantity that affects the numerical results. It is also a potential source for misuse: “let me see if another seed value produces a smaller prediction error.”</p>
+<p>Data are messy and possibly full of errors. It contains missing values. There is uncertainty about how disparate data sources represent a feature (a customer, a region, a temperature) that affects how you integrate the data sources. These sources of uncertainty can be managed through proper data quality and data integration. As a data scientist you need to be aware and respectful of these issues; they can doom a project if not properly addressed. In an organization without a dedicated data engineering team resolving data quality issues might fall on your shoulders. If you are lucky to work with a data engineering team you still need to be mindful of these challenges and able to confirm that they have been addressed or deal with some of them (missing values).</p>
+<div class="example">
+<div class="example-header">
+<p>Example: Imputation through Principal Component Analysis (PCA)</p>
+</div>
+<div class="example-container">
+<table class="table">
+<caption>A missing value pattern.</caption>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th style="text-align: center;">Type</th>
+<th style="text-align: center;">X1</th>
+<th style="text-align: center;">X2</th>
+<th style="text-align: center;">X3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">3.71</td>
+<td style="text-align: center;">5.93</td>
+<td style="text-align: center;">55</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">4.29</td>
+<td style="text-align: center;">32</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">0.98</td>
+<td style="text-align: center;">5.86</td>
+<td style="text-align: center;">55</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">4.28</td>
+<td style="text-align: center;">29</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">6.04</td>
+<td style="text-align: center;">5.94</td>
+<td style="text-align: center;">48</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">5.25</td>
+<td style="text-align: center;">18</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">1.52</td>
+<td style="text-align: center;">4.01</td>
+<td style="text-align: center;">61</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">.</td>
+<td style="text-align: center;">5.55</td>
+<td style="text-align: center;">30</td>
+</tr>
+</tbody>
+</table>
+<p>The table above shows eight observations on four features: Type, X1, X2, and X3.</p>
+<p>Whatever types A and B represent, we notice that values for X1 are missing whenever Type equals B. A complete-case analysis based on X1 through X3 would eliminate observations with missing values and leave us only with observations for Type A. This makes a comparison between the two types impossible. To facilitate such a comparison, we could limit any analysis to rely on only X1 and X2, or we could impute the missing values for X3.</p>
+<p>Such an imputation could be based on a matrix completion algorithm that uses principal component analysis (PCA) to iteratively fill in the missing information for X1 based on the observed data for X1, X2, and X3. That sounds awesome. But what if there are systematic differences between the two types? Does it then make sense to fill in values for X1, Type B with information derived from Type A? Could this possibly bias the analysis and be worse than not using X1 in the analysis at all?</p>
+</div>
+</div>
+</section>
+<section id="perspective-about-data" class="level3">
+<h3 class="anchored" data-anchor-id="perspective-about-data">Perspective about Data</h3>
+<p>Maintaining proper perspective about data means knowing where the important issues are. This can be a moving target.</p>
+<ul>
+<li><p>The volume of data can be unproblematic for one analytic method and becomes a limiting factor if you want to derive prediction intervals by way of bootstrapping.</p></li>
+<li><p>A large but highly accurate model is being developed on historical training data in an Internet of Things (IoT) application. Due to the complexity of the model the scoring engine that applies the model in real time to data flowing off sensors cannot keep up.</p></li>
+<li><p>A stacked ensemble of classification models improves the ability to segment customers but is not interpretable.</p></li>
+</ul>
+<p>There are many limiting factors in data-centric applications and many moving parts. The data scientist is in a unique position to have perspective and awareness of the factors related to data. It is unlikely that anyone else will have that 360-degree view about data.</p>
+<p>As Brian Godsey put it:</p>
+<blockquote class="blockquote">
+<p><em>As a data scientist, I have as my goal to make sure that no important aspect of a project goes awry unnoticed. When something goes wrong—and something will—I want to notice it so that I can fix it.</em></p>
+</blockquote>
+</section>
+<section id="intuition-for-data" class="level3">
+<h3 class="anchored" data-anchor-id="intuition-for-data">Intuition for Data</h3>
+<p>Intuition is the feeling of knowing something instinctively, without conscious reasoning. Developing intuition for data is one of the most valuable skills a data scientist can acquire. It will help to flag things that are surprising, curious, worth another look, or that do not pass the smell test. Developing intuition is helped by strong technical knowledge, it provides the foundation against which our conscious mind can judge surprise. Some intuition for data is innate, and it can be developed with experience and practice. Being curious, asking questions, requesting feedback, working with real data sets, and spending time exploring data go a long way in developing better intuition.</p>
+<p>Let’s test our intuition for data with a few examples.</p>
+<section id="outliers-in-box-and-whisker-plot" class="level4">
+<h4 class="anchored" data-anchor-id="outliers-in-box-and-whisker-plot">Outliers in Box and Whisker Plot</h4>
+<p>The following graph shows a box plot constructed from 200 observations on a variable. What does your intuition tell you about the five data points on the right side in of <a href="#fig-proj-intuition-box" class="quarto-xref">Figure&nbsp;<span>3.7</span></a>?</p>
+<div id="fig-proj-intuition-box" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-proj-intuition-box-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/Intuition_BoxPlot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" data-glightbox="description: .lightbox-desc-10"><img src="images/Intuition_BoxPlot.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-intuition-box-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.7: Box plot of 200 observations for a variable.
+</figcaption>
+</figure>
+</div>
+<p>Also called the box-and-whisker plot, this plot places a box that covers the central 50% of the data—called the interquartile range—and extends from the edge of the box whiskers to the observations within <span class="math inline">\(\pm 1.5\)</span> times the interquartile range. Points that fall outside the whiskers are labeled as outliers. Does knowing the details of box plot construction change your intuition about the data points on the right?</p>
+<p>After having seen many box plots you will look at this specimen as an example of a continuous random variable with a right-skewed (long right tail) distribution. Five “outliers” out of 200 is not alarming when the distribution has a long tail.</p>
+</section>
+<section id="prediction-error-in-test-and-training-data" class="level4">
+<h4 class="anchored" data-anchor-id="prediction-error-in-test-and-training-data">Prediction Error in Test and Training Data</h4>
+<p><a href="#fig-proj-intuition-traintest" class="quarto-xref">Figure&nbsp;<span>3.8</span></a> shows graphs of the mean-squared prediction error, a measure of model performance, as a function of model complexity. The complexity is expressed in terms of the model’s ability to capture more wiggly structures (flexibility). The training data is the set of observations used to determine the model parameters. The test data is a separate set of observations used to evaluate how well the fitted (=trained) model generalizes to new data points.</p>
+<div id="fig-proj-intuition-traintest" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-proj-intuition-traintest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/Intuition_TestTrain.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" data-glightbox="description: .lightbox-desc-11"><img src="images/Intuition_TestTrain.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-intuition-traintest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.8: The mean-squared prediction error for a set of training and test data as a function of model complexity.
+</figcaption>
+</figure>
+</div>
+<p>Something is off here. The prediction error on the test data set should not decrease steadily as the model flexibility increases. The performance of the model on the test data will be poor if the model is too flexible or too inflexible. The prediction error on the training data on the other hand will decline with greater model flexibility. Intuition for data suggests that measures of performance are optimized on the training data set and should be lower for the test data set. It is worth checking whether the labels in the legend are reversed.</p>
+</section>
+<section id="sec-storks-babies" class="level4">
+<h4 class="anchored" data-anchor-id="sec-storks-babies">Storks and Babies</h4>
+<p>The next example of data intuition is shown in the following scatterplot based on data in Neyman (1952). Data on the birth rate in 54 counties, calculated as the number of babies born relative to the number of women of child-bearing age, and the density of storks, calculated as the number of storks relative to the same number of women, suggests a trend between the density of storks and the birth rate.</p>
+<div id="fig-proj-intuition-storks" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-proj-intuition-storks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/Intuition_Storks.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" data-glightbox="description: .lightbox-desc-12"><img src="images/Intuition_Storks.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-intuition-storks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.9: Scatterplot of stork density and birth rate along with a LOESS fit. The variables are calculated by dividing the number of babies and the number of storks in the county by the number of women of child-bearing age in the county (in 10,000).
+</figcaption>
+</figure>
+</div>
+<p>Our intuition tells us that something does not seem quite right. The myth of storks bringing babies has been debunked—conclusively. The data seem to tell a different story, however. What does your <em>data</em> intuition tell you?</p>
+<p>There must be a different reason for the relationship that appears in the plot. Both variables plotted are divided by the same quantity, the number of women of child-bearing age. This number will be larger for larger counties, as will be the number of babies and, if the counties are comparable, the number of storks. In the absence of a relationship between the number of babies and the number of storks, a spurious relationship is introduced by dividing both with the same denominator.</p>
+</section>
+<section id="cluster-assignment" class="level4">
+<h4 class="anchored" data-anchor-id="cluster-assignment">Cluster Assignment</h4>
+<p>Clustering is an unsupervised learning technique where the goal is to find groups of observations (or groups of features) that are in some form alike. In statistical terms we try to assign data to groups such that the within-group variability is minimized, and the between-group variability is maximized. In this example of clustering, data on age, income, and a spending score were obtained for 200 shopping mall customers. The spending score is a value assigned by the mall, higher scores indicate a higher propensity of the customer to make purchases at the mall stores.</p>
+<p>A cluster analysis was performed to group similar customers into segments, so that a marketing campaign aimed at increasing mall revenue can target customers efficiently. A few observations are shown in the next table.</p>
+<table class="table">
+<tbody>
+<tr class="odd">
+<td><strong>Customer ID</strong></td>
+<td><strong>Age</strong></td>
+<td><strong>Income</strong></td>
+<td><strong>Spending Score</strong></td>
+</tr>
+<tr class="even">
+<td><strong>1</strong></td>
+<td>19</td>
+<td>15</td>
+<td>39</td>
+</tr>
+<tr class="odd">
+<td><strong>2</strong></td>
+<td>20</td>
+<td>16</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td><strong>3</strong></td>
+<td>35</td>
+<td>120</td>
+<td>79</td>
+</tr>
+<tr class="odd">
+<td><strong>4</strong></td>
+<td>45</td>
+<td>126</td>
+<td>28</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#fig-proj-intuition-cluster1" class="quarto-xref">Figure&nbsp;<span>3.10</span></a> shows a scatter plot of the standardized income and spending score attributes, overlaid with the customer assignment to one of five clusters.</p>
+<div id="fig-proj-intuition-cluster1" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-proj-intuition-cluster1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/Intuition_Cluster.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" data-glightbox="description: .lightbox-desc-13"><img src="images/Intuition_Cluster.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-intuition-cluster1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.10: Results of hierarchical clustering with five clusters.
+</figcaption>
+</figure>
+</div>
+<p>There are distinct groups of points with respect to (the standardized) spending and income. One group is near the center of the coordinate system, one group is in the upper-right quadrant, one group is in the lower-right quadrant. If the clustering algorithm worked properly, then these points should not be all assigned to the same cluster. This is an example where we need to take another look at the analysis. It turns out that the customer ID was erroneously included in the analysis. Unless that identifier is meaningful in distinguishing customers, it must be removed from the analysis. The results of the analysis without the customer ID are shown in <a href="#fig-proj-intuition-cluster2" class="quarto-xref">Figure&nbsp;<span>3.11</span></a>, confirming that the clustering algorithm indeed detected groups that have (nearly) distinct value ranges for spending score and income.</p>
+<div id="fig-proj-intuition-cluster2" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-proj-intuition-cluster2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/Intuition_Cluster2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" data-glightbox="description: .lightbox-desc-14"><img src="images/Intuition_Cluster2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-intuition-cluster2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.11: Corrected cluster analysis after removing the non-informative customer ID variable from the analysis. The detected clusters map more clearly to groups of points that are distinct with respect to spending and income.
+</figcaption>
+</figure>
+</div>
+
+
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Figure&nbsp;3.1: The concept of “T-shaped” competencies, combining deep expertise in one area with breadth in multiple disciplines and systems.</span>
+<span class="glightbox-desc lightbox-desc-2">Figure&nbsp;3.2: The stages of the data science project lifecycle.</span>
+<span class="glightbox-desc lightbox-desc-3">Figure&nbsp;3.3: The CRISP-DM model for the data science process.</span>
+<span class="glightbox-desc lightbox-desc-4">The data science project cycle is iterative. You might have to move back to an earlier stage based on information discovered at a later stage.</span>
+<span class="glightbox-desc lightbox-desc-5">Drug concentration due to absorption and elimination in the body over time and three possible approaches to modeling.</span>
+<span class="glightbox-desc lightbox-desc-6">Model operations combine deployment, management, and monitoring of analytic assets.</span>
+<span class="glightbox-desc lightbox-desc-7">Figure&nbsp;3.4: The four types of concept drift according to Lu et al.</span>
+<span class="glightbox-desc lightbox-desc-8">Figure&nbsp;3.5: An example of data drift. The training data for input variable X has a symmetric distribution with a mean of 2. The data seen by the model in production has a right-skewed distribution and a mean of 5. The production model will see values of X with different frequencies as during training and will see values of X it never encountered during training. We do not know whether the model applies for X &gt; 10, for example.</span>
+<span class="glightbox-desc lightbox-desc-9">Figure&nbsp;3.6: The Airbnb reservation system blocks a suspected party booking. <a href="https://www-cnbc-com.cdn.ampproject.org/c/s/www.cnbc.com/amp/2023/09/19/airbnb-party-preventer-naba-banerjee-reduced-parties-55percent-in-two-years.html">Source</a>.</span>
+<span class="glightbox-desc lightbox-desc-10">Figure&nbsp;3.7: Box plot of 200 observations for a variable.</span>
+<span class="glightbox-desc lightbox-desc-11">Figure&nbsp;3.8: The mean-squared prediction error for a set of training and test data as a function of model complexity.</span>
+<span class="glightbox-desc lightbox-desc-12">Figure&nbsp;3.9: Scatterplot of stork density and birth rate along with a LOESS fit. The variables are calculated by dividing the number of babies and the number of storks in the county by the number of women of child-bearing age in the county (in 10,000).</span>
+<span class="glightbox-desc lightbox-desc-13">Figure&nbsp;3.10: Results of hierarchical clustering with five clusters.</span>
+<span class="glightbox-desc lightbox-desc-14">Figure&nbsp;3.11: Corrected cluster analysis after removing the non-informative customer ID variable from the analysis. The detected clusters map more clearly to groups of points that are distinct with respect to spending and income.</span>
+</div>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../proj/history.html" class="pagination-link" aria-label="History and Evolution of Data Science">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">History and Evolution of Data Science</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../databasics.html" class="pagination-link" aria-label="Basic Data Preparation and Understanding">
+        <span class="nav-page-text">Basic Data Preparation and Understanding</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Foundations of Data Science by Oliver Schabenberger</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

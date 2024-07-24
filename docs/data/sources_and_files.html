@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.552">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Foundations of Data Science - 4&nbsp; Data Sources and File Formats</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../data/data_access.html" rel="next">
+<link href="../databasics.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../databasics.html">Basic Data Preparation and Understanding</a></li><li class="breadcrumb-item"><a href="../data/sources_and_files.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Sources and File Formats</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Foundations of Data Science</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../proj.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Science and Data Science Projects</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">History and Evolution of Data Science</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/lifecycle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Data Science Project Lifecycle</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../databasics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basic Data Preparation and Understanding</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/sources_and_files.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Sources and File Formats</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/data_access.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Quality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/summarization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Summarization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Visualization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/sqlbasics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">SQL Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Integration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../stat_learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/general.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">General Topics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/mathstat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/linalg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/featproc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Feature and Target Processing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Applied Ethics in Data Science</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/bias_harm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#databases" id="toc-databases" class="nav-link active" data-scroll-target="#databases"><span class="header-section-number">4.1</span> Databases</a>
+  <ul>
+  <li><a href="#relational-and-non-relational-databases" id="toc-relational-and-non-relational-databases" class="nav-link" data-scroll-target="#relational-and-non-relational-databases">Relational and Non-relational databases</a></li>
+  <li><a href="#transactional-oltp-and-analytical-olap-databases" id="toc-transactional-oltp-and-analytical-olap-databases" class="nav-link" data-scroll-target="#transactional-oltp-and-analytical-olap-databases">Transactional (OLTP) and Analytical (OLAP) Databases</a></li>
+  <li><a href="#row-and-column-storage" id="toc-row-and-column-storage" class="nav-link" data-scroll-target="#row-and-column-storage">Row and Column Storage</a></li>
+  <li><a href="#hybrid-htap-databases" id="toc-hybrid-htap-databases" class="nav-link" data-scroll-target="#hybrid-htap-databases">Hybrid (HTAP) Databases</a></li>
+  <li><a href="#newsql-databases" id="toc-newsql-databases" class="nav-link" data-scroll-target="#newsql-databases">NewSQL Databases</a></li>
+  <li><a href="#non-relational-database-designs" id="toc-non-relational-database-designs" class="nav-link" data-scroll-target="#non-relational-database-designs">Non-relational Database Designs</a>
+  <ul class="collapse">
+  <li><a href="#key-value-stores" id="toc-key-value-stores" class="nav-link" data-scroll-target="#key-value-stores">Key-value stores</a></li>
+  <li><a href="#document-stores" id="toc-document-stores" class="nav-link" data-scroll-target="#document-stores">Document stores</a></li>
+  <li><a href="#graph-databases" id="toc-graph-databases" class="nav-link" data-scroll-target="#graph-databases">Graph databases</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#cloud-databases" id="toc-cloud-databases" class="nav-link" data-scroll-target="#cloud-databases"><span class="header-section-number">4.2</span> Cloud Databases</a>
+  <ul>
+  <li><a href="#self-managed" id="toc-self-managed" class="nav-link" data-scroll-target="#self-managed">Self-managed</a></li>
+  <li><a href="#managed-service" id="toc-managed-service" class="nav-link" data-scroll-target="#managed-service">Managed Service</a></li>
+  <li><a href="#serverless-systems" id="toc-serverless-systems" class="nav-link" data-scroll-target="#serverless-systems">Serverless Systems</a></li>
+  </ul></li>
+  <li><a href="#data-warehouse-mart-lake-and-lakehouse" id="toc-data-warehouse-mart-lake-and-lakehouse" class="nav-link" data-scroll-target="#data-warehouse-mart-lake-and-lakehouse"><span class="header-section-number">4.3</span> Data Warehouse, Mart, Lake, and Lakehouse</a>
+  <ul>
+  <li><a href="#data-warehouse" id="toc-data-warehouse" class="nav-link" data-scroll-target="#data-warehouse">Data Warehouse</a></li>
+  <li><a href="#data-mart" id="toc-data-mart" class="nav-link" data-scroll-target="#data-mart">Data Mart</a></li>
+  <li><a href="#data-lake" id="toc-data-lake" class="nav-link" data-scroll-target="#data-lake">Data Lake</a></li>
+  <li><a href="#data-lakehouse" id="toc-data-lakehouse" class="nav-link" data-scroll-target="#data-lakehouse">Data Lakehouse</a></li>
+  </ul></li>
+  <li><a href="#file-formats" id="toc-file-formats" class="nav-link" data-scroll-target="#file-formats"><span class="header-section-number">4.4</span> File Formats</a>
+  <ul>
+  <li><a href="#csv" id="toc-csv" class="nav-link" data-scroll-target="#csv">CSV</a></li>
+  <li><a href="#json" id="toc-json" class="nav-link" data-scroll-target="#json">JSON</a></li>
+  <li><a href="#apache-parquet" id="toc-apache-parquet" class="nav-link" data-scroll-target="#apache-parquet">Apache Parquet</a></li>
+  <li><a href="#apache-orc" id="toc-apache-orc" class="nav-link" data-scroll-target="#apache-orc">Apache ORC</a></li>
+  <li><a href="#apache-avro" id="toc-apache-avro" class="nav-link" data-scroll-target="#apache-avro">Apache Avro</a></li>
+  <li><a href="#the-apache-arrow-project" id="toc-the-apache-arrow-project" class="nav-link" data-scroll-target="#the-apache-arrow-project">The Apache Arrow Project</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../databasics.html">Basic Data Preparation and Understanding</a></li><li class="breadcrumb-item"><a href="../data/sources_and_files.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Sources and File Formats</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Sources and File Formats</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="databases" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="databases"><span class="header-section-number">4.1</span> Databases</h2>
+<p>According to <a href="https://en.wikipedia.org/wiki/Database">Wikipedia</a>, a database is an “organized collection of data stored and accessed electronically through the use of a database management system” (DBMS). The three elements are the data, a form of data storage, and DBMS software that allows a user to interact with the system. The terms database and DBMS are often used interchangeably.</p>
+<p>Databases play a central role in the IT stack of an organization and choosing the wrong database for an application can have dire consequences with respect to availability, scalability, security, data quality, data validity, etc. The site <a href="https://db-engines.com/en/">DB-engines</a> collects information about databases and ranks them by popularity based on a somewhat transparent <a href="https://db-engines.com/en/ranking_definition">algorithm</a>. If you think there are a lot of data science tools to choose from, wait until you wade into the world of databases—DB-engines lists over 400.</p>
+<p>Unless you build your own tech stack, write your own application, or start your own company, you will probably not select a database. In most situations the databases have been chosen and implemented as part of the backend tech stack. Often there will be more than one, for example, MongoDB for documents, MySQL for transactions, Redshift or Spark for analytics, Redis as a memory cache—the dreaded <em>database sprawl</em> in organizations. Databases are part of the backend infrastructure of organizations, the part that does not change frequently. The so-called Gartner spaghetti graph in <a href="#fig-data-Gartner" class="quarto-xref">Figure&nbsp;<span>4.1</span></a> shows market share of databases between 2011 and 2021. While there is some stability near the top of the market, several items are noteworthy:</p>
+<ul>
+<li><p>A change of guard at the top. Oracle has dominated the market for a long time and is being challenged and/or surpassed by Microsoft, Amazon Web Services, and Google Cloud Platform. The cloud providers are leading the way with compelling cloud database offerings.</p></li>
+<li><p>Gartner depicts pure-play cloud database vendors in light blue. The spaghetti chart shows the revenue shift in databases to the cloud.</p></li>
+<li><p>The vertical axis displays market share across all software markets. Database expenses make up about 35% of the overall software expenses. That share of the overall software market continues to increase (the chart is fanning out more toward the right).</p></li>
+<li><p>Market share is calculated based on revenue, it does not account for free offerings, such as open-source databases.</p></li>
+<li><p>After a peak around 2017, Hadoop-based providers of big data resources are on the decline, for example, Cloudera.</p></li>
+<li><p>Some cloud database providers had an impressive rise since their inception, AWS since 2013, Alibaba Cloud since 2014, Google Cloud since 2015, Tencent since 2016, Snowflake since 2016.</p></li>
+<li><p>A surprising amount of movement in a market segment that is supposed to be relatively stable. Organizations are loath to change database management systems that are key to their operations. Migrating a database that is the backbone of an essential part of the business is the last thing a CIO wants to do. Databases are not as sticky as they used to be.</p></li>
+</ul>
+<div id="fig-data-Gartner" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-Gartner-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../images/data/GartnerDMBSMarketShare.jpeg" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1"><img src="../images/data/GartnerDMBSMarketShare.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-Gartner-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: Database market share 2011—2021, according to Gardner. <a href="https://www.techrepublic.com/article/new-gartner-report-shows-massive-growth-database-market-fueled-cloud/">Source</a>.
+</figcaption>
+</figure>
+</div>
+<p>It is important for anyone involved with data to understand some basics of database architectures and the strengths and weaknesses of the different database designs. A NoSQL key-value store can be a great way to work with unstructured data but can be a terrible choice for analytics compared to a relational column store. Many modern DBMS are multi-model, supporting multiple data models in a single backend, for example, key-value pairs, relational, and time-series data. There are so many databases because there are so many use cases for working with data; databases try to optimize for specific data access patterns and use cases.</p>
+<p>Databases can be organized in several ways.</p>
+<section id="relational-and-non-relational-databases" class="level3">
+<h3 class="anchored" data-anchor-id="relational-and-non-relational-databases">Relational and Non-relational databases</h3>
+<p>In a relational DBMS (a RDBMS) the data are organized in 2-dimensional tables of rows and columns. A database consists of a collection of named tables, each with a named collection of attributes (columns). Typically, RDBMS use SQL (Structured Query Language) to manipulate the contents of the DBMS. Each row in a table has a unique key and can be linked to rows in other tables. Relationships are logical connections between tables through keys. The structure of a table (columns, primary keys) is known as the table schema, and it is defined before the table is populated with data—this is also called a schema-on-write design (<a href="#fig-data-schema-on-write" class="quarto-xref">Figure&nbsp;<span>4.2</span></a>).</p>
+<div id="fig-data-schema-on-write" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-schema-on-write-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/SchemaOnWrite.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2"><img src="images/SchemaOnWrite.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-schema-on-write-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.2: Schema on write with PostgreSQL. The CREATE TABLE statement creates the table named titanic and defines the schema: names, order, and data types of columns and default values. The \copy statement populates the database table with data.
+</figcaption>
+</figure>
+</div>
+<p>The relational principle has dominated the world of databases since the 1980s. Seven relational databases are among the top ten databases according to DB-engines: Oracle, MySQL, Microsoft SQL Server, PostgreSQL, IBM DB2, Microsoft Access, and SQLite.</p>
+<p>With the advent of Big Data more data was collected in ways that did not fit well with the relational paradigm: key-value pairs, documents, time series data. More fluid and dynamic relationships between data points were better captured with graph structures rather than rigid relational structures. Big Data analytics also asked for more flexibility in defining data structures on top of the raw data. The relational model was thought to be too restrictive. If the schema must be declared when the table is created and before rows are added (schema-on-write) it makes it difficult to bring new data in on the fly. Schema-on-write in relational databases requires to define the schema for the table <strong>and</strong> to structure the data based on the data. Changing the structure of the data, for example from text to numbers, requires changes to the schema and results in table copies.</p>
+<p>Schema-on-read, on the other hand, applies structure to the data when it is read (<a href="#fig-data-schema-on-read" class="quarto-xref">Figure&nbsp;<span>4.3</span></a>). That gives users the ability to structure the same source data differently, depending on the application. Schema-on-read led to a new class of data frameworks and databases that broke with the highly structured relational logical data model. These non-relational databases store data in key-value pairs and documents rather than tables and were also called NoSQL databases because they eschewed the structured nature of SQL-based schema-on-write. However, there is still a structuring step in non-relational databases. It just happens on demand when the data is read instead of at the beginning before the first row of data is inserted.</p>
+<div id="fig-data-schema-on-read" class="lightbox quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-schema-on-read-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/SchemaOnReadHadoop.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="quarto-lightbox-gallery-3"><img src="images/SchemaOnReadHadoop.png" class="img-fluid figure-img" style="width:75.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-schema-on-read-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.3: An example of schema on read with Hadoop and its file system (HDFS). The data are loaded into Hadoop with the hdfs dfs command. No schema is defined at this stage. The data is then processed with the hadoop command. The customer-mapper.py Python script determines how the data is interpreted for this job; the Python script applies the schema on read.
+</figcaption>
+</figure>
+</div>
+<p>Non-relational databases are sometimes called <em>schemaless</em> databases; that goes a bit too far as some structure is needed to read the data from a key-value or document store into an application. The best translation of “NoSQL” is “not-only-SQL”, these databases still need a structured way to interact with the database.</p>
+<p>It is easy to see how the push for more flexibility through schema-on-read goes hand in hand with the greater flexibility achieved by moving from the ETL to the ELT processing paradigm. Non-relational databases also gained popularity because they support horizontal scaling more easily than their relational counterparts. When a system scales horizontally—also called <em>scaling out</em>—additional machines are added to support increasing workload. Vertical scaling—also called <em>scaling up</em>—adds more computing resources (CPU, RAM, GPU, …) to existing machines.</p>
+<p>You can explain the difference between the scaling models by thinking of a building with a fixed number of rooms. To increase the total number of rooms you can either add more floors (scaling up) or add more buildings (scaling out). Both types of scaling reach limits, a single building cannot be made arbitrarily tall and adding buildings consumes land. The limits for horizontal scaling are much higher than for vertical scaling.</p>
+<div id="fig-data-scaling" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-scaling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/ScalingUp_and_Out.png" class="lightbox" data-glightbox="description: .lightbox-desc-4" data-gallery="quarto-lightbox-gallery-4"><img src="images/ScalingUp_and_Out.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-scaling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.4: Scaling up (vertically) and scaling out (horizontally). Scaling up adds more rooms to an existing building, scaling out adds more buildings.
+</figcaption>
+</figure>
+</div>
+<p>Because non-relational systems partition data on just a primary key and do not need to maintain relationships between tables, scaling them horizontally is relatively simple. As the database grows (contains more keys) add new machines to hold the additional keys. The data can be re-partitioned by re-hashing keys across the larger cluster.</p>
+<p>With relational systems it is necessary to maintain the relationships between the tables. When data are distributed over multiple machines, this becomes more difficult. With relational databases, the response to growing data sizes historically was to scale up. <a href="#_NewSQL_Databases">NewSQL</a> databases are relational databases designed with horizontal scaling in mind.</p>
+<p>Non-relational (NoSQL) databases are categorized by their underlying data models into pure <a href="https://db-engines.com/en/ranking/document+store">document</a> stores, <a href="https://db-engines.com/en/ranking/key-value+store">key-value stores</a>, and <a href="https://db-engines.com/en/ranking/graph+dbms">graph</a> databases—more on these designs below. NoSQL is primarily used in transactional databases for OLTP (online transactional processing) and applications where interactions with the database are limited to CRUD operations (Create, Read, Update, Delete). They are not performant for analytical jobs.</p>
+</section>
+<section id="transactional-oltp-and-analytical-olap-databases" class="level3">
+<h3 class="anchored" data-anchor-id="transactional-oltp-and-analytical-olap-databases">Transactional (OLTP) and Analytical (OLAP) Databases</h3>
+<p>A transactional database is a repository to record the transactions of the business, the ways in which an organization interacts with others and exchanges goods and services. Business interactions that are recorded in transactional systems are, for example, purchases, returns, debits, credits, signups, subscriptions, dividends, interest, trades, payroll, donations.</p>
+<p>Databases that support business transactions are optimized for a high volume of concurrent write operations: adding new rows, updating rows, inserting rows. These transactions are often executed in real time, hence the name online transaction processing (OLTP).</p>
+<p>The concept of a database transaction is different from a business transaction. A database transaction is a single logical unit of work that, if successful, changes the state of the database. It can comprise multiple database operations such as reading, writing, indexing, updating logs. A business transaction, a customer orders an item online, can be associated with one or more database transactions.</p>
+<p>Database transactions are not just reserved for OLTP systems, although supporting transactional integrity with so-called ACID properties is a must for them. Analytic databases, graph databases, NoSQL databases typically support transactions. In relational SQL systems, look for BEGIN statements to flag the start of a transaction, the COMMIT statement to commit the results of a transaction and the ROLLBACK statement to reset the state of the database prior to the transaction.</p>
+<p>The ACID properties refer to atomicity, consistency, isolation, and durability to ensure the integrity of the transaction.</p>
+<ul>
+<li><p><strong>Atomicity</strong>: all changes are performed as if they were a single operation. Either all of them are performed or none of them.</p></li>
+<li><p><strong>Consistency</strong>: When the transaction starts and when it finishes, the data are in a consistent state.</p></li>
+<li><p><strong>Isolation</strong>: intermediate states of the transaction are invisible to the rest of the system. When multiple transactions happen at the same time, it appears as if they execute serially.</p></li>
+<li><p><strong>Durability</strong>: After a transaction completes, changes to the data are not undone.</p></li>
+</ul>
+<p>Take as an example the transfer of funds from one account to another. Atomicity requires that if a debit is made from one account a credit in the same amount is made to the other account. Consistency requires that the sum of the balances in the two accounts is the same at the start of the transaction and at the end. Isolation implies that a concurrent transaction sees the amount to be transferred either in the debited account or in the credited account. If a concurrent transaction would see the amount in neither account or in both accounts the database fails the isolation test. Durability means that if the database fails for some reason after the transaction completes, the changes made to the accounts will persist.</p>
+<p>Examples of transactional (OLTP) relational databases are MySQL, PostgreSQL, Microsoft SQL Server, Oracle Database. These systems are also called Systems of Record (SoR) because they store the official records of an organization—the ground truth. While NoSQL databases can support transactions, they relax some of the criteria to support greater scalability. The According to the <a href="https://en.wikipedia.org/wiki/CAP_theorem">CAP theorem</a>, a distributed database that partitions data across different machines cannot be fully ACID compliant and guarantee availability. When a network partition fails one must choose between availability of the system and consistency. A relaxed condition is <em>eventual consistency</em>, where the data achieves a consistent state sometime in the future. Eventually, all reads will return the most recently written data value. For systems of records in financial services eventual consistency is not acceptable; SoRs must be ACID compliant.</p>
+<p>Why are these arcane details of database architecture important for a data scientist?</p>
+<ul>
+<li><p>Database designers make tradeoffs when optimizing for a use case. You should be aware how these tradeoffs can affect data integrity if that matters for your project—it might not be an issue at all.</p></li>
+<li><p>Using an OLTP system for analytical work is usually a bad idea. Transactional systems need to respond to frequent data updates and tend to return small record sets when queried (look up a customer, look up an account balance). The best way of storing information for this pattern is as a <strong>row-store</strong>: the data for a record is stored in a chunk of memory which makes retrieval of a record or set of record very efficient.</p></li>
+</ul>
+</section>
+<section id="row-and-column-storage" class="level3">
+<h3 class="anchored" data-anchor-id="row-and-column-storage">Row and Column Storage</h3>
+<p>The following table shows seven of the 150 observations from the famous Iris data set that is used in statistics and machine learning courses to apply regression, classification, and clustering methods. The full data set contains 50 observations for each of three Iris species: <em>Iris setosa</em>, <em>Iris versicolor</em>, and <em>Iris virginica</em>. Four measurements of the flowers, the length and width of the petals (the large leaves on the flowers) and the sepals (the small leaves) were taken on each plant.</p>
+<table class="table">
+<caption>Flower measurements for five <em>Iris setosa</em> and two <em>Iris versicolor</em> from the famous iris data set.</caption>
+<colgroup>
+<col style="width: 21%">
+<col style="width: 20%">
+<col style="width: 21%">
+<col style="width: 20%">
+<col style="width: 16%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>SepalLength</strong></td>
+<td><strong>SepalWidth</strong></td>
+<td><strong>PetalLength</strong></td>
+<td><strong>PetalWidth</strong></td>
+<td><strong>Species</strong></td>
+</tr>
+<tr class="even">
+<td>5.1</td>
+<td>3.5</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr class="odd">
+<td>4.9</td>
+<td>3.0</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr class="even">
+<td>4.7</td>
+<td>3.2</td>
+<td>1.3</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr class="odd">
+<td>4.6</td>
+<td>3.1</td>
+<td>1.5</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr class="even">
+<td>5.0</td>
+<td>3.6</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>setosa</td>
+</tr>
+<tr class="odd">
+<td>7.0</td>
+<td>3.2</td>
+<td>4.7</td>
+<td>1.4</td>
+<td>versicolor</td>
+</tr>
+<tr class="even">
+<td>6.4</td>
+<td>3.2</td>
+<td>4.5</td>
+<td>1.5</td>
+<td>versicolor</td>
+</tr>
+</tbody>
+</table>
+<p>Suppose we store this data in a row-store with a fixed record length. The numerical measurements can be stored in 4-byte floats. The longest string in the Species column is 10 characters long. To align the records on 4-byte boundaries for faster access, we set the record length to 4 x 4 + 12 = 28. <a href="#fig-data-rowstore1" class="quarto-xref">Figure&nbsp;<span>4.5</span></a> shows the first row of data set is laid out across 28 bytes.</p>
+<div id="fig-data-rowstore1" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-rowstore1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/RowStore_1.png" class="lightbox" data-glightbox="description: .lightbox-desc-5" data-gallery="quarto-lightbox-gallery-5"><img src="images/RowStore_1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-rowstore1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.5: Layout in memory of row 1 of Iris data set with four-byte storage of floating-point numbers and 12-byte storage for the species string. (It seems that the number 5.1 uses 3 bytes for storage. It uses all 4 x 8 = 32 bits of the 4 bytes to store the number. The most significant bit stores the sign, the next 8 bits store the exponent, the following 23 bits store the mantissa of the float.)
+</figcaption>
+</figure>
+</div>
+<p>Suppose that the data is stored in one big chunk of memory, each row starts 28 bytes after the previous row.</p>
+<div id="fig-data-rowstore2" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-rowstore2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/RowStore_2.png" class="lightbox" data-glightbox="description: .lightbox-desc-6" data-gallery="quarto-lightbox-gallery-6"><img src="images/RowStore_2.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-rowstore2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.6: The first three rows of the Iris data set in row-store form with contiguous memory.
+</figcaption>
+</figure>
+</div>
+<p>Looking up rows is extremely fast. To read the data for the third observation jump to byte 56 and read the next 28 bytes. Adding new records in row-oriented storage is also fast: allocate a new chunk of 28 bytes and fill in the fields. However, if we want to perform an analytic operation such as computing the average petal length, we must jump through the memory and grab values at position 8, 8 + 28, 8 + 56, …., 8 + 150 x 28. That is very inefficient, especially when tables have many columns and records are long.</p>
+<p>To support fast analytic processing, analytical databases are optimized for an access pattern where data is mostly read and infrequently written (changed). The ease of appending or looking up entire rows is then not as important as the efficiency of accessing memory for a column. Analytical queries are deep in that they process information from many records in the table—rather than looking up records—and they can return large result sets. Also, analytical queries tend to operate on a small subset of the columns of a table rather than all the columns.</p>
+<p>The best-performing format for storing information for this workload is a <strong>column-store</strong>: each column in the table is stored in one or more chunks of memory.</p>
+<div id="fig-data-columnstore" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-columnstore-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/ColumnStore.png" class="lightbox" data-glightbox="description: .lightbox-desc-7" data-gallery="quarto-lightbox-gallery-7"><img src="images/ColumnStore.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-columnstore-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.7: The seven observations of the Iris data set in column-store format.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-data-columnstore" class="quarto-xref">Figure&nbsp;<span>4.7</span></a> shows the five columns in the Iris data set in column store format. Computing the average of, say, sepal length, can now be done efficiently by scanning the memory for that column. The data for the other columns does not have to be loaded into memory for this operation.</p>
+<p>Columnar storage has other advantages for analytic databases: the data types are homogeneous within a block of memory (all characters, all integers, all floats, etc.) and compress well. Except for sepal length, all columns have repeated values. These can be stored along with an integer that counts the number of times a value appears. This simple technique—called run-length encoding—can greatly reduce the storage requirements when the data are ordered and have repeat values.</p>
+<p>The following is a non-exhaustive list of analytic databases that use columnar storage:</p>
+<ul>
+<li><p>Amazon Redshift</p></li>
+<li><p>Google BigQuery</p></li>
+<li><p>Azure Cosmos DB</p></li>
+<li><p>DuckDB</p></li>
+<li><p>Vertica</p></li>
+<li><p>ScyllaDB</p></li>
+<li><p>DataStax</p></li>
+<li><p>ClickHouse</p></li>
+<li><p>Apache Druid</p></li>
+<li><p>Apache Cassandra</p></li>
+<li><p>Apache HBase</p></li>
+</ul>
+</section>
+<section id="hybrid-htap-databases" class="level3">
+<h3 class="anchored" data-anchor-id="hybrid-htap-databases">Hybrid (HTAP) Databases</h3>
+<p>Some databases combine row-oriented storage with column-oriented storage in the same database engine; this paradigm is called hybrid transactional-analytical processing (HTAP). The idea behind HTAP databases is that you do not need two separate databases, one for transactional workloads and one for analytical workloads. The ability to perform both workloads efficiently in the same database reduces data movement and data duplication between databases. This reduces the dreaded <em>database sprawl</em> in organizations. The term HTAP was coined by industry analyst firm Gartner. Forrester, Gartner’s competitor, refers to this processing paradigm as <em>translytical</em>.</p>
+<p>Another motivation of HTAP databases is that transactional systems, where information about the business is recorded in real time, also need support for real-time analytics to produce insights “in the moment”. Transactional systems are becoming more analytical, the results and side effects of algorithms triggered by a transaction can be the most important piece of information of the transaction.</p>
+<div class="example">
+<div class="example-header">
+<p>Ride Share Booking</p>
+</div>
+<div class="example-container">
+<p>Suppose you land at the San Francisco airport and use your favorite ride share app to book a ride into the city. This starts a transaction with the ride share company. The data recorded as part of the transaction includes customer information, origin and destination of the trip, time of day, etc. In real-time, as the transaction occurs, the backend of the app calculates the price for the ride based on location, traffic density, ride demand, available drivers, vehicle type, etc.</p>
+<p>This is an analytical operation that invokes a price-optimization algorithm. Based on the real-time prices offered to you in the app you choose the preferred ride. The optimized price is recorded as part of the transaction.</p>
+</div>
+</div>
+<p>The following are examples of HTAP databases:</p>
+<ul>
+<li>PingCAP</li>
+</ul>
+<!-- -->
+<ul>
+<li>Aerospike</li>
+</ul>
+<!-- -->
+<ul>
+<li><p>SingleStoreDB (formerly MemSQL)</p></li>
+<li><p>InterSystems</p></li>
+<li><p>Oracle Exadata</p></li>
+<li><p>Splice Machine</p></li>
+<li><p>GridGrain</p></li>
+<li><p>Redis Lab</p></li>
+<li><p>SAP/HANA</p></li>
+<li><p>VoltDB</p></li>
+<li><p>Snowflake (since the addition of Unistore in 2022)</p></li>
+<li><p>Greenplum</p></li>
+</ul>
+</section>
+<section id="newsql-databases" class="level3">
+<h3 class="anchored" data-anchor-id="newsql-databases">NewSQL Databases</h3>
+<p>As a broad generalization we can state that non-relational NoSQL databases sacrifice consistency for horizontal scalability and that traditional relational SQL databases are ACID compliant but do not scale well horizontally, they are designed for scale-up.</p>
+<p>NewSQL databases try to bridge this gap, providing horizontal scalability and transactional integrity (ACID compliance). There are variations in the types of transactional guarantees they provide, so it is a good idea to read the fine print. For example, a transaction might be defined by a single read or write to the database rather than the operations wrapped in a BEGIN—COMMIT block.</p>
+<p>NewSQL databases tend to have in common:</p>
+<ul>
+<li><p><strong>Data partitioning</strong>: the data are divided into partitions (also called shards). Partitions can reside on different machines.</p></li>
+<li><p><strong>Horizontal scaling</strong>: because of sharding, the database can accommodate an increase in size by adding more machines.</p></li>
+<li><p><strong>Replication</strong>: The data appears in the database more than once. Replicates can be stored on the same or different machines, availability zones or regions. For example, one machine can serve as the primary node for some partitions and as a backup node for replicates of other partitions. This provides failure resilience and the ability to recover the database from disasters.</p></li>
+<li><p><strong>Concurrency control</strong>: to maintain data integrity under concurrent transactions.</p></li>
+<li><p><strong>Failure resilience</strong>: the databases recover to a previous consistent state when machines fail or the database crashes.</p></li>
+</ul>
+<p>The following are examples of NewSQL databases:</p>
+<ul>
+<li><p>CockroachDB</p></li>
+<li><p>VoltDB</p></li>
+<li><p>SingleStoreDB</p></li>
+<li><p>ClustrixDB</p></li>
+<li><p>Pivotal Gemfire</p></li>
+<li><p>NuoDB</p></li>
+</ul>
+</section>
+<section id="non-relational-database-designs" class="level3">
+<h3 class="anchored" data-anchor-id="non-relational-database-designs">Non-relational Database Designs</h3>
+<p>Because non-relational (NoSQL) databases have become popular and play an important role in data analytics, we want to spend a few moments on their principal architecture. The primary designs for NoSQL databases are</p>
+<ul>
+<li><p>Key-value stores</p></li>
+<li><p>Document stores</p></li>
+<li><p>Graph databases</p></li>
+</ul>
+<p>Non-relational databases can be multi-model and support more than one design. Many graph databases on the DB-Engines <a href="https://db-engines.com/en/ranking/graph+dbms">list</a> support document store, key-value, and graph models.</p>
+<section id="key-value-stores" class="level4">
+<h4 class="anchored" data-anchor-id="key-value-stores">Key-value stores</h4>
+<p>In a key-value store, every item in the database has only two fields, a key and a value. For example, the key could be a product number and the value could be a product name. This seems restrictive, but the value does not have to be a scalar, it can be, for example, a JSON documents with subfields.<br>
+</p>
+<table class="table">
+<caption>Examples of keys and values in key-value stores. The schema-less nature of the store is apparent in the last two table rows. Two keys can be associated with values of different types. Database items do not have to conform to a specific structure except that an item consists of a key and a value.</caption>
+<colgroup>
+<col style="width: 23%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Key</th>
+<th>Value2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">“username”</td>
+<td>“oschabenberger”</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">“account type”</td>
+<td>“personal”</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">345625</td>
+<td>{<br>
+&nbsp;&nbsp;&nbsp; name: “MacBook Pro 16”,<br>
+&nbsp;&nbsp;&nbsp; processor: “M2”,<br>
+&nbsp;&nbsp;&nbsp; memory: 32GB”<br>
+}</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">165437</td>
+<td>{<br>
+&nbsp;&nbsp;&nbsp; name: “Paper towel”,<br>
+&nbsp;&nbsp;&nbsp; available: true,<br>
+&nbsp;&nbsp;&nbsp; discount: 10%”<br>
+}</td>
+</tr>
+</tbody>
+</table>
+<p>To achieve horizontal scaling (scaling out) of key-value stores, the data are partitioned across multiple machines based on a hash table. For a database with <em>n</em> machines the hash is essentially a mapping from the key to the integers from 0 to <em>n</em>-1 that determines on which machine a particular key is kept. As the database grows (more keys added) more machines can be easily added. Such scaling out is more difficult in relational systems where the relationships between the tables must be maintained as the data is distributed over more machines. That is why not building tables on relations supports horizontal scaling. While documents are grouped into collections (the NoSQL version of a table), there is no association or relationship between one document or any other. The relative ease to scale horizontally is one reason why non-relational databases became so popular for handling large and growing databases.</p>
+<p>Disadvantages of key-value stores are also apparent: items can only be looked up by their (primary) key. Queries that filter on other attributes are less efficient than in relational systems: what is the average order amount of customers who ordered fewer than 5 items in the last 12 month? It is difficult to join data based on keys. They are not as performant for analytical work as relational systems, especially those with columnar storage layers. A good application for key-value stores are CRUD applications where items are merely created, read, updated, and deleted.</p>
+</section>
+<section id="document-stores" class="level4">
+<h4 class="anchored" data-anchor-id="document-stores">Document stores</h4>
+<p>A document store extends the simple design of the key-value store. The value is now stored as a document-oriented set of fields in JSON, XML, YAML, BSON, or similar format. While the data in a key-value store is transparent to the application but deliberately opaque to the database, in a document store the values are transparent to the database. This enables more complex queries than just using the primary key, the fields in the document can be queried.</p>
+<div id="fig-data-documentstore" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-documentstore-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/MongoDB_Document.png" class="lightbox" data-glightbox="description: .lightbox-desc-8" data-gallery="quarto-lightbox-gallery-8"><img src="images/MongoDB_Document.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-documentstore-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.8: Examples of documents in MongoDB. A simple document on the left and a more complex document on the right. The first field, _id, is a unique identifier of the document.
+</figcaption>
+</figure>
+</div>
+<p>The fields of the documents do not have to be identical across records in the database. For example, documents containing customer names have a field for a middle initial only if the individual has a middle initial. Documents do not contain empty fields. In contrast, a relational system that stores a middle initial will have this field for all records and NULL values are used to signal an empty field when a middle initial is missing.</p>
+<p>Like key-value stores, document databases are great for CRUD applications, but do not perform well for analytical queries and cannot represent relationships and associations. Each document exists as an independent unit unrelated to other documents.</p>
+</section>
+<section id="graph-databases" class="level4">
+<h4 class="anchored" data-anchor-id="graph-databases">Graph databases</h4>
+<p>In graph databases relationships are a first-class citizen. The relationships are not expressed through keys in tables, but through edges that connect nodes (vertices). Nodes are the entities of interest in the database such as people, products, cities. Nodes have attributes (called properties) stored as key-value pairs or documents (<a href="#fig-data-simplegraph" class="quarto-xref">Figure&nbsp;<span>4.9</span></a>).</p>
+<div id="fig-data-simplegraph" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-simplegraph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/SimpleGraph.png" class="lightbox" data-glightbox="description: .lightbox-desc-9" data-gallery="quarto-lightbox-gallery-9"><img src="images/SimpleGraph.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-simplegraph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.9: A simple graph with 6 nodes and 7 edges.
+</figcaption>
+</figure>
+</div>
+<p>Because of this storage model graph databases are considered NoSQL databases. Labeling them as non-relational databases is only correct with respect to the traditional table-based relational systems. Relationships are a central property of graph databases, and they are more flexible and dynamic compared to RDBMS. Relationships emerge as patterns through the connections of the nodes rather than predefined elements of the database.</p>
+<p><a href="https://db-engines.com/en/ranking/graph+dbms">This</a> list shows the DB-Engines ranking of graph database systems. Note that many of them also support key-value or document stores.</p>
+</section>
+</section>
+</section>
+<section id="cloud-databases" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="cloud-databases"><span class="header-section-number">4.2</span> Cloud Databases</h2>
+<p>According to <a href="https://www.statista.com/statistics/1062879/worldwide-cloud-storage-of-corporate-data/">statista</a>, the share of corporate data stored in the cloud has increased from 30% in 2015 to 60% in 2022. The total addressable market (TAM) in cloud computing is estimated to exceed $200 billion per year and is growing by double digits.</p>
+<p>The market for storing data in the cloud as files, blocks, or generic objects is a staggering $78 billions of that TAM (2022) and the market for cloud databases is $21 billions in 2023. The cumulative aggregate growth rate (CAGR) for cloud storage and cloud databases is 18% and 22%, respectively. What do we take away from these numbers?</p>
+<ul>
+<li><p>Cloud computing is one of the most fundamental revolutions in computing in the last 20 years.</p></li>
+<li><p>Half of the addressable market is in storing data, either in databases or in some other form of cloud storage (files, blocks, objects). Getting your data into their cloud is a key element in the business model of the cloud service providers (CSP). Data has gravity and its “gravitational constant” seems to increase as it comes to rest in a cloud data center.</p></li>
+<li><p>The economics of inexpensive cloud storage will continue to erode Big Data storage systems like Hadoop (HDFS).</p></li>
+<li><p>Transactional and operational systems are unlikely to be supported by object storage, while it is least expensive it is also least performant. That is where databases optimized for transactions and/or analytic of cloud data come in.</p></li>
+</ul>
+<p>A database is said to be <em>cloud-ready</em> if it can be run on cloud infrastructure. That is true for most databases. It is said to be <em>cloud-native</em> if the database was designed for the cloud and takes advantage of the full functionality of the cloud, for example, horizontal scaling (scale-out) with increased workload, separation of storage and compute, container deployment and Kubernetes orchestration, multi-tenancy, disaster recovery, bottomless storage.</p>
+<p>Among cloud databases we can broadly distinguish three service models according to who takes on the responsibility for maintaining the infrastructure, the database instance, and the access to the database: self-managed databases, managed services (DBaaS), and serverless databases.</p>
+<section id="self-managed" class="level3">
+<h3 class="anchored" data-anchor-id="self-managed">Self-managed</h3>
+<p>A self-managed cloud database is not much different from a database installed on premises, except that it uses cloud infrastructure. As the name suggests, you are responsible for administering and maintaining all aspects of the deployment. The CSP will provide the infrastructure and make sure that it is operational, but you must make sure that the database running on the platform is operational, updated. You can install any database of your choice, including not cloud-native databases.</p>
+<p>Some cloud-native databases offer a self-managed option, but a managed service or serverless offering is more typical when databases were designed specifically for the cloud.</p>
+</section>
+<section id="managed-service" class="level3">
+<h3 class="anchored" data-anchor-id="managed-service">Managed Service</h3>
+<p>Also known as database-as-a-service (DBaaS), this deployment methodology is a special case of software as a service, where the software managed on behalf of the user is a database system. In exchange for a subscription, the service provider handles the management of the database, including provisioning, support, and maintenance. The service provider chooses the hardware instances on which the database runs, frequently using shared resources for multiple databases and customers.</p>
+<p>Here are examples of relational and NoSQL databases offered as a managed service:</p>
+<ul>
+<li><p>Relational</p>
+<ul>
+<li><p><a href="https://www.singlestore.com/">SingleStoreDB</a></p></li>
+<li><p><a href="https://www.cockroachlabs.com/">CockroachDB</a></p></li>
+<li><p><a href="https://aws.amazon.com/rds/">Amazon RDS</a> (Relational Database Service)</p></li>
+<li><p><a href="https://azure.microsoft.com/en-us/products/azure-sql/database">Azure SQL</a></p></li>
+<li><p><a href="https://motherduck.com/">MotherDuck</a> (SaaS for DuckDB)</p></li>
+<li><p>Azure DB for <a href="https://azure.microsoft.com/en-us/products/mysql">MySQL</a>, <a href="https://azure.microsoft.com/en-us/products/postgresql/">PostgreSQL</a>, …</p></li>
+<li><p><a href="https://cloud.google.com/bigquery">Google BigQuery</a></p></li>
+<li><p><a href="https://cloud.google.com/spanner">Google Spanner</a></p></li>
+<li><p><a href="https://www.oracle.com/database/">Oracle Database</a></p></li>
+</ul></li>
+<li><p>NoSQL</p>
+<ul>
+<li><p><a href="https://www.mongodb.com/atlas">MongoDB Atlas</a></p></li>
+<li><p><a href="https://azure.microsoft.com/en-us/products/cosmos-db">Azure Cosmos DB</a></p></li>
+<li><p><a href="https://www.couchbase.com/">Couchbase</a></p></li>
+<li><p><a href="https://cloud.google.com/datastore">Google Datastore</a></p></li>
+<li><p><a href="https://cloud.google.com/bigtable?hl=en">Google BigTable</a></p></li>
+<li><p><a href="https://cloud.google.com/firestore">Google FireStore</a></p></li>
+<li><p><a href="https://redis.com/">Redis</a></p></li>
+<li><p><a href="https://aws.amazon.com/dynamodb/">Amazon DynamoDB</a></p></li>
+</ul></li>
+</ul>
+<p>Cloud service providers have been pushing non-relational systems because horizontal scaling fits well with their business model: adding cloud infrastructure drives revenue for the cloud provider.</p>
+</section>
+<section id="serverless-systems" class="level3">
+<h3 class="anchored" data-anchor-id="serverless-systems">Serverless Systems</h3>
+<p>We need to explain what we mean by “serverless computing” because all code executes on a computer (a server) somewhere. Serverless computing does not do away with servers. It eliminates for software developers the particulars of worrying about which servers their code runs on. This sounds a bit like the SaaS model, but there are important distinctions between a serverless and a serverful (e.g., SaaS) system:</p>
+<ul>
+<li><p>In serverless computing you execute code without managing resource allocation. You provide a piece of code to the CSP, and the cloud automatically provisions the resources necessary to execute the code.</p></li>
+<li><p>n serverless computing you pay for the time the code is executing, not for the resources reserved to (eventually) execute the code. The provider of a serverless service is then encouraged to scale back computing resources as much as possible when not in use (known as scale-to-zero).</p></li>
+</ul>
+<p>Serverless computing can be seen as the latest form of virtualization in computing. The user writes a cloud function and ties it to a trigger that runs the function, for example, when a customer opens an online shopping cart. The serverless system then takes care of everything else such as instance selection, logging, scaling, security, etc.</p>
+<p>Not all applications are suitable for serverless computing and for some time databases where thought to be among the backend services that do not fit with the serverless paradigm (see, for example, <a href="https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-3.pdf">this</a> view from Berkeley):</p>
+<ul>
+<li><p>Serverless computing is essentially stateless computing: the state necessary to execute code is either sent over an API along with the request or is stored somewhere server-side between function calls.</p></li>
+<li><p>Databases have a lot of state, such as connection protocols, metadata, access controls, schemas, etc.</p></li>
+<li><p>Databases often use connection-based protocols which assume a stable connection over a port between a host and a client. That conflicts with the design of serverless systems.</p></li>
+<li><p>Databases have a cold-start problem. A cold start is the time required to instantiate an environment and to get things up and running when a function is called for the first time. In a serverful environment you encounter a cold start only once at the beginning. In a serverless environment cold starts happen the first time you invoke a service and every time the system has scaled back. For example, if the serverless database quiesces after 5 minutes of inactivity and you submit queries every 10 minutes then every query must go through an instantiation of the database environment, including loading the data.</p></li>
+</ul>
+<p>Despite these challenges there has been a lot of progress in serverless database systems in recent years. Here is an incomplete list of relational and NoSQL serverless cloud databases. Notice that the list contains databases listed earlier; some providers make DBaaS and serverless options available:</p>
+<ul>
+<li><p>Relational</p>
+<ul>
+<li><p><a href="https://motherduck.com/">MotherDuck</a> (collaborative serverless platform built on DuckDB)</p></li>
+<li><p><a href="https://neon.tech/">Neon Serverless Postgres</a></p></li>
+<li><p><a href="https://planetscale.com/">PlanetScale DB</a> (Serverless MySQL)</p></li>
+<li><p><a href="https://www.cockroachlabs.com/lp/serverless/">CockroachDB Serverless</a></p></li>
+<li><p><a href="https://aws.amazon.com/rds/aurora/serverless/">Amazon Aurora Serverless</a></p></li>
+</ul></li>
+<li><p>NoSQL</p>
+<ul>
+<li><p><a href="https://fauna.com/">Fauna DB</a></p></li>
+<li><p><a href="https://firebase.google.com/docs/firestore">Google FireStore</a></p></li>
+<li><p><a href="https://aws.amazon.com/dynamodb/?nc2=h_ql_prod_fs_ddb">Amazon DynamoDB</a></p></li>
+<li><p><a href="https://www.mongodb.com/use-cases/serverless">MongoDB Serverless</a></p></li>
+</ul></li>
+</ul>
+<p>A special shout-out to DuckDB, a lightweight, embedded, analytical RDBMS that runs inside a host process, for example, inside a Python or R session. DuckDB integrates very well with other systems; it makes working with a relational system from Python or R very easy. MotherDuck is a serverless platform and cloud database built on DuckDB. The integration between the two makes working with databases locally and in the cloud particularly easy. And since DuckDB is optimized for analytic workloads, DuckDB &amp; MotherDuck are great choices for data scientists. We will cover more about DuckDB and MotherDuck in the chapters that follow.</p>
+</section>
+</section>
+<section id="data-warehouse-mart-lake-and-lakehouse" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="data-warehouse-mart-lake-and-lakehouse"><span class="header-section-number">4.3</span> Data Warehouse, Mart, Lake, and Lakehouse</h2>
+<p>We used the term data warehouse frequently throughout this document and made several references to data lake. What are they and how do data marts fit into the picture?</p>
+<p>Data warehouses and data lakes represent two distinct philosophies to store data and to make it available in enterprises. Many organizations have both a data warehouse and a data lake, some enterprises have several of each. The Data lakehouse is a recent development aimed at combining the pros of warehouses and lakes into a single architecture.</p>
+<section id="data-warehouse" class="level3">
+<h3 class="anchored" data-anchor-id="data-warehouse">Data Warehouse</h3>
+<p>The main differences between a data warehouse, also called an enterprise data warehouse (EDW), and a data lake are the level of curation of the data, the storage technology, and the level of access. The data in data warehouses is highly organized and curated and access to it tends to be more tightly controlled than in a data lake.</p>
+<p>A data warehouse contains structured data for business intelligence, reporting, and visualization. Data warehouses are updated with data from transactional source systems such as CRM, ERP, Salesforce on a regular schedule. Data are extracted to a staging area where they are transformed, normalized, and enriched before being loaded into the data warehouse. This process of extracting—transformation—loading is abbreviated as the <a href="#_ETL_and_ELT">ETL</a> approach.</p>
+<div id="fig-data-edw" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-edw-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/DataWarehouse.png" class="lightbox" data-glightbox="description: .lightbox-desc-10" data-gallery="quarto-lightbox-gallery-10"><img src="images/DataWarehouse.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-edw-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.10: An enterprise data warehouse (EDW) is loaded with data transformed and curated in a staging area.
+</figcaption>
+</figure>
+</div>
+<p>Data warehouses consist of schema-on-write tables—dimension and fact tables—and indexes that support consistency (ACID) and are optimized for analytical queries. Fact tables hold numerical data and primary keys; the dimension tables hold the descriptive information for all fields included in a fact table. A typical example is to store <code>orders</code> in a fact table and <code>customers</code> and <code>products</code> information in dimension tables. When relations between the fact and dimension tables are represented by a single join, the arrangement is called a <strong>star schema</strong> due to the central role of the fact table.</p>
+<div id="fig-data-starschema" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-starschema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/StarSchema.png" class="lightbox" data-glightbox="description: .lightbox-desc-11" data-gallery="quarto-lightbox-gallery-11"><img src="images/StarSchema.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-starschema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.11: One fact table (Orders) and four dimension tables in a star schema. PK denotes primary keys, FK denotes foreign keys. The fact table has foreign keys that support relations with the dimension table. <a href="https://towardsdatascience.com/star-schema-924b995a9bdf">Source</a>.
+</figcaption>
+</figure>
+</div>
+<p>The star schema is one of the simplest ways of organizing data in a data warehouse. The <strong>snowflake</strong> schema has a more complex structure with normalized dimension tables (without duplicates) and possibly multiple levels of joins.</p>
+<div id="fig-data-snowflakeschema" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-snowflakeschema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/Snowflake_Schema.png" class="lightbox" data-glightbox="description: .lightbox-desc-12" data-gallery="quarto-lightbox-gallery-12"><img src="images/Snowflake_Schema.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-snowflakeschema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.12: Snowflake schema with up to two levels of relational joins. <a href="https://www.simplilearn.com/star-schema-vs-snowflake-schema-article">Source</a>.
+</figcaption>
+</figure>
+</div>
+<p>The snowflake schema in the preceding figure can require two levels of table joins to query data. For example, to calculate revenue by country requires a join of the fact table with the join of the `Dealer` and <code>Country</code> tables. In a star schema the location and country information would be incorporated into the `Dealer` table; that would increase the size of that dimension table due to multiple locations within countries and multiple dealers at locations, but it would simplify the relationship among the tables.</p>
+<p>Data warehouses uses SQL as the primary interface, are highly relational, ACID compliant, and schema-dependent—these are attributes of relational database management systems. But you should not equate EDWs with any specific RDBMS. Data warehouses are built on relational database technology but not every RDMBS can serve as a data warehouse. Examples of data warehouses include:</p>
+<ul>
+<li><p>Teradata (on-premises) and Teradata Vantage (cloud-based)</p></li>
+<li><p>Google BigQuery</p></li>
+<li><p>Amazon Redshift</p></li>
+<li><p>Microsoft SQL Server</p></li>
+<li><p>Oracle Exadata</p></li>
+<li><p>IBM Db2 and IBM Infosphere</p></li>
+<li><p>IBM Netezza</p></li>
+<li><p>SAP/HANA and SAP Datasphere</p></li>
+<li><p>Snowflake</p></li>
+<li><p>Yellowbrick</p></li>
+</ul>
+</section>
+<section id="data-mart" class="level3">
+<h3 class="anchored" data-anchor-id="data-mart">Data Mart</h3>
+<p>A data mart is a section of a data warehouse where data is curated for a specific line of business, team, or organizational unit. For example, a data warehouse might contain a data mart for the Marketing organization, a data mart for the R&amp;D organization, and a data mart for the Finance team. These teams have very different needs and different levels of access privileges.</p>
+<div id="fig-data-datamarts" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-datamarts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/DataMarts.png" class="lightbox" data-glightbox="description: .lightbox-desc-13" data-gallery="quarto-lightbox-gallery-13"><img src="images/DataMarts.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-datamarts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.13: A data warehouses supports different data marts. The teams access their data marts rather than the data warehouse directly.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="data-lake" class="level3">
+<h3 class="anchored" data-anchor-id="data-lake">Data Lake</h3>
+<p>Data warehouses have dominated enterprise data storage and analysis for decades. They are not without drawbacks and their disadvantages were amplified during the rise of Big Data with new data types, new workloads, and the need for more flexibility. Data warehouses are often expensive, custom-built appliances that do not scale out easily. They use read-on-write schemas with proprietary storage formats. First Hadoop with the Hadoop Distributed File System (HDFS) and then cloud object storage (Amazon S3, Azure Blob Storage, Google Cloud Storage) presented a much cheaper storage option to reimagine data storage, data curation, and data access. Open-source data formats such as Parquet, ORC, and Avro presented an alternative to storing data in a proprietary format and promised multi-use of the data.</p>
+<p>Data lakes were born as centralized repositories where data is stored in raw form. The name suggests that data are like water in a lake, free flowing.</p>
+<p>A common data lake architecture is the <strong>medallion</strong> system named after bronze, silver, and gold medals awarded in competition. The structure and quality improve as one moves from the bronze to the silver to the gold tier. The bronze layer contains the raw data in formats such as CSV, JSON, XML, XLS and is not accessible by the end user. From here the data are cleansed and enriched and formatted into open-source formats such as parquet or Avro. The data in the silver layer is validated and standardized, schemas are defined but can evolve as needed. Users of the silver layer are data scientists and data analysts who perform self-service analysis, data science, and machine learning. Data engineers also use the silver layer to structure and curate data even more for project-specific databases that you find in the gold layer.</p>
+<div id="fig-data-datalake-medallion" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-datalake-medallion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/DataLake.png" class="lightbox" data-glightbox="description: .lightbox-desc-14" data-gallery="quarto-lightbox-gallery-14"><img src="images/DataLake.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-datalake-medallion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.14: Medallion data lake design.
+</figcaption>
+</figure>
+</div>
+<p>The data can be structured, unstructured, or semi-structured. Data lakes support many storage and file formats—CSV, JSON, Parquet, ORC, and Avro are common file formats for data sets. The data is kept in the lake in raw form until it is needed. RDBMS use databases and tables to organize the data. NoSQL databases use document collections and key-value pairs to organize the data. File systems use folders and files to organize files. A data lake uses a flat structure where elements have unique identifiers and are tagged with metadata. Like a NoSQL database, data lakes are schema-on-read systems.</p>
+<p>Data lakes are another result of the Big Data era. Increasingly heavy analytical workloads that burned CPU cycles and consumed memory were not welcome in databases and data warehouses that were meant to serve existing business reporting needs. A new data architecture was needed where data scientists and machine learning engineers can go to work, unencumbered by the rigidity of existing data infrastructure and not encumbering the existing data infrastructure with additional number crunching.</p>
+<p>The data lake is manifestation of the belief that great insights will (magically) result when you throw together all your data. When data are stored in a data lake without a pre-defined reason and in arbitrary formats, and poorly organized, they can quickly turn into <em>data swamps</em>.</p>
+<p>Here are some vendors of data lake solutions:</p>
+<ul>
+<li><p><a href="https://azure.microsoft.com/en-us/solutions/data-lake">Microsoft Azure Data Lake</a></p></li>
+<li><p><a href="https://cloud.google.com/solutions/data-lake">Google Cloud’s Data Lake</a></p></li>
+<li><p><a href="https://aws.amazon.com/lake-formation/?c=a&amp;sec=srvm&amp;loc=0">AWS Lake Formation</a></p></li>
+<li><p><a href="https://www.cloudera.com/products/sdx/data-lake-service.html">Cloudera Data Lake Service</a></p></li>
+<li><p><a href="https://www.ibm.com/data-lake">IBM data lake solution</a></p></li>
+<li><p><a href="https://delta.io/">Delta Lake</a> (an open-source metadata layer that sits on top of open file formats like Delta and Parquet)</p></li>
+</ul>
+<p>Data lakes are flexible, scale horizontally (scale-out), and are quite cost effective. They are often built on cheap but scalable object/block/file storage systems that helps reduce costs at the expense of performance. A data warehouse on the other hand is a highly optimized, highly performant system for business intelligence. EDWs often come in the form of packaged appliances (Teradata, Oracle Exadata, IBM Netezza) that makes scaling more difficult. These systems are easier to scale up (adding more memory, more CPUs, etc.) rather than scale horizontally (scale out by adding more machines). EDWs support ACID transactions and allow updates, inserts, and deletes of data. Altering data in a data lake is very difficult, it supports mostly append operations.</p>
+<p>Data science and machine learning is more directed toward the data lake whereas business intelligence is directed at the warehouse. Can the two worlds come together, enabling cost-effective and performant business intelligence and data science on all data in a central place? Maybe. That is the premise and promise of the data <strong>lakehouse</strong>!</p>
+</section>
+<section id="data-lakehouse" class="level3">
+<h3 class="anchored" data-anchor-id="data-lakehouse">Data Lakehouse</h3>
+<p>The term data lakehouse was coined by <a href="https://www.databricks.com/glossary/data-lakehouse">Databricks</a>:</p>
+<blockquote class="blockquote">
+<p><em>a new, open data management architecture that combines the flexibility, cost-efficiency, and scale of data lakes&nbsp;with the data management and ACID transactions of data warehouses, enabling business intelligence (BI) and machine learning (ML) on all data.</em></p>
+</blockquote>
+<p>The lakehouse adds a layer on top of the low-cost storage of a data lake that provides data structures and data management akin to a data warehouse.</p>
+<div id="fig-data-lakehouse" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-lakehouse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/data-lakehouse-new.png" class="lightbox" data-glightbox="description: .lightbox-desc-15" data-gallery="quarto-lightbox-gallery-15"><img src="images/data-lakehouse-new.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-lakehouse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.15: Data warehouse, data lake, and data lakehouse as seen by Databricks. <a href="https://www.databricks.com/glossary/data-lakehouse">Source</a>.
+</figcaption>
+</figure>
+</div>
+<p>This is a compelling vision that, if it delivers what it promises, would be a major step into the right direction: to reduce the number of data architectures while enabling more teams to work with data.</p>
+<p>It is early days for the data lakehouse but there is considerable momentum. Some vendors are quick to point out that their cloud data warehouses also operate as a lakehouse. Other vendors position SQL query engines on top of S3 object storage as lakehouse solutions. Then there are solutions designed as a data lakehouse, e.g.,</p>
+<ul>
+<li><p><a href="https://sourceforge.net/software/product/Databricks/">Databricks Lakehouse</a></p></li>
+<li><p><a href="https://sourceforge.net/software/product/Oracle-Cloud-Infrastructure-Data-Lakehouse/">Oracle Cloud Infrastructure Data Lakehouse</a></p></li>
+<li><p><a href="https://www.blossomsky.io/">Blossom Sky</a></p></li>
+<li><p><a href="https://www.datalakehouse.io/">DataLakeHouse.io</a></p></li>
+</ul>
+</section>
+</section>
+<section id="file-formats" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="file-formats"><span class="header-section-number">4.4</span> File Formats</h2>
+<p>If you are working with proprietary data analytics tools such as SAS or JMP, you probably do not worry much about the ways in which data are stored, read, and written by the software, except that you want the tool to support import and export to your favorite non-proprietary format.</p>
+<p>Most data science is performed on open-source or open standard file formats. Proprietary formats are not easily exchanged between tools and applications. Data science spans many technologies and storing data in a form accessible by only a subset of the tools is counterproductive. You end up reformatting the data into an exchangeable format at some point anyway.</p>
+<p>The most important file formats in data science are CSV, JSON, Parquet, ORC, and Avro. CSV and JSON are text-based, human-readable formats, whereas Parquet, ORC, and Avro are binary formats. The last three were designed specifically to handle Big Data use cases, Parquet and ORC in particular are associated with the Hadoop ecosystem. Parquet, ORC, and Avro are Apache open-source projects.</p>
+<p>Although CSV and JSON are ubiquitous, they were never meant for large data volumes.</p>
+<p>You will encounter many other data formats in data science work, but these five file formats cover a lot of ground, you should have a basic understanding of their advantages and disadvantages.</p>
+<section id="csv" class="level3">
+<h3 class="anchored" data-anchor-id="csv">CSV</h3>
+<p>In data science projects you will invariably work with <em>comma-separated values</em> (CSV) files. Not because that is a great file format, but because CSV files are ubiquitous for rectangular data sets made up of rows and columns. Each line of the file stores one record with values in plain text separated by commas.</p>
+<p><a href="#fig-data-csvfile" class="quarto-xref">Figure&nbsp;<span>4.16</span></a> shows the contents of a CSV file with ten observations. The first line lists the column names. Strings are enclosed in quotes and values are separated by commas.</p>
+<div id="fig-data-csvfile" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-csvfile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/CSVfilesExample.png" class="lightbox" data-glightbox="description: .lightbox-desc-16" data-gallery="quarto-lightbox-gallery-16"><img src="images/CSVfilesExample.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-csvfile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.16: A CSV file with ten records.
+</figcaption>
+</figure>
+</div>
+<p>Among the advantages of CSV files are</p>
+<ul>
+<li><p><strong>Ubiquitous</strong>: every data tool can read and write CSV files. It is thus a common format to exchange (export/import) data between tools and applications.</p></li>
+<li><p><strong>Human readable</strong>: since the column names and values are stored in plain text, it is easy to look at the contents of a CSV file. When data are stored in binary form, you need to know exactly how the data are laid out in the file to access it.</p></li>
+<li><p><strong>Compression</strong>: since the data are stored in plain text it is easy to compress CSV files.</p></li>
+<li><p><strong>Excel</strong>: CSV files are easily exported from and imported to Microsoft Excel.</p></li>
+<li><p><strong>Simple</strong>: the structure of the files is straightforward to understand and can represent tabular data well if the data types can be converted to text characters.</p></li>
+</ul>
+<p>There are some considerable disadvantages of CSV files, however:</p>
+<ul>
+<li><p><strong>Human readable</strong>: To prevent exposing the contents of the file you need to use access controls and/or encryption. It is not a recommended file format for sensitive data.</p></li>
+<li><p><strong>Simple structure</strong>: Complex data types such as documents with multiple fields and sub-fields cannot be stored in CSV files.</p></li>
+<li><p><strong>Plain text</strong>: Some data types cannot be represented as plain text, for example, images, audio, and video. If you kluge binary data into a text representation the systems writing and reading the data need to know how to kluge and un-kluge the information—it is not a recommended practice.</p></li>
+<li><p><strong>Efficiency</strong>: much more efficient formats for storing data exist, especially large data sets.</p></li>
+</ul>
+<!-- -->
+<ul>
+<li><p><strong>Broken</strong>: CSV files can be easily broken by applications. Examples include inserting line breaks, limiting line width, not handling embedded quotes correctly, blank lines.</p></li>
+<li><p><strong>Missing values</strong> (NaNs): The writer and reader of CSV files need to agree how to represent missing values and values representing not-a-number. Inconsistency between writing and reading these values can have disastrous results. For example, it is a bad but common practice to code missing values with special numbers such as 99999; how does the application reading the file know this is the code for a missing value?</p></li>
+<li><p><strong>Encodings</strong>: When CSV files contain more than plain ASCII text, for example, emojis or Unicode characters, the file cannot be read without knowing the correct encoding (UTF-8, UTF-16, EBCDIC, US-ASCII, etc.). Storing encoding information in the header section of the CSV file throws off CSV reader software that does not anticipate the extra information.</p></li>
+<li><p><strong>Metadata</strong>: The only metadata supported by the CSV format are the column names in the first row of the file. This information is optional and you will find CSV files without column names. Additional metadata common about columns in a table such as data types, format masks, number-to-string maps, cannot be stored in a CSV file.</p></li>
+<li><p><strong>Data Types</strong>: Data types need to be inferred by the CSV reader software when scanning the file. There is no metadata in the CSV header to identify data types, only column names.</p></li>
+<li><p><strong>Loss of Precision</strong>: Floating point numbers are usually stored in CSV files with fewer decimal places than their internal representation in the computer. A double-precision floating point number occupies 64-bits (8 bytes) and has 15 digits of precision. Although it is not necessary, floating-point numbers are often rounded or truncated when they are converted to plain text.</p></li>
+</ul>
+<p>Despite these drawbacks, CSV is one of the most common file formats. It is the lowest common denominator format to exchange data between disparate systems.</p>
+</section>
+<section id="json" class="level3">
+<h3 class="anchored" data-anchor-id="json">JSON</h3>
+<p><a href="https://www.json.org/json-en.html">JSON</a> stands for JavaScript Object Notation, and although it was borne out of interoperability concerns for JavaScript applications and is based on a JavaScript standard, it is a language-agnostic data format. Initially used to pass information in human readable form between applications over APIs (Application Programmer Interfaces), JSON has grown into a general-purpose format for text-based, structured information. It is the standard for communicating on the web. The correct pronunciation of JSON is apparently akin to the name “Jason”, but “JAY-sawn” has become common.</p>
+<p>A binary, non-human readable form of JSON was created at MongoDB and is called BSON (binary JSON).</p>
+<p>In contrast to CSV, JSON is not based on rows of data but three basic data elements:</p>
+<ul>
+<li><p><strong>Value</strong>: a string, number, reserved word, or one of the following:</p></li>
+<li><p><strong>Object</strong>: a collection of name—value pairs similar to a key-value store.</p></li>
+<li><p><strong>Array</strong>: An ordered list of values</p></li>
+</ul>
+<p>All modern programming languages support key—values and arrays, they might be calling it by different names (object, record, dictionary, struct, list, sequence, map, hash table, …). This makes JSON documents highly interchangeable between programming languages—JSON documents are easy to parse (read) and write by computers. Any modern data processing system can read and write JSON data, making it a frequent choice to share data between systems and applications.</p>
+<p>A value in JSON can be a string in double quotes, a number, true, false, or null, an object or an array. Objects are unordered collection of name—value pairs. An array is an ordered collection of values. Since values can contain objects and arrays, JSON allows highly nested data structures that do not fit the row structure of CSV files.</p>
+<div id="fig-data-json-structure" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-json-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/JSON_Structure.png" class="lightbox" data-glightbox="description: .lightbox-desc-17" data-gallery="quarto-lightbox-gallery-17"><img src="images/JSON_Structure.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-json-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.17: Elements of a JSON document. Because values can contain objects and arrays, JSON documents can be highly structured and deeply nested.
+</figcaption>
+</figure>
+</div>
+<p>JSON documents are self-describing, the schema to make the data intelligible is built into the structures. It is also a highly flexible format that does not impose any structure on the data, except that it must comply with the JSON rules and data types—JSON is schema-free.</p>
+<div id="fig-data-json-example" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-json-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/JSON_Example.png" class="lightbox" data-glightbox="description: .lightbox-desc-18" data-gallery="quarto-lightbox-gallery-18"><img src="images/JSON_Example.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-json-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.18: A simple JSON document. The entire document is a name—value pair with name “menu”. The value is an object with names “id”, “value”, and “popup”. The value of “popup” is an object with name “menuitem” whose value is an array. The elements of the array are objects with names “value” and “onclick”.
+</figcaption>
+</figure>
+</div>
+<p>Many databases support JSON as a data type, allowing you to store hierarchical information in a cell of a row-column layout, limited only by the maximum size of a text data type in the database. Non-relational document databases often use JSON as the format for their documents.</p>
+<p>Since so much data is stored in JSON format, you need to get familiar and comfortable with working with JSON files. Data science projects are more likely consumers of JSON files rather than producer of files.</p>
+</section>
+<section id="apache-parquet" class="level3">
+<h3 class="anchored" data-anchor-id="apache-parquet">Apache Parquet</h3>
+<p>The <a href="https://parquet.apache.org/">Apache Parquet</a> open-source file format is a binary format—data are not stored in plain text but in binary form. Originally conceived as a column-based file format in the Hadoop ecosystem, it has become popular as a general file format for analytical data inside and outside of Hadoop and its file system HDFS: for example, as an efficient analytic file format for data exported to data lakes or in data processing with Spark.</p>
+<p>Working with Parquet files for large data is an order of magnitude faster than working with CSV files. The drawbacks of CSV files discussed previously all melt away with Parquet files.</p>
+<p>Parquet was designed from the ground up with complex data structures and read-heavy analytics in mind. It uses principally columnar storage but does it cleverly by storing chunks of columns in row groups rather than entire columns.</p>
+<div id="fig-data-parquet" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-parquet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/ParquetStorage.png" class="lightbox" data-glightbox="description: .lightbox-desc-19" data-gallery="quarto-lightbox-gallery-19"><img src="images/ParquetStorage.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-parquet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.19: The Parquet file architecture. Chunks of columns are stored in row groups. The footer contains important metadata. <a href="https://towardsdatascience.com/parquet-file-format-everything-you-need-to-know-4eed5c0019e7">Source</a>: Parquet File Format: Everything You Need to Know, by Nikola Ilic.
+</figcaption>
+</figure>
+</div>
+<p>This hybrid storage model is very efficient when queries select specific columns and filter rows at the same time; a common pattern in data science: compute the correlation between <code>homeValue</code> and <code>NumberOfRooms</code> for homes where <code>ZipCode = 24060</code>.</p>
+<p>Parquet stores metadata about the row chunks to speed access to rows, the metadata tells the reader which row chunks to skip. Also, a single write to the Parquet format can generate multiple <code>.parquet</code> files. The total data is divided into multiple files collected within a folder. Like NoSQL and NewSQL databases, data are partitioned, but since Parquet is a file format and not a database engine, the partitioning results in multiple files. This is advantageous for parallel processing frameworks like Spark that can work on multiple partitions (files) concurrently.</p>
+<p>Parquet uses several compression techniques to reduce the size of the files such as run-length encoding, dictionary encoding, Snappy, GZip, LZO, LZ4, ZSTD. Because of columnar storage compression methods can be specified on a per-column basis; Parquet files compress much more than text-oriented CSV files.</p>
+<p>Because of its complex file structure, Parquet files are relatively slow to write. The file format is optimized for the WORM paradigm: write-once, read many times.</p>
+<table class="table">
+<caption>Comparison of popular file formats in data science.</caption>
+<colgroup>
+<col style="width: 37%">
+<col style="width: 24%">
+<col style="width: 19%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">CSV</th>
+<th style="text-align: center;">JSON</th>
+<th style="text-align: center;">Parquet</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Columnar</strong></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr class="even">
+<td><strong>Compression</strong></td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr class="odd">
+<td><strong>Human Readable</strong></td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">No</td>
+</tr>
+<tr class="even">
+<td><strong>Nestable</strong></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr class="odd">
+<td><strong>Complex Data Structures</strong></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr class="even">
+<td><strong>Named Columns</strong></td>
+<td style="text-align: center;">Yes, if in header</td>
+<td style="text-align: center;">Based on scan</td>
+<td style="text-align: center;">Yes, metadata</td>
+</tr>
+<tr class="odd">
+<td><strong>Data Types</strong></td>
+<td style="text-align: center;">Based on scan</td>
+<td style="text-align: center;">Based on scan</td>
+<td style="text-align: center;">Yes, metadata</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="apache-orc" class="level3">
+<h3 class="anchored" data-anchor-id="apache-orc">Apache ORC</h3>
+<p>The <a href="https://orc.apache.org/">Apache ORC</a> (Optimized Row Columnar) open-source file format, like the Parquet file format, was originally associated with the Hadoop Big Data ecosystem. ORC files have a purely columnar storage format unlike the row-group/column chunk hybrid storage in Parquet files.</p>
+<p>ORC files are split into individual files that contain a collection of records; with columnar storage within the file. ORC files are organized into stripes, a stripe combines an index, the data in columnar form, and a footer with metadata. Stripes are essential to ORC files; they are treated independently of each other to support parallel data processing.</p>
+<div id="fig-data-orc-structure" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-orc-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/ORC-file-structure.png" class="lightbox" data-glightbox="description: .lightbox-desc-20" data-gallery="quarto-lightbox-gallery-20"><img src="images/ORC-file-structure.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-orc-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.20: Layout of an ORC file in stripes. <a href="https://www.upsolver.com/blog/the-file-format-fundamentals-of-big-data">Source</a>.
+</figcaption>
+</figure>
+</div>
+<p>A stripe is by default 64 MB in size and ORC files can have multiple stripes. This gives you an idea that these file types were designed to store large amounts of data.</p>
+<p>The ORC format was optimized for Hive, the data warehouse in the Hadoop ecosystem. For example, Hive and ORC together support ACID transactions on top of Hadoop. You will find that outside of Hadoop, support for ORC files is not as generous as for Parquet files. For example, you can read a multi-file Parquet file with Pandas in a single line of code. To read multi-file ORC files you need to append the results of reading the individual files. The Pandas functions <code>read_orc()</code> and <code>to_orc()</code> to read and write ORC files are not supported on Windows.</p>
+</section>
+<section id="apache-avro" class="level3">
+<h3 class="anchored" data-anchor-id="apache-avro">Apache Avro</h3>
+<p><a href="https://avro.apache.org/">Apache Avro</a> is an open-source, row-based, schema-based, file format. It is often used in conjunction with the streaming platform Apache Kafka, but Avro files are useful for batch processing as well. The storage format in Avro files is mixed in that the schema information is stored in JSON format while the data is stored in binary form. The schema is thus human readable.</p>
+<p>Like the Parquet format, Avro files are self-describing, the information to access and to deserialize the records is stored in the file itself. Avro files can be compressed but they do not compress as well as column stores. Heterogeneous data types within a row do not compress as well as homogeneous data within a column. Furthermore, column-oriented storage can choose optimal compression algorithms based on the data type of a column whereas row-oriented storage uses the same compression algorithm across all data types.</p>
+<p>Like other row stores, Avro files are great for applications that write more than they read; the exact opposite of column stores.</p>
+</section>
+<section id="the-apache-arrow-project" class="level3">
+<h3 class="anchored" data-anchor-id="the-apache-arrow-project">The Apache Arrow Project</h3>
+<p>If you work with large data sets, you perform data analytics, you process batch and streaming data, you want to perform in-memory analytics and query processing, then you should pay attention to <a href="https://arrow.apache.org/docs/index.html">Apache Arrow</a>. This is an open-source development platform for in-memory analytics that supports many programming environments, including R and Python, the primary languages for data science.</p>
+<p>Main contributors to the Python pandas project are also involved with Arrow, so there is a lot of portability between Arrow tables and pandas DataFrames. The pyarrow package is the backend for some of the read and write functions in pandas that handle Big Data formats such as Parquet and ORC.</p>
+<p>Newer releases of Pandas are leaning more on pyarrow, e.g., Pandas 2.0.</p>
+
+
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Figure&nbsp;4.1: Database market share 2011—2021, according to Gardner. <a href="https://www.techrepublic.com/article/new-gartner-report-shows-massive-growth-database-market-fueled-cloud/">Source</a>.</span>
+<span class="glightbox-desc lightbox-desc-2">Figure&nbsp;4.2: Schema on write with PostgreSQL. The CREATE TABLE statement creates the table named titanic and defines the schema: names, order, and data types of columns and default values. The \copy statement populates the database table with data.</span>
+<span class="glightbox-desc lightbox-desc-3">Figure&nbsp;4.3: An example of schema on read with Hadoop and its file system (HDFS). The data are loaded into Hadoop with the hdfs dfs command. No schema is defined at this stage. The data is then processed with the hadoop command. The customer-mapper.py Python script determines how the data is interpreted for this job; the Python script applies the schema on read.</span>
+<span class="glightbox-desc lightbox-desc-4">Figure&nbsp;4.4: Scaling up (vertically) and scaling out (horizontally). Scaling up adds more rooms to an existing building, scaling out adds more buildings.</span>
+<span class="glightbox-desc lightbox-desc-5">Figure&nbsp;4.5: Layout in memory of row 1 of Iris data set with four-byte storage of floating-point numbers and 12-byte storage for the species string. (It seems that the number 5.1 uses 3 bytes for storage. It uses all 4 x 8 = 32 bits of the 4 bytes to store the number. The most significant bit stores the sign, the next 8 bits store the exponent, the following 23 bits store the mantissa of the float.)</span>
+<span class="glightbox-desc lightbox-desc-6">Figure&nbsp;4.6: The first three rows of the Iris data set in row-store form with contiguous memory.</span>
+<span class="glightbox-desc lightbox-desc-7">Figure&nbsp;4.7: The seven observations of the Iris data set in column-store format.</span>
+<span class="glightbox-desc lightbox-desc-8">Figure&nbsp;4.8: Examples of documents in MongoDB. A simple document on the left and a more complex document on the right. The first field, _id, is a unique identifier of the document.</span>
+<span class="glightbox-desc lightbox-desc-9">Figure&nbsp;4.9: A simple graph with 6 nodes and 7 edges.</span>
+<span class="glightbox-desc lightbox-desc-10">Figure&nbsp;4.10: An enterprise data warehouse (EDW) is loaded with data transformed and curated in a staging area.</span>
+<span class="glightbox-desc lightbox-desc-11">Figure&nbsp;4.11: One fact table (Orders) and four dimension tables in a star schema. PK denotes primary keys, FK denotes foreign keys. The fact table has foreign keys that support relations with the dimension table. <a href="https://towardsdatascience.com/star-schema-924b995a9bdf">Source</a>.</span>
+<span class="glightbox-desc lightbox-desc-12">Figure&nbsp;4.12: Snowflake schema with up to two levels of relational joins. <a href="https://www.simplilearn.com/star-schema-vs-snowflake-schema-article">Source</a>.</span>
+<span class="glightbox-desc lightbox-desc-13">Figure&nbsp;4.13: A data warehouses supports different data marts. The teams access their data marts rather than the data warehouse directly.</span>
+<span class="glightbox-desc lightbox-desc-14">Figure&nbsp;4.14: Medallion data lake design.</span>
+<span class="glightbox-desc lightbox-desc-15">Figure&nbsp;4.15: Data warehouse, data lake, and data lakehouse as seen by Databricks. <a href="https://www.databricks.com/glossary/data-lakehouse">Source</a>.</span>
+<span class="glightbox-desc lightbox-desc-16">Figure&nbsp;4.16: A CSV file with ten records.</span>
+<span class="glightbox-desc lightbox-desc-17">Figure&nbsp;4.17: Elements of a JSON document. Because values can contain objects and arrays, JSON documents can be highly structured and deeply nested.</span>
+<span class="glightbox-desc lightbox-desc-18">Figure&nbsp;4.18: A simple JSON document. The entire document is a name—value pair with name “menu”. The value is an object with names “id”, “value”, and “popup”. The value of “popup” is an object with name “menuitem” whose value is an array. The elements of the array are objects with names “value” and “onclick”.</span>
+<span class="glightbox-desc lightbox-desc-19">Figure&nbsp;4.19: The Parquet file architecture. Chunks of columns are stored in row groups. The footer contains important metadata. <a href="https://towardsdatascience.com/parquet-file-format-everything-you-need-to-know-4eed5c0019e7">Source</a>: Parquet File Format: Everything You Need to Know, by Nikola Ilic.</span>
+<span class="glightbox-desc lightbox-desc-20">Figure&nbsp;4.20: Layout of an ORC file in stripes. <a href="https://www.upsolver.com/blog/the-file-format-fundamentals-of-big-data">Source</a>.</span>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../databasics.html" class="pagination-link" aria-label="Basic Data Preparation and Understanding">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Basic Data Preparation and Understanding</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../data/data_access.html" class="pagination-link" aria-label="Data Access">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Access</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Foundations of Data Science by Oliver Schabenberger</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

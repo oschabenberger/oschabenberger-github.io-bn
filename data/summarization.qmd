@@ -1,0 +1,272 @@
+# Data Summarization
+
+We encountered quantitative data summaries in the discussion of data profiling; `describe()` in Pandas or the sweetviz visualization produced a number of quantities that summarize properties of the variables in the data set.
+
+::: definition
+::: definition-header
+Definition: Data Summaries
+:::
+
+::: definition-container
+Data **summarization** reduces *n* data points to quantities that describe aspects of the variability in the data. These quantities are called **descriptive statistics**. For quantitative variables, the statistics measure aspects of the **location** and **dispersion** of the data. For qualitative variables, summaries describe unique values and frequencies.
+:::
+:::
+
+The focus of summarization in this chapter is to produce numerical quantities and tabular output that informs us about features of variables. These are mostly attributes of the distribution such as the central tendency or the dispersion (spread). Graphical summaries are covered in @sec-visualization.
+
+## Location and Dispersion Statistics
+
+Common location and dispersion measures for quantitative variables are shown in the next tables.
+
+| Sample Statistic | Symbol         | Computation                                                                                                                                                                                                                               | Notes                                                                            |
+|------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| Min              |                | $Y^*[1]$                                                                                                                                                                                                                                  | The smallest non-missing value                                                   |
+| Max              |                | $Y^*[n]$                                                                                                                                                                                                                                  | The largest value                                                                |
+| Mean             | $\overline{Y}$ | $\frac{1}{n}\sum_{i=1}^n Y_i$                                                                                                                                                                                                             | Most important location measure, but can be affected by outliers                 |
+| Median           | Med            | $$= \left \{    \begin{array}{cc}       Y^* \left[ \frac{n+1}{2} \right ] & n \text{ is even} \\        \frac{1}{2} \left( Y^* \left[\frac{n}{2} \right] + Y^* \left[\frac{n}{2}+1\right] \right) & n\text{ is odd} \end{array}\right .$$ | Half of the observations are smaller than the median; robust against outliers    |
+| Mode             | Mode           |                                                                                                                                                                                                                                           | The most frequent value; not useful when real numbers are unique                 |
+| 1st Quartile     |                | $Y^*\left[\frac{1}{4}(n+1) \right]$                                                                                                                                                                                                       | 25% of the observations are smaller than $Q_1$                                   |
+| 2nd Quartile     |                | See Median                                                                                                                                                                                                                                | 50% of the observations are smaller than $Q_2$. This is the median               |
+| 3rd Quartile     |                | $Y^*\left[\frac{3}{4}(n+1) \right]$                                                                                                                                                                                                       | 75% of the observations are smaller than $Q_3$                                   |
+| X% Percentile    |                | $Y^*\left[\frac{X}{100}(n+1) \right]$                                                                                                                                                                                                     | For example, 5% of the observations are larger than $P_{95}$, the 95% percentile |
+
+: Important statistics measuring location attributes of a variable. Sample mean, sample median, and sample mode are measures of the central tendency of a variable. $Y^*$ denotes the ordered sequence of observations and $Y^*[k]$ the value at the $k$th position in the ordered sequence. The min is defined as the smallest non-missing values because NaNs often sort as smallest values in software packages.
+
+| Sample Statistic     | Symbol | Computation                                                          | Notes                                                                                      |
+|----------------------|--------|----------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
+| Range                | $R$    | $Y^*[n] - Y^*[1]$                                                    | Simply largest minus smallest value                                                        |
+| Inter-quartile Range | IQR    | $Q_3 - Q_1$                                                          | Used in constructing box plots; covers the central 50% of the data                         |
+| Standard Deviation   | $S$    | $\sqrt{\frac{1}{n-1}\sum_{i=1}^n\left( Y_i - \overline{Y}\right)^2}$ | Most important dispersion measure; in the same units as the sample mean (the units of $Y$) |
+| Variance             | $S^2$  | $\frac{1}{n-1}\sum_{i=1}^n \left( Y_i - \overline{Y} \right)^2$      | Important statistical measure of dispersion; in squared units of $Y$                       |
+
+: Important statistics measuring dispersion (variability) of a variable.
+
+In the parlance of databases, the descriptive statistics in the previous tables are called **aggregates**.
+
+::: definition
+::: definition-header
+Definition: Aggregation
+:::
+
+::: definition-container
+Aggregation in a database management system (DBMS) is the process of combining records into meaningful quantities called aggregates.
+:::
+:::
+
+## Iris Data
+
+We are now calculating these summary statistics with Pandas, Polars, and with SQL for the famous Iris data set; a staple of data science and machine learning instruction. The data was used by R.A. Fisher, a pioneer and founder of modern statistics, in a 1936 paper "The use of multiple measurements in taxonomic problems." The data set contains fifty measurements of four flower characteristics, the length and width of sepals and petals for each of three iris species: *Iris setosa*, *Iris versicolor*, and *Iris virginica*. The petals are the large leaves on the flowers, sepals are the smaller leaves at the bottom of the flower. You will likely see the iris data again, it is used to teach visualization, regression, classification, clustering, etc.
+
+![Iris versicolor flowers](images/IrisVersicolor.jpeg){#fig-data-iris-versicolor .lightbox fig-align="center" width="80%"}
+
+We can load the data from our DuckDB database into Pandas and Polars DataFrames with the following statements:
+
+```{python}
+#| echo: false
+import warnings
+
+warnings.simplefilter(action='ignore', category=FutureWarning)
+
+```
+
+```{python}
+import pandas as pd
+import polars as pl
+import duckdb
+con = duckdb.connect(database="../ads5064.ddb")
+
+pd_df = con.sql('select * from iris').df()
+pd_dl = con.sql('select * from iris').pl()
+
+```
+
+A basic set of statistical measures is computed with the `describe()` methods of these libraries:
+
+```{python}
+pd_df.describe()
+```
+
+```{python}
+pd_dl.describe()
+```
+
+Pandas and Polars produce very similar output statistics for the numeric variables. Polars adds a row for the number of missing observations (`null_count`) and some basic summaries for the qualitative `species` variable. Apart from formatting, the results agree. The output column `std` represents the sample standard deviation, `25%`, `50%`, and `75%` are the first, second, and third quartile (the 25^th^, 50^th^, and 75^th^ percentiles), respectively.
+
+To produce this table of summary statistics with SQL requires a bit more work. To compute the statistics for a particular column, say, `sepal_length`,
+
+```{python}
+con.sql("select count(sepal_length) as count, \
+        mean(sepal_length) as mean,  \
+        stddev(sepal_length) as std,\
+        min(sepal_length) as min, \
+        quantile(sepal_length,.25) as q1, \
+        quantile(sepal_length,.50) as q2, \
+        quantile(sepal_length,.75) as q3, \
+        max(sepal_length) as max from iris")
+
+```
+
+And now we have to repeat this for other columns. In this case, SQL is much more verbose and clunky compared to the simple `describe()` call. However, the power of SQL becomes clear when you further refine the analysis. Suppose you want to compute the previous result separately for each species in the data set. This is easily done by adding a GROUP BY clause to the SQL statement (`group by species`) and listing `species` in the SELECT:
+
+```{python}
+con.sql("select species, count(sepal_length) as count, \
+        mean(sepal_length) as mean,  \
+        stddev(sepal_length) as std,\
+        min(sepal_length) as min, \
+        quantile(sepal_length,.25) as q1, \
+        quantile(sepal_length,.50) as q2, \
+        quantile(sepal_length,.75) as q3, \
+        max(sepal_length) as max from iris group by species")
+
+```
+
+Interpretation: The average sepal length increases from *I. setosa* (5.006) to *I. versicolor* (5.936) to *I. virginica* (6.588). The variability of the sepal length measurements also increased in that order. You can find *I. versicolor* plants with large sepal length for that species that exceed the sepal length of the *I. virginica* specimens at the lower end of the spectrum. That can be gleaned from the proximity of the sample means and the size of the standard deviation. It is confirmed by comparing max and min of the species.
+
+## Group-by Aggregation
+
+A group-by analysis computes analytic results separately for each group of observations. It is a powerful tool to gain insight on how data varies within a group and between groups. Groups are often defined by the unique values of qualitative variables, but they can also be constructed by, for example, binning real-valued variables. In the Iris example, the obvious grouping variable is `species`.
+
+Going from an ungrouped to a grouped analysis is easy with SQL—just add a GROUP BY clause. With Pandas and Polars we need to do a bit more work. Suppose we want to compute the min, max, mean, and standard deviation for the `petal_width` of *I. setosa* and *I. virginica*. This requires filtering records (excluding *I. versicolor*) and calculating summary statistics separately for the two remaining species.
+
+The syntax for aggregations with group-by is different in Pandas and Polars. With Pandas, you can use a statement such as this:
+
+```{python}
+pd_df[pd_df["species"] != "versicolor"][["species","sepal_width"]] \
+    .groupby("species").agg(['min','max','mean','std'])
+
+```
+
+The first set of brackets applies a filter (selects rows), the second set of brackets selects the `species` and `sepal_width columns`. The resulting DataFrame is then grouped by `species` and the groups are aggregated (summarized); four statistics are requested in the aggregation.
+
+### Eager and lazy evaluation
+
+The execution model in Pandas is called an **eager** evaluation. Polars can support eager and **lazy** evaluation.
+
+::: definition
+::: definition-header
+Definition: Eager and Lazy Evaluation
+:::
+
+::: definition-container
+In an **eager** evaluation model, operations are executed as soon as they are encountered. In a **lazy** evaluation model, the execution of operations is delayed until their results are needed. For example, lazy evaluation of a file read delays the retrieval of data until records need to be processed.
+:::
+:::
+
+Lazy evaluation has many advantages:
+
+-   The overall query can be optimized.
+
+-   Filters (called predicates in data processing parlance) can be pushed down as soon as possible, eliminating loading data into memory for subsequent steps.
+
+-   Column selections (called projections) can also be done early to reduce the amount of data passed to the following step.
+
+-   You can write a lazily evaluated query and analyze it prior to execution; restructuring the query can lead to further optimization.
+
+You can see the full list of lazy query optimization in Polars [here](https://pola-rs.github.io/polars-book/user-guide/lazy/optimizations/).
+
+The Polars syntax to execute the group-by aggregation eagerly is:
+
+```{python}
+pd_dl.filter(pl.col("species") != "versicolor").group_by("species").agg(
+    pl.col("sepal_width").min().alias('min'),
+    pl.col("sepal_width").max().alias('max'),
+    pl.col("sepal_width").mean().alias('mean'),
+    pl.col("sepal_width").std().alias('std')
+    )
+
+```
+
+The Polars syntax should be familiar to users of the dplyr package in R. Operations on the DataFrame are piped from step to step. `.filter()` selects rows, `.group_by()` groups the filtered data, `.agg()` aggregates the resulting rows. Since variable `sepal_width` is used in multiple aggregates, we are adding an `.alias()` to give the calculated statistic a unique name in the output.
+
+The following statements perform lazy evaluation for the same query. The result of the operation is what Polars calls a LazyFrame, rather than a DataFrame. A LazyFrame is a promise on computation. The promise is fulfilled—the query is executed—with `q.collect()`. Notice that we call the `.lazy()` method on the DataFrame `pd_dl`. Because of this, the object `q` is a LazyFrame. If we had not specified `.lazy()`, `q` would be a DataFrame.
+
+```{python}
+q = (
+    pd_dl.lazy()
+    .filter(pl.col("species") != "versicolor")
+    .group_by("species")
+    .agg(
+        pl.col("sepal_width").min().alias('min'),
+        pl.col("sepal_width").min().alias('max'),
+        pl.col("sepal_width").mean().alias('mean'),
+        pl.col("sepal_width").min().alias('std'),
+ 
+        )
+)
+
+q.collect()
+
+```
+
+The results of eager and lazy evaluation are identical. The performance and memory requirements can be different, especially for large data sets. Fortunately, the eager API in Polars calls the lazy API under the covers in many cases and collects the results immediately.
+
+You can see the optimized query with
+
+```{python}
+q.explain(optimized=True)
+```
+
+### Streaming execution
+
+Another advantage of lazy evaluation in Polars is the support for streaming execution—where possible. Rather than loading the selected rows and columns into memory, Polars processes the data in batches allowing you to process large data volumes that exceed the memory capacity. To invoke streaming on a LazyFrame, simply add `streaming=True` to the collection:
+
+```{python}
+q.collect(streaming=True)
+```
+
+Streaming capabilities in Polars are still under development and not supported for all operations. However, the operations for which streaming is supported include many of the important data manipulations, including group-by aggregation:
+
+-   filter, select,
+
+-   slice, head, tail
+
+-   with_columns
+
+-   group_by
+
+-   join
+
+-   sort
+
+-   scan_csv, scan_parquet
+
+In the following example we are calculating the sample mean and standard deviation for three variables (`num_7`, `num_8`, `num_9`) grouped by variable `cat_1` for a data set with 30 million rows and 18 columns, stored in a Parquet file.
+
+```{python}
+nums = ['num_7','num_8', 'num_9']
+
+q3 = (
+    pl.scan_parquet('../datasets/Parquet/train.parquet')
+    .group_by('cat_1')
+    .agg(
+        pl.col(nums).mean().suffix('_mean'),
+        pl.col(nums).std().suffix('_std'),
+    )
+)
+q3.collect(streaming=True)
+
+```
+
+The `scan_parquet()` function reads lazily from the file `train.parquet`, `.group_by()` and `.agg()` functions request the statistics for a list of columns. The `.suffix()` method adds a string to the variable names to distinguish the results in the output.
+
+The streaming Polars code executes on my machine in 0.3 seconds. The Pandas equivalent produces identical results in about 4 seconds—an order of magnitude slower with much higher memory consumption.
+
+You can use lazy execution with data stored in other formats. Suppose we want to read data from a DuckDB database and analyze it lazily with minibatch streaming. The following statements do exactly that for the Iris data stored in DuckDB
+
+```{python}
+qduck = (
+    con.sql('select * from iris').pl().lazy()
+    .select(["species", "sepal_width"])
+    .filter(pl.col("species") != "versicolor")
+    .group_by("species")
+    .agg(
+        pl.col("sepal_width").min().alias('min'),
+        pl.col("sepal_width").min().alias('max'),
+        pl.col("sepal_width").mean().alias('mean'),
+        pl.col("sepal_width").min().alias('std'),
+ 
+        )
+)
+qduck.collect(streaming=True)
+
+```

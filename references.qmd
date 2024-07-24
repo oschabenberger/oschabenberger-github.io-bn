@@ -1,0 +1,275 @@
+# References {.unnumbered}
+
+::: {#refs}
+@article{AngwinProPublica_2016,
+title={Machine Bias—Risk Assessment in Criminal Sentencing},
+url={https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing},
+author={Julia Angwin and Jeff Larson and Surya Mattu and Lauren Kirchner},
+journal={ProPublica}, 
+year={2016},
+month={May}
+}
+
+@article{ASAEthics,
+title={ASA Ethical Guidelines for Statistical Practice},
+url={https://www.amstat.org/your-career/ethical-guidelines-for-statistical-practice},
+author={American Statistical Association},
+year={2022}
+}
+
+@artilce{Borne_2021_profiling,
+title={Data Profiling--Having that First Data with your Data},
+author={Borne, Kirk},
+journal={Medium},
+year={2021},
+issue-date={September 12, 2021},
+url={https://medium.com/codex/data-profiling-having-that-first-date-with-your-data-2e05de50fca7}
+}
+
+
+@article{BoxCox1964,
+ ISSN = {00359246},
+ URL = {http://www.jstor.org/stable/2984418},
+ abstract = {In the analysis of data it is often assumed that observations y1, y2, ..., yn are independently normally distributed with constant variance and with expectations specified by a model linear in a set of parameters θ. In this paper we make the less restrictive assumption that such a normal, homoscedastic, linear model is appropriate after some suitable transformation has been applied to the y's. Inferences about the transformation and about the parameters of the linear model are made by computing the likelihood function and the relevant posterior distribution. The contributions of normality, homoscedasticity and additivity to the transformation are separated. The relation of the present methods to earlier procedures for finding transformations is discussed. The methods are illustrated with examples.},
+ author = {G. E. P. Box and D. R. Cox},
+ journal = {Journal of the Royal Statistical Society. Series B (Methodological)},
+ number = {2},
+ pages = {211--252},
+ publisher = {[Royal Statistical Society, Wiley]},
+ title = {An Analysis of Transformations},
+ urldate = {2024-06-05},
+ volume = {26},
+ year = {1964}
+}
+
+@article{BreimanTwoCultures,
+title={Statistical Modeling: The Two Cultures},
+author={Leo Breiman},
+journal={Statistical Science},
+year={2001},
+volume={16},
+number={3},
+pages={199--231}
+}
+
+
+@article{Cleveland2001,
+ ISSN = {03067734, 17515823},
+ URL = {http://www.jstor.org/stable/1403527},
+ author = {William S. Cleveland},
+ journal = {International Statistical Review / Revue Internationale de Statistique},
+ number = {1},
+ pages = {21--26},
+ publisher = {[Wiley, International Statistical Institute (ISI)]},
+ title = {Data Science: An Action Plan for Expanding the Technical Areas of the Field of Statistics},
+ volume = {69},
+ year = {2001}
+}
+
+@article{Cressie2023,
+title={Robodebt not only broke the law of the land -- it also broke laws of mathematics},
+author={Cressie, N.},
+journal={The Conversation},
+year={2023},
+issue=date={March 16, 2023},
+url={https://theconversation.com/robodebt-not-only-broke-the-laws-of-the-land-it-also-broke-laws-of-mathematics-201299}
+}
+
+@article{DavenportPatil_2012,
+title={Data Scientist: The Sexiest Job of the 21st Century?},
+author={Davenport, Thomas H. and Patil, D.J.},
+journal={Harvard Business Review},
+year={2012}.
+month={October},
+url={https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century}
+}
+
+@article{DavenportPatil_2022,
+title={Is Data Scientist Still the Sexiest Job of the 21st Century?},
+author={Davenport, Thomas H. and Patil, D.J.},
+journal={Harvard Business Review},
+year={2022}.
+month={July},
+issue_date = {July 15, 2022},
+url={https://hbr.org/2022/07/is-data-scientist-still-the-sexiest-job-of-the-21st-century},
+}
+
+@article{GelmanUnwin2013,
+title={Infovis and Statistical Graphics: Different Goals, Different Looks},
+url={https://www.tandfonline.com/doi/full/10.1080/10618600.2012.761137}, 
+author={Gelman, A., and Unwin, A.},
+journal={Journal of Computational and Graphical Statistics}, 
+volume={22}, 
+year={2013},
+issue={1},
+pages={2--28}
+}
+
+@book{Huff_1954,
+title={How to Lie with Statistics},
+author={Huff, Darrell},
+year={1954},
+publisher={W.W. Norton \& Company, New York}
+}
+
+@article{LarsonProPublica_2016,
+title={How We Analyzed the COMPAS Recidivism Algorithm},
+url={https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm},
+author={Jeff Larson and Surya Mattu and Lauren Kirchner and Julia Angwin},
+journal={ProPublica},
+year={2016},
+month={May}
+}
+
+@book{Loukides_etal_2018,
+title={Ethics and Data Science},
+url={https://resources.oreilly.com/examples/0636920203964/},
+author={Loukides, Mike and Mason, Hilary and Patil, D.J.},
+publisher={O’Reilly Media},
+year={2018}
+}
+
+@article{RSS_2019,
+title={A Guide for Ethical Data Science},
+author={Royal Statistical Society and Institute and Faculty of Actuaries},
+year={2019},
+publisher={Royal Statistical Society and Institute and Faculty of Actuaries},
+url={https://rss.org.uk/RSS/media/News-and-publications/Publications/Reports and guides/A-Guide-for-Ethical-Data-Science-Final-Oct-2019.pdf}
+}
+
+@article{SureshGuttag,
+title={A Framework for Understanding Sources of Harm throughout the Machine Learning Life Cycle},
+author={Suresh, H. and Guttag, J.},
+url={https://arxiv.org/pdf/1901.10002.pdf},
+publisher={arXiv:1901.10002},
+year={2021}
+}
+
+@article{TrewinCressie_2023,
+title={The Robodebt tragedy}, 
+author={Trewin, D. and Fisher, N. and Cressie, N.},
+journal={Significance}, 
+volume={20},
+number={6},
+pages={18--21},
+month={December},
+year={2023},
+url={https://academic.oup.com/jrssig/article/20/6/18/7457250}
+}
+
+@book{Tufte_1983,
+title={The Visual Display of Quantitative Information}, 
+author={Tufte, E.},
+year={1983},
+publisher={Graphics Press}
+}
+
+@book{Tufte_2001,
+title={The Visual Display of Quantitative Information, 2nd ed.}, 
+author={Tufte, E.},
+year={2001},
+publisher={Graphics Press}
+}
+
+@article{TukeyDA,
+title={The Future of Data Analysis},
+author={Tukey, John W.},
+journal={The Annals of Mathematical Statistics},
+year={1962},
+volume={33},
+number={1},
+pages={1--67},
+publisher={Institute of Mathematical Statistics}
+}
+
+@book{TukeyEDA,
+title={Exploratory Data Analysis},
+author={Tukey, John W.},
+year={1977},
+publisher={Pearson},
+isbn={9780201076165}
+}
+
+:::
+
+## From the project part
+
+[Data Scientist: The Sexiest Job of the 21^st^ Century](https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century) by Thomas H. Davenport and DJ Patil, Harvard Business Review, 2012
+
+[Big Data is Dead](https://motherduck.com/blog/big-data-is-dead/) by Jordan Tigani, 2023
+
+[Is Data Scientist Still the Sexiest Job of the 21^st^ Century](https://hbr.org/2022/07/is-data-scientist-still-the-sexiest-job-of-the-21st-century) by Thomas H. Davenport and DJ Patil, Harvard Business Review, July 2022
+
+[A Very Short History Of Data Science](https://www.forbes.com/sites/gilpress/2013/05/28/a-very-short-history-of-data-science/?sh=5cb7998f55cf) by Gil Press, Forbes, 2013
+
+[The History of Data Science and Pioneers You Should Know](https://onlinestemprograms.wpi.edu/blog/history-data-science-and-pioneers-you-should-know)
+
+[The Future of Data Analysis](https://projecteuclid.org/journals/annals-of-mathematical-statistics/volume-33/issue-1/The-Future-of-Data-Analysis/10.1214/aoms/1177704711.full), John W. Tukey, 1962
+
+[Science and Statistics](http://www-sop.inria.fr/members/Ian.Jermyn/philosophy/writings/Boxonmaths.pdf), George, E.P. Box, Journal of the American Statistical Association, 1976, 71:3
+
+[Think like a Data Scientist](https://learning.oreilly.com/library/view/think-like-a/9781633430273/), Brian Godsey, Manning Publications, 2017
+
+[Data Science 101: Life Cycle of a Data Science Project](https://towardsdatascience.com/data-science-101-life-cycle-of-a-data-science-project-86cbc4a2f7f0), Abraham Musa, Medium, 2021
+
+[Solving the Last Mile Problem for Data Science Project Success](https://www.forbes.com/sites/forbestechcouncil/2019/07/23/solving-the-last-mile-problem-for-data-science-project-success/?sh=255737625493), Bill Waid, Forbes, 2019
+
+[The Ultimate Guide to Deploying Machine Learning Models](https://mlinproduction.com/deploying-machine-learning-models/), Luigi Patruno, 2020
+
+[Meet Airbnb’s official party pooper, who reduced partying by 5% in two years](https://www-cnbc-com.cdn.ampproject.org/c/s/www.cnbc.com/amp/2023/09/19/airbnb-party-preventer-naba-banerjee-reduced-parties-55percent-in-two-years.html), CNBC, Sept. 19, 2023
+
+[Lectures and conferences on mathematical statistics and probability](http://cda.psych.uiuc.edu/Wallace/neyman_book.pdf). Jerzy Neyman, 1952
+
+## From the data part
+
+
+[Junk Charts Trifecta Checkup: The Definite Guide](https://junkcharts.typepad.com/junk_charts/junk-charts-trifecta-checkup-the-definitive-guide.html), by Kaiser Fung.
+
+[Fundamentals of Data Visualization](https://clauswilke.com/dataviz/), by Claus O. Wilke, O’Reilly Media, 2019.
+
+
+[The science behind data visualization](https://www.creativebloq.com/design/science-behind-data-visualisation-8135496), by Graham Odds on Creative Blog, August 8, 2013
+
+[Choosing a good chart](https://extremepresentation.typepad.com/blog/2006/09/choosing_a_good.html), by Andrew Abela, blog, The Extreme Presentation Method, Sept. 15, 2020.
+
+The Grammar of Graphics, by Leland Wilkinson, Springer Verlag, 2005
+
+[Designing Against Bias in Machine Learning and AI](https://magazine.amstat.org/blog/2023/09/01/mlbias/) by David Corliss, AMSTAT News, September 2023
+
+[ASA Ethical Guidelines for Statistical Practice](https://www.amstat.org/your-career/ethical-guidelines-for-statistical-practice), American Statistical Association
+
+[Ethics and Data Science](https://resources.oreilly.com/examples/0636920203964/) by Mike Loukides, Hilary Mason, and DJ Patil, O’Reilly Media, 2018.
+
+[A Guide for Ethical Data Science](https://rss.org.uk/RSS/media/News-and-publications/Publications/Reports%20and%20guides/A-Guide-for-Ethical-Data-Science-Final-Oct-2019.pdf), Royal Statistical Society and Institute and Faculty of Actuaries
+
+
+[Big data ethics and 10 controversial data science experiments](https://datasciencedojo.com/blog/big-data-ethics-10-experiments/), by Sabrina Dominquez, Data Science Dojo, May 2018
+
+[Strava’s heatmap was a ‘clear risk’ to security, UK military warned](https://www.wired.co.uk/article/strava-heat-maps-military-app-uk-warning-security), by Matt Burgess, Wired Magazine, April 2018
+
+
+The Robodebt tragedy, by Trewin, D., Fisher, N., and Cressie, N. Significance, December 2023
+
+[Robodebt not only broke the laws of the land—it also broke the laws of mathematics](https://theconversation.com/robodebt-not-only-broke-the-laws-of-the-land-it-also-broke-laws-of-mathematics-201299), by Noel Cressie, *The Conversation*, March 16, 2023
+
+[University lecturer slams ‘sexist’ Google Translate as gender neutral languages are translated into English](https://www.dailymail.co.uk/news/article-9396937/University-lecturer-slams-sexist-Google-Translate.html), Daily Mail.com, March 24, 2021
+
+[Regression to the mean: what it is and how to deal with it](https://academic.oup.com/ije/article/34/1/215/638499), by Barnett, A.G., van der Pols, J.C., and Dobson, A.J., International Journal of Epidemiology, 34(1), 2005.
+
+[An Introduction to Statistical Learning](https://www.statlearning.com/), 2^nd^ ed., by James, G., Witten, D., Hastie, T., and Tibshirani, R., Springer Verlag, 2023
+
+[Lectures and conferences on mathematical statistics and probability](http://cda.psych.uiuc.edu/Wallace/neyman_book.pdf). Neyman, Jerzy, Washington, Graduate School, U.S. Dept. of Agriculture, 1952
+
+The Book of Why, Judea Pearl and Dana MacKenzie, Basic Books, New York, 2018
+
+Causality, 2^nd^ ed., Judea Pearl, Cambridge University Press, 2009
+
+Matrices with Applications in Statistics, 2^nd^ ed., Franklin A. Graybill, Wadsworth International Group, Belmont, CA., 1983
+
+Theory and Application of the Linear Model, Franklin A. Graybill, Duxbury Press, North Scituate, Massachusetts, 1976
+
+Adjustments of an inverse matrix corresponding to changes in the elements of a given column or a given row of the original matrix. Sherman, J., and Morrison, W.J. Ann. Math. Stat., 20, 621, 1949
+
+Inverting modified matrices. Woodbury, M., Memorandum No. 42, Statistical Research Group, Princeton University, 1950.
+
+Mathematical Statistics and Data Analysis, 2^nd^ ed. John A. Rice, Duxbury Press, Belmont, CA, 1995
