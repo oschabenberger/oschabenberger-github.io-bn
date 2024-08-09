@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.552">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Foundations of Data Science - 18&nbsp; Coding Best Practices</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../integ/tools.html" rel="next">
+<link href="../ethics/privacy.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../integ/coding_practices.html">Part V. Integration of Data Science Solutions</a></li><li class="breadcrumb-item"><a href="../integ/coding_practices.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Foundations of Data Science</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Part I. Data Science and Data Science Projects</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">History and Evolution of Data Science</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/lifecycle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Data Science Project Lifecycle</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Part II. Data Preparation and Understanding</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/sources_and_files.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Sources and File Formats</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/data_access.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Quality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/summarization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Summarization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Visualization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/sqlbasics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">SQL Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Integration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Part III. Statistical Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/general.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">General Topics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/mathstat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/linalg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/featproc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Feature and Target Processing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Part IV. Applied Ethics in Data Science</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/bias_harm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Part V. Integration of Data Science Solutions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../integ/coding_practices.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../integ/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-repro-vc" id="toc-sec-repro-vc" class="nav-link active" data-scroll-target="#sec-repro-vc"><span class="header-section-number">18.1</span> Version Control</a>
+  <ul>
+  <li><a href="#a-crash-course-in-git" id="toc-a-crash-course-in-git" class="nav-link" data-scroll-target="#a-crash-course-in-git">A Crash Course in Git</a>
+  <ul class="collapse">
+  <li><a href="#installing-git" id="toc-installing-git" class="nav-link" data-scroll-target="#installing-git">Installing Git</a></li>
+  <li><a href="#basic-configuration" id="toc-basic-configuration" class="nav-link" data-scroll-target="#basic-configuration">Basic configuration</a></li>
+  <li><a href="#repositories" id="toc-repositories" class="nav-link" data-scroll-target="#repositories">Repositories</a></li>
+  <li><a href="#stages-of-a-file" id="toc-stages-of-a-file" class="nav-link" data-scroll-target="#stages-of-a-file">Stages of a file</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#structure-and-organization" id="toc-structure-and-organization" class="nav-link" data-scroll-target="#structure-and-organization"><span class="header-section-number">18.2</span> Structure and Organization</a>
+  <ul>
+  <li><a href="#naming" id="toc-naming" class="nav-link" data-scroll-target="#naming">Naming</a></li>
+  <li><a href="#comments" id="toc-comments" class="nav-link" data-scroll-target="#comments">Comments</a></li>
+  <li><a href="#whitespace" id="toc-whitespace" class="nav-link" data-scroll-target="#whitespace">Whitespace</a></li>
+  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions">Functions</a>
+  <ul class="collapse">
+  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r"><code>R</code></a></li>
+  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python">Python</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../integ/coding_practices.html">Part V. Integration of Data Science Solutions</a></li><li class="breadcrumb-item"><a href="../integ/coding_practices.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-coding-best-practice" class="quarto-section-identifier"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Writing code, maintaining code, reviewing code, and fixing code are essential elements of what data professionals do.</p>
+<p>Understanding and following best practices is important. 80% of jobs in data science are outside of academic environments. Employers have standard operating procedures (SOPs) for software developers that will apply also to statistical programming and data science projects. For example, many companies use code reviews by fellow developers to evaluate new or modified code before it can be committed to a repository. The feedback from code reviews flows into performance evaluations and has impact on your career. Not following the coding guidelines and best practices of an organization is a great way of shortening tenure. Software projects are collaborative projects and someone else will need to work with your code. How easy is it to understand? Is it well documented? Is it properly structured and modular? How easy is it to debug?</p>
+<p>This chapter covers some elementary good coding practices for you to consider.</p>
+<section id="sec-repro-vc" class="level2" data-number="18.1">
+<h2 data-number="18.1" class="anchored" data-anchor-id="sec-repro-vc"><span class="header-section-number">18.1</span> Version Control</h2>
+<p>Version control refers to the management and tracking of changes in digital content; mostly files and mostly code. Any digital asset can be placed under version control. Even if you are working (mostly) by yourself, using a version control system is important. Employers consider it a non-negotiable skill and you do not want to stand out as the applicant who does not know how to use Git. The benefits of version control systems are many, even the solo programmer would be remiss not to use it.</p>
+<p>What does a version control system like Git do for you:</p>
+<ul>
+<li><p>It keeps track of files and their changes over time.</p></li>
+<li><p>It saves changes to files without duplicating the contents, saving space in the process.</p></li>
+<li><p>It groups content in logical units (branches) that are managed together. For example, all files associated with a particular build of a software release are kept in a branch.</p></li>
+<li><p>It is a time machine, allowing you to reconstruct a previous state of the project and to see the complete history of the files.</p></li>
+<li><p>It is a backup machine, making sure you have access to older versions of files and that changes do not get lost.</p></li>
+<li><p>It allows you to perform comparisons between versions of files and to reconcile their differences.</p></li>
+<li><p>It allows you to safely experiment with code without affecting code others depend on.</p></li>
+<li><p>It allows you to see which parts of a project are worked on most/least frequently.</p></li>
+<li><p>It is a collaborative tool, that reconciles changes to files made by multiple developers. Version control systems allow you to submit changes to someone else’s code.</p></li>
+<li><p>By supporting modern continuous integration/continuous deployment (CI/CD) principles, a version control system can automate the process of testing and deploying software.</p></li>
+</ul>
+<p>The list goes on and on. The main point is that these capabilities and benefits are for everyone, whether you work on a project alone or as a team member.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Oh how I wish there were easily accessible version control systems when I did my Ph.D.&nbsp;work. It involved a lot of programming algorithms and the analysis of real data sets. Developing the code took months to years and went through many iterations. I made frequent backups of the relevant files using really cool storage technology using special 1GB-size cartridges and a special reader. There were disks labeled “January 1993”, “March 1993”, “December 1993”, “Final”, “Final-V2”, and so forth. The storage technology was discontinued by the manufacturer and the cartridges are useless today. I am not able to access the contents even if the bits have not rotted on the media by now.</p>
+<p>To study how the algorithm I needed to write for the dissertation evolved over time, I would have to go through all the backups and compare files one by one. A version control system will show me the entire history of changes in one fell swoop.</p>
+<p>Using a cloud-based version control system would have avoided that headache. Alas, that did not exist back then.</p>
+</div>
+</div>
+<p>There are many version control systems, Git, Perforce, Beanstalk, Mercurial, Bitbucket, Apache Subversion, AWS CodeCommit, CVS (Concurrent Versions System, not the drugstore chain), and others.</p>
+<p>The most important system today is Git. GitHub and GitLab are built on top of Git. What is the relationship? Git is a local version control system, it runs entirely on the machine where it is installed and manages file changes there. GitHub and GitLab are cloud-based systems that allow you to work with remote repositories. In addition to supporting Git remotely, GitHub adds many cool features to increase developer productivity. The files for the pages you are reading are managed with Git and stored in a remote repository on GitHub (the URL is <a href="https://github.com/oschabenberger/oschabenberger-github.io-bn">https://github.com/oschabenberger/oschabenberger-github.io-bn</a>). GitHub also hosts the web site for the text through <a href="https://oschabenberger.github.io/oschabenberger-github.io-bn/">GitHub Pages</a>. GitHub Actions can be set up so that the web site (the book) automatically rebuilds if any source files changes. And all of that comes with the free capabilities of GitHub.</p>
+<section id="a-crash-course-in-git" class="level3">
+<h3 class="anchored" data-anchor-id="a-crash-course-in-git">A Crash Course in Git</h3>
+<p>Git is installed on your machine, it is a <strong>local</strong> tool for versioning files. You can perform all major Git operations (clone, init, add, mv, restore, rm, diff, grep, log, branch, commit merge, rebase, etc.) without an internet connection. The collaborative aspect of version control comes into play when you use a Git service provider such as GitHub or GitLab. Besides making Git a tool for multi-user applications, using GitHub or GitLab also gives you the ability to work with <strong>remote</strong> repositories; you can push your local changes to a server in the cloud, making it accessible to others and making it independent of the local workstation. Just because you push a repository to GitHub does not necessarily give everyone on the internet access to it—you manage whether a repository is private or public.</p>
+<section id="installing-git" class="level4">
+<h4 class="anchored" data-anchor-id="installing-git">Installing Git</h4>
+<p>There are several ways to get Git on your machine, see <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">here</a>. On MacOS, installing the XCode Command Line tools will drop git on the machine. To see if you already have Git, open a terminal and check:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>➜ which git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>/usr/bin/git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The executable is installed in <code>/usr/bin/git</code> on my MacBook.</p>
+</section>
+<section id="basic-configuration" class="level4">
+<h4 class="anchored" data-anchor-id="basic-configuration">Basic configuration</h4>
+<p>There are a million of configuration options for Git and its commands. You can see the configuration with</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>➜ git config --list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To connect to GitHub later, add your username and email address to the configuration:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>➜ git config --global user.name "First Last"</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>➜ git config --global user.email "first.last@example.com"</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can have project-specific configurations, simply remove the <code>--global</code> option and issue the <code>git config</code> command from the project (repository) directory.</p>
+</section>
+<section id="repositories" class="level4">
+<h4 class="anchored" data-anchor-id="repositories">Repositories</h4>
+<p>A repository is a collection of folders and files. Repositories are either cloned from an existing repository or initialized from scratch. To initialize a repository, change into the root directory of the project and issue the <code>git init</code> command:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>➜ cd "STAT 5014"</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>➜ STAT 5014 pwd</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>/Users/olivers/Documents/Teaching/Data Science/STAT 5014</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>➜ STAT 5014 git init</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>Initialized empty Git repository in /Users/olivers/Documents/Teaching/Data Science/STAT 5014/.git/</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>➜ STAT 5014 git:(main)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To get help on git or any of the git commands, simply add <code>--help</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>➜ git --help</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>➜ git status --help</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>➜ git add --help</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="stages-of-a-file" class="level4">
+<h4 class="anchored" data-anchor-id="stages-of-a-file">Stages of a file</h4>
+<p>A file in a Git repository goes through multiple stages (<a href="#fig-git-file" class="quarto-xref">Figure&nbsp;<span>18.1</span></a>). At first, the file is <strong>unmodified</strong> and <strong>untracked</strong>. A file that was changed in any way is in a <strong>modified</strong> state. That does not automatically update the repository. In order to commit the change, the file first needs to be <strong>staged</strong> with the <code>git add</code> command.</p>
+<p>When you issue a <code>git add</code> on a new file or directory, it is being <strong>tracked</strong>. When you clone a repository, all files in your working directory will be tracked and unmodified.</p>
+<div id="fig-git-file" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-git-file-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/git_file_lifecycle.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1"><img src="images/git_file_lifecycle.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-git-file-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18.1: The lifecycle of a file in Git. <a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository">Source</a>
+</figcaption>
+</figure>
+</div>
+<p>A file that is staged will appear under the “Changes to be committed” heading in the <code>git status</code> output.</p>
+<p>Once you commit the file it goes back into an unmodified and tracked state.</p>
+<section id="tracking-files" class="level5">
+<h5 class="anchored" data-anchor-id="tracking-files">Tracking files</h5>
+<p>To track files in a repository, you need to explicitly add them to the file tree with <code>git add</code>. This does not commit the file or push the file into a branch or a remote repository, it simply informs Git which files you care about.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>➜ git add LeastSquares.R</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>➜ git add *.Rmd</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>➜ git add docs/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The previous commands added <code>LeastSquares.R</code>, all <code>.Rmd</code> files in the current directory, and all files in the <code>docs</code> subfolder to the Git tree. You can see the state of this tree any time with</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>➜ git status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>git status</code> shows you all files that have changed as well as files that are not tracked by Git and are <strong>not ignored</strong>. For example, after making some changes to the <code>quarto.yml</code> and to <code>reproducibility.qmd</code> files since the last commit, the status of the repository for this material looks as follows:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>➜  StatProgramming git:(main) ✗ git status</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>On branch main</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>Your branch is up to date with 'origin/main'.</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>Changes not staged for commit:</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  (use "git add &lt;file&gt;..." to update what will be committed)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  (use "git restore &lt;file&gt;..." to discard changes in working directory)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    modified:   _quarto.yml</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    modified:   docs/reproducibility.html</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    modified:   docs/search.json</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    modified:   reproducibility.qmd</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>Untracked files:</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  (use "git add &lt;file&gt;..." to include in what will be committed)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    .DS_Store</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    .gitignore</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    .nojekyll</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    .python-version</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    StatProgramming.Rproj</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    _book/</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    ads.ddb</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    customstyle.scss</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    data/</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    debug_ada.R</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    debug_ada.Rmd</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    images/</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    latexmacros.tex</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    sp_references.bib</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>no changes added to commit (use "git add" and/or "git commit -a")</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Two more files have been noted by Git as modified, <code>docs/reproducibility.html</code> and <code>docs/search.json</code>. These files are generated by Quarto when the content of the modified files is being rendered. They will be added to the next commit to make sure the website is up to date and not just the source (<code>.qmd</code>) files.</p>
+<p><code>git add</code> can be a bit confusing because it appears to perform multiple functions: to track a new file and to stage a file for commit. If you think of <code>git add</code> as adding precisely the content to the next commit, then the multiple functions roll into a single one.</p>
+<hr>
+<p>An ignored file is one for which you explicitly tell Git not to worry about. You list those files in a <code>.gitignore</code> file. (You can have multiple <code>.gitignore</code> files in the directory hierarchy, refer to the <a href="https://git-scm.com/docs">Git documentation</a> on how they interact. The typical scenario is a <code>.gitignore</code> file in the root of the repository.)</p>
+<p>The contents of the following <code>.gitignore</code> file state that all <code>.html</code> files should be ignored, except for <code>foo.html</code>. Also, <code>StatLearning.Rproj</code> will be ignored.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>➜ cat .gitignore</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>*.html</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>!foo.html</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>StatLearning.Rproj</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Files that are listed in <code>.gitignore</code> are not added to the repository and persist when a repository is cloned. However, if a file is already being tracked, then adding it to <code>.gitignore</code> does not untrack the file. To stop tracking a file that is currently tracked, use</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>git rm --cached filename </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>to remove the file from the tree. The file name can then be added to the .gitignore file to stop the file from being reintroduced in later commits.</p>
+<p>Files that you want to exclude from tracking are often binary files that are the result of a build or compile, and large files. Also, if you are pushing to a public remote repository, make sure that no files containing sensitive information are added.</p>
+</section>
+<section id="committing-changes" class="level5">
+<h5 class="anchored" data-anchor-id="committing-changes">Committing changes</h5>
+<p>Once you track a file, Git keeps track of the changes to the file. Those changes are not reflected in the repository until you commit them with the <code>commit</code> command. A file change will not be committed to the repository unless it has been staged. <code>git add</code> will do that for you.</p>
+<p>It is a good practice to add a descriptive message to the <code>commit</code> command that explains what changes are committed to the repository:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>➜ git commit -m "Early stopping criterion for GLMM algorithm"</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you do not specify a commit message, Git will open an editor in which you must enter a message.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If Git opens an editor for you and this is the first time you find yourself in vi or vim, you might struggle with those editors. To set a different default editor on MacOS or Linux, set the EDITOR environment variable.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>➜ echo $EDITOR</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>tells you whether a default text editor has been set.</p>
+</div>
+</div>
+<p>Since only files that have been added with <code>git add</code> are committed, you can ask Git to notice the changes to the files whose contents are tracked in your working tree and do corresponding <code>git add</code>s for you by adding the <code>-a</code> option to the commit:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>➜ git commit -a -m "Early stopping criterion for GLMM algorithm"</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>What happens when you modify a file after you ran <code>git add</code> but before the net commit? The file will appear in <code>git status</code> as both staged and ready to be committed <strong>and</strong> as unstaged. The reason is because Git is tracking two versions of the file now: the state it was in when you first ran <code>git add</code> and the state it is in now, which includes the modifications since the last <code>git add</code>. In order to stage the most recent changes to the file, simply run <code>git add</code> on the file again.</p>
+</section>
+<section id="remote-repositories" class="level5">
+<h5 class="anchored" data-anchor-id="remote-repositories">Remote repositories</h5>
+<p>The full power of Git comes to light when you combine the local work in Git repositories with a cloud-based version control service such as GitHub or GitLab. To use remote repositories with Git, first set up an account, say with <a href="https://www.github.com">GitHub</a>.</p>
+<p>The Git commands to interact with a remote repository are</p>
+<ul>
+<li><p><code>git pull</code>: Incorporates changes from a remote repository into the current branch. If the current branch is behind the remote, then by default it will fast-forward the current branch to match the remote. The result is a copy of changes into your working directory.</p></li>
+<li><p><code>git fetch</code>: Copies changes from a remote repository into the local Git repository. The difference between <code>fetch</code> and <code>pull</code> is that the latter also copies the changes into your working directory, not just into the local repo.</p></li>
+<li><p><code>git push</code>: Updates remote references using local references, while sending necessary objects.</p></li>
+<li><p><code>git remote</code>: Manage the set of remote repositories whose branches you track.</p></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you have used other version control systems, you might have come across the terms <em>pushing</em> and <em>pulling</em> files. In CVS, for example, to pull a file means adding it to your local checkout of a branch, to push a file means adding it back to the central repository.</p>
+<p>With Git, push and pull command only come into play when you work with remote repositories. As long as everything remains on your machine, you do not need those commands. However, most repositories these days are remote, so the initial interaction with a repository is often a <code>clone</code>, <code>pull</code>, or <code>fetch</code>.</p>
+</div>
+</div>
+<p>Start by creating a new repository on GitHub by clicking on the <em>New</em> button. You have to decide on a name for the repository and whether it is public or private. Once you created a remote repository, GitHub gives you alternative ways of addressing it, using https, ssh, etc.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Depending on which type of reference you use on the command line, you also need different ways of authenticating the transaction. GitHub removed passwords as an authentication method for command-line operations some time ago. If you use SSH-style references you authenticate using the passphrase of an SSH key registered with GitHub. If you use https-style references you authenticate with an access token you set up in GitHub.</p>
+</div>
+</div>
+<p>Back on your local machine you manage the association between the local repository and the remote repository with the <code>git remote</code> commands. For example,</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>➜ git remote add origin git@github.com:oschabenberger/oschabenberger-github.io-bn.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>associates the remote repository described by the ssh syntax <code>git@github.com:oschabenberger/oschabenberger-github.io-bn.git</code> with the local repository. Using html syntax, the same command looks like this:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>➜ git remote add origin https://github.com/oschabenberger/oschabenberger-github.io-bn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>GitHub provides these strings to you when you create a repository.</p>
+<p>To update the remote repository with the contents of the local repository, issue the <code>git push</code> command:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>➜ git push</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+</section>
+</section>
+<section id="structure-and-organization" class="level2" data-number="18.2">
+<h2 data-number="18.2" class="anchored" data-anchor-id="structure-and-organization"><span class="header-section-number">18.2</span> Structure and Organization</h2>
+<section id="naming" class="level3">
+<h3 class="anchored" data-anchor-id="naming">Naming</h3>
+<ul>
+<li><p>Choose names for variables and functions that are easy to understand. Variable and function names should be self explanatory. Most modern programming languages and tools no longer limit the length of function or variable names, there is no excuse for using <code>a1</code>, <code>a2</code>, <code>b3</code> as variable names. Use nouns for names of variables and objects that describe what the item holds; for example, <code>originalData</code> and <code>randomForestResult</code> instead of <code>d</code> and <code>out</code>.</p></li>
+<li><p>Stick with a naming convention such as snake_case, PascalCase, or camelCase. In snake_case, spaces between words are replaced with an underscore. In camelCase, words are concatenated and the first letter of the word is capitalized. PascalCase is a special case where the first letter of the entire name is also capitalized; camelCase is ambivalent about capitalizing the first letter of the name. The following are examples of names in camelCase.</p></li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>accountBalance</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>thisVariableIsWrittenInCamelCase</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>itemNumber</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>socialSN</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>MasterCard</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>An issue with camelCase is that it is not entirely clear how to write names in that style that contain other names or abbreviations, for example, is it <code>NASAAdminFiles</code> or <code>NasaAdminFiles</code>? I am not sure it really matters.</p>
+<p>snake_case is popular because it separates words with underscores—mimicking white space—while producing valid names for computer processing. The following are examples of names in snake_case:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>account_balance</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>ACCOUNT_BALANCE</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>home_page</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>item_Number</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Using upper-case letters in snake_case is called “screaming snake case”, situations where I have seen it used are the definition of global constants or macro names in C. kebab case is similar to snake case but uses a hyphen instead of an underscore. Here are examples of names in kebab case:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>account-balance</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>home-page</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>item-Number</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Although it might look nice, it is a good idea to avoid kebab case in programs. Imagine the mess that ensues if the hyphen were to be interpreted as a minus sign! While the compiler might read the hyphen correctly, the code reviewer in the cubicle down the hall might think it is a minus sign.</p>
+<p>Do <strong>not</strong> assign objects to existing names, unless you really want to override them. This goes in particular for internal symbols and built-in functions. Unfortunately, <code>R</code> does not blink and allows you to do things like this:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>T &lt;- runif(20)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>C &lt;- summary(lm(y ~ x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>These assignments override the global variable whose value is set to <code>TRUE</code> for logical comparison and the function <code>C()</code> that defines contrasts for factors. If in doubt whether it is safe to assign to a name, check in the console whether the name exists or request help for it</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>?T</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>?C()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="comments" class="level3">
+<h3 class="anchored" data-anchor-id="comments">Comments</h3>
+<p>Unless you write a literal program use comments throughout to clarify <strong>why</strong> code is written a certain way and what the code is supposed to accomplish. Even with literal programs, comments associated with code are a good practice because the code-portion of the literal program can get separated from the text material at some later point.</p>
+<p>Comments frequently are intended by programmers to leave themselves some notes, for example, about functions yet to be written or to be refactored later. Make it clear with a “TODO” at the beginning of the comment where those sections of the program are and make the TODO comment stand out visually from other comments.</p>
+<p>It is a good practice to have a standardized form for writing comments. For example, you can have a standard comment block at the beginning of functions. Some organizations will require you to write very detailed comment blocks that explain all inputs and outputs down to length of vectors and data types.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a># -------------------------------------------------------------------</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a># TODO: Add check whether it is safe to perform the division before</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>#       returning from the function. Variances can be zero or near zero.</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a># -------------------------------------------------------------------</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a># ###################################################################</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a># Function: getIRLSWeights</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a># Purpose: retrieve the vector of weights for iteratively </span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>#          reweighted least squares</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a># Arguments:</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>#       eta: numeric vector of linear predictors</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>#       link: character string describing the link function</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>#       dist: character string describing the distribution of the response </span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>#</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a># Returns: the vector of weights, same length as the eta vector (input)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>#</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a># Notes: </span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>#   For efficiency, eta is not checked for NULL or missing values. </span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>#   These checks are in the deta_dmu() and get_var() functions.</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a># ###################################################################</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>getIRLSWeights &lt;- function(eta, link="log", dist="poisson") {</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    var_z &lt;- deta_dmu(eta,link)^2 * get_var(get_mu(eta,link),dist)</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    return (1/var_z)    </span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you program in Python, you would add docstrings to the function. This also serves as the help information for the user.</p>
+</section>
+<section id="whitespace" class="level3">
+<h3 class="anchored" data-anchor-id="whitespace">Whitespace</h3>
+<p>Judicious use of whitespace makes code more readable. It helps to differentiate visually and to see patterns. Examples are indentation (use spaces, not tabs), alignment within code blocks, placement of parentheses, and so forth.</p>
+<p>Which of the following two functions is easier to read? It does not matter for the <code>R</code> interpreter but it matters for the programmer.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>get_z &lt;- function(y, eta, link) {</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>if (is.null(y) || is.null(eta)) {</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>stop("null values not allowed") }</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>if (anyNA(y) || anyNA(eta)) {</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>stop("cannot handle missing values") }</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>z &lt;- eta + (y - get_mu(eta,link)) * deta_dmu(eta,link)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>return(z)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>get_z &lt;- function(y, eta, link) {</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    if (is.null(y) || is.null(eta)) {</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>        stop("null values not allowed")</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    if (anyNA(y) || anyNA(eta)) {</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>        stop("cannot handle missing values")</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    z &lt;- eta + (y - get_mu(eta,link)) * deta_dmu(eta,link)</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    return(z)</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The following code uses indentation to separate options from values and to isolate the function definition for handling the reference strip. The closing parenthesis is separated with whitespace to visually align with the opening parenthesis of <code>xyplot</code>.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>xyplot(diameter ~ measurement | Tree, </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>       data    = apples,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>       strip   = function(...) {</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>           # alter the text in the reference strip   </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>           strip.default(..., </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                         strip.names  = c(T,T), </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                         strip.levels = c(T,T),</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                         sep          = " ")</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>       },</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>       xlab    = "Measurement index",</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>       ylab    = "Diameter (inches)",</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>       type    = c("p"),</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>       as.table= TRUE,</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>       layout  = c(4,3,1)</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>      )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>With languages such as Python, where whitespace is functionally relevant, you have to use spacing within the limits of what the language allows.</p>
+</section>
+<section id="functions" class="level3">
+<h3 class="anchored" data-anchor-id="functions">Functions</h3>
+<section id="r" class="level4">
+<h4 class="anchored" data-anchor-id="r"><code>R</code></h4>
+<p>In <code>R</code> almost everything is a function. When should <strong>you</strong> write functions instead of one-off lines of code? As always, it depends; a partial answer hides in the question. When you do something only once, then writing a bunch of lines of code instead of packaging the code in a function makes sense. When you write a function you have to think about function arguments (is the string being passed a single string or a vector?), default values, return values, and so on.</p>
+<p>However, many programming tasks are not one-offs. Check your own code, you probably write the same two or three “one-off” lines of code over and over again. If you do it more than once, consider writing a function for it. If you do a substantial task over and over, consider writing a package.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you are interested in writing an <code>R</code> package, check out <a href="https://bookdown.org/rdpeng/RProgDA/building-r-packages.html">this</a> chapter in the book by <span class="citation" data-cites="Pengetal2020">Peng, Kross, and Anderson (<a href="../references.html#ref-Pengetal2020" role="doc-biblioref">2020</a>)</span>.</p>
+</div>
+</div>
+<p>Function names should be verbs associated with the function purpose, e.g., <code>joinTables()</code>, <code>updateWeights()</code>. For functions that retrieve or set values, using <code>get</code> and <code>set</code> is common: <code>getWeights()</code>, <code>setOptimizationInput()</code>.</p>
+<p>The comment block for function should document the function purpose, required arguments, and returns.</p>
+<p>Some argue that it is good coding practice to have default values on function arguments. For example,</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>addNumbers &lt;- function(a=1, b=2) {return(a+b)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>instead of</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>addNumbers &lt;- function(a, b) {return(a+b)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Adding defaults ensures that all variables are initialized with valid values and simplifies calling the function. On the other hand, it can mask important ways to control the behavior of the function. Users will call a function as they see it being used by others and not necessarily look at the function signature. Take the <code>duckload()</code> function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>duckload <span class="ot">&lt;-</span> <span class="cf">function</span>(tableName, <span class="at">whereClause=</span><span class="cn">NULL</span>, <span class="at">dbName=</span><span class="st">"ads.ddb"</span>) {</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(tableName)) {</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"duckdb"</span> <span class="sc">%in%</span> (<span class="fu">.packages</span>()))) {</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">suppressWarnings</span>(<span class="fu">library</span>(<span class="st">"duckdb"</span>))</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">message</span>(<span class="st">"duckdb library was loaded to execute duckload()."</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>        con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(<span class="fu">duckdb</span>(), <span class="at">dbdir=</span>dbName, <span class="at">read_only=</span><span class="cn">TRUE</span>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>        query_string <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"SELECT * from "</span>, tableName)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(whereClause)) {</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>            query_string <span class="ot">&lt;-</span> <span class="fu">paste</span>(query_string, <span class="st">" WHERE "</span>, whereClause)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>        df_ <span class="ot">&lt;-</span> <span class="fu">dbGetQuery</span>(con, query_string)</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">dbDisconnect</span>(con)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span> (df_)</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span> (<span class="cn">NULL</span>)</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Would you know from the following usage pattern that you can pass a WHERE clause to the SQL string?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">duckload</span>(<span class="st">"apples"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If the function arguments had no defaults, the function call would reveal its capabilities:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">duckload</span>(<span class="st">"apples"</span>, <span class="at">whereClause=</span><span class="cn">NULL</span>, <span class="at">dbName=</span><span class="st">"ads.ddb"</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">duckload</span>(<span class="st">"apples"</span>,<span class="cn">NULL</span>,<span class="st">"ads.ddb"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Other good practices to observe when writing functions:</p>
+<ul>
+<li><p>Always have an explicit <code>return</code> argument. It makes it much easier to figure out where you return from the function and what exactly is being returned.</p></li>
+<li><p>Check for NULL inputs</p></li>
+<li><p>Check for missing values unless your code can handle them.</p></li>
+<li><p>Handle errors (see below)</p></li>
+<li><p>Pass through variable arguments (<code>...</code>)</p></li>
+<li><p>If you return multiple values, organize them in a list or a data frame. Lists are convenient to collect objects that are of different types and sizes into a single object. The following function returns a list with three elements,</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>iterationWeight <span class="ot">&lt;-</span> <span class="cf">function</span>(Gm,wts,<span class="at">method=</span><span class="st">"tree"</span>) {</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    pclass <span class="ot">&lt;-</span> <span class="fu">predict</span>(Gm,<span class="at">type=</span><span class="st">"vector"</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    misclass <span class="ot">&lt;-</span> pclass <span class="sc">!=</span> Gm<span class="sc">$</span>y</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    Em <span class="ot">&lt;-</span> <span class="fu">sum</span>(wts<span class="sc">*</span>misclass)<span class="sc">/</span><span class="fu">sum</span>(wts)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    alpha_m <span class="ot">&lt;-</span> <span class="fu">log</span>((<span class="dv">1</span><span class="sc">-</span>Em)<span class="sc">/</span>Em)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span> (<span class="fu">list</span>(<span class="st">"misclass"</span><span class="ot">=</span>misclass,<span class="st">"Em"</span><span class="ot">=</span>Em,<span class="st">"alpha_m"</span><span class="ot">=</span>alpha_m))</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="error-handling" class="level5">
+<h5 class="anchored" data-anchor-id="error-handling">Error Handling</h5>
+<p>Think of a function as a contract between you and the user. If the user provides specified arguments, the function produces predictable results. What should happen when the user specifies invalid arguments or when the function encounters situations that would create unpredictable results or situations that keep it from continuing?</p>
+<p>Your opportunities to handle these situations include issue warning messages with <code>warning()</code>, informational messages with <code>message()</code>, stopping the execution with <code>stop()</code> and <code>stopifnot()</code> and try-catch-finally execution blocks. In general, stopping the execution of a function with <code>stop</code> or <code>stopifnot</code> is a last resort if the function cannot possibly continue. If the data passed are of the wrong type and cannot be coerced into the correct data type, or if coercion would result in something nonsensical, then stop.</p>
+<p>In the event that inputs are invalid and you cannot perform the required calculations, could you still return NULL as a result? If so, do not stop the execution of the function. You can issue a warning message and then return NULL. Warning messages are also appropriate when the function behavior is changing in an unexpected way. For example, the input data contains missing values (NAs) and your algorithm cannot handle them. If you process the data after omitting missing values, then issue a warning message if that affects the dimensions of the returned objects.</p>
+<p>Keep in mind that <code>R</code> is used in scripts and as an interactive language. Messages from your code are intended for human consumption so they should be explicit and easy to understand. But avoid making your code too chatty.</p>
+<p>To check whether input values have the expected types you can use functions such as</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>()</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>()</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.factor</span>()</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">is.ordered</span>()</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>()</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">is.matrix</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and to coerce between data types you can use the <code>as.</code> versions</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>()</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>()</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as.factor</span>()</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">as.ordered</span>()</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">as.vector</span>()</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">as.matrix</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>tryCatch()</code> is the <code>R</code> implementation of the try-catch-finally logic you might have seen in other languages. It is part of the condition system that provides a mechanism for signaling and handling unusual conditions in programs. <code>tryCatch</code> attempts to evaluate expression <code>expr</code>, and if it succeeds, executes the code in the <code>finally</code> block. You can add erorr and warning handlers with the <code>error=</code> and <code>warning=</code> options.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>(expr,</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">error =</span> <span class="cf">function</span>(e){</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">message</span>(<span class="st">"An error occurred:</span><span class="sc">\n</span><span class="st">"</span>, e)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>         },</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">warning =</span> <span class="cf">function</span>(w){</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>           <span class="fu">message</span>(<span class="st">"A warning occured:</span><span class="sc">\n</span><span class="st">"</span>, w)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>         },</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">finally =</span> {</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>           <span class="fu">message</span>(<span class="st">"Finally done!"</span>)</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>         }</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>tryCatch</code> is an elegant way to handle conditions, but you should not overdo it. It can be a drag on performance. For example, if you require input to be of numeric type, then it is easier and faster to check with <code>is.numeric</code> than to wrap the execution in <code>tryCatch</code>.</p>
+</section>
+<section id="dependencies" class="level5">
+<h5 class="anchored" data-anchor-id="dependencies">Dependencies</h5>
+<p>It is a good idea to check dependencies in functions. Are the required packages loaded? It is kind of you to load required packages on behave of the caller rather than stopping execution. If you do, issue a message to that effect. See <code>duckload()</code> above for an example.</p>
+<p>Installing packages on behalf of the caller is a step too far in my opinion, since you are now changing the <code>R</code> environment. You can check whether a package is installed with <code>require</code>. The following code stops executing if the <code>dplyr</code> package is not installed.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>check_pkg_deps <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(dplyr))</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">stop</span>(<span class="st">"the 'dplyr' package needs to be installed first"</span>)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>require()</code> is similar to <code>library()</code>, but while the latter fails with an error if the package cannot be loaded, <code>require</code> returns TRUE or FALSE depending on whether the library was loaded and does not throw an error if the package cannot be found. Think of <code>require</code> as the version of <code>library</code> you should use inside of functions.</p>
+</section>
+<section id="documentation" class="level5">
+<h5 class="anchored" data-anchor-id="documentation">Documentation</h5>
+<p>Comments in code are not documentation. Documentation is a detailed explanation of the purpose of the code, how it works, how its functions work, their arguments, etc. It also includes all information someone would want to need to take over the project. In literal programs you have the opportunity to write code and documentation at the same time. Many software authoring frameworks include steps in programming that generate the documentation. For example, to add documentation to an <code>R</code> package, you need to create a “man” subdirectory that contains one file per function in the special R Documentation format (.Rd). You can see what the files look like by browsing <code>R</code> packages on GitHub. For example, <a href="https://github.com/cran/ada">here</a> is the repository for the <code>ada</code> package.</p>
+<p>At a minimum a README file in Markdown should accompany the program. The file has setup instructions and use instructions someone would have to follow to execute the code. It identifies author, version, major revision history, and details on the functions in the public API—those functions called by the user of the program.</p>
+<p>There are great automated documentation systems such as <a href="https://www.doxygen.nl/">doxygen</a> which annotate the source code in such a way that documentation can be extracted automatically. An <code>R</code> package for generating inline documentation that was inspired by doxygen is <code>roxygen2</code>.</p>
+</section>
+</section>
+<section id="python" class="level4">
+<h4 class="anchored" data-anchor-id="python">Python</h4>
+
+
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Figure&nbsp;18.1: The lifecycle of a file in Git. <a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository">Source</a></span>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Pengetal2020" class="csl-entry" role="listitem">
+Peng, Roger D., Sean Kross, and Brooke Anderson. 2020. <em>Mastering Software Development in r</em>. <a href="https://bookdown.org/rdpeng/RProgDA/">https://bookdown.org/rdpeng/RProgDA/</a>.
+</div>
+</div>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../ethics/privacy.html" class="pagination-link" aria-label="Personal Information and Personal Data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../integ/tools.html" class="pagination-link" aria-label="Data Science Tools">
+        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Foundations of Data Science by Oliver Schabenberger</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"zoom","closeEffect":"zoom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

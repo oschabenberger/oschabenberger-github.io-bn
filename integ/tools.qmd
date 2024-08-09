@@ -1,0 +1,286 @@
+# Data Science Tools {#sec-tools}
+
+## Tech Stacks
+
+Because the “T-shaped” role of the data scientist touches many disciplines and systems it can take many tools to do the work. From project management tools like JIRA or Asana to machine learning frameworks like TensorFlow, CNTK, PyTorch, or Keras, to multiple programming languages (R, Python, Scala, Java, JavaScript, C++, Go), multiple databases, visualization tools, cloud providers, ETL and ELT tools, DevOps tools, ModelOps tools, dashboard builders. The list goes on and on. The abundance of software tools and frameworks available to data scientists can be overwhelming—and it is growing every day.
+
+A few comments and recommendations:
+
+* You do not need to be an expert at every tool in order to be an expert data scientist.
+
+* You can and should develop your own preferred tech stack.
+
+* Every tool has pros and cons, and everyone has preferences.
+
+* Look at job postings to learn about the tech stack of employers.
+Some companies have published or described their tech stack online. This will give you an idea of the tools you will encounter at those employers and how companies make choices about their data stack.
+
+* Check Reddit, Stack Overflow, Stack Exchange, GitHub, etc. The degree of activity on these sites is a good indicator for the relevance of a tool.
+
+* In an organization with a small data science team, you will have a different 
+set of tasks and tools than as part of a larger data science team with specialists 
+in data engineering, visualization, etc.
+
+* In research settings the tech stack is smaller since the number of data science tasks is smaller.
+
+* You will find tools built in-house in larger companies. Many organizations use a
+blend of internal and 3^rd^-party tools. Some companies have their own forks of 
+open-source software projects.
+
+* Be ready to adapt and learn new tools, technologies, languages.
+
+Employers will have preferences and standards you must comply with. Expertise with one tool makes switching to another tool easier. If your employer is an AWS shop you will not convince them to switch to Google BigQuery. If you have basic SQL skills, you will be able to move from BigQuery to Amazon Redshift. If you are familiar with business intelligence tools like Tableau or Alteryx, adding Power BI to your toolbox is not a problem.
+
+You will also find that organizations have invested heavily in systems in the past and are slow to move on although more modern and better performing options are available. For example, many companies have built data lakes and machine learning environments based on the Hadoop ecosystem. Although superseded by cloud-based object storage, migrating from a Hadoop cluster is costly and time consuming. Hadoop-based tools such as Hive, Impala, Kudu, Pig, Mahout, Sqoop, and Zookeeper will be around for a while longer. Be ready to work with tools that might not be on the *Favorites* list.
+
+### Example Tech Stacks
+
+Here are some examples of tech stacks at companies. These include frontend and backend tools as well as data tools. We dive a bit deeper into the data engineering stack at Meta (formerly Facebook) in the next section.
+
+In the video below from 2023, Chris Wiggins, Chief Data Scientist of the New York Times 
+discusses the evolution of the data science tech stack at the New York Times: 
+
+{{< video https://youtu.be/y3tXvuCl-Ks
+    title="Evolution of Tech Stack at New York Times"
+>}}
+
+Like many other organizations, their data science tech stack is changing, the company is iterating to find what works best for them. They move from “write your own MapReduce jobs against S3 buckets” to “jobs in Hive and Pig” to “started our own Hadoop instance” to “all in BigQuery and GCP tech stack”: code in Python leveraging scikit-learn, when necessary code in Go, data are read from BigQuery, model output is pushed back to BigQuery, sometimes hosting an API, scheduling using Airflow instance on GCP, containerized.
+
+What are the takeaways:
+
+- Moving away from Hadoop
+- Not afraid of changing cloud providers (from AWS S3 to Google Cloud Platform and BigQuery)
+- Reading from and writing back to the same data platform: minimizing data movement, single format, SQL access
+- At every stage the tech stack was pretty modern and the company is not afraid to change---good attributes.
+
+Here are the tech stacks of some other companies:
+
+* [Google](https://stackshare.io/google/google): Python, Java, AngularJS, Golang, C++, Dart, Preact, K8s, Android Studio, Bazel
+
+* [Facebook](https://stackshare.io/facebook/facebook): React, PHP, GraphQL, Cassandra, Memcached, Presto, Flux, Tornado, RocksDB, Jenkins, Chef, Phabricator, Datadog, Confluence
+
+* [Netflix](https://stackshare.io/netflix/netflix): Python, Node.js, React, Java, MySQL, PostgreSQL, Flask, AWS (S3, EC2, RDS, DynamoDB, EMR, CloudTrail), Cassandra, Oracle, Hadoop, Presto, Pig, Atlas-DB, GitHub, Jenkins, Gradle, Sumo Logic.
+
+* [Uber](https://stackshare.io/uber-technologies/uber): Python, jQuery, Node.js, React, Java, MySQL, NGINX, PostgreSQL, MongoDB, Redis, Amazon EC2, Kafka, Golang, Cassandra, Apache Spark, Hadoop, AresDB, Terraform, Grafana, Prometheus, Zookeeper. Also see [this](https://jagan-singhh.medium.com/data-science-at-uber-4380bf8f6aca) article on data science at Uber.
+
+* [Shopify](https://stackshare.io/shopify/shopify): Python, React, MySQL, NGINX, Redis, GraphQL, Kafka, Goang, Memcached, Apache Spark, Hadoop, dbt, Apache Beam, ElasticSearch, GitHub, Docker, K8s, Datadog, Chef, Zookeeper
+
+* [Udemy](https://stackshare.io/udemy/udemy): Python, jQuery, Node.js, React, MySQL, NGINX, CloudFlare, AngularJS, Redis, Django, Spring Boot, Kafka, Kotlin, Memcached, ElasticSearch, GitHub, Docker, Jenkins, K8s, PyCharm, Ansible, Terraform, Sentry, Datadog
+
+### The Meta Data Engineering Stack
+
+We picked the stack for data engineering at Meta (fka Facebook) for a deeper examination because their team provided a detailed [article](https://medium.com/@AnalyticsAtMeta/data-engineering-at-meta-high-level-overview-of-the-internal-tech-stack-a200460a44fe) that discusses some of the characteristics of data engineering at large, modern companies [@AnalticsAtMeta]:
+
+* **Very** large data warehouses
+* Complex data pipelines
+* A mix of commercial and open-source tools
+* A mix of in-house and 3^rd^-party tools
+
+The main data warehouse for analytics consists of a collection of millions of Hive tables stored in ORC (Optimized Row Columnar) format (see @sec-datasource-orc). Meta maintains its own fork of ORC, which suggests that they optimized the file format for their use cases.
+
+The data warehouse is so large that it cannot be stored in one data center. The data are partitioned geographically and logically into namespaces---groups of tables that are likely used together. Tables in the same namespace are located together in the same data center location to facilitate merges and joins without sending data across geographies. If data needs to be accessed across namespaces, the data are replicated to another namespace so that they can be processed at the same location.
+
+You really have a lot of data if the analytic data needs to be spread across multiple data centers in multiple geographies. The total size of the Meta data warehouse is measured in exabytes (millions of terabytes).
+
+Meta has a strict data retention policy, table partitions older than the table’s retention time are deleted or archived following anonymization of the data.
+
+To find data in such a massive data warehouse, Meta developed its own tool, iData, to search for data by keyword. The iData search engine returns tables ranked by relevance, considering data freshness, number of uses, and number of mentions in posts of the table.
+
+To query the data warehouse, Meta uses Presto and Spark. Presto is an open-source SQL querying engine originally developed by Meta. After open-sourcing Presto, Meta maintains its own internal fork. SQL (Presto SQL or Spark SQL) is key for querying the data at Meta. Presto is used for most day-to-day queries; a light query at Meta’s scale scans through a few billion rows of data. Spark is used for the heavy workloads.
+
+Data exploration and analysis are based on internal tools, Daiquery is the internal tool for querying and visualizing any data source. Bento is an internal implementation of Jupyter notebooks for Python and R code.
+
+Dashboards are created with another internal tool, Unidash.
+
+Data pipelines are written in SQL, wrapped in Python, and orchestrated with Dataswarm, a predecessor of Airflow.
+
+VSCode is the IDE of choice for developing data pipelines and has been enhanced with custom plugins developed internally. For example, a custom linter checks SQL statements. On Save the internal VSCode extension generates the directed acyclic graph for the pipeline. The data engineer can then schedule a test run of the pipeline using real data, writing the result to a temporary result table.
+
+## Exploratory Data Analysis and Business Intelligence {#sec-tools-eda-bi}
+
+Business Intelligence (BI) is the processing of organizational data and 
+presenting it in reports and on dashboards. The goal is to help an organization’s 
+operations by using relevant data. Key functions are to monitor, report, and analyze 
+the business operations. BI overlaps with Exploratory Data Analysis (EDA) in that 
+it is highly descriptive, relying on visualizations and summarizations to 
+inform about what is and has been happening.
+
+Here is a list of some BI tools you will encounter in practice (in no particular order):
+
+-  [Microsoft Power BI](https://powerbi.microsoft.com/en-us/)
+-  [Tableau](https://www.tableau.com/) (acquired by Salesforce)
+-  [Heap Analytics](https://www.heap.io/)
+-  [Metabase](https://www.metabase.com/)
+-  [Mode](https://mode.com/) (acquired by ThoughtSpot)
+-  [ThoughtSpot](https://www.thoughtspot.com/)
+-  [Qlik](https://www.qlik.com/us/)
+-  [Sisense](https://www.sisense.com/)
+-  [SAP BusinessObjects](https://www.sap.com/products/technology-platform/bi-platform.html)
+-  [Oracle BI](https://www.oracle.com/business-analytics/business-intelligence/technologies/bi.html)
+-  [TIBCO Spotfire](https://www.tibco.com/products/tibco-spotfire)
+-  [AWS QuickSights](https://aws.amazon.com/quicksight/)
+-  [Looker](https://cloud.google.com/looker) (Looker Studio)
+-  [DOMO](https://www.domo.com/business-intelligence)
+-  [IBM Cognos Analytics](https://www.ibm.com/products/cognos-analytics)
+-  [MicroStrategy](https://www.microstrategy.com/en)
+-  [Yellowfin](https://www.yellowfinbi.com/)
+-  [SAS Augmented Analytics & BI](https://www.sas.com/en_us/solutions/augmented-analytics-business-intelligence.html)
+-  [JMP](https://www.jmp.com/en_us/home.html)
+
+## Data Engineering
+
+Data engineers build pipelines that help to collect, merge, cleanse, prepare, and 
+transform data for subsequent analytics. Data engineering defines, creates, and 
+maintains the infrastructure that enables modern data analytics. Key steps in the 
+data engineering workflow are pipelining, 
+[data replication](#_Data_Replication_and), 
+[change-data-capture](#_Data_Replication_and) (CDC), 
+[ETL](#_ETL_and_ELT) (Extract-Transform-Load) and/or 
+[ELT](#_ETL_and_ELT) (Extract-Load-Transform).
+
+Here is a list of some common tools used in data engineering.
+
+-  [Dbt Labs](https://www.getdbt.com/). The “t” in dbt is the “T” in ELT. Dbt is a SQL-based data engineering tool that assumes the data is already loaded into the target system. It transforms data where it lives.
+-  [Fivetran](https://www.fivetran.com/). An ELT and data-movement platform with extensive data replication and change-data-capture capabilities.
+-  [CData](https://www.cdata.com/). Data connectivity, data movement, data sync (CDC).
+-  [Spark](https://spark.apache.org/). An engine for distributed big-data analytics with interfaces for Python (pySpark), SQL (spark-sql), Scala, Java, and R (sparkR)
+-  [Dask](https://www.dask.org/). A parallel-processing framework for Python
+-  [Apache Airflow](https://airflow.apache.org/). A Python-based tool to create and manage workflows. Often used to pipeline data.
+-  [Prefect](https://www.prefect.io/). Workflow orchestration for data engineers and ML engineers.
+-  [Apache Kafka](https://kafka.apache.org/). Open-source distributed event-streaming platform that is frequently used to move data through streaming pipelines.
+-  [Matillion](https://www.matillion.com/). Build and orchestrate data pipelines.
+-  Databases (see @sec-datasource-dbms)
+-  [ElasticSearch](https://www.elastic.co/elasticsearch/). Distributed search and analytics engine.
+-  [Presto](https://prestodb.io/). An open-source, distributed SQL engine for analytic queries
+-  [Redis](https://redis.io/). An open-source, in-memory data store. Often used as a memory cache.
+
+## Data Visualization
+
+-  Python-based
+  - pandas, matplotlib, seaborn, plotly, Vega-altair, plotnine (ggplot)
+
+-  R-based
+  - tidyverse (dplyr, tidyr, ggplot2, shiny)
+
+-  Many of the tools listed in @sec-tools-eda-bi.
+
+## Data Analytics and Machine Learning
+
+### Cloud Service Providers
+
+-  [AWS SageMaker](https://aws.amazon.com/sagemaker/)
+-  [Azure Synapse Analytics](https://azure.microsoft.com/en-us/products/synapse-analytics)
+-  [Google BigQuery ML](https://cloud.google.com/bigquery/docs/bqml-introduction)
+
+### Languages & Packages
+
+-  Python-based
+    - numpy, scipy, pandas, polars, statsmodels, scikit-learn
+    - Pyspark
+
+-  Scala-based
+    - Spark
+
+-  R-based
+    - Basic modeling capabilities are built into the language
+    - dplyr, tidyr, caret, gam, glmnet, nnet, KernLab, E1071, RandomForest, tree, gbm, xgboost, lme4, boot, …. See the [CRAN overview](https://cran.r-project.org/web/views/MachineLearning.html) for Machine Learning and Statistical Learning
+    - sparkR
+
+-  Java: mostly used to put models into production and to build applications rather than model building.
+    - Deeplearning4j: open-source toolkit for Java to deploy deep neural nets.
+    - ND4J: n-dimensional array objects for scientific computing
+
+-  Golang: Go is used mainly as a language for managing and orchestrating backend architecture but is finding more applications in data orchestration.
+
+### Commercial Offerings
+
+-  [Alteryx](https://www.alteryx.com/)
+-  [KNIME](https://www.knime.com/)
+-  [Domino Data Lab](https://domino.ai/)
+-  [DataRobot](https://www.datarobot.com/)
+-  [Dataiku](https://www.dataiku.com/)
+-  [H20.ai](https://h2o.ai/)
+-  [RapidMiner](https://rapidminer.com/) (acquired by Altair)
+-  [MindsDB](https://mindsdb.com/)
+-  [Databricks](https://www.databricks.com/)
+-  [SAS Viya](https://www.sas.com/en_us/software/viya.html)
+-  J[MP Pro](https://www.jmp.com/en_us/software/predictive-analytics-software.html)
+-  [MATLAB](https://www.mathworks.com/products/matlab.html)
+
+## Deep Learning
+
+-  [TensorFlow](https://www.tensorflow.org/)
+-  [Keras](https://keras.io/)
+-  [Torch](http://torch.ch/)
+-  [PyTorch](https://pytorch.org/)
+-  [Microsoft Cognitive Toolkit](https://learn.microsoft.com/en-us/cognitive-toolkit/) (CNTK)
+-  [OpenAI](https://openai.com/)
+-  [OpenCV](https://opencv.org/)
+-  Viso Suite from [viso.ai](https://viso.ai/)
+-  [DeepLearningKit](https://github.com/DeepLearningKit/DeepLearningKit) for Apple tvOS, iOS, OS X
+-  [H2O.ai](https://h2o.ai/)
+-  [Caffe](https://caffe.berkeleyvision.org/) from Berkeley AI Research
+
+## IDEs and Developer Productivity
+
+-  [IPython](https://ipython.readthedocs.io/en/stable/): a command shell for interactive computing
+-  JupyterLab and [Jupyter](https://jupyter.org/) Notebook
+-  [Spyder](https://www.spyder-ide.org/): IDE for Python
+-  [VSCode](https://code.visualstudio.com/): a code editor with IDE-like plugins
+-  [Visual Studio](https://visualstudio.microsoft.com/) (an IDE)
+-  [DataSpell](https://www.jetbrains.com/dataspell/) from JetBrains
+-  [PyCharm](https://www.jetbrains.com/pycharm/): a commercial IDE for Python from JetBrains
+-  [Google Colab](https://colab.google/)(oratory)
+-  Git, [GitLab](https://about.gitlab.com/), [GitHub](https://github.com/)
+-  [GitHub Copilot](https://github.com/features/copilot)
+-  [RStudio](https://posit.co/products/open-source/rstudio/) (free open-source edition)
+
+## Cloud Computing & DevOps
+
+-  [AWS](https://aws.amazon.com/) (Amazon Web Services)
+-  Microsoft [Azure](https://azure.microsoft.com/en-us)
+-  [GCP](https://cloud.google.com/?hl=en) (Google Cloud Platform)
+-  [Docker](https://www.docker.com/)
+-  [Kubernetes](https://kubernetes.io/) (K8s)
+-  [Fly.io](https://fly.io/)
+-  [Cloudflare](https://www.cloudflare.com/)
+-  [Jenkins](https://www.jenkins.io/) (CI/CD)
+-  [Ansible](https://www.ansible.com/)
+
+## Web Development
+
+-  [Svelte](https://svelte.dev/)
+-  [Vue.js](https://vuejs.org/)
+-  [Angular](https://angular.io/)
+-  [React](https://react.dev/)
+-  [D3.js](https://d3js.org/) (data visualization)
+-  [Laravel](https://laravel.com/) (PHP based)
+-  [GraphQL](https://graphql.org/) (Graphene, Apollo etc.)
+-  [NodeJS](https://nodejs.org/en)
+-  [Flask](https://flask.palletsprojects.com/en/2.3.x/)
+-  [Django](https://www.djangoproject.com/)
+-  [Heroku](https://www.heroku.com/)
+-  [Vercel](https://vercel.com/), Next.js
+-  [Netlify](https://www.netlify.com/)
+-  [AWS Amplify](https://aws.amazon.com/amplify/)
+-  [AWS Lambda](https://aws.amazon.com/lambda/)
+-  [MongoDB Realm](https://www.mongodb.com/developer/products/realm/)
+-  [Firebase](https://firebase.google.com/)
+-  [DigitalOcean](https://www.digitalocean.com/)
+
+## Programming Languages
+
+-  R
+-  Python
+-  SQL
+-  Scala
+-  Julia
+-  PHP
+-  HTML
+-  CSS
+-  C/C++
+-  Go
+-  Rust
+-  Java
+-  JavaScript
+-  TypeScript

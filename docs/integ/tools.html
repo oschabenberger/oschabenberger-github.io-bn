@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.552">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Foundations of Data Science - 19&nbsp; Data Science Tools</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../references.html" rel="next">
+<link href="../integ/coding_practices.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../integ/coding_practices.html">Part V. Integration of Data Science Solutions</a></li><li class="breadcrumb-item"><a href="../integ/tools.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Science Tools</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Foundations of Data Science</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Part I. Data Science and Data Science Projects</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">History and Evolution of Data Science</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/lifecycle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Data Science Project Lifecycle</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Part II. Data Preparation and Understanding</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/sources_and_files.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Sources and File Formats</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/data_access.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Quality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/summarization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Summarization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Visualization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/sqlbasics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">SQL Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Integration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Part III. Statistical Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/general.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">General Topics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/mathstat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/linalg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/featproc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Feature and Target Processing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Part IV. Applied Ethics in Data Science</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/bias_harm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Part V. Integration of Data Science Solutions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../integ/coding_practices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../integ/tools.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#tech-stacks" id="toc-tech-stacks" class="nav-link active" data-scroll-target="#tech-stacks"><span class="header-section-number">19.1</span> Tech Stacks</a>
+  <ul>
+  <li><a href="#example-tech-stacks" id="toc-example-tech-stacks" class="nav-link" data-scroll-target="#example-tech-stacks">Example Tech Stacks</a></li>
+  <li><a href="#the-meta-data-engineering-stack" id="toc-the-meta-data-engineering-stack" class="nav-link" data-scroll-target="#the-meta-data-engineering-stack">The Meta Data Engineering Stack</a></li>
+  </ul></li>
+  <li><a href="#sec-tools-eda-bi" id="toc-sec-tools-eda-bi" class="nav-link" data-scroll-target="#sec-tools-eda-bi"><span class="header-section-number">19.2</span> Exploratory Data Analysis and Business Intelligence</a></li>
+  <li><a href="#data-engineering" id="toc-data-engineering" class="nav-link" data-scroll-target="#data-engineering"><span class="header-section-number">19.3</span> Data Engineering</a></li>
+  <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link" data-scroll-target="#data-visualization"><span class="header-section-number">19.4</span> Data Visualization</a></li>
+  <li><a href="#data-analytics-and-machine-learning" id="toc-data-analytics-and-machine-learning" class="nav-link" data-scroll-target="#data-analytics-and-machine-learning"><span class="header-section-number">19.5</span> Data Analytics and Machine Learning</a>
+  <ul>
+  <li><a href="#cloud-service-providers" id="toc-cloud-service-providers" class="nav-link" data-scroll-target="#cloud-service-providers">Cloud Service Providers</a></li>
+  <li><a href="#languages-packages" id="toc-languages-packages" class="nav-link" data-scroll-target="#languages-packages">Languages &amp; Packages</a></li>
+  <li><a href="#commercial-offerings" id="toc-commercial-offerings" class="nav-link" data-scroll-target="#commercial-offerings">Commercial Offerings</a></li>
+  </ul></li>
+  <li><a href="#deep-learning" id="toc-deep-learning" class="nav-link" data-scroll-target="#deep-learning"><span class="header-section-number">19.6</span> Deep Learning</a></li>
+  <li><a href="#ides-and-developer-productivity" id="toc-ides-and-developer-productivity" class="nav-link" data-scroll-target="#ides-and-developer-productivity"><span class="header-section-number">19.7</span> IDEs and Developer Productivity</a></li>
+  <li><a href="#cloud-computing-devops" id="toc-cloud-computing-devops" class="nav-link" data-scroll-target="#cloud-computing-devops"><span class="header-section-number">19.8</span> Cloud Computing &amp; DevOps</a></li>
+  <li><a href="#web-development" id="toc-web-development" class="nav-link" data-scroll-target="#web-development"><span class="header-section-number">19.9</span> Web Development</a></li>
+  <li><a href="#programming-languages" id="toc-programming-languages" class="nav-link" data-scroll-target="#programming-languages"><span class="header-section-number">19.10</span> Programming Languages</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../integ/coding_practices.html">Part V. Integration of Data Science Solutions</a></li><li class="breadcrumb-item"><a href="../integ/tools.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Science Tools</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-tools" class="quarto-section-identifier"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="tech-stacks" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="tech-stacks"><span class="header-section-number">19.1</span> Tech Stacks</h2>
+<p>Because the “T-shaped” role of the data scientist touches many disciplines and systems it can take many tools to do the work. From project management tools like JIRA or Asana to machine learning frameworks like TensorFlow, CNTK, PyTorch, or Keras, to multiple programming languages (R, Python, Scala, Java, JavaScript, C++, Go), multiple databases, visualization tools, cloud providers, ETL and ELT tools, DevOps tools, ModelOps tools, dashboard builders. The list goes on and on. The abundance of software tools and frameworks available to data scientists can be overwhelming—and it is growing every day.</p>
+<p>A few comments and recommendations:</p>
+<ul>
+<li><p>You do not need to be an expert at every tool in order to be an expert data scientist.</p></li>
+<li><p>You can and should develop your own preferred tech stack.</p></li>
+<li><p>Every tool has pros and cons, and everyone has preferences.</p></li>
+<li><p>Look at job postings to learn about the tech stack of employers. Some companies have published or described their tech stack online. This will give you an idea of the tools you will encounter at those employers and how companies make choices about their data stack.</p></li>
+<li><p>Check Reddit, Stack Overflow, Stack Exchange, GitHub, etc. The degree of activity on these sites is a good indicator for the relevance of a tool.</p></li>
+<li><p>In an organization with a small data science team, you will have a different set of tasks and tools than as part of a larger data science team with specialists in data engineering, visualization, etc.</p></li>
+<li><p>In research settings the tech stack is smaller since the number of data science tasks is smaller.</p></li>
+<li><p>You will find tools built in-house in larger companies. Many organizations use a blend of internal and 3<sup>rd</sup>-party tools. Some companies have their own forks of open-source software projects.</p></li>
+<li><p>Be ready to adapt and learn new tools, technologies, languages.</p></li>
+</ul>
+<p>Employers will have preferences and standards you must comply with. Expertise with one tool makes switching to another tool easier. If your employer is an AWS shop you will not convince them to switch to Google BigQuery. If you have basic SQL skills, you will be able to move from BigQuery to Amazon Redshift. If you are familiar with business intelligence tools like Tableau or Alteryx, adding Power BI to your toolbox is not a problem.</p>
+<p>You will also find that organizations have invested heavily in systems in the past and are slow to move on although more modern and better performing options are available. For example, many companies have built data lakes and machine learning environments based on the Hadoop ecosystem. Although superseded by cloud-based object storage, migrating from a Hadoop cluster is costly and time consuming. Hadoop-based tools such as Hive, Impala, Kudu, Pig, Mahout, Sqoop, and Zookeeper will be around for a while longer. Be ready to work with tools that might not be on the <em>Favorites</em> list.</p>
+<section id="example-tech-stacks" class="level3">
+<h3 class="anchored" data-anchor-id="example-tech-stacks">Example Tech Stacks</h3>
+<p>Here are some examples of tech stacks at companies. These include frontend and backend tools as well as data tools. We dive a bit deeper into the data engineering stack at Meta (formerly Facebook) in the next section.</p>
+<p>In the video below from 2023, Chris Wiggins, Chief Data Scientist of the New York Times discusses the evolution of the data science tech stack at the New York Times:</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/y3tXvuCl-Ks" title="Evolution of Tech Stack at New York Times" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>Like many other organizations, their data science tech stack is changing, the company is iterating to find what works best for them. They move from “write your own MapReduce jobs against S3 buckets” to “jobs in Hive and Pig” to “started our own Hadoop instance” to “all in BigQuery and GCP tech stack”: code in Python leveraging scikit-learn, when necessary code in Go, data are read from BigQuery, model output is pushed back to BigQuery, sometimes hosting an API, scheduling using Airflow instance on GCP, containerized.</p>
+<p>What are the takeaways:</p>
+<ul>
+<li>Moving away from Hadoop</li>
+<li>Not afraid of changing cloud providers (from AWS S3 to Google Cloud Platform and BigQuery)</li>
+<li>Reading from and writing back to the same data platform: minimizing data movement, single format, SQL access</li>
+<li>At every stage the tech stack was pretty modern and the company is not afraid to change—good attributes.</li>
+</ul>
+<p>Here are the tech stacks of some other companies:</p>
+<ul>
+<li><p><a href="https://stackshare.io/google/google">Google</a>: Python, Java, AngularJS, Golang, C++, Dart, Preact, K8s, Android Studio, Bazel</p></li>
+<li><p><a href="https://stackshare.io/facebook/facebook">Facebook</a>: React, PHP, GraphQL, Cassandra, Memcached, Presto, Flux, Tornado, RocksDB, Jenkins, Chef, Phabricator, Datadog, Confluence</p></li>
+<li><p><a href="https://stackshare.io/netflix/netflix">Netflix</a>: Python, Node.js, React, Java, MySQL, PostgreSQL, Flask, AWS (S3, EC2, RDS, DynamoDB, EMR, CloudTrail), Cassandra, Oracle, Hadoop, Presto, Pig, Atlas-DB, GitHub, Jenkins, Gradle, Sumo Logic.</p></li>
+<li><p><a href="https://stackshare.io/uber-technologies/uber">Uber</a>: Python, jQuery, Node.js, React, Java, MySQL, NGINX, PostgreSQL, MongoDB, Redis, Amazon EC2, Kafka, Golang, Cassandra, Apache Spark, Hadoop, AresDB, Terraform, Grafana, Prometheus, Zookeeper. Also see <a href="https://jagan-singhh.medium.com/data-science-at-uber-4380bf8f6aca">this</a> article on data science at Uber.</p></li>
+<li><p><a href="https://stackshare.io/shopify/shopify">Shopify</a>: Python, React, MySQL, NGINX, Redis, GraphQL, Kafka, Goang, Memcached, Apache Spark, Hadoop, dbt, Apache Beam, ElasticSearch, GitHub, Docker, K8s, Datadog, Chef, Zookeeper</p></li>
+<li><p><a href="https://stackshare.io/udemy/udemy">Udemy</a>: Python, jQuery, Node.js, React, MySQL, NGINX, CloudFlare, AngularJS, Redis, Django, Spring Boot, Kafka, Kotlin, Memcached, ElasticSearch, GitHub, Docker, Jenkins, K8s, PyCharm, Ansible, Terraform, Sentry, Datadog</p></li>
+</ul>
+</section>
+<section id="the-meta-data-engineering-stack" class="level3">
+<h3 class="anchored" data-anchor-id="the-meta-data-engineering-stack">The Meta Data Engineering Stack</h3>
+<p>We picked the stack for data engineering at Meta (fka Facebook) for a deeper examination because their team provided a detailed <a href="https://medium.com/@AnalyticsAtMeta/data-engineering-at-meta-high-level-overview-of-the-internal-tech-stack-a200460a44fe">article</a> that discusses some of the characteristics of data engineering at large, modern companies <span class="citation" data-cites="AnalticsAtMeta">(<a href="../references.html#ref-AnalticsAtMeta" role="doc-biblioref">Meta 2023</a>)</span>:</p>
+<ul>
+<li><strong>Very</strong> large data warehouses</li>
+<li>Complex data pipelines</li>
+<li>A mix of commercial and open-source tools</li>
+<li>A mix of in-house and 3<sup>rd</sup>-party tools</li>
+</ul>
+<p>The main data warehouse for analytics consists of a collection of millions of Hive tables stored in ORC (Optimized Row Columnar) format (see <a href="../data/sources_and_files.html#sec-datasource-orc" class="quarto-xref"><span>Section 4.4.4</span></a>). Meta maintains its own fork of ORC, which suggests that they optimized the file format for their use cases.</p>
+<p>The data warehouse is so large that it cannot be stored in one data center. The data are partitioned geographically and logically into namespaces—groups of tables that are likely used together. Tables in the same namespace are located together in the same data center location to facilitate merges and joins without sending data across geographies. If data needs to be accessed across namespaces, the data are replicated to another namespace so that they can be processed at the same location.</p>
+<p>You really have a lot of data if the analytic data needs to be spread across multiple data centers in multiple geographies. The total size of the Meta data warehouse is measured in exabytes (millions of terabytes).</p>
+<p>Meta has a strict data retention policy, table partitions older than the table’s retention time are deleted or archived following anonymization of the data.</p>
+<p>To find data in such a massive data warehouse, Meta developed its own tool, iData, to search for data by keyword. The iData search engine returns tables ranked by relevance, considering data freshness, number of uses, and number of mentions in posts of the table.</p>
+<p>To query the data warehouse, Meta uses Presto and Spark. Presto is an open-source SQL querying engine originally developed by Meta. After open-sourcing Presto, Meta maintains its own internal fork. SQL (Presto SQL or Spark SQL) is key for querying the data at Meta. Presto is used for most day-to-day queries; a light query at Meta’s scale scans through a few billion rows of data. Spark is used for the heavy workloads.</p>
+<p>Data exploration and analysis are based on internal tools, Daiquery is the internal tool for querying and visualizing any data source. Bento is an internal implementation of Jupyter notebooks for Python and R code.</p>
+<p>Dashboards are created with another internal tool, Unidash.</p>
+<p>Data pipelines are written in SQL, wrapped in Python, and orchestrated with Dataswarm, a predecessor of Airflow.</p>
+<p>VSCode is the IDE of choice for developing data pipelines and has been enhanced with custom plugins developed internally. For example, a custom linter checks SQL statements. On Save the internal VSCode extension generates the directed acyclic graph for the pipeline. The data engineer can then schedule a test run of the pipeline using real data, writing the result to a temporary result table.</p>
+</section>
+</section>
+<section id="sec-tools-eda-bi" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="sec-tools-eda-bi"><span class="header-section-number">19.2</span> Exploratory Data Analysis and Business Intelligence</h2>
+<p>Business Intelligence (BI) is the processing of organizational data and presenting it in reports and on dashboards. The goal is to help an organization’s operations by using relevant data. Key functions are to monitor, report, and analyze the business operations. BI overlaps with Exploratory Data Analysis (EDA) in that it is highly descriptive, relying on visualizations and summarizations to inform about what is and has been happening.</p>
+<p>Here is a list of some BI tools you will encounter in practice (in no particular order):</p>
+<ul>
+<li><a href="https://powerbi.microsoft.com/en-us/">Microsoft Power BI</a></li>
+<li><a href="https://www.tableau.com/">Tableau</a> (acquired by Salesforce)</li>
+<li><a href="https://www.heap.io/">Heap Analytics</a></li>
+<li><a href="https://www.metabase.com/">Metabase</a></li>
+<li><a href="https://mode.com/">Mode</a> (acquired by ThoughtSpot)</li>
+<li><a href="https://www.thoughtspot.com/">ThoughtSpot</a></li>
+<li><a href="https://www.qlik.com/us/">Qlik</a></li>
+<li><a href="https://www.sisense.com/">Sisense</a></li>
+<li><a href="https://www.sap.com/products/technology-platform/bi-platform.html">SAP BusinessObjects</a></li>
+<li><a href="https://www.oracle.com/business-analytics/business-intelligence/technologies/bi.html">Oracle BI</a></li>
+<li><a href="https://www.tibco.com/products/tibco-spotfire">TIBCO Spotfire</a></li>
+<li><a href="https://aws.amazon.com/quicksight/">AWS QuickSights</a></li>
+<li><a href="https://cloud.google.com/looker">Looker</a> (Looker Studio)</li>
+<li><a href="https://www.domo.com/business-intelligence">DOMO</a></li>
+<li><a href="https://www.ibm.com/products/cognos-analytics">IBM Cognos Analytics</a></li>
+<li><a href="https://www.microstrategy.com/en">MicroStrategy</a></li>
+<li><a href="https://www.yellowfinbi.com/">Yellowfin</a></li>
+<li><a href="https://www.sas.com/en_us/solutions/augmented-analytics-business-intelligence.html">SAS Augmented Analytics &amp; BI</a></li>
+<li><a href="https://www.jmp.com/en_us/home.html">JMP</a></li>
+</ul>
+</section>
+<section id="data-engineering" class="level2" data-number="19.3">
+<h2 data-number="19.3" class="anchored" data-anchor-id="data-engineering"><span class="header-section-number">19.3</span> Data Engineering</h2>
+<p>Data engineers build pipelines that help to collect, merge, cleanse, prepare, and transform data for subsequent analytics. Data engineering defines, creates, and maintains the infrastructure that enables modern data analytics. Key steps in the data engineering workflow are pipelining, <a href="#_Data_Replication_and">data replication</a>, <a href="#_Data_Replication_and">change-data-capture</a> (CDC), <a href="#_ETL_and_ELT">ETL</a> (Extract-Transform-Load) and/or <a href="#_ETL_and_ELT">ELT</a> (Extract-Load-Transform).</p>
+<p>Here is a list of some common tools used in data engineering.</p>
+<ul>
+<li><a href="https://www.getdbt.com/">Dbt Labs</a>. The “t” in dbt is the “T” in ELT. Dbt is a SQL-based data engineering tool that assumes the data is already loaded into the target system. It transforms data where it lives.</li>
+<li><a href="https://www.fivetran.com/">Fivetran</a>. An ELT and data-movement platform with extensive data replication and change-data-capture capabilities.</li>
+<li><a href="https://www.cdata.com/">CData</a>. Data connectivity, data movement, data sync (CDC).</li>
+<li><a href="https://spark.apache.org/">Spark</a>. An engine for distributed big-data analytics with interfaces for Python (pySpark), SQL (spark-sql), Scala, Java, and R (sparkR)</li>
+<li><a href="https://www.dask.org/">Dask</a>. A parallel-processing framework for Python</li>
+<li><a href="https://airflow.apache.org/">Apache Airflow</a>. A Python-based tool to create and manage workflows. Often used to pipeline data.</li>
+<li><a href="https://www.prefect.io/">Prefect</a>. Workflow orchestration for data engineers and ML engineers.</li>
+<li><a href="https://kafka.apache.org/">Apache Kafka</a>. Open-source distributed event-streaming platform that is frequently used to move data through streaming pipelines.</li>
+<li><a href="https://www.matillion.com/">Matillion</a>. Build and orchestrate data pipelines.</li>
+<li>Databases (see <a href="../data/sources_and_files.html#sec-datasource-dbms" class="quarto-xref"><span>Section 4.1</span></a>)</li>
+<li><a href="https://www.elastic.co/elasticsearch/">ElasticSearch</a>. Distributed search and analytics engine.</li>
+<li><a href="https://prestodb.io/">Presto</a>. An open-source, distributed SQL engine for analytic queries</li>
+<li><a href="https://redis.io/">Redis</a>. An open-source, in-memory data store. Often used as a memory cache.</li>
+</ul>
+</section>
+<section id="data-visualization" class="level2" data-number="19.4">
+<h2 data-number="19.4" class="anchored" data-anchor-id="data-visualization"><span class="header-section-number">19.4</span> Data Visualization</h2>
+<ul>
+<li><p>Python-based</p></li>
+<li><p>pandas, matplotlib, seaborn, plotly, Vega-altair, plotnine (ggplot)</p></li>
+<li><p>R-based</p></li>
+<li><p>tidyverse (dplyr, tidyr, ggplot2, shiny)</p></li>
+<li><p>Many of the tools listed in <a href="#sec-tools-eda-bi" class="quarto-xref"><span>Section 19.2</span></a>.</p></li>
+</ul>
+</section>
+<section id="data-analytics-and-machine-learning" class="level2" data-number="19.5">
+<h2 data-number="19.5" class="anchored" data-anchor-id="data-analytics-and-machine-learning"><span class="header-section-number">19.5</span> Data Analytics and Machine Learning</h2>
+<section id="cloud-service-providers" class="level3">
+<h3 class="anchored" data-anchor-id="cloud-service-providers">Cloud Service Providers</h3>
+<ul>
+<li><a href="https://aws.amazon.com/sagemaker/">AWS SageMaker</a></li>
+<li><a href="https://azure.microsoft.com/en-us/products/synapse-analytics">Azure Synapse Analytics</a></li>
+<li><a href="https://cloud.google.com/bigquery/docs/bqml-introduction">Google BigQuery ML</a></li>
+</ul>
+</section>
+<section id="languages-packages" class="level3">
+<h3 class="anchored" data-anchor-id="languages-packages">Languages &amp; Packages</h3>
+<ul>
+<li>Python-based
+<ul>
+<li>numpy, scipy, pandas, polars, statsmodels, scikit-learn</li>
+<li>Pyspark</li>
+</ul></li>
+<li>Scala-based
+<ul>
+<li>Spark</li>
+</ul></li>
+<li>R-based
+<ul>
+<li>Basic modeling capabilities are built into the language</li>
+<li>dplyr, tidyr, caret, gam, glmnet, nnet, KernLab, E1071, RandomForest, tree, gbm, xgboost, lme4, boot, …. See the <a href="https://cran.r-project.org/web/views/MachineLearning.html">CRAN overview</a> for Machine Learning and Statistical Learning</li>
+<li>sparkR</li>
+</ul></li>
+<li>Java: mostly used to put models into production and to build applications rather than model building.
+<ul>
+<li>Deeplearning4j: open-source toolkit for Java to deploy deep neural nets.</li>
+<li>ND4J: n-dimensional array objects for scientific computing</li>
+</ul></li>
+<li>Golang: Go is used mainly as a language for managing and orchestrating backend architecture but is finding more applications in data orchestration.</li>
+</ul>
+</section>
+<section id="commercial-offerings" class="level3">
+<h3 class="anchored" data-anchor-id="commercial-offerings">Commercial Offerings</h3>
+<ul>
+<li><a href="https://www.alteryx.com/">Alteryx</a></li>
+<li><a href="https://www.knime.com/">KNIME</a></li>
+<li><a href="https://domino.ai/">Domino Data Lab</a></li>
+<li><a href="https://www.datarobot.com/">DataRobot</a></li>
+<li><a href="https://www.dataiku.com/">Dataiku</a></li>
+<li><a href="https://h2o.ai/">H20.ai</a></li>
+<li><a href="https://rapidminer.com/">RapidMiner</a> (acquired by Altair)</li>
+<li><a href="https://mindsdb.com/">MindsDB</a></li>
+<li><a href="https://www.databricks.com/">Databricks</a></li>
+<li><a href="https://www.sas.com/en_us/software/viya.html">SAS Viya</a></li>
+<li>J<a href="https://www.jmp.com/en_us/software/predictive-analytics-software.html">MP Pro</a></li>
+<li><a href="https://www.mathworks.com/products/matlab.html">MATLAB</a></li>
+</ul>
+</section>
+</section>
+<section id="deep-learning" class="level2" data-number="19.6">
+<h2 data-number="19.6" class="anchored" data-anchor-id="deep-learning"><span class="header-section-number">19.6</span> Deep Learning</h2>
+<ul>
+<li><a href="https://www.tensorflow.org/">TensorFlow</a></li>
+<li><a href="https://keras.io/">Keras</a></li>
+<li><a href="http://torch.ch/">Torch</a></li>
+<li><a href="https://pytorch.org/">PyTorch</a></li>
+<li><a href="https://learn.microsoft.com/en-us/cognitive-toolkit/">Microsoft Cognitive Toolkit</a> (CNTK)</li>
+<li><a href="https://openai.com/">OpenAI</a></li>
+<li><a href="https://opencv.org/">OpenCV</a></li>
+<li>Viso Suite from <a href="https://viso.ai/">viso.ai</a></li>
+<li><a href="https://github.com/DeepLearningKit/DeepLearningKit">DeepLearningKit</a> for Apple tvOS, iOS, OS X</li>
+<li><a href="https://h2o.ai/">H2O.ai</a></li>
+<li><a href="https://caffe.berkeleyvision.org/">Caffe</a> from Berkeley AI Research</li>
+</ul>
+</section>
+<section id="ides-and-developer-productivity" class="level2" data-number="19.7">
+<h2 data-number="19.7" class="anchored" data-anchor-id="ides-and-developer-productivity"><span class="header-section-number">19.7</span> IDEs and Developer Productivity</h2>
+<ul>
+<li><a href="https://ipython.readthedocs.io/en/stable/">IPython</a>: a command shell for interactive computing</li>
+<li>JupyterLab and <a href="https://jupyter.org/">Jupyter</a> Notebook</li>
+<li><a href="https://www.spyder-ide.org/">Spyder</a>: IDE for Python</li>
+<li><a href="https://code.visualstudio.com/">VSCode</a>: a code editor with IDE-like plugins</li>
+<li><a href="https://visualstudio.microsoft.com/">Visual Studio</a> (an IDE)</li>
+<li><a href="https://www.jetbrains.com/dataspell/">DataSpell</a> from JetBrains</li>
+<li><a href="https://www.jetbrains.com/pycharm/">PyCharm</a>: a commercial IDE for Python from JetBrains</li>
+<li><a href="https://colab.google/">Google Colab</a>(oratory)</li>
+<li>Git, <a href="https://about.gitlab.com/">GitLab</a>, <a href="https://github.com/">GitHub</a></li>
+<li><a href="https://github.com/features/copilot">GitHub Copilot</a></li>
+<li><a href="https://posit.co/products/open-source/rstudio/">RStudio</a> (free open-source edition)</li>
+</ul>
+</section>
+<section id="cloud-computing-devops" class="level2" data-number="19.8">
+<h2 data-number="19.8" class="anchored" data-anchor-id="cloud-computing-devops"><span class="header-section-number">19.8</span> Cloud Computing &amp; DevOps</h2>
+<ul>
+<li><a href="https://aws.amazon.com/">AWS</a> (Amazon Web Services)</li>
+<li>Microsoft <a href="https://azure.microsoft.com/en-us">Azure</a></li>
+<li><a href="https://cloud.google.com/?hl=en">GCP</a> (Google Cloud Platform)</li>
+<li><a href="https://www.docker.com/">Docker</a></li>
+<li><a href="https://kubernetes.io/">Kubernetes</a> (K8s)</li>
+<li><a href="https://fly.io/">Fly.io</a></li>
+<li><a href="https://www.cloudflare.com/">Cloudflare</a></li>
+<li><a href="https://www.jenkins.io/">Jenkins</a> (CI/CD)</li>
+<li><a href="https://www.ansible.com/">Ansible</a></li>
+</ul>
+</section>
+<section id="web-development" class="level2" data-number="19.9">
+<h2 data-number="19.9" class="anchored" data-anchor-id="web-development"><span class="header-section-number">19.9</span> Web Development</h2>
+<ul>
+<li><a href="https://svelte.dev/">Svelte</a></li>
+<li><a href="https://vuejs.org/">Vue.js</a></li>
+<li><a href="https://angular.io/">Angular</a></li>
+<li><a href="https://react.dev/">React</a></li>
+<li><a href="https://d3js.org/">D3.js</a> (data visualization)</li>
+<li><a href="https://laravel.com/">Laravel</a> (PHP based)</li>
+<li><a href="https://graphql.org/">GraphQL</a> (Graphene, Apollo etc.)</li>
+<li><a href="https://nodejs.org/en">NodeJS</a></li>
+<li><a href="https://flask.palletsprojects.com/en/2.3.x/">Flask</a></li>
+<li><a href="https://www.djangoproject.com/">Django</a></li>
+<li><a href="https://www.heroku.com/">Heroku</a></li>
+<li><a href="https://vercel.com/">Vercel</a>, Next.js</li>
+<li><a href="https://www.netlify.com/">Netlify</a></li>
+<li><a href="https://aws.amazon.com/amplify/">AWS Amplify</a></li>
+<li><a href="https://aws.amazon.com/lambda/">AWS Lambda</a></li>
+<li><a href="https://www.mongodb.com/developer/products/realm/">MongoDB Realm</a></li>
+<li><a href="https://firebase.google.com/">Firebase</a></li>
+<li><a href="https://www.digitalocean.com/">DigitalOcean</a></li>
+</ul>
+</section>
+<section id="programming-languages" class="level2" data-number="19.10">
+<h2 data-number="19.10" class="anchored" data-anchor-id="programming-languages"><span class="header-section-number">19.10</span> Programming Languages</h2>
+<ul>
+<li>R</li>
+<li>Python</li>
+<li>SQL</li>
+<li>Scala</li>
+<li>Julia</li>
+<li>PHP</li>
+<li>HTML</li>
+<li>CSS</li>
+<li>C/C++</li>
+<li>Go</li>
+<li>Rust</li>
+<li>Java</li>
+<li>JavaScript</li>
+<li>TypeScript</li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-AnalticsAtMeta" class="csl-entry" role="listitem">
+Meta, Analytics at. 2023. <span>“Data Engineering at Meta: High-Level Overview of the Internal Tech Stack.”</span> <em>Medium</em>. <a href="https://medium.com/@AnalyticsAtMeta/data-engineering-at-meta-high-level-overview-of-the-internal-tech-stack-a200460a44fe">https://medium.com/@AnalyticsAtMeta/data-engineering-at-meta-high-level-overview-of-the-internal-tech-stack-a200460a44fe</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../integ/coding_practices.html" class="pagination-link" aria-label="Coding Best Practices">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Foundations of Data Science by Oliver Schabenberger</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
