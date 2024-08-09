@@ -43,7 +43,7 @@ In this subsection we consider a data set on housing prices in California, based
 The variables in the data are:
 
 | Variable           | Description                                                                                         |
-|--------------------|-----------------------------------------------------------------------------------------------------|
+|----------------|--------------------------------------------------------|
 | longitude          | A measure of how far west a house is; a higher value is farther west                                |
 | latitude           | A measure of how far north a house is; a higher value is farther north                              |
 | housing_median_age | Median age of a house within a block; a lower number is a newer building                            |
@@ -304,7 +304,7 @@ Columns `DATE` and `TIME` contain no null (missing) values, their count equals t
 @tbl-pandas-missing displays Pandas DataFrame methods to operate on missing values.
 
 | Method          | Description                                                                      | Notes                                                                     |
-|:----------------|----------------------------------------------------------------------------------|---------------------------------------------------------------------------|
+|:--------------|------------------------------|---------------------------|
 | `isnull()`      | Returns a boolean same-sized object indicating if the missing values are missing | `isna()` is an alias                                                      |
 | `notnull()`     | Opposite of `isnull()`, indicating if values are not missing                     | `notna()` is an alias                                                     |
 | `dropna()`      | Remove missing values, dropping either rows (`axis=0`) or columns (`axis=1`)     | `how={'any','all'}` to determine when to drop a row or column             |

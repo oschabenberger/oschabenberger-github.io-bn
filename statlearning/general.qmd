@@ -4,7 +4,7 @@ $$
 $$
 :::
 
-# General Topics
+# General Topics {#sec-statlearn-general}
 
 ## Introduction
 
@@ -487,7 +487,7 @@ This was the problem faced by systems like Chat-GPT. How do you score the answer
 
 In 2017, when AlphaGo beat Lee Sedol, it was thought that reinforcement learning would change the world. Despite its remarkable achievement in gameplay and robotics, the impact of RL fell short of expectations.
 
-![n LeCun weighs in on the impact of reinforcement learning (RL).](images/YannLeCun_on_RL.png){#fig-sl-Yann-leCun fig-align="center"}
+![Yann LeCun weighs in on the impact of reinforcement learning (RL).](images/YannLeCun_on_RL.png){#fig-sl-Yann-leCun fig-align="center"}
 
 Why did RL fall short? Developing and training reinforcement learning models is an expensive undertaking. The barrier to entry is very high, limiting RL research and development to large tech-savvy organizations. The main reason is the Sim2Real problem mentioned in the tweet above. Reinforcement learning trains an agent in a simulated, artificial environment. The real world is much more complex and transferring training based on simulation to reality is difficult. The RL agents end up performing poorly in real applications.
 

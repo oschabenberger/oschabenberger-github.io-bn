@@ -1,11 +1,12 @@
 project:
   type: book
+  output-dir: docs
 
 book:
   title: "Foundations of Data Science"
   subtitle: "Beyond the Numbers"
   author: "Oliver Schabenberger"
-  date: "06/05/2024"
+  date: "08/09/2024"
   reader-mode: true
 
   page-footer:
@@ -19,12 +20,12 @@ book:
     - index.qmd
     - intro.qmd
 
-    - part: proj.qmd
+    - part: "Part I. Data Science and Data Science Projects"
       chapters:
         - proj/history.qmd
         - proj/lifecycle.qmd
 
-    - part: databasics.qmd
+    - part: "Part II. Data Preparation and Understanding"
       chapters:
         - data/sources_and_files.qmd
         - data/data_access.qmd
@@ -34,19 +35,24 @@ book:
         - data/sqlbasics.qmd
         - data/integration.qmd
 
-    - part: stat_learning.qmd
+    - part: "Part III. Statistical Learning"
       chapters:
         - statlearning/general.qmd
         - statlearning/mathstat.qmd
         - statlearning/linalg.qmd
         - statlearning/featproc.qmd
         
-    - part: "Applied Ethics in Data Science"
+    - part: "Part IV. Applied Ethics in Data Science"
       chapters:
         - ethics/intro.qmd
         - ethics/bias_harm.qmd
         - ethics/privacy.qmd
 
+    - part: "Part V. Integration of Data Science Solutions"
+      chapters:
+        - integ/coding_practices.qmd
+        - integ/tools.qmd
+        
     - references.qmd
 
 bibliography: references.bib

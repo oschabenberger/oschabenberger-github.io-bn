@@ -1,6 +1,16 @@
 # References {.unnumbered}
 
 ::: {#refs}
+
+@article{AnalticsAtMeta,
+author={Analytics at Meta},
+title={Data engineering at Meta: High-Level Overview of the internal tech stack},
+journal={Medium},
+yeat={2023},
+issue-date={October 12, 2023},
+url={https://medium.com/@AnalyticsAtMeta/data-engineering-at-meta-high-level-overview-of-the-internal-tech-stack-a200460a44fe}
+}
+
 @article{AngwinProPublica_2016,
 title={Machine Bias—Risk Assessment in Criminal Sentencing},
 url={https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing},
@@ -127,6 +137,13 @@ url={https://resources.oreilly.com/examples/0636920203964/},
 author={Loukides, Mike and Mason, Hilary and Patil, D.J.},
 publisher={O’Reilly Media},
 year={2018}
+}
+
+@book{Pengetal2020,
+title={Mastering Software Development in R},
+author={Peng, Roger D. and Kross, Sean and Anderson, Brooke},
+year={2020},
+url={https://bookdown.org/rdpeng/RProgDA/}
 }
 
 @article{RSS_2019,

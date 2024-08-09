@@ -1,6 +1,6 @@
 # Data Sources and File Formats
 
-## Databases
+## Databases {#sec-datasource-dbms}
 
 According to [Wikipedia](https://en.wikipedia.org/wiki/Database), a database is an “organized collection of data stored and accessed electronically through the use of a database management system” (DBMS). The three elements are the data, a form of data storage, and DBMS software that allows a user to interact with the system. The terms database and DBMS are often used interchangeably.
 
@@ -22,7 +22,7 @@ Unless you build your own tech stack, write your own application, or start your 
 
 -   A surprising amount of movement in a market segment that is supposed to be relatively stable. Organizations are loath to change database management systems that are key to their operations. Migrating a database that is the backbone of an essential part of the business is the last thing a CIO wants to do. Databases are not as sticky as they used to be.
 
-![Database market share 2011—2021, according to Gardner. [Source](https://www.techrepublic.com/article/new-gartner-report-shows-massive-growth-database-market-fueled-cloud/).](/images/data/GartnerDMBSMarketShare.jpeg){#fig-data-Gartner .lightbox fig-align="center" width="80%"}
+![Database market share 2011—2021, according to Gardner. [Source](https://www.techrepublic.com/article/new-gartner-report-shows-massive-growth-database-market-fueled-cloud/).](images/GartnerDMBSMarketShare.jpeg){#fig-data-Gartner .lightbox fig-align="center" width="80%"}
 
 It is important for anyone involved with data to understand some basics of database architectures and the strengths and weaknesses of the different database designs. A NoSQL key-value store can be a great way to work with unstructured data but can be a terrible choice for analytics compared to a relational column store. Many modern DBMS are multi-model, supporting multiple data models in a single backend, for example, key-value pairs, relational, and time-series data. There are so many databases because there are so many use cases for working with data; databases try to optimize for specific data access patterns and use cases.
 
@@ -90,16 +90,23 @@ Why are these arcane details of database architecture important for a data scien
 
 The following table shows seven of the 150 observations from the famous Iris data set that is used in statistics and machine learning courses to apply regression, classification, and clustering methods. The full data set contains 50 observations for each of three Iris species: *Iris setosa*, *Iris versicolor*, and *Iris virginica*. Four measurements of the flowers, the length and width of the petals (the large leaves on the flowers) and the sepals (the small leaves) were taken on each plant.
 
-|                 |                |                 |                |             |
-|-----------------|----------------|-----------------|----------------|-------------|
++-----------------+----------------+-----------------+----------------+-------------+
 | **SepalLength** | **SepalWidth** | **PetalLength** | **PetalWidth** | **Species** |
++-----------------+----------------+-----------------+----------------+-------------+
 | 5.1             | 3.5            | 1.4             | 0.2            | setosa      |
++-----------------+----------------+-----------------+----------------+-------------+
 | 4.9             | 3.0            | 1.4             | 0.2            | setosa      |
++-----------------+----------------+-----------------+----------------+-------------+
 | 4.7             | 3.2            | 1.3             | 0.2            | setosa      |
++-----------------+----------------+-----------------+----------------+-------------+
 | 4.6             | 3.1            | 1.5             | 0.2            | setosa      |
++-----------------+----------------+-----------------+----------------+-------------+
 | 5.0             | 3.6            | 1.4             | 0.2            | setosa      |
++-----------------+----------------+-----------------+----------------+-------------+
 | 7.0             | 3.2            | 4.7             | 1.4            | versicolor  |
++-----------------+----------------+-----------------+----------------+-------------+
 | 6.4             | 3.2            | 4.5             | 1.5            | versicolor  |
++-----------------+----------------+-----------------+----------------+-------------+
 
 : Flower measurements for five *Iris setosa* and two *Iris versicolor* from the famous iris data set.
 
@@ -525,7 +532,7 @@ Although CSV and JSON are ubiquitous, they were never meant for large data volum
 
 You will encounter many other data formats in data science work, but these five file formats cover a lot of ground, you should have a basic understanding of their advantages and disadvantages.
 
-### CSV
+### CSV {#sec-datasource-csv}
 
 In data science projects you will invariably work with *comma-separated values* (CSV) files. Not because that is a great file format, but because CSV files are ubiquitous for rectangular data sets made up of rows and columns. Each line of the file stores one record with values in plain text separated by commas.
 
@@ -555,8 +562,6 @@ There are some considerable disadvantages of CSV files, however:
 
 -   **Efficiency**: much more efficient formats for storing data exist, especially large data sets.
 
-<!-- -->
-
 -   **Broken**: CSV files can be easily broken by applications. Examples include inserting line breaks, limiting line width, not handling embedded quotes correctly, blank lines.
 
 -   **Missing values** (NaNs): The writer and reader of CSV files need to agree how to represent missing values and values representing not-a-number. Inconsistency between writing and reading these values can have disastrous results. For example, it is a bad but common practice to code missing values with special numbers such as 99999; how does the application reading the file know this is the code for a missing value?
@@ -571,7 +576,7 @@ There are some considerable disadvantages of CSV files, however:
 
 Despite these drawbacks, CSV is one of the most common file formats. It is the lowest common denominator format to exchange data between disparate systems.
 
-### JSON
+### JSON {#sec-datasource-json}
 
 [JSON](https://www.json.org/json-en.html) stands for JavaScript Object Notation, and although it was borne out of interoperability concerns for JavaScript applications and is based on a JavaScript standard, it is a language-agnostic data format. Initially used to pass information in human readable form between applications over APIs (Application Programmer Interfaces), JSON has grown into a general-purpose format for text-based, structured information. It is the standard for communicating on the web. The correct pronunciation of JSON is apparently akin to the name “Jason”, but “JAY-sawn” has become common.
 
@@ -599,7 +604,7 @@ Many databases support JSON as a data type, allowing you to store hierarchical i
 
 Since so much data is stored in JSON format, you need to get familiar and comfortable with working with JSON files. Data science projects are more likely consumers of JSON files rather than producer of files.
 
-### Apache Parquet
+### Apache Parquet {#sec-datasource-parquet}
 
 The [Apache Parquet](https://parquet.apache.org/) open-source file format is a binary format—data are not stored in plain text but in binary form. Originally conceived as a column-based file format in the Hadoop ecosystem, it has become popular as a general file format for analytical data inside and outside of Hadoop and its file system HDFS: for example, as an efficient analytic file format for data exported to data lakes or in data processing with Spark.
 
@@ -617,19 +622,27 @@ Parquet uses several compression techniques to reduce the size of the files such
 
 Because of its complex file structure, Parquet files are relatively slow to write. The file format is optimized for the WORM paradigm: write-once, read many times.
 
-|                             |        CSV        |     JSON      |    Parquet    |
-|-----------------------------|:-----------------:|:-------------:|:-------------:|
-| **Columnar**                |        No         |      No       |      Yes      |
-| **Compression**             |        Yes        |      Yes      |      Yes      |
-| **Human Readable**          |        Yes        |      Yes      |      No       |
-| **Nestable**                |        No         |      Yes      |      Yes      |
-| **Complex Data Structures** |        No         |      Yes      |      Yes      |
++-----------------------------+-------------------+---------------+---------------+
+|                             | CSV               | JSON          | Parquet       |
++=============================+:=================:+:=============:+:=============:+
+| **Columnar**                | No                | No            | Yes           |
++-----------------------------+-------------------+---------------+---------------+
+| **Compression**             | Yes               | Yes           | Yes           |
++-----------------------------+-------------------+---------------+---------------+
+| **Human Readable**          | Yes               | Yes           | No            |
++-----------------------------+-------------------+---------------+---------------+
+| **Nestable**                | No                | Yes           | Yes           |
++-----------------------------+-------------------+---------------+---------------+
+| **Complex Data Structures** | No                | Yes           | Yes           |
++-----------------------------+-------------------+---------------+---------------+
 | **Named Columns**           | Yes, if in header | Based on scan | Yes, metadata |
-| **Data Types**              |   Based on scan   | Based on scan | Yes, metadata |
++-----------------------------+-------------------+---------------+---------------+
+| **Data Types**              | Based on scan     | Based on scan | Yes, metadata |
++-----------------------------+-------------------+---------------+---------------+
 
 : Comparison of popular file formats in data science.
 
-### Apache ORC
+### Apache ORC {#sec-datasource-orc}
 
 The [Apache ORC](https://orc.apache.org/) (Optimized Row Columnar) open-source file format, like the Parquet file format, was originally associated with the Hadoop Big Data ecosystem. ORC files have a purely columnar storage format unlike the row-group/column chunk hybrid storage in Parquet files.
 
@@ -641,7 +654,7 @@ A stripe is by default 64 MB in size and ORC files can have multiple stripes. Th
 
 The ORC format was optimized for Hive, the data warehouse in the Hadoop ecosystem. For example, Hive and ORC together support ACID transactions on top of Hadoop. You will find that outside of Hadoop, support for ORC files is not as generous as for Parquet files. For example, you can read a multi-file Parquet file with Pandas in a single line of code. To read multi-file ORC files you need to append the results of reading the individual files. The Pandas functions `read_orc()` and `to_orc()` to read and write ORC files are not supported on Windows.
 
-### Apache Avro
+### Apache Avro {#sec-datasource-avro}
 
 [Apache Avro](https://avro.apache.org/) is an open-source, row-based, schema-based, file format. It is often used in conjunction with the streaming platform Apache Kafka, but Avro files are useful for batch processing as well. The storage format in Avro files is mixed in that the schema information is stored in JSON format while the data is stored in binary form. The schema is thus human readable.
 
@@ -656,3 +669,19 @@ If you work with large data sets, you perform data analytics, you process batch 
 Main contributors to the Python pandas project are also involved with Arrow, so there is a lot of portability between Arrow tables and pandas DataFrames. The pyarrow package is the backend for some of the read and write functions in pandas that handle Big Data formats such as Parquet and ORC.
 
 Newer releases of Pandas are leaning more on pyarrow, e.g., Pandas 2.0.
+
+### Spreadsheets {#sec-datasource-xls}
+
+Microsoft Excel is one of the most common formats to store data. Why are we discussing it here, after all the other file formats. Like CSV files, Excel files are ubiquitous and a horrific format to store data for analytics. What goes for Excel goes for all other spreadsheet formats. Do not use spreadsheets for analytic data! There be dragons!
+
+We like rectangular (tabular) layouts in rows and columns: every row is an observation, every column is a variable. While spreadsheets appear to be organized this way, there are many ways in which the basic tabular layout can be messed with:
+
+* Cells can refer to other cells on the same or on another sheet.
+* Cells can contain data, figures, calculations, text, etc.  
+* Cells can be merged
+
+One of the most problematic features of spreadsheets is how easily the data can be modified---accidentally. How many times have you been in a spreadsheet, typed something, and wondered where the input went and whether contents of a cell were changed? 
+
+:::{.callout-tip}
+This is another great question to ask a potential employer when you interview: "What data formats and/or databases are you using for analytic data?" If the answer is "We email xlsx files around once a week" run; run like it is the plague. If the answer is "The primary data is stored in Parquet files in S3 buckets", reply "Tell me more!"
+:::

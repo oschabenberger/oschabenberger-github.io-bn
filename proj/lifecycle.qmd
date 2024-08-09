@@ -105,7 +105,7 @@ A model is a generic term for a system that takes inputs, processes them accordi
 Statistical models and machine learning models are trained on data. The training process shapes the capabilities of the model based on the training data. As a rule, more complex models require larger training data sets. The following table shows the increasing complexity (as measured by the number of parameters) of Open AI’s GPT foundation models. GPT-3.5 has 175 billion parameters and essentially was trained on all text data available on the internet.
 
 | Version of GPT | Released      | Number of Parameters                                                                    |
-|-------------|-------------|----------------------------------------------|
+|---------------|---------------|------------------------------------------|
 | GPT-1          | June 2018     |                                                                                         |
 | GPT-2          | February 2019 | 117 million                                                                             |
 | GPT-3.5        | November 2022 | 1.5 billion                                                                             |
@@ -249,7 +249,6 @@ Most algorithms are trained in batch on historical data. Many algorithms are dep
     -   one-way stateless webhooks over HTTP
     -   two-way stateful WebSockets over WS
     -   an asynchronous publish/subscribe (pub/sub) architecture
-
 -   Type of API
     -   RESTful
     -   SOAP
@@ -453,5 +452,3 @@ A cluster analysis was performed to group similar customers into segments, so th
 There are distinct groups of points with respect to (the standardized) spending and income. One group is near the center of the coordinate system, one group is in the upper-right quadrant, one group is in the lower-right quadrant. If the clustering algorithm worked properly, then these points should not be all assigned to the same cluster. This is an example where we need to take another look at the analysis. It turns out that the customer ID was erroneously included in the analysis. Unless that identifier is meaningful in distinguishing customers, it must be removed from the analysis. The results of the analysis without the customer ID are shown in @fig-proj-intuition-cluster2, confirming that the clustering algorithm indeed detected groups that have (nearly) distinct value ranges for spending score and income.
 
 ![Corrected cluster analysis after removing the non-informative customer ID variable from the analysis. The detected clusters map more clearly to groups of points that are distinct with respect to spending and income.](images/Intuition_Cluster2.png){#fig-proj-intuition-cluster2 .lightbox fig-align="center" width="80%"}
-
- 

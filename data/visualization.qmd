@@ -457,13 +457,13 @@ sns.histplot(data=penguins, x="flipper_length_mm", hue="species")
 
 To install plotly, assuming you are using pip to manage Python packages, simply run
 
-```{default}
+```{.default}
 pip install plotly
 ```
 
 On my system I also had to
 
-```{default}
+```{.default}
 pip install --upgrade nbformat
 ```
 
@@ -582,9 +582,9 @@ Each graphic consists of at least the following layers:
 
 In addition, we might apply statistical transformations of the data, must place all objects in a 2-dimensional space and decide on presentation elements such as fonts and colors. And if the data consist of multiple groups, we need a faceting specification to organize the graphic or the page in multiple groups.
 
-The next figure shows the layered representation of the grammar of graphics.
+@fig-data-grammar-of-graphics shows the layered representation of the grammar of graphics.
 
-![The grammar of graphics; a layered approach to building data visualizations.](images/GrammarOfGraphics.png){#fit-data-grammar-of-graphics .lightbox fig-align="center" width="80%"}
+![The grammar of graphics; a layered approach to building data visualizations.](images/GrammarOfGraphics.png){#fig-data-grammar-of-graphics .lightbox fig-align="center" width="80%"}
 
 Thinking about data visualization in these terms is helpful because we get away from thinking about pie charts and box plots and line charts, and instead about how to organize the basic elements of a visualization.
 

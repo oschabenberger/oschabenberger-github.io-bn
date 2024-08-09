@@ -724,7 +724,7 @@ x1_trans = quantizer.fit_transform(x1)
 
 plt.figure()
 plt.hist(x1,bins=20,color='0.7',alpha=0.7,label='Original')
-plt.hist(x1_boxcox,color='magenta',alpha=0.5,label='Quantile transformed')
+plt.hist(x1_trans,color='magenta',alpha=0.5,label='Quantile transformed')
 plt.legend()
 plt.show()
 ```

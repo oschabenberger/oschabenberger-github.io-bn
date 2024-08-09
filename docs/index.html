@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Oliver Schabenberger">
-<meta name="dcterms.date" content="2024-07-24">
+<meta name="dcterms.date" content="2024-08-09">
 
 <title>Foundations of Data Science</title>
 <style>
@@ -73,6 +73,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -132,8 +161,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./proj.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Science and Data Science Projects</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Part I. Data Science and Data Science Projects</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -155,8 +184,8 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./databasics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Basic Data Preparation and Understanding</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Part II. Data Preparation and Understanding</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -208,8 +237,8 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./stat_learning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistical Learning</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Part III. Statistical Learning</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -244,7 +273,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">Applied Ethics in Data Science</span></a>
+ <span class="menu-text">Part IV. Applied Ethics in Data Science</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -266,6 +295,29 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./ethics/privacy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Part V. Integration of Data Science Solutions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./integ/coding_practices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./integ/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
   </div>
 </li>
       </ul>
@@ -313,7 +365,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 24, 2024</p>
+      <p class="date">August 9, 2024</p>
     </div>
   </div>
   
@@ -328,8 +380,35 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="preface" class="level1 unnumbered">
 <h1 class="unnumbered">Preface</h1><p><img src="FoundationsCover.png" title="Foundations of Data Science" class="quarto-cover-image img-fluid"></p>
-<p>TODO: Write the Preface.</p>
-<p>To learn more about Quarto books visit <a href="https://quarto.org/docs/books" class="uri">https://quarto.org/docs/books</a>.</p>
+<p>Since data science appeared on the scene some decades ago it has been subject to constant change. In the beginning many were not quite sure what to make of data science. How was it a scientific discipline and how was it different from statistics or data analytics? Was data scientist not yet another description for the business analyst?</p>
+<p>In some ways the dust has settled by now and we have a much better handle on what data scientists do and on the skills they need. On the other hand the data profession in general has evolved and keeps expanding. At first, a data scientist was the all-round unicorn that was expert in engineering data, modeling data, writing code, and implementing data solutions. Those individuals were difficult to find and difficult to train.</p>
+<p>In smaller organizations the workload of the data scientist continues to be fluid, simply because the number of folks who can perform data-related tasks is limited. In larger organizations with dedicated data teams you can now find data engineers, data analysts, business analysts, machine learning engineers, AI engineers, statistical programmers, and so on. Where does a <strong>data scientist</strong> fit into this picture and what are the skills a data scientist should have to be and to remain competitive in this landscape?</p>
+<p>My own personal journey to data science took me from forestry to forest biometry to statistics to software development. Like me, many will come to data science from a non-statistical and non-computational path. As educators we need to think about how to ensure the foundations of the discipline are being taught. Assuming that everyone who strives for a career in data science will have a solid background in statistics, applied mathematics, and computer science is not helpful. We have to deal with varied backgrounds and strengths. Data science, like no other discipline I encountered in my 30+ year career, combines technical with non-technical skills, combines hard and “soft” (human) skills, and has a focus on solving real-world problems.</p>
+<p>It is OK to come to data science with strengths and weaknesses in different aspects of statistics, mathematics, computer science and domain knowledge. Those are the foundation <strong>disciplines</strong>. <strong>Your foundation</strong> lies in a genuine interest in these disciplines, the curiosity and drive to fill in the gaps, and a desire for lifelong learning. If you hate math and are not willing to learn the linear algebra concepts necessary to manipulate data science models—forget it. If you have not programmed before and think that you can pass that off to some software engineer—forget it. If you are afraid of public speaking and are not willing to work on improving communication skills—forget it.</p>
+<p>If you are excited about learning principles of data engineering and statistical learning, about communicating data concepts to colleagues, customers and executives, if you are aching to write better software, and love managing complex projects, then welcome! Data science has been waiting for you.</p>
+<hr>
+<p>The origin for this material lies in recognizing how data science as a discipline has evolved and continues to change. The foundational disciplines remain the same, but the demands on data scientists today are much more varied and complex than some courses and certifications would lead you to believe.</p>
+<p>In my own practical experience I have witnessed the transition from creating data/analytic teams in organizations—because that is what everyone else was doing—to measuring the success and justification of those teams in terms of value created for the business. Many projects are faltering in this respect, study after study reveals that the majority of data science projects do not succeed. There are many reasons for this sobering reality, how we educate and train for data science careers definitely plays a part.</p>
+<p>Understanding data science begins with recognizing data science as a team sport. It is not about slinging code and developing a cool model. As someone said,</p>
+<blockquote class="blockquote">
+<p>a data science model in a Jupyter notebook has $0.0 value.</p>
+</blockquote>
+<p>Learning all the classical and modern methods of data analysis is table stakes. Your random forest is not going to be any better than your colleague’s random forest. You are probably using the same software and are tuning the same hyperparameters. Everyone uses TensorFlow or CNTK or PyTorch to implement deep learning. You can implement LeNet-5 or AlexNet for image classification with a few lines of <code>R</code> of Python code—if you are not sure how, google it or ask ChatGPT.</p>
+<p>What are the differentiating factors in this competitive field?</p>
+<ul>
+<li><p>Understanding how to take a business problem, research, or policy question and turn it into a data project, executing the data project as a team and translating it back into a business, research, or policy solution.</p></li>
+<li><p>Being able to communicate with business, information technology, marketing, finance, and legal to define, develop and implement a data-driven solution.</p></li>
+<li><p>Being at times evangelist, programmer, project manager, instructor, presenter, and implementer.</p></li>
+<li><p>Understanding the ethical, security, and privacy issues associated with data and data-driven decisions.</p></li>
+<li><p>Cultivating a desire to learn as new tools and methods affect what can be done with data—GPT anyone?</p></li>
+</ul>
+<hr>
+<p>Lifelong learning is a mindset that has worked in my favor for decades. It is a growth mindset that builds on curiosity to push your boundaries further out. Faced with a formidable task you don’t know how to accomplish you say to yourself “I don’t know how to do this. <em>Not yet!</em>”. Contrast this with a fixed mindset that views one’s abilities as limited and stays within one’s comfort zone, not pushing against the boundaries. With a fixed mindset, “Not yet!” turns into “Not now” or “Not ever”.</p>
+<p>A growth mindset and joy of learning serves you well in data science. Any of the technology revolutions of the last decades had a profound effect on the way we collect, store, analyze, and use data: the internet, social media, cloud computing, artificial intelligence. You cannot just sit out cloud computing, for example, hoping that it will blow over.</p>
+<p>We might not know what the next disruption looks like, but we know it is coming. A few years ago, large language models were an interesting novelty, today they have changed our view of what is possible with data. At the same time, principal component analysis (PCA), one of the oldest statistical methods, continues to be one of the most important tools for summarization, visualization, and dimension reduction in statistics and machine learning. This tension between old and new is what makes data science such an exciting field.</p>
+<p>Let’s go.</p>
+<hr>
+<p>This material was written in Quarto, because it handles multiple programming languages in the same document, works in RStudio like RMarkdown on steroids, incorporates <span class="math inline">\(\LaTeX\)</span> beautifully, and creates great-looking and highly functional documents. To learn more about Quarto books visit <a href="https://quarto.org/docs/books" class="uri">https://quarto.org/docs/books</a>.</p>
 
 
 </section>
