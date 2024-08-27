@@ -4,7 +4,7 @@ $$
 $$
 :::
 
-# Linear Algebra
+# Linear Algebra {#sec-linear-algebra}
 
 ## Basics
 
@@ -482,7 +482,7 @@ If $\bX$ is of full column rank, then $\left( \bXpX \right)^{- 1}$ exists and we
 
 $$\widehat{\bbeta}=\left( \bXpX \right)^{- 1}\bX^{\prime}\bY$$
 
-### The "hat" Matrix
+### The "Hat" Matrix
 
 The ordinary least squares estimator is the orthogonal projection of $\bY$ onto the sub-space created by the columns of $\bX$. To see the projection matrix at work, compute the predicted values, $\bX\widehat{\bbeta}$:
 
@@ -537,7 +537,7 @@ $$\Var\left\lbrack \bH\bY \right\rbrack = \bH\text{Var}\left\lbrack \bY \right\r
 \frac{\sigma^{2}}{n} & \cdots & \frac{\sigma^{2}}{n}
 \end{bmatrix}$$
 
-## Multivariate Gaussian Distribution
+## Multivariate Gaussian Distribution {#sec-multi-gauss}
 
 ### Definition
 
@@ -545,7 +545,7 @@ A scalar random variable $Y$ has a **Gaussian** distribution function with mean 
 
 $$f(y) = \frac{1}{\sqrt{2\pi\sigma^{2}}}\exp\left\{ - \frac{1}{2\sigma^{2}}(y - \mu)^{2} \right\}$$
 
-We also say that $Y$ is **normally** distributed with mean $\mu$ and variance $\sigma^{2}$. The shorthand expressions $Y \sim G(\mu,\sigma^{2})$ or $Y \sim N(\mu,\sigma^{2})$ are common.
+We also say that $Y$ is **normally** distributed with mean $\mu$ and variance $\sigma^{2}$ but prefer the name Gaussian over Normal for the reasons given in @sec-prob-cont-dist. The shorthand expressions $Y \sim G(\mu,\sigma^{2})$ or $Y \sim N(\mu,\sigma^{2})$ are common.
 
 The generalization from a scalar random variable $Y$ to a random vector $\bY_{(n \times 1)}$ with a **multivariate Gaussian** distribution is as follows. $\bY_{(n \times 1)}$ has a multivariate Gaussian (normal) distribution with mean $\bmu$ and variance matrix $\bV$, if its density is given by
 
@@ -555,7 +555,7 @@ This is denoted with the shorthand $\bY \sim G_{n}(\bmu,\bV)$ or $\bY \sim N_{n}
 
 $$f\left( \bY \right)=\frac{1}{(2\pi)^{\frac{n}{2}}}\exp\left\{ - \frac{1}{2}\bY^{\prime}\bY \right\} = \frac{1}{(2\pi)^{\frac{n}{2}}}\exp\left\{ - \frac{1}{2}\sum_{i}^{n}y_{i}^{2} \right\}$$
 
-But this is just the product of the $n$ univariate densities of $N(0,1)$ random variables:
+But this is just the product of the $n$ univariate densities of $G(0,1)$ random variables:
 
 $$f\left( \bY \right) = f\left( y_{1} \right) \times \cdots \times f\left( y_{n} \right)$$
 
@@ -586,10 +586,10 @@ You cannot in general conclude that random variables are independent based on th
 $$\bY_{(n \times 1)} = \begin{bmatrix}
 \bY_{1(s \times 1)} \\
 \bY_{2(k \times 1)}
-\end{bmatrix},\ \ \bmu = \begin{bmatrix}
+\end{bmatrix},\qquad \bmu = \begin{bmatrix}
 \bmu_{1} \\
 \bmu_{2}
-\end{bmatrix},\ \ \ \ \ \ \bV = \begin{bmatrix}
+\end{bmatrix},\qquad \bV = \begin{bmatrix}
 \bV_{11} & \bV_{12} \\
 \bV_{21} & \bV_{22}
 \end{bmatrix}$$
@@ -598,7 +598,7 @@ If $\bV_{12} = \bzero$, then $\bY_{1}$ and $\bY_{2}$ are independent. Also, each
 
 It follows immediately that each element of $\bY$ follows a (univariate) Gaussian distribution, $Y_{i} \sim G(\mu_{i},V_{ii})$---all marginal univariate distributions are Gaussian.
 
-#### Conditionals are Gaussian}
+#### Conditionals are Gaussian
 
 The conditional distribution of $\bY_{1}$ given $\bY_{2}$ is also a Gaussian distribution, specifically:
 
@@ -620,25 +620,35 @@ $ln\mathcal{\{ l}\left( \bbeta;\bY \right\} = l\left( \bbeta;\bY \right) = - \fr
 
 Finding the maximum of this function with respect to $\bbeta$ is equivalent to minimizing the quadratic form $\left( \bY - \bX\bbeta \right)^\prime\bV^{-1}\left( \bY - \bX\bbeta \right)$ with respect to $\bbeta$. Applying the results about matrix differentiation from above we obtain
 
-$$\frac{\partial}{\partial\bbeta}\left( \bY - \bX\bbeta \right)^\prime\bV^{- 1}\left( \bY - \bX\bbeta \right) = \frac{\partial}{\partial\bbeta}\left\{ \bY^\prime\bV^{- 1}\bY - 2\bY^\prime\bV^{- 1}\bX\bbeta + \bbeta^\prime\bX^\prime\bV^{- 1}\bX\bbeta \right\}$$
 
-$$= - 2\bX^\prime\bV^{- 1}\bY + 2\bX^\prime\bV^{- 1}\bX\bbeta$$
+\begin{align*}
+\frac{\partial}{\partial\bbeta}\left( \bY - \bX\bbeta \right)^\prime\bV^{- 1}\left( \bY - \bX\bbeta \right) &= \frac{\partial}{\partial\bbeta}\left\{ \bY^\prime\bV^{- 1}\bY - 2\bY^\prime\bV^{- 1}\bX\bbeta + \bbeta^\prime\bX^\prime\bV^{- 1}\bX\bbeta \right\} \\
+
+&= - 2\bX^\prime\bV^{- 1}\bY + 2\bX^\prime\bV^{- 1}\bX\bbeta
+\end{align*}
+
 
 The derivative is zero when $\bX^\prime\bV^{- 1}\bY = \bX^\prime\bV^{- 1}\bX\bbeta$.
 
 If $\bX$ is of full column rank, then $\bX^\prime\bV^{- 1}\bX$ is non-singular and its inverse exists. Pre-multiplying both sides of the equation with that inverse yields the solution
 
-$$\bX^\prime\bV^{- 1}\bY = \bX^\prime\bV^{- 1}\bX\widehat{\bbeta}$$
 
-$$\left( \bX^{\prime}\bV^{- 1}\bX \right)^{- 1}\bX^\prime\bV^{- 1}\bY = {\left( \bX^{\prime}\bV^{- 1}\bX \right)^{- 1}\bX}^\prime\bV^{- 1}\bX\widehat{\bbeta}$$
+\begin{align*}
+\bX^\prime\bV^{- 1}\bY &= \bX^\prime\bV^{- 1}\bX\widehat{\bbeta} \\
 
-$$\left( \bX^{\prime}\bV^{- 1}\bX \right)^{- 1}\bX^\prime\bV^{- 1}\bY = \widehat{\bbeta}$$
+\left( \bX^{\prime}\bV^{- 1}\bX \right)^{- 1}\bX^\prime\bV^{- 1}\bY &= {\left( \bX^{\prime}\bV^{- 1}\bX \right)^{- 1}\bX}^\prime\bV^{- 1}\bX\widehat{\bbeta}\\
+
+\left( \bX^{\prime}\bV^{- 1}\bX \right)^{- 1}\bX^\prime\bV^{- 1}\bY &= \widehat{\bbeta}
+\end{align*}
+
 
 The maximum likelihood estimator of $\bbeta$ is the generalized least squares estimator
 
 $${\widehat{\bbeta}=\left( \bX^{\prime}\bV^{- 1}\bX \right)}^{- 1}\bX^\prime\bV^{- 1}\bY$$
 
-A special case is when the model errors $\bepsilon$ are uncorrelated. Since the errors are Gaussian distributed, we know that the errors are then independent. The variance matrix $\bV$ is then a diagonal matrix
+A special case arises when the model errors $\bepsilon$ are uncorrelated. 
+Since the errors are Gaussian distributed, we know that the errors are then independent. 
+The variance matrix $\bV$ is then a diagonal matrix
 
 $$\bV = \begin{bmatrix}
 \sigma_{1}^{2} & \cdots & 0 \\
@@ -654,7 +664,7 @@ $$\bV = \begin{bmatrix}
 0 & \cdots & \sigma^{2}
 \end{bmatrix} = \sigma^{2}\bI$$
 
-We can write the error distribution in this case as $\bepsilon \sim G\left(\bzero,\sigma^{2}\bI \right)$ and the model for $\bY$ as $\bY \sim G\left( \bX\bbeta,\sigma^{2}\bI \right)$. This is known as the \*iid\*\* case, the errors are independent and identically distributed. You will encounter the *iid* assumption a lot in statistical modeling and in machine learning, because it allows you to write multivariate joint distributions as products of univariate distributions and this greatly simplifies matters.
+We can write the error distribution in this case as $\bepsilon \sim G\left(\bzero,\sigma^{2}\bI \right)$ and the model for $\bY$ as $\bY \sim G\left( \bX\bbeta,\sigma^{2}\bI \right)$. This is known as the *iid* case, the errors are independent and identically distributed. You will encounter the *iid* assumption a lot in statistical modeling and in machine learning, because it allows you to write multivariate joint distributions as products of univariate distributions and this greatly simplifies matters.
 
 Under the *iid* assumption for the Gaussian linear model we can substitute $\sigma^{2}\bI$ for $\bV$ in the formula for $\widehat{\bbeta}$ and obtain
 

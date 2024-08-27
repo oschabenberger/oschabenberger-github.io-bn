@@ -4,11 +4,11 @@ $$
 $$
 :::
 
-# Probability and Statistics
+# Probability and Statistics {#sec-prob-stats}
 
 This chapter covers some basic topics in mathematical statistics that are relevant to understanding data science methodology related to modeling data. The topics are considered more review than exposition and are brought together here as a reference.
 
-## Probability
+## Probability {#sec-prob}
 
 Data are not deterministic; they have an element of uncertainty. Measurement errors, sampling variability, random assignment and selection, incomplete observation, are just some sources of random variability found in data. A solid understanding of probability concepts is necessary for any data professional. To separate signal from noise in data means separating systematic from random effects; to make statements about data requires the quantification of uncertainty.
 
@@ -171,7 +171,7 @@ $$\Pr\left( A|B \right) = \frac{\Pr(A \cap B)}{\Pr(B)} = \frac{\Pr{(A)\Pr(B)}}{\
 
 In other words, when $A$ and $B$ are independent, the conditional probability equals the marginal probability---the occurrence of $B$ does not alter the probability of $A$.
 
-### Random Variables
+### Random Variables {#sec-prob-random-variables}
 
 Random variables are real-valued functions defined on sample spaces. Recall the sample space of the traffic lights encountered on the way to work:
 
@@ -383,9 +383,9 @@ $$\Exp\left\lbrack g(X)h(Y) \right\rbrack = \Exp\left\lbrack g(X) \right\rbrack 
 
 For example, $\Exp\lbrack XY\rbrack = \Exp\lbrack X\rbrack \Exp\lbrack Y\rbrack$ and it follows that the covariance between independent random variables is zero. That is, independent random variables are uncorrelated. The reverse does not have to be true. Lack of correlation (a zero covariance) does not imply independence.
 
-## Discrete (Univariate) Distributions
+## Discrete (Univariate) Distributions {#sec-prob-discrete-dist}
 
-### Bernoulli (Binary) Distribution
+### Bernoulli (Binary), Bernoulli$(\pi)$
 
 A Bernoulli (or binary) experiment has two possible outcomes that occur with probabilities $\pi$ and $1 - \pi$, respectively. The outcomes are coded numerically as $Y = 1$ (with probability $\pi$) and $Y = 0$, the subset of the sample space $\Omega$ that maps to $Y = 1$ is often called the "event" or the "success" outcome of the binary distribution, the complement is called the "non-event" or the "failure" outcome.
 
@@ -406,7 +406,7 @@ The mean and variance of the Bernoulli($\pi$) random variable are $\pi$ and $\pi
 
 ![Probability mass function of the Bernoulli(0.7) random variable.](images/mathstat/Bernoulli.png){fig-align="center" width="75%"}
 
-### Binomial Distribution
+### Binomial, Binomial$(n,\pi)$
 
 Let $Y_{1},\cdots,Y_{n}$ be independent binary experiments with the same event probability $\pi$. Then $X = \sum_{i = 1}^{n}Y_{i}$ has a Binomial($n,\pi$) distribution with p.m.f.
 
@@ -423,7 +423,7 @@ $$\Exp\lbrack X\rbrack = n\pi\ \ \ \ \ \Var\lbrack X\rbrack = n\pi(1 - \pi)$$
 
 The Bernoulli($\pi$) distribution is the special case of the Binomial($1,\pi$) distribution.
 
-### Geometric distribution
+### Geometric, Geometric$(\pi)$
 
 The Binomial($n,\pi$) distribution is the number of events in a series of $n$ Bernoulli($\pi$) experiments. The Geometric($\pi$) distribution also can be defined in terms of independent Bernoulli($\pi$) experiments as the number of trials needed to obtain the first event. There is no theoretical upper bound for the support, as you might need infinitely many binary experiments to realize one event.
 
@@ -453,7 +453,7 @@ $$p(y) = \pi(1 - \pi)^{y}\ \ \ \ \ y = 0,1,2,\cdots$$
 
 With mean $\Exp\lbrack Y\rbrack = \frac{(1 - \pi)}{\pi}$ and variance $\Var\lbrack Y\rbrack = \frac{(1 - \pi)}{\pi}^{2}$.
 
-### Negative Binomial Distribution
+### Negative Binomial, NegBin$(k,\pi)$
 
 An extension of the Geometric($\pi$) distribution is the Negative Binomial (NegBin($k,\pi$)) distribution. In a series of independent Bernoulli($\pi$) trials, the number of experiments until the $k$^th^ event is observed is a NegBin($k,\pi$) random variable.
 
@@ -481,7 +481,7 @@ The p.m.f. for a NegBin(5,0.7) in this parameterization is shown in @fig-sl-negb
 
 An important application of the negative binomial distribution is in mixing models. These are models where the parameters of a distribution are assumed to be random variables rather than constants. This mechanism introduces additional variability into the system and is applied when the observed data appear more dispersed than a distribution permits. This condition is called **overdispersion**. For example, a binomial random variable has variance $n\pi(1 - \pi)$; the variability is a function of the mean $n\pi$. When the observed data suggest that this relationship between mean and variance does not hold---and typically the observed variability is greater than the nominal variance---one can treat $n$ or $\pi$ as a random variable. If you assume that $n$ follows a Poisson distribution (see next), then the marginal distribution of the data is also Poisson. If you start with a Poisson distribution and assume that its parameter follows a Gamma distribution, the resulting marginal distribution of the data is negative binomial.
 
-### Poisson Distribution
+### Poisson, Poisson$(\lambda)$
 
 The Poisson distribution is a common probability model for count variables that represent counts per unit, rather than counts that can be converted to proportions. For example, the number of chocolate chips on a cookie, the number of defective parts per day on an assembly line or the number of fish caught per day can be modeled as Poisson random variables.
 
@@ -520,7 +520,7 @@ As $\lambda \rightarrow \infty$, the Poisson p.m.f. approaches the shape of a Ga
 
 Because the events being counted occur independently of each other, a Poisson distribution is divisible. You can think of a Poisson($\lambda = 5$) variable as the sum of five Poisson(1) variables. The result of one variable producing on average 5 events per time units or five variables each producing on average one event per unit is the same. More generally, if $Y_{1},\cdots,Y_{n}$ are independent random variables with respective Poisson($\lambda_{i}$) distributions, then their sum $\sum_{i}^{}Y_{i}$ follows a Poisson distribution with mean $\lambda = \sum_{i}^{}\lambda_{i}$.
 
-## Continuous (Univariate) Distributions
+## Continuous (Univariate) Distributions {#sec-prob-cont-dist}
 
 For continuous random variables, the probability that the variable takes on any particular value is zero. To make meaningful probability statements we consider integration of the probability density function (p.d.f.) over sets, for example, intervals:
 
@@ -528,7 +528,7 @@ $$\Pr{(a \leq X \leq b)} = \int_{a}^{b}{f(x)dx}$$
 
 The density function satisfies $\int_{- \infty}^{\infty}{f(x)dx} = 1$ and can be obtained by differentiating the c.d.f $F(x) = \Pr{(X \leq x)}$; $f(x) = \frac{dF(x)}{dx}$.
 
-### Uniform Distribution
+### Uniform, U$(a,b)$
 
 If a random variable has a continuous uniform distribution on the interval $\lbrack a,b\rbrack$, denoted $Y \sim U(a,b)$, its p.d.f. is given by
 
@@ -541,7 +541,7 @@ The mean and variance of a $U(a,b)$ random variable are
 
 $$\Exp\lbrack Y\rbrack = \frac{a + b}{2}\ \ \ \ \ \ \Var\lbrack Y\rbrack = \frac{(b - a)^{2}}{12}$$
 
-### Exponential Distribution
+### Exponential, Expo$(\lambda)$
 
 The exponential distribution is a useful probability model for modeling continuous lifetimes. It is related to Poisson processes. If events occur continuously and independently at a constant rate $\lambda$, the number of events is a Poisson random variable. The time between the events is an exponential random variable, denoted $Y \sim$ Expo($\lambda$).
 
@@ -563,7 +563,7 @@ The memoryless property of the exponential distribution makes it **not** a good 
 
 You don't have to worry about whether other distributions have this memoryless property in applications where lack of memory would not be appropriate. The exponential distribution is defined by this property, it is the only continuous distribution with lack of memory.
 
-### Gamma Distribution
+### Gamma, Gamma$(\alpha,\beta)$
 
 The Expo($\lambda$) distribution is a special case of a broader family of distributions, 
 the Gamma($\alpha,\beta$) distribution. A random variable $Y$ is said to have a Gamma($\alpha,\beta$) distribution 
@@ -591,7 +591,7 @@ Another special case of the gamma-type random variables is the chi-square random
 
 ![Densities of Gamma(3,1/2) (solid), Gamma(2,2) (dashed) and Gamma(1,1/2) random variables. The Gamma(2,2) is also a $\chi_{4}^{2}$ distribution. The Gamma(1,1/2) is a Expo(2) distribution.](images/mathstat/Gamma.png){fig-align="center" width="75%"}
 
-### Beta Distribution
+### Beta, Beta$(\alpha,\beta)$
 
 A random variable has a Beta distribution with parameters $\alpha$ and $\beta$,
 denoted $Y \sim \text{Beta}(\alpha,\beta)$, if its density function is given 
@@ -632,7 +632,7 @@ variable takes on exactly the value 0 or 1 is zero. However, in practice you
 can observe proportions at the extreme of the support; the proportion of income spent
 on rent by a homeowner is zero. 
 
-### Gaussian (Normal) Distribution
+### Gaussian (Normal), G$(\mu,\sigma^2)$
 
 The Gaussian (or Normal) distribution is arguably the most important continuous distribution in all of probability and statistics. A random variable $Y$ has a Gaussian distribution with mean $\mu$ and variance $\sigma^{2}$ if its density function is
 
@@ -648,7 +648,7 @@ A special version is the **standard** Gaussian (standard normal) distribution $Z
 
 $$f(z) = \frac{1}{\sqrt{2\pi}}\exp\left\{ - \frac{1}{2}y^{2} \right\}$$
 
-The standard normal is also referred to as the **unit** normal distribution.
+The standard Gaussian is also referred to as the **unit** normal distribution.
 
 Gaussian random variables have some interesting properties. For example, linear combinations of Gaussian random variables are Gaussian distributed. If $Y\sim G\left( \mu,\sigma^{2} \right)$, then $X = aY + b$ has distribution $G(a\mu + b,a^{2}\sigma^{2})$. As an example, if $Y\sim G\left( \mu,\sigma^{2} \right)$, then
 
@@ -658,7 +658,7 @@ has a standard Gaussian distribution. You can express probabilities about $Y$ in
 
 $$\Pr{(X \leq x)} = \Pr\left( Z \leq \frac{x - \mu}{\sigma} \right)$$
 
-Because linear functions of Gaussians are Gaussians, it is easy to establish the distribution of the sample mean $\overline{Y} = \frac{1}{n}\sum_{i}^{}Y_{i}$ in a random sample from a $G(\mu,\sigma^{2})$ distribution. First, if we take a random sample from **any** distribution with mean $\mu$ and variance $\sigma^{2}$, then the sample mean $\overline{Y}$ has mean and variance
+Because linear functions of Gaussian random variables are Gaussian random variables, it is easy to establish the distribution of the sample mean $\overline{Y} = \frac{1}{n}\sum_{i}^{}Y_{i}$ in a random sample from a $G(\mu,\sigma^{2})$ distribution. First, if we take a random sample from **any** distribution with mean $\mu$ and variance $\sigma^{2}$, then the sample mean $\overline{Y}$ has mean and variance
 
 $$\Exp\left\lbrack \overline{Y} \right\rbrack = \mu\ \ \ \ \ \ \ \ \ \Var\left\lbrack \overline{Y} \right\rbrack = \frac{\sigma^{2}}{n}$$
 
@@ -682,11 +682,24 @@ converges to that of a standard normal random variable as $n \rightarrow \infty$
 :::
 :::
 
-## Sampling distributions
+These amazing properties contribute to the Gaussian distribution being the most important probability distribution.
+Most continuous attributes actually do not behave like Gaussian random variables at all, they often have a restricted
+range or are skewed or have heavier tails than a Gaussian random variable. There is really nothing *normal* about 
+this distribution, which is one reason why we prefer the name Gaussian over Normal distribution.
+
+:::{.callout-note title="What is normal?" collapse="true"}
+We avoid the use of the term normal to describe the Gaussian distribution for another reason: the connection of the concept of normality and this distribution to eugenics. The Belgian astronomer, statistician and mathematician Adolphe Quetelet (1796--1847) introduced the generalized notion of the normal. He studied the distribution of physical attributes and determined that the normal, the most representative, value of an attribute is its average. Discrepancies above and below the average were considered "errors". Early applications of the Gaussian distribution were in the study of measurement errors. C.F. Gauss used the distribution to represent errors in the measurement of celestial bodies.
+
+Prior to Quetelet, the view of "norm" and "normality" was associated with carpentry. The carpenter square is also called the norm, and in normal construction everything is at right angles. With Quetelet, the middle of the distribution, the center, became the "new normal." There is nothing objectionable so far. 
+
+However, this view did not sit well with Francis Galton, who introduced the term eugenics. Galton replaced the term "error" with standard deviation and considered variability within a human population as potential for racial progress [@GrueHeiberg]. The bell shape of the normal distribution was not used to focus our attention on the average, as Quetelet did. Galton introduced quartiles to categorize the area under the normal into sections of greater and lesser genetic worth. That is not normal!
+:::
+
+## Sampling Distributions {#sec-prob-sampling-dist}
 
 Many important probability distributions are related to sampling data from Gaussian processes, $t$, $\chi^{2}$, and $F$ distributions most importantly.
 
-### Chi-Square distribution
+### Chi-Square, $\chi^2_\nu$
 
 Let $Z_{1},\cdots,Z_{k}$ denote independent standard normal random variables $G(0,1)$. Then
 
@@ -712,7 +725,7 @@ $$\Exp\left\lbrack \frac{(n - 1)S^{2}}{\sigma^{2}} \right\rbrack = n - 1$$
 
 $$\Exp\left\lbrack S^{2} \right\rbrack = \sigma^{2}$$
 
-### Students' t distribution
+### Students' t, $t_\nu$
 
 In the Gaussian case you can also show that $\overline{Y}$ and $S^{2}$ are independent random variables. This is important because of another distributional result: if $Z \sim G(0,1)$ and $U \sim \chi_{\nu}^{2}$, and $Z$ and $U$ are independent, then the ratio
 
@@ -734,7 +747,7 @@ We know that $\overline{Y} \sim G\left( \mu,\frac{\sigma^{2}}{n} \right)$ and th
 
 $$\frac{\frac{\overline{Y} - \mu}{\sigma/\sqrt{n}}}{\sqrt{S^{2}{/\sigma}^{2}}} = \frac{\overline{Y} - \mu}{S/\sqrt{n}} \sim t_{n - 1}$$
 
-### F distribution
+### F, $F_{\nu_1, \nu_2}$
 
 If $\chi_{1}^{2}$ and $\chi_{2}^{2}$ are independent chi-square random variables with $\nu_{1}$ and $\nu_{2}$ degrees of freedom, respectively, then the ratio
 

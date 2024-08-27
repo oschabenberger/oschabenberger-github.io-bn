@@ -358,17 +358,17 @@ window.Quarto = {
   <li><a href="#idempotent-matrices" id="toc-idempotent-matrices" class="nav-link" data-scroll-target="#idempotent-matrices"><span class="header-section-number">13.6</span> Idempotent Matrices</a>
   <ul>
   <li><a href="#projections" id="toc-projections" class="nav-link" data-scroll-target="#projections">Projections</a></li>
-  <li><a href="#the-hat-matrix" id="toc-the-hat-matrix" class="nav-link" data-scroll-target="#the-hat-matrix">The “hat” Matrix</a></li>
+  <li><a href="#the-hat-matrix" id="toc-the-hat-matrix" class="nav-link" data-scroll-target="#the-hat-matrix">The “Hat” Matrix</a></li>
   <li><a href="#a-special-case" id="toc-a-special-case" class="nav-link" data-scroll-target="#a-special-case">A Special Case</a></li>
   </ul></li>
-  <li><a href="#multivariate-gaussian-distribution" id="toc-multivariate-gaussian-distribution" class="nav-link" data-scroll-target="#multivariate-gaussian-distribution"><span class="header-section-number">13.7</span> Multivariate Gaussian Distribution</a>
+  <li><a href="#sec-multi-gauss" id="toc-sec-multi-gauss" class="nav-link" data-scroll-target="#sec-multi-gauss"><span class="header-section-number">13.7</span> Multivariate Gaussian Distribution</a>
   <ul>
   <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition">Definition</a></li>
   <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties">Properties</a>
   <ul class="collapse">
   <li><a href="#linear-combinations-are-gaussian" id="toc-linear-combinations-are-gaussian" class="nav-link" data-scroll-target="#linear-combinations-are-gaussian">Linear combinations are Gaussian</a></li>
   <li><a href="#zero-covariance-implies-independence" id="toc-zero-covariance-implies-independence" class="nav-link" data-scroll-target="#zero-covariance-implies-independence">Zero covariance implies independence</a></li>
-  <li><a href="#conditionals-are-gaussian" id="toc-conditionals-are-gaussian" class="nav-link" data-scroll-target="#conditionals-are-gaussian">Conditionals are Gaussian}</a></li>
+  <li><a href="#conditionals-are-gaussian" id="toc-conditionals-are-gaussian" class="nav-link" data-scroll-target="#conditionals-are-gaussian">Conditionals are Gaussian</a></li>
   </ul></li>
   <li><a href="#maximum-likelihood-estimator" id="toc-maximum-likelihood-estimator" class="nav-link" data-scroll-target="#maximum-likelihood-estimator">Maximum Likelihood Estimator</a></li>
   </ul></li>
@@ -381,7 +381,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../statlearning/general.html">Part III. Statistical Learning</a></li><li class="breadcrumb-item"><a href="../statlearning/linalg.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Linear Algebra</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Linear Algebra</span></h1>
+<h1 class="title"><span id="sec-linear-algebra" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></h1>
 </div>
 
 
@@ -742,7 +742,7 @@ Y_{n}
 <p><span class="math display">\[\widehat{\boldsymbol{\beta}}=\left( \textbf{X}^\prime\textbf{X}\right)^{- 1}\textbf{X}^{\prime}\textbf{Y}\]</span></p>
 </section>
 <section id="the-hat-matrix" class="level3">
-<h3 class="anchored" data-anchor-id="the-hat-matrix">The “hat” Matrix</h3>
+<h3 class="anchored" data-anchor-id="the-hat-matrix">The “Hat” Matrix</h3>
 <p>The ordinary least squares estimator is the orthogonal projection of <span class="math inline">\(\textbf{Y}\)</span> onto the sub-space created by the columns of <span class="math inline">\(\textbf{X}\)</span>. To see the projection matrix at work, compute the predicted values, <span class="math inline">\(\textbf{X}\widehat{\boldsymbol{\beta}}\)</span>:</p>
 <p><span class="math display">\[\textbf{X}\widehat{\boldsymbol{\beta}}=\textbf{X}\left( \textbf{X}^{\prime}\textbf{X}\right)^{- 1}\textbf{X}^{\prime}\textbf{Y}= \widehat{\textbf{Y}}\]</span></p>
 <p>The matrix <span class="math inline">\(\textbf{X}\left( \textbf{X}^\prime\textbf{X}\right)^{- 1}\textbf{X}^{\prime}\)</span> has a very special role in regression analysis, it is often called the “hat” matrix and denoted <span class="math inline">\(\textbf{H}\)</span>, because pre-multiplying <span class="math inline">\(\textbf{Y}\)</span> with <span class="math inline">\(\textbf{H}\)</span> puts the hats on <span class="math inline">\(\textbf{Y}\)</span>:</p>
@@ -782,18 +782,18 @@ Y_{n}
 \end{bmatrix}\]</span></p>
 </section>
 </section>
-<section id="multivariate-gaussian-distribution" class="level2" data-number="13.7">
-<h2 data-number="13.7" class="anchored" data-anchor-id="multivariate-gaussian-distribution"><span class="header-section-number">13.7</span> Multivariate Gaussian Distribution</h2>
+<section id="sec-multi-gauss" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="sec-multi-gauss"><span class="header-section-number">13.7</span> Multivariate Gaussian Distribution</h2>
 <section id="definition" class="level3">
 <h3 class="anchored" data-anchor-id="definition">Definition</h3>
 <p>A scalar random variable <span class="math inline">\(Y\)</span> has a <strong>Gaussian</strong> distribution function with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^{2}\)</span> if its probability density function is given by</p>
 <p><span class="math display">\[f(y) = \frac{1}{\sqrt{2\pi\sigma^{2}}}\exp\left\{ - \frac{1}{2\sigma^{2}}(y - \mu)^{2} \right\}\]</span></p>
-<p>We also say that <span class="math inline">\(Y\)</span> is <strong>normally</strong> distributed with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^{2}\)</span>. The shorthand expressions <span class="math inline">\(Y \sim G(\mu,\sigma^{2})\)</span> or <span class="math inline">\(Y \sim N(\mu,\sigma^{2})\)</span> are common.</p>
+<p>We also say that <span class="math inline">\(Y\)</span> is <strong>normally</strong> distributed with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^{2}\)</span> but prefer the name Gaussian over Normal for the reasons given in <a href="mathstat.html#sec-prob-cont-dist" class="quarto-xref"><span>Section 12.3</span></a>. The shorthand expressions <span class="math inline">\(Y \sim G(\mu,\sigma^{2})\)</span> or <span class="math inline">\(Y \sim N(\mu,\sigma^{2})\)</span> are common.</p>
 <p>The generalization from a scalar random variable <span class="math inline">\(Y\)</span> to a random vector <span class="math inline">\(\textbf{Y}_{(n \times 1)}\)</span> with a <strong>multivariate Gaussian</strong> distribution is as follows. <span class="math inline">\(\textbf{Y}_{(n \times 1)}\)</span> has a multivariate Gaussian (normal) distribution with mean <span class="math inline">\(\boldsymbol{\mu}\)</span> and variance matrix <span class="math inline">\(\textbf{V}\)</span>, if its density is given by</p>
 <p><span class="math display">\[f\left( \textbf{Y}\right)=\frac{\left| \textbf{V}\right|^{- 1/2}}{(2\pi)^{\frac{n}{2}}}\exp\left\{ - \frac{1}{2}\left( \textbf{Y}- \boldsymbol{\mu}\right)^\prime\textbf{V}^{- 1}\left( \textbf{Y}- \boldsymbol{\mu}\right) \right\}\]</span></p>
 <p>This is denoted with the shorthand <span class="math inline">\(\textbf{Y}\sim G_{n}(\boldsymbol{\mu},\textbf{V})\)</span> or <span class="math inline">\(\textbf{Y}\sim N_{n}(\boldsymbol{\mu},\textbf{V}\)\)</span>. If the dimension of the distribution is clear from context, the subscript <span class="math inline">\(n\)</span> can be omitted. A special case is the <strong>standard</strong> multivariate Gaussian distribution with mean <span class="math inline">\(\textbf{0}\)</span> and variance matrix <span class="math inline">\(\textbf{I}\)</span> :</p>
 <p><span class="math display">\[f\left( \textbf{Y}\right)=\frac{1}{(2\pi)^{\frac{n}{2}}}\exp\left\{ - \frac{1}{2}\textbf{Y}^{\prime}\textbf{Y}\right\} = \frac{1}{(2\pi)^{\frac{n}{2}}}\exp\left\{ - \frac{1}{2}\sum_{i}^{n}y_{i}^{2} \right\}\]</span></p>
-<p>But this is just the product of the <span class="math inline">\(n\)</span> univariate densities of <span class="math inline">\(N(0,1)\)</span> random variables:</p>
+<p>But this is just the product of the <span class="math inline">\(n\)</span> univariate densities of <span class="math inline">\(G(0,1)\)</span> random variables:</p>
 <p><span class="math display">\[f\left( \textbf{Y}\right) = f\left( y_{1} \right) \times \cdots \times f\left( y_{n} \right)\]</span></p>
 <p>where</p>
 <p><span class="math display">\[f\left( y_{i} \right) = \frac{1}{(2\pi)^{1/2}}\exp\left\{ - \frac{1}{2}y^{2} \right\}\]</span></p>
@@ -815,10 +815,10 @@ Y_{n}
 <p><span class="math display">\[\textbf{Y}_{(n \times 1)} = \begin{bmatrix}
 \textbf{Y}_{1(s \times 1)} \\
 \textbf{Y}_{2(k \times 1)}
-\end{bmatrix},\ \ \boldsymbol{\mu}= \begin{bmatrix}
+\end{bmatrix},\qquad \boldsymbol{\mu}= \begin{bmatrix}
 \boldsymbol{\mu}_{1} \\
 \boldsymbol{\mu}_{2}
-\end{bmatrix},\ \ \ \ \ \ \textbf{V}= \begin{bmatrix}
+\end{bmatrix},\qquad \textbf{V}= \begin{bmatrix}
 \textbf{V}_{11} &amp; \textbf{V}_{12} \\
 \textbf{V}_{21} &amp; \textbf{V}_{22}
 \end{bmatrix}\]</span></p>
@@ -826,7 +826,7 @@ Y_{n}
 <p>It follows immediately that each element of <span class="math inline">\(\textbf{Y}\)</span> follows a (univariate) Gaussian distribution, <span class="math inline">\(Y_{i} \sim G(\mu_{i},V_{ii})\)</span>—all marginal univariate distributions are Gaussian.</p>
 </section>
 <section id="conditionals-are-gaussian" class="level4">
-<h4 class="anchored" data-anchor-id="conditionals-are-gaussian">Conditionals are Gaussian}</h4>
+<h4 class="anchored" data-anchor-id="conditionals-are-gaussian">Conditionals are Gaussian</h4>
 <p>The conditional distribution of <span class="math inline">\(\textbf{Y}_{1}\)</span> given <span class="math inline">\(\textbf{Y}_{2}\)</span> is also a Gaussian distribution, specifically:</p>
 <p><span class="math display">\[\textbf{Y}_{1}|\textbf{Y}_{2} \sim G\left( \boldsymbol{\mu}_{1}\mathbf{+}\textbf{V}_{12}\textbf{V}_{22}^{- 1}\left( \textbf{Y}_{2} - \boldsymbol{\mu}_{2} \right),\ \textbf{V}_{11} - \textbf{V}_{12}\textbf{V}_{22}^{- 1}\textbf{V}_{12}^\prime \right)\]</span></p>
 <p>This result plays an important role when predicting Gaussian random variables, for example in mixed models.</p>
@@ -840,16 +840,23 @@ Y_{n}
 <p>This joint distribution of the data can be used to derive the maximum likelihood estimator (MLE) of <span class="math inline">\(\boldsymbol{\beta}\)</span>. Maximum likelihood estimation considers this as a function of <span class="math inline">\(\boldsymbol{\beta}\)</span> rather than a function of <span class="math inline">\(\textbf{Y}.\)</span> Maximizing this likelihood function <span class="math inline">\(\mathcal{l(}\boldsymbol{\beta};\textbf{Y})\)</span> is equivalent to maximizing its logarithm and working on the log scale is much simpler. The log-likelihood fu1nction for this problem is given by</p>
 <p><span class="math inline">\(ln\mathcal{\{ l}\left( \boldsymbol{\beta};\textbf{Y}\right\} = l\left( \boldsymbol{\beta};\textbf{Y}\right) = - \frac{1}{2}\ln\left( \left| \textbf{V}\right| \right) - \frac{n}{2}\ln(2\pi) - \frac{1}{2}\left( \textbf{Y}- \textbf{X}\boldsymbol{\beta}\right)^\prime\textbf{V}^{- 1}\left( \textbf{Y}- \textbf{X}\boldsymbol{\beta}\right)\)</span></p>
 <p>Finding the maximum of this function with respect to <span class="math inline">\(\boldsymbol{\beta}\)</span> is equivalent to minimizing the quadratic form <span class="math inline">\(\left( \textbf{Y}- \textbf{X}\boldsymbol{\beta}\right)^\prime\textbf{V}^{-1}\left( \textbf{Y}- \textbf{X}\boldsymbol{\beta}\right)\)</span> with respect to <span class="math inline">\(\boldsymbol{\beta}\)</span>. Applying the results about matrix differentiation from above we obtain</p>
-<p><span class="math display">\[\frac{\partial}{\partial\boldsymbol{\beta}}\left( \textbf{Y}- \textbf{X}\boldsymbol{\beta}\right)^\prime\textbf{V}^{- 1}\left( \textbf{Y}- \textbf{X}\boldsymbol{\beta}\right) = \frac{\partial}{\partial\boldsymbol{\beta}}\left\{ \textbf{Y}^\prime\textbf{V}^{- 1}\textbf{Y}- 2\textbf{Y}^\prime\textbf{V}^{- 1}\textbf{X}\boldsymbol{\beta}+ \boldsymbol{\beta}^\prime\textbf{X}^\prime\textbf{V}^{- 1}\textbf{X}\boldsymbol{\beta}\right\}\]</span></p>
-<p><span class="math display">\[= - 2\textbf{X}^\prime\textbf{V}^{- 1}\textbf{Y}+ 2\textbf{X}^\prime\textbf{V}^{- 1}\textbf{X}\boldsymbol{\beta}\]</span></p>
+<p><span class="math display">\[\begin{align*}
+\frac{\partial}{\partial\boldsymbol{\beta}}\left( \textbf{Y}- \textbf{X}\boldsymbol{\beta}\right)^\prime\textbf{V}^{- 1}\left( \textbf{Y}- \textbf{X}\boldsymbol{\beta}\right) &amp;= \frac{\partial}{\partial\boldsymbol{\beta}}\left\{ \textbf{Y}^\prime\textbf{V}^{- 1}\textbf{Y}- 2\textbf{Y}^\prime\textbf{V}^{- 1}\textbf{X}\boldsymbol{\beta}+ \boldsymbol{\beta}^\prime\textbf{X}^\prime\textbf{V}^{- 1}\textbf{X}\boldsymbol{\beta}\right\} \\
+
+&amp;= - 2\textbf{X}^\prime\textbf{V}^{- 1}\textbf{Y}+ 2\textbf{X}^\prime\textbf{V}^{- 1}\textbf{X}\boldsymbol{\beta}
+\end{align*}\]</span></p>
 <p>The derivative is zero when <span class="math inline">\(\textbf{X}^\prime\textbf{V}^{- 1}\textbf{Y}= \textbf{X}^\prime\textbf{V}^{- 1}\textbf{X}\boldsymbol{\beta}\)</span>.</p>
 <p>If <span class="math inline">\(\textbf{X}\)</span> is of full column rank, then <span class="math inline">\(\textbf{X}^\prime\textbf{V}^{- 1}\textbf{X}\)</span> is non-singular and its inverse exists. Pre-multiplying both sides of the equation with that inverse yields the solution</p>
-<p><span class="math display">\[\textbf{X}^\prime\textbf{V}^{- 1}\textbf{Y}= \textbf{X}^\prime\textbf{V}^{- 1}\textbf{X}\widehat{\boldsymbol{\beta}}\]</span></p>
-<p><span class="math display">\[\left( \textbf{X}^{\prime}\textbf{V}^{- 1}\textbf{X}\right)^{- 1}\textbf{X}^\prime\textbf{V}^{- 1}\textbf{Y}= {\left( \textbf{X}^{\prime}\textbf{V}^{- 1}\textbf{X}\right)^{- 1}\textbf{X}}^\prime\textbf{V}^{- 1}\textbf{X}\widehat{\boldsymbol{\beta}}\]</span></p>
-<p><span class="math display">\[\left( \textbf{X}^{\prime}\textbf{V}^{- 1}\textbf{X}\right)^{- 1}\textbf{X}^\prime\textbf{V}^{- 1}\textbf{Y}= \widehat{\boldsymbol{\beta}}\]</span></p>
+<p><span class="math display">\[\begin{align*}
+\textbf{X}^\prime\textbf{V}^{- 1}\textbf{Y}&amp;= \textbf{X}^\prime\textbf{V}^{- 1}\textbf{X}\widehat{\boldsymbol{\beta}} \\
+
+\left( \textbf{X}^{\prime}\textbf{V}^{- 1}\textbf{X}\right)^{- 1}\textbf{X}^\prime\textbf{V}^{- 1}\textbf{Y}&amp;= {\left( \textbf{X}^{\prime}\textbf{V}^{- 1}\textbf{X}\right)^{- 1}\textbf{X}}^\prime\textbf{V}^{- 1}\textbf{X}\widehat{\boldsymbol{\beta}}\\
+
+\left( \textbf{X}^{\prime}\textbf{V}^{- 1}\textbf{X}\right)^{- 1}\textbf{X}^\prime\textbf{V}^{- 1}\textbf{Y}&amp;= \widehat{\boldsymbol{\beta}}
+\end{align*}\]</span></p>
 <p>The maximum likelihood estimator of <span class="math inline">\(\boldsymbol{\beta}\)</span> is the generalized least squares estimator</p>
 <p><span class="math display">\[{\widehat{\boldsymbol{\beta}}=\left( \textbf{X}^{\prime}\textbf{V}^{- 1}\textbf{X}\right)}^{- 1}\textbf{X}^\prime\textbf{V}^{- 1}\textbf{Y}\]</span></p>
-<p>A special case is when the model errors <span class="math inline">\(\boldsymbol{\epsilon}\)</span> are uncorrelated. Since the errors are Gaussian distributed, we know that the errors are then independent. The variance matrix <span class="math inline">\(\textbf{V}\)</span> is then a diagonal matrix</p>
+<p>A special case arises when the model errors <span class="math inline">\(\boldsymbol{\epsilon}\)</span> are uncorrelated. Since the errors are Gaussian distributed, we know that the errors are then independent. The variance matrix <span class="math inline">\(\textbf{V}\)</span> is then a diagonal matrix</p>
 <p><span class="math display">\[\textbf{V}= \begin{bmatrix}
 \sigma_{1}^{2} &amp; \cdots &amp; 0 \\
 \vdots &amp; \ddots &amp; \vdots \\
@@ -861,7 +868,7 @@ Y_{n}
 \vdots &amp; \ddots &amp; \vdots \\
 0 &amp; \cdots &amp; \sigma^{2}
 \end{bmatrix} = \sigma^{2}\textbf{I}\]</span></p>
-<p>We can write the error distribution in this case as <span class="math inline">\(\boldsymbol{\epsilon}\sim G\left(\textbf{0},\sigma^{2}\textbf{I}\right)\)</span> and the model for <span class="math inline">\(\textbf{Y}\)</span> as <span class="math inline">\(\textbf{Y}\sim G\left( \textbf{X}\boldsymbol{\beta},\sigma^{2}\textbf{I}\right)\)</span>. This is known as the *iid** case, the errors are independent and identically distributed. You will encounter the <em>iid</em> assumption a lot in statistical modeling and in machine learning, because it allows you to write multivariate joint distributions as products of univariate distributions and this greatly simplifies matters.</p>
+<p>We can write the error distribution in this case as <span class="math inline">\(\boldsymbol{\epsilon}\sim G\left(\textbf{0},\sigma^{2}\textbf{I}\right)\)</span> and the model for <span class="math inline">\(\textbf{Y}\)</span> as <span class="math inline">\(\textbf{Y}\sim G\left( \textbf{X}\boldsymbol{\beta},\sigma^{2}\textbf{I}\right)\)</span>. This is known as the <em>iid</em> case, the errors are independent and identically distributed. You will encounter the <em>iid</em> assumption a lot in statistical modeling and in machine learning, because it allows you to write multivariate joint distributions as products of univariate distributions and this greatly simplifies matters.</p>
 <p>Under the <em>iid</em> assumption for the Gaussian linear model we can substitute <span class="math inline">\(\sigma^{2}\textbf{I}\)</span> for <span class="math inline">\(\textbf{V}\)</span> in the formula for <span class="math inline">\(\widehat{\boldsymbol{\beta}}\)</span> and obtain</p>
 <p><span class="math display">\[{\widehat{\boldsymbol{\beta}}=\left( \textbf{X}^{\prime}\textbf{X}\right)}^{- 1}\textbf{X}^\prime\textbf{Y}\]</span></p>
 <p>the ordinary least squares estimator. Notice that <span class="math inline">\(\sigma^{2}\)</span> cancels out of the formula; the value of the OLS estimator does not depend on the intrinsic variability of the data. However, the variability of the OLS estimator does depend on <span class="math inline">\(\sigma^{2}\)</span> (and on <span class="math inline">\(\textbf{X}\)</span>).</p>

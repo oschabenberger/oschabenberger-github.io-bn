@@ -157,10 +157,10 @@ Here is a list of some common tools used in data engineering.
 ## Data Visualization
 
 -  Python-based
-  - pandas, matplotlib, seaborn, plotly, Vega-altair, plotnine (ggplot)
+    - pandas, matplotlib, seaborn, plotly, Vega-altair, plotnine (ggplot)
 
 -  R-based
-  - tidyverse (dplyr, tidyr, ggplot2, shiny)
+    - tidyverse (dplyr, tidyr, ggplot2, shiny)
 
 -  Many of the tools listed in @sec-tools-eda-bi.
 

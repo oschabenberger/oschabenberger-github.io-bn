@@ -18,6 +18,9 @@ We discuss data visualization after data summarization because—like summarizat
 
 The authors point out an important distinction between presentation graphics and exploratory graphics. Presentation graphics are a small number of graphics prepared for a potentially large audience. They are highly polished and designed. Exploratory graphing is about producing a large number of graphics for an audience of one—yourself. Speed, flexibility, and alternative views of the data are of the essence. During exploratory work, you already have your own, undivided, interest. Attention-grabbing graphics elements are not necessary. But views that stimulate self-interest to dig deeper into the story the data are trying to tell are important. On the other hand, when preparing graphics for a presentation to company executives, you do not have their attention yet. Data visualization can be a great assistant in grabbing the attention and telling the story.
 
+![Choosing the right amount of information in your visualizations.](images/Info_vs_Confusion.png){fig-align="center" width="80%"}
+
+
 ## Visual Learning
 
 It is often said that “a picture is worth more than a thousand words”. That does not mean that you should always choose a data visualization over a tabular data summary or over a descriptive statement. To choose the best medium for communicating information, you need to understand what medium works best for the audience. Tabular and graphical displays complement each other, or in the words of @GelmanUnwin2013:
@@ -34,7 +37,7 @@ The answer lies in the way in which we process information in our sub-conscious 
 
 We can take in much more information through sight than through any other sense. The amount of information processed in the conscious mind is much lower compared to the sub-conscious mind for any of the senses, as shown in the following figure. That means the sub-conscious acts as a filter for information, passing to the conscious mind that which needs more in-depth processing and engagement. The combination of processing power and bandwidth is why sight is most suited for understanding data.
 
-![Sensory bandwidth of the sub-conscious and the conscious mind. [Source](https://www.creativebloq.com/design/science-behind-data-visualisation-8135496).](images/SubconsciousAndConsciousProcessing.png){#fig-data-sensory-bandwidth .lightbox fig-align="center"}
+![Sensory bandwidth of the sub-conscious and the conscious mind. From [Creative Bloq](https://www.creativebloq.com/design/science-behind-data-visualisation-8135496).](images/SubconsciousAndConsciousProcessing.png){#fig-data-sensory-bandwidth .lightbox fig-align="center" width="80%"}
 
 ## Twenty Apple Trees
 
@@ -686,4 +689,81 @@ Statistics that are false on their face are comparisons that are based on absolu
 
 However, if you compare, say, crime statistics, cancer incidences, service subscribers, etc., between regions or states, then large absolute numbers in large regions are probably not a surprise. There being fewer crimes in Blacksburg, VA than in Chicago does not make Blacksburg a safer place to live. It is a safer place because there are fewer crimes **per resident** or **per 10,000 residents** in Blacksburg, VA compared to Chicago.
 
+
+### Gallery of Terrible Graphics
+
+<!---
+From this tweet and its replies
+https://x.com/mpfix1/status/1828109846912372940?s=12&t=-aflvr6VvgqZnGDoYnU5mw
+--->
+
+And now, without much commentary or warning, here are some truly terrible examples of data visualization.
+
+![Older people are taller? I reckon you never stop growing.](images/BadGraph_Attendees.png){fig-align="center" width=60%}
+
+---
+
+![Is this misleading or what?](images/BadGraph_GunDeaths.jpeg){fig-align="center" width=60%}
+
+---
+
+![The bar chart that wasn't.](images/BadGraph_HappyCountries.jpeg){fig-align="center" width=60%}
+
+---
+
+![3 out of 4 people are bad with fractions.](images/BadGraph_Fraction.jpeg){fig-align="center" width=50%}
+
+---
+
+![More graphics elements, please.](images/BadGraph_Overload.jpeg){fig-align="center" width=60%}
+
+---
+
+![There are five numbers here! Just five!](images/BadChart_AgeStructure.jpeg){fig-align="center" width=70%}
+
+---
+
+![Ouch. This is called gaslighting.](images/BadGraph_PriceHike.jpeg){fig-align="center" width=50%}
+
+---
+
+![This is known as a fuzzball.](images/BadGraph_Afghanistan.jpeg){fig-align="center" width=70% .lightbox}
+
+---
+
+![Wait, what?](images/BadGraph_WrongColor.jpeg){fig-align="center" width=60%}
+
+---
+
+![This was in the New York Times, apparently](images/BadGraph_NYT1.jpeg){fig-align="center" width=60%}
+
+---
+
+![What is going on here?](images/BadGraph_NYT3.jpeg){fig-align="center" width=60%}
+
+---
+
+![Those are supposed to be error bars. Not the letter "T"!](images/BadGraph_TErrorBars.jpeg){fig-align="center" width=60%}
+
+---
+
+![Another one messing with axes.](images/BadGraph_Axes.jpeg){fig-align="center" width=70%}
+
+---
+
+![A pie chart gone mad. And what is the "World"?](images/BadGraph_PieChartGoneBad.png){fig-align="center" width=70%}
+
+---
+
+
+![A classic: the bicylce of education.](images/BadGraph_BicycleOfEducation.jpeg){fig-align="center" width=70%}
+
+---
+
+![Never gonna give you up. Thank you Rick.](images/BadGraph_RickAstley.png){fig-align="center" width=60%}
+
+
+{{< video https://www.youtube.com/watch?v=dQw4w9WgXcQ
+    title="Never Gonna Give You Up--Rick Astley"
+>}}
 

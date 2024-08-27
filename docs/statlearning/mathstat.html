@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -337,7 +357,7 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#probability" id="toc-probability" class="nav-link active" data-scroll-target="#probability"><span class="header-section-number">12.1</span> Probability</a>
+  <li><a href="#sec-prob" id="toc-sec-prob" class="nav-link active" data-scroll-target="#sec-prob"><span class="header-section-number">12.1</span> Probability</a>
   <ul>
   <li><a href="#sample-space-and-events" id="toc-sample-space-and-events" class="nav-link" data-scroll-target="#sample-space-and-events">Sample Space and Events</a></li>
   <li><a href="#probability-measures" id="toc-probability-measures" class="nav-link" data-scroll-target="#probability-measures">Probability Measures</a>
@@ -348,7 +368,7 @@ window.Quarto = {
   <li><a href="#bayes-rule" id="toc-bayes-rule" class="nav-link" data-scroll-target="#bayes-rule">Bayes’ rule</a></li>
   <li><a href="#independence" id="toc-independence" class="nav-link" data-scroll-target="#independence">Independence</a></li>
   </ul></li>
-  <li><a href="#random-variables" id="toc-random-variables" class="nav-link" data-scroll-target="#random-variables">Random Variables</a>
+  <li><a href="#sec-prob-random-variables" id="toc-sec-prob-random-variables" class="nav-link" data-scroll-target="#sec-prob-random-variables">Random Variables</a>
   <ul class="collapse">
   <li><a href="#distribution-functions" id="toc-distribution-functions" class="nav-link" data-scroll-target="#distribution-functions">Distribution functions</a></li>
   <li><a href="#expected-value" id="toc-expected-value" class="nav-link" data-scroll-target="#expected-value">Expected value</a></li>
@@ -357,27 +377,27 @@ window.Quarto = {
   <li><a href="#independence-1" id="toc-independence-1" class="nav-link" data-scroll-target="#independence-1">Independence</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#discrete-univariate-distributions" id="toc-discrete-univariate-distributions" class="nav-link" data-scroll-target="#discrete-univariate-distributions"><span class="header-section-number">12.2</span> Discrete (Univariate) Distributions</a>
+  <li><a href="#sec-prob-discrete-dist" id="toc-sec-prob-discrete-dist" class="nav-link" data-scroll-target="#sec-prob-discrete-dist"><span class="header-section-number">12.2</span> Discrete (Univariate) Distributions</a>
   <ul>
-  <li><a href="#bernoulli-binary-distribution" id="toc-bernoulli-binary-distribution" class="nav-link" data-scroll-target="#bernoulli-binary-distribution">Bernoulli (Binary) Distribution</a></li>
-  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution">Binomial Distribution</a></li>
-  <li><a href="#geometric-distribution" id="toc-geometric-distribution" class="nav-link" data-scroll-target="#geometric-distribution">Geometric distribution</a></li>
-  <li><a href="#negative-binomial-distribution" id="toc-negative-binomial-distribution" class="nav-link" data-scroll-target="#negative-binomial-distribution">Negative Binomial Distribution</a></li>
-  <li><a href="#poisson-distribution" id="toc-poisson-distribution" class="nav-link" data-scroll-target="#poisson-distribution">Poisson Distribution</a></li>
+  <li><a href="#bernoulli-binary-bernoullipi" id="toc-bernoulli-binary-bernoullipi" class="nav-link" data-scroll-target="#bernoulli-binary-bernoullipi">Bernoulli (Binary), Bernoulli<span class="math inline">\((\pi)\)</span></a></li>
+  <li><a href="#binomial-binomialnpi" id="toc-binomial-binomialnpi" class="nav-link" data-scroll-target="#binomial-binomialnpi">Binomial, Binomial<span class="math inline">\((n,\pi)\)</span></a></li>
+  <li><a href="#geometric-geometricpi" id="toc-geometric-geometricpi" class="nav-link" data-scroll-target="#geometric-geometricpi">Geometric, Geometric<span class="math inline">\((\pi)\)</span></a></li>
+  <li><a href="#negative-binomial-negbinkpi" id="toc-negative-binomial-negbinkpi" class="nav-link" data-scroll-target="#negative-binomial-negbinkpi">Negative Binomial, NegBin<span class="math inline">\((k,\pi)\)</span></a></li>
+  <li><a href="#poisson-poissonlambda" id="toc-poisson-poissonlambda" class="nav-link" data-scroll-target="#poisson-poissonlambda">Poisson, Poisson<span class="math inline">\((\lambda)\)</span></a></li>
   </ul></li>
-  <li><a href="#continuous-univariate-distributions" id="toc-continuous-univariate-distributions" class="nav-link" data-scroll-target="#continuous-univariate-distributions"><span class="header-section-number">12.3</span> Continuous (Univariate) Distributions</a>
+  <li><a href="#sec-prob-cont-dist" id="toc-sec-prob-cont-dist" class="nav-link" data-scroll-target="#sec-prob-cont-dist"><span class="header-section-number">12.3</span> Continuous (Univariate) Distributions</a>
   <ul>
-  <li><a href="#uniform-distribution" id="toc-uniform-distribution" class="nav-link" data-scroll-target="#uniform-distribution">Uniform Distribution</a></li>
-  <li><a href="#exponential-distribution" id="toc-exponential-distribution" class="nav-link" data-scroll-target="#exponential-distribution">Exponential Distribution</a></li>
-  <li><a href="#gamma-distribution" id="toc-gamma-distribution" class="nav-link" data-scroll-target="#gamma-distribution">Gamma Distribution</a></li>
-  <li><a href="#beta-distribution" id="toc-beta-distribution" class="nav-link" data-scroll-target="#beta-distribution">Beta Distribution</a></li>
-  <li><a href="#gaussian-normal-distribution" id="toc-gaussian-normal-distribution" class="nav-link" data-scroll-target="#gaussian-normal-distribution">Gaussian (Normal) Distribution</a></li>
+  <li><a href="#uniform-uab" id="toc-uniform-uab" class="nav-link" data-scroll-target="#uniform-uab">Uniform, U<span class="math inline">\((a,b)\)</span></a></li>
+  <li><a href="#exponential-expolambda" id="toc-exponential-expolambda" class="nav-link" data-scroll-target="#exponential-expolambda">Exponential, Expo<span class="math inline">\((\lambda)\)</span></a></li>
+  <li><a href="#gamma-gammaalphabeta" id="toc-gamma-gammaalphabeta" class="nav-link" data-scroll-target="#gamma-gammaalphabeta">Gamma, Gamma<span class="math inline">\((\alpha,\beta)\)</span></a></li>
+  <li><a href="#beta-betaalphabeta" id="toc-beta-betaalphabeta" class="nav-link" data-scroll-target="#beta-betaalphabeta">Beta, Beta<span class="math inline">\((\alpha,\beta)\)</span></a></li>
+  <li><a href="#gaussian-normal-gmusigma2" id="toc-gaussian-normal-gmusigma2" class="nav-link" data-scroll-target="#gaussian-normal-gmusigma2">Gaussian (Normal), G<span class="math inline">\((\mu,\sigma^2)\)</span></a></li>
   </ul></li>
-  <li><a href="#sampling-distributions" id="toc-sampling-distributions" class="nav-link" data-scroll-target="#sampling-distributions"><span class="header-section-number">12.4</span> Sampling distributions</a>
+  <li><a href="#sec-prob-sampling-dist" id="toc-sec-prob-sampling-dist" class="nav-link" data-scroll-target="#sec-prob-sampling-dist"><span class="header-section-number">12.4</span> Sampling Distributions</a>
   <ul>
-  <li><a href="#chi-square-distribution" id="toc-chi-square-distribution" class="nav-link" data-scroll-target="#chi-square-distribution">Chi-Square distribution</a></li>
-  <li><a href="#students-t-distribution" id="toc-students-t-distribution" class="nav-link" data-scroll-target="#students-t-distribution">Students’ t distribution</a></li>
-  <li><a href="#f-distribution" id="toc-f-distribution" class="nav-link" data-scroll-target="#f-distribution">F distribution</a></li>
+  <li><a href="#chi-square-chi2_nu" id="toc-chi-square-chi2_nu" class="nav-link" data-scroll-target="#chi-square-chi2_nu">Chi-Square, <span class="math inline">\(\chi^2_\nu\)</span></a></li>
+  <li><a href="#students-t-t_nu" id="toc-students-t-t_nu" class="nav-link" data-scroll-target="#students-t-t_nu">Students’ t, <span class="math inline">\(t_\nu\)</span></a></li>
+  <li><a href="#f-f_nu_1-nu_2" id="toc-f-f_nu_1-nu_2" class="nav-link" data-scroll-target="#f-f_nu_1-nu_2">F, <span class="math inline">\(F_{\nu_1, \nu_2}\)</span></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -387,7 +407,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../statlearning/general.html">Part III. Statistical Learning</a></li><li class="breadcrumb-item"><a href="../statlearning/mathstat.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></h1>
+<h1 class="title"><span id="sec-prob-stats" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></span></h1>
 </div>
 
 
@@ -405,8 +425,8 @@ window.Quarto = {
 
 
 <p>This chapter covers some basic topics in mathematical statistics that are relevant to understanding data science methodology related to modeling data. The topics are considered more review than exposition and are brought together here as a reference.</p>
-<section id="probability" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="probability"><span class="header-section-number">12.1</span> Probability</h2>
+<section id="sec-prob" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="sec-prob"><span class="header-section-number">12.1</span> Probability</h2>
 <p>Data are not deterministic; they have an element of uncertainty. Measurement errors, sampling variability, random assignment and selection, incomplete observation, are just some sources of random variability found in data. A solid understanding of probability concepts is necessary for any data professional. To separate signal from noise in data means separating systematic from random effects; to make statements about data requires the quantification of uncertainty.</p>
 <p>Situations in which the outcomes occur randomly are called generically <em>experiments</em> and probability theory is used to model such experiments.</p>
 <section id="sample-space-and-events" class="level3">
@@ -543,8 +563,8 @@ window.Quarto = {
 <p>In other words, when <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent, the conditional probability equals the marginal probability—the occurrence of <span class="math inline">\(B\)</span> does not alter the probability of <span class="math inline">\(A\)</span>.</p>
 </section>
 </section>
-<section id="random-variables" class="level3">
-<h3 class="anchored" data-anchor-id="random-variables">Random Variables</h3>
+<section id="sec-prob-random-variables" class="level3">
+<h3 class="anchored" data-anchor-id="sec-prob-random-variables">Random Variables</h3>
 <p>Random variables are real-valued functions defined on sample spaces. Recall the sample space of the traffic lights encountered on the way to work:</p>
 <p><span class="math display">\[\Omega = \left\{ rr,ry,rg,yr,yy,yg,gr,gy,gg \right\}\]</span></p>
 <p><span class="math inline">\(X\)</span>, the number of green lights is a random variable. <span class="math inline">\(X\)</span> is a <strong>discrete</strong> random variable since it can take on a countable number of values, <span class="math inline">\(X = 0,\ 1,\ 2\)</span>. If the nine traffic light configurations in <span class="math inline">\(\Omega\)</span> are equally likely, then the values of <span class="math inline">\(X\)</span> occur with probabilities</p>
@@ -672,10 +692,10 @@ window.Quarto = {
 </section>
 </section>
 </section>
-<section id="discrete-univariate-distributions" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="discrete-univariate-distributions"><span class="header-section-number">12.2</span> Discrete (Univariate) Distributions</h2>
-<section id="bernoulli-binary-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="bernoulli-binary-distribution">Bernoulli (Binary) Distribution</h3>
+<section id="sec-prob-discrete-dist" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="sec-prob-discrete-dist"><span class="header-section-number">12.2</span> Discrete (Univariate) Distributions</h2>
+<section id="bernoulli-binary-bernoullipi" class="level3">
+<h3 class="anchored" data-anchor-id="bernoulli-binary-bernoullipi">Bernoulli (Binary), Bernoulli<span class="math inline">\((\pi)\)</span></h3>
 <p>A Bernoulli (or binary) experiment has two possible outcomes that occur with probabilities <span class="math inline">\(\pi\)</span> and <span class="math inline">\(1 - \pi\)</span>, respectively. The outcomes are coded numerically as <span class="math inline">\(Y = 1\)</span> (with probability <span class="math inline">\(\pi\)</span>) and <span class="math inline">\(Y = 0\)</span>, the subset of the sample space <span class="math inline">\(\Omega\)</span> that maps to <span class="math inline">\(Y = 1\)</span> is often called the “event” or the “success” outcome of the binary distribution, the complement is called the “non-event” or the “failure” outcome.</p>
 <p>For example, in the traffic light example the sample space is</p>
 <p><span class="math display">\[\Omega = \left\{ rr,ry,rg,yr,yy,yg,gr,gy,gg \right\}\]</span></p>
@@ -693,8 +713,8 @@ window.Quarto = {
 </figure>
 </div>
 </section>
-<section id="binomial-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="binomial-distribution">Binomial Distribution</h3>
+<section id="binomial-binomialnpi" class="level3">
+<h3 class="anchored" data-anchor-id="binomial-binomialnpi">Binomial, Binomial<span class="math inline">\((n,\pi)\)</span></h3>
 <p>Let <span class="math inline">\(Y_{1},\cdots,Y_{n}\)</span> be independent binary experiments with the same event probability <span class="math inline">\(\pi\)</span>. Then <span class="math inline">\(X = \sum_{i = 1}^{n}Y_{i}\)</span> has a Binomial(<span class="math inline">\(n,\pi\)</span>) distribution with p.m.f.</p>
 <p><span class="math display">\[\Pr(X = x) = \begin{pmatrix}
 n \\
@@ -710,8 +730,8 @@ x
 </div>
 <p>The Bernoulli(<span class="math inline">\(\pi\)</span>) distribution is the special case of the Binomial(<span class="math inline">\(1,\pi\)</span>) distribution.</p>
 </section>
-<section id="geometric-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="geometric-distribution">Geometric distribution</h3>
+<section id="geometric-geometricpi" class="level3">
+<h3 class="anchored" data-anchor-id="geometric-geometricpi">Geometric, Geometric<span class="math inline">\((\pi)\)</span></h3>
 <p>The Binomial(<span class="math inline">\(n,\pi\)</span>) distribution is the number of events in a series of <span class="math inline">\(n\)</span> Bernoulli(<span class="math inline">\(\pi\)</span>) experiments. The Geometric(<span class="math inline">\(\pi\)</span>) distribution also can be defined in terms of independent Bernoulli(<span class="math inline">\(\pi\)</span>) experiments as the number of trials needed to obtain the first event. There is no theoretical upper bound for the support, as you might need infinitely many binary experiments to realize one event.</p>
 <p>The p.m.f. of a Geometric(<span class="math inline">\(\pi\)</span>) random variable, and its mean and variance, are given by</p>
 <p><span class="math display">\[p(x) = \pi(1 - \pi)^{x - 1}\ \ \ \ \ \ x = 1,2,\cdots\]</span></p>
@@ -732,8 +752,8 @@ x
 <p><span class="math display">\[p(y) = \pi(1 - \pi)^{y}\ \ \ \ \ y = 0,1,2,\cdots\]</span></p>
 <p>With mean <span class="math inline">\(\text{E}\lbrack Y\rbrack = \frac{(1 - \pi)}{\pi}\)</span> and variance <span class="math inline">\(\text{Var}\lbrack Y\rbrack = \frac{(1 - \pi)}{\pi}^{2}\)</span>.</p>
 </section>
-<section id="negative-binomial-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="negative-binomial-distribution">Negative Binomial Distribution</h3>
+<section id="negative-binomial-negbinkpi" class="level3">
+<h3 class="anchored" data-anchor-id="negative-binomial-negbinkpi">Negative Binomial, NegBin<span class="math inline">\((k,\pi)\)</span></h3>
 <p>An extension of the Geometric(<span class="math inline">\(\pi\)</span>) distribution is the Negative Binomial (NegBin(<span class="math inline">\(k,\pi\)</span>)) distribution. In a series of independent Bernoulli(<span class="math inline">\(\pi\)</span>) trials, the number of experiments until the <span class="math inline">\(k\)</span><sup>th</sup> event is observed is a NegBin(<span class="math inline">\(k,\pi\)</span>) random variable.</p>
 <p>A NegBin(<span class="math inline">\(k,\pi\)</span>) random variable is thus the sum of <span class="math inline">\(k\)</span> Geometric(<span class="math inline">\(\pi\)</span>) random variables. The p.m.f., mean, and variance of <span class="math inline">\(X \sim NegBin(k,\pi)\)</span> are</p>
 <p><span class="math display">\[p(x) = \begin{pmatrix}
@@ -760,8 +780,8 @@ Figure&nbsp;12.1: Probability mass function of a NegBin(5,0.7) random variable.
 </div>
 <p>An important application of the negative binomial distribution is in mixing models. These are models where the parameters of a distribution are assumed to be random variables rather than constants. This mechanism introduces additional variability into the system and is applied when the observed data appear more dispersed than a distribution permits. This condition is called <strong>overdispersion</strong>. For example, a binomial random variable has variance <span class="math inline">\(n\pi(1 - \pi)\)</span>; the variability is a function of the mean <span class="math inline">\(n\pi\)</span>. When the observed data suggest that this relationship between mean and variance does not hold—and typically the observed variability is greater than the nominal variance—one can treat <span class="math inline">\(n\)</span> or <span class="math inline">\(\pi\)</span> as a random variable. If you assume that <span class="math inline">\(n\)</span> follows a Poisson distribution (see next), then the marginal distribution of the data is also Poisson. If you start with a Poisson distribution and assume that its parameter follows a Gamma distribution, the resulting marginal distribution of the data is negative binomial.</p>
 </section>
-<section id="poisson-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="poisson-distribution">Poisson Distribution</h3>
+<section id="poisson-poissonlambda" class="level3">
+<h3 class="anchored" data-anchor-id="poisson-poissonlambda">Poisson, Poisson<span class="math inline">\((\lambda)\)</span></h3>
 <p>The Poisson distribution is a common probability model for count variables that represent counts per unit, rather than counts that can be converted to proportions. For example, the number of chocolate chips on a cookie, the number of defective parts per day on an assembly line or the number of fish caught per day can be modeled as Poisson random variables.</p>
 <p>For the Poisson assumption to be met when modeling event counts over some unit, e.g.&nbsp;time, the rate at which events occur cannot depend on the occurrence of any events and events have to occur independently. For example, if the number of customer calls to a service center increases sharply after the release of a new software product, then the rate of events (calls) per day is not constant across days. This can still be modeled as a Poisson process where <span class="math inline">\(\lambda\)</span> depends on other input variables such as the time since release of the new product. If one customer’s call makes it more likely that another customer calls into the service center, the Poisson assumption is not valid.</p>
 <p>The random variable <span class="math inline">\(Y\)</span> has a Poisson(<span class="math inline">\(\lambda\)</span>) distribution if its probability mass function is given by</p>
@@ -812,13 +832,13 @@ Figure&nbsp;12.3: Normal approximation to the Poisson distribution for <span cla
 <p>Because the events being counted occur independently of each other, a Poisson distribution is divisible. You can think of a Poisson(<span class="math inline">\(\lambda = 5\)</span>) variable as the sum of five Poisson(1) variables. The result of one variable producing on average 5 events per time units or five variables each producing on average one event per unit is the same. More generally, if <span class="math inline">\(Y_{1},\cdots,Y_{n}\)</span> are independent random variables with respective Poisson(<span class="math inline">\(\lambda_{i}\)</span>) distributions, then their sum <span class="math inline">\(\sum_{i}^{}Y_{i}\)</span> follows a Poisson distribution with mean <span class="math inline">\(\lambda = \sum_{i}^{}\lambda_{i}\)</span>.</p>
 </section>
 </section>
-<section id="continuous-univariate-distributions" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="continuous-univariate-distributions"><span class="header-section-number">12.3</span> Continuous (Univariate) Distributions</h2>
+<section id="sec-prob-cont-dist" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="sec-prob-cont-dist"><span class="header-section-number">12.3</span> Continuous (Univariate) Distributions</h2>
 <p>For continuous random variables, the probability that the variable takes on any particular value is zero. To make meaningful probability statements we consider integration of the probability density function (p.d.f.) over sets, for example, intervals:</p>
 <p><span class="math display">\[\Pr{(a \leq X \leq b)} = \int_{a}^{b}{f(x)dx}\]</span></p>
 <p>The density function satisfies <span class="math inline">\(\int_{- \infty}^{\infty}{f(x)dx} = 1\)</span> and can be obtained by differentiating the c.d.f <span class="math inline">\(F(x) = \Pr{(X \leq x)}\)</span>; <span class="math inline">\(f(x) = \frac{dF(x)}{dx}\)</span>.</p>
-<section id="uniform-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="uniform-distribution">Uniform Distribution</h3>
+<section id="uniform-uab" class="level3">
+<h3 class="anchored" data-anchor-id="uniform-uab">Uniform, U<span class="math inline">\((a,b)\)</span></h3>
 <p>If a random variable has a continuous uniform distribution on the interval <span class="math inline">\(\lbrack a,b\rbrack\)</span>, denoted <span class="math inline">\(Y \sim U(a,b)\)</span>, its p.d.f. is given by</p>
 <p><span class="math display">\[f(x) = \left\{ \begin{matrix}
 \frac{1}{(b - a)} &amp; a \leq x \leq b \\
@@ -827,8 +847,8 @@ Figure&nbsp;12.3: Normal approximation to the Poisson distribution for <span cla
 <p>The mean and variance of a <span class="math inline">\(U(a,b)\)</span> random variable are</p>
 <p><span class="math display">\[\text{E}\lbrack Y\rbrack = \frac{a + b}{2}\ \ \ \ \ \ \text{Var}\lbrack Y\rbrack = \frac{(b - a)^{2}}{12}\]</span></p>
 </section>
-<section id="exponential-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="exponential-distribution">Exponential Distribution</h3>
+<section id="exponential-expolambda" class="level3">
+<h3 class="anchored" data-anchor-id="exponential-expolambda">Exponential, Expo<span class="math inline">\((\lambda)\)</span></h3>
 <p>The exponential distribution is a useful probability model for modeling continuous lifetimes. It is related to Poisson processes. If events occur continuously and independently at a constant rate <span class="math inline">\(\lambda\)</span>, the number of events is a Poisson random variable. The time between the events is an exponential random variable, denoted <span class="math inline">\(Y \sim\)</span> Expo(<span class="math inline">\(\lambda\)</span>).</p>
 <p><span class="math display">\[p(y) = \lambda e^{- \lambda y},\ \ \ \ y \geq 0\]</span></p>
 <p><span class="math display">\[F(y) = 1 - e^{- \lambda y},\ \ \ y \geq 0\]</span></p>
@@ -840,8 +860,8 @@ Figure&nbsp;12.3: Normal approximation to the Poisson distribution for <span cla
 <p>The memoryless property of the exponential distribution makes it <strong>not</strong> a good model for human lifetimes. The probability that a 20-year-old will live another 10 years is not the same as the probability that a 75-year-old will live another 10 years. The exponential distribution implies that this would be the case. When modeling earthquakes, it might be reasonable that the probability of an earthquake in the next ten years is the same, regardless of when the last earthquake occurred—the exponential distribution would then be reasonable.</p>
 <p>You don’t have to worry about whether other distributions have this memoryless property in applications where lack of memory would not be appropriate. The exponential distribution is defined by this property, it is the only continuous distribution with lack of memory.</p>
 </section>
-<section id="gamma-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="gamma-distribution">Gamma Distribution</h3>
+<section id="gamma-gammaalphabeta" class="level3">
+<h3 class="anchored" data-anchor-id="gamma-gammaalphabeta">Gamma, Gamma<span class="math inline">\((\alpha,\beta)\)</span></h3>
 <p>The Expo(<span class="math inline">\(\lambda\)</span>) distribution is a special case of a broader family of distributions, the Gamma(<span class="math inline">\(\alpha,\beta\)</span>) distribution. A random variable <span class="math inline">\(Y\)</span> is said to have a Gamma(<span class="math inline">\(\alpha,\beta\)</span>) distribution if its density function is</p>
 <p><span class="math display">\[f(y) = \frac{1}{\beta^{\alpha}\Gamma(\alpha)}y^{\alpha - 1}e^{- y/\beta},\ \ \ \ \ y \geq 0,\ \alpha,\beta &gt; 0\]</span></p>
 <p>The mean and variance of a Gamma(<span class="math inline">\(\alpha,\beta\)</span>) random variable are given by</p>
@@ -871,8 +891,8 @@ Tip
 </figure>
 </div>
 </section>
-<section id="beta-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="beta-distribution">Beta Distribution</h3>
+<section id="beta-betaalphabeta" class="level3">
+<h3 class="anchored" data-anchor-id="beta-betaalphabeta">Beta, Beta<span class="math inline">\((\alpha,\beta)\)</span></h3>
 <p>A random variable has a Beta distribution with parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, denoted <span class="math inline">\(Y \sim \text{Beta}(\alpha,\beta)\)</span>, if its density function is given by <span class="math display">\[
 f(y) = \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\, y^{\alpha-1}\,(1-y)^{\beta-1}\quad 0 &lt; y &lt; 1
 \]</span> The family of beta distributions takes on varied shapes as seen in <a href="#fig-sl-beta" class="quarto-xref">Figure&nbsp;<span>12.4</span></a>.</p>
@@ -896,8 +916,8 @@ Figure&nbsp;12.4: Densities of Beta(<span class="math inline">\(\alpha,\beta\)</
 <p>The <span class="math inline">\(\text{Beta}(1,1)\)</span> is a continuous uniform random variable on [0,1].</p>
 <p>Since <span class="math inline">\(Y\)</span> is continuous, we can define the support of the Beta random variable as <span class="math inline">\(0 \le y \le 1\)</span> or as <span class="math inline">\(0 &lt; y &lt; 1\)</span>. The probability that the continuous random variable takes on exactly the value 0 or 1 is zero. However, in practice you can observe proportions at the extreme of the support; the proportion of income spent on rent by a homeowner is zero.</p>
 </section>
-<section id="gaussian-normal-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="gaussian-normal-distribution">Gaussian (Normal) Distribution</h3>
+<section id="gaussian-normal-gmusigma2" class="level3">
+<h3 class="anchored" data-anchor-id="gaussian-normal-gmusigma2">Gaussian (Normal), G<span class="math inline">\((\mu,\sigma^2)\)</span></h3>
 <p>The Gaussian (or Normal) distribution is arguably the most important continuous distribution in all of probability and statistics. A random variable <span class="math inline">\(Y\)</span> has a Gaussian distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^{2}\)</span> if its density function is</p>
 <p><span class="math display">\[f(y) = \frac{1}{\sqrt{2\pi\sigma^{2}}}\exp\left\{ - \frac{1}{2\sigma^{2}}(y - \mu)^{2} \right\},\ \ \ \ \text{-}\infty &lt; y &lt; \infty\]</span></p>
 <p>The notation <span class="math inline">\(Y \sim G\left( \mu,\sigma^{2} \right)\)</span> or <span class="math inline">\(Y \sim N\left( \mu,\sigma^{2} \right)\)</span> is common.</p>
@@ -910,12 +930,12 @@ Figure&nbsp;12.4: Densities of Beta(<span class="math inline">\(\alpha,\beta\)</
 </div>
 <p>A special version is the <strong>standard</strong> Gaussian (standard normal) distribution <span class="math inline">\(Z \sim G(0,1)\)</span> with density</p>
 <p><span class="math display">\[f(z) = \frac{1}{\sqrt{2\pi}}\exp\left\{ - \frac{1}{2}y^{2} \right\}\]</span></p>
-<p>The standard normal is also referred to as the <strong>unit</strong> normal distribution.</p>
+<p>The standard Gaussian is also referred to as the <strong>unit</strong> normal distribution.</p>
 <p>Gaussian random variables have some interesting properties. For example, linear combinations of Gaussian random variables are Gaussian distributed. If <span class="math inline">\(Y\sim G\left( \mu,\sigma^{2} \right)\)</span>, then <span class="math inline">\(X = aY + b\)</span> has distribution <span class="math inline">\(G(a\mu + b,a^{2}\sigma^{2})\)</span>. As an example, if <span class="math inline">\(Y\sim G\left( \mu,\sigma^{2} \right)\)</span>, then</p>
 <p><span class="math display">\[Z = \frac{Y - \mu}{\sigma}\]</span></p>
 <p>has a standard Gaussian distribution. You can express probabilities about <span class="math inline">\(Y\)</span> in terms of probabilities about <span class="math inline">\(Z\)</span>:</p>
 <p><span class="math display">\[\Pr{(X \leq x)} = \Pr\left( Z \leq \frac{x - \mu}{\sigma} \right)\]</span></p>
-<p>Because linear functions of Gaussians are Gaussians, it is easy to establish the distribution of the sample mean <span class="math inline">\(\overline{Y} = \frac{1}{n}\sum_{i}^{}Y_{i}\)</span> in a random sample from a <span class="math inline">\(G(\mu,\sigma^{2})\)</span> distribution. First, if we take a random sample from <strong>any</strong> distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^{2}\)</span>, then the sample mean <span class="math inline">\(\overline{Y}\)</span> has mean and variance</p>
+<p>Because linear functions of Gaussian random variables are Gaussian random variables, it is easy to establish the distribution of the sample mean <span class="math inline">\(\overline{Y} = \frac{1}{n}\sum_{i}^{}Y_{i}\)</span> in a random sample from a <span class="math inline">\(G(\mu,\sigma^{2})\)</span> distribution. First, if we take a random sample from <strong>any</strong> distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^{2}\)</span>, then the sample mean <span class="math inline">\(\overline{Y}\)</span> has mean and variance</p>
 <p><span class="math display">\[\text{E}\left\lbrack \overline{Y} \right\rbrack = \mu\ \ \ \ \ \ \ \ \ \text{Var}\left\lbrack \overline{Y} \right\rbrack = \frac{\sigma^{2}}{n}\]</span></p>
 <p>This follows from the linearity of the expectation operator and the independence of the observations in the random sample. If, in addition, the <span class="math inline">\(Y_{i} \sim G\left( \mu,\sigma^{2} \right)\)</span>, then</p>
 <p><span class="math display">\[\overline{Y} \sim G\left( \mu,\frac{\sigma^{2}}{n} \right)\]</span></p>
@@ -930,13 +950,32 @@ Figure&nbsp;12.4: Densities of Beta(<span class="math inline">\(\alpha,\beta\)</
 <p>converges to that of a standard normal random variable as <span class="math inline">\(n \rightarrow \infty\)</span>.</p>
 </div>
 </div>
+<p>These amazing properties contribute to the Gaussian distribution being the most important probability distribution. Most continuous attributes actually do not behave like Gaussian random variables at all, they often have a restricted range or are skewed or have heavier tails than a Gaussian random variable. There is really nothing <em>normal</em> about this distribution, which is one reason why we prefer the name Gaussian over Normal distribution.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="What is normal?">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What is normal?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We avoid the use of the term normal to describe the Gaussian distribution for another reason: the connection of the concept of normality and this distribution to eugenics. The Belgian astronomer, statistician and mathematician Adolphe Quetelet (1796–1847) introduced the generalized notion of the normal. He studied the distribution of physical attributes and determined that the normal, the most representative, value of an attribute is its average. Discrepancies above and below the average were considered “errors”. Early applications of the Gaussian distribution were in the study of measurement errors. C.F. Gauss used the distribution to represent errors in the measurement of celestial bodies.</p>
+<p>Prior to Quetelet, the view of “norm” and “normality” was associated with carpentry. The carpenter square is also called the norm, and in normal construction everything is at right angles. With Quetelet, the middle of the distribution, the center, became the “new normal.” There is nothing objectionable so far.</p>
+<p>However, this view did not sit well with Francis Galton, who introduced the term eugenics. Galton replaced the term “error” with standard deviation and considered variability within a human population as potential for racial progress <span class="citation" data-cites="GrueHeiberg">(<a href="../references.html#ref-GrueHeiberg" role="doc-biblioref">Grue and Heiberg 2006</a>)</span>. The bell shape of the normal distribution was not used to focus our attention on the average, as Quetelet did. Galton introduced quartiles to categorize the area under the normal into sections of greater and lesser genetic worth. That is not normal!</p>
+</div>
+</div>
+</div>
 </section>
 </section>
-<section id="sampling-distributions" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="sampling-distributions"><span class="header-section-number">12.4</span> Sampling distributions</h2>
+<section id="sec-prob-sampling-dist" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="sec-prob-sampling-dist"><span class="header-section-number">12.4</span> Sampling Distributions</h2>
 <p>Many important probability distributions are related to sampling data from Gaussian processes, <span class="math inline">\(t\)</span>, <span class="math inline">\(\chi^{2}\)</span>, and <span class="math inline">\(F\)</span> distributions most importantly.</p>
-<section id="chi-square-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="chi-square-distribution">Chi-Square distribution</h3>
+<section id="chi-square-chi2_nu" class="level3">
+<h3 class="anchored" data-anchor-id="chi-square-chi2_nu">Chi-Square, <span class="math inline">\(\chi^2_\nu\)</span></h3>
 <p>Let <span class="math inline">\(Z_{1},\cdots,Z_{k}\)</span> denote independent standard normal random variables <span class="math inline">\(G(0,1)\)</span>. Then</p>
 <p><span class="math display">\[X = Z_{1}^{2} + Z_{2}^{2} + \cdots + Z_{k}^{2}\]</span></p>
 <p>has p.d.f.</p>
@@ -955,8 +994,8 @@ Figure&nbsp;12.4: Densities of Beta(<span class="math inline">\(\alpha,\beta\)</
 <p><span class="math display">\[\text{E}\left\lbrack \frac{(n - 1)S^{2}}{\sigma^{2}} \right\rbrack = n - 1\]</span></p>
 <p><span class="math display">\[\text{E}\left\lbrack S^{2} \right\rbrack = \sigma^{2}\]</span></p>
 </section>
-<section id="students-t-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="students-t-distribution">Students’ t distribution</h3>
+<section id="students-t-t_nu" class="level3">
+<h3 class="anchored" data-anchor-id="students-t-t_nu">Students’ t, <span class="math inline">\(t_\nu\)</span></h3>
 <p>In the Gaussian case you can also show that <span class="math inline">\(\overline{Y}\)</span> and <span class="math inline">\(S^{2}\)</span> are independent random variables. This is important because of another distributional result: if <span class="math inline">\(Z \sim G(0,1)\)</span> and <span class="math inline">\(U \sim \chi_{\nu}^{2}\)</span>, and <span class="math inline">\(Z\)</span> and <span class="math inline">\(U\)</span> are independent, then the ratio</p>
 <p><span class="math display">\[T = \frac{Z}{\sqrt{U/\nu}}\]</span></p>
 <p>has a <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(\nu\)</span> degrees of freedom. In honor of Student, the pseudonym used by William Gosset for publishing statistical research while working at Guinness Breweries, the <span class="math inline">\(t\)</span> distribution is also known as Student’s <span class="math inline">\(t\)</span> distribution or Student’s distribution for short.</p>
@@ -973,8 +1012,8 @@ Figure&nbsp;12.4: Densities of Beta(<span class="math inline">\(\alpha,\beta\)</
 <p>We know that <span class="math inline">\(\overline{Y} \sim G\left( \mu,\frac{\sigma^{2}}{n} \right)\)</span> and that <span class="math inline">\(\frac{(n - 1)S^{2}}{\sigma^{2}}\)</span> follows a <span class="math inline">\(\chi_{n - 1}^{2}\)</span> distribution. Furthermore, <span class="math inline">\(\overline{Y}\)</span> and <span class="math inline">\(S^{2}\)</span> are independent. Taking ratios as required by the definition of a <span class="math inline">\(t\)</span> random variable yields</p>
 <p><span class="math display">\[\frac{\frac{\overline{Y} - \mu}{\sigma/\sqrt{n}}}{\sqrt{S^{2}{/\sigma}^{2}}} = \frac{\overline{Y} - \mu}{S/\sqrt{n}} \sim t_{n - 1}\]</span></p>
 </section>
-<section id="f-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="f-distribution">F distribution</h3>
+<section id="f-f_nu_1-nu_2" class="level3">
+<h3 class="anchored" data-anchor-id="f-f_nu_1-nu_2">F, <span class="math inline">\(F_{\nu_1, \nu_2}\)</span></h3>
 <p>If <span class="math inline">\(\chi_{1}^{2}\)</span> and <span class="math inline">\(\chi_{2}^{2}\)</span> are independent chi-square random variables with <span class="math inline">\(\nu_{1}\)</span> and <span class="math inline">\(\nu_{2}\)</span> degrees of freedom, respectively, then the ratio</p>
 <p><span class="math display">\[F = \frac{\chi_{1}^{2}/v_{1}}{\frac{\chi_{2}^{2}}{\nu_{2}}}\]</span></p>
 <p>follows an <span class="math inline">\(F\)</span> distribution with <span class="math inline">\(\nu_{1}\)</span> numerator and <span class="math inline">\(\nu_{2}\)</span> denominator degrees of freedom. We denote this fact <span class="math inline">\(F\sim F_{\nu_{1},\nu_{2}}\)</span>. The mean and variance of the <span class="math inline">\(F\)</span> distribution are</p>
@@ -998,6 +1037,11 @@ Figure&nbsp;12.4: Densities of Beta(<span class="math inline">\(\alpha,\beta\)</
 <p>This fact is used in software packages that might report the result of an <span class="math inline">\(F\)</span>-test instead of the result of a two-sided <span class="math inline">\(t\)</span>-test. The two are equivalent and the <span class="math inline">\(p\)</span>-values are the same.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-GrueHeiberg" class="csl-entry" role="listitem">
+Grue, Lars, and Arvid Heiberg. 2006. <span>“Notes on the History of Normality–Reflections on the Work of Quetelet and Galton.”</span> <em>Scandinavian Journal of Disability Research</em> 8 (4): 232–46.
+</div>
+</div>
 </section>
 </section>
 

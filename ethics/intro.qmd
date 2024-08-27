@@ -190,7 +190,7 @@ The application is designed with an ideal user in mind, someone who is happy, ha
 :::
 :::
 
-It is easy to brush aside unintended consequences as not knowable, the so-called *unknown unknowns*. They will certainly remain unknowns if you do not want them to be known. Hindsight has always 20:20 vision, but some unintended consequences are in fact knowable and foreseeable. We have to make an effort to think about possible unintended consequences and be creative in imagining what could happen. Data sharing is an interesting case in point. Much good can be done by combining data sources that complement each other—the sum can be more than the parts. Medical research can benefit by combining anonymized data from clinical trials that are conducted in isolation. Data collected in an app with user consent can be made available to a wider audience and make the world a better place—or it can backfire spectacularly.
+It is easy to brush aside unintended consequences as not knowable, the so-called *unknown unknowns*. They will certainly remain unknowns if you do not want them to be known. Hindsight has always 20:20 vision, but some unintended consequences are in fact knowable and foreseeable. We have to make an effort to think about possible unintended consequences and be creative in imagining what could happen. Data sharing is an interesting case in point. Much good can be done by combining data sources that complement each other—the total can be more than the sum of the parts. Medical research can benefit by combining anonymized data from clinical trials that are conducted in isolation. Data collected in an app with user consent can be made available to a wider audience and make the world a better place—or it can backfire spectacularly.
 
 ::: example
 ::: example-header
@@ -204,7 +204,7 @@ However, the move turned into a privacy nightmare. Military researchers discover
 
 The [Guardian](https://www.theguardian.com/technology/2018/jan/29/strava-secret-army-base-locations-heatmap-public-users-military-ban) determined that by drilling into the data at Strava.com, they were able to reveal the names of 50 U.S. service members stationed at an airbase in Afghanistan. From changes in running profiles one can also glean when service members are transferred.
 
-Revealing information about military operations was an unintended consequence of the release of information on Strava.com. It was not breach of data, it was done deliberately, with other goals in mind. According to the Guardian, the company argued that the information was already made public by the users who uploaded it. In hindsight, it was a foreseeable consequence of sharing geotagged data.
+Revealing information about military operations was an unintended consequence of the release of information on Strava.com. It was not a data breach, it was done deliberately, with other goals in mind. According to the Guardian, the company argued that the information was already made public by the users who uploaded it. In hindsight, it was a foreseeable consequence of sharing geotagged data.
 :::
 :::
 
@@ -212,7 +212,7 @@ Revealing information about military operations was an unintended consequence of
 
 Should we accept a more accurate approach over a less accurate approach? Many would say “Yes”, greater accuracy is better. The more accurate method can have other shortcomings, for example, it may be inscrutable or very difficult to implement and the nod might go to the less accurate method that is easier to implement. In this situation we are making a deliberate choice to prefer one approach over another despite its inferiority with respect to a specific metric. Other considerations also matter.
 
-But even if all other things being equal, accuracy is not necessarily the appropriate measure by which to judge the performance of a decision rule. Consider a classification problem with two possible states, “Yes” and “No”. An algorithm is developed to classify an observation based on data. Since the model will not always predict correctly, there are four possible scenarios, commonly displayed in a **confusion matrix**.
+All other things being equal, accuracy is not necessarily the appropriate measure by which to judge the performance of a decision rule. Consider a classification problem with two possible states, “Yes” and “No”. An algorithm is developed to classify an observation based on data. Since the model will not always predict correctly, there are four possible scenarios, commonly displayed in a **confusion matrix**.
 
 ::: definition
 ::: definition-header
@@ -222,7 +222,7 @@ Definition: Confusion Matrix
 ::: definition-container
 The confusion matrix in a classification problem is the cross-classification between the observed and the predicted categories. In a problem with two categories, the confusion matrix is a 2 x 2 matrix.
 
-The cells of the matrix contain the number of data points that fall into the cross-classification when the model’s decision rule is applied to n observations. If one of the categories is labeled positive and the other is labeled negative, the cells give the number of true positive (TP), true negative (TN), false positive (FP), and false negative (FN) predictions.
+The cells of the matrix contain the number of data points that fall into the cross-classification when the model’s decision rule is applied to $n$ observations. If one of the categories is labeled positive and the other is labeled negative, the cells give the number of true positive (TP), true negative (TN), false positive (FP), and false negative (FN) predictions.
 :::
 :::
 

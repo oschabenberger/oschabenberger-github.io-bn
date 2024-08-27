@@ -115,6 +115,16 @@ issue={1},
 pages={2--28}
 }
 
+@article{GrueHeiberg,
+title={Notes on the History of Normality--Reflections on the Work of Quetelet and Galton},
+author={Grue, Lars and Heiberg, Arvid},
+journal={Scandinavian Journal of Disability Research},
+year={2006},
+volume={8},
+number={4},
+pages={232--246}
+}
+
 @book{Huff_1954,
 title={How to Lie with Statistics},
 author={Huff, Darrell},
