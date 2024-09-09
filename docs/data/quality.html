@@ -347,14 +347,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../ethics/gonewrong.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">How Things Go Wrong</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../ethics/bias_harm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/privacy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
   </div>
 </li>
       </ul>
@@ -371,13 +377,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/coding_practices.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/tools.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
   </div>
 </li>
       </ul>
@@ -521,7 +527,7 @@ window.Quarto = {
 </table>
 <p>The variable description is important metadata to understand the data. A variable such as <code>totalRooms</code> could be understood as the number of rooms in a building and the <code>medianHouseValue</code> could then mean the median of the houses that have that number of rooms. However, since the data are not for individual houses but blocks, <code>totalRooms</code> represents the sum of all the rooms in all the houses in that block.</p>
 <p>We start data profiling a pandas DataFrame of the data with getting basic info and a listing of the first few observations.</p>
-<div id="8ec93558" class="cell" data-execution_count="1">
+<div id="01084230" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>CA_houses <span class="op">=</span> pd.read_csv(<span class="st">"../datasets/CaliforniaHousing_1990.csv"</span>)</span>
@@ -651,7 +657,7 @@ memory usage: 1.6+ MB</code></pre>
 <li><p>The <code>ocean_proximity</code> entries are in all caps. We want to see the other values in that column to make sure the entries are consistent. Knowing the format of strings is important for filtering (selecting) or grouping observations.</p></li>
 </ul>
 <p>The next step is to use pandas <code>describe()</code> function to compute basic summaries of the variables.</p>
-<div id="5d4ffac6" class="cell" data-execution_count="2">
+<div id="633794c7" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>CA_houses.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
@@ -779,7 +785,7 @@ memory usage: 1.6+ MB</code></pre>
 </div>
 <p>For each of the numeric variables, <code>describe()</code> computes the number of non-missing values (count), the sample mean (mean), the sample standard deviation (std), the minimum (min), maximum (max) and three percentiles (25%, 50%, 75%).</p>
 <p>The results confirm that all variables have complete data (no missing values) except for <code>total_bedrooms</code>. The min and max values are useful to see the range (range = max – min) for the variables and to spot outliers and unusual values. It is suspicious that there is one or more blocks with a single household. This is not necessarily the same record that has 2 <code>total_rooms</code> and a population of 3.</p>
-<div id="63c5c671" class="cell" data-execution_count="3">
+<div id="6077b366" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>CA_houses[CA_houses[<span class="st">"households"</span>] <span class="op">==</span> <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
@@ -829,13 +835,13 @@ memory usage: 1.6+ MB</code></pre>
 <h3 class="anchored" data-anchor-id="profiling-tools">Profiling Tools</h3>
 <p>You can accelerate the data profiling task by using packages such as ydata_profiling (fka pandas_profiling), lux, or sweetviz. Sweetviz, for example, generates detailed interactive visualizations in a web browser or a notebook that help to address some of the profiling questions we raised at the beginning of the section.</p>
 <p>To create a profile report for the housing prices data with sweetviz, use the following:</p>
-<div id="d6e6c6b2" class="cell" data-execution_count="4">
+<div id="893ef8dd" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sweetviz <span class="im">as</span> sv</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>my_report <span class="op">=</span> sv.analyze(CA_houses)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>my_report.show_html(filepath<span class="op">=</span><span class="st">'Profiling_CA_1.html'</span>, open_browser<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"edcf93ce990044189f8ec779a3e262dd","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+{"model_id":"e5f9526281f34c38be636da2851b760a","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
 </script>
 </div>
 <div class="cell-output cell-output-stdout">
@@ -891,12 +897,12 @@ Figure&nbsp;6.4: Sweetviz visualization of pairwise associations in California H
 <p>Strong positive correlations are present between <code>households</code> and the variables <code>total_rooms</code>, <code>total_bedrooms</code>, and <code>population</code>. That is expected as these variables are accumulated across all households in a block. There is a moderate positive association between median income and median house value. More expensive houses are associated with higher incomes—not surprising. A strong negative correlation exists between <code>longitude</code> and <code>latitude</code>, a consequence of the geography of California: as you move further west (east) the state reaches further south (north).&nbsp;</p>
 <p>Associations between quantitative and qualitative variables are calculated as the <a href="https://en.wikipedia.org/wiki/Correlation_ratio">correlation ratio</a> that ranges from 0 to 1 and displayed as squares in the Associations matrix. The correlation ratio is based on means within the categories of the qualitative variables. A ratio of 0 means that the means of the quantitative variable are identical for all categories. Since the data contains only one qualitative variable, <code>ocean_proximity</code>, squares appear only in the last row and column of the Associations matrix.</p>
 <p>If the data contains an obvious target variable for modeling, you can indicate that when creating the profiling report. Sweetviz then adds information on that variable to the visualizations. Suppose that we are interested in modeling the median house value as a function of other attributes. The following statement requests a report with <code>median_house_value</code> as the target.</p>
-<div id="c107996f" class="cell" data-execution_count="5">
+<div id="7edb4f87" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>housevalue_report <span class="op">=</span> sv.analyze(CA_houses, target_feat<span class="op">=</span><span class="st">"median_house_value"</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>housevalue_report.show_html(filepath<span class="op">=</span><span class="st">'Profiling_CA_2.html'</span>, open_browser<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"bbe9a07943c74e8a801d039abfdf279d","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+{"model_id":"817faf803c164a84b3184813d2416471","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
 </script>
 </div>
 <div class="cell-output cell-output-stdout">
@@ -1048,7 +1054,7 @@ Caution
 <section id="missing-values-in-pandas" class="level3">
 <h3 class="anchored" data-anchor-id="missing-values-in-pandas">Missing Values in Pandas</h3>
 <p>Python has the singleton object None which can be used to indicate missingness and it supports the IEEE <code>NaN</code> (not a number) to indicate missing values for floating-point types. Pandas uses the sentinel value approach based on <code>NaN</code> for floating-point and <code>None</code> for all other data types. This choice has some side effects, <code>None</code> and <code>NaN</code> do not behave the same way.</p>
-<div id="15e8df5f" class="cell" data-execution_count="6">
+<div id="039a61ec" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1065,7 +1071,7 @@ Caution
 </div>
 <p>The array with <code>None</code> value is represented internally as an array of Python objects. Operating on objects is slower than on basic data types such as integers. Having missing values in non-floating-point columns thus incurs some drag on performance.</p>
 <p>For floating point data use <code>np.nan</code> to indicate missingness.</p>
-<div id="910b45d4" class="cell" data-execution_count="7">
+<div id="7dd9af76" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> np.array([<span class="dv">1</span>, np.nan, <span class="dv">3</span>, <span class="dv">4</span>])</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>f1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
@@ -1073,20 +1079,20 @@ Caution
 </div>
 </div>
 <p>The behavior of <code>None</code> and <code>NaN</code> in operations is different. For example, arithmetic operations on <code>NaN</code>s result in <code>NaN</code>s, whereas arithmetic on <code>None</code> values results in errors.</p>
-<div id="a842171b" class="cell" data-execution_count="8">
+<div id="7ced4920" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>f1.<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>nan</code></pre>
 </div>
 </div>
-<div id="d7c1ad37" class="cell" data-execution_count="9">
+<div id="f0402c04" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>x1.<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>TypeError: unsupported operand type(s) for +: 'int' and 'NoneType'</code></pre>
 </div>
 </div>
 <p>While <code>None</code> values result in errors and stop program execution, <code>NaN</code>s are contagious; they turn everything they come in touch with into <code>NaN</code>s—but the program keeps executing. Pandas mixes <code>None</code> and <code>NaN</code> values and follows casting rules when <code>np.nan</code> is stored.</p>
-<div id="88745e29" class="cell" data-execution_count="10">
+<div id="7559c4cc" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> pd.Series([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>], dtype<span class="op">=</span><span class="bu">int</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>display(x2)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>x2[<span class="dv">2</span>] <span class="op">=</span> np.nan</span>
@@ -1107,7 +1113,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>The integer series is converted to a float series when a <code>NaN</code> was inserted. The same happens when you use <code>None</code> instead of <code>NaN</code>:</p>
-<div id="ca37eded" class="cell" data-execution_count="11">
+<div id="27a7776d" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>x3 <span class="op">=</span> pd.Series([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>], dtype<span class="op">=</span><span class="bu">int</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>x3[<span class="dv">1</span>] <span class="op">=</span> <span class="va">None</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>x3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1123,7 +1129,7 @@ dtype: float64</code></pre>
 <section id="working-with-missing-values-in-data-sets" class="level3">
 <h3 class="anchored" data-anchor-id="working-with-missing-values-in-data-sets">Working with Missing Values in Data Sets</h3>
 <p>The following statements create a Pandas DataFrame from a CSV file that contains information about 7,303 traffic collisions in New York City. You can use the info() attribute of the DataFrame for information about the columns, including missing value counts.</p>
-<div id="7e697bcb" class="cell" data-execution_count="12">
+<div id="afa23cd4" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>collisions <span class="op">=</span> pd.read_csv(<span class="st">"../datasets/nyc_collision_factors.csv"</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>collisions.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1215,7 +1221,7 @@ Table&nbsp;6.2: Methods to operate on missing values in pandas DataFrames.
 </figure>
 </div>
 <p>The <code>isnull()</code> method can be used to return a data frame of Boolean (True/False) values that indicate missingness. You can sum across rows or columns of the data frame to count the missing values:</p>
-<div id="6de140f6" class="cell" data-execution_count="13">
+<div id="7632758e" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>collisions.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>DATE                                0
@@ -1248,7 +1254,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>If you choose to remove records with missing values, you can use the <code>dropna()</code> method. The <code>how=’any’|’all’</code> option specifies whether to remove records if any variable is missing (complete-case analysis) or if all variables is missing. Because the columns referring to cyclists contain only missing values, a complete-case analysis will result in an empty DataFrame.</p>
-<div id="29cb1d89" class="cell" data-execution_count="14">
+<div id="121ef60a" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>coll_no_miss <span class="op">=</span> collisions.dropna(how<span class="op">=</span><span class="st">'any'</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>display(<span class="bu">len</span>(collisions))</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>display(<span class="bu">len</span>(coll_no_miss))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1260,11 +1266,11 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>Suppose we verified that the missing values in columns 14 &amp; 15 were meant to indicate that no cyclists were injured or killed. Then we can replace the missing values with zeros using the <code>fillna()</code> method.</p>
-<div id="00dd9e9e" class="cell" data-execution_count="15">
+<div id="9e9c93cd" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>collisions[<span class="st">"NUMBER OF CYCLISTS INJURED"</span>].fillna(<span class="dv">0</span>,inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>collisions[<span class="st">"NUMBER OF CYCLISTS KILLED"</span>].fillna(<span class="dv">0</span>,inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/ff/6m670wks1776ck_gbfxynxrc0000gq/T/ipykernel_13573/612697346.py:1: FutureWarning:
+<pre><code>/var/folders/ff/6m670wks1776ck_gbfxynxrc0000gq/T/ipykernel_27871/612697346.py:1: FutureWarning:
 
 A value is trying to be set on a copy of a DataFrame or Series through chained assignment using an inplace method.
 The behavior will change in pandas 3.0. This inplace method will never work because the intermediate object on which we are setting values always behaves as a copy.
@@ -1273,7 +1279,7 @@ For example, when doing 'df[col].method(value, inplace=True)', try using 'df.met
 
 
 
-/var/folders/ff/6m670wks1776ck_gbfxynxrc0000gq/T/ipykernel_13573/612697346.py:2: FutureWarning:
+/var/folders/ff/6m670wks1776ck_gbfxynxrc0000gq/T/ipykernel_27871/612697346.py:2: FutureWarning:
 
 A value is trying to be set on a copy of a DataFrame or Series through chained assignment using an inplace method.
 The behavior will change in pandas 3.0. This inplace method will never work because the intermediate object on which we are setting values always behaves as a copy.
@@ -1286,7 +1292,7 @@ For example, when doing 'df[col].method(value, inplace=True)', try using 'df.met
 </div>
 <p>Techniques for imputing missing values are discussed in more detail below.</p>
 <p>The <code>notnull()</code> method is useful to select records without missing values. Since it returns a boolean same-sized object, you can use it to filter:</p>
-<div id="6283ea97" class="cell" data-execution_count="16">
+<div id="c7363396" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>bool_series <span class="op">=</span> pd.notnull(collisions[<span class="st">"CONTRIBUTING FACTOR VEHICLE 5"</span>]) </span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>collisions.loc[bool_series, [<span class="st">"DATE"</span>, <span class="st">"TIME"</span>, <span class="st">"BOROUGH"</span>, <span class="st">"ON STREET NAME"</span>]] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
@@ -1414,7 +1420,7 @@ For example, when doing 'df[col].method(value, inplace=True)', try using 'df.met
 <section id="visualizing-missing-value-patterns" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-missing-value-patterns">Visualizing Missing Value Patterns</h3>
 <p>The <a href="https://github.com/ResidentMario/missingno">Missingno</a> Python package has some nice methods to inspect the missing value patterns in data. This is helpful to see the missing value distribution across multiple columns. The <code>matrix()</code> method displays the missing value pattern for the DataFrame.</p>
-<div id="cd8f3bfc" class="cell" data-execution_count="17">
+<div id="2d528054" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> missingno <span class="im">as</span> msno</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>msno.matrix(collisions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1555,7 +1561,7 @@ Table&nbsp;6.3: Data with column dependencies that propagate missing values.
 </figure>
 </div>
 <p>The <code>heatmap()</code> method shows a matrix of nullity correlations between the columns of the data. Note that the CSV file contains dots (“.”) for the missing values. To make sure the data are correctly converted to numerical types and the dots are interpreted as missing values, the <code>na_values=</code> and <code>skipinitalspace=</code> options are added to <code>pd.read_csv()</code>.</p>
-<div id="2d5b55a7" class="cell" data-execution_count="18">
+<div id="1f76d61e" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>land <span class="op">=</span> pd.read_csv(<span class="st">"../datasets/landsales.csv"</span>, </span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                   na_values<span class="op">=</span><span class="st">"."</span>,</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                   skipinitialspace<span class="op">=</span><span class="va">True</span>)</span>
@@ -1598,7 +1604,7 @@ Table&nbsp;6.3: Data with column dependencies that propagate missing values.
 <li><p><strong>Generative imputation</strong>. If the data consists of images or text and portions are unobserved, for example, parts of the image are obscured, then generative methods can be used to fill in missing pixels in the image or missing words in text.</p></li>
 </ul>
 <p>To demonstrate some of these techniques, consider this simple 6 x 3 DataFrame.</p>
-<div id="aba196d1" class="cell" data-execution_count="19">
+<div id="e7b8a669" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(np.random.standard_normal((<span class="dv">6</span>, <span class="dv">3</span>)))</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>df.iloc[:<span class="dv">4</span>,<span class="dv">1</span>] <span class="op">=</span> np.nan</span>
@@ -1663,7 +1669,7 @@ Table&nbsp;6.3: Data with column dependencies that propagate missing values.
 </div>
 </div>
 <p>You can choose a common fill value for all columns or vary the value by column.</p>
-<div id="3cd9755a" class="cell" data-execution_count="20">
+<div id="fd001af8" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>df.fillna({<span class="dv">1</span>:<span class="fl">0.3</span>, <span class="dv">2</span>:<span class="dv">0</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <div>
@@ -1724,10 +1730,10 @@ Table&nbsp;6.3: Data with column dependencies that propagate missing values.
 </div>
 </div>
 <p>Missing values in the second column are replaced with 0.3, those in the last column with zero. Forward (LOCF) and backward imputation are available by setting the <code>method=</code> parameter of <code>fillna()</code>:</p>
-<div id="6b40e43a" class="cell" data-execution_count="21">
+<div id="1c6f986c" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>df.fillna(method<span class="op">=</span><span class="st">"ffill"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/ff/6m670wks1776ck_gbfxynxrc0000gq/T/ipykernel_13573/3944122520.py:1: FutureWarning:
+<pre><code>/var/folders/ff/6m670wks1776ck_gbfxynxrc0000gq/T/ipykernel_27871/3944122520.py:1: FutureWarning:
 
 DataFrame.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
 </code></pre>
@@ -1791,10 +1797,10 @@ DataFrame.fillna with 'method' is deprecated and will raise in a future version.
 </div>
 </div>
 <p>Notice that the forward fill does not replace the <code>NaN</code>s in the second column as there is no non-missing last value to be carried forward. The second and third row in the third column are imputed by carrying forward 0.647689 from the first row. With a backfill imputation the DataFrame is fully completed, since both columns have an observed value after the last missing value.</p>
-<div id="a8284b1c" class="cell" data-execution_count="22">
+<div id="09f939f2" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df.fillna(method<span class="op">=</span><span class="st">"bfill"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/ff/6m670wks1776ck_gbfxynxrc0000gq/T/ipykernel_13573/3896554658.py:1: FutureWarning:
+<pre><code>/var/folders/ff/6m670wks1776ck_gbfxynxrc0000gq/T/ipykernel_27871/3896554658.py:1: FutureWarning:
 
 DataFrame.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
 </code></pre>
@@ -1858,7 +1864,7 @@ DataFrame.fillna with 'method' is deprecated and will raise in a future version.
 </div>
 </div>
 <p>To replace the missing values with the column-specific sample means, simply use</p>
-<div id="902ef4b6" class="cell" data-execution_count="23">
+<div id="e2b51039" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>df.fillna(df.mean())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <div>
@@ -1919,7 +1925,7 @@ DataFrame.fillna with 'method' is deprecated and will raise in a future version.
 </div>
 </div>
 <p>The sample means of the non-missing observations in the second and third columns are -1.463056 and -0.307178, respectively. Imputing with the sample mean has the nice property to preserve the sample mean of the completed data:]</p>
-<div id="d5999078" class="cell" data-execution_count="24">
+<div id="4ae99a97" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>df.fillna(df.mean()).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>0    0.636865
@@ -1929,7 +1935,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>You can use other location statistics than the mean. The following statement imputes with the column-specific sample median:</p>
-<div id="44863c53" class="cell" data-execution_count="25">
+<div id="9ef31a76" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>df.fillna(df.median())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
 <div>
@@ -1990,7 +1996,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>To demonstrate imputation by interpolation, consider this simple series:</p>
-<div id="4862c9f2" class="cell" data-execution_count="26">
+<div id="ab74167e" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> pd.Series([<span class="dv">0</span>, <span class="dv">2</span>, np.nan, <span class="dv">8</span>])</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="26">
@@ -2002,7 +2008,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>The default interpolation method is linear interpolation. You can choose other method, for example, spline or polynomial interpolation, with the <code>method=</code> option.</p>
-<div id="37477bbd" class="cell" data-execution_count="27">
+<div id="0176118d" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>s.interpolate()</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>s.interpolate(method<span class="op">=</span><span class="st">'polynomial'</span>, order<span class="op">=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="27">
@@ -2014,7 +2020,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>To see interpolation operate on a DataFrame, consider this example:</p>
-<div id="50911381" class="cell" data-execution_count="28">
+<div id="7bc5c4d8" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame([(<span class="fl">0.0</span>, np.nan, <span class="op">-</span><span class="fl">1.0</span>, <span class="fl">1.0</span>),</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>                    (np.nan, <span class="fl">2.0</span>, np.nan, np.nan),</span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>                    (<span class="fl">2.0</span>, <span class="fl">3.0</span>, np.nan, <span class="fl">9.0</span>),</span>
@@ -2073,7 +2079,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>The default interpolation method is linear with a forward direction across rows.</p>
-<div id="bf8597af" class="cell" data-execution_count="29">
+<div id="5113a1e4" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>df.interpolate()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="29">
 <div>
@@ -2128,7 +2134,7 @@ dtype: float64</code></pre>
 </div>
 <p>Because there was no observed value preceding the missing value in column <code>b</code>, the <code>NaN</code> cannot be interpolated. Because there was no value past the last missing value in column <code>a</code>, the <code>NaN</code> is replaced with the last value carried forward.</p>
 <p>To interpolate in the forward and backward direction, use <code>limit_direction=’both’</code>:</p>
-<div id="8b59d95c" class="cell" data-execution_count="30">
+<div id="2941cc27" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>df.interpolate(method<span class="op">=</span><span class="st">'linear'</span>, limit_direction<span class="op">=</span><span class="st">'both'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="30">
 <div>
@@ -2182,7 +2188,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>To interpolate across the columns, set the <code>axis=</code> option to <code>axis=1</code>:</p>
-<div id="23ad68d6" class="cell" data-execution_count="31">
+<div id="7ff9642a" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>df.interpolate(method<span class="op">=</span><span class="st">'linear'</span>, limit_direction<span class="op">=</span><span class="st">'forward'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="31">
 <div>
@@ -2267,7 +2273,7 @@ Borne, Kirk. 2021. <span>“Data Profiling–Having That First Data with Your Da
 
 </main> <!-- /main -->
 <script type="application/vnd.jupyter.widget-state+json">
-{"state":{"0088b168e6a241fcb135dfecac9463be":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"StyleView","background":null,"description_width":"","font_size":null,"text_color":null}},"01b5981c2a894373afbb1fe36fc39adf":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"HTMLView","description":"","description_allow_html":false,"layout":"IPY_MODEL_0d333f981f7643298b0ba0a1a2d38f64","placeholder":"​","style":"IPY_MODEL_448e535d13594679867a7b3639ceaec4","tabbable":null,"tooltip":null,"value":" [100%]   00:00 -&gt; (00:00 left)"}},"047a84883d4d4cb08c9c90b5714df85d":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":"inline-flex","flex":null,"flex_flow":"row wrap","grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":"100%"}},"0c0cb23821c94c6aa8c4c047a1111422":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":null,"flex":"2","flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"0d333f981f7643298b0ba0a1a2d38f64":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"13e8f340312d40598fb91c7049f242bd":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"13f2391c5afd4ec3b9260e1cfbcbac88":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"StyleView","background":null,"description_width":"","font_size":null,"text_color":null}},"1e7121899ef94740b7fbd12a2974700d":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"HTMLView","description":"","description_allow_html":false,"layout":"IPY_MODEL_ff0d5e89ccc240ce9f8a1277c3a0b46b","placeholder":"​","style":"IPY_MODEL_13f2391c5afd4ec3b9260e1cfbcbac88","tabbable":null,"tooltip":null,"value":" [100%]   00:00 -&gt; (00:00 left)"}},"2323ef3bcf5a402bbc40ab8c5abf9918":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"FloatProgressModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"FloatProgressModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"ProgressView","bar_style":"success","description":"","description_allow_html":false,"layout":"IPY_MODEL_0c0cb23821c94c6aa8c4c047a1111422","max":1,"min":0,"orientation":"horizontal","style":"IPY_MODEL_859b9952b2d244d880153cf13eff8054","tabbable":null,"tooltip":null,"value":1}},"40151651b16c43b8a7343457a780680b":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"HTMLView","description":"","description_allow_html":false,"layout":"IPY_MODEL_13e8f340312d40598fb91c7049f242bd","placeholder":"​","style":"IPY_MODEL_f0cd3d7419a241cbb9c9b9c13c60482c","tabbable":null,"tooltip":null,"value":"Done! Use &#x27;show&#x27; commands to display/save.   "}},"448e535d13594679867a7b3639ceaec4":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"StyleView","background":null,"description_width":"","font_size":null,"text_color":null}},"4790791028a948ba8c134d7d89adff20":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":"inline-flex","flex":null,"flex_flow":"row wrap","grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":"100%"}},"7cae548bac9d4597a0b559043b461cfd":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"7fbfab93f5324bc393d0794740ae1795":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"ProgressStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"ProgressStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"StyleView","bar_color":null,"description_width":""}},"80142bbb139f484ba7fa11c025f2ef5d":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":null,"flex":"2","flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"859b9952b2d244d880153cf13eff8054":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"ProgressStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"ProgressStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"StyleView","bar_color":null,"description_width":""}},"bbe9a07943c74e8a801d039abfdf279d":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HBoxModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HBoxModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"HBoxView","box_style":"","children":["IPY_MODEL_f63195092ae24f6eb6f53c9a3d02ef15","IPY_MODEL_c40bd873609e4ddb855eabd22f09e45e","IPY_MODEL_1e7121899ef94740b7fbd12a2974700d"],"layout":"IPY_MODEL_4790791028a948ba8c134d7d89adff20","tabbable":null,"tooltip":null}},"c40bd873609e4ddb855eabd22f09e45e":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"FloatProgressModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"FloatProgressModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"ProgressView","bar_style":"success","description":"","description_allow_html":false,"layout":"IPY_MODEL_80142bbb139f484ba7fa11c025f2ef5d","max":1,"min":0,"orientation":"horizontal","style":"IPY_MODEL_7fbfab93f5324bc393d0794740ae1795","tabbable":null,"tooltip":null,"value":1}},"edcf93ce990044189f8ec779a3e262dd":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HBoxModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HBoxModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"HBoxView","box_style":"","children":["IPY_MODEL_40151651b16c43b8a7343457a780680b","IPY_MODEL_2323ef3bcf5a402bbc40ab8c5abf9918","IPY_MODEL_01b5981c2a894373afbb1fe36fc39adf"],"layout":"IPY_MODEL_047a84883d4d4cb08c9c90b5714df85d","tabbable":null,"tooltip":null}},"f0cd3d7419a241cbb9c9b9c13c60482c":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"StyleView","background":null,"description_width":"","font_size":null,"text_color":null}},"f63195092ae24f6eb6f53c9a3d02ef15":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"HTMLView","description":"","description_allow_html":false,"layout":"IPY_MODEL_7cae548bac9d4597a0b559043b461cfd","placeholder":"​","style":"IPY_MODEL_0088b168e6a241fcb135dfecac9463be","tabbable":null,"tooltip":null,"value":"Done! Use &#x27;show&#x27; commands to display/save.   "}},"ff0d5e89ccc240ce9f8a1277c3a0b46b":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}}},"version_major":2,"version_minor":0}
+{"state":{"08a7423d4ec44cc99208d6094bd2a954":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"StyleView","background":null,"description_width":"","font_size":null,"text_color":null}},"1a7973b2a0224a94b0e09185ae25b767":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"2603035c59fa429ba88f914db86ecb8b":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":null,"flex":"2","flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"2c5f62f64340420c9ceb00eb743af3fd":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":"inline-flex","flex":null,"flex_flow":"row wrap","grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":"100%"}},"41fa229b330b44eabc6fd48501f3967c":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":null,"flex":"2","flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"4314d8638a844866982aab93164a598a":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"StyleView","background":null,"description_width":"","font_size":null,"text_color":null}},"52ba1b7223154632a7ec2600d7aa17fe":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":"inline-flex","flex":null,"flex_flow":"row wrap","grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":"100%"}},"6209d128f41440b499e247680fa9e868":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"ProgressStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"ProgressStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"StyleView","bar_color":null,"description_width":""}},"817faf803c164a84b3184813d2416471":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HBoxModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HBoxModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"HBoxView","box_style":"","children":["IPY_MODEL_ef51f2e424304f8181908f9f1459d74b","IPY_MODEL_f2a10e3cd6794cec8884d551e1b8fece","IPY_MODEL_d3053c05b66243a885e19385e991f555"],"layout":"IPY_MODEL_2c5f62f64340420c9ceb00eb743af3fd","tabbable":null,"tooltip":null}},"a84a75db92244198ab47deebc202ba5f":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"StyleView","background":null,"description_width":"","font_size":null,"text_color":null}},"ad59d1130aab4fe0a78c0e7090ba81a0":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"ProgressStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"ProgressStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"StyleView","bar_color":null,"description_width":""}},"b81bb9eae08d4716a8d145e275c59bca":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"cab070ac0fbe44c88c938384a8a1ea03":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"HTMLView","description":"","description_allow_html":false,"layout":"IPY_MODEL_1a7973b2a0224a94b0e09185ae25b767","placeholder":"​","style":"IPY_MODEL_4314d8638a844866982aab93164a598a","tabbable":null,"tooltip":null,"value":" [100%]   00:00 -&gt; (00:00 left)"}},"d3053c05b66243a885e19385e991f555":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"HTMLView","description":"","description_allow_html":false,"layout":"IPY_MODEL_b81bb9eae08d4716a8d145e275c59bca","placeholder":"​","style":"IPY_MODEL_a84a75db92244198ab47deebc202ba5f","tabbable":null,"tooltip":null,"value":" [100%]   00:00 -&gt; (00:00 left)"}},"d5718feddaf7441c862f0d22c8fcb387":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"FloatProgressModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"FloatProgressModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"ProgressView","bar_style":"success","description":"","description_allow_html":false,"layout":"IPY_MODEL_2603035c59fa429ba88f914db86ecb8b","max":1,"min":0,"orientation":"horizontal","style":"IPY_MODEL_ad59d1130aab4fe0a78c0e7090ba81a0","tabbable":null,"tooltip":null,"value":1}},"e0fb1b6a3b004b45808b98c4094d0803":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"HTMLView","description":"","description_allow_html":false,"layout":"IPY_MODEL_e25edce0ffcd436d93dc930363fc2a36","placeholder":"​","style":"IPY_MODEL_08a7423d4ec44cc99208d6094bd2a954","tabbable":null,"tooltip":null,"value":"Done! Use &#x27;show&#x27; commands to display/save.   "}},"e11dc0b2f34e44b58e207f6320c791d8":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"StyleView","background":null,"description_width":"","font_size":null,"text_color":null}},"e25edce0ffcd436d93dc930363fc2a36":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"e5f9526281f34c38be636da2851b760a":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HBoxModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HBoxModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"HBoxView","box_style":"","children":["IPY_MODEL_e0fb1b6a3b004b45808b98c4094d0803","IPY_MODEL_d5718feddaf7441c862f0d22c8fcb387","IPY_MODEL_cab070ac0fbe44c88c938384a8a1ea03"],"layout":"IPY_MODEL_52ba1b7223154632a7ec2600d7aa17fe","tabbable":null,"tooltip":null}},"ef51f2e424304f8181908f9f1459d74b":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"HTMLView","description":"","description_allow_html":false,"layout":"IPY_MODEL_f4b307bd4c9c4ecbb3be4277a6f77129","placeholder":"​","style":"IPY_MODEL_e11dc0b2f34e44b58e207f6320c791d8","tabbable":null,"tooltip":null,"value":"Done! Use &#x27;show&#x27; commands to display/save.   "}},"f2a10e3cd6794cec8884d551e1b8fece":{"model_module":"@jupyter-widgets/controls","model_module_version":"2.0.0","model_name":"FloatProgressModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"2.0.0","_model_name":"FloatProgressModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"2.0.0","_view_name":"ProgressView","bar_style":"success","description":"","description_allow_html":false,"layout":"IPY_MODEL_41fa229b330b44eabc6fd48501f3967c","max":1,"min":0,"orientation":"horizontal","style":"IPY_MODEL_6209d128f41440b499e247680fa9e868","tabbable":null,"tooltip":null,"value":1}},"f4b307bd4c9c4ecbb3be4277a6f77129":{"model_module":"@jupyter-widgets/base","model_module_version":"2.0.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"2.0.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"2.0.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border_bottom":null,"border_left":null,"border_right":null,"border_top":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}}},"version_major":2,"version_minor":0}
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -2848,7 +2854,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":false,"selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

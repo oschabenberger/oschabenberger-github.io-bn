@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.552">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Foundations of Data Science - 16&nbsp; How Things Go Wrong</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../ethics/bias_harm.html" rel="next">
+<link href="../ethics/intro.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ethics/intro.html">Part IV. Applied Ethics in Data Science</a></li><li class="breadcrumb-item"><a href="../ethics/gonewrong.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">How Things Go Wrong</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Foundations of Data Science</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Part I. Data Science and Data Science Projects</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">History and Evolution of Data Science</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/lifecycle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Data Science Project Lifecycle</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Part II. Data Preparation and Understanding</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/sources_and_files.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Sources and File Formats</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/data_access.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Quality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/summarization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Summarization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Visualization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/sqlbasics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">SQL Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Integration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Part III. Statistical Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/general.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">General Topics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/mathstat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/linalg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/featproc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Feature and Target Processing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Part IV. Applied Ethics in Data Science</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/gonewrong.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">How Things Go Wrong</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/bias_harm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Part V. Integration of Data Science Solutions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../integ/coding_practices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../integ/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#cybersecurity" id="toc-cybersecurity" class="nav-link active" data-scroll-target="#cybersecurity"><span class="header-section-number">16.1</span> Cybersecurity</a></li>
+  <li><a href="#model-risk-management" id="toc-model-risk-management" class="nav-link" data-scroll-target="#model-risk-management"><span class="header-section-number">16.2</span> Model Risk Management</a></li>
+  <li><a href="#unintended-consequences" id="toc-unintended-consequences" class="nav-link" data-scroll-target="#unintended-consequences"><span class="header-section-number">16.3</span> Unintended Consequences</a></li>
+  <li><a href="#measuring-performance" id="toc-measuring-performance" class="nav-link" data-scroll-target="#measuring-performance"><span class="header-section-number">16.4</span> Measuring Performance</a></li>
+  <li><a href="#automation-and-scale" id="toc-automation-and-scale" class="nav-link" data-scroll-target="#automation-and-scale"><span class="header-section-number">16.5</span> Automation and Scale</a></li>
+  <li><a href="#bad-data-flawed-algorithm-poor-implementation" id="toc-bad-data-flawed-algorithm-poor-implementation" class="nav-link" data-scroll-target="#bad-data-flawed-algorithm-poor-implementation"><span class="header-section-number">16.6</span> Bad Data, Flawed Algorithm, Poor Implementation</a></li>
+  <li><a href="#from-revenue-management-to-price-fixing" id="toc-from-revenue-management-to-price-fixing" class="nav-link" data-scroll-target="#from-revenue-management-to-price-fixing"><span class="header-section-number">16.7</span> From Revenue Management to Price Fixing</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ethics/intro.html">Part IV. Applied Ethics in Data Science</a></li><li class="breadcrumb-item"><a href="../ethics/gonewrong.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">How Things Go Wrong</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">How Things Go Wrong</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>In this chapter we explore how ethical boundaries can get crossed. The sections provide only a sampling and the case studies and examples prove that this is not an academic exercise. Follow the links in the examples for a deeper dive into the particulars of a case.</p>
+<p>I recommend to study the examples at first read not with an assumption of malfeasance; people often engage for the right reasons and somewhere along the way things go off the rail. For example, an algorithm might not be objectionable in its own right, but applying it at scale to a certain demographic can be unethical. Modeling price elasticity is standard practice; applying such a model to data collected from organizations competing in the same market to raise prices above what a functioning healthy market would provide can earn you an antitrust law suit in federal court.</p>
+<p>Also look out for opportunities for human intervention—<em>the human in the loop</em>, as it is called. Many algorithmic systems are developed to support decisioning, the ultimate call is supposed to be made by a human being who uses the algorithmic answer as another data point. The examples are full of situations where a human is built into the system and the algorithmic answer does not get sufficient scrutiny. Bad things happen when responsibility is abdicated because of resource constraints, ill will, or excessive trust in the analytics.</p>
+<section id="cybersecurity" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="cybersecurity"><span class="header-section-number">16.1</span> Cybersecurity</h2>
+<p>With respect to the consequences of missteps and unintended consequences, data systems are entering a phase that cybersecurity has gone through previously. Today, the cybersecurity posture of an organization is a top priority. CISOs, Chief Information Security Officers, are common among high-ranking executives, whereas Chief Data Officers and Chief Analytic Officers tend to be found in Director-level positions. That is changing as the strategic importance of data-related activity increases; CDOs and CAOs are on the way up on the corporate ladder.</p>
+<p>Information security, the security of IT assets, data, and operations, is a modern form of risk management and mitigation. This includes safeguarding information about the organization and its clients (customers).</p>
+<div class="example">
+<div class="example-header">
+<p>Example: Equifax Data Breach</p>
+</div>
+<div class="example-container">
+<p>Apache Struts is a web application framework to develop Java applications. On March 7, 2017, a patch was released for Struts to fix a security vulnerability. The national credit bureau company Equifax had not updated applications on its website when the vulnerability was exploited on its site on March 12, 2017. The hackers accessed information about Equifax employees and used their credentials to scan databases and extract personal information on over 160 million citizens. The breached information included names, birth dates, addresses, social security numbers, and driver’s license numbers.</p>
+<p>While it took only five days from the release of the security fix to an exploit, it took Equifax more than two months to discover the breach and it took until September 2017 to disclose the breach. A week later the Chief Information Officer and Chief Security Officer left the company. Hundreds of lawsuits were filed against Equifax after the breach became public. In 2019, Equifax settled with the Federal Trade Commission for $575 million, $475 million in restitution and $100 million in fines.</p>
+<p>After the Equifax data breach, the Chief Information Officer of a major international bank called Apache Struts “the CIO killer.”</p>
+<p>Read more about the Equifax case <a href="https://en.wikipedia.org/wiki/2017_Equifax_data_breach#:~:text=The%20Equifax%20data%20breach%20occurred,funds%20and%20free%20credit%20monitoring.">here</a> including the criticism of the company due to inadequate response, fumbling notification websites, and executives selling stock before the breach was made public.</p>
+</div>
+</div>
+</section>
+<section id="model-risk-management" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="model-risk-management"><span class="header-section-number">16.2</span> Model Risk Management</h2>
+<p>Data breaches are not the only source of data-related risk to be mitigated. You can now add the risk from applying models trained on data to the list—models can be incorrect, and they can be misapplied and misused. In financial services, model risk management (MRM) has been a staple for years.</p>
+<div class="definition">
+<div class="definition-header">
+<p>Definition: Model Risk Management (MRM)</p>
+</div>
+<div class="definition-container">
+<p>Model risk management is the management and mitigation of risks that arise from the consequences of decisions based on models that fail to perform.</p>
+</div>
+</div>
+<p>In general, MRM is concerned with risks from the consequences of decisions based on incorrect, misapplied, or misused models. The FDIC (Federal Deposit Insurance Corporation) provides <a href="https://www.fdic.gov/news/financial-institution-letters/2017/fil17022a.pdf">guidance to banks</a> about effective model risk management. Banks are relying routinely on models for valuations, underwriting credit, determining adequacy of reserves, safeguarding client assets, etc. The use of models invariably presents risk that can lead to financial loss, poor decision making, and damage to reputation. The FDIC notes two primary reasons for model risk:</p>
+<ul>
+<li><p>Models may be fundamentally wrong due to incorrect assumptions, underlying theories, choice of sample design, choice of numerical routines, implementation errors, inadequate or erroneous inputs, and so forth.</p></li>
+<li><p>The model may be fundamentally sound but is used or applied incorrectly. Real-world events might prove the underlying assumptions of a model inappropriate—e.g., a global pandemic. The model might be applied to situations for which it was not developed, for example, to new products or markets.</p></li>
+</ul>
+<p>We recognize in these points the concepts of data drift and model drift discussed early on. It is also clear that the concept of model risk management is not germane to the financial service industry—it applies everywhere. A key principle of effective MRM is to challenge models effectively, testing and validation play an important part. When models are developed and tested under assumptions that do not reflect their use in real life, model risk increases dramatically. This is what happened to Microsoft Tay.</p>
+<div class="example">
+<div class="example-header">
+<p>Example: <a href="https://en.wikipedia.org/wiki/Tay_(chatbot)">Microsoft Tay</a></p>
+</div>
+<div class="example-container">
+<p>Microsoft released in 2016 a Twitter AI chat bot, called Tay (as in <strong>T</strong>hinking-<strong>a</strong>bout-<strong>y</strong>ou) that was trained to behave like a teenager in interactions with Twitter users and learn from them. Within less than a day online, Tay had turned into a hateful racist, claiming in offensive tweets that, for example, “Hitler was right”, recommending feminists should all die, and denying the Holocaust. Microsoft blamed Tay’s responses on trolls teaching the AI bot deliberately inflammatory content.</p>
+<p>Tay was a successful AI project in that the bot learned how to communicate based on who it was communicating with. But the internet can be a dark and awful place and Tay learned awful things from the people that engaged with the bot. The bot was not a successful AI project in that it did not incorporate content moderation and boundaries. The developers probably assumed that users on the internet would interact with the bot in the way the developers were interacting with it.</p>
+<p>When systems can learn, how do we make sure that they do not learn bad things? Is it ethical to limit what a system can learn? Or is it unethical to expose users to what a system can possibly learn?</p>
+<p>Microsoft did not break any laws with Tay. The bot was unethical in that it was developed without safeguards that prevented offensive and hurtful responses. AI bots are highly complex pieces of software; the unintended consequences arose from Tay still being good enough for the intended application. It probably worked very well in a sheltered test environment with benign interactions.</p>
+<p>Microsoft CEO Satya Nadella gave the Tay episode credit for how Microsoft is approaching AI today.</p>
+</div>
+</div>
+<p>The reasons for model risk stated by the FDIC are somewhat obvious: (i) the model is wrong, (ii) the model is correct but misapplied. We add another source of model risk: models that are trained well, almost too well. The following example reminds us that by merging, processing, and modeling data we can find out more than we should know. While it might not be illegal to <strong>have</strong> that knowledge, it is unethical to <strong>use</strong> that knowledge.</p>
+<div class="example">
+<div class="example-header">
+<p>Example: Target Pregnancy Prediction</p>
+</div>
+<div class="example-container">
+<p>An angry father walked into a Minneapolis Target store and demanded to know why the company was sending his teenage daughter coupons for pregnancy- and baby-related items. He wanted to know if Target is trying to encourage his daughter to become pregnant. It turns out Target had indeed sent pregnancy marketing material to her, and it turns out that she was indeed pregnant–unbeknownst to her father at the time he called on the store.</p>
+<p>It is disputed whether this actually happened or is an anecdote. What is not disputed, as reported by the <a href="https://www.nytimes.com/2012/02/19/magazine/shopping-habits.html?pagewanted=1&amp;_r=1&amp;hp">New York Times</a>, is that Target had developed a predictive model that assigns customers a <em>pregnancy score</em> based on demographic data merged with data from customers who had baby registries at a store, and a set of products that indicated a high probability of a pregnancy when purchased together.</p>
+<p>By analyzing data of customers who had a baby registry, they<br>
+developed a predictive model for all shoppers. The algorithm performed so well that Target could determine the trimester and estimate the due date. This enabled all kinds of targeted, personalized marketing efforts. From the New York Times:</p>
+<blockquote class="blockquote">
+<p><em>… women on the baby registry were buying larger quantities of unscented lotion around the beginning of their second trimester. Another analyst noted that sometime in the first 20 weeks, pregnant women loaded up on supplements like calcium, magnesium and zinc. Many shoppers purchase soap and cotton balls, but when someone suddenly starts buying lots of scent-free soap and extra-big bags of cotton balls, in addition to hand sanitizers and washcloths, it signals they could be getting close to their delivery date.</em></p>
+</blockquote>
+<p>Target did not run afoul of any laws, they used internal and public data available to them. They developed a model that performed well by statistical standards. But just because you can do something does not mean you should. You can learn something legally about someone and it can still be ethically questionable or even inappropriate to use that information.</p>
+<p>Target customers were actually creeped out when they learned that the retailer knew intimate personal details about them. The company adjusted its marketing approach to be more <em>subtle</em>. The predictive models are still being used.</p>
+</div>
+</div>
+</section>
+<section id="unintended-consequences" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="unintended-consequences"><span class="header-section-number">16.3</span> Unintended Consequences</h2>
+<p>The law of unintended consequences describes the phenomenon when an action leads to results that are not the intended purpose of the action. Typically, we think of the unintended consequences as detrimental; they can be beneficial a well.</p>
+<p>Technology, all the inventions of the human mind, are full of unintended consequences. Comic <a href="https://www.ted.com/talks/chuck_nice_a_funny_look_at_the_unintended_consequences_of_technology?language=en">Chuck Nice</a> says that future technology comes with two things: promises and unintended consequences.</p>
+<p>You can reduce the likelihood of unintended consequences—positive or negative ones—by deeply understanding the systems involved. Greater complexity likely leads to more unintended consequences as complex systems cannot be fully comprehended. Unfortunately, our capabilities through innovation and our ability to build complex systems increases more quickly than our ability to foresee the consequences. In his <a href="https://www.ted.com/talks/edward_tenner_unintended_consequences?language=en">TED talk</a>, Edward Tenner gives examples of unintended consequences from innovation throughout history. For example, the introduction of HVAC systems in the 1970s raised the temperature of water in these systems to the optimum for reproduction of Legionella bacillus, the bacteria causing Legionnaire disease—an unintended consequence. A bactericide was added to HVAC systems to prevent the disease. In the early 1980s it was observed that computer tape drives were failing in drives close to ventilation ducts. The bactericide contained traces of tin which destroyed the tape heads—an unintended consequence of the safety intervention.</p>
+<p>When we build more complex and more opaque systems from data, we should expect more unintended consequences when working with data. While we develop the systems with the best of intentions, we should always ask “What could go wrong?”</p>
+<div class="example">
+<div class="example-header">
+<p>Example: Facebook’s Year in Review</p>
+</div>
+<div class="example-container">
+<p>When Facebook first rolled out the Year in Review feature, it was intended to digitally scrapbook the previous year based on highly liked and photo-heavy content. Cheerful iconography surrounded images through which Facebook users were prompted to create their digital scrapbook for the year.</p>
+<p>Author and designer Eric Meyer called it Inadvertent Algorithmic Cruelty in his <a href="https://meyerweb.com/eric/thoughts/2014/12/24/inadvertent-algorithmic-cruelty/">blog</a>, when Facebook invited him to celebrate the past year with an image of his daughter, who had died. He writes:</p>
+<blockquote class="blockquote">
+<p><em>This inadvertent algorithmic cruelty is the result of code that works in the overwhelming majority of cases, reminding people of the awesomeness of their years, showing them selfies at a party or whale spouts from sailing boats or the marina outside their vacation house.</em></p>
+<p><em>But for those of us who lived through the death of loved ones, or spent extended time in the hospital, or were hit by divorce or losing a job or any one of a hundred crises, we might not want another look at this past year.</em></p>
+</blockquote>
+<p>The application is designed with an ideal user in mind, someone who is happy, had a great year, and would like to see a summary. It does not consider the worst-case scenario and lacks empathy for the far-from-ideal users. Meyer concludes:</p>
+<blockquote class="blockquote">
+<p><em>If I could fix one thing about our industry, just one thing, it would be that: to increase awareness of and consideration for the failure modes, the edge cases, the worst-case scenarios.</em></p>
+</blockquote>
+</div>
+</div>
+<p>It is easy to brush aside unintended consequences as not knowable, the so-called <em>unknown unknowns</em>. They will certainly remain unknowns if you do not want them to be known. Hindsight has always 20:20 vision, but some unintended consequences are in fact knowable and foreseeable. We have to make an effort to think about possible unintended consequences and be creative in imagining what could happen. Data sharing is an interesting case in point. Much good can be done by combining data sources that complement each other—the total can be more than the sum of the parts. Medical research can benefit by combining anonymized data from clinical trials that are conducted in isolation. Data collected in an app with user consent can be made available to a wider audience and make the world a better place—or it can backfire spectacularly.</p>
+<div class="example">
+<div class="example-header">
+<p>Example: Strava Exercise Maps</p>
+</div>
+<div class="example-container">
+<p>Exercise app <a href="https://www.wired.co.uk/article/strava-heat-maps-military-app-uk-warning-security">Strava opened up its data</a> on Strava.com in 2018 to allow users to find new places to exercise. The move was well-intended. Strava had collected at that time data on more than a billion runs, walks, bicycle rides, and swims all over the world. For someone looking for a place to exercise that information would be highly valuable. Maybe you can find a trail or bike path in your neighborhood that you were not aware of.</p>
+<p>However, the move turned into a privacy nightmare. Military researchers discovered that the heatmaps of exercise activity made it possible to study the workouts of military personnel around military bases. Although the data shared online was anonymized, it was possible to de-anonymize the data by requesting information for a specific geographic location. With this method it was even possible to see the names and heart rates of some individuals. If your daily run starts and ends at a military basis, then it is easy to infer that you are somehow connected to the military. By revealing common movements, someone with ill intent could use the information to figure out how a military basis operates.</p>
+<p>The <a href="https://www.theguardian.com/technology/2018/jan/29/strava-secret-army-base-locations-heatmap-public-users-military-ban">Guardian</a> determined that by drilling into the data at Strava.com, they were able to reveal the names of 50 U.S. service members stationed at an airbase in Afghanistan. From changes in running profiles one can also glean when service members are transferred.</p>
+<p>Revealing information about military operations was an unintended consequence of the release of information on Strava.com. It was not a data breach, it was done deliberately, with other goals in mind. According to the Guardian, the company argued that the information was already made public by the users who uploaded it. In hindsight, it was a foreseeable consequence of sharing geotagged data.</p>
+</div>
+</div>
+</section>
+<section id="measuring-performance" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="measuring-performance"><span class="header-section-number">16.4</span> Measuring Performance</h2>
+<p>Should we accept a more accurate approach over a less accurate approach? Many would say “Yes”, greater accuracy is better. The more accurate method can have other shortcomings, for example, it may be inscrutable or very difficult to implement and the nod might go to the less accurate method that is easier to implement. In this situation we are making a deliberate choice to prefer one approach over another despite its inferiority with respect to a specific metric. Other considerations also matter.</p>
+<p>All other things being equal, accuracy is not necessarily the appropriate measure by which to judge the performance of a decision rule. Consider a classification problem with two possible states, “Yes” and “No”. An algorithm is developed to classify an observation based on data. Since the model will not always predict correctly, there are four possible scenarios, commonly displayed in a <strong>confusion matrix</strong>.</p>
+<div class="definition">
+<div class="definition-header">
+<p>Definition: Confusion Matrix</p>
+</div>
+<div class="definition-container">
+<p>The confusion matrix in a classification problem is the cross-classification between the observed and the predicted categories. In a problem with two categories, the confusion matrix is a 2 x 2 matrix.</p>
+<p>The cells of the matrix contain the number of data points that fall into the cross-classification when the model’s decision rule is applied to <span class="math inline">\(n\)</span> observations. If one of the categories is labeled positive and the other is labeled negative, the cells give the number of true positive (TP), true negative (TN), false positive (FP), and false negative (FN) predictions.</p>
+</div>
+</div>
+<p>The following table shows the layout of a typical confusion matrix for a 2-category classification problem. A false positive prediction, for example, is to predict a positive (“Yes”) result when the true state (the observed state) was negative. A false negative result is when the decision rule assigns a “No” to an observation with positive state.</p>
+<table class="table">
+<caption>Confusion matrix for a classification problem with two states.</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Observed Category</th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Predicted Category</strong></td>
+<td style="text-align: center;"><strong>Yes (Positive)</strong></td>
+<td style="text-align: center;"><strong>No (Negative)</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Yes (Positive)</strong></td>
+<td style="text-align: center;">True Positive (TP)</td>
+<td style="text-align: center;">False Positive (FP)</td>
+</tr>
+<tr class="odd">
+<td><strong>No (Negative)</strong></td>
+<td style="text-align: center;">False Negative (FN)</td>
+<td style="text-align: center;">True Negative (TN)</td>
+</tr>
+</tbody>
+</table>
+<p>Based on the four cells in the confusion matrix we can calculate several statistics.</p>
+<div id="tbl-confusion-statistics" class="striped hover quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-confusion-statistics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;16.1: Statistics calculated from a 2 x 2 confusion matrix.
+</figcaption>
+<div aria-describedby="tbl-confusion-statistics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped table-hover table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 39%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Statistic</th>
+<th style="text-align: center;">Calculation</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>False Positive Rate (FPR)</strong></td>
+<td style="text-align: center;">FP / (FP + TN)</td>
+<td style="text-align: left;">The rate of the true negative cases that were predicted to be positive</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>False Negative Rate (FNR)</strong></td>
+<td style="text-align: center;">FN / (TP + FN)</td>
+<td style="text-align: left;">The rate of the true positive cases that were predicted to be negative</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Sensitivity</strong></td>
+<td style="text-align: center;">TP / (TP + FN) = 1 – FNR</td>
+<td style="text-align: left;">This is the true positive rate; also called <strong>Recall</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Specificity</strong></td>
+<td style="text-align: center;">TN / (FP + TN) = 1— FPR</td>
+<td style="text-align: left;">This is the true negative rate</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Accuracy</strong></td>
+<td style="text-align: center;">(TP + TN) / (TP + TN + FP + FN)</td>
+<td style="text-align: left;">Overall proportion of correct classifications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Misclassification rate</strong></td>
+<td style="text-align: center;">(FP + FN) / (TP + TN + FP + FN)</td>
+<td style="text-align: left;">Overall proportion of incorrect classifications, 1 – Accuracy</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Precision</strong></td>
+<td style="text-align: center;">TP / (TP + FP)</td>
+<td style="text-align: left;">Ratio of true positives to anything predicted as positive</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Detection Rate</strong></td>
+<td style="text-align: center;">TP / (TP + TN + FP + FN)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>No Information Rate</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{\max(TP+FN,FP+TN)}{TP+TN+FP+FN}\)</span></td>
+<td style="text-align: left;">The proportion of observations in the larger observed class</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The model accuracy is measured by the ratio of observations that were correctly classified, the sum of the diagonal cells divided by the total number of observations. The misclassification rate, another common performance measure is the complement of the accuracy.</p>
+<p>The sensitivity is the ratio of true positives to what should have been predicted as positive. The specificity is the ratio of true negatives to what should have been predicted as negative. They are <strong>not</strong> complements of each other; they are calculated with different denominators.</p>
+<p>The problem with focusing solely on accuracy is that the two possible errors, false positives and false negatives might not be of equal consequence. For example, it might not matter how accurate a model is unless it achieves a certain sensitivity—the ability to correctly identify positives.</p>
+<p>Consider the data in the <a href="#tbl-confusion-example" class="quarto-xref">Table&nbsp;<span>16.2</span></a>, representing 1,000 observations and predictions.</p>
+<div id="tbl-confusion-example" class="striped quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-confusion-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;16.2: Example of a confusion matrix for 1,000 observations.
+</figcaption>
+<div aria-describedby="tbl-confusion-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Observed Category</th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Predicted Category</strong></td>
+<td style="text-align: center;"><strong>Yes (Positive)</strong></td>
+<td style="text-align: center;"><strong>No (Negative)</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Yes (Positive)</strong></td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">7</td>
+</tr>
+<tr class="odd">
+<td><strong>No (Negative)</strong></td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">958</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The classification has an accuracy of 96.7%, which seems impressive. Its false positive and false negative rates are very different, however: FPR = 0.0073, FNR = 0.7429. The model is much less likely to predict a “Yes” when the true state is “No”, than it is to predict a “No” when the true state is “Yes”. Whether we can accept a model with such low sensitivity (100 – 74.29) = 25.71% is questionable, despite the high accuracy. An evaluation of this model should consider whether the two errors, false positive and false negative predictions, are of equal importance and consequence.</p>
+<p>It is also noteworthy that the accuracy of 96.7% is not as impressive if you check the no-information rate of the data. The proportion of observations in the larger observed class is (958 + 7)/1,000 = 0.965. The accuracy of the decision rule is only slightly larger. In other words, if you were to take a naïve approach and predict all observations as “No” without looking at the data, that naïve decision rule would have an accuracy of 96.5%.</p>
+<div class="example">
+<div class="example-header">
+<p>Example: COMPAS Tool to Predict Recidivism Risk</p>
+</div>
+<div class="example-container">
+<p>Judges, parole, and probation officers are increasingly relying on algorithms to determine an offender’s propensity for recidivism—to re-offend. A higher likelihood to re-offend might result in a stiffer sentence. One such algorithm was developed by Northpointe, Inc.&nbsp;and is part of their COMPAS tool (Correctional Offender Management Profile for Alternative Sanctions).</p>
+<p>Upon being booked in jail, a questionnaire of 137 questions is filled out, answered in part by the defendants or by pulling data from criminal records. Questions include things like “How often did you get in fights while at school?”, “How often have you moved in the last 12 months?”, and whether they agree with statements such as “Some people just don’t deserve any respect and should be treated like animals”. The questionnaire is <a href="https://www.documentcloud.org/documents/2702103-Sample-Risk-Assessment-COMPAS-CORE.html">known</a>, but the algorithm that uses the answers to score defendants on the likelihood to re-offend within two years, is proprietary. Two risk scores are produces by the COMPAS tool: the risk of general recidivism and the risk of committing a violent crime in the future.</p>
+<p>The idea of using algorithms to make key decisions in the legal process, not guided by conscious or unconscious personal bias, is appealing. An accurate prediction of recidivism can make the justice system fairer. But that requires that the algorithm works, it cannot itself be biased. Someone said that even a slightly flawed algorithm is better than a bigoted judge, but the consequence of applying even a slightly biased algorithm at scale, across the nation, in thousands of cases can be disastrous.</p>
+<p>In 2016, ProPublica investigated the performance of the proprietary algorithm using data from more than 7,000 criminal defendants in Broward County, Florida (<span class="citation" data-cites="AngwinProPublica_2016">Angwin et al. (<a href="../references.html#ref-AngwinProPublica_2016" role="doc-biblioref">2016</a>)</span>, <span class="citation" data-cites="LarsonProPublica_2016">Larson et al. (<a href="../references.html#ref-LarsonProPublica_2016" role="doc-biblioref">2016</a>)</span>). For these defendants the predicted recidivism and whether the individual actually re-offended was known. This allows the investigators to probe how well the COMPAS model is actually doing in predicting outcomes.</p>
+<p>A notebook with data management and analysis using R and Python is available on <a href="https://github.com/propublica/compas-analysis">GitHub</a>, along with the data—made available by ProPublica.</p>
+<p>The ProPublica analysis uses logistic regression and survival models to compare COMPAS scores among races and genders. The results include confusion matrices for recidivism classification (Low/High) and future violent crime (Low/High). Some of the important findings are:</p>
+<ul>
+<li><p>51% of defendants were Black, 34% White, 8% Hispanic</p></li>
+<li><p>81% of defendants were Male, 19% were Female.</p></li>
+<li><p>Black defendants are 45% more likely than white defendants to receive a higher risk score when correcting for seriousness of the crime, previous arrests, and future criminal behavior. The risk score for future violent crime overpredicts recidivism for black defendants by 77% compared to white offenders.</p></li>
+<li><p>Women are 19% more likely to receive a higher risk score than men.</p></li>
+<li><p>Defendants under 25 are 2.5 times more likely to receive a higher risk score than middle-aged defendants.</p></li>
+<li><p>The predictive accuracy of the COMPAS model is only 63% (as measured by a Cox proportional hazard model).</p></li>
+<li><p>Only 20% of those predicted to commit violent crimes went on to do so.</p></li>
+<li><p>The false positive rate of the model is 32.3% overall, 44.8% for Blacks, and 23.4% for Whites.</p></li>
+<li><p>Under COMPAS, black defendants are 91% more likely to get a higher score and not go on to commit more crimes over the next two years.</p></li>
+<li><p>COMPAS scores misclassify white re-offenders as low risk 70.4% more often than black re-offenders.</p></li>
+<li><p>Black defendants are twice as likely to be false positives for a higher violent crime score than white defendants.</p></li>
+<li><p>White defendants are 63% more likely to get a lower violent crime score and go on to commit another crime.</p></li>
+</ul>
+<p>With an accuracy of just over 60%, the system is barely better than a coin flip, which would have an accuracy of 50%. The racial disparities in the predictions from the model are deeply troubling. In predicting who would re-offend, the algorithms made mistakes for Black and White defendants at similar rates but in very different ways.</p>
+<table class="table">
+<colgroup>
+<col style="width: 58%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>White</strong></td>
+<td><strong>Black</strong></td>
+</tr>
+<tr class="even">
+<td>Labeled higher risk for recidivism but did not re-offend</td>
+<td>23.5%</td>
+<td>44.8%</td>
+</tr>
+<tr class="odd">
+<td>Labeled lower risk for recidivism and did re-offend</td>
+<td>47.9%</td>
+<td>28.0%</td>
+</tr>
+</tbody>
+</table>
+<p>For Blacks, the algorithm has a high false positive rate (44.8%). For Whites, the algorithm has a high false negative rate (47.9%). When the algorithm predicts incorrectly, it leads to lighter consequences for Whites and to tougher consequences for Blacks.</p>
+</div>
+</div>
+</section>
+<section id="automation-and-scale" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="automation-and-scale"><span class="header-section-number">16.5</span> Automation and Scale</h2>
+<p>We automate processes to achieve greater efficiency and productivity, to scale up operations, and to reduce time spent on mundane repetitive tasks. As someone explained,</p>
+<blockquote class="blockquote">
+<p><em>when I do something for the second time, I think about how I did it last time. If I do it for the third time, I think about how to automate it and never do it again.</em></p>
+</blockquote>
+<p>Scaling a process through automation is wonderful if automation makes the process better or if the outcome is inherently good. If automation of tax refunds means that refunds reach taxpayers sooner, no one will complain. If automation of traffic signals means better traffic flow through the city and less time spent staring at brake lights, grumbling is unlikely.</p>
+<p>However, if automated decisions are of lesser quality, more biased and potentially harmful, then exercising them at scale can cause great harm.</p>
+<p>A cruel example where this scenario played out is the former “Robodebt” system of the Australian Government.</p>
+<div class="example">
+<div class="example-header">
+<p>Example: <a href="https://en.wikipedia.org/wiki/Robodebt_scheme">Robodebt Scheme</a> of the Australian Government</p>
+</div>
+<div class="example-container">
+<p>Between 2016 and 2019 the government of Australia, through its social services agency Centrelink, wanted to save billions of dollars by recovering social security (welfare) overpayments to recipients. The process previously in place checked for compliance manually and resulted in about 20,000 cases per year. It was based on matching income reported in two different places: the tax office served as the system of record for annual income, and the self-reported bi-weekly income by the welfare recipient. If there was a discrepancy between reported incomes, a staff member would investigate and request that the recipient explain the difference.</p>
+<p>An automated system, it was thought, could do this more efficiently, issue more debt notices, and hence recover more overpayments. The system would more than pay for itself. Such a system was put in place in 2016. In the first six months in operation, it issued already 169,000 debt notices. But that was not the only difference between the manual and the automated system.</p>
+<p>While the manual (human-based) system would issue a notice to the recipient to please explain the difference, the new automated system, when it found a discrepancy between tax-reported and self-reported Centrelink income, would automatically issue a debt notice and expect repayment—hence the name “Robodebt”. The presumption of innocence turned into presumption of guilt. The onus was suddenly placed on the individual to prove that they did not owe the government funds—without human verification or interaction.</p>
+<p>This is a horrible practice, unethical and possibly illegal, even if the overpayments are correctly assessed. But that is another way in which the automated system went astray. Robodebt had a staggering false positive rate of at least 27%! If you were a social security recipient who received the appropriate payment from the government, you had more than a 1-in-4 chance to be issued a request for overpayment.</p>
+<p>Over the period of operation, 567,000 debts were raised through the use of the Robodebt algorithm.</p>
+<p>After the government responsible for Robodebt was voted out of office, the incoming administration killed the program and announced that 470,000 wrongly-issued debts would be repaid in full. The error rate is over 80%!</p>
+<p>In the article “The Robodebt strategy” in the December 2023 issue of Significance, <span class="citation" data-cites="TrewinCressie_2023">Trewin, Fisher, and Cressie (<a href="../references.html#ref-TrewinCressie_2023" role="doc-biblioref">2023</a>)</span> note the following main statistical flaws of Robodebt:</p>
+<p>a) Using annual tax income to match against bi-weekly self-reported income. Bi-weekly income can fluctuate greatly throughout the year and cannot be simply compared against distributing the annual income evenly.</p>
+<p>b) No documented understanding of error sources with the data or the data matching process.</p>
+<p>c) No sensitivity analysis and inadequate testing of algorithms</p>
+<p>d) No understanding of error rates</p>
+<p>e) No involvement of professional statisticians.</p>
+<p>A system that was supposed to save the government A$300 million cost it A$1.2 billion in repayments alone. The human toll was devastating: some recipients of debt notices had committed suicide.</p>
+<p>The statistician Noel Cressie called Robodebt</p>
+<blockquote class="blockquote">
+<p><em>a catastrophic program that was legally and ethically indefensible—an example of how technological overreach, coupled with dereliction of duty can amount to immense suffering for ordinary people.</em></p>
+</blockquote>
+<p>He noted that Jensen’s inequality tells us that if the algorithm called out overpayments it should have also detected underpayments and issued credits (<span class="citation" data-cites="Cressie2023">Cressie (<a href="../references.html#ref-Cressie2023" role="doc-biblioref">2023</a>)</span>). Robodebt never issued any credits.</p>
+</div>
+</div>
+</section>
+<section id="bad-data-flawed-algorithm-poor-implementation" class="level2" data-number="16.6">
+<h2 data-number="16.6" class="anchored" data-anchor-id="bad-data-flawed-algorithm-poor-implementation"><span class="header-section-number">16.6</span> Bad Data, Flawed Algorithm, Poor Implementation</h2>
+<p>Implementing a flawed algorithm poorly and feeding it bad data is a recipe for disaster. In the following example, that recipe led to the murder of victims of domestic violence. As a recent audit of the system suggests, at least some of these murders were preventable.</p>
+<div class="example">
+<div class="example-header">
+<p>VioGén Algorithm to Monitor Gender Violence</p>
+</div>
+<div class="example-container">
+<p>Since 2007, Spain has been operating the VioGén system, a web application to help Spanish authorities to protect women and children from domestic violence. Based on an external audit by the <a href="https://eticasfoundation.org/?audit-spotlight=the-adversarial-audit-of-viogen">Eticas Foundation</a> and reported by <a href="https://www.politico.eu/newsletter/ai-decoded/spains-flawed-domestic-abuse-algorithm-ban-debate-heats-up-holding-the-police-accountable-2/">Politico</a> and others, the system is deeply flawed. (See <a href="https://eticasfoundation.org/wp-content/uploads/2024/04/ETICAS-_-Auditoria-Externa-del-sistema-VioGen-_-20220308.docx.pdf">here</a> for the full report in Spanish).</p>
+<p>The combination of numerous shortcomings, from bad data, to an opaque algorithm, to lack of human intervention, leads to an underestimation of the risk of violence. Women do not receive the proper protection, some are sent back into a domestic violence environment, and some have paid for it with their lives.</p>
+<p>The underlying algorithm uses classical statistical models for risk classification, yielding a risk score based on the weighted sum of responses on an intake questionnaire. The system is designed as a recommendation system, assigning a “recommended” score to an individual with the opportunity for adjustment by a human. That human would usually be a police officer who runs the algorithm on the questionnaire answers provided by the victim of domestic violence. The Eticas audit revealed that in 95% of the cases the score returned by the algorithm is <strong>not</strong> being adjusted. Because of lack of human intervention, the recommendation system becomes the automated decisioning system.</p>
+<p>The algorithm assigns a case to the risk categories “unappreciated”, “low”, “medium”, “high”, and “extreme”. Only one in seven women who reached out to police for protection actually received protection. Many women reporting violence receive an “unappreciated” risk score; 45% of the cases. Only 3% of women who are victims of gender violence receive a risk score of medium or higher. Furthermore, the system caps the number of higher risk scores at the level at which protection is funded in the budget.</p>
+<p>Is the algorithm biased and is it underestimating the risk? Probably so. The algorithm focuses on physical violence and under-values psychological and non-sociological violence, for example, through social media. The lack of transparency of the algorithm does not help. The fact that only 35% of the women are told their risk scores is suspicious.</p>
+<p>What is not in doubt are the flaws in the collection of data for the risk prediction algorithm. When a woman makes an official complaint, authorities present them with a standardized set of binary questions assessing 39 risk indicators as “present”/“not present”. Questions explore the severity of previous assaults (e.g., whether weapons were ever used), the features of the aggressor (jealous, bully, sexual abuser, unemployed, drug addict, etc.), the vulnerability of the victim (pregnant, foreign, economically dependent, etc.), and aggravating factors. The questions are blunt and direct, sometimes embarrassing. In the situation of the complaint, the victim of domestic violence is often terrified, under extreme duress, in a state of shock, emotionally charged. That is not the time to fill out a very consequential questionnaire. Police officers are reported to leave victims alone with the questionnaire and pressure them to finish it quickly.</p>
+<p>The VioGén algorithm and questionnaire have been revised several times, the latest iteration seems to be in 2019. The Eticas Foundation audit was published in 2024. Recent efforts to improve the VioGén system aimed at introducing machine learning to first predict the probability of recidivism and then to adjust that probability based on indicators about the perpetrator. A former employer of mine is involved in this effort; see <a href="https://blogs.sas.com/content/hiddeninsights/2021/11/09/data-science-for-public-safety-preventing-gender-based-violence/">here</a> and <a href="https://blogs.sas.com/content/hiddeninsights/2021/12/01/applying-analytics-to-reduce-violence-against-women-lessons-from-viogen/">here</a>.</p>
+</div>
+</div>
+</section>
+<section id="from-revenue-management-to-price-fixing" class="level2" data-number="16.7">
+<h2 data-number="16.7" class="anchored" data-anchor-id="from-revenue-management-to-price-fixing"><span class="header-section-number">16.7</span> From Revenue Management to Price Fixing</h2>
+<p>Because algorithms can make decisions at scale they are often said to be the key to drive harm and discrimination out of systems affected by subjectivity and bias of human reasoning. We have seen numerous examples in this chapter where algorithms, even if developed with the best intentions, can cause harm. Any positive or negative effects are amplified at scale.</p>
+<p>Revenue Management Systems (RMS) are computerized decision systems that determine prices for goods or services. The goal is typically to optimize—read maximize—revenue for the operator of the RMS. Suppose two competitors operate in the same market, offering the same or a similar product. The consumer is likely to choose the lower-priced alternative, motivating the competitors to compete on price. The competition benefits the consumer. If, however, the companies agree to not undercut each other’s prices and instead raise prices in parallel, the consumer is at a disadvantage. Effectively, the competitors are colluding to fix prices above what a healthy market would lead to. This is called supra-competitive pricing.</p>
+<p>The collusion can be <em>indirect</em> in that it can happen through a third party that computes the optimal pricing for a product in a certain market, when the competitors are all using the same pricing tool. The RMS is the pricing tool in this case, and when it is the dominant (or only) mechansim to determine prices we essentially approach monopoly conditions.</p>
+<div class="example">
+<div class="example-header">
+<p>Example: IDeaS RMS for Hotel Management</p>
+</div>
+<div class="example-container">
+<p>A class action antitrust <a href="https://www.classaction.org/media/dai-et-al-v-sas-institute-inc-et-al.pdf">lawsuit</a> filed in April 2024 in federal court in San Francisco alleges that SAS Institute, Inc., IDeaS, Inc., Hilton Worldwide Holdings Inc., Wyndham Hotels &amp; Resorts, Inc., Four Seasons Hotels and Resorts US Inc., Omni Hotels and Resorts, Inc., Hyatt Hotel Corporation, and Choice Hotels International Inc. used price fixing to inflate the price of hotel rooms.</p>
+<p>The agreement to fix prices might have been tacit, meaning the executives of the hotel chains did not get together in a room and agreed to manipulate prices for their benefit. Instead, the anti-competitive action resulted from all hotel chains using the same revenue management system and how that RMS operates. The RMS at the heart of the antitrust lawsuit is <em>G3 RMS</em> of IDeaS (Integrated Decisions and Systems, Inc.), a Minnesota-based subsidiary of SAS Institute. IDeaS was acquired by SAS in 2008.</p>
+<p><strong>Full disclosure</strong>: SAS Institute is one of my former employers, I worked there from 2002–2021 and towards the end of my tenure served as a high-ranking company executive.</p>
+<p><a href="https://www.cbsnews.com/sanfrancisco/news/major-antitrust-suit-alleges-6-hotel-chains-with-bay-area-locations-colluded-to-fix-prices/">This article</a> by CBS News details how the IDeaS algorithm is alleged to support anticompetitive price fixing:</p>
+<blockquote class="blockquote">
+<p><em>IDeaS’s clients, all competitors with each other, agree to supply IDeaS with proprietary, non-public, and sensitive information about their room availability, demand, and pricing. The information is provided continuously, in real time, so that IDeaS always knows what all of its client-competitors have available in a given market.</em></p>
+</blockquote>
+<p>Like other revenue management systems, the vendors claim that they can optimize prices better than a person could. The suit alleges that the hotels participate knowing which of their competitors are part of the conspiracy, that they know IDeaS is collecting similar information from participating competitors and that faithful adherence to IDeaS’ price recommendations will yield greater revenue for all participants. According to plaintiffs,</p>
+<blockquote class="blockquote">
+<p><em>by sending their sensitive confidential pricing and occupancy information to a third party to process, analyze, and develop supra-competitive prices, the [defendants] are able to achieve the same result as if they secretly met in a back room and exchanged their information and agreed to a supra-competitive price.</em></p>
+</blockquote>
+</div>
+</div>
+<p>For another example how a revenue management algorithm leads to higher prices and how concentration in an industry can create anti-competitive conditions that put the consumer (here, the renter) at a disadvantage, check out the <a href="https://www.propublica.org/article/yieldstar-rent-increase-realpage-rent">ProPublica investigation</a> into the RealPage YieldStar software used to determine prices for rental housing.</p>
+<p>The RealPage and IDeaS cases have things in common:</p>
+<ul>
+<li><p>A proprietary optimization algorithm targets maximum revenue through modeling metrics such as price elasticity: how much does a change in price affect the demand? There is nothing unethical or illegal in modeling price elasticity, it is a common economic metric.</p></li>
+<li><p>The models become very effective across sub-markets with access to large databases of market data, actual prices that consumers pay under known conditions. In a normally functioning market, competitors would not share that kind of data with other competitors. How you determine your price and based on what information is a trade secret.</p></li>
+<li><p>The software vendors act as clearinghouses for data sharing across competitors. While they might not see each other’s data directly, the sharing enables pricing algorithms that yield higher-than-competitive prices that the client’s would otherwise not be able to achieve.</p></li>
+<li><p>The market concentration of the participating companies creates anti-competitive pricing across many markets.</p></li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-AngwinProPublica_2016" class="csl-entry" role="listitem">
+Angwin, Julia, Jeff Larson, Surya Mattu, and Lauren Kirchner. 2016. <span>“Machine Bias—Risk Assessment in Criminal Sentencing.”</span> <em>ProPublica</em>, May. <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing</a>.
+</div>
+<div id="ref-Cressie2023" class="csl-entry" role="listitem">
+Cressie, N. 2023. <span>“Robodebt Not Only Broke the Law of the Land – It Also Broke Laws of Mathematics.”</span> <em>The Conversation</em>. <a href="https://theconversation.com/robodebt-not-only-broke-the-laws-of-the-land-it-also-broke-laws-of-mathematics-201299">https://theconversation.com/robodebt-not-only-broke-the-laws-of-the-land-it-also-broke-laws-of-mathematics-201299</a>.
+</div>
+<div id="ref-LarsonProPublica_2016" class="csl-entry" role="listitem">
+Larson, Jeff, Surya Mattu, Lauren Kirchner, and Julia Angwin. 2016. <span>“How We Analyzed the COMPAS Recidivism Algorithm.”</span> <em>ProPublica</em>, May. <a href="https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm">https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm</a>.
+</div>
+<div id="ref-TrewinCressie_2023" class="csl-entry" role="listitem">
+Trewin, D., N. Fisher, and N. Cressie. 2023. <span>“The Robodebt Tragedy.”</span> <em>Significance</em> 20 (6): 18–21. <a href="https://academic.oup.com/jrssig/article/20/6/18/7457250">https://academic.oup.com/jrssig/article/20/6/18/7457250</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../ethics/intro.html" class="pagination-link" aria-label="Introduction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../ethics/bias_harm.html" class="pagination-link" aria-label="Bias and Harm in Algorithms">
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Foundations of Data Science by Oliver Schabenberger</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

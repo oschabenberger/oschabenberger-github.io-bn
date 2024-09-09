@@ -306,14 +306,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../ethics/gonewrong.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">How Things Go Wrong</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../ethics/bias_harm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/privacy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
   </div>
 </li>
       </ul>
@@ -330,13 +336,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/coding_practices.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/tools.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
   </div>
 </li>
       </ul>
@@ -373,6 +379,7 @@ window.Quarto = {
   <li><a href="#distribution-functions" id="toc-distribution-functions" class="nav-link" data-scroll-target="#distribution-functions">Distribution functions</a></li>
   <li><a href="#expected-value" id="toc-expected-value" class="nav-link" data-scroll-target="#expected-value">Expected value</a></li>
   <li><a href="#variance-and-standard-deviation" id="toc-variance-and-standard-deviation" class="nav-link" data-scroll-target="#variance-and-standard-deviation">Variance and standard deviation</a></li>
+  <li><a href="#centering-and-scaling" id="toc-centering-and-scaling" class="nav-link" data-scroll-target="#centering-and-scaling">Centering and Scaling</a></li>
   <li><a href="#covariance-and-correlation" id="toc-covariance-and-correlation" class="nav-link" data-scroll-target="#covariance-and-correlation">Covariance and correlation</a></li>
   <li><a href="#independence-1" id="toc-independence-1" class="nav-link" data-scroll-target="#independence-1">Independence</a></li>
   </ul></li>
@@ -622,7 +629,7 @@ window.Quarto = {
 <h4 class="anchored" data-anchor-id="variance-and-standard-deviation">Variance and standard deviation</h4>
 <p>Next to the mean, the most important expected value of a random variable, is the <strong>variance</strong>, the expected value of the squared deviation of a random variable from its mean:</p>
 <p><span class="math display">\[\text{Var}\lbrack X\rbrack = \text{E}\left\lbrack \left( X - \text{E}\lbrack X\rbrack \right)^{2} \right\rbrack = \text{E}\left\lbrack X^{2} \right\rbrack -\text{E}\lbrack X\rbrack^{2}\]</span></p>
-<p>The second expression states that the variance can also be written as the difference of the mean of the square of the random variable and the square of the mean of the random variable. The Greek symbol <span class="math inline">\(\sigma^{2}\)</span> is commonly used to denote the variance. The square is useful to remind us that the variance is in squared units. If the random variable <span class="math inline">\(X\)</span> is a length in feet, the variance is measured in square feet.</p>
+<p>The second expression states that the variance can also be written as the difference of the mean of the square of the random variable and the square of the mean of the random variable. The Greek symbol <span class="math inline">\(\sigma^{2}\)</span> is commonly used to denote the variance. The square is useful to remind us that the variance is in squared units. If the random variable <span class="math inline">\(X\)</span> is a length in feet, the variance represents an area in square feet.</p>
 <p>The square root of the variance is called the <strong>standard deviation</strong> of the random variable, frequently denoted <span class="math inline">\(\sigma\)</span>. The standard deviation is measured in the same units as <span class="math inline">\(X\)</span>.</p>
 <p>From the definition of expected values and functions of random values, the variance can be calculated from first principles as the expected value of <span class="math inline">\((X - \mu)^{2}\)</span>, where <span class="math inline">\(\mu = E\lbrack X\rbrack:\)</span></p>
 <p><span class="math display">\[\text{Var}\lbrack X\rbrack = \sum_{x}^{}(x - \mu)^{2}p(x)\]</span></p>
@@ -630,13 +637,18 @@ window.Quarto = {
 <p>It is often easier to derive the variance of a random variable from the following properties. Suppose <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are constants and <span class="math inline">\(X\)</span> is a random variable with variance <span class="math inline">\(\sigma^{2}\)</span></p>
 <ol type="1">
 <li><p><span class="math inline">\(\text{Var}\lbrack a\rbrack = 0\)</span></p></li>
-<li><p><span class="math inline">\(\text{Var}\lbrack X + b\rbrack = \sigma\^{2}\)</span></p></li>
-<li><p><span class="math inline">\(\text{Var}\lbrack aX\rbrack = a^{2}\sigma^{2}\)</span></p></li>
-<li><p><span class="math inline">\(\text{Var}\lbrack aX + b\rbrack = a^{2}\sigma^{2}\)</span></p></li>
+<li><p><span class="math inline">\(\text{Var}\lbrack X + b\rbrack = \sigma^2\)</span></p></li>
+<li><p><span class="math inline">\(\text{Var}\lbrack aX\rbrack = a^2\sigma^2\)</span></p></li>
+<li><p><span class="math inline">\(\text{Var}\lbrack aX + b\rbrack = a^2\sigma^2\)</span></p></li>
 </ol>
 <p>The first property states that constants have no variability—this should make sense. A constant is equal to its expected value, <span class="math inline">\(\text{E}\lbrack a\rbrack = a\)</span>, so that deviations between value and mean are always 0.</p>
+<p>The second property states that shifting a random variable by a fixed amount does not change its dispersion. That also should make intuitive sense: adding (or subtracting) a constant amount from every value does not change the shape of the distribution, it simply moves the distribution to a different location—the mean changes but the variance does not.</p>
+<p>The third property states that scaling a random variable with constant <span class="math inline">\(a\)</span> has a squared effect on the variance. This is also intuitive since the variance is in squared units. The effect of scaling on the standard deviation is linear: If you multiply every value with the constant <span class="math inline">\(a\)</span>, the standard deviation of the product increases by factor <span class="math inline">\(a\)</span>.</p>
+<p>The fourth property simply combines properties 1 and 3.</p>
+<p>The following result plays an important role in deriving the variance of linear functions of random variables. Many statistical estimators are of this form, from the sample mean to least-squares regression estimators.</p>
 <p>If <span class="math inline">\(X_{1},\cdots,X_{k}\)</span> are independent random variables and <span class="math inline">\(a_{1},\cdots,a_{k}\)</span> are constants, then the variance of <span class="math inline">\(a_{1}X_{1} + \cdots + a_{k}X_{k}\)</span> is given by</p>
 <p><span class="math display">\[\text{Var}\left\lbrack a_{1}X_{1} + \cdots + a_{k}X_{k} \right\rbrack = a_{1}^{2}\text{Var}\left\lbrack X_{1} \right\rbrack + a_{2}^{2}\text{Var}\left\lbrack X_{2} \right\rbrack + \cdots + a_{k}^{2}\text{Var}\lbrack X_{k}\rbrack\]</span></p>
+<p>For this result to hold it is sufficient that the <span class="math inline">\(X_i\)</span> are <strong>uncorrelated</strong>, they do not have to be independent.</p>
 <div class="example">
 <div class="example-header">
 <p>Example: Variance of Binomial Distribution</p>
@@ -650,29 +662,82 @@ window.Quarto = {
 <p><span class="math display">\[\text{Var}\lbrack X\rbrack = \sum_{i = 1}^{n}{\text{Var}\left\lbrack Y_{i} \right\rbrack} = n\pi(1 - \pi)\]</span></p>
 </div>
 </div>
+<p>We can also apply these results to derive the variance of the sample mean.</p>
+<div class="example">
+<div class="example-header">
+<p>Example: Variance of the Sample Mean</p>
+</div>
+<div class="example-container">
+<p>Suppose that <span class="math inline">\(Y_1, \cdots, Y_n\)</span> are a random sample from a distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. What is the variance of the sample mean <span class="math inline">\(\overline{Y} = \frac{1}{n}\sum_{i=1}^n Y_i\)</span>?</p>
+<p>The sample mean is the sum of the <span class="math inline">\(Y_i\)</span>s, divided by the sample size <span class="math inline">\(n\)</span>. By virtue of drawing a random sample, independence of the <span class="math inline">\(Y_i\)</span> is guaranteed. We can thus apply the results about the variance of a sum of independent random variables and about the variance of a scaled random variable: <span class="math display">\[
+\begin{align*}
+\text{Var}[\overline{Y}] &amp;= \text{Var}\left[ \frac{1}{n}\sum_{i=1}^n Y_i\right] \\
+&amp;= \frac{1}{n^2}\text{Var}\left[\sum_{i=1}^n Y_i\right] \\
+&amp;= \frac{1}{n^2}\sum_{i=1}^n \text{Var}[Y_i] \\
+&amp;= \frac{1}{n^2} n \sigma^2 = \frac{\sigma^2}{n}
+\end{align*}
+\]</span></p>
+</div>
+</div>
 <p>It is sufficient for this result to hold that the random variables are mutually uncorrelated, a weaker condition than mutual independence. We are introducing independence below after discussing the concept of joint distribution functions.</p>
-<p>####Centering and standardization</p>
-<p>A random variable <span class="math inline">\(X\)</span> with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^{2}\)</span> is <strong>centered</strong> by subtracting its mean and <strong>standardized</strong> (scaled) by dividing by its standard deviation:</p>
+</section>
+<section id="centering-and-scaling" class="level4">
+<h4 class="anchored" data-anchor-id="centering-and-scaling">Centering and Scaling</h4>
+<p>A random variable <span class="math inline">\(X\)</span> with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^{2}\)</span> is <strong>centered</strong> by subtracting its mean. A random variable is <strong>scaled</strong> by multiplying or dividing it by a factor. A random variable is <strong>standardized</strong> by centering and dividing by its standard deviation:</p>
 <p><span class="math display">\[Y = \frac{X - \mu}{\sigma}\]</span></p>
-<p>It is easy to show that <span class="math inline">\(Y\)</span> has mean 0 and variance 1. It is also called the centered-and-scaled version of <span class="math inline">\(X\)</span>.</p>
+<p>If <span class="math inline">\(X\)</span> has mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>, then <span class="math inline">\(Y\)</span> has mean 0 and variance 1. This follows by applying the properties of the expecation and variance operators: <span class="math display">\[
+\begin{align*}
+\text{E}[Y] &amp;= \text{E}\left[\frac{X-\mu}{\sigma}\right] = \frac{1}{\sigma}\text{E}[X-\mu] =\frac{1}{\sigma}(\mu-\mu) = 0\\
+\text{Var}[Y]
+&amp;= \text{Var}\left[\frac{X-\mu}{\sigma}\right] = \frac{1}{\sigma^2}\text{Var}[X-\mu] =
+\frac{1}{\sigma^2}\text{Var}[X] = \frac{\sigma^2}{\sigma^2} =1
+\end{align*}
+\]</span></p>
+<p>It is also called the centered-and-scaled version of <span class="math inline">\(X\)</span>.</p>
+<p>A special type of scaling is <strong>range scaling</strong>. This form of scaling of the data transforms the data so it falls between a known lower and upper bound, often 0 and 1. Suppose that <span class="math inline">\(\text{min}(X) \le X \le \text{max}(X)\)</span> and we want to create a variable <span class="math inline">\(z_\text{min} \le Z \le z_\text{max}\)</span> from <span class="math inline">\(X\)</span>. <span class="math inline">\(Z\)</span> can be computed by scaling and shifting a standardized form of <span class="math inline">\(X\)</span>: <span class="math display">\[
+\begin{align*}
+  x^* &amp;= \frac{x-\min(x)}{\max(x)-\min(x)} \\
+  z &amp;= z_{\text{min}} + x^* \times (z_{\text{max}} - z_{\text{min}})
+\end{align*}
+\]</span> If the bounds are <span class="math inline">\(z_{\text{min}} = 0\)</span> and <span class="math inline">\(z_{\text{max}} = 1\)</span>, then <span class="math inline">\(z = x^*\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Technically, scaling refers to multiplication of a variable with a factor. Because standardization involves centering and scaling, and standardization is used frequently, you will find the term <em>scaling</em> applied to standardization. In fact, the <code>scale</code> function in <code>R</code> performs standardization (centering and scaling) by default.</p>
+</div>
+</div>
 </section>
 <section id="covariance-and-correlation" class="level4">
 <h4 class="anchored" data-anchor-id="covariance-and-correlation">Covariance and correlation</h4>
-<p>Whereas the variance measures the dispersion of a random variable, the <strong>covariance</strong> measures how two random variables vary together. The covariance of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is the expected value of the cross-product of two variables centered around their respective means, <span class="math inline">\(\mu_{X}\)</span> and <span class="math inline">\(\mu_{Y}\)</span>:</p>
+<p>Whereas the variance measures the dispersion of a random variable, the <strong>covariance</strong> measures how two random variables vary <strong>together</strong>. The covariance of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is the expected value of the cross-product of two variables centered around their respective means, <span class="math inline">\(\mu_{X}\)</span> and <span class="math inline">\(\mu_{Y}\)</span>:</p>
 <p><span class="math display">\[\text{Cov}\lbrack X,Y\rbrack = \text{E}\left\lbrack \left( X - \mu_{X} \right)\left( Y - \mu_{Y} \right) \right\rbrack = \text{E}\lbrack XY\rbrack - \mu_{X}\mu_{Y}\]</span></p>
-<p>Similar to the variance, the covariance has useful properties when working with random variables:</p>
+<p>Similar to the variance, the covariance has properties that come in handy when working with random variables:</p>
 <ol type="1">
 <li><p><span class="math inline">\(\text{Cov}\lbrack X,a\rbrack = 0\)</span></p></li>
 <li><p><span class="math inline">\(\text{Cov}\lbrack X,X\rbrack = \text{Var}\lbrack X\rbrack\)</span></p></li>
 <li><p><span class="math inline">\(\text{Cov}\lbrack aX,bY\rbrack = ab \text{Cov}\lbrack X,Y\rbrack\)</span></p></li>
 <li><p><span class="math inline">\(\text{Cov}\lbrack aY + bU,cW + dV\rbrack = ac \text{Cov}\lbrack Y,W\rbrack + bc \text{Cov}\lbrack U,W\rbrack + ad \text{Cov}\lbrack Y,V\rbrack + bd \text{Cov}\lbrack U,V\rbrack\)</span></p></li>
 </ol>
-<p>Earlier we gave an expression for the variance of a linear combination of random variables under the assumption that the random variables are independent. We can now generalize the result as follows. If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are random variables with variance <span class="math inline">\(\sigma_{X}^{2}\)</span> and <span class="math inline">\(\sigma_{Y}^{2}\)</span>, respectively, and <span class="math inline">\(a,b\)</span> are constants, then</p>
-<p><span class="math display">\[\text{Var}\lbrack aX + bY\rbrack = \text{Var}\lbrack aX\rbrack + \text{Var}\lbrack bY\rbrack + \text{Cov}\lbrack aX,bY\rbrack\]</span></p>
-<p><span class="math display">\[= a^{2}\sigma_{X}^{2} + b^{2}\sigma_{Y}^{2} + ab \text{Cov}\lbrack X,Y\rbrack\]</span></p>
-<p>If <span class="math inline">\(\text{Cov}\lbrack X,Y\rbrack = 0\)</span>, the random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>uncorrelated</strong>. The correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is defined as</p>
+<p>Since the variance is a special case of the covariance of a random variable with itself, the properties of the covariance operator are general cases of the properties of the variance operator discussed earlier.</p>
+<p>Earlier we gave an expression for the variance of a linear combination of independent random variables. We can now generalize the result to linear combinations of correlated random variables.</p>
+<p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are random variables with variance <span class="math inline">\(\sigma_{X}^{2}\)</span> and <span class="math inline">\(\sigma_{Y}^{2}\)</span>, respectively, and <span class="math inline">\(a, b\)</span> are constants, then</p>
+<p><span class="math display">\[
+\begin{align*}
+\text{Var}\lbrack aX + bY\rbrack &amp;= \text{Var}\lbrack aX\rbrack + \text{Var}\lbrack bY\rbrack + \text{Cov}\lbrack aX,bY\rbrack \\
+     &amp;= a^{2}\sigma_{X}^{2} + b^{2}\sigma_{Y}^{2} + ab \text{Cov}\lbrack X,Y\rbrack
+\end{align*}
+\]</span></p>
+<p>If <span class="math inline">\(\text{Cov}\lbrack X,Y\rbrack = 0\)</span>, the random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>uncorrelated</strong>. The <strong>correlation</strong> between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is defined as</p>
 <p><span class="math display">\[\text{Corr}\lbrack X,Y\rbrack = \frac{\text{Cov}\lbrack X,Y\rbrack}{\sigma_{X}\sigma_{Y}}\]</span></p>
-<p>The correlation is often denoted <span class="math inline">\(\rho_{XY}\)</span> and takes on values <span class="math inline">\(- 1 \leq \rho_{XY} \leq 1\)</span>. A zero correlation is a weaker condition than <strong>independence</strong> of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
+<p>The correlation is often denoted <span class="math inline">\(\rho_{XY}\)</span> and takes on values <span class="math inline">\(-1 \leq \rho_{XY} \leq 1\)</span>. A zero correlation is a weaker condition than <strong>independence</strong> of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. A positive value of <span class="math inline">\(\rho_{XY}\)</span> means that an increase in the value of <span class="math inline">\(X\)</span> is associated with an increase in the value of <span class="math inline">\(Y\)</span>. Note that we are not stating that the increase in <span class="math inline">\(X\)</span> is caused by the increase in <span class="math inline">\(Y\)</span>. Correlation is a measure of association and does not imply causation.</p>
+<p>If <span class="math inline">\(\text{Corr}[X,Y] = 1\)</span> or <span class="math inline">\(\text{Corr}[X,Y] = -1\)</span>, then <span class="math inline">\(X\)</span> can be predicted perfectly from <span class="math inline">\(Y\)</span>; knowing <span class="math inline">\(Y\)</span> is equal to knowing <span class="math inline">\(X\)</span>. An example of a perfect positive correlation is when <span class="math inline">\(X\)</span> is a length measured in inches and <span class="math inline">\(Y\)</span> is measured in cm. When <span class="math inline">\(\text{Corr}[X,Y] = 0\)</span>, then <span class="math inline">\(X\)</span> carries no information about <span class="math inline">\(Y\)</span>, and vice versa. A person’s shoe size and tomorrow’s weather is an example of uncorrelated variables.</p>
 </section>
 <section id="independence-1" class="level4">
 <h4 class="anchored" data-anchor-id="independence-1">Independence</h4>
@@ -952,7 +1017,7 @@ Figure&nbsp;12.4: Densities of Beta(<span class="math inline">\(\alpha,\beta\)</
 </div>
 <p>These amazing properties contribute to the Gaussian distribution being the most important probability distribution. Most continuous attributes actually do not behave like Gaussian random variables at all, they often have a restricted range or are skewed or have heavier tails than a Gaussian random variable. There is really nothing <em>normal</em> about this distribution, which is one reason why we prefer the name Gaussian over Normal distribution.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="What is normal?">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -961,7 +1026,7 @@ What is normal?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>We avoid the use of the term normal to describe the Gaussian distribution for another reason: the connection of the concept of normality and this distribution to eugenics. The Belgian astronomer, statistician and mathematician Adolphe Quetelet (1796–1847) introduced the generalized notion of the normal. He studied the distribution of physical attributes and determined that the normal, the most representative, value of an attribute is its average. Discrepancies above and below the average were considered “errors”. Early applications of the Gaussian distribution were in the study of measurement errors. C.F. Gauss used the distribution to represent errors in the measurement of celestial bodies.</p>
 <p>Prior to Quetelet, the view of “norm” and “normality” was associated with carpentry. The carpenter square is also called the norm, and in normal construction everything is at right angles. With Quetelet, the middle of the distribution, the center, became the “new normal.” There is nothing objectionable so far.</p>

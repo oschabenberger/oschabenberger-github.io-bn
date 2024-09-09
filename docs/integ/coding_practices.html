@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Foundations of Data Science - 18&nbsp; Coding Best Practices</title>
+<title>Foundations of Data Science - 19&nbsp; Coding Best Practices</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -141,7 +141,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../integ/coding_practices.html">Part V. Integration of Data Science Solutions</a></li><li class="breadcrumb-item"><a href="../integ/coding_practices.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../integ/coding_practices.html">Part V. Integration of Data Science Solutions</a></li><li class="breadcrumb-item"><a href="../integ/coding_practices.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -314,14 +314,20 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../ethics/gonewrong.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">How Things Go Wrong</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../ethics/bias_harm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/privacy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
   </div>
 </li>
       </ul>
@@ -338,13 +344,13 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/coding_practices.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/tools.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
   </div>
 </li>
       </ul>
@@ -365,7 +371,7 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-repro-vc" id="toc-sec-repro-vc" class="nav-link active" data-scroll-target="#sec-repro-vc"><span class="header-section-number">18.1</span> Version Control</a>
+  <li><a href="#sec-repro-vc" id="toc-sec-repro-vc" class="nav-link active" data-scroll-target="#sec-repro-vc"><span class="header-section-number">19.1</span> Version Control</a>
   <ul>
   <li><a href="#a-crash-course-in-git" id="toc-a-crash-course-in-git" class="nav-link" data-scroll-target="#a-crash-course-in-git">A Crash Course in Git</a>
   <ul class="collapse">
@@ -375,7 +381,7 @@ div.csl-indent {
   <li><a href="#stages-of-a-file" id="toc-stages-of-a-file" class="nav-link" data-scroll-target="#stages-of-a-file">Stages of a file</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#structure-and-organization" id="toc-structure-and-organization" class="nav-link" data-scroll-target="#structure-and-organization"><span class="header-section-number">18.2</span> Structure and Organization</a>
+  <li><a href="#structure-and-organization" id="toc-structure-and-organization" class="nav-link" data-scroll-target="#structure-and-organization"><span class="header-section-number">19.2</span> Structure and Organization</a>
   <ul>
   <li><a href="#naming" id="toc-naming" class="nav-link" data-scroll-target="#naming">Naming</a></li>
   <li><a href="#comments" id="toc-comments" class="nav-link" data-scroll-target="#comments">Comments</a></li>
@@ -392,9 +398,9 @@ div.csl-indent {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../integ/coding_practices.html">Part V. Integration of Data Science Solutions</a></li><li class="breadcrumb-item"><a href="../integ/coding_practices.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../integ/coding_practices.html">Part V. Integration of Data Science Solutions</a></li><li class="breadcrumb-item"><a href="../integ/coding_practices.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-coding-best-practice" class="quarto-section-identifier"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></h1>
+<h1 class="title"><span id="sec-coding-best-practice" class="quarto-section-identifier"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></h1>
 </div>
 
 
@@ -414,8 +420,8 @@ div.csl-indent {
 <p>Writing code, maintaining code, reviewing code, and fixing code are essential elements of what data professionals do.</p>
 <p>Understanding and following best practices is important. 80% of jobs in data science are outside of academic environments. Employers have standard operating procedures (SOPs) for software developers that will apply also to statistical programming and data science projects. For example, many companies use code reviews by fellow developers to evaluate new or modified code before it can be committed to a repository. The feedback from code reviews flows into performance evaluations and has impact on your career. Not following the coding guidelines and best practices of an organization is a great way of shortening tenure. Software projects are collaborative projects and someone else will need to work with your code. How easy is it to understand? Is it well documented? Is it properly structured and modular? How easy is it to debug?</p>
 <p>This chapter covers some elementary good coding practices for you to consider.</p>
-<section id="sec-repro-vc" class="level2" data-number="18.1">
-<h2 data-number="18.1" class="anchored" data-anchor-id="sec-repro-vc"><span class="header-section-number">18.1</span> Version Control</h2>
+<section id="sec-repro-vc" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="sec-repro-vc"><span class="header-section-number">19.1</span> Version Control</h2>
 <p>Version control refers to the management and tracking of changes in digital content; mostly files and mostly code. Any digital asset can be placed under version control. Even if you are working (mostly) by yourself, using a version control system is important. Employers consider it a non-negotiable skill and you do not want to stand out as the applicant who does not know how to use Git. The benefits of version control systems are many, even the solo programmer would be remiss not to use it.</p>
 <p>What does a version control system like Git do for you:</p>
 <ul>
@@ -483,15 +489,15 @@ Tip
 </section>
 <section id="stages-of-a-file" class="level4">
 <h4 class="anchored" data-anchor-id="stages-of-a-file">Stages of a file</h4>
-<p>A file in a Git repository goes through multiple stages (<a href="#fig-git-file" class="quarto-xref">Figure&nbsp;<span>18.1</span></a>). At first, the file is <strong>unmodified</strong> and <strong>untracked</strong>. A file that was changed in any way is in a <strong>modified</strong> state. That does not automatically update the repository. In order to commit the change, the file first needs to be <strong>staged</strong> with the <code>git add</code> command.</p>
+<p>A file in a Git repository goes through multiple stages (<a href="#fig-git-file" class="quarto-xref">Figure&nbsp;<span>19.1</span></a>). At first, the file is <strong>unmodified</strong> and <strong>untracked</strong>. A file that was changed in any way is in a <strong>modified</strong> state. That does not automatically update the repository. In order to commit the change, the file first needs to be <strong>staged</strong> with the <code>git add</code> command.</p>
 <p>When you issue a <code>git add</code> on a new file or directory, it is being <strong>tracked</strong>. When you clone a repository, all files in your working directory will be tracked and unmodified.</p>
 <div id="fig-git-file" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-git-file-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/git_file_lifecycle.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1"><img src="images/git_file_lifecycle.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+<a href="images/git_file_lifecycle.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1"><img src="images/git_file_lifecycle.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-git-file-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;18.1: The lifecycle of a file in Git. <a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository">Source</a>
+Figure&nbsp;19.1: The lifecycle of a file in Git. <a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository">Source</a>
 </figcaption>
 </figure>
 </div>
@@ -624,8 +630,8 @@ Tip
 </section>
 </section>
 </section>
-<section id="structure-and-organization" class="level2" data-number="18.2">
-<h2 data-number="18.2" class="anchored" data-anchor-id="structure-and-organization"><span class="header-section-number">18.2</span> Structure and Organization</h2>
+<section id="structure-and-organization" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="structure-and-organization"><span class="header-section-number">19.2</span> Structure and Organization</h2>
 <section id="naming" class="level3">
 <h3 class="anchored" data-anchor-id="naming">Naming</h3>
 <ul>
@@ -866,7 +872,7 @@ Note
 
 
 <div class="hidden" aria-hidden="true">
-<span class="glightbox-desc lightbox-desc-1">Figure&nbsp;18.1: The lifecycle of a file in Git. <a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository">Source</a></span>
+<span class="glightbox-desc lightbox-desc-1">Figure&nbsp;19.1: The lifecycle of a file in Git. <a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository">Source</a></span>
 </div>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-Pengetal2020" class="csl-entry" role="listitem">
@@ -1434,12 +1440,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../ethics/privacy.html" class="pagination-link" aria-label="Personal Information and Personal Data">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../integ/tools.html" class="pagination-link" aria-label="Data Science Tools">
-        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1457,7 +1463,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

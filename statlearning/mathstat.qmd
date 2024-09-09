@@ -271,7 +271,7 @@ Next to the mean, the most important expected value of a random variable, is the
 
 $$\Var\lbrack X\rbrack = \Exp\left\lbrack \left( X - \Exp\lbrack X\rbrack \right)^{2} \right\rbrack = \Exp\left\lbrack X^{2} \right\rbrack -\Exp\lbrack X\rbrack^{2}$$
 
-The second expression states that the variance can also be written as the difference of the mean of the square of the random variable and the square of the mean of the random variable. The Greek symbol $\sigma^{2}$ is commonly used to denote the variance. The square is useful to remind us that the variance is in squared units. If the random variable $X$ is a length in feet, the variance is measured in square feet.
+The second expression states that the variance can also be written as the difference of the mean of the square of the random variable and the square of the mean of the random variable. The Greek symbol $\sigma^{2}$ is commonly used to denote the variance. The square is useful to remind us that the variance is in squared units. If the random variable $X$ is a length in feet, the variance represents an area in square feet.
 
 The square root of the variance is called the **standard deviation** of the random variable, frequently denoted $\sigma$. The standard deviation is measured in the same units as $X$.
 
@@ -285,17 +285,29 @@ It is often easier to derive the variance of a random variable from the followin
 
 1.  $\Var\lbrack a\rbrack = 0$
 
-2.  $\Var\lbrack X + b\rbrack = \sigma\^{2}$
+2.  $\Var\lbrack X + b\rbrack = \sigma^2$
 
-3.  $\Var\lbrack aX\rbrack = a^{2}\sigma^{2}$
+3.  $\Var\lbrack aX\rbrack = a^2\sigma^2$
 
-4.  $\Var\lbrack aX + b\rbrack = a^{2}\sigma^{2}$
+4.  $\Var\lbrack aX + b\rbrack = a^2\sigma^2$
 
 The first property states that constants have no variability---this should make sense. A constant is equal to its expected value, $\Exp\lbrack a\rbrack = a$, so that deviations between value and mean are always 0.
+
+The second property states that shifting a random variable by a fixed amount does not change its dispersion. That also should make intuitive sense: adding (or subtracting) a constant amount from every value does not change the shape of the distribution, it simply moves the distribution to a different location---the mean changes but the variance does not.
+
+The third property states that scaling a random variable with constant $a$ has a squared effect on the variance.
+This is also intuitive since the variance is in squared units. The effect of scaling on the standard deviation is linear: If you multiply every value with the constant $a$, the standard deviation of the product increases by 
+factor $a$.
+
+The fourth property simply combines properties 1 and 3.
+
+The following result plays an important role in deriving the variance of linear functions of random variables. Many statistical estimators are of this form, from the sample mean to least-squares regression estimators.
 
 If $X_{1},\cdots,X_{k}$ are independent random variables and $a_{1},\cdots,a_{k}$ are constants, then the variance of $a_{1}X_{1} + \cdots + a_{k}X_{k}$ is given by
 
 $$\Var\left\lbrack a_{1}X_{1} + \cdots + a_{k}X_{k} \right\rbrack = a_{1}^{2}\Var\left\lbrack X_{1} \right\rbrack + a_{2}^{2}\Var\left\lbrack X_{2} \right\rbrack + \cdots + a_{k}^{2}\Var\lbrack X_{k}\rbrack$$
+
+For this result to hold it is sufficient that the $X_i$ are **uncorrelated**, they do not have to be independent.
 
 ::: example
 ::: example-header
@@ -317,23 +329,72 @@ $$\Var\lbrack X\rbrack = \sum_{i = 1}^{n}{\Var\left\lbrack Y_{i} \right\rbrack} 
 :::
 :::
 
+We can also apply these results to derive the variance of the sample mean.
+
+:::{.example}
+::::{.example-header}
+Example: Variance of the Sample Mean
+::::
+::::{.example-container}
+Suppose that $Y_1, \cdots, Y_n$ are a random sample from a distribution with mean $\mu$ and 
+variance $\sigma^2$. What is the variance of the sample mean $\overline{Y} = \frac{1}{n}\sum_{i=1}^n Y_i$?
+
+The sample mean is the sum of the $Y_i$s, divided by the sample size $n$. By virtue of 
+drawing a random sample, independence of the $Y_i$ is guaranteed. We can thus apply the results about the
+variance of a sum of independent random variables and about the variance of a scaled random variable:
+$$
+\begin{align*}
+\Var[\overline{Y}] &= \Var\left[ \frac{1}{n}\sum_{i=1}^n Y_i\right] \\
+&= \frac{1}{n^2}\Var\left[\sum_{i=1}^n Y_i\right] \\
+&= \frac{1}{n^2}\sum_{i=1}^n \Var[Y_i] \\
+&= \frac{1}{n^2} n \sigma^2 = \frac{\sigma^2}{n}
+\end{align*}
+$$
+::::
+:::
+
 It is sufficient for this result to hold that the random variables are mutually uncorrelated, a weaker condition than mutual independence. We are introducing independence below after discussing the concept of joint distribution functions.
 
-####Centering and standardization
+#### Centering and Scaling
 
-A random variable $X$ with mean $\mu$ and variance $\sigma^{2}$ is **centered** by subtracting its mean and **standardized** (scaled) by dividing by its standard deviation:
+A random variable $X$ with mean $\mu$ and variance $\sigma^{2}$ is **centered** by subtracting its mean. A random variable is **scaled** by multiplying or dividing it by a factor. A random variable is
+**standardized** by centering and dividing by its standard deviation:
 
 $$Y = \frac{X - \mu}{\sigma}$$
 
-It is easy to show that $Y$ has mean 0 and variance 1. It is also called the centered-and-scaled version of $X$.
+If $X$ has mean $\mu$ and variance $\sigma^2$, then $Y$ has mean 0 and variance 1. This follows by applying the properties of the expecation and variance operators:
+$$
+\begin{align*}
+\Exp[Y] &= \Exp\left[\frac{X-\mu}{\sigma}\right] = \frac{1}{\sigma}\Exp[X-\mu] =\frac{1}{\sigma}(\mu-\mu) = 0\\
+\Var[Y]
+ &= \Var\left[\frac{X-\mu}{\sigma}\right] = \frac{1}{\sigma^2}\Var[X-\mu] =
+ \frac{1}{\sigma^2}\Var[X] = \frac{\sigma^2}{\sigma^2} =1
+\end{align*}
+$$
+
+It is also called the centered-and-scaled version of $X$.
+
+A special type of scaling is **range scaling**. This form of scaling of the data transforms the data so it falls between a known lower and upper bound, often 0 and 1. Suppose that $\text{min}(X) \le X \le \text{max}(X)$  and we want to create a variable $z_\text{min} \le Z \le z_\text{max}$ from $X$. $Z$ can be computed by scaling and shifting a standardized form of $X$:
+$$
+\begin{align*}
+  x^* &= \frac{x-\min(x)}{\max(x)-\min(x)} \\
+  z &= z_{\text{min}} + x^* \times (z_{\text{max}} - z_{\text{min}})
+\end{align*}
+$$
+If the bounds are $z_{\text{min}} = 0$ and $z_{\text{max}} = 1$, then $z = x^*$.
+
+
+:::{.callout-note}
+Technically, scaling refers to multiplication of a variable with a factor. Because standardization involves centering and scaling, and standardization is used frequently, you will find the term *scaling* applied to standardization. In fact, the `scale` function in `R` performs standardization (centering and scaling) by default.
+:::
 
 #### Covariance and correlation
 
-Whereas the variance measures the dispersion of a random variable, the **covariance** measures how two random variables vary together. The covariance of $X$ and $Y$ is the expected value of the cross-product of two variables centered around their respective means, $\mu_{X}$ and $\mu_{Y}$:
+Whereas the variance measures the dispersion of a random variable, the **covariance** measures how two random variables vary **together**. The covariance of $X$ and $Y$ is the expected value of the cross-product of two variables centered around their respective means, $\mu_{X}$ and $\mu_{Y}$:
 
 $$\Cov\lbrack X,Y\rbrack = \Exp\left\lbrack \left( X - \mu_{X} \right)\left( Y - \mu_{Y} \right) \right\rbrack = \Exp\lbrack XY\rbrack - \mu_{X}\mu_{Y}$$
 
-Similar to the variance, the covariance has useful properties when working with random variables:
+Similar to the variance, the covariance has properties that come in handy when working with random variables:
 
 1.  $\Cov\lbrack X,a\rbrack = 0$
 
@@ -343,17 +404,26 @@ Similar to the variance, the covariance has useful properties when working with 
 
 4.  $\Cov\lbrack aY + bU,cW + dV\rbrack = ac \Cov\lbrack Y,W\rbrack + bc \Cov\lbrack U,W\rbrack + ad \Cov\lbrack Y,V\rbrack + bd \Cov\lbrack U,V\rbrack$
 
-Earlier we gave an expression for the variance of a linear combination of random variables under the assumption that the random variables are independent. We can now generalize the result as follows. If $X$ and $Y$ are random variables with variance $\sigma_{X}^{2}$ and $\sigma_{Y}^{2}$, respectively, and $a,b$ are constants, then
+Since the variance is a special case of the covariance of a random variable with itself, the properties of the covariance operator are general cases of the properties of the variance operator discussed earlier.
 
-$$\Var\lbrack aX + bY\rbrack = \Var\lbrack aX\rbrack + \Var\lbrack bY\rbrack + \Cov\lbrack aX,bY\rbrack$$
+Earlier we gave an expression for the variance of a linear combination of independent random variables. We can now generalize the result to linear combinations of correlated random variables. 
 
-$$= a^{2}\sigma_{X}^{2} + b^{2}\sigma_{Y}^{2} + ab \Cov\lbrack X,Y\rbrack$$
+If $X$ and $Y$ are random variables with variance $\sigma_{X}^{2}$ and $\sigma_{Y}^{2}$, respectively, and $a, b$ are constants, then
 
-If $\Cov\lbrack X,Y\rbrack = 0$, the random variables $X$ and $Y$ are **uncorrelated**. The correlation between $X$ and $Y$ is defined as
+$$
+\begin{align*}
+\Var\lbrack aX + bY\rbrack &= \Var\lbrack aX\rbrack + \Var\lbrack bY\rbrack + \Cov\lbrack aX,bY\rbrack \\
+     &= a^{2}\sigma_{X}^{2} + b^{2}\sigma_{Y}^{2} + ab \Cov\lbrack X,Y\rbrack
+\end{align*}
+$$
+
+If $\Cov\lbrack X,Y\rbrack = 0$, the random variables $X$ and $Y$ are **uncorrelated**. The **correlation** between $X$ and $Y$ is defined as
 
 $$\Corr\lbrack X,Y\rbrack = \frac{\Cov\lbrack X,Y\rbrack}{\sigma_{X}\sigma_{Y}}$$
 
-The correlation is often denoted $\rho_{XY}$ and takes on values $- 1 \leq \rho_{XY} \leq 1$. A zero correlation is a weaker condition than **independence** of $X$ and $Y$.
+The correlation is often denoted $\rho_{XY}$ and takes on values $-1 \leq \rho_{XY} \leq 1$. A zero correlation is a weaker condition than **independence** of $X$ and $Y$. A positive value of $\rho_{XY}$ means that an increase in the value of $X$ is associated with an increase in the value of $Y$. Note that we are not stating that the increase in $X$ is caused by the increase in $Y$. Correlation is a measure of association and does not imply causation.
+
+If $\Corr[X,Y] = 1$ or $\Corr[X,Y] = -1$, then $X$ can be predicted perfectly from $Y$; knowing $Y$ is equal to knowing $X$. An example of a perfect positive correlation is when $X$ is a length measured in inches and $Y$ is measured in cm. When $\Corr[X,Y] = 0$, then $X$ carries no information about $Y$, and vice versa. A person's shoe size and tomorrow's weather is an example of uncorrelated variables.
 
 #### Independence
 

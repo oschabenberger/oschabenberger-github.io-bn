@@ -45,6 +45,7 @@ book:
     - part: "Part IV. Applied Ethics in Data Science"
       chapters:
         - ethics/intro.qmd
+        - ethics/gonewrong.qmd
         - ethics/bias_harm.qmd
         - ethics/privacy.qmd
 

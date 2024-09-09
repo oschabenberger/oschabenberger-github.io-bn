@@ -79,11 +79,14 @@ Be also aware of the default behavior of software packages. The `prcomp` functio
 
 ### Range Scaling
 
-This form of scaling of the data scales the data so it falls between a known lower and upper bound, often 0 and 1. Suppose $Z$ is a range-scaled version of $X$ such that $z_{\text{min}} \le z \le z_{\text{max}}$. $Z$ can be computed by scaling and shifting a standardized form of $X$:
+This form of scaling of the data transforms the data so it falls between a known lower and upper bound, often 0 and 1. Suppose that $\text{min}(X) \le X \le \text{max}(X)$  and we want to create
+a variable $z_{\text{min}} \le Z \le z_{\text{max}}$ from $X$. $Z$ can be computed by scaling and shifting a standardized form of $X$:
+$$
 \begin{align*}
   x^* &= \frac{x-\min(x)}{\max(x)-\min(x)} \\
   z &= z_{\text{min}} + x^* \times (z_{\text{max}} - z_{\text{min}})
 \end{align*}
+$$
 
 The following Python code scales the Gamma(3,2) sample to lie between 0 and 2.
 

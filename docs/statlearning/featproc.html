@@ -343,14 +343,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../ethics/gonewrong.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">How Things Go Wrong</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../ethics/bias_harm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/privacy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
   </div>
 </li>
       </ul>
@@ -367,13 +373,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/coding_practices.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/tools.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
   </div>
 </li>
       </ul>
@@ -571,10 +577,12 @@ Scaling called Standardization
 </section>
 <section id="range-scaling" class="level3">
 <h3 class="anchored" data-anchor-id="range-scaling">Range Scaling</h3>
-<p>This form of scaling of the data scales the data so it falls between a known lower and upper bound, often 0 and 1. Suppose <span class="math inline">\(Z\)</span> is a range-scaled version of <span class="math inline">\(X\)</span> such that <span class="math inline">\(z_{\text{min}} \le z \le z_{\text{max}}\)</span>. <span class="math inline">\(Z\)</span> can be computed by scaling and shifting a standardized form of <span class="math inline">\(X\)</span>: <span class="math display">\[\begin{align*}
+<p>This form of scaling of the data transforms the data so it falls between a known lower and upper bound, often 0 and 1. Suppose that <span class="math inline">\(\text{min}(X) \le X \le \text{max}(X)\)</span> and we want to create a variable <span class="math inline">\(z_{\text{min}} \le Z \le z_{\text{max}}\)</span> from <span class="math inline">\(X\)</span>. <span class="math inline">\(Z\)</span> can be computed by scaling and shifting a standardized form of <span class="math inline">\(X\)</span>: <span class="math display">\[
+\begin{align*}
   x^* &amp;= \frac{x-\min(x)}{\max(x)-\min(x)} \\
   z &amp;= z_{\text{min}} + x^* \times (z_{\text{max}} - z_{\text{min}})
-\end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 <p>The following Python code scales the Gamma(3,2) sample to lie between 0 and 2.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>range_scaler <span class="op">=</span> preprocessing.MinMaxScaler(feature_range<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">2</span>)).fit(x)</span>
@@ -1344,7 +1352,7 @@ y^\lambda &amp; \text{if } \lambda \ne 0 \\
 <div id="fig-boxcox-transforms" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-boxcox-transforms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="featproc_files/figure-html/fig-boxcox-transforms-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1"><img src="featproc_files/figure-html/fig-boxcox-transforms-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+<a href="featproc_files/figure-html/fig-boxcox-transforms-1.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1"><img src="featproc_files/figure-html/fig-boxcox-transforms-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxcox-transforms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;14.4: Box-Cox transformations for various values of <span class="math inline">\(\lambda\)</span>
@@ -1463,7 +1471,7 @@ Figure&nbsp;14.6: Quantile transformation to normality for Gamma(3,2) data.
 <div id="fig-bimodal-quantile" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bimodal-quantile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="featproc_files/figure-html/fig-bimodal-quantile-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2"><img src="featproc_files/figure-html/fig-bimodal-quantile-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+<a href="featproc_files/figure-html/fig-bimodal-quantile-3.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2"><img src="featproc_files/figure-html/fig-bimodal-quantile-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bimodal-quantile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;14.7: Quantile transformation to normality for bimodal data from a mixture distribution.
@@ -2075,7 +2083,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","loop":false});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","loop":false});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

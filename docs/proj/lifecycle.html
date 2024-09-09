@@ -289,14 +289,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../ethics/gonewrong.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">How Things Go Wrong</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../ethics/bias_harm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/privacy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
   </div>
 </li>
       </ul>
@@ -313,13 +319,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/coding_practices.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/tools.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
   </div>
 </li>
       </ul>
@@ -413,10 +419,10 @@ window.Quarto = {
 <p>The most important reason for failure of data science projects is called the “last-mile problem” of data science: the struggle to deploy the result of the data analysis (models) into processes and applications where they are used by the organization and are serving the intended end user. It is one thing to build from historical data a model that can predict customer churn accurately. If the goal is to provide a customer service representative with a real-time prediction of a customer’s tendency to cancel a service and to recommend an action, e.g., to give a discount, the project is not complete until the model is incorporated into the system through which customers and representatives interact.</p>
 <p>It is best to recognize the reality that data science projects will likely fail unless they are carefully planned and executed. Successful projects combine technical skills with soft skills such as communication, trust building, transparency, and empathy. Successful projects are a team sport that incorporate collaboration and communication throughout the project cycle with data scientists taking on multiple roles. The data scientist is at times evangelist, planner, presenter, data wrangler, modeler, software developer, engineer, facilitator, implementer, storyteller, auditor.</p>
 <p>It is often said that data scientists spend 80% of their time wrangling and cleaning data. That is not true, but the narrative reveals that a data scientists’ job entails much more than the technical aspects of building models on prepared data sets. A good portion of the job is to meet people, interact about project requirements, communicate insights, manage projects, etc. In the terminology of people management, data scientists are “T-shaped people” who combine depth of expertise with broad cross-functional competencies (<a href="#fig-proj-tshaped" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>).</p>
-<div id="fig-proj-tshaped" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Breadth and depth of experience displayed in the shape of a &quot;T&quot;">
+<div id="fig-proj-tshaped" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" alt="Breadth and depth of experience displayed in the shape of a &quot;T&quot;" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-proj-tshaped-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/TShapedPeople.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1"><img src="images/TShapedPeople.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%" alt="Breadth and depth of experience displayed in the shape of a &quot;T&quot;"></a>
+<a href="images/TShapedPeople.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1"><img src="images/TShapedPeople.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%" alt="Breadth and depth of experience displayed in the shape of a &quot;T&quot;"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-tshaped-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.1: The concept of “T-shaped” competencies, combining deep expertise in one area with breadth in multiple disciplines and systems.
@@ -426,10 +432,10 @@ Figure&nbsp;3.1: The concept of “T-shaped” competencies, combining deep expe
 <p>This allows data scientists to understand and communicate about many disciplines and systems (the horizontal bar of the generalist) combined with deep expertise in at least one discipline or system, e.g., cloud-based machine learning (the vertical bar of the expert). As a data scientist you work both independently and collaboratively.</p>
 <p>The associated skill sets are exercised during the key stages in the data science project lifecycle.</p>
 <p>Our methodology calls out seven phases in the project: discovery, data engineering, model planning, model building, communication, deployment, and monitoring (<a href="#fig-proj-lifecycle" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>).</p>
-<div id="fig-proj-lifecycle" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Diagram of a process">
+<div id="fig-proj-lifecycle" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" alt="Diagram of a process" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-proj-lifecycle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/DSProjectLifeCycle.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2"><img src="images/DSProjectLifeCycle.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:55.0%" alt="Diagram of a process"></a>
+<a href="images/DSProjectLifeCycle.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2"><img src="images/DSProjectLifeCycle.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:55.0%" alt="Diagram of a process"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-lifecycle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.2: The stages of the data science project lifecycle.
@@ -440,7 +446,7 @@ Figure&nbsp;3.2: The stages of the data science project lifecycle.
 <div id="fig-proj-crispdm" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-proj-crispdm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/CRISP-DM.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="quarto-lightbox-gallery-3"><img src="images/CRISP-DM.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%"></a>
+<a href="images/CRISP-DM.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-glightbox="description: .lightbox-desc-3"><img src="images/CRISP-DM.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-crispdm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.3: The CRISP-DM model for the data science process.
@@ -478,7 +484,7 @@ Figure&nbsp;3.3: The CRISP-DM model for the data science process.
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/DSProject_Iteration.png" class="lightbox" data-glightbox="description: .lightbox-desc-4" data-gallery="quarto-lightbox-gallery-4" title="The data science project cycle is iterative. You might have to move back to an earlier stage based on information discovered at a later stage."><img src="images/DSProject_Iteration.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%" alt="The data science project cycle is iterative. You might have to move back to an earlier stage based on information discovered at a later stage."></a></p>
+<p><a href="images/DSProject_Iteration.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-glightbox="description: .lightbox-desc-4" title="The data science project cycle is iterative. You might have to move back to an earlier stage based on information discovered at a later stage."><img src="images/DSProject_Iteration.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%" alt="The data science project cycle is iterative. You might have to move back to an earlier stage based on information discovered at a later stage."></a></p>
 </figure>
 </div>
 <figcaption>The data science project cycle is iterative. You might have to move back to an earlier stage based on information discovered at a later stage.</figcaption>
@@ -584,7 +590,7 @@ Figure&nbsp;3.3: The CRISP-DM model for the data science process.
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/Theophylline.png" class="lightbox" data-glightbox="description: .lightbox-desc-5" data-gallery="quarto-lightbox-gallery-5" title="Drug concentration due to absorption and elimination in the body over time and three possible approaches to modeling."><img src="images/Theophylline.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%" alt="Drug concentration due to absorption and elimination in the body over time and three possible approaches to modeling."></a></p>
+<p><a href="images/Theophylline.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" data-glightbox="description: .lightbox-desc-5" title="Drug concentration due to absorption and elimination in the body over time and three possible approaches to modeling."><img src="images/Theophylline.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%" alt="Drug concentration due to absorption and elimination in the body over time and three possible approaches to modeling."></a></p>
 </figure>
 </div>
 <figcaption>Drug concentration due to absorption and elimination in the body over time and three possible approaches to modeling.</figcaption>
@@ -614,7 +620,7 @@ Figure&nbsp;3.3: The CRISP-DM model for the data science process.
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/LifeCycle_ModelOps.png" class="lightbox" data-glightbox="description: .lightbox-desc-6" data-gallery="quarto-lightbox-gallery-6" title="Model operations combine deployment, management, and monitoring of analytic assets."><img src="images/LifeCycle_ModelOps.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%" alt="Model operations combine deployment, management, and monitoring of analytic assets."></a></p>
+<p><a href="images/LifeCycle_ModelOps.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" data-glightbox="description: .lightbox-desc-6" title="Model operations combine deployment, management, and monitoring of analytic assets."><img src="images/LifeCycle_ModelOps.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%" alt="Model operations combine deployment, management, and monitoring of analytic assets."></a></p>
 </figure>
 </div>
 <figcaption>Model operations combine deployment, management, and monitoring of analytic assets.</figcaption>
@@ -685,7 +691,7 @@ In “Learning under Concept Drift: A Review”, Lu et al.&nbsp;(<a href="#0">Ar
 <div id="fig-proj-conceptdrift" class="lightbox quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-proj-conceptdrift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/Concept Drift.png" class="lightbox" data-glightbox="description: .lightbox-desc-7" data-gallery="quarto-lightbox-gallery-7"><img src="images/Concept Drift.png" class="img-fluid figure-img" style="width:80.0%"></a>
+<a href="images/Concept Drift.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" data-glightbox="description: .lightbox-desc-7"><img src="images/Concept Drift.png" class="img-fluid figure-img" style="width:80.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-conceptdrift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.4: The four types of concept drift according to Lu et al.
@@ -696,7 +702,7 @@ Figure&nbsp;3.4: The four types of concept drift according to Lu et al.
 <div id="fig-proj-datadrift" class="lightbox quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-proj-datadrift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/DataDrift.png" class="lightbox" data-glightbox="description: .lightbox-desc-8" data-gallery="quarto-lightbox-gallery-8"><img src="images/DataDrift.png" class="img-fluid figure-img" style="width:85.0%"></a>
+<a href="images/DataDrift.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" data-glightbox="description: .lightbox-desc-8"><img src="images/DataDrift.png" class="img-fluid figure-img" style="width:85.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-datadrift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.5: An example of data drift. The training data for input variable X has a symmetric distribution with a mean of 2. The data seen by the model in production has a right-skewed distribution and a mean of 5. The production model will see values of X with different frequencies as during training and will see values of X it never encountered during training. We do not know whether the model applies for X &gt; 10, for example.
@@ -730,7 +736,7 @@ Figure&nbsp;3.5: An example of data drift. The training data for input variable 
 <div id="fig-proj-airbnbblocker" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-proj-airbnbblocker-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/AirbnbPartyBlocker.png" class="lightbox" data-glightbox="description: .lightbox-desc-9" data-gallery="quarto-lightbox-gallery-9"><img src="images/AirbnbPartyBlocker.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+<a href="images/AirbnbPartyBlocker.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" data-glightbox="description: .lightbox-desc-9"><img src="images/AirbnbPartyBlocker.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-airbnbblocker-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.6: The Airbnb reservation system blocks a suspected party booking. <a href="https://www-cnbc-com.cdn.ampproject.org/c/s/www.cnbc.com/amp/2023/09/19/airbnb-party-preventer-naba-banerjee-reduced-parties-55percent-in-two-years.html">Source</a>.
@@ -864,7 +870,7 @@ Figure&nbsp;3.6: The Airbnb reservation system blocks a suspected party booking.
 <div id="fig-proj-intuition-box" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-proj-intuition-box-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/Intuition_BoxPlot.png" class="lightbox" data-glightbox="description: .lightbox-desc-10" data-gallery="quarto-lightbox-gallery-10"><img src="images/Intuition_BoxPlot.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+<a href="images/Intuition_BoxPlot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" data-glightbox="description: .lightbox-desc-10"><img src="images/Intuition_BoxPlot.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-intuition-box-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.7: Box plot of 200 observations for a variable.
@@ -880,7 +886,7 @@ Figure&nbsp;3.7: Box plot of 200 observations for a variable.
 <div id="fig-proj-intuition-traintest" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-proj-intuition-traintest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/Intuition_TestTrain.png" class="lightbox" data-glightbox="description: .lightbox-desc-11" data-gallery="quarto-lightbox-gallery-11"><img src="images/Intuition_TestTrain.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+<a href="images/Intuition_TestTrain.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" data-glightbox="description: .lightbox-desc-11"><img src="images/Intuition_TestTrain.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-intuition-traintest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.8: The mean-squared prediction error for a set of training and test data as a function of model complexity.
@@ -895,7 +901,7 @@ Figure&nbsp;3.8: The mean-squared prediction error for a set of training and tes
 <div id="fig-proj-intuition-storks" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-proj-intuition-storks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/Intuition_Storks.png" class="lightbox" data-glightbox="description: .lightbox-desc-12" data-gallery="quarto-lightbox-gallery-12"><img src="images/Intuition_Storks.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+<a href="images/Intuition_Storks.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" data-glightbox="description: .lightbox-desc-12"><img src="images/Intuition_Storks.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-intuition-storks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.9: Scatterplot of stork density and birth rate along with a LOESS fit. The variables are calculated by dividing the number of babies and the number of storks in the county by the number of women of child-bearing age in the county (in 10,000).
@@ -947,7 +953,7 @@ Figure&nbsp;3.9: Scatterplot of stork density and birth rate along with a LOESS 
 <div id="fig-proj-intuition-cluster1" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-proj-intuition-cluster1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/Intuition_Cluster.png" class="lightbox" data-glightbox="description: .lightbox-desc-13" data-gallery="quarto-lightbox-gallery-13"><img src="images/Intuition_Cluster.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+<a href="images/Intuition_Cluster.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" data-glightbox="description: .lightbox-desc-13"><img src="images/Intuition_Cluster.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-intuition-cluster1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.10: Results of hierarchical clustering with five clusters.
@@ -958,7 +964,7 @@ Figure&nbsp;3.10: Results of hierarchical clustering with five clusters.
 <div id="fig-proj-intuition-cluster2" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-proj-intuition-cluster2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/Intuition_Cluster2.png" class="lightbox" data-glightbox="description: .lightbox-desc-14" data-gallery="quarto-lightbox-gallery-14"><img src="images/Intuition_Cluster2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+<a href="images/Intuition_Cluster2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" data-glightbox="description: .lightbox-desc-14"><img src="images/Intuition_Cluster2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-proj-intuition-cluster2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.11: Corrected cluster analysis after removing the non-informative customer ID variable from the analysis. The detected clusters map more clearly to groups of points that are distinct with respect to spending and income.
@@ -1567,7 +1573,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","loop":false,"closeEffect":"zoom","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom","closeEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
