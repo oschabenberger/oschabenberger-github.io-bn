@@ -453,6 +453,23 @@ $$\Exp\left\lbrack g(X)h(Y) \right\rbrack = \Exp\left\lbrack g(X) \right\rbrack 
 
 For example, $\Exp\lbrack XY\rbrack = \Exp\lbrack X\rbrack \Exp\lbrack Y\rbrack$ and it follows that the covariance between independent random variables is zero. That is, independent random variables are uncorrelated. The reverse does not have to be true. Lack of correlation (a zero covariance) does not imply independence.
 
+:::{.callout-note title="Probability Playground"}
+Before we dive into some important discrete and continuous distributions in statistics,
+I want to point you at a remarkable website, called the 
+[Probability Playground](https://www.acsu.buffalo.edu/~adamcunn/probability/probability.html),
+created by Adam Cunningham at the University of Buffalo. The site was featured
+in an article in the September 2024 issue of Amstat News [@Cunningham24].
+
+This is an interactive site where you can see the relationships between probability
+distributions (on the Map) and explore the distributions. You can study visually
+their properties such as convergence to other distributions, their shapes,
+the effects of their parameters, and even simulate them. 
+
+Spending a few minutes on the Probability Playground will deepen your understanding
+of any distribution and see how distributions are connected with each other. 
+And you can see how means and variances are derived from first principles.
+:::
+
 ## Discrete (Univariate) Distributions {#sec-prob-discrete-dist}
 
 ### Bernoulli (Binary), Bernoulli$(\pi)$
@@ -656,6 +673,8 @@ Fun fact: if $\alpha$ is an integer, $\Gamma(\alpha) = (\alpha - 1)!$
 :::
 
 The exponential random variable introduced earlier is a special case of the Gamma family, the Expo($1/\beta$) is the same as the Gamma(1,$\beta$).
+Gamma-distributed random variables occur in applications of waiting times. Suppose that cars arrive at an intersection at a rate of one every two minutes. The time you have to wait until the 5th car arrives at the intersection is a Gamma($\alpha=5,\beta=2$) random variable. If
+lightbulbs last 5 years on average and are replaced when they fail, the time a box of six lasts is a Gamma($\alpha=6, \beta=5$) random variable  [@Cunningham24].
 
 Another special case of the gamma-type random variables is the chi-square random variable. A random variable $Y$ is said to have a chi-squared distribution with $\nu$ degrees of freedom, denoted $\chi_{\nu}^{2}$, if $Y$ is a Gamma($\frac{\nu}{2},2$) random variable. More on $\chi^{2}$ random variables below after we introduced sampling from a Gaussian distribution.
 
@@ -688,19 +707,41 @@ $$
 The support of a Beta random variable is continuous on [0,1], which makes it an 
 attractive candidate for modeling proportions, for example, the proportion of 
 time a vehicle is in maintenance or the proportion of disposable income spent
-on rent. 
+on rent. @Cunningham24 gives the following examples of Beta distributions:
+
+* Five numbers are chosen at random from the interval (0,1) and arranged in 
+order. The middle number has a Beta(3,3) distribution.
+* The probability that an apple will be unblemished has a Beta(8,0.5) distribution.
+* Relative humidity for Auckland, New Zealand for the first six months of 2022 
+has an approximate Beta(5.93, 1.78) distribution.
 
 The Beta distribution can also be used for random variables that are
 defined on a different scale, $a < Y < b$ by transforming to the [0,1] scale: 
 $Y^* = (Y-a)/(b-a)$.
 
-The $\text{Beta}(1,1)$ is a continuous uniform random variable on [0,1]. 
+Here are some interesting properties and relationships for Beta random variables:
+
+* The $\text{Beta}(1,1)$ is a continuous uniform random variable on [0,1]. 
+
+* If $Y \sim \text{Beta}(\alpha,\beta)$, then $1 - Y \sim \text{Beta}(\beta,\alpha)$.
+
+* The relationship between Gamma and Beta functions hints at a relationship between
+Gamma and Beta random variables. Indeed, there is one.
+If $X \sim \text{Gamma}(\alpha_1,\beta)$ and $Y \sim \text{Gamma}(\alpha_2,\beta)$,
+and $X$ and $Y$ are independent, then the ratio $X/(X+Y)$ follows a Beta$(\alpha_1,\alpha_2)$
+distribution:
+
+$$
+\frac{X}{X+Y} \sim \text{Beta}(\alpha_1,\alpha_2)
+$$
+
+* If $X$ is an Expo($\lambda$) random variable then $e^{−X} \sim \text{Beta}(\lambda,1)$.
 
 Since $Y$ is continuous, we can define the support of the Beta random variable as 
 $0 \le y \le 1$ or as $0 < y < 1$. The probability that the continuous random
 variable takes on exactly the value 0 or 1 is zero. However, in practice you
 can observe proportions at the extreme of the support; the proportion of income spent
-on rent by a homeowner is zero. 
+on rent by a homeowner is zero.
 
 ### Gaussian (Normal), G$(\mu,\sigma^2)$
 

@@ -76,6 +76,7 @@ pages={199--231}
  year = {2001}
 }
 
+
 @article{Cressie2023,
 title={Robodebt not only broke the law of the land -- it also broke laws of mathematics},
 author={Cressie, N.},
@@ -83,6 +84,16 @@ journal={The Conversation},
 year={2023},
 issue=date={March 16, 2023},
 url={https://theconversation.com/robodebt-not-only-broke-the-laws-of-the-land-it-also-broke-laws-of-mathematics-201299}
+}
+
+@article{Cunningham24,
+title={Probability Playground},
+author={Cunningham, Adam},
+year={2024},
+journal={Amstat News},
+publisher={American Statistical Society},
+issue={September 2024, \#567},
+pages={26--28}
 }
 
 @article{DavenportPatil_2012,

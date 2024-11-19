@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Foundations of Data Science - 11&nbsp; Data Integration</title>
+<title>Foundations of Data Science - 4&nbsp; Data Science Teams</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../statlearning/general.html" rel="next">
-<link href="../data/sqlbasics.html" rel="prev">
+<link href="../data/sources_and_files.html" rel="next">
+<link href="../proj/lifecycle.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -84,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data/sources_and_files.html">Part II. Data Preparation and Understanding</a></li><li class="breadcrumb-item"><a href="../data/integration.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data Integration</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../proj/history.html">Part I. Data Science and Data Science Projects</a></li><li class="breadcrumb-item"><a href="../proj/teams.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Science Teams</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -152,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../proj/teams.html" class="sidebar-item-text sidebar-link">
+  <a href="../proj/teams.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Science Teams</span></span></a>
   </div>
 </li>
@@ -205,7 +205,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data/integration.html" class="sidebar-item-text sidebar-link active">
+  <a href="../data/integration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data Integration</span></span></a>
   </div>
 </li>
@@ -320,20 +320,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#combining-tables-with-sql" id="toc-combining-tables-with-sql" class="nav-link active" data-scroll-target="#combining-tables-with-sql"><span class="header-section-number">11.1</span> Combining Tables with SQL</a>
-  <ul>
-  <li><a href="#set-operations" id="toc-set-operations" class="nav-link" data-scroll-target="#set-operations">Set Operations</a></li>
-  <li><a href="#joins" id="toc-joins" class="nav-link" data-scroll-target="#joins">Joins</a></li>
-  </ul></li>
+  <li><a href="#upside-down-how-not-to-build-a-team" id="toc-upside-down-how-not-to-build-a-team" class="nav-link active" data-scroll-target="#upside-down-how-not-to-build-a-team"><span class="header-section-number">4.1</span> Upside Down, How Not to Build a Team</a></li>
+  <li><a href="#roles" id="toc-roles" class="nav-link" data-scroll-target="#roles"><span class="header-section-number">4.2</span> Roles</a></li>
+  <li><a href="#centralization" id="toc-centralization" class="nav-link" data-scroll-target="#centralization"><span class="header-section-number">4.3</span> Centralization</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data/sources_and_files.html">Part II. Data Preparation and Understanding</a></li><li class="breadcrumb-item"><a href="../data/integration.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data Integration</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../proj/history.html">Part I. Data Science and Data Science Projects</a></li><li class="breadcrumb-item"><a href="../proj/teams.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Science Teams</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data Integration</span></h1>
+<h1 class="title"><span id="sec-teams" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Science Teams</span></span></h1>
 </div>
 
 
@@ -350,253 +348,29 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Data integration is the process of bringing together data from different sources and transforming and combining them into a more valuable form. The goal is to make the data more meaningful and richer for downstream applications, to increase the quality of the data, and to facilitate analytic processing. Pollution data from the EPA informs us about risk factors, hospital admissions data tells us why patients are being seen and treated. By combining the two data sources we can study the association between pollution and health outcomes. Geo-referenced data are often aligned to different units. For example, there are 41,642 unique zip codes in the U.S. and 73,057 census tracts. An analysis of data using zip codes might want to include information from the latest census. An analysis of census data might want to pull in zip-code-level data from municipal sources.</p>
-<p>There are many challenges in data integration:</p>
-<ul>
-<li><p>Same thing, different name. The same information appears in different ways across data sources: <code>name</code>, “<code>last name</code>”, <code>last.name</code>, <code>familyName</code>, <code>surname</code>, etc.</p></li>
-<li><p>Different thing, same name. The Region as defined by the finance department does not agree with the definition of Region in the databases of the R&amp;D team. <code>Revenue</code> at the level of the organization includes revenue from sales, services, partners, and training, the data in the Salesforce instance reflects only revenue from direct sales.</p></li>
-<li><p>Data that means the same thing is formatted differently, e.g., dates are stored in “dd/mm/yy” format in one table and in “mm/dd/yyyy” format in another table. Most software stores dates internally as numeric variables relative to a base date, e.g., 1/1/1970. When data are merged, they need to be aligned on the same basis.</p></li>
-<li><p>Data need to be aligned, for example, geographically or temporally. Date/time data must be converted into a consistent representation and format. Measurements must be converted into consistent units.</p></li>
-<li><p>Combining data can increase the size of the data sets considerably. Flattened tables for analysis can exceed the capacity of a system although the individual tables pre-join are small. This happens when tables are joined on many-to-many relationships.</p></li>
-<li><p>The data sources being integrated are stored on different systems, requiring movement of data.</p></li>
-<li><p>The data sources being integrated are stored in different formats, e.g., Parquet files need to be integrated with data in CSV files and data in two different RDBMS.</p></li>
-<li><p>The process can be time consuming, integrating complex data can take months.</p></li>
-</ul>
-<section id="combining-tables-with-sql" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="combining-tables-with-sql"><span class="header-section-number">11.1</span> Combining Tables with SQL</h2>
-<p>The process of combining tables is based on set operations or joins. A join uses the values in specific columns of the tables to match records. A set operation is a merging of columns without considering the values in the columns. Appending the rows of one table to another table is a set operation. What happens to columns that exist in one table but not in the other during the append depends on the implementation. Similarly, what happens to columns that share the same name when tables are merged horizontally depends on the implementation.</p>
-<section id="set-operations" class="level3">
-<h3 class="anchored" data-anchor-id="set-operations">Set Operations</h3>
-<p>We draw on an example in the DuckDB documentation to explain how tables can be merged by rows or columns. First, let’s create two small tables with information on cities:</p>
-<pre class="{default}"><code>CREATE TABLE capitals(city VARCHAR, country VARCHAR);
-INSERT INTO capitals VALUES ('Amsterdam', 'NL'), ('Berlin', 'Germany');
-
-CREATE TABLE weather(city VARCHAR, degrees INTEGER, date DATE);
-INSERT INTO weather VALUES ('Amsterdam', 10, '2022-10-14'), 
-                           ('Seattle', 8, '2022-10-12');
-</code></pre>
-<pre class="{default}"><code>FROM capitals;
-
-┌───────────┬─────────┐
-│   city    │ country │
-│  varchar  │ varchar │
-├───────────┼─────────┤
-│ Amsterdam │ NL      │
-│ Berlin    │ Germany │
-└───────────┴─────────┘
-</code></pre>
-<pre class="{default}"><code>FROM weather;
-
-┌───────────┬─────────┬────────────┐
-│   city    │ degrees │    date    │
-│  varchar  │  int32  │    date    │
-├───────────┼─────────┼────────────┤
-│ Amsterdam │      10 │ 2022-10-14 │
-│ Seattle   │       8 │ 2022-10-12 │
-└───────────┴─────────┴────────────┘  
-</code></pre>
-<p>Set operations involve two SELECT queries. The queries are connected with clauses that control how the rows are combined:</p>
-<ul>
-<li><p>UNION: combines rows from queries that have the same columns (number and types) and eliminates duplicates.</p></li>
-<li><p>UNION ALL: combines rows from queries that have the same columns (number and types) and preserves duplicates.</p></li>
-<li><p>INTERSECT: selects rows that occur in both queries and removes duplicates.</p></li>
-<li><p>EXCEPT: selects rows that occur in the left query and removes duplicates.</p></li>
-<li><p>UNION BY NAME: works like UNION but does not require the queries to have the same number and types of columns. Eliminates duplicates, like UNION.</p></li>
-<li><p>UNION ALL BY NAME: works like UNION BY NAME but does not eliminate duplicate rows.</p></li>
-</ul>
-<p>Here are the result of UNION and UNION ALL clauses:</p>
-<pre class="{default}"><code>SELECT city FROM capitals UNION SELECT city FROM weather;
-
-┌───────────┐
-│   city    │
-│  varchar  │
-├───────────┤
-│ Amsterdam │
-│ Seattle   │
-│ Berlin    │
-└───────────┘
-</code></pre>
-<pre class="{default}"><code>SELECT city FROM capitals UNION ALL SELECT city FROM weather;
-
-┌───────────┐
-│   city    │
-│  varchar  │
-├───────────┤
-│ Amsterdam │
-│ Berlin    │
-│ Amsterdam │
-│ Seattle   │
-└───────────┘ 
-</code></pre>
-<p>Here are the results of INTERSECT and EXCEPT clauses:</p>
-<pre class="{default}"><code>SELECT city FROM capitals INTERSECT SELECT city FROM weather;
-
-┌───────────┐
-│   city    │
-│  varchar  │
-├───────────┤
-│ Amsterdam │
-└───────────┘
-</code></pre>
-<pre class="{default}"><code>SELECT city FROM capitals EXCEPT SELECT city FROM weather;
-
-┌─────────┐
-│  city   │
-│ varchar │
-├─────────┤
-│ Berlin  │
-└─────────┘ 
-</code></pre>
-<p>Notice that UNION, UNION ALL, INTERSECT, and EXCEPT require the two queries to return the same columns. The horizontal column matching is done by position. To merge rows across tables with different columns, use UNION (ALL) BY NAME:</p>
-<pre class="{default}"><code>SELECT * FROM capitals UNION BY NAME SELECT * FROM weather;
-
-┌───────────┬─────────┬─────────┬────────────┐
-│   city    │ country │ degrees │    date    │
-│  varchar  │ varchar │  int32  │    date    │
-├───────────┼─────────┼─────────┼────────────┤
-│ Amsterdam │ NL      │         │            │
-│ Seattle   │         │       8 │ 2022-10-12 │
-│ Berlin    │ Germany │         │            │
-│ Amsterdam │         │      10 │ 2022-10-14 │
-└───────────┴─────────┴─────────┴────────────┘ 
-</code></pre>
+<section id="upside-down-how-not-to-build-a-team" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="upside-down-how-not-to-build-a-team"><span class="header-section-number">4.1</span> Upside Down, How Not to Build a Team</h2>
+<p>Before we discus roles on data science teams and whether centralized or decentralized teams are best for an organization, consider this story how a data science team comes to be, as told by Claire Sullivan in this Data Umbrella video.</p>
+<!---
+Claire Sullivan at github.com/cj2001
+--->
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/zIx6ueR2Zx4?si=S2-pqNMhh3b9KR1J&amp;t=180" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>The CEO hears about data as the new oil, his competitors all create data strategies, data science teams, and have a Chief Data Officer. The CEO develops a serious case of FOMO (fear of missing out). Worried about remaining competitive, the CEO directs his people to “hire me some data scientists”.</p>
 </section>
-<section id="joins" class="level3">
-<h3 class="anchored" data-anchor-id="joins">Joins</h3>
-<p>The previous set operations combine rows of data (vertically). To combine tables horizontally we use join operations. Joins typically are based on the values in columns of the tables to find matches. There are two exceptions, <strong>positional</strong> and <strong>cross</strong> joins.</p>
-<p>For data scientists working with rectangular data frames in which observations have a natural order, merging data horizontally is a standard operation. In relational databases this is a somewhat unnatural operation because relational tables do not work from a natural ordering of the data, they are based on keys and indices. The positional join matches row-by-row such that rows from both tables appear at least once:</p>
-<pre class="{default}"><code>select capitals.*, weather.* from capitals positional join weather;
-
-┌───────────┬─────────┬───────────┬─────────┬────────────┐
-│   city    │ country │   city    │ degrees │    date    │
-│  varchar  │ varchar │  varchar  │  int32  │    date    │
-├───────────┼─────────┼───────────┼─────────┼────────────┤
-│ Amsterdam │ NL      │ Amsterdam │      10 │ 2022-10-14 │
-│ Berlin    │ Germany │ Seattle   │       8 │ 2022-10-12 │
-└───────────┴─────────┴───────────┴─────────┴────────────┘ 
-</code></pre>
-<p>The cross join is actually the simplest join, it returns all possible pairs of rows:</p>
-<pre class="{default}"><code>select capitals.*, weather.* from capitals cross join weather;
-
-┌───────────┬─────────┬───────────┬─────────┬────────────┐
-│   city    │ country │   city    │ degrees │    date    │
-│  varchar  │ varchar │  varchar  │  int32  │    date    │
-├───────────┼─────────┼───────────┼─────────┼────────────┤
-│ Amsterdam │ NL      │ Amsterdam │      10 │ 2022-10-14 │
-│ Amsterdam │ NL      │ Seattle   │       8 │ 2022-10-12 │
-│ Berlin    │ Germany │ Amsterdam │      10 │ 2022-10-14 │
-│ Berlin    │ Germany │ Seattle   │       8 │ 2022-10-12 │
-└───────────┴─────────┴───────────┴─────────┴────────────┘ 
-</code></pre>
-<p>Joins are categorized as outer or inner joins depending on whether rows with matches are returned. An outer join returns rows that do not have any matches whereas the inner join returns only rows that get paired. The two tables in a join are called the left and right sides of the relation and outer joins are further classified as</p>
-<ul>
-<li><p><strong>Left</strong> outer join: all rows from the left side of the relation appear at least once.</p></li>
-<li><p><strong>Right</strong> outer join: all rows from the right side of the relation appear at least once.</p></li>
-<li><p><strong>Full</strong> outer join: all rows from both sides of the relation appear at least once.</p></li>
-</ul>
-<p>To demonstrate the joins in DuckDB, let’s set up some simple tables:</p>
-<pre class="{default}"><code>CREATE TABLE weather (
-      city           VARCHAR,
-      temp_lo        INTEGER, -- minimum temperature on a day
-      temp_hi        INTEGER, -- maximum temperature on a day
-      prcp           REAL,
-      date           DATE
-  );
-CREATE TABLE cities (
-      name            VARCHAR,
-      lat             DECIMAL,
-      lon             DECIMAL
-  );
-INSERT INTO weather VALUES ('San Francisco', 46, 50, 0.25, '1994-11-27');
-INSERT INTO weather (city, temp_lo, temp_hi, prcp, date)
-      VALUES ('San Francisco', 43, 57, 0.0, '1994-11-29');
-INSERT INTO weather (date, city, temp_hi, temp_lo)
-      VALUES ('1994-11-29', 'Hayward', 54, 37);
-</code></pre>
-<pre class="{default}"><code>FROM weather;
-
-┌───────────────┬─────────┬─────────┬───────┬────────────┐
-│     city      │ temp_lo │ temp_hi │ prcp  │    date    │
-│    varchar    │  int32  │  int32  │ float │    date    │
-├───────────────┼─────────┼─────────┼───────┼────────────┤
-│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │
-│ San Francisco │      43 │      57 │   0.0 │ 1994-11-29 │
-│ Hayward       │      37 │      54 │       │ 1994-11-29 │
-└───────────────┴─────────┴─────────┴───────┴────────────┘ 
-</code></pre>
-<pre class="{default}"><code>INSERT INTO cities VALUES ('San Francisco', -194.0, 53.0);
-FROM cities;
-
-┌───────────────┬───────────────┬───────────────┐
-│     name      │      lat      │      lon      │
-│    varchar    │ decimal(18,3) │ decimal(18,3) │
-├───────────────┼───────────────┼───────────────┤
-│ San Francisco │      -194.000 │        53.000 │
-└───────────────┴───────────────┴───────────────┘ 
-</code></pre>
-<p>An inner join between the tables on the columns that contain the city names will match the records for San Francisco:</p>
-<pre class="{default}"><code>SELECT * FROM weather INNER JOIN cities ON (weather.city = cities.name);
-
-┌───────────────┬─────────┬─────────┬───────┬────────────┬───────────────┬───────────────┬───────────────┐
-│     city      │ temp_lo │ temp_hi │ prcp  │    date    │     name      │      lat      │      lon      │
-│    varchar    │  int32  │  int32  │ float │    date    │    varchar    │ decimal(18,3) │ decimal(18,3) │
-├───────────────┼─────────┼─────────┼───────┼────────────┼───────────────┼───────────────┼───────────────┤
-│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │ San Francisco │      -194.000 │        53.000 │
-│ San Francisco │      43 │      57 │   0.0 │ 1994-11-29 │ San Francisco │      -194.000 │        53.000 │
-└───────────────┴─────────┴─────────┴───────┴────────────┴───────────────┴───────────────┴───────────────┘ 
-</code></pre>
-<p>Note that the values for <code>lat</code> and <code>lon</code> are repeated for every row in the weather table that matches the join in the relation. Because this is an inner join (the DuckDB default), and the weather table had no matching row for city Hayward, this city does not appear in the join result. We can change that by modifying the type of join to a left outer join:</p>
-<pre class="{default}"><code>SELECT * FROM weather LEFT OUTER JOIN cities ON (weather.city = cities.name);
-
-┌───────────────┬─────────┬─────────┬───────┬────────────┬───────────────┬───────────────┬───────────────┐
-│     city      │ temp_lo │ temp_hi │ prcp  │    date    │     name      │      lat      │      lon      │
-│    varchar    │  int32  │  int32  │ float │    date    │    varchar    │ decimal(18,3) │ decimal(18,3) │
-├───────────────┼─────────┼─────────┼───────┼────────────┼───────────────┼───────────────┼───────────────┤
-│ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │ San Francisco │      -194.000 │        53.000 │
-│ San Francisco │      43 │      57 │   0.0 │ 1994-11-29 │ San Francisco │      -194.000 │        53.000 │
-│ Hayward       │      37 │      54 │       │ 1994-11-29 │               │               │               │
-└───────────────┴─────────┴─────────┴───────┴────────────┴───────────────┴───────────────┴───────────────┘
-</code></pre>
-<p>Because the join is an outer join, rows that do not have matches in the relation are returned. Because the outer join is a left join, every row on the left side of the relation is returned (at least once). If you change the left- and right-hand side of the relation you can achieve the same result by using a right outer join:</p>
-<pre class="{default}"><code>SELECT * FROM cities  RIGHT OUTER JOIN weather ON (weather.city = cities.name);
-
-┌───────────────┬───────────────┬───────────────┬───────────────┬─────────┬─────────┬───────┬────────────┐
-│     name      │      lat      │      lon      │     city      │ temp_lo │ temp_hi │ prcp  │    date    │
-│    varchar    │ decimal(18,3) │ decimal(18,3) │    varchar    │  int32  │  int32  │ float │    date    │
-├───────────────┼───────────────┼───────────────┼───────────────┼─────────┼─────────┼───────┼────────────┤
-│ San Francisco │      -194.000 │        53.000 │ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │
-│ San Francisco │      -194.000 │        53.000 │ San Francisco │      43 │      57 │   0.0 │ 1994-11-29 │
-│               │               │               │ Hayward       │      37 │      54 │       │ 1994-11-29 │
-└───────────────┴───────────────┴───────────────┴───────────────┴─────────┴─────────┴───────┴────────────┘ 
-</code></pre>
-<p>Now let’s add another record to the <code>cities</code> table without a matching record in the <code>weather</code> table:</p>
-<pre class="{default}"><code>INSERT INTO cities VALUES ('New York',40.7, -73.9);
-FROM cities;
-
-┌───────────────┬───────────────┬───────────────┐
-│     name      │      lat      │      lon      │
-│    varchar    │ decimal(18,3) │ decimal(18,3) │
-├───────────────┼───────────────┼───────────────┤
-│ San Francisco │      -194.000 │        53.000 │
-│ New York      │        40.700 │       -73.900 │
-└───────────────┴───────────────┴───────────────┘ 
-</code></pre>
-<p>A full outer join between the two tables ensures that rows from both sides of the relation appear at least once:</p>
-<pre class="{default}"><code>SELECT * FROM cities FULL OUTER JOIN weather ON (weather.city = cities.name);
-
-┌───────────────┬───────────────┬───────────────┬───────────────┬─────────┬─────────┬───────┬────────────┐
-│     name      │      lat      │      lon      │     city      │ temp_lo │ temp_hi │ prcp  │    date    │
-│    varchar    │ decimal(18,3) │ decimal(18,3) │    varchar    │  int32  │  int32  │ float │    date    │
-├───────────────┼───────────────┼───────────────┼───────────────┼─────────┼─────────┼───────┼────────────┤
-│ San Francisco │      -194.000 │        53.000 │ San Francisco │      46 │      50 │  0.25 │ 1994-11-27 │
-│ San Francisco │      -194.000 │        53.000 │ San Francisco │      43 │      57 │   0.0 │ 1994-11-29 │
-│               │               │               │ Hayward       │      37 │      54 │       │ 1994-11-29 │
-│ New York      │        40.700 │       -73.900 │               │         │         │       │            │
-└───────────────┴───────────────┴───────────────┴───────────────┴─────────┴─────────┴───────┴────────────┘ 
-</code></pre>
-
-
+<section id="roles" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="roles"><span class="header-section-number">4.2</span> Roles</h2>
+<!---
+https://www.datascience-pm.com/team-roles/
+https://www.datascience-pm.com/lessons-from-20-data-science-teams/
+--->
 </section>
+<section id="centralization" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="centralization"><span class="header-section-number">4.3</span> Centralization</h2>
+<!---
+https://www.datascience-pm.com/centralized-vs-decentralized-data-science-teams/
+--->
+
+
 </section>
 
 </main> <!-- /main -->
@@ -1155,13 +929,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../data/sqlbasics.html" class="pagination-link" aria-label="SQL Basics">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">SQL Basics</span></span>
+      <a href="../proj/lifecycle.html" class="pagination-link" aria-label="The Data Science Project Lifecycle">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Data Science Project Lifecycle</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../statlearning/general.html" class="pagination-link" aria-label="General Topics">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">General Topics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../data/sources_and_files.html" class="pagination-link" aria-label="Data Sources and File Formats">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Sources and File Formats</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

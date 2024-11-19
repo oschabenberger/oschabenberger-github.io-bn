@@ -1,0 +1,35 @@
+
+# Data Science Teams {#sec-teams}
+
+## Upside Down, How Not to Build a Team
+
+Before we discus roles on data science teams and whether centralized or 
+decentralized teams are best for an organization, consider this story how a
+data science team comes to be, as told by Claire Sullivan in this Data Umbrella
+video.
+
+<!---
+Claire Sullivan at github.com/cj2001
+--->
+
+{{< video https://youtu.be/zIx6ueR2Zx4?si=S2-pqNMhh3b9KR1J&t=180 >}}
+
+The CEO hears about data as the new oil, his competitors all create data strategies,
+data science teams, and have a Chief Data Officer. The CEO develops a serious case
+of FOMO (fear of missing out). Worried about remaining competitive, the CEO
+directs his people to "hire me some data scientists".
+
+
+
+## Roles
+
+<!---
+https://www.datascience-pm.com/team-roles/
+https://www.datascience-pm.com/lessons-from-20-data-science-teams/
+--->
+
+## Centralization
+
+<!---
+https://www.datascience-pm.com/centralized-vs-decentralized-data-science-teams/
+--->
