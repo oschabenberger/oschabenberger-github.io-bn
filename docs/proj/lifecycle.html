@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -324,14 +344,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../integ/ds_softwareeng.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Science versus Software Engineering,</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../integ/coding_practices.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/tools.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
   </div>
 </li>
       </ul>
@@ -765,7 +791,7 @@ Figure&nbsp;3.6: The Airbnb reservation system blocks a suspected party booking.
 <p>The data scientist takes on different roles and personas throughout the project. Whether you are writing analytic code or communicating with team members or working with the IT department on implementation, you always think like a data scientist. What does that mean?</p>
 <section id="dealing-with-uncertainty" class="level3">
 <h3 class="anchored" data-anchor-id="dealing-with-uncertainty">Dealing with Uncertainty</h3>
-<p>In “<a href="https://learning.oreilly.com/library/view/think-like-a/9781633430273/">Think Like a Data Scientist</a>”, Brian Godsey lists awareness in the face of uncertainty as one of the biggest strengths of a data scientist. Once source of uncertainty is the inherent complexity of data science projects that involve many parts of the organization. A data science project is full of problems, the real-world problem that needs to be solved and problems that arise during the projects. Deadlines will be missed. Data will not be as available as expected or of lower quality as expected. Budgets can change and goals are reprioritized. Models that work well on paper fall apart when they get in contact with reality. The list goes on and on. The data scientist thinks through problems not from the perspective of the data but from the perspective what data can help us to accomplish. What matters is that we solve the business problem, not that we build a neural network.</p>
+<p>In “<a href="https://learning.oreilly.com/library/view/think-like-a/9781633430273/">Think Like a Data Scientist</a>”, Brian Godsey lists awareness in the face of uncertainty as one of the biggest strengths of a data scientist <span class="citation" data-cites="Godsey_2017">(<a href="../references.html#ref-Godsey_2017" role="doc-biblioref">Godsey 2017</a>)</span>. Once source of uncertainty is the inherent complexity of data science projects that involve many parts of the organization. A data science project is full of problems, the real-world problem that needs to be solved and problems that arise during the projects. Deadlines will be missed. Data will not be as available as expected or of lower quality as expected. Budgets can change and goals are reprioritized. Models that work well on paper fall apart when they get in contact with reality. The list goes on and on. The data scientist thinks through problems not from the perspective of the data but from the perspective what data can help us to accomplish. What matters is that we solve the business problem, not that we build a neural network.</p>
 <p>Another source of uncertainty is the inherent variability of the raw material, data. Variability is contagious, it makes everything produced from data also variable. The point of data processing is to separate the signal from the noise and to find the systematic patterns and relationships in the data, the insights that help make decisions.</p>
 <p>Data scientists are sometimes compared to software developers. They do share certain traits; both are using tools, languages, and frameworks to build complex systems with software. But analytic code is different from non-analytic code in that it is processing an uncertain input. A JSON parser also processes variability, each JSON document is different from the next. Does it not also deal with uncertain input? If the parser is free of bugs, the result of parsing is known with certainty. For example, we are convinced that the sentence “<em>this book is certainly concerned with uncertainty</em>” has been correctly extracted from the JSON file. Assessing the sentiment of the sentence, however, is a data science task: a sentiment model is applied to the text and returns a set of probabilities indicating how likely the model believes the sentiment of the text is negative, neutral, or positive. Subsequent steps taken in the software are based on interpreting what is probable.</p>
 <p>There is uncertainty about which method to use. Whether a software developer uses a quicksort or merge sort algorithm to order an array has impact on the performance of the code but not on the result. Whether you choose a decision tree or a support vector machine to classify the data in the array impacts the performance <strong>and</strong> the result of the code. A chosen value for a tuning parameter, e.g., the learning rate, can produce stable results with one data set and highly volatile results with another.</p>
@@ -994,6 +1020,11 @@ Figure&nbsp;3.11: Corrected cluster analysis after removing the non-informative 
 <span class="glightbox-desc lightbox-desc-12">Figure&nbsp;3.9: Scatterplot of stork density and birth rate along with a LOESS fit. The variables are calculated by dividing the number of babies and the number of storks in the county by the number of women of child-bearing age in the county (in 10,000).</span>
 <span class="glightbox-desc lightbox-desc-13">Figure&nbsp;3.10: Results of hierarchical clustering with five clusters.</span>
 <span class="glightbox-desc lightbox-desc-14">Figure&nbsp;3.11: Corrected cluster analysis after removing the non-informative customer ID variable from the analysis. The detected clusters map more clearly to groups of points that are distinct with respect to spending and income.</span>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Godsey_2017" class="csl-entry" role="listitem">
+Godsey, Brian. 2017. <em>Think Like a Data Scientist</em>. Manning Publications. <a href="https://www.oreilly.com/library/view/think-like-a/9781633430273/">https://www.oreilly.com/library/view/think-like-a/9781633430273/</a>.
+</div>
 </div>
 </section>
 </section>
@@ -1579,7 +1610,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

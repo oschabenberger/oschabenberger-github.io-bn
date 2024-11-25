@@ -344,14 +344,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../integ/ds_softwareeng.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Science versus Software Engineering,</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../integ/coding_practices.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/tools.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
   </div>
 </li>
       </ul>
@@ -491,7 +497,7 @@ Data and Datum
 <p>The New England Journal of Medicine published in 2012 an article that relates the chocolate consumption per capita to the number of Nobel prize winners in various countries, a highly significant statistical relationship that explains almost 2/3 of the country-to-country variation in Nobel laureates</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-proj-choclolate" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A diagram displaying the relationship between chocolate consumption and number of Nobel laureates in countries. " data-fig-align="center">
+<div id="fig-proj-choclolate" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="A diagram displaying the relationship between chocolate consumption and number of Nobel laureates in countries. ">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-proj-choclolate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="images/ChocolateNobel.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1"><img src="images/ChocolateNobel.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%" alt="A diagram displaying the relationship between chocolate consumption and number of Nobel laureates in countries. "></a>
@@ -598,7 +604,7 @@ Figure&nbsp;2.1: Messerli, F.H. (2012) “Chocolate Consumption, Cognitive Funct
 <p>The term <em>model</em> is pervasive in our field, and we come to this conversation with different notions of what constitutes a model. Before going any further in the discussion, we’ll discuss the concept of a model in the context of data science.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-proj-simplemodel" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A diagram displaying the model input and output " data-fig-align="center">
+<div id="fig-proj-simplemodel" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="A diagram displaying the model input and output ">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-proj-simplemodel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/BasicModel.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%" alt="A diagram displaying the model input and output ">
@@ -616,7 +622,7 @@ Figure&nbsp;2.2: A simple representation of a model that processes inputs with a
 <p>When the input data to an algorithm is the result of observing random variation, we are looking to the algorithms of the model to find the signal in the data, to de-noise it. The signal located in the data is then transformed into the model output. Most models we build in data science are of this kind because the data we work with is inherently noisy. The reasons for the random variations are many: selecting observation from a larger population at random, applying treatments to randomly chosen experimental units, variations in measurement instruments and procedures, variations in the environment in which a phenomenon is observed, and so on. The algorithms we use depend on the goals of the analysis, properties of the data, assumptions we are willing to make, attributes we look for in competitive models, and personal preferences.</p>
 <p>Much of data science methodology is to select the right approach (algorithm) based on input data, learning methodology (supervised, unsupervised, semi-supervised, self-supervised) and analysis goal (prediction, recommendation, classification, clustering, dimension reduction, sequential decisioning), to train the model, and to deploy the model. <a href="#fig-proj-dsmodels" class="quarto-xref">Figure&nbsp;<span>2.3</span></a> is an attempt at structuring the input, algorithm, and output components of a model in the data science context. The diagram is complex and woefully incomplete and is intended to give you an idea of the diversity of methods and the many ways we can look at things. For example, in discussing input data we could highlight how data are stored, how fast it is moving, the degree to which the data is structured, the data types, and so forth. There are many other categorizations of data one could have listed.</p>
 <p>The categorization of algorithms—what many consider the models in the narrow sense—leaves out semi-supervised learning, self-supervised learning, transfer learning, and other learning methods. Volumes of books and papers have been written about every item in the list of algorithms and many algorithms are represented by a simple description. Multilayer networks, for example, include artificial neural networks, deep networks such as convolutional and recurrent networks, and transformer architectures such as GPT.</p>
-<div id="fig-proj-dsmodels" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" alt="Structuring and categorizing input, algorithm, and output in data science models." data-fig-align="center">
+<div id="fig-proj-dsmodels" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center" alt="Structuring and categorizing input, algorithm, and output in data science models.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-proj-dsmodels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="images/DataScienceModels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2"><img src="images/DataScienceModels.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Structuring and categorizing input, algorithm, and output in data science models."></a>
@@ -1252,7 +1258,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","openEffect":"zoom","selector":".lightbox","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

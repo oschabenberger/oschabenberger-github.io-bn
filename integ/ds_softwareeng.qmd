@@ -1,0 +1,153 @@
+
+
+<!---
+https://www.datascience-pm.com/data-science-vs-software-engineering/
+--->
+
+# Data Science versus Software Engineering, {#sec-ds-softwareeng}
+
+Data science involves statistical programming and writing code. Data scientists
+are sometimes compared to software engineers and software engineering principles
+are often assumed to apply to data science projects. That is how *agile* 
+methodology, continuous integration and deployment, and other concepts enter
+the conversation about data science.
+
+But there are substantial difference between data science projects and software
+engineering projects. Overlooking those differences and forcing standard
+software engineering workflows on to data science projects contributes to the
+failure rates in data science.
+
+## Software Engineering Principles
+
+Data scientists write statistical programs. That is software, but it is not 
+bona fide software engineering. Because the result of statistical programming
+is software, data scientists need to know the principles of good software engineering:
+
+- **Modularity**: Separate software into components according to functionality 
+and responsibility (functions, modules, public and private interfaces)
+
+- **Separation of Concerns**: Human beings have a limited capacity to manage contexts. 
+Breaking down a larger task into units and abstractions that you can deal with 
+one at a time is helpful. Interface and implementation are separate concerns. 
+Data quality and data modeling are separate concerns. Not in the sense that they 
+are unrelated, low quality data leads to low quality models---garbage in, garbage 
+out. But in the sense that you can deal with data quality prior to the modeling 
+task. Code efficiency (runtime performance) is sometimes listed as an example 
+for separating concerns: write the code first to meet criteria such as correctness 
+and robustness, then optimize the code for efficiency, focusing on the parts 
+of the code the run spends most time in.
+
+- **Abstraction**: Separate the *behavior* of software components from their 
+*implementation*. Look at each component from two points of views: *what* it 
+does and *how* it does it. A client-facing API (Application Programming Interface) 
+specifies what a module does. It does not convey the implementation details. By 
+looking at the function interface of  `prcomp` and `princomp` in `R`, you cannot 
+tell that one function is based on singular-value decomposition and the other is 
+based on eigenvalue decomposition.
+
+- **Generality**: Software should be free from restrictions that limit its use 
+as an automated solution for the problem at hand. Limiting supported data types 
+to doubles and fixed-size strings is convenient, but not sufficiently general to 
+deal with today's varied data formats (unstructured text, audio, video, etc.). 
+The "Year 2000" issue is a good example of lack of generality that threatened the 
+digital economy: to save memory, years were represented in software products as 
+two-digit numbers, causing havoc when 1999 ("99") rolled over to "00" on January 
+1, 2000.
+
+- **Anticipation of Change**: Software is an automated solution. It is rarely 
+finished on the first go-around; the process is iterative. Starting from client 
+requirements the product evolves in a back and forth between client and developer, 
+each side refining their understanding of the process and the product at each 
+step. Writing software that can easily change is important and often difficult. 
+When software components are tightly coupled and depend on each other, it is 
+unlikely that you can swap out for another without affecting both.
+
+- **Consistency**: It is easier to do things within a familiar context. Consistent 
+layout of code and user interfaces helps the programmer as well as the user as 
+well as the next programmer. Consistency in code formatting, comments, naming 
+conventions, variable assignments, etc. makes it easier to read and modify code 
+and helps to prevent errors. When you are consistent in initializing all local 
+variables in C functions, you will never have uninitialized variable bugs.
+
+## Dealing with Uncertainty
+
+
+The important differences between statistical programming and general 
+software engineering stem to a large part from the inherent uncertainty 
+and unpredictability of data and the ambiguity of solutions to more open-ended
+questions. Software engineers are comfortable with definite logic, data scientists
+are comfortable thinking in terms of probabilities.
+
+* **Input inherently unpredictable and uncertain**. Statistical code is different 
+from non-analytic code in that it is processing an uncertain input. A JSON parser 
+also processes variability, each JSON document is different from the next. Does 
+it not also deal with uncertain input? If the parser is free of bugs, the result 
+of parsing is known with certainty. For example, we are convinced that the sentence 
+“this book is certainly concerned with uncertainty” has been correctly extracted 
+from the JSON file. Assessing the sentiment of the sentence, however, is a data
+science task: a sentiment model is applied to the text and returns a set of 
+probabilities indicating how likely the model believes the sentiment of the text 
+is negative, neutral, or positive. Subsequent steps taken in the software are 
+based on interpreting what is probable.
+
+* **Uncertainty about methods**. Whether a software developer uses a quicksort 
+or merge sort algorithm to order an array has impact on the performance of the 
+code but not on the result. Whether you choose a decision tree or a support vector 
+machine to classify the data in the array impacts the performance **and** the 
+result of the code. A chosen value for a tuning parameter, e.g., the learning 
+rate, can produce stable results with one data set and highly volatile results 
+with another.
+
+* **Random elements in code**. Further uncertainty is introduced through analytic 
+steps that are themselves random. Splitting data into training and test data sets, 
+creating random folds for cross-validation, drawing bootstrap samples in random 
+forests, random starting values in clustering or neural networks, selecting the 
+predictors in random forests, Monte Carlo estimation, are some examples where 
+data analysis involves drawing random numbers. The statistical programmer needs 
+to ensure that random number sequences that create different numerical results 
+do not affect the quality of the answers. The results are frequently made 
+epeatable by fixing the seed or starting value of the random number generator. 
+While this makes the program flow repeatable, it is yet another quantity that 
+affects the numerical results. It is also a potential source for misuse: “let 
+me see if another seed value produces a smaller prediction error.”
+
+* **Data are messy**. Data contains missing values and can be full of errors. 
+There is uncertainty about how disparate data sources represent a feature (a 
+customer, a region, a temperature) that affects how you integrate the data sources. 
+These sources of uncertainty can be managed through proper data quality and data 
+integration. As a data scientist you need to be aware and respectful of these 
+issues; they can doom a project if not properly addressed. In an organization 
+without a dedicated data engineering team resolving data quality issues might 
+fall on your shoulders. If you are lucky to work with a data engineering team 
+you still need to be mindful of these challenges and able to confirm that they 
+have been addressed or deal with some of them (missing values).
+
+
+## Other Differences
+
+Other differences between data science projects and software engineering projects 
+are 
+
+* Data science problems are inherently explorative. Finding insights in data is
+a discovery operation. Software engineering solves problems with specific 
+requirements and less ambiguity.
+
+* The use of high-level languages. Statistical programming uses languages like 
+`R` and Python. The software is written at a high level of abstraction, calling 
+into existing packages and libraries. Rather than writing your own implementation 
+of a random forest, you use someone else's implementation. Instead, your concern 
+shifts to how to use the hyperparameters of the random forest to the greatest 
+effect for the particular data set. You can perform statistical programming in 
+C, C++, or Rust. These system-level languages are best for implementing efficient 
+algorithms, that are then called from a higher-level interface in `R` or Python.
+
+* The length of the programs. Statistical programs are typically short, a few 
+hundred to a few thousands lines long. While a thousand lines of Python code 
+may sound like much, it is not much compared to the size of large software 
+engineering projects.
+
+* The programs are often standalone. A single file or module can contain all the 
+code you need for a statistics project. That is good and bad. Good because it is 
+easy to maintain. Bad because we often skip steps of good software hygiene such 
+as documentation and source control. 
+

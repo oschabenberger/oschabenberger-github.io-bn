@@ -52,6 +52,7 @@ book:
 
     - part: "Part V. Integration of Data Science Solutions"
       chapters:
+        - integ/ds_softwareeng.qmd
         - integ/coding_practices.qmd
         - integ/tools.qmd
         

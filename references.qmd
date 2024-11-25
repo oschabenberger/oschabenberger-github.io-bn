@@ -136,6 +136,15 @@ number={4},
 pages={232--246}
 }
 
+
+@book{Godsey_2017,
+title={Think Like a Data Scientist},
+author={Godsey, Brian},
+year={2017},
+url={https://www.oreilly.com/library/view/think-like-a/9781633430273/},
+publisher={Manning Publications}
+}
+
 @book{Huff_1954,
 title={How to Lie with Statistics},
 author={Huff, Darrell},
@@ -150,6 +159,14 @@ author={Jeff Larson and Surya Mattu and Lauren Kirchner and Julia Angwin},
 journal={ProPublica},
 year={2016},
 month={May}
+}
+
+
+@book{Lencioni_2002,
+title={The Five Dysfunctions of a Team: A Leadership Fable, 20th Anniversary Edition},
+author={Lencioni, Patrick M.},
+year={2002},
+publisher={John Wiley & Sons, New York}
 }
 
 @book{Loukides_etal_2018,
