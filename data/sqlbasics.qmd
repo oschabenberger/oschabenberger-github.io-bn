@@ -12,11 +12,11 @@ SQL has been standardized and revised since 1986. SQL-92, for example, refers to
 
 SQL can be difficult to master.
 
--   Many programmers are more familiar and comfortable with **imperative** languages that specify the program flow step by step.
+- Many programmers are more familiar and comfortable with **imperative** languages that specify the program flow step by step.
 
--   Declarative languages are domain specific, the domain for SQL is the manipulation of data in relational systems. This is associated with a lot of special terminology and domain-specific logic. The data scientist thinks in terms of rows and columns, the database engineer thinks in terms of predicates, projections, clauses, constraints, and relations.
+- Declarative languages are domain specific, the domain for SQL is the manipulation of data in relational systems. This is associated with a lot of special terminology and domain-specific logic. The data scientist thinks in terms of rows and columns, the database engineer thinks in terms of predicates, projections, clauses, constraints, and relations.
 
--   While the number of relevant SQL commands is rather small, SQL queries can become astonishingly complex and unwieldy. A single SQL query that accesses multiple tables with correlated (dependent) subqueries, joins, and common table expressions can be hundreds of lines long. If you are not used to reading SQL, a simple subquery such as this one might give you a headache:
+- While the number of relevant SQL commands is rather small, SQL queries can become astonishingly complex and unwieldy. A single SQL query that accesses multiple tables with correlated (dependent) subqueries, joins, and common table expressions can be hundreds of lines long. If you are not used to reading SQL, a simple subquery such as this one might give you a headache:
 
 ```{.default}
 SELECT employee_number, name,
