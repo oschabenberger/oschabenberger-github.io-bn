@@ -1,0 +1,22 @@
+
+# Introduction {#sec-busi-into}
+
+The CRISP-DM methodology remains one of the most widely adopted frameworks for data mining projects [@shearer2000crisp]. While various other methodologies have emerged [@mariscal2010survey; @kurgan2006survey], CRISP-DM's emphasis on business understanding has contributed to its longevity [@martinez2019crisp]. @fig-crisp-aug shows an augmented flow of a data science project according to this methodology. You see the steps reflected in the module organization of our material. 
+
+A majority of data science projects start with the Business Understanding phase, in which business stakeholders and the data science team collaboratively work to frame the business opportunity and explore possible data science solutions. While most of the work in this phase occurs early in the project, this phase will likely need to be revisited (often many times) as both stakeholders and data science teams better understand the problem and solution space. Most high-value data science projects are very complex with interconnected objectives and systems that require deep knowledge of processes, data, and (often competing) business objectives.
+
+::: {#fig-crisp-aug fig-cap="Augmented CRISP-DM"}
+{{< include crisp_dm_diagram.qmd >}}
+:::
+
+The primary role of this phase is to provide a two-way discovery process between stakeholders and the data science team. It's a two-way process because stakeholders need to understand the art of the possible from a data science perspective, and the data science team needs to fully understand the business opportunity, including alignment with strategic company objectives, business benefits, measurement criteria, and potential roadblocks. The success of many data science projects is often determined by the effectiveness of the work done in this phase of the CRISP-DM process. Misalignment due to ineffective Business Understanding can result in project failure due to unrealistic expectations on outcomes, failure to identify "showstopper" risks, or lack of support due to poor strategic alignment.
+
+::: {#fig-busi-venn fig-cap="Business Understanding Venn Diagram"}
+<img src=images/business_understanding_venn.svg alt="Business Understanding Venn Diagram">
+:::
+
+When data scientists have a shallow understanding of business processes and opportunities, they often create trivial solutions that offer little value to the business. They may focus on building solutions where data is easily accessible or on leveraging cutting-edge algorithms. This can result in business users questioning the value of the entire data science approach.
+
+When business users don't understand the capabilities of data science, they tend to fall back on old patterns of thinking (often business intelligence-based) that do not leverage the power of fully integrated predictive and prescriptive solutions [@debortoli2014comparing]. Business intelligence applications masquerading as data science projects deliver less value, resulting in the business questioning the value of the entire data science investment [@provost2013data].
+
+

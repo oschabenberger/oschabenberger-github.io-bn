@@ -1,0 +1,28 @@
+
+```{mermaid}
+graph TD
+    B["Business Understanding"]:::phase --> D["Data Understanding"]:::phase
+    D --> B
+    D --> P["Data Preparation"]:::phase
+    P --> D
+    P --> M["Modeling"]:::phase
+    M --> P
+    M --> E["Evaluation"]:::phase
+    E --> M
+    E --> DEP["Deployment"]:::phase
+    DEP --> MON["Monitoring"]:::phase
+
+    B -.- B1["• <u>Frame problem/solution</u><br/>• Define KPIs<br/>• Set success criteria"]
+    D -.- D1["• Identify & explore data<br/>• Verify quality<br/>• Identify subsets"]
+    P -.- P1["• Clean & transform<br/>• <u>Feature creation</u><br/>• <u>Feature selection I</u>"]
+    M -.- M1["• Build models<br/>• <u>Feature selection II</u><br/>• Evaluate models"]
+    E -.- E1["• Evaluate vs KPIs"]
+    DEP -.- DEP1["• Pilot & full deployment<br/>• KPI evaluation"]
+    MON -.- MON1["• Monitor performance"]
+
+    classDef phase fill:#f9f9f9,stroke:#333,stroke-width:2px
+    classDef note fill:#fff,stroke:#999,stroke-width:1px
+    
+    class B,D,P,M,E,DEP,MON phase
+    class B1,D1,P1,M1,E1,DEP1,MON1 note
+```

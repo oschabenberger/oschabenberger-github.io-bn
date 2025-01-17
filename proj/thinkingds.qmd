@@ -1,0 +1,1327 @@
+
+
+# Thinking Like a Data Scientist {#sec-thinkingds}
+
+The data scientist takes on different roles and personas throughout the project. 
+Whether you are writing analytic code or communicating with team members or working 
+with the IT department on implementation, you always think like a data scientist. 
+What does that mean?
+
+Working on a data science project combines **computational thinking** and 
+**quantitative thinking** in the face of uncertainty. 
+
+## Computational Thinking {#sec-comp-thinking}
+
+In the broad sense, **computational thinking** (CT) is a problem-solving methodology
+that develops solutions for complex problems by breaking them down into individual
+steps. Well, are not most problems solved this way? Actually, yes. We all apply
+computational thinking methodology every day. As we will see in the example below, 
+cooking a pot of soup involves computational thinking.
+
+In the narrow sense, computational thinking is problem solving by expressing
+the solution in such a way that it can be implemented through a computer---using
+software and hardware. The term *computational* in CT derives from the fact that
+the methodology is based on core principles of computer science. It does not mean
+that all CT problems are solved through coding. It means to solve problems by
+thinking like a computer scientists. 
+
+### Elements of CT
+
+What is that like? The five elements of computational thinking are
+
+#### Problem Definition
+
+This should go without saying, before attempting to
+build a solution one should know what problem the solution solves. However, we
+often get things backwards, building solutions first and then looking for what
+problems to solve with them. The world of technology is littered with solutions
+looking for a problem. 
+
+#### Decomposition (Factoring)
+
+This element of computational thinking asks to break the 
+complex problem into smaller, manageable parts and by doing so helps to focus the
+solution on the aspects that matter, eliminating extraneous stuff.
+
+Smaller problems are easier to solve and can be managed independently. A software 
+developer decomposes a task into several functions, for example, one that takes user 
+input, one that sorts data, one that displays results. These functions can be developed 
+separately and are then combined to produce the solution. Sorting can further be 
+decomposed into sub-problems, for example, the choice of data structure (list, tree, etc.), 
+the sort algorithm (heap, quicksort, bubble, ...) and so on.
+
+To understand how something works we can factor it into its parts and study
+how the individual parts work by themselves. A better understanding of the whole 
+results when we reassemble the components we now understand. For example, to figure
+out how a bicycle works, decompose it into the frame, seat, handle bars, chain, pedals,
+crank, derailleurs, brakes, etc. 
+
+#### Pattern recognition
+
+Pattern recognition is the process of learning 
+connections and relationships between the parts of the problem. In the bicycle
+example, once we understand the front and rear derailleurs, we understand how they 
+work together in changing gears. Pattern recognition helps to simplify the problem
+beyond the decomposition by identifying details that are similar or different.
+
+:::{.callout-note title="Carl Friedrich Gauss"}
+Carl Friedrich Gauss (1777--1855) was one of the greatest thinkers of his time
+and widely considered one of the greatest mathematicians and scientists of all time. 
+Many disciplines, from astronomy, geodesy, mathematics, statistics, and physics list 
+Gauss as a foundational and major contributor. 
+
+In *The Prince of Mathematics*, @Tent2006 tells the story of an arithmetic 
+assignment at the beginning of Gauss' third school year in Brunswick, Germany. Carl
+was ten years  old at the time. Herr Büttner, the teacher wanted to keep the kids 
+quiet for a while and asked them to find the sum of the first 100 integers, 
+$$
+\sum_{i=1}^{100}i
+$$
+The students were
+to work the answer out on their slates and place them on Herr Büttner's desk 
+when done. Carl thought about the problem for a minute, wrote one number on
+his slate and placed it on the teacher's desk. He was the first to turn in a 
+solution and it took his classmates much longer. The slates were placed on top of
+the previous solutions as students finished. Many of them got the answer 
+wrong, messing up an addition somewhere along the way. Herr Büttner, going through
+the slates one by one found one wrong answer after another and expected Gauss' 
+answer also to be wrong, since the boy had come up with it almost instantly. 
+To his surprise Gauss' slate showed no work, Carl had written on it
+just one number, 5,050, the correct answer. 
+
+Carl explained
+
+>*Well, sir, I thought about it. I realized that those numbers were all in a row, that
+they were consecutive, so I figured there must be some pattern. So I added the 
+first and the last number: 1 + 100 = 101. Then I added the second and the next to
+last numbers: 2 + 99 = 101. [...] That meant I would find 50 pairs of numbers that
+always add up to 101, so the whole sum must be 50 x 101 = 5,050.*
+
+Carl had recognized a pattern that helped him see the connected parts of the 
+problem: a fixed number of partial sums of the same value.
+:::
+
+#### Generalization (Abstraction)
+
+Once the problem is decomposed and the patterns are recognized,
+we should be able to see the relevant details of the problem and how we go about
+solving the problem. This is where we derive the core logic of the solution, the **rules**. 
+For example, to write a computer program to solve a jigsaw puzzle, you would not 
+want to write code specific to one particular puzzle image. You want code that
+can solve jigsaw puzzles in general. The specific image someone will use for the
+jigsaw puzzle is an irrelevant detail.
+
+A rectangle can be decomposed into a series of squares (@fig-rectangle-decomp).
+Calculating the area of a rectangle as width x height is a generalization of 
+the rule to calculate the area of a square as width-squared.
+
+![Decomposing a 12 x 8 rectangle into six 4 x 4 squares to generalize computation of the area.](images/RectangleDecomposition.png){#fig-rectangle-decomp fig-align="center" width=50%}
+
+#### Algorithm design
+
+The final element of CT involves another form of thinking,
+**algorithmic thinking**. Here we define the solution as a series of steps to
+be executed. Algorithmic thinking does not mean the solution has to be implemented
+by a computer, although this is the case in the narrow sense of CT. The point of
+the algorithm is to arrive at a set of repeatable, step-by-step instructions, whether 
+these are implemented by humans, machines, or a computer. Capturing the solution in
+an algorithm is a step toward **automation**.\
+\
+@fig-soup-recipe shows an algorithm to produce pumpkin soup, repeatable instructions
+that lay out the ingredients and how to process them in steps to transform them
+into soup.
+
+![A recipe for pumpkin soup is an algorithm.](images/PumpkinSoupRecipe.png){#fig-soup-recipe fig-align="center" width=75% .lightbox}
+
+In data science solutions the steps to be executed are themselves algorithms. During
+the data preparation step, you might use one algorithm to de-duplicate the 
+data and another algorithm to impute missing values. During the model training
+step you rely on multiple algorithms to train a model, cross-validate a model,
+and visualize the output of a model.
+
+### Making Pumpkin Soup
+
+Let's apply the elements of computational thinking to the problem of making
+pumpkin soup. 
+
+#### Decomposition
+Decomposition is the process of breaking down a complex problem into smaller, 
+more manageable parts. In the case of making pumpkin soup, we can break it down 
+into several steps:
+
+- **Ingredients**: Identify the key ingredients required for the soup.
+  - Pumpkin
+  - Onion or Leek
+  - Garlic
+  - Stock (vegetable or chicken)
+  - Cream (optional)
+  - Salt, pepper, and spices (e.g., nutmeg, cinnamon)
+  - Olive oil or butter for sautéing
+- **Preparation**: Break down the actions involved in preparing the ingredients.
+  - Peel and chop the pumpkin
+  - Chop the onion and garlic
+  - Prepare spices and seasoning
+- **Cooking**: Identify the steps in cooking the soup.
+  - Sauté the onion and garlic
+  - Add the pumpkin and cook it
+  - Add stock and bring to a simmer
+  - Puree the mixture
+  - Add cream and season to taste
+- **Final Steps**: Focus on finishing touches.
+  - Garnish (optional)
+  - Serve and taste for seasoning adjustments
+
+#### Pattern recognition
+
+What are the similar elements or repeating steps in the problem?
+
+- **Common cooking steps**: Many soups follow a similar structure: sautéing vegetables, 
+adding liquid, simmering, and then blending or pureeing.
+- **Ingredient variations**: While the exact ingredients for pumpkin soup may vary 
+(e.g., adding coconut milk instead of cream), the basic framework of the recipe 
+remains the same.
+- **Timing patterns**: There’s a pattern to the cooking times: first sautéing for 
+a few minutes, then simmering the soup for about 20-30 minutes, followed by blending.
+
+#### Generalization
+
+We can generalize (abstract) the process of making pumpkin soup into a more 
+general recipe for making any pureed vegetable soup, regardless of the specific
+ingredients.
+
+- **Essential components**: 
+  - A base (onions, garlic, or other aromatics)
+  - A main vegetable (in this case, pumpkin)
+  - Liquid (stock, broth, or water)
+  - Seasoning and optional cream
+
+- **General process**:
+  1. Sauté aromatics.
+  2. Add the main vegetable and liquid.
+  3. Simmer until the vegetable is tender.
+  4. Blend until smooth.
+  5. Adjust seasoning and add cream if desired.
+
+
+#### Algorithm design
+
+Here is a simple algorithm for making pumpkin soup:
+
+1. **Prepare ingredients**:
+   - Peel and chop the pumpkin into cubes.
+   - Chop the onion and garlic.
+2. **Sauté aromatics**:
+   - In a pot, heat oil or butter over medium heat.
+   - Add chopped onion and garlic, sauté for 5 minutes until softened.
+3. **Cook pumpkin**:
+   - Add chopped pumpkin to the pot and sauté for 5 minutes.
+   - Add stock to cover the pumpkin (about 4 cups) and bring to a boil.
+4. **Simmer**:
+   - Lower the heat, cover, and let the soup simmer for 20-30 minutes until the 
+   pumpkin is tender.
+5. **Blend the soup**:
+   - Use an immersion blender or transfer the soup to a blender. Puree until smooth.
+6. **Add cream and seasoning**:
+   - Stir in cream (optional) and season with salt, pepper, and spices to taste 
+   (e.g., nutmeg or cinnamon).
+7. **Serve**:
+   - Pour into bowls and garnish with optional toppings (e.g., a swirl of cream, 
+   roasted seeds, or fresh herbs).
+
+@fig-soup-recipe is a specific implementation of the algorithm.
+
+By applying computational thinking, we decomposed the task of making pumpkin soup 
+into smaller steps, recognized patterns in the cooking process, abstracted the 
+general process for making soups, and designed an algorithm to efficiently make 
+pumpkin soup. This method helps streamline the cooking process, ensures nothing 
+is overlooked and provides a clear, repeatable procedure.
+
+## Quantitative Thinking {#sec-quant-thinking}
+
+**Quantitative thinking** (QT) is a problem-solving technique, like computational
+thinking. It views the world through measurable events, and approaches problems
+by analyzing quantitative evidence. At the heart of QT lies **quantification**,
+representing things in measurable quantities. The word quantification is rooted 
+in the Latin word *quantus*, meaning "how much". The purpose of quantification is 
+to express things in numbers. The result is data in its many forms.
+
+When dealing with inherently measurable attributes such as height or weight, quantification is 
+simple. We need an agreed-upon method of measuring and a system to express
+the measurement in. The former might be an electronic scale or an analog scale
+with counterweights for weight measurement, a ruler, yardstick, or laser device
+for height measurements. It seems obvious to report weights in metric units of 
+milligrams, grams, pounds (500 grams), kilograms, and tons or in U.S. Customary units of ounces, 
+pounds (16 ounces), and tons. As long as we know which measurement units apply, we can 
+all agree on how heavy something is. And we need to keep in mind that the same
+word can represent different things: a metric pound is 500 grams, a U.S. pound
+is 453.6 grams. But wait, there is more: Apothecaries' weights are slightly 
+different, a pound a.p. is 12 ounces. And in some fields, weights are measured
+entirely differently, diamonds are measured in carats (0.2 grams). In the 
+International System of Units (SI), weight is measured in Newtons, which is 
+gravitational force on a mass, equivalent to kg * m /s^2^.
+As long as we know what units are used to report a weight, we can convert it 
+into whatever system we want to use. So we could say that this attribute is easily
+quantifiable. 
+
+Other attributes are difficult to quantify. How do you measure happiness? Finland
+has been declared the [happiest country](https://www.bbc.com/reel/video/p0hmcc91/why-is-finland-the-happiest-country-in-the-world-) 
+on earth for seven years running. This must involve some form of quantification
+otherwise we could not rank countries and declare one as "best". 
+How did they come up with that? The purpose of the [World Happiness Report](https://worldhappiness.report/ed/2020/social-environments-for-world-happiness/)
+is to review the science of measuring well-being and to use survey measures of 
+life satisfaction across 150 countries. *Happiness* according to the World Happiness
+Report is a combination of many other measurements. For example, a rating of
+one's overall life satisfaction, the ability to own a home, the availability of
+public transportation, etc. Clearly, there is a subjective element in choosing
+the measurable attributes that are supposed to allow inference about the 
+difficult to measure attribute *happiness*. Not all attributes weigh equally in
+the determination of happiness, the weighing scheme itself is part of the quantification.
+Norms and values also must play a role. The availability of public transportation
+affects quality of life differently in rural Arkansas and in downtown London. 
+In short, the process of quantifying a difficult-to-measure attribute should be
+part of the conversation.
+
+This is a common problem in the social sciences: what we are interested in measuring
+is difficult to quantify and the process of quantification is full of assumptions.
+Instead of getting at the phenomenon directly, we use
+other quantities to inform about all or parts of what we are really interested
+in. These **surrogates** are known by different names: we call them an indicator, 
+an index (such as the consumer price index), a metric, a score, and so on. 
+
+:::{.example}
+::::{.example-header}
+Example: Net Promoter Score (NPS)
+::::
+::::{.example-container}
+Building on the theme of "happiness", a frequent question asked by companies that
+sell products or services is "are my customers satisfied and are they loyal?"
+
+Rather than an extensive survey with many questions as in the World Happiness
+Report, the question of customer satisfaction and loyalty is often distilled into 
+a single metric in the business world, the Net Promoter Score (NPS).
+NPS is considered by many the gold standard customer experience metric. It 
+rests on a single question: "How likely are you to recommend the companies
+products or services?"
+
+The calculation of NPS is as follows (@fig-nps):
+
+- Customers answer the question on a scale of 0–10, with 0 being not at all likely 
+to recommend and 10 being extremely likely to recommend.
+- Based on their response, customers are categorized as promoters, passives, or 
+detractors. A detractor is someone whose answer was between 0 and 6. A promoter
+is someone whose answer is 9 or 10. The others, which responded with a 7 or 8 are
+passives.
+- The NPS is calculated by subtracting the percentage of detractors from the 
+percentage of promoters. 
+
+The NPS ranges from -100 to 100, higher scores imply more promoters. A NPS of
+100 is achieved if everyone scores 9 or 10. A score of -100 is achieved if
+everyone scores 6 or below.
+
+![Net promoter score](images/NetPromoterScore.png){#fig-nps fig-align="center" width=75%}
+::::
+:::
+
+
+:::{.assignment}
+::::{.assignment-header}
+Exercise: Net Promoter Score
+::::
+::::{.assignment-container}
+1. What are the assumptions in the NPS calculation?
+2. Company Foo improved its NPS from 30 to 40 over the last year. Explain how
+that can happen.
+3. What does NPS tell you about a company that has many products and/or services?
+4. What impact could cultural differences and societal norms and traditions have
+on NPS values around the world?
+5. What do you think is a great net promoter score? Does it depend on the industry?
+6. Companies are applying NPS in other contexts, not just to measure
+customer satisfaction. For example, the employee NPS (eNPS) uses NPS methodology
+and the question "How likely are you to recommend company X as a place of work?" 
+What do you think about that?
+7. If you plot NPS by age, what would that look like? In other words, do you expect
+younger or older consumers to have higher/lower NPS?
+
+8. List reasons why NPS is (might be) a troubling indicator.
+<!---
+For some answers see here:
+https://www.qualtrics.com/experience-management/customer/net-promoter-score/
+https://hbr.org/2019/10/where-net-promoter-score-goes-wrong
+
+Important: cultural differences, someone cannot be detractor and promoter at the
+same time, division of range is arbitrary, tries to distill a complex relationship
+in a single number, depends on how and who you ask among the customers.
+
+Whether you recommend something or detract from something depends on who you
+are talking to. You might recommend a product to a peer but not to your parents.
+
+Fewer than those designated as promoters have actually promoted the brand.
+It measures intention, not behavior
+
+NPS does not explain why someone would recommend a product: ease of use,
+price, customer service, availability, ... It also does not explain why someone
+detracts from a product. How are you going to fix things?
+--->
+::::
+:::
+
+The NPS has many detractors, pun intended. Some describe it as "management 
+snake oil". Management touts it when the NPS goes up, nobody reports it when
+it goes down. It continues to be widely used. [Forbes](https://www.forbes.com/sites/ronshevlin/2019/05/21/its-time-to-retire-the-net-promoter-score/) reported that in 50 earnings calls of S&P 500 companies NPS was mentioned 150 
+times in 2018.
+
+### Indicators
+
+An indicator is a quantitative or qualitative factor or variable that offers a 
+direct, simple, unique and reliable signal or means to measure achievements.
+
+The economy is a complex system for the distribution of  goods and services. 
+Such a complex system defies quantification by a single number.
+Instead, we use thousands of indicators to give us insight into a particular
+aspect of the economy: inflation rates, consumer price indices, unemployment 
+numbers, gross domestic product, economic activity, etc.
+
+:::{.assignment}
+::::{.assignment-header}
+Exercise: Quantifying the Economy
+::::
+::::{.assignment-container}
+Find at least two indicators in each of the following aspects:
+
+1. International trade
+2. Housing and construction
+3. Consumer spending
+4. Manufacturing
+5. Climate
+6. Labor markets
+
+What are the indicators used for--that is, what do they indicate?
+::::
+:::
+
+An indicator is called **leading** if it is predictive, informing us about what
+might happen in the future. The job satisfaction in an employee survey is a 
+leading indicator of employee attrition in the future. Unhappy employees are
+more likely to quit and to move on to other jobs. A **lagging** indicator is
+descriptive, it looks at what has happened in the past. Last month's resignation
+rate is a lagging indicator for the human resources department.
+
+### Types of Data
+
+Data, the result of quantification, can be classified in a number of ways. The
+first distinction of quantified variables is by **data type**. 
+
+- **Continuous**: the number of possible values of the variable is not countable. 
+Examples are physical measurements such as weight, height, length, pressure, temperature. 
+
+- **Discrete**: the number of possible values is countable. Even if the number 
+of possible values is infinite, the variable is still discrete. The number of fish 
+caught per day does not have a theoretical upper limit, although it is highly 
+unlikely that a weekend warrior will catch 1,000 fish. A commercial fishing vessel 
+might.\
+\
+Discrete variables are further divided into the following groups:
+    - **Count Variables**: the values are true counts, obtained by enumeration. 
+    There are two types of counts:
+
+        - **Counts per unit**: the count relates to a unit of measurement, e.g., 
+        the number of fish caught per day, the number of customer complaints per 
+        quarter, the number of chocolate chips per cookie, the number of cancer 
+        incidences per 100,000.
+
+        - **Proportions (Counts out of a total)**: the count can be converted 
+        to a proportion by dividing it with a maximum value. Examples are the 
+        number of heads out of 10 coin tosses, the number of larvae out of 20 
+        succumbing to an insecticide,
+
+    - **Categorical Variables**: the values consist of labels, even if numbers 
+    are used for labeling.
+
+        - **Nominal variables**: The labels are unordered, for example the 
+        variable "fruit" takes on the values "apple", "peach", "tomato" 
+        (yes, tomatoes are fruit but do not belong in fruit salad).
+
+        - **Ordinal variables**: the category labels can be arranged in a natural 
+        order in a lesser-greater sense. Examples are 1---5 star reviews or ratings 
+        of severity ("mild", "modest", "severe").
+
+        - **Binary variables**: take on exactly two values (dead/alive, Yes/No, 
+        1/0, fraud/not fraud, diseased/not diseased)
+
+Categorical variables are also called **qualitative** variables. They encode a
+quality, namely to belong to one of the categories. All other variables are also
+called **quantitative** variables. Note that quantifying something through numbers
+does not imply it is a quantitative variable. Highway exits might have numbers that
+are simple identifiers not related to distances. The number of stars on a 5-star
+rating scale indicates the category, not a quantified amount. The numeric values
+of quantitative variables, on the other hand, can be used to calculate meaningful
+differences and ratios. 40 kg is twice as much as 20 kg, but a 4-star review is 
+not twice as much as a 2-star review---it is simply higher than a 2-star review.
+
+
+## Dealing with Uncertainty
+
+In “[Think Like a Data Scientist](https://learning.oreilly.com/library/view/think-like-a/9781633430273/)”, 
+Brian Godsey lists awareness in the face of uncertainty as one of the biggest 
+strengths of a data scientist [@Godsey_2017]. Once source of uncertainty is the 
+inherent complexity of data science projects that involve many parts of the organization. 
+A data science project is full of problems, the real-world problem that needs to 
+be solved and problems that arise during the projects. Deadlines will be missed. 
+Data will not be as available as expected or of lower quality as expected. Budgets 
+can change and goals are re-prioritized. Models that work well on paper fall apart 
+when they get in contact with reality. The list goes on and on. The data scientist 
+thinks through problems not from the perspective of the data but from the 
+perspective what data can help us to accomplish. What matters is that we solve the 
+business problem, not that we build a neural network.
+
+Another source of uncertainty is the inherent variability of the raw material, 
+data. Variability is contagious, it makes everything produced from data also variable. 
+The point of data processing is to separate the signal from the noise and to find 
+the systematic patterns and relationships in the data, the insights that help
+make decisions.
+
+Data scientists are sometimes compared to software developers. They do share certain 
+traits; both are using tools, languages, and frameworks to build complex systems 
+with software. But analytic code is different from non-analytic code in that it 
+is processing an uncertain input. A JSON parser also processes variability, each 
+JSON document is different from the next. Does it not also deal with uncertain input? 
+If the parser is free of bugs, the result of parsing is known with certainty. For 
+example, we are convinced that the sentence “*this book is certainly concerned with 
+uncertainty*” has been correctly extracted from the JSON file. Assessing the 
+sentiment of the sentence, however, is a data science task: a sentiment model is 
+applied to the text and returns a set of probabilities indicating how likely the 
+model believes the sentiment of the text is negative, neutral, or positive. 
+Subsequent steps taken in the software are based on interpreting what is probable.
+
+There is uncertainty about which method to use. Whether a software developer uses 
+a quicksort or merge sort algorithm to order an array has impact on the performance 
+of the code but not on the result. Whether you choose a decision tree or a support 
+vector machine to classify the data in the array impacts the performance **and**
+the result of the code. A chosen value for a tuning parameter, e.g., the learning 
+rate, can produce stable results with one data set and highly volatile results 
+with another.
+
+Further uncertainty is introduced through analytic steps that are themselves random. 
+Splitting data into training and test data sets, creating random folds for cross-validation, 
+drawing bootstrap samples to estimate variability or to stabilize analytics through 
+bagging, random starting values in clustering or neural networks, selecting the 
+predictors in random forests, Monte Carlo estimation, are some examples where data 
+analysis involves drawing random numbers. The data scientist needs to ensure that 
+random number sequences that create different numerical results do not affect the 
+quality of the answers. The results are frequently made repeatable by fixing the 
+seed or starting value of the random number generator. While this makes the program 
+flow repeatable, it is yet another quantity that affects the numerical results. 
+It is also a potential source for misuse: “let me see if another seed value 
+produces a smaller prediction error.”
+
+Data are messy and possibly full of errors. It contains missing values. There is 
+uncertainty about how disparate data sources represent a feature (a customer, a 
+region, a temperature) that affects how you integrate the data sources. These 
+sources of uncertainty can be managed through proper data quality and data integration. 
+As a data scientist you need to be aware and respectful of these issues; they can 
+doom a project if not properly addressed. In an organization without a dedicated 
+data engineering team resolving data quality issues might fall on your shoulders. 
+If you are lucky to work with a data engineering team you still need to be mindful 
+of these challenges and able to confirm that they have been addressed or deal with 
+some of them (missing values).
+
+::: example
+::: example-header
+Example: Imputation through Principal Component Analysis (PCA)
+:::
+
+::: example-container
+| ID  | Type |  X1  |  X2  | X3  |
+|-----|:----:|:----:|:----:|:---:|
+| 1   |  A   | 3.71 | 5.93 | 55  |
+| 2   |  B   |  .   | 4.29 | 32  |
+| 3   |  A   | 0.98 | 5.86 | 55  |
+| 4   |  B   |  .   | 4.28 | 29  |
+| 5   |  A   | 6.04 | 5.94 | 48  |
+| 6   |  B   |  .   | 5.25 | 18  |
+| 7   |  A   | 1.52 | 4.01 | 61  |
+| 8   |  B   |  .   | 5.55 | 30  |
+
+: A missing value pattern.
+
+The table above shows eight observations on four features: Type, X1, X2, and X3.
+
+Whatever types A and B represent, we notice that values for X1 are missing 
+whenever Type equals B. A complete-case analysis based on X1 through X3 would 
+eliminate observations with missing values and leave us only with observations 
+for Type A. This makes a comparison between the two types impossible. To facilitate 
+such a comparison, we could limit any analysis to rely on only X1 and X2, or we 
+could impute the missing values for X3.
+
+Such an imputation could be based on a matrix completion algorithm that uses 
+principal component analysis (PCA) to iteratively fill in the missing information
+for X1 based on the observed data for X1, X2, and X3. That sounds awesome. But 
+what if there are systematic differences between the two types? Does it then make 
+sense to fill in values for X1, Type B with information derived from Type A? 
+Could this possibly bias the analysis and be worse than not using X1 in the analysis at all?
+:::
+:::
+
+## Perspective about Data
+
+Maintaining proper perspective about data means knowing where the important 
+issues are. This can be a moving target.
+
+-   The volume of data can be unproblematic for one analytic method and  
+a limiting factor if you want to derive prediction intervals by way of bootstrapping.
+
+-   A large but highly accurate model is being developed on historical training 
+data in an Internet of Things (IoT) application. Due to the complexity of the
+model the scoring engine that applies the model in real time to data flowing 
+off sensors cannot keep up.
+
+-   A stacked ensemble of classification models improves the ability to segment 
+customers but is not interpretable.
+
+There are many limiting factors in data-centric applications and many moving parts. 
+The data scientist is in a unique position to have perspective and awareness of 
+the factors related to data. It is unlikely that anyone else will have that 
+360-degree view about data.
+
+As Brian Godsey put it:
+
+> *As a data scientist, I have as my goal to make sure that no important aspect of a project goes awry unnoticed. When something goes wrong—and something will—I want to notice it so that I can fix it.*
+
+## Data Intuition
+
+Intuition is the feeling of knowing something instinctively, without conscious 
+reasoning. Developing intuition for data is one of the most valuable skills a 
+data scientist can acquire. It will help to flag things that are surprising, 
+curious, worth another look, or that do not pass the smell test. Developing 
+intuition is helped by strong technical knowledge, it provides the foundation 
+against which our conscious mind can judge surprise. Some intuition for data is 
+innate, and it can be developed with experience and practice. Being curious, 
+asking questions, requesting feedback, working with real data sets, and spending
+time exploring data go a long way in developing better intuition.
+
+Let’s test our intuition for data with a few examples.
+
+### Outliers in Box and Whisker Plot
+
+The following graph shows a box plot constructed from 200 observations on a variable. 
+What does your intuition tell you about the five data points on the right side 
+in of @fig-proj-intuition-box?
+
+![Box plot of 200 observations for a variable.](images/Intuition_BoxPlot.png){#fig-proj-intuition-box .lightbox fig-align="center" width="80%"}
+
+Also called the box-and-whisker plot, this plot places a box that covers the 
+central 50% of the data—called the interquartile range—and extends from the edge 
+of the box whiskers to the observations within $\pm 1.5$ times the interquartile 
+range. Points that fall outside the whiskers are labeled as outliers. Does knowing 
+the details of box plot construction change your intuition about the data points 
+on the right?
+
+After having seen many box plots you will look at this specimen as an example of
+a continuous random variable with a right-skewed (long right tail) distribution. 
+Five “outliers” out of 200 is not alarming when the distribution has a long tail.
+
+### Prediction Error in Test and Training Data
+
+@fig-proj-intuition-traintest shows graphs of the mean-squared prediction error, 
+a measure of model performance, as a function of model complexity. The complexity 
+is expressed in terms of the model’s ability to capture more wiggly structures 
+(flexibility). The training data is the set of observations used to determine the 
+model parameters. The test data is a separate set of observations used to 
+evaluate how well the fitted (=trained) model generalizes to new data points.
+
+![The mean-squared prediction error for a set of training and test data as a function of model complexity.](images/Intuition_TestTrain.png){#fig-proj-intuition-traintest .lightbox fig-align="center" width="80%"}
+
+Something is off here. The prediction error on the test data set should not 
+decrease steadily as the model flexibility increases. The performance of the model
+on the test data will be poor if the model is too flexible or too inflexible. 
+The prediction error on the training data on the other hand will decline with 
+greater model flexibility. Intuition for data suggests that measures of performance 
+are optimized on the training data set and should be lower for the test data set. 
+It is worth checking whether the labels in the legend are reversed.
+
+### Storks and Babies {#sec-storks-babies}
+
+The next example of data intuition is shown in the following scatterplot based 
+on data in Neyman (1952). Data on the birth rate in 54 counties, calculated as 
+the number of babies born relative to the number of women of child-bearing age, 
+and the density of storks, calculated as the number of storks relative to the 
+same number of women, suggests a trend between the density of storks and the birth rate.
+
+![Scatterplot of stork density and birth rate along with a LOESS fit. The variables are calculated by dividing the number of babies and the number of storks in the county by the number of women of child-bearing age in the county (in 10,000).](images/Intuition_Storks.png){#fig-proj-intuition-storks .lightbox fig-align="center" width="80%"}
+
+Our intuition tells us that something does not seem quite right. The myth of storks 
+bringing babies has been debunked—conclusively. The data seem to tell a different 
+story, however. What does your *data* intuition tell you?
+
+There must be a different reason for the relationship that appears in the plot. 
+Both variables plotted are divided by the same quantity, the number of women of 
+child-bearing age. This number will be larger for larger counties, as will be the 
+number of babies and, if the counties are comparable, the number of storks. In 
+the absence of a relationship between the number of babies and the number of 
+storks, a spurious relationship is introduced by dividing both with the same 
+denominator.
+
+### Cluster Assignment
+
+Clustering is an unsupervised learning technique where the goal is to find groups 
+of observations (or groups of features) that are in some form alike. In statistical 
+terms we try to assign data to groups such that the within-group variability is 
+minimized, and the between-group variability is maximized. In this example of 
+clustering, data on age, income, and a spending score were obtained for 200 shopping 
+mall customers. The spending score is a value assigned by the mall, higher scores 
+indicate a higher propensity of the customer to make purchases at the mall stores.
+
+A cluster analysis was performed to group similar customers into segments, so 
+that a marketing campaign aimed at increasing mall revenue can target customers 
+efficiently. A few observations are shown in the next table.
+
+|                 |         |            |                    |
+|-----------------|---------|------------|--------------------|
+| **Customer ID** | **Age** | **Income** | **Spending Score** |
+| **1**           | 19      | 15         | 39                 |
+| **2**           | 20      | 16         | 6                  |
+| **3**           | 35      | 120        | 79                 |
+| **4**           | 45      | 126        | 28                 |
+
+@fig-proj-intuition-cluster1 shows a scatter plot of the standardized income 
+and spending score attributes, overlaid with the customer assignment to one of 
+five clusters.
+
+![Results of hierarchical clustering with five clusters.](images/Intuition_Cluster.png){#fig-proj-intuition-cluster1 .lightbox fig-align="center" width="80%"}
+
+There are distinct groups of points with respect to (the standardized) spending 
+and income. One group is near the center of the coordinate system, one group is 
+in the upper-right quadrant, one group is in the lower-right quadrant. If the 
+clustering algorithm worked properly, then these points should not be all assigned 
+to the same cluster. This is an example where we need to take another look at the 
+analysis. It turns out that the customer ID was erroneously included in the analysis. 
+Unless that identifier is meaningful in distinguishing customers, it must be 
+removed from the analysis. The results of the analysis without the customer ID 
+are shown in @fig-proj-intuition-cluster2, confirming that the clustering algorithm 
+indeed detected groups that have (nearly) distinct value ranges for spending score 
+and income.
+
+![Corrected cluster analysis after removing the non-informative customer ID variable from the analysis. The detected clusters map more clearly to groups of points that are distinct with respect to spending and income.](images/Intuition_Cluster2.png){#fig-proj-intuition-cluster2 .lightbox fig-align="center" width="80%"}
+
+
+## Quantitative Intuition and Problem Solving {#sec-thinkingds-quant-intuition}
+
+The previous subsection presented some examples to test your intuition around
+data. What about quantitative intuition and general problem solving skills?
+This subsection presents a few problems and puzzles to flex your 
+analytic and quantitative thinking muscles. Most of these are well-known problems
+that you might run into during a job interview for a technical/analytical role.
+
+Solutions are provided in the callout boxes. Try to solve the puzzles before
+taking a look at the solutions.
+
+### The Prisoner's Dilemma
+
+Suppose that Andy and Brie are arrested as members of a criminal gang and held 
+separately by the police. They cannot communicate. There is enough evidence to
+convict them on a lesser charge, but not on the principal charge. The police
+offers the following deal:
+
+- If they both remain silent, they will each serve one year in prison.
+- If one testifies against the other, but the other one does not, the one who
+testified will be set free while the other serves three years in prison.
+- If Andy and Brie both testify against each other, they will each serve two years.
+
+How should Andy and Brie behave to optimize their positions, that is, look out
+after their own interest?
+
+The result of such a game is typically displayed in a payoff matrix that shows
+in each cell the payoff for the two players.
+
+|                        | **Brie remains silent** | **Brie testifies** |
+|:----:|:----:|:----:|
+|**Andy remains silent** | $(-1, -1)$ | $(-3, 0)$ |
+|**Andy testifies**      | $(0, -3)$  | $(-2, -2)$ |
+
+: Expected payoffs in prisoner dilemma {#tbl-prisoner .striped}
+
+The "payoffs" are shown in the matrix as negative numbers, as they represent a
+penalty, years of imprisonment. The goal is to maximize the payoff, a number
+as large as possible.
+
+The best situation for Andy is to testify when Brie remains silent. He would
+go free in this case (and does not mind Brie spending three years behind bars).
+Similarly, the best situation for Brie is to testify when Andy remains silent.
+These are the two diagonal cells in @tbl-prisoner. 
+
+The situation does not play out as well for them if one testifies and the other
+also testifies. What is the best strategy?
+
+#### Nash equilibrium
+
+The Nash equilibrium is a concept in game theory. It applies to non-cooperative
+games where players compete against each other. In the equilibrium state, no
+player can gain an advantage by changing their strategy. This assumes that the
+other player's strategies do not change.
+
+Suppose players Andy and Brie have chosen strategies A and B, respectively.
+In the Nash equilibrium, there is no other strategy available to Andy that would
+increase his expected payoff if Brie stays with strategy B. Similarly, there is
+no other strategy available to Brie that would increase her expected payoff from
+the game if Andy stays with strategy A.
+
+The Nash equilibrium tells us not to consider player's action in isolation. 
+Instead, we need to take into account what other players are expected to do in
+evaluating a player's choices.
+
+---
+
+The best **outcome** for either Andy and Brie would be to go free. But they do
+not know how the other one will behave. So what is the best **strategy** to 
+play this game? Let's rephrase testifying and remaining silent in terms of 
+**defecting** and **collaborating** players of a game. 
+
+|                        | **Brie collaborates** | **Brie defects** |
+|:----:|:----:|:----:|
+|**Andy collaborates** | $(-1, -1)$ | $(-3, 0)$ |
+|**Andy defects**      | $(0, -3)$  | $(-2, -2)$ |
+
+: Expected payoffs in prisoner dilemma {#tbl-prisoner2 .striped}
+
+If Andy defects, his penalty will be less, regardless of whether Brie is 
+collaborative or not (0 or 2 years compared to 1 or 3 years). The same applies
+to Brie, if she defects her penalty will be less regardless of what Andy does.
+The Nash equilibrium is that both players defect although they suffer worse
+penalties than if they had both cooperated.
+
+### Guarding Criminals 
+
+Suppose you are guarding $n$ criminals in an open field. You have one gun with
+a single bullet. You are a good shot and being fired at means death---the criminals
+know that. Their behavior is governed by the following rules: 
+
+- If any of them has a non-zero probability of surviving, they will attempt to escape.
+- If a criminal is certain of death, they will not attempt to escape.
+
+How do you guard the criminals and stop them from escaping?
+
+::: {.callout-tip title="Solution" collapse=true}
+Imagine there is only a single criminal, $n=1$. Since he/she would definitely be shot at
+during an escape, they would face certain death and not escape. 
+
+What happens if there are two criminals? If they both try to escape, there is a 
+50:50 chance to survive, hence they will both try to escape. To prevent that from 
+happening you would tell one of the two (you do not need to tell both!) that 
+you would shoot them, should they both attempt to escape. That criminal now 
+faces certain death and will not escape. That brings you back to the situation
+with a single criminal.
+
+How does this generalize to larger groups of criminals? Assign a number from 1 to
+$n$ to the criminals and tell them that should any subgroup of them try to escape,
+the one with the highest number in the group will be shot.
+:::
+
+### Three Jars
+
+Three opaque jars are sitting on a table. The jars are labeled "Apples", "Oranges",
+and "Apples & Oranges". Unfortunately, all three are labeled incorrectly.
+
+![Three opaque jars.](images/ThreeJars.png){#file-three-jars fig-align="center" width=75%}
+
+Your task is to assign the labels correctly to the jars. 
+What is the smallest number of fruit you have to choose in order to correctly
+label the three jars?
+
+::: {.callout-tip title="Solution" collapse=true}
+
+You choose one fruit from the jar that is labeled incorrectly as "Apples &
+Oranges". If you pull an apple, you know this is the jar with the apples,
+otherwise it is the jar with the oranges. Now you have two jars left whose
+labels just need to be flipped since you were told that all three jars are 
+labeled incorrectly.
+:::
+
+### Pattern Recognition \#1
+
+@fig-math-puzzle1 shows a logic reasoning puzzle. The first row makes sense if 
+the strange operator is addition, but that does not work for the next rows.
+You have to find the meaning of that operator, then apply the pattern to solve
+the last equation.
+
+![Can you solve this?](images/LogicPuzzle1.png){#fig-math-puzzle1 fig-align="center" width=50%}
+
+::: {.callout-tip title="Solution" collapse=true}
+
+We need to find a pattern that expresses the operations in terms of familiar algebra.
+If the operator in @fig-math-puzzle1 is interpreted as multiplication
+then we get 4, 10, 18, all smaller than the values on the right hand side. How 
+much smaller? Exactly by the left-most number. The pattern that seems to apply
+to the first three rows is
+
+- multiply the two numbers
+- then add the number on the left
+
+Applying this pattern to the last row yields 96 as the solution (@fig-math-puzzle2).
+
+![A solution.](images/LogicPuzzle1Solution.png){#fig-math-puzzle2 fig-align="center" width=50%}
+
+This, by the way, is not the only solution. There are other patterns that will
+lead to a different result for the last row. Those patterns are equally valid.
+Can you find another pattern that yields a solution?
+:::
+
+### Pattern Recognition \#2
+
+Here is a sequence of numbers.
+
+$$
+\begin{array}{c}
+1 \\
+11 \\
+21 \\
+1211 \\
+111221 \\
+312211 \\
+??
+\end{array}
+$$
+
+What is the next number in the sequence?
+
+::: {.callout-tip title="Solution" collapse=true}
+What is the pattern in the sequence of numbers? 
+
+- The first row is the number 1, it is also "one one".
+- The second row is the number 11, it is also "two ones". 
+- The third row is the number 21, it is also "one two and one one".
+
+The pattern is that the numbers for the following row are obtained by spelling
+out the numbers in the current row, then replacing the words with the numbers
+they represent. For example, take 1211 in the fourth row. Spelling it out gives 
+"one one one two two ones". Now replace the words with numbers: "111221".
+
+The missing entry at the end of the sequence is thus
+$$
+13112221
+$$
+:::
+
+### Birthday Problem
+
+This is a classical problem in probability, and a popular one because it is 
+relatable yet somewhat counterintuitive. The probability is higher than what 
+most people expect. It goes like this: 
+
+>What is the probability that in a group of $n$ randomly chosen people, at least two share the same birthday?
+
+"Birthday" is meant as one of 365 days of the year, not adjusting for leap years.
+Also, we are not taking the birth year into account. A birthday for the purpose
+of this problem is April 10, or August 15, etc.
+
+The standard version of the problem uses $n=23$, because you can imagine yourself
+in a group of that size---a classroom, for example---and the probability of at
+least two shared birthdays is also relatable.
+
+How likely do you think at least two people share a birthday in a group of 23?
+
+::: {.callout-tip title="Solution" collapse=true}
+
+The probability of at least two shared birthdays in a group of 23 is about 0.5;
+it is 0.05073, to be more exact. How do you interpret that? If you were to 
+assemble groups of 23 randomly chosen people, than half of those groups would
+have at least two shared birthdays. Pretty high, eh?
+
+What happens to the probability of a shared birthday when the groups get larger?
+How about in a group of 35 people? The probability of a shared birthday increases
+to 0.814. In a group of 50 people, the probability is 0.97. In a group of 100,
+it is virtually certain that there are at least two identical birthdays, $p=0.999999$.
+With only 10 people in a group, it would be surprising to have identical 
+birthdays, but it is not a rare event, $p=0.117$.
+
+---
+
+For those interested, how do you calculate those probabilities? First, whenever
+you see the expression "at least" in a probability statement, it is probably 
+easier to calculate the probability of the complement event and subtract that from
+1. 
+$$
+\Pr(\text{at least two identical birthdays}) = 1 - \Pr(\text{no matching birthdays})
+$$
+
+What is the probability that no birthdays match in a group of $n$? You can 
+compute this by considering the possible choices as people enter the group. The 
+birthday of the first person can be chosen from 365 days, but the birthday for
+the second person has only 364 choices, otherwise we would have a match. 
+Since the members of the group are chosen at random, the birthdays are independent
+and the probability of no matches is the product
+$$
+\Pr(\text{no matches}) = \frac{365}{365} \times \frac{364}{365} \times \cdots \times \frac{365-n+1}{365}
+$$
+
+You can write this in terms of factorials as
+$$
+\Pr(\text{no matches}) = \frac{1}{365^n} \frac{365!}{(365-n)!}
+$$
+Finally, the probability of at least two shared birthdays is
+$$
+\Pr(\text{at least two shared birthdays}) = 1 - \frac{1}{365^n} \frac{365!}{(365-n)!}
+$$
+
+If you were to compute this, you'd run into problems because the factorials are
+larger than what a finite precision computer can represent. The following `R`
+function uses two tricks to compute the birthday probability efficiently:
+
+1. Compute the probability on the logarithmic scale, then exponentiate at the end
+2. Use the fact that for an integer $k$, $k!$ is $\Gamma(k+1)$, where $\Gamma()$ 
+is the Gamma function.
+
+The `lgamma` function in `R` computes the log of the Gamma function, and that 
+gives us access to an efficient way to compute the components of the probability
+on the log scale.
+
+```{r}
+birthday_prob <- function(n) {
+   log_p <- lgamma(365+1) - lgamma(365-n+1) - n*log(365)
+   return (1-exp(log_p))
+}
+
+birthday_prob(10)
+birthday_prob(23)
+birthday_prob(35)
+birthday_prob(50)
+birthday_prob(100)
+```
+:::
+
+
+### Minimum Cuts
+
+Imagine that you hire a consultant to work for you for five days. At the end of 
+each day you need to pay them 1/5th of a gold bar. You have a single gold bar
+(worth 5 fifths) and need to cut it up so you can pay the consultant at the 
+end of each day.
+
+![A gold bar that needs to be cut up.](images/GoldBar.png){#fig-gold-bar fig-align="center" width=50%}
+
+>What is the minimum number of cuts that allow you to pay the consultant every day?
+
+::: {.callout-tip title="Solution" collapse=true}
+
+You need only two cuts to cut the gold bar into three pieces of sizes 1/5, 1/5,
+and 3/5.
+
+![No more than two cuts are needed.](images/GoldBarSolution.png){#fig-gold-bar-solution fig-align="center" width=30%}
+
+
+Then you pay the consultant as follows:
+
+- Day 1: give them a 1/5 gold bar
+- Day 2: give them the second 1/5 gold bar
+- Day 3: take back the two 1/5 bars and hand them the 3/5 bar
+- Day 4: give them a 1/5 gold bar
+- Day 5: give them the second 1/5 gold bar
+:::
+
+### When to Choose the Ticket
+
+An airline has a single seat open on a flight, but $n=100$ standby passengers 
+hoping to get on the flight. You are one of the passengers on standby.
+To be fair to all standby passengers, the airline decides to drop 100 equal-sized
+pieces of paper into a bucket. 99 of them are blank, one says "Last Seat".
+The papers are folded and shuffled in the bucket.
+
+The standby passengers queue and each passenger gets to pick one piece of paper
+without replacement---that is, they keep the slip and do not return it to the 
+bucket. Also they cannot unfold and look at the slip until all of them re drawn.
+After the last slip is drawn the standby passengers announce who is the lucky 
+person that drew the "Last Seat" by checking their slip.
+
+Here is the question: if you have your choice to pick first, second, last, or 
+at any particular position in the queue, which position would you choose?
+
+::: {.callout-tip title="Solution" collapse=true}
+
+It does not matter when you draw the paper if the pieces were properly shuffled.
+This is a completely random sample even if the sampling is done sequentially.
+Your chance of drawing the "Last Seat" slip is 1/100, whether you draw first,
+last, or at any other position in the queue.
+
+Note that this would be different if passengers would announce the result of 
+their draws before the next draw. The conditional probability of choosing the 
+"Last Seat" slip on the next draw increases with every bank slip that preceded.
+:::
+
+### How Many Squares on a Chessboard
+
+A chess board is made up of eight rows and columns of black and white positions
+(@fig-chessboard). How many squares are on a board?
+
+![Chess board.](images/Chessboard.png){#fig-chessboard fig-align="center" width=50%}
+
+::: {.callout-tip title="Solution" collapse=true}
+
+The quick answer is $8 \times 8 = 64$ squares. However, that is only part of the
+story. The entire board is a single square as well, made up of the 64 individual
+squares. And we could place all kinds of $2 \times 2$ squares inside the larger
+frame.
+
+If you think about it for a bit there are $8^2$ squares of size $1 \times 1$,
+$7^2$ squares of size $2 \times 2$, $6^2$ squares of size $3 \times 3$ and so on.
+The total number of squares on a chess board is
+
+$$
+8^2 + 7^2 + 6^2 + 5^2 + 4^2 + 3^2 + 2^2 + 1^2 = 204
+$$
+:::
+
+### Book Sorting
+
+Suppose you are working in a library and are sorting books from a box that 
+contains 32 fiction (F) and 17 non-fiction (NF) books. A steady supply of new
+books is available to add to the box. Your sorting algorithm goes as follows:
+
+- You randomly choose 2 books from the box. 
+- Based on the types of books chosen you add another book from the supply to the box:
+
+  1. if you choose two fiction books (F,F) you add a new fiction book to the box
+  2. if you choose two non-fiction books (NF, NF) you also add a fiction book to the box
+  3. if you choose one fiction and one non-fiction book (F,NF or NF,F) then you add
+  a non-fiction book to the box.
+  
+The entire procedure is depicted in @fig-book-sorting.
+
+![Book sorting routine. [Source](https://medium.com/puzzle-sphere/book-sorting-interview-puzzle-math-logic-google-amazon-microsoft-faang-quantitative-aptitude-probability-124b5917e059)](images/BookSorting.webp){#fig-book-sorting fig-align="center" width=50%}
+
+Since you add only one book to the box for every two books you remove, the box
+will eventually be empty. What is the type of the last book in the box? Is it 
+a fiction or a non-fiction book?
+
+::: {.callout-tip title="Solution" collapse=true}
+
+The number of books in the bin goes down by one with each cycle: two books are
+removed from the bin, one book is added. How does this affect the number of 
+fiction and non-fiction books that remain?
+
+Let's see how the number of non-fiction books in the bin changes in cases 1.--3. 
+In the first case, there is no change. In the second case, the number of non-fiction
+books goes down by 2. In the third case, the number of non-fiction books also
+does not change: one is removed, one is added.
+
+Since the number of NF books initially is an odd number, 17, we can conclude 
+that after each cycle the number of NF books remains an odd number. It can never
+be an even number. Which leads to the conclusion that if there is only one 
+book left in the bin it must be a non-fiction book.
+:::
+
+### Inverted Triangle
+
+@fig-coin-triangle shows a triangle made from 10 coins. Can you change this into
+an upside-down triangle by moving only 3 coins?
+
+![Inverting the coin triangle.](images/CoinTrianglePuzzle.png){#fig-coin-triangle fig-align="center" width=75%}
+
+::: {.callout-tip title="Solution" collapse=true}
+
+The solution is shown in @fig-coin-solution. First, focus on the seven coins in
+the center of the triangle. The original and the inverted triangle share these; 
+they do not need to move at all. We can focus on the three coins at the edges.
+
+![Moving the three coins.](images/CoinTrianglePuzzleSolution.png){#fig-coin-solution fig-align="center" width=75%}
+:::
+
+### The Spare Tire
+
+Your car has four tires mounted to the wheels and a spare tire (S). That gives you
+five tires to work with. Each of the tires lasts at most 30,000 miles. If you can 
+exchange tires among the five as many times as you wish, what is the furthest 
+distance you can travel before you need to purchase a new tire?
+
+@fig-tire-solution1 depicts the initial tire life prior to driving the first mile.
+All tires, including the spare (S) have the same life expectancy of 30,000 miles.
+
+![Tire life before driving the first mile.](images/TirePuzzleSolution1.png){#fig-tire-solution1 fig-align="center" width=50%}
+
+::: {.callout-tip title="Solution" collapse=true}
+
+The maximum total distance the five tires could travel before they are all worn
+out is 30,000 x 5 = 150,000 miles. The minimum distance of travel before you 
+have to buy at least one new tire is 30,000 miles; it is achieved if you do not
+use the spare tire and run down the four tires currently mounted.
+
+By optimizing how you use the spare tire, there must be an achievable distance 
+between 30,000 and 150,000 miles. The optimal strategy is to wear all tires
+equally and to use the spare tire as much as possible. But we cannot use the 
+spare for more than 30,000 miles, same as with the other four tires.
+
+If the four tires on the car are equally worn, we can go at most 150,000/4 = 37,500 
+miles. The strategy is to get 30,000 miles from each of the tires on the car
+and 4 times 7,500 = 30,000 miles from the spare tire. In other words, the spare 
+will have to give each of the four tires a 7,500 mile break.
+
+
+@fig-tire-solution2 shows how the spare tire is rotated for another tire after
+each leg of 7,500 miles. The right rear tire comes off after the fourth leg,
+it is worn out. The other tires still have 7,500 miles of life to go.
+
+![Remaining tire life after 7,500, 15,000, 22,50, and 30,000 miles., miles](images/TirePuzzleSolution2.png){#fig-tire-solution2 fig-align="center" width=75% .lightbox}
+
+:::
+
+### Robot Triangle
+
+There are many versions of this basic puzzle, using ants, camels, and other
+animals. We use robots here, the puzzle goes like this. Three robots are placed
+at the corners of a triangle. A robot can choose to move along either side of
+the triangle that meet at its corner (@fig-robot-triangle). What is the probability
+that any two robots will collide?
+
+![Robot triangle.](images/RobotTrianglePuzzle.png){#fig-robot-triangle fig-align="center" width=75%}
+
+::: {.callout-tip title="Solution" collapse=true}
+
+Each robot has two possible movements, so there are a total of 2 x 2 x 2 = 8 
+possible moves on the triangle. There are two ways in which there won't be any
+collisions, if all choose to go clockwise or counter-clockwise. In those cases
+they will follow each other around the triangle (@fig-robot-solution).
+
+![Robots moving without running into each other.](images/RobotPuzzleSolution.png){#fig-robot-solution fig-align="center" width=90%}
+
+Any other choice of movements will result in at least one collision. So the 
+probability of any collision if the robots choose their movements at random is
+6/8 = 3/4. There is a 75\% chance that any two robots will collide.
+:::
+
+### Truth Telling
+
+This puzzle is about logic reasoning and not about probability. Surprisingly,
+it is related to the previous robot movement puzzle.
+
+Consider the following three statements:
+
+1. Gavin says that Brian is a liar.
+2. Brian says that Jenn is a liar.
+3. Jenn says that both Gavin and Brian are liars.
+
+Who is telling the truth and who is lying?
+
+::: {.callout-tip title="Solution" collapse=true}
+
+This puzzle is related to the robot movement in that there are $2^3 = 8$
+possible choices, each of the three characters could either be truthful or
+lying. It is different from the robot movement in that it is not a question
+of probability. While robots choose one of the two directions at random, our
+characters are either lying or telling the truth. We have to reason which one
+it is.
+
+With 8 possible choices you can go about it by finding combinations that are
+inconsistent, a process of elimination.
+
+Suppose that Jenn tells the truth. Then Gavin and Brian are liars. According 
+to Gavin's statement, that would mean Brian is telling the truth. But Brian's 
+statement contradicts the assumption that Jenn tells the truth. Jenn must be a liar.
+
+If Jenn is not telling the truth, there are three possibilities:
+
+1. Gavin is truthful and Brian is not
+2. Gavin is a liar and Brian is truthful
+3. Both are truthful.
+
+Let's look at the first option. If Gavin tells the truth than Brian is lying,
+which means Jenn would be truthful. We already ruled out this possibility.
+But if Gavin is not truthful, then 3. cannot be the case either.
+
+We are down to the second option: Brian speaks the truth and the other two are
+liars. Let's see if everything makes sense in this scenario: If Gavin does not
+speak the truth, then Brian is not a liar. Brian's statement that Jenn is a liar
+is consistent with what we already found.
+
+Conclusion: Only Brian is truthful.
+:::
+
+
+### Clock Made With Matches
+
+You have two wooden sticks and a box of matches. When a sticks is lit it 
+will burn completely in exactly one hour. How do you use these ingredients to 
+measure exactly 45 minutes?
+
+::: {.callout-tip title="Solution" collapse=true}
+
+Light the first stick on one end and light the second stick on both ends. 
+Since an entire stick burns in one hour, the stick lit on both ends will burn 
+down in 30 minutes (@fig-stick-puzzle1).
+
+![Initial lighting of sticks.](images/StickPuzzle1.png){#fig-stick-puzzle1 fig-align="center" width=85%}
+
+At that point light the first stick on the other end. This will double the 
+speed with which that stick, now reduced to 30 minutes burn time, will burn.
+
+When the first stick is completely burned down, 45 minutes will have passed (@fig-stick-puzzle2).
+
+![After 30 minutes, light the other end of the first stick.](images/StickPuzzle2.png){#fig-stick-puzzle2 fig-align="center" width=75%}
+:::
+
+### Two Stacks of Cards
+
+You have two stacks of cards. The first is a regular 52-card deck. The 
+second stack contains two regular 52-card decks, thus has 104 cards.
+Both stacks are shuffled well. You choose two cards in sequence and you win if 
+they are both red. Would you prefer to choose from the 52-card stack or the 
+104-card stack?
+
+
+::: {.callout-tip title="Solution" collapse=true}
+You want to choose from the larger stack. The probability to draw two red cards
+in sequence from a stack of $n$ cards (with $n/2$ red ones) is
+$$
+\frac{n/2}{n} \times \frac{n/2-1}{n-1}
+$$
+For the first draw the probabilities are identical: $26/52$ and $52/104$.
+But for the second draw the probabilities are 
+$$
+\frac{51}{103}=0.495 > \frac{25}{51}=0.49
+$$
+
+There is a slightly higher chance to draw two red cards from the larger stack.
+:::
+
+### Rapid Fire
+
+Cowboy Billy carries a Colt single action 6 shooter revolver. When he fires all 
+6 shots in a row, the time between the first bullet and the last is 60 seconds. 
+How long would it take him to fire 3 shots?
+
+::: {.callout-tip title="Solution" collapse=true}
+It will take him 24 seconds to fire three shots. Wait, what?
+
+The relevant pattern here is about the time elapsed between shots. If the shots
+are fired at regular intervals, then Billy will take 12 seconds between the 
+six shots. 12 seconds after the first shot he fires the second bullet,
+12 seconds after that he fires the third bullet.
+
+Another way of thinking about this is the distance at which fence posts are 
+placed. In a fence with six posts, the first one is at 0/5^th^ total distance, 
+the second post is located 1/5^th^ of the total distance, and so on.
+:::
+
+### Crossing the River
+
+A farmer is on his way back from the market, with him he has a fox, a chicken 
+and some grain. To get home he needs to cross a river using a small boat that can
+accommodate only him and one of the other items. Unfortunately, if the fox is 
+left alone with the chicken it will eat it. If the chicken is left alone with 
+the grain, it will eat it. How can the farmer cross the river and bring home
+the fox, the chicken, and the grain?
+
+::: {.callout-tip title="Solution" collapse=true}
+This will take several trips across the river:
+
+1. He takes the chicken across the river.
+2. He returns in an empty boat and picks up the fox.
+3. He takes the fox across the river and picks up the chicken.
+4. He returns with the chicken in the boat and deposits it while picking up the grain.
+5. He takes the grain across the river. Now he has the chicken on the near side
+of the river and the fox and the grain on the far side.
+6. He returns in an empty boat and picks up the chicken.
+7. He takes the chicken across the river, now all three items have crossed.
+
+The trick is to take one item---here, the chicken---back and forth to make sure
+it is not alone with the item it would destroy.
+
+:::
+

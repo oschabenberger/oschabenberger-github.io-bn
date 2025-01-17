@@ -1,0 +1,330 @@
+
+# Approach and Methodology {#sec-busi-approach}
+
+## General Approach
+
+Because the Business Understanding phase is pivotal to a project's ultimate success, it needs to be **inclusive**, **iterative**, and have **specific deliverables** that must be met to be effective.
+
+### Inclusive Discovery
+
+Here is a list of typical participants in the Business Understanding phase for a large-scale project. These are the people who will be directly affected by the project or have insights that will be used to inform the requirements and/or project design. Usually, there will be a multi-day kickoff to perform the Business Understanding discovery with the entire group present. This is important to ensure that business problem framing and solution framing are aligned and that roadblocks are identified quickly and addressed inline. While this appears to be a large number of participants, some of the roles outlined here can be filled by a single person. Many projects have ultimately been derailed because key participants were not included in the Business Understanding meetings, leading to unidentified roadblocks or business objectives.
+
+#### Strategic stakeholders
+
+Generally, executives at the SVP level or higher focus on the strategic objectives of the company. In some organizations, Directors also fill this role. Higher-level executives want to ensure that projects align with strategic objectives.
+
+-   C-level executives (including CEO, CFO, etc.)
+-   Executive Vice Presidents (EVP-level) executives
+-   Senior Vice Presidents (SVP-level) executives
+-   Directors (in some organizations)
+
+#### Tactical stakeholders
+
+-   Managers
+-   Team members
+
+Tactical stakeholders are the process owners. They perform the "day-to-day" process work. Often, tactical stakeholders are the teams that will use the data science solutions to bring about change. They ensure continuity with current business processes and provide valuable feedback on how the data science-driven solution should work.
+
+#### Data subject matter experts
+
+-   Business analysts
+-   Data engineers
+
+Data subject matter experts understand the structure, semantic meaning, and business importance of data in corporate data stores. They identify potential issues with data availability, quality, privacy, and other concerns.
+
+#### Information technology (IT)
+
+-   Enterprise architects
+-   Software developers
+
+Enterprise architects understand the topology of hardware infrastructure and design of software systems and how they integrate to deliver business solutions. They ensure that the data science solution follows architectural and security standards. Software developers create the necessary middleware (software that contains business logic) and user interface elements of the data science solution.
+
+#### Data science team
+
+-   Data scientists
+-   Business analysts
+
+Data scientists build predictive and prescriptive models that drive both tactical and strategic decisions. Business analysts deliver business intelligence reporting, dashboarding of Key Performance Indicators (KPIs), and visualizations.
+
+
+### Iterative Refinement
+
+The CRISP-DM process was developed with iterative learning and continuous improvement in mind. The Business Understanding phase is iterative, meaning that it starts with an initial problem definition and evolves into a more refined problem and solution definition. It can be helpful to review the problem definition at each stage of the process to ensure business stakeholders remain aligned with your understanding of the opportunities and solutions. It is common for business stakeholders' priorities to change as the project progresses. Multi-month (or even multi-year) projects can fail if priorities change, processes evolve, or new business problems are identified and the design is not updated accordingly.
+
+
+### Specific Deliverables: Business Understanding Document
+
+The Business Understanding document serves as the foundational blueprint for any data science project, providing a comprehensive framework that connects business objectives with technical implementation. Its primary purpose is to ensure all stakeholders have a clear, shared understanding of what the project aims to achieve, how it will be executed, and how success will be measured. This document acts as both a strategic compass and an operational roadmap. Starting with strategic alignment and stakeholder analysis, it establishes the "why" and "who" of the project. The requirements documentation and feasibility assessment sections then build upon this foundation to define the "what" and "how possible." The business process impact analysis ensures we understand the organizational changes needed, while the KPIs and success criteria establish how we'll measure progress and success. Finally, the project plan transforms all these insights into actionable steps. Most importantly, this document serves as a single source of truth that teams can reference throughout the project lifecycle to maintain alignment, resolve disputes, and make informed decisions. It should be treated as a living document that can be updated as new information emerges or business conditions change while still maintaining its core purpose of keeping the project aligned with business objectives.
+
+#### Overview of strategic alignment
+
+Strategic alignment focuses on ensuring the data mining initiative directly supports business objectives and strategy. This includes documenting current business challenges, identifying key stakeholders and their needs, and understanding how the project's outcomes will drive business value. It also involves mapping organizational capabilities, constraints, and assumptions that could impact project success.
+
+#### Stakeholder analysis
+
+A detailed mapping of:
+
+-   Key stakeholders and their roles
+-   Communication requirements and preferences
+-   Decision-making authority levels
+-   Expected involvement and responsibilities
+-   Impact assessment for each stakeholder group
+
+#### Requirements documentation
+
+A comprehensive documentation of both functional and technical requirements, including:
+
+-   Data requirements and sources
+-   System integration needs
+-   Security and compliance requirements
+-   Stakeholder access and reporting needs
+-   Performance and scalability requirements
+-   Data governance and privacy considerations
+
+#### Feasibility assessment
+
+A thorough analysis that evaluates:
+
+-   Technical feasibility (available tools, data, expertise)
+-   Economic feasibility (ROI analysis, cost-benefit breakdown)
+-   Operational feasibility (organizational readiness)
+-   Legal and ethical considerations
+-   Data availability and quality assessment
+-   Resource availability and constraints
+
+#### Business process impact analysis
+
+Documentation of how the data mining project will affect:
+
+-   Current business processes
+-   Workflow changes needed
+-   Training requirements
+-   System integrations
+-   Organizational change management needs
+-   Dependencies on other systems or processes
+
+#### KPI and metrics
+
+The KPI and metrics deliverable establishes quantifiable measures that will be used to track project progress and success. This includes identifying both business KPIs (like revenue growth, customer retention, or cost reduction) and technical KPIs (model accuracy, precision, recall). Each metric should have a clear baseline, target value, and measurement methodology. The document should also explain how these metrics connect to broader business objectives.
+
+#### Success criteria
+
+Success criteria define the specific thresholds and conditions that must be met for the project to be considered successful. This deliverable includes both business and technical success criteria:
+
+-   Business criteria might specify required improvements in operational efficiency, revenue targets, or cost savings
+-   Technical criteria outline required model performance levels, data quality standards, and system performance requirements
+
+The document should also detail how success will be measured and validated throughout the project lifecycle.
+
+#### Project plan
+
+The project plan provides a comprehensive roadmap for executing the data science initiative. It includes:
+
+-   Detailed timeline with major milestones and dependencies
+-   Resource requirements (technical, human, and infrastructure)
+-   Risk assessment and mitigation strategies
+-   Budget allocation and tracking mechanisms
+-   Communication plan for stakeholders
+-   Quality assurance approach and checkpoints
+-   Change management strategy
+-   Contingency plans
+
+The plan should be realistic, accounting for available resources and organizational constraints while maintaining alignment with business objectives.
+
+------------------------------------------------------------------------
+
+## Methodology {#sec-busi-methodology}
+
+### Performing Business Discovery and Framing the Problem
+
+Here are some requirements for effectively performing discovery with business stakeholders:
+
+#### Start with why
+
+-   Begin every discovery session by understanding the fundamental business drivers
+-   Ask "Why now?" to understand urgency and priority
+-   Connect the initiative to strategic business objectives
+-   Define clear, measurable success metrics aligned with business KPIs
+
+#### Stakeholder mapping
+
+-   Create a comprehensive stakeholder map early in the process
+-   Identify both direct and indirect stakeholders
+-   Include domain experts who understand the business context
+-   Document each stakeholder's interests, influence, and concerns
+-   Map dependencies between stakeholder groups
+
+#### Current state analysis
+
+-   Document existing business processes and workflows
+-   Identify pain points and inefficiencies
+-   Map the current data landscape and systems
+-   Understand existing solutions and why they're insufficient
+-   Analyze current performance metrics
+
+#### Problem definition
+
+-   Use root cause analysis to identify underlying issues
+-   Quantify the business impact of the problem
+-   Define clear boundaries and scope
+-   Distinguish between symptoms and core problems
+-   Identify interconnected challenges
+
+#### Value proposition
+
+-   Calculate potential ROI and business benefits
+-   Identify both tangible and intangible benefits
+-   Estimate resource requirements and costs
+-   Set realistic timeline expectations
+-   Consider long-term strategic value
+
+#### Data science goals
+
+-   Translate business objectives into specific data science goals
+-   Define clear success criteria for the analytical solution
+-   Identify technical objectives and requirements
+-   Document constraints and limitations
+-   Align with data governance policies
+
+#### Risk assessment
+
+-   Identify potential technical and business risks
+-   Assess data quality and availability risks
+-   Develop mitigation strategies
+-   Consider regulatory and compliance implications
+-   Evaluate security considerations
+
+#### Solution exploration
+
+-   Explore multiple potential approaches
+-   Conduct feasibility analysis for each option
+-   Identify quick wins and long-term solutions
+-   Analyze trade-offs between different approaches
+-   Consider scalability requirements
+
+#### Change management
+
+-   Develop a stakeholder communication plan
+-   Identify training and support needs
+-   Plan for organizational adoption
+-   Consider cultural impacts and resistance
+-   Create feedback mechanisms
+
+#### Documentation
+
+-   Maintain clear documentation of requirements
+-   Record assumptions and dependencies
+-   Create a glossary of business terms
+-   Document decisions and their rationale
+-   Establish version control
+
+Each of these steps should be applied iteratively throughout the business understanding phase. Remember to:
+
+-   Validate findings with stakeholders regularly
+-   Update documentation as new information emerges
+-   Keep focus on **business value rather than technical solutions**
+-   Maintain clear communication channels with all stakeholders
+-   Foster collaborative problem-solving
+
+### Framing/Presenting a Data Science Based Solution Back to the Business Stakeholders
+
+Here are some requirements for effectively presenting data science solutions to business stakeholders:
+
+#### Executive summary focus
+
+-   Begin with clear business value proposition
+-   Highlight key findings and recommendations
+-   Present ROI and business impact metrics upfront
+-   Keep technical details in appendices
+-   Address strategic alignment
+
+#### Story structure
+
+-   Start with the business problem context
+-   Narrate the analytical journey
+-   Show the solution evolution
+-   End with concrete impact and results
+-   Include real-world examples
+
+#### Business metrics first
+
+-   Lead with improvements to key business KPIs
+-   Quantify cost savings and efficiency gains
+-   Highlight new revenue or growth opportunities
+-   Compare results to initial success criteria
+-   Show trends and projections
+
+#### Visual communication
+
+-   Use clear, business-focused visualizations
+-   Create interactive demonstrations when possible
+-   Develop intuitive business dashboards
+-   Avoid complex technical plots
+-   Ensure accessibility
+
+#### Technical translation
+
+-   Convert technical concepts into business language
+-   Use relevant industry analogies
+-   Provide real-world examples
+-   Layer technical details based on audience
+-   Create relatable metaphors
+
+#### Implementation plan
+
+-   Outline clear deployment steps
+-   Detail resource requirements
+-   Present realistic timelines
+-   Include key milestones and dependencies
+-   Address operational impacts
+
+#### Risk management
+
+-   Be transparent about limitations
+-   Clarify key assumptions
+-   Present mitigation strategies
+-   Address potential failure modes
+-   Include contingency plans
+
+#### Adoption strategy
+
+-   Detail user training requirements
+-   Present change management approach
+-   Outline ongoing support plan
+-   Include feedback mechanisms
+-   Consider cultural factors
+
+#### Future roadmap
+
+-   Suggest next steps and phases
+-   Present scaling opportunities
+-   Identify potential enhancements
+-   Link to long-term business strategy
+-   Consider emerging technologies
+
+#### Stakeholder engagement
+
+-   Prepare for common questions
+-   Identify key decision points
+-   Define ongoing success metrics
+-   Plan for different audience levels
+-   Build consensus
+
+Key Presentation Principles:
+
+-   Tailor the depth based on audience
+-   Focus on outcomes over methods
+-   Use progressive disclosure for technical details
+-   Encourage interactive discussion
+-   Prepare multiple paths through the material
+-   Have technical details ready but not front-loaded
+-   Maintain engagement through storytelling
+
+Remember to:
+
+-   Prepare backup slides for detailed questions
+-   **Have specific examples ready**
+-   **Know your audience's technical level**
+-   **Be ready to pivot based on stakeholder reactions**
+-   Document key decisions and next steps
+-   Follow up on action items promptly

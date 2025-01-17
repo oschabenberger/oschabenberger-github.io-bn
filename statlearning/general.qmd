@@ -327,23 +327,22 @@ The first distinction is whether the target variable is continuous or discrete.
 
 -   **Continuous**: the number of possible values of the variable is not countable. Typical examples are physical measurements such as weight, height, length, pressure, temperature. If the values of a variable are countable but the cardinality is high, applying methods for continuous data can make sense---for example, number of days since birth.
 
--   **Discrete**: the number of possible values is countable. Even if the number of possible values is infinite, the variable is still discrete. The number of fish caught per day does not have a theoretical upper limit, although it is highly unlikely that a weekend warrior will catch 1,000 fish. A commercial fishing vessel might.
-
+-   **Discrete**: the number of possible values is countable. Even if the number of possible values is infinite, the variable is still discrete. The number of fish caught per day does not have a theoretical upper limit, although it is highly unlikely that a weekend warrior will catch 1,000 fish. A commercial fishing vessel might.\
+\
 Discrete variables are further divided into the following groups:
+    - **Count Variables**: the values are true counts, obtained by enumeration. There are two types of counts:
 
--   **Count Variables**: the values are true counts, obtained by enumeration. There are two types of counts:
+        - **Counts per unit**: the count relates to a unit of measurement, e.g., the number of fish caught per day, the number of customer complaints per quarter, the number of chocolate chips per cookie, the number of cancer incidences per 100,000.
 
-    -   **Counts per unit**: the count relates to a unit of measurement, e.g., the number of fish caught per day, the number of customer complaints per quarter, the number of chocolate chips per cookie, the number of cancer incidences per 100,000.
+        - **Proportions (Counts out of a total)**: the count can be converted to a proportion by dividing it with a maximum value. Examples are the number of heads out of 10 coin tosses, the number of larvae out of 20 succumbing to an insecticide,
 
-    -   **Proportions (Counts out of a total)**: the count can be converted to a proportion by dividing it with a maximum value. Examples are the number of heads out of 10 coin tosses, the number of larvae out of 20 succumbing to an insecticide,
+    - **Categorical Variables**: the values consist of labels, even if numbers are used for labeling.
 
--   **Categorical Variables**: the values consist of labels, even if numbers are used for labeling.
+        - **Nominal variables**: The labels are unordered, for example the variable "fruit" takes on the values "apple", "peach", "tomato" (yes, tomatoes are fruit but do not belong in fruit salad).
 
-    -   **Nominal variables**: The labels are unordered, for example the variable "fruit" takes on the values "apple", "peach", "tomato" (yes, tomatoes are fruit but do not belong in fruit salad).
+        - **Ordinal variables**: the category labels can be arranged in a natural order in a lesser-greater sense. Examples are 1---5 star reviews or ratings of severity ("mild", "modest", "severe").
 
-    -   **Ordinal variables**: the category labels can be arranged in a natural order in a lesser-greater sense. Examples are 1---5 star reviews or ratings of severity ("mild", "modest", "severe").
-
-    -   **Binary variables**: take on exactly two values (dead/alive, Yes/No, 1/0, fraud/not fraud, diseased/not diseased)
+        - **Binary variables**: take on exactly two values (dead/alive, Yes/No, 1/0, fraud/not fraud, diseased/not diseased)
 
 ## Supervised and Unsupervised Methods
 

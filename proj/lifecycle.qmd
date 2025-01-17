@@ -1,90 +1,236 @@
-# The Data Science Project Lifecycle
+# The Data Science Project Lifecycle {#sec-proj-lifecycle}
 
 ## Introduction
 
-A data scientist finds an interesting set of data, builds a clever analytical model, and changes the world.
+A data scientist finds an interesting set of data, builds a clever analytical model, 
+and changes the world.
 
-This sounds great; unfortunately, data science projects do not unfold this way in the real world. At least not most of them; almost none of them. In this section we examine the typical structure of data science projects in non-research settings—that is, a project to solve a specific problem in an organization. Let’s call it the *business* problem, acknowledging that such problems arise in industry, government, and non-profit organizations alike. The next chapter takes a closer look at data science in research settings.
+This sounds great; unfortunately, data science projects do not unfold this way 
+in the real world. At least not most of them; almost none of them. In this section 
+we examine the typical structure of data science projects in non-research settings---that is, 
+a project to solve a specific problem in an organization. Let’s call it the 
+*business* problem, acknowledging that such problems arise in industry, government, 
+and non-profit organizations alike. The next chapter takes a closer look at data 
+science in research settings.
 
-Data science models play a big part in this, but it is not where we start. Building a model is just one step in the lifecycle of a data science project.
+Data science models play a big part in this, but it is not where we start. Building 
+a model is just one step in the lifecycle of a data science project.
 
-Projects involve many steps, diverse teams, and projects can fail at any step. The model building phase is not where most unsuccessful projects go off the rails. Industry analyst firm Gartner estimated in 2016 that about 60% of data science projects are failing and admitted two years later that was an underestimate; the real failure rate was closer to 85%. That is a sobering statistic, and many reasons are cited for the failures:
+Projects involve many steps, diverse teams, and projects can fail at any step. 
+The model building phase is not where most unsuccessful projects go off the rails. 
+Industry analyst firm Gartner estimated in 2016 that about 60% of data science 
+projects are failing and admitted two years later that was an underestimate; the
+real failure rate was closer to 85%. That is a sobering statistic, and many 
+reasons are cited for the failures:
 
 -   Difficulties inherent in integrating data-driven solutions with existing processes and applications
-
 -   Management resistance and internal politics about project ownership, budget, etc.
-
 -   Lack of skills
-
 -   Lack of quality data
-
 -   Security and governance challenges
 
-The most important reason for failure of data science projects is called the “last-mile problem” of data science: the struggle to deploy the result of the data analysis (models) into processes and applications where they are used by the organization and are serving the intended end user. It is one thing to build from historical data a model that can predict customer churn accurately. If the goal is to provide a customer service representative with a real-time prediction of a customer’s tendency to cancel a service and to recommend an action, e.g., to give a discount, the project is not complete until the model is incorporated into the system through which customers and representatives interact.
+The most important reason for failure of data science projects is called the 
+“last-mile problem” of data science: the struggle to deploy the result of the data 
+analysis (models) into processes and applications where they are used by the 
+organization and are serving the intended end user. It is one thing to build from 
+historical data a model that can predict customer churn accurately. If the goal 
+is to provide a customer service representative with a real-time prediction of a 
+customer’s tendency to cancel a service and to recommend an action, e.g., to give 
+a discount, the project is not complete until the model is incorporated into the 
+system through which customers and representatives interact.
 
-It is best to recognize the reality that data science projects will likely fail unless they are carefully planned and executed. Successful projects combine technical skills with soft skills such as communication, trust building, transparency, and empathy. Successful projects are a team sport that incorporate collaboration and communication throughout the project cycle with data scientists taking on multiple roles. The data scientist is at times evangelist, planner, presenter, data wrangler, modeler, software developer, engineer, facilitator, implementer, storyteller, auditor.
+It is best to recognize the reality that data science projects will likely fail 
+unless they are carefully planned and executed. Successful projects combine technical 
+skills with soft skills such as communication, trust building, transparency, and 
+empathy. Successful projects are a team sport that incorporate collaboration and 
+communication throughout the project cycle with data scientists taking on multiple 
+roles. The data scientist is at times evangelist, planner, presenter, data wrangler, 
+modeler, software developer, engineer, facilitator, implementer, storyteller, auditor.
 
-It is often said that data scientists spend 80% of their time wrangling and cleaning data. That is not true, but the narrative reveals that a data scientists’ job entails much more than the technical aspects of building models on prepared data sets. A good portion of the job is to meet people, interact about project requirements, communicate insights, manage projects, etc. In the terminology of people management, data scientists are “T-shaped people” who combine depth of expertise with broad cross-functional competencies (@fig-proj-tshaped).
+It is often said that data scientists spend 80% of their time wrangling and cleaning 
+data. That is not true, but the narrative reveals that a data scientists’ job 
+entails much more than the technical aspects of building models on prepared data 
+sets. A good portion of the job is to meet people, interact about project 
+requirements, communicate insights, manage projects, etc. In the terminology of 
+people management, data scientists are “T-shaped people” who combine depth of 
+expertise with broad cross-functional competencies (@fig-proj-tshaped).
 
 ![The concept of “T-shaped” competencies, combining deep expertise in one area with breadth in multiple disciplines and systems.](images/TShapedPeople.png){#fig-proj-tshaped .lightbox fig-alt="Breadth and depth of experience displayed in the shape of a \"T\"" fig-align="center" width="85%"}
 
-This allows data scientists to understand and communicate about many disciplines and systems (the horizontal bar of the generalist) combined with deep expertise in at least one discipline or system, e.g., cloud-based machine learning (the vertical bar of the expert). As a data scientist you work both independently and collaboratively.
+This allows data scientists to understand and communicate about many disciplines 
+and systems (the horizontal bar of the generalist) combined with deep expertise 
+in at least one discipline or system, e.g., cloud-based machine learning (the 
+vertical bar of the expert). As a data scientist you work both independently and 
+collaboratively.
 
-The associated skill sets are exercised during the key stages in the data science project lifecycle.
+The associated skill sets are exercised during the key stages in the 
+data science project lifecycle.
 
 Our methodology calls out seven phases in the project: discovery, data engineering, model planning, model building, communication, deployment, and monitoring (@fig-proj-lifecycle).
 
 ![The stages of the data science project lifecycle.](images/DSProjectLifeCycle.png){#fig-proj-lifecycle .lightbox fig-alt="Diagram of a process" fig-align="center" width="55%"}
 
-Other process models for data science exist, for example [CRISP-DM](https://www.datascience-pm.com/crisp-dm-2/), the cross-industry standard process for data mining is the foundation of the data science process model according to the [Data Science Process Alliance](https://www.datascience-pm.com/). CRISP-DM is shown in @fig-proj-crispdm.
+Other process models for data science exist, for example 
+[CRISP-DM](https://www.datascience-pm.com/crisp-dm-2/), the cross-industry 
+standard process for data mining is the foundation of the data science process 
+model according to the [Data Science Process Alliance](https://www.datascience-pm.com/).
+CRISP-DM is shown in @fig-proj-crispdm.
 
 ![The CRISP-DM model for the data science process.](images/CRISP-DM.png){#fig-proj-crispdm .lightbox fig-align="center" width="75%"}
 
-The process models use similar terms and stages, what matters is not the labels but that there is a general flow that results in a data-driven solution to a real-world problem, that the stages are iterative, and that a project does not start with modeling data. To deliver a production data project that is used repeatably by an organization requires many steps before and after the data modeling phase.
+The process models use similar terms and stages, what matters is not the labels but 
+the general flow that results in a data-driven solution to a real-world problem, 
+that the stages are iterative, and that a project does not start with modeling data. 
+To deliver a production data project that is used repeatably by an organization 
+requires many steps before and after the data modeling phase.
 
-## Discovery
+The modules of this book are organized according to the flows in @fig-proj-lifecycle
+and @fig-proj-crispdm. During the discovery phase we develop an understanding
+of the business problem and whether it can be solved with data technology. 
+The data engineering phase develops our understanding of available and needed
+data sources and how to prepare the data for the modeling phase. Modeling
+comprises planning and building of statistical, machine learning, and AI models
+to address the core of the business problem. The models need to be evaluated
+against metrics that map back to the business problem. Models that perform well
+on statistical grounds but do not move the needle on key business metrics are
+not helpful. This step also involves communicating the data science solutions to
+stakeholders outside of the immediate team. If the project is accepted at this stage,
+the model needs to be integrated and deployed and its performance monitored.
 
-During the **Discovery** phase the business problem is identified and defined with enough specificity to facilitate answering the question: “Does the problem translate to data science?” A problem statement such as “We need to increase revenue” is not specific enough. The question “does a modified user interface for the checkout process increase online sales?” is more specific; it provides information about the target (online sales) and how it is related to measurable changes.
+In the following paragraphs we introduce the phases of the project life cycle
+a bit further, then dedicate entire modules to the steps.
 
-The question “Can wildlife species be identified with at least 80% accuracy from drone video?” is very specific, it identifies the goal (wildlife identification), the methodology (drone video), and what success looks like (accuracy greater than 80%). Many questions still need to be addressed before this results in a successful data science project. How will the video be taken (geographic location, flight height, type of camera, time of day, etc.)? Will wildlife be identified based on tracks, signs of habitation, animal images? Are there existing models for object detection that can be used directly or enhanced via transfer learning?
+## Discovery and Business Understanding
 
-The data scientist can help to increase specificity of the problem formulation by asking the right questions. Domain experts think and communicate in terms of subject matter. Data scientists can link the problem to data and analytic methods where that is possible. To measure the level of financial risk exposure the Chief Risk Officer of a bank is interested in forecasting VaR, the value at risk in their investment portfolio for the next two weeks. The data scientist can translate this into a simulation study: based on historical data of investment position values states of the market are simulated and the portfolio is evaluated against the simulated future market states. VaR is calculated as the 95^th^ percentile of the distribution of simulated values.
+During the **Discovery** phase the business problem is identified and defined 
+with enough specificity to facilitate answering the question: “Does the problem 
+translate to data science?” A problem statement such as “We need to increase revenue” 
+is not specific enough. The question “does a modified user interface for the 
+checkout process increase online sales?” is more specific; it provides information 
+about the target (online sales) and how it is related to measurable changes.
 
-Data science is powerful but not all questions are solved by analyzing data. The best approach might be to build a handcrafted expert system by translating existing knowledge and logic into software (think “TurboTax”) or to develop a piece of hardware. We need to be honest and transparent if data science cannot provide what is asked for. The adage that *if you have only a hammer then everything looks like a nail* applies here.
+The question “Can wildlife species be identified with at least 80% accuracy from 
+drone video?” is very specific, it identifies the goal (wildlife identification), 
+the methodology (drone video), and what success looks like (accuracy greater than 80%).
+Many questions still need to be addressed before this results in a successful 
+data science project. How will the video be taken (geographic location, flight 
+height, type of camera, time of day, etc.)? Will wildlife be identified based on 
+tracks, signs of habitation, animal images? Are there existing models for object 
+detection that can be used directly or enhanced via transfer learning?
 
-The results of a data science project need to be relevant and solve a real-world problem. A client once conveyed the following anecdote: he was approached by the data science team that proudly demonstrated a new algorithm to predict a customer’s age based on their online behavior. The executive responded “That’s cool. But we do know their date of birth.”
+The data scientist can help to increase specificity of the problem formulation by 
+asking the right questions. Domain experts think and communicate in terms of subject 
+matter. Data scientists can link the problem to data and analytic methods where 
+that is possible. To measure the level of financial risk exposure the Chief Risk 
+Officer of a bank is interested in forecasting VaR, the value at risk in their 
+investment portfolio for the next two weeks. The data scientist can translate this 
+into a simulation study: based on historical data of investment position values 
+states of the market are simulated and the portfolio is evaluated against the 
+simulated future market states. VaR is calculated as the 95^th^ percentile of the 
+distribution of simulated values.
+
+Data science is powerful but not all questions are solved by analyzing data. The 
+best approach might be to build a handcrafted expert system by translating existing 
+knowledge and logic into software (think “TurboTax”) or to develop a piece of hardware. 
+We need to be honest and transparent if data science cannot provide what is asked 
+for. The adage that *if you have only a hammer then everything looks like a nail* 
+applies here.
+
+The results of a data science project need to be relevant and solve a real-world 
+problem. A client once conveyed the following anecdote: he was approached by the 
+data science team that proudly demonstrated a new algorithm to predict a customer’s 
+age based on their online behavior. The executive responded “That’s cool. But we 
+do know their date of birth.”
 
 ![The recommender system no one needs.](images/AssociationRule_1.jpg){fig-align="center" width="50%"}
 
-During the **Discovery** phase we are beginning to deepen our data understanding. What type of data might be needed to solve the problem, and what data sources are available to us? Exploratory data analysis and visualizations inform us about the shape of the data, the distribution of the variables and possible relationships. Data quality issues will surface during this phase.
+During the **Discovery** phase we are beginning to deepen our data understanding. 
+What type of data might be needed to solve the problem, and what data sources are 
+available to us? Exploratory data analysis and visualizations inform us about the 
+shape of the data, the distribution of the variables and possible relationships. 
+Data quality issues will surface during this phase.
 
-It is important to carefully document what you find and the decisions that are being made. Why are certain data included or excluded? How are variables defined, what metadata is available? What data quality issues have surfaced (outliers, missing values, inconsistent variable definitions, etc.)? This information is important during the next stage when we use data engineering to prepare data for analysis. Just because two tables have a field `customer_id` does not imply that we can join the tables on that field. Missing values can be replaced by actual or computed values, but such data imputation is not without pitfalls either.
+It is important to carefully document what you find and the decisions that are
+being made. Why are certain data included or excluded? How are variables defined, 
+what metadata is available? What data quality issues have surfaced (outliers, 
+missing values, inconsistent variable definitions, etc.)? This information is 
+important during the next stage when we use data engineering to prepare data for 
+analysis. Just because two tables have a field `customer_id` does not imply that 
+we can join the tables on that field. Missing values can be replaced by actual 
+or computed values, but such data imputation is not without pitfalls either.
 
-During the **Discovery** phase it is also not too soon to consider the ethical concerns and implications of the project. If data will be used or collected from individuals, do we have the consent to do so? Are there potential biases that could lead to poor outcomes by perpetuating stereotypes or by withholding resources? As algorithms and models are becoming more complex, less interpretable, and more easily automated, our need for transparency increases. Data scientists play an important role in recognizing and avoiding the introduction or continuation of bias in data-based decision making. We are devoting an entire chapter to the important topic of ethical decisioning with data.
+During the **Discovery** phase it is also not too soon to consider the ethical 
+concerns and implications of the project. If data will be used or collected from 
+individuals, do we have the consent to do so? Are there potential biases that could 
+lead to poor outcomes by perpetuating stereotypes or by withholding resources? 
+As algorithms and models are becoming more complex, less interpretable, and more 
+easily automated, our need for transparency increases. Data scientists play an 
+important role in recognizing and avoiding the introduction or continuation of bias 
+in data-based decision making. We are devoting an entire chapter to the important 
+topic of ethical decisioning with data.
 
 ## Data Engineering
 
-If the real-world problem translates into a data science activity, we progress to the next stage.
+If the real-world problem translates into a data science activity, we progress to 
+the next stage.
 
-During the **Data Engineering** stage these considerations are made concrete. Are the data available to us? What is their size and quality? Are additional attributes required, if so, where do they come from? Do we need to collect more data, or can we obtain data from a 3^rd^ party source (for free, for fee)?
+During the **Data Engineering** stage these considerations are made concrete. 
+Are the data available to us? What is their size and quality? Are additional 
+attributes required, if so, where do they come from? Do we need to collect more 
+data, or can we obtain data from a 3^rd^ party source (for free, for fee)?
 
-How is raw data converted into usable form? How is data from multiple sources integrated, cleansed, and processed? It is not uncommon these days to have data stored in multiple clouds as well as on-premises systems—how do these data come together for analysis in one place?
+How is raw data converted into usable form? How is data from multiple sources 
+integrated, cleansed, and processed? It is not uncommon these days to have data 
+stored in multiple clouds as well as on-premises systems—how do these data come
+together for analysis in one place?
 
-In data science projects that go beyond reporting and building dashboards, the projects that involve data scientists building models to cluster, predict or classify, it is unusual to work directly with the raw data. Instead, data will be organized, cleansed, and stored to fit the subsequent modeling needs. How will the data be prepared for analysis and where is that data stored? Traditionally, analytic tables are two-dimensional arrays of rows and columns, where columns have simple data types such as integers, doubles, or strings. Increasingly, data can be served to analytics as JSON structures, in Parquet format, or in feature stores designed for machine learning. Data engineers and data scientists need to agree on the “best” format considering efficiency, tooling, cost, etc.
+In data science projects that go beyond reporting and building dashboards, the
+projects that involve data scientists building models to cluster, predict or classify, 
+it is unusual to work directly with the raw data. Instead, data will be organized, 
+cleansed, and stored to fit the subsequent modeling needs. How will the data be 
+prepared for analysis and where is that data stored? Traditionally, analytic tables 
+are two-dimensional arrays of rows and columns, where columns have simple data 
+types such as integers, doubles, or strings. Increasingly, data can be served 
+to analytics as JSON structures, in Parquet format, or in feature stores designed 
+for machine learning. Data engineers and data scientists need to agree on the 
+“best” format considering efficiency, tooling, cost, etc.
 
-The answer and approach to many of these questions depends on what you want to do with the data. We are looking down the road to the modeling phases and it is a great time to emphasize that the data science project cycle is not a single clockwise motion but an iterative process.
+The answer and approach to many of these questions depends on what you want to 
+do with the data. We are looking down the road to the modeling phases and it is 
+a great time to emphasize that the data science project cycle is not a single 
+clockwise motion but an iterative process.
 
-What data sources you consider is informed by the types of models you are imagining (*Model Planning* and *Model Building* stages). On the other hand, the types of data that can be made available at sufficient quantity and quality will inform the types of models you can plan for.
+What data sources you consider is informed by the types of models you are imagining 
+(*Model Planning* and *Model Building* stages). On the other hand, the types of 
+data that can be made available at sufficient quantity and quality will inform 
+the types of models you can plan for.
 
 ![The data science project cycle is iterative. You might have to move back to an earlier stage based on information discovered at a later stage.](images/DSProject_Iteration.png){.lightbox fig-align="center" width="50%"}
 
-It is often stated that 80% of the data science project is data engineering or data preparation. That is not true. What is true is that you should spend effort here because not having the right data prepared in the right way can invalidate the subsequent steps and jeopardize the project. It is also true that in smaller organizations you might not find dedicated data engineering teams that could do the heavy lifting in preparing high-quality data for analysis; some of that work then falls to the data scientist.
+It is often stated that 80% of the data science project is data engineering and 
+data preparation. That is not true. What is true is that you should spend effort 
+here because not having the right data prepared in the right way can invalidate 
+the subsequent steps and jeopardize the project. It is also true that in smaller
+organizations you might not find dedicated data engineering teams that could do 
+the heavy lifting in preparing high-quality data for analysis; some of that work 
+then falls to the data scientist.
 
-Imagine that you find a very strong relationship between patient well-being and a health metric in a long-term study only to find out when you communicate the results that the definition of the health metric was changed half-way through the study.
+Imagine that you find a very strong relationship between patient well-being and 
+a health metric in a long-term study only to find out when you communicate the 
+results that the definition of the health metric was changed half-way through the 
+study.
 
-Imagine that you fail to find evidence for the effects of climate change in a multi-national study and discover later that during merging of data from different countries measurements in imperial and metric units were intermingled and that temperatures in degrees Fahrenheit were not converted to degrees Celsius.
+Imagine that you fail to find evidence for the effects of climate change in a 
+multi-national study and discover later that during merging of data from different 
+countries measurements in imperial and metric units were intermingled and that 
+temperatures in degrees Fahrenheit were not converted to degrees Celsius.
 
-When data are missing, we must ask questions about why the data points are unobserved. Are entire records missing, for example, when a group of the population was not included in the data collection? Were measurements unobservable because of limited precision of the instruments? Did subjects drop out of the study, if so, is the dropout related to the purpose of the study? Is the reason why survey recipients did not answer questions related to the study itself?
+When data are missing, we must ask questions about why the data points are unobserved. 
+Are entire records missing, for example, when a group of the population was not 
+included in the data collection? Were measurements unobservable because of limited 
+precision of the instruments? Did subjects drop out of the study, if so, is the 
+dropout related to the purpose of the study? Is the reason why survey recipients 
+did not answer questions related to the study itself?
 
 Some typical tasks during the **Data Engineering** stage involve
 
@@ -96,62 +242,296 @@ Some typical tasks during the **Data Engineering** stage involve
 
 -   **Data Delivery**: The result of data preparation is made available in an agreed-upon format, for example, as Parquet files stored in S3 or as tables in a database.
 
-## Model Planning
+## Modeling
 
-A model is a generic term for a system that takes inputs, processes them according to algorithmic logic and produces outputs (@fig-proj-simplemodel). Chat GPT is a model (a large language model) that takes input in the form of text prompts, passes the prompts through a pre-trained transformer algorithm, and generates text responses. The Chat GPT model contains parameters, unknown quantities for which we need to find values before the model can be used. This is known as training the model. Once trained, the algorithmic logic of the model can be applied—this step is often referred to as *model inference* in machine learning or *scoring* in statistics.
+### What is in a Model?
 
-### Types of Algorithms
+The term *model* is pervasive in our field, and we come to this conversation with 
+different notions of what constitutes a model. Before going any further in the 
+discussion, we'll discuss the concept of a model in the context of data science.
 
-Statistical models and machine learning models are trained on data. The training process shapes the capabilities of the model based on the training data. As a rule, more complex models require larger training data sets. The following table shows the increasing complexity (as measured by the number of parameters) of Open AI’s GPT foundation models. GPT-3.5 has 175 billion parameters and essentially was trained on all text data available on the internet.
+```{r, fig.align="center"}
+#| label: fig-proj-simplemodel
+#| echo: false
+#| fig-cap: |
+#|   A simple representation of a model that processes inputs with 
+#|   algorithmic logic and produces output.
+#| fig-alt: |
+#|   A diagram displaying the model input and output
+#| out.width: 75%
 
-| Version of GPT | Released      | Number of Parameters                                                                    |
-|---------------|---------------|------------------------------------------|
-| GPT-1          | June 2018     |                                                                                         |
-| GPT-2          | February 2019 | 117 million                                                                             |
-| GPT-3.5        | November 2022 | 1.5 billion                                                                             |
-| GPT-4          | March 2023    | Rumored to consist of 8 sub-models with 220 billion parameters each, 1.7 trillion total |
+knitr::include_graphics("images/BasicModel.png")
+```
 
-: Evolution of number of parameters in Open AI’s generative pre-trained transformer foundation models.
+From the 30,000 foot view a model is simply a mechanism to process some input and 
+produce a corresponding output (@fig-proj-simplemodel).
 
-In general, models do not have to rely on data to craft their algorithms. Expert systems, also known as hand-crafted knowledge systems, are translating through software the logic applied by experts to make decisions into computer instructions. Tax preparation software is an example of such an expert system. The input to the system is data about your financial situation, the algorithm represents the logic of the tax code translated into machine instructions, the output is your tax liability or refund. You would not want to use a model that is trained on data to predict your tax liability. The training data would be past tax returns, including fraudulent ones and returns that are not at all like yours. The algorithm would not attempt to reproduce the tax code, but to predict the average tax liability of returns similar to those used in training. That might be useful for government planning purposes to estimate budgets but not to ascertain an individual’s precise tax liability.
+The input to drive the model algorithm is almost always some form of data. The algorithm 
+that processes the inputs can be based on data, but that is not necessarily so. 
+Suppose the problem we are trying to solve is to ascertain an individuals annual 
+federal income tax. The problem is solved with a model that takes as **input**
+the individuals financial situation. This information is typically known without
+error as information about income, property taxes, expenses, etc. is well documented. 
+The **algorithm** processing this input is a translation of the relevant information 
+in the federal income tax laws into machine instructions. The **output** is the
+amount of money owed to the government or expected as a refund.
 
-The algorithms in models can also derive from rules based on operating an organization; these are called business rules. They often take the form of “when this, do that” logic. For example,
+Now suppose that for some reason the input data in the tax problem is not known 
+without error. For example, income from tips, medical expenses or charitable contributions 
+might be best guesses rather than exact amounts. Income data could be noisy because 
+foreign income is converted at fluctuating exchange rates. If the input data is 
+the realization of stochastic (random) influences, should we modify the algorithm?
+
+When the input data to an algorithm is the result of observing random variation, 
+we are looking to the algorithms of the model to find the signal in the data, to 
+de-noise it. The signal located in the data is then transformed into the model output. 
+Most models we build in data science are of this kind because the data we work with 
+is inherently noisy. The reasons for the random variations are many: selecting 
+observation from a larger population at random, applying treatments to randomly 
+chosen experimental units, variations in measurement instruments and procedures, 
+variations in the environment in which a phenomenon is observed, and so on. The 
+algorithms we use depend on the goals of the analysis, properties of the data, 
+assumptions we are willing to make, attributes we look for in competitive models, 
+and personal preferences.
+
+Much of data science methodology is to select the right approach (algorithm) based 
+on input data, learning methodology (supervised, unsupervised, semi-supervised, 
+self-supervised) and analysis goal (prediction, recommendation, classification, 
+clustering, dimension reduction, sequential decisioning), to train the model, and 
+to deploy the model. @fig-proj-dsmodels is an attempt at structuring the input, 
+algorithm, and output components of a model in the data science context. The diagram 
+is complex and woefully incomplete and is intended to give you an idea of the 
+diversity of methods and the many ways we can look at things. For example, in 
+discussing input data we could highlight how data are stored, how fast it is moving, 
+the degree to which the data is structured, the data types, and so forth. There 
+are many other categorizations of data one could have listed.
+
+The categorization of algorithms---what many consider the models in the narrow 
+sense---leaves out semi-supervised learning, self-supervised learning, transfer 
+learning, and other learning methods. Volumes of books and papers have been written 
+about every item in the list of algorithms and many algorithms are represented by 
+a simple description. Multilayer networks, for example, include artificial neural 
+networks, deep networks such as convolutional and recurrent networks, and transformer 
+architectures such as GPT.
+
+![Structuring and categorizing input, algorithm, and output in data science models.](images/DataScienceModels.png){#fig-proj-dsmodels .lightbox fig-alt="Structuring and categorizing input, algorithm, and output in data science models." fig-align="center"}
+
+George E.P. Box is credited with coining the much-used phrase “all models are wrong, 
+but some are useful”. The phrase appears partially (“all models are wrong”) twice 
+in his 1976 paper on [Science and Statistics](http://www-sop.inria.fr/members/Ian.Jermyn/philosophy/writings/Boxonmaths.pdf) [@GEPBox1976]:
+
+> *Since all models are wrong the scientist cannot obtain a "correct" one by excessive elaboration.*
+>
+> *Since all models are wrong the scientist must be alert to what is importantly wrong.*
+
+The full phrase appears on p. 424 of his book with Norman Draper [@BoxDraper_1987].
+
+The takeaway is that any model is an abstraction of a phenomenon and we strive to 
+find a useful abstraction. The model does not attempt to reproduce the phenomenon. 
+The tax algorithm converts the essence of the tax code into machine instructions, 
+it is not an electronic copy of the entire law. The purpose is to accurately 
+calculate an entity’s tax, anything else can be stripped away. An algorithm processing 
+noisy data that reproduces the data is uninteresting. The goal is to abstract the 
+data in such a way to allow separating the signal from the noise and to convert 
+the signal into the desired output.
+
+The first G.E.P. Box quote instructs us not to overdo it in building models; this 
+translates to the problem of **overfitting** in data science, crafting a model 
+that follows the training data too closely and as a result does not generalize 
+well to new data points. If the goal is to predict, classify, or cluster the unseen; 
+generalizability of the model is key. A model to forecast stock prices or trading 
+volumes is judged by how well it can predict the future, not by how well it can 
+predict the past. The adequate level of generalization for that model must be 
+wrung from current and past stock prices. Finding the appropriate level of abstraction 
+is resolved by striking the right balance in the **bias-and-variance tradeoff**.
+
+John von Neumann is said to have remarked
+
+> *With four parameters I can fit an elephant and with five I can make him wiggle his trunk.*
+
+If the point of the model is to capture the essence of the elephant, then four 
+parameters would be enough.
+
+The second G.E.P. Box quote instructs us that models are abstracting away features 
+of the phenomenon. If these are important features, the model is not useful. In 
+the best case this model does not meet its goal and is revised or abandoned. In 
+the worst case the model leads to bad decisions and harmful outcomes.
+
+No matter how complex the model, we need to strive to understand how it works 
+(interpret the model), not just what it does. If a model is not intrinsically 
+interpretable then we need to strive to explain the forces that drive the model, 
+keeping in mind that we are then making statements about the model and not about
+the underlying phenomenon we have abstracted.
+
+It might seem like a daunting task to command the plethora of complexity displayed 
+in @fig-proj-dsmodels, understand all the pros and cons, grok the idiosyncrasies 
+of software implementations, write code to train the model(s), communicate the 
+results, and possibly implement a solution within a business context. 
+
+That is what we are here for.
+
+### Model Planning
+
+We have seen that *model* is a generic term for a system that takes inputs, processes them according 
+to algorithmic logic and produces outputs (@fig-proj-simplemodel). ChatGPT is a
+model (a large language model) that takes input in the form of text prompts, passes 
+the prompts through a pre-trained transformer algorithm, and generates text responses. 
+The ChatGPT model contains parameters, unknown quantities for which we need to 
+find values before the model can be used. This is known as training the model. 
+Once trained, the algorithmic logic of the model can be applied—this step is often 
+referred to as *model inference* in machine learning or *scoring* in statistics.
+
+#### Types of algorithms
+
+Statistical models and machine learning models are trained on data. The training 
+process shapes the capabilities of the model based on the training data. As a rule, 
+more complex models require larger training data sets. The following table shows 
+the increasing complexity (as measured by the number of parameters) of Open AI’s GPT 
+foundation models. GPT-3.5 has 175 billion parameters and essentially was trained 
+on text data scraped from the internet.
+
+| Version of GPT | Released      | Number of Parameters                   |
+|---------------|---------------|-----------------------------------------|
+| GPT-1         | June 2018     | 117 million                             |
+| GPT-2         | February 2019 | 1.5 billion                             |
+| GPT-3.5       | November 2022 | 175 billion                             |
+| GPT-4         | March 2023    | Rumored to consist of 8 sub-models with 220 billion parameters each, 1.7 trillion total |
+
+: Evolution of number of parameters in Open AI’s generative pre-trained transformer foundation models. {#tbl-gpt-parms .striped}
+
+In general, models do not have to rely on data to craft their algorithms. Expert 
+systems, also known as hand-crafted knowledge systems, are translating through 
+software the logic applied by experts to make decisions into computer instructions. 
+Tax preparation software is an example of such an expert system. The input to the 
+system is data about your financial situation, the algorithm represents the logic 
+of the tax code translated into machine instructions, the output is your tax liability 
+or refund. You would not want to use a model that is trained on data to predict 
+your tax liability. The training data would be past tax returns, including fraudulent 
+ones and returns that are not at all like yours. The algorithm would not attempt to 
+reproduce the tax code, but to predict the average tax liability of returns similar 
+to those used in training. That might be useful for government planning purposes to 
+estimate budgets but not to ascertain an individual’s precise tax liability.
+
+The algorithms in models can also derive from rules based on operating an organization; 
+these are called business rules. They often take the form of “when this, do that” logic. For example,
 
 -   If a job completes more than 5 business days after the request date, apply a 10% discount.
-
 -   A manager is defined as an employee to whom more than two people report directly.
-
 -   Customers are grouped based on their payment behavior: those who pay monthly balances in full, those who pay in installments, and those who have late payments.
 
-A real-world problem can involve one or more model types, not all of which depend on data science. The solution to the problem can require incorporating, blending (an ensemble), or switching between models.
+A real-world problem can involve one or more model types, not all of which depend 
+on data science. The solution to the problem can require incorporating, blending 
+(an ensemble), or switching between models.
 
-During the **Model Planning** stage, we examine alternative approaches to capture the key decision in a data science project. What kind of model can produce a solution: a mathematical model, physical model, statistical model, machine learning model, expert system, etc.? What alternatives are available within the relevant classes? For example, if the goal is to classify a two-level target variable, we might consider logistic regression, classification trees, random forests, gradient boosted trees, support vector machines, regularized regression and so on. What are their pros and cons?
+During the **Model Planning** stage, we examine alternative approaches to capture 
+the key decision in a data science project. What kind of model can produce a solution: 
+a mathematical model, physical model, statistical model, machine learning model, 
+expert system, etc.? What alternatives are available within the relevant classes? 
+For example, if the goal is to classify a two-level target variable, we might consider 
+logistic regression, classification trees, random forests, gradient boosted trees, 
+support vector machines, regularized regression and so on. What are their pros 
+and cons?
 
-### Pre-built and Pre-trained Models
+#### Pre-built and pre-trained models
 
-Not all models have to be built from scratch with an organization’s own data sources. A pre-built model is a model that was trained by someone else and is ready to use. Deployment options might be to invoke the model as a cloud service through an API (application programming interface) or to run the model in a container on premises. A sentiment model that classifies the writer’s opinion in a piece of text as positive, neutral, or negative, is an example of a pre-built model. Amazon Web Services (AWS) makes this capability available through the [Amazon Comprehend API](https://docs.aws.amazon.com/comprehend/latest/dg/how-sentiment.html).
+Not all models have to be built from scratch with an organization’s own data sources. 
+A pre-built model is a model that was trained by someone else and is ready to use. 
+Deployment options might be to invoke the model as a cloud service through an API 
+(application programming interface) or to run the model in a container on premises. 
+A sentiment model that classifies the writer’s opinion in a piece of text as positive, 
+neutral, or negative, is an example of a pre-built model. Amazon Web Services (AWS) 
+makes this capability available through the [Amazon Comprehend API](https://docs.aws.amazon.com/comprehend/latest/dg/how-sentiment.html).
 
-The terms *pre-trained* and *pre-built* models are often used interchangeably; [AWS](https://aws.amazon.com/marketplace/solutions/machine-learning/pre-trained-models) promotes pre-trained SageMaker models in a marketplace where vendors offer access to what we would call pre-built models. A pre-built model cannot be altered and is ready to use. You rely on someone else to train the model and to package it for use. A pre-built model is pre-trained in the sense that the model builder trained the model on some data. It is important that the training data are representative for your application. A pre-built model for sentiment analysis that was trained on data from a different language will not perform well.
+The terms *pre-trained* and *pre-built* models are often used interchangeably; [AWS](https://aws.amazon.com/marketplace/solutions/machine-learning/pre-trained-models) 
+promotes pre-trained SageMaker models in a marketplace where vendors offer access 
+to what we would call pre-built models. A pre-built model cannot be altered and 
+is ready to use. You rely on someone else to train the model and to package it for 
+use. A pre-built model is pre-trained in the sense that the model builder trained 
+the model on some data. It is important that the training data are representative 
+for your application. A pre-built model for sentiment analysis that was trained 
+on data from a different language will not perform well.
 
-A pre-trained model is a statistical or machine learning model that was trained on data and the model is made available in that state with the ability to continue training. GPT (Generative Pre-trained Transformer) models are an example of pre-training large language models by Open AI. Each model in the GPT family has been pre-trained to a certain point. For example, text-davinci-003 in the [GPT-3.5 family](https://platform.openai.com/docs/models/gpt-3-5) was trained on text data found on the internet through June 2021. These large models are also called *foundation models*, because they are used to build more specific applications with additional training. Chat-GPT, for example, is a question-answer application built on top of the GPT foundation models.
+A pre-trained model is a statistical or machine learning model that was trained 
+on data and the model is made available in that state with the ability to continue
+training. GPT (Generative Pre-trained Transformer) models are an example of pre-training 
+large language models by Open AI. Each model in the GPT family has been pre-trained 
+to a certain point. For example, text-davinci-003 in the [GPT-3.5 family](https://platform.openai.com/docs/models/gpt-3-5) was trained on text 
+data found on the internet through June 2021. These large models are also called 
+**foundation models**, because they are used to build more specific applications 
+with additional training. Chat-GPT, for example, is a question-answer application 
+built on top of the GPT foundation models.
 
-You can accept the pre-trained model as the final model and build applications with it—the pre-trained model has become the pre-built model. Or you can continue training the model with additional data. For example, you can continue to train text-davinci-003 by adding more recent data than June 2021. Or you can add data from sources more relevant to your domain than what can be scraped from the internet. OpenAI calls this process [*fine tuning*](https://platform.openai.com/docs/guides/fine-tuning) of models. You will also see the term *transfer learning* in this context: transferring the capabilities of a model from one domain to another.
+You can accept the pre-trained model as the final model and build applications 
+with it—the pre-trained model has become the pre-built model. Or you can continue 
+training the model with additional data. For example, you can continue to train 
+text-davinci-003 by adding more recent data than June 2021. Or you can add data 
+from sources more relevant to your domain than what can be scraped from the internet. 
+OpenAI calls this process [**fine tuning**](https://platform.openai.com/docs/guides/fine-tuning) 
+of models. You will also see the term **transfer learning** in this context: 
+transferring the capabilities of a model from one domain to another.
 
-Pre-training is common in computer vision and natural language applications where many capable models already exist, building a model from scratch is difficult because of the massive amounts of data and computing resources required, and transferring capabilities by training on additional data has shown to be effective. Convolutional neural networks such as AlexNet, VGG, or GoogLeNet, ResNet trained on an existing corpus of images serve as the starting point
+Pre-training is common in computer vision and natural language applications where 
+many capable models already exist, building a model from scratch is difficult 
+because of the massive amounts of data and computing resources required, and 
+transferring capabilities by training on additional data has shown to be effective. 
+Convolutional neural networks such as AlexNet, VGG, or GoogLeNet, ResNet trained 
+on an existing corpus of images serve as the starting point
 
-During **Model Planning** you should decide which models are trained from scratch, pre-trained and fine-tuned, and pre-built. Beware of the *Not Invented Here* (NIH) attitude: the tendency to avoid using or buying other products and instead to build everything from scratch. There is strong bias against ideas or capabilities from the outside. If a model does not fall into the core specialty or competency of an organization, then it is best to look outside for pre-built or pre-trained models (if you have additional data to train for your context).
+During **Model Planning** you should decide which models are trained from scratch, 
+pre-trained and fine-tuned, and pre-built. Beware of the *Not Invented Here* (NIH) 
+attitude: the tendency to avoid using or buying other products and instead to build 
+everything from scratch. There is strong bias against ideas or capabilities from 
+the outside. If a model does not fall into the core specialty or competency of an 
+organization, then it is best to look outside for pre-built or pre-trained models 
+(if you have additional data to train for your context).
 
-During **Model Planning** we need to also consider the infrastructure available and/or necessary to train, test, and deploy models. Failure to consider deployment constraints at this stage will come back to haunt you during the **Deployment** stage. Imagine training a deep learning model with millions of parameters using PyTorch to find out later that it needs to be deployed on a small medical device with limiting processing capabilities.
+During **Model Planning** we need to also consider the infrastructure available 
+and/or necessary to train, test, and deploy models. Failure to consider deployment 
+constraints at this stage will come back to haunt you during the **Deployment** 
+stage. Imagine training a deep learning model with millions of parameters using 
+PyTorch to find out later that it needs to be deployed on a small medical device 
+with limiting processing capabilities.
 
-## Model Building
+### Model Building
 
-The **Model Building** stage is where many data scientists and ML engineers prefer to spend their time. Here you train candidate models on data. You evaluate and validate them and determine the optimal values for tuning parameters (bandwidths, number of inputs, learning rate, depth of trees, regularization penalties, …). You use train:test data splits or cross-validation to choose between competing approaches and to balance the bias—variance tradeoff. You use bagging to improve the predictive accuracy of a weak learning technique and bootstrapping to estimate the variability of quantities. It is the fun part of data science; it is where we nerd out.
+The **Model Building** stage is where many data scientists and ML engineers prefer 
+to spend their time. Here you train candidate models on data. You evaluate and 
+validate them and determine the optimal values for tuning parameters (bandwidths, 
+number of inputs, learning rate, depth of trees, regularization penalties, …). You 
+use train:test data splits or cross-validation to choose between competing approaches 
+and to balance the bias—variance tradeoff. You use bagging to improve the predictive 
+accuracy of a weak learning technique and bootstrapping to estimate the variability
+of quantities. It is the fun part of data science; it is where we nerd out.
 
-Many programs teaching data science focus on the model building stage; it is a rich field that can fill semesters with material. New techniques increase the list of candidates all the time. Fifteen years ago, deep learning models were not a consideration, we lacked affordable compute power and sufficiently large data sets to train deep neural networks well. In the 2000s recurrent neural networks such as long short-term memory models became all the rage in natural language understanding and convolutional neural networks were the go-to architectures for computer vision applications. In the early 2020s, both network types have been mostly replaced by networks based on transformer architectures. How quickly things change.
+Many programs teaching data science focus on the model building stage; it is a 
+rich field that can fill semesters with material. New techniques increase the list 
+of candidates all the time. Fifteen years ago, deep learning models were not a 
+consideration, we lacked affordable compute power and sufficiently large data sets 
+to train deep neural networks well. In the 2000s recurrent neural networks such as 
+long short-term memory models became all the rage in natural language understanding 
+and convolutional neural networks were the go-to architectures for computer vision 
+applications. In the early 2020s, both network types have been mostly replaced 
+by networks based on transformer architectures. How quickly things change.
 
-With greater automation (AutoML, for example), tasks in the **Model Building** stage will be done more efficiently and at greater scale. Effort will shift from building and evaluating the models to applying the models, to building applications with them, and to helping others to reap the benefits of AI. There will always be room for algorithmic innovation in data science. But the goal post moves with advances in technology. Spending all your time building models at the expense of other stages of the project cycle does not reduce the failure rate of data science projects.
+With greater automation (AutoML, for example), tasks in the **Model Building** 
+stage will be done more efficiently and at greater scale. Effort will shift from
+building and evaluating the models to applying the models, to building applications
+with them, and to helping others to reap the benefits of AI. There will always be 
+room for algorithmic innovation in data science. But the goal post moves with 
+advances in technology. Spending all your time building models at the expense of 
+other stages of the project cycle does not reduce the failure rate of data science projects.
 
-During **Model Planning** and **Model Building** we consider the tradeoffs between model choices. The model with the highest accuracy or lowest prediction error is not necessarily the best solution. Interpretability of a model can tip the scale toward a less accurate model. A single decision tree, trained and pruned, is easy to visualize and to explain. A random forest of 500 trees cannot be visualized and is more difficult to explain, although it will likely perform better than the single tree. A neural network with thousands (or millions) of parameters is an inscrutable black box and is not intrinsically interpretable. Trying to explain how the network comes up with a decision, which factors drive it, is the best we can hope for. How do you convince stakeholders of the quality of your data-analytical work if they cannot understand it?
+During **Model Planning** and **Model Building** we consider the tradeoffs between 
+model choices. The model with the highest accuracy or lowest prediction error is 
+not necessarily the best solution. Interpretability of a model can tip the scale 
+toward a less accurate model. A single decision tree, trained and pruned, is easy 
+to visualize and to explain. A random forest of 500 trees cannot be visualized 
+and is more difficult to explain, although it will likely perform better than the 
+single tree. A neural network with thousands (or millions) of parameters is an 
+inscrutable black box and is not intrinsically interpretable. Trying to explain 
+how the network comes up with a decision, which factors drive it, is the best we 
+can hope for. How do you convince stakeholders of the quality of your data-analytical
+work if they cannot understand it?
 
 ::: example
 ::: example-header
@@ -159,53 +539,105 @@ Example: Concentration of a drug in patient’s body over time
 :::
 
 ::: example-container
-The data in the following graph show the concentration of a drug in the body of patients over time. The drug is administered at time 0, followed by a period of absorption by the body, and a period of elimination from the body. Three candidate models are fit to the data, represented as different lines: A simple linear regression model (dashed line) A local 2nd degree polynomial smoothing model (LOESS, blue line) A nonlinear, first-order compartmental, model (black line) that expresses concentration as follows: $$
+The data in @fig-proj-theoph show the concentration of a drug in the body 
+of patients over time. The drug is administered at time 0, followed by a period 
+of absorption by the body, and a period of elimination from the body. Three candidate 
+models are fit to the data, represented as different lines: A simple linear 
+regression model (dashed line) A local 2nd degree polynomial smoothing model 
+(LOESS, blue line) A nonlinear, first-order compartmental, model (black line) 
+that expresses concentration as follows: 
+$$
     C= \frac{D k_a k_e}{C(k_a-k_e)}  (\exp⁡(-tk_e)  -\exp⁡( tk_a)) 
-    $$ The quantities in the compartmental model represent $D$: the dose of the drug
+$$ 
+The quantities in the compartmental model represent $D$: the dose of the drug
 
 -   $k_a$: the rate of absorption by the body
-
 -   $k_e$: the rate of elimination from the body
-
 -   $C$: the clearance (volume of blood or plasma cleared of the drug per time unit)
-
 -   $t$: time since administration of the drug
 
-![Drug concentration due to absorption and elimination in the body over time and three possible approaches to modeling.](images/Theophylline.png){.lightbox fig-align="center" width="80%"}
+![Drug concentration due to absorption and elimination in the body over time and three possible approaches to modeling.](images/Theophylline.png){#fig-proj-theoph .lightbox fig-align="center" width="80%"}
 
-The simple linear regression (dashed) model is very simple, it consists of an intercept at time 0 and a slope. It is easy to explain but for data between 0 and 10 units of time the model is inadequate. The drug concentration over the entire observation period cannot be captured by a straight line. However, once the drug concentration is down to 50—60% of the maximum a straight line might be a reasonable model. The LOESS model (blue) is very flexible and follows the data more closely. It picks up some interesting cyclical behavior between time 12 and time 20. Is it a spurious effect of the model/data interaction or does it capture a real biological effect?
+The simple linear regression (dashed) model is very simple, it consists of an 
+intercept at time 0 and a slope. It is easy to explain but for data between 0 and 
+10 units of time the model is inadequate. The drug concentration over the entire 
+observation period cannot be captured by a straight line. However, once the drug 
+concentration is down to 50—60% of the maximum a straight line might be a reasonable 
+model. The LOESS model (blue) is very flexible and follows the data more closely. 
+It picks up some interesting cyclical behavior between time 12 and time 20. Is 
+it a spurious effect of the model/data interaction or does it capture a real 
+biological effect?
 
-The compartmental model has a clear biological interpretation, its quantities relate to well-understood processes. That enables us to ask questions such as “at what time has 30% of the maximal absorbed amount cleared the body?”
+The compartmental model has a clear biological interpretation, its quantities 
+relate to well-understood processes. That enables us to ask questions such as 
+“at what time has 30% of the maximal absorbed amount cleared the body?”
 
-Suppose that the LOESS model predicts drug concentration in patients that did not participate in the study (unseen data) more accurately than the nonlinear compartmental model. Would we recommend the LOESS model over the nonlinear model? Does the answer change if testing hypothesis about the absorption/elimination rates is important?
+Suppose that the LOESS model predicts drug concentration in patients that did not 
+participate in the study (unseen data) more accurately than the nonlinear 
+compartmental model. Would we recommend the LOESS model over the nonlinear model? 
+Does the answer change if testing hypothesis about the absorption/elimination 
+rates is important?
 
-Whatever your decision you need to be able to communicate it and convince stakeholders of the value of your work.
+Whatever your decision you need to be able to communicate it and convince 
+stakeholders of the value of your work.
 :::
 :::
 
-## Communication
+## Evaluation and Communication
 
-The **Communication** stage is an essential part of the project life cycle. The solution we have derived so far does not speak for itself. We made choices and tradeoffs and settled on a particular approach. We learned some new things. Now that we have seen the data engineered to solve the problem through data science what are the data telling us? Were we able to solve the problem? What have we learned?
+The **Communication** stage is an essential part of the project life cycle. The 
+solution we have derived so far does not speak for itself. We made choices and 
+tradeoffs and settled on a particular approach. We learned some new things. 
+Now that we have seen the data engineered to solve the problem through data 
+science what are the data telling us? Were we able to solve the problem? 
+What have we learned?
 
-Suppose that our data science solution checks all boxes and is the greatest things since sliced bread. It will not see the light of day unless we communicate it to the stakeholders of the problem.
+Suppose that our data science solution checks all boxes and is the greatest things 
+since sliced bread. It will not see the light of day unless we communicate it to 
+the stakeholders of the problem and it meets the business requirements.
 
-Communication can take many forms: memos, emails, reports, dashboards, presentations. The best scenario is to get a chance to present the results in person, connecting the data analysis to the original problem, letting data (not math or code) tell the story. During the *Discovery* stage we translated the business problem into a data science project. Now we need to translate the data science solution back to the business problem and communicate in the language of the business. The stakeholders need to understand the solution, why it matters, and why they should care. If the model output is not presented in the original problem context, why would anyone outside of the data science team trust it?
+Communication can take many forms: memos, emails, reports, dashboards, presentations. 
+The best scenario is to get a chance to present the results in person, connecting 
+the data analysis to the original problem, letting data (not math or code) tell 
+the story. During the *Discovery* stage we translated the business problem into a 
+data science project. Now we need to translate the data science solution back to 
+the business problem and communicate in the language of the business. The stakeholders 
+need to understand the solution, why it matters, and why they should care. If the
+model output is not presented in the original problem context, why would anyone 
+outside of the data science team trust it?
 
-Lasswell’s model of communication analyzes communication by asking "Who says what to whom in what channel and with what effect?”
+The communication needs to present a solution and why the team thinks it is viable. 
+This does not need to be done as a live analytics demo, but the audience should be 
+empowered to judge the solution. Decision makers need to be able to decide whether 
+to move forward with implementation, whether to return to an earlier stage in the 
+project cycle, or whether to stop. Model accuracy, test error, or specificity are 
+metrics that matter to the data scientist, the business executive considers KPIs 
+such as bookings, revenue, funnel size and conversion rates.
 
-The communication needs to present a solution and why the team thinks it is viable. This does not need to be done as a live analytics demo, but the audience should be empowered to judge the solution. Decision makers need to be able to decide whether to move forward with implementation, whether to return to an earlier stage in the project cycle, or whether to stop. Model accuracy, test error, or specificity are metrics that matter to the data scientist, the business executive considers KPIs such as bookings, revenue, funnel size and conversion rates.
-
-Do not overestimate the persuasiveness of a black-box algorithm and do not underestimate how much information a simple bar chart or box plot conveys to a non-data scientist.
+Do not overestimate the persuasiveness of a black-box algorithm and do not 
+underestimate how much information a simple bar chart or box plot conveys to a 
+non-data scientist.
 
 A lot is at stake at this stage.
 
-## Operationalization (Deployment)
+Because communications in data science is a critical step and communication
+skills are non-negotiable soft skills for today's data scientists, a separate
+corpus of material is dedicated to communication in team-based data science.
 
-The **Operationalization** (Deployment) and **Monitoring** stages are combined into **Model Operations**, or ModelOps, the discipline that implements algorithmic logic and monitors it over time. We call out deployment as a stage within ModelOps because so many projects fail here.
+## Operationalization (Deployment & Monitoring)
+
+The **Operationalization** (Deployment) and **Monitoring** stages are combined into 
+**Model Operations**, or ModelOps, the discipline that implements algorithmic 
+logic and monitors it over time. We call out deployment as a stage within ModelOps 
+because so many projects fail here.
 
 ![Model operations combine deployment, management, and monitoring of analytic assets.](images/LifeCycle_ModelOps.png){.lightbox fig-align="center" width="50%"}
 
-Deployment can be simple, sometimes a report or a table in a spreadsheet is all that is needed. It can also be highly complex such as implementing a real-time prediction system across an organization in collaboration with the IT department.
+### Deployment
+
+**Deployment** can be simple, sometimes a report or a table in a spreadsheet is all 
+that is needed. It can also be highly complex such as implementing a real-time 
+prediction system across an organization in collaboration with the IT department.
 
 ::: example
 ::: example-header
@@ -213,37 +645,79 @@ Example: Predicting Sepsis in Preemies
 :::
 
 ::: example-container
-One of the major causes of death in premature babies (preemies) is sepsis. The fatality rate of early-onset sepsis in babies with low birth weight is 3—40%, up to 4 times higher than in full-term infants. Preemies have weaker immune system; their skin and gut are also more fragile. The presence of tubes for ventilation or IVs into veins increases the risk of infection.
+One of the major causes of death in premature babies (preemies) is sepsis. The 
+fatality rate of early-onset sepsis in babies with low birth weight is 3—40%, 
+up to 4 times higher than in full-term infants. Preemies have weaker immune system; 
+their skin and gut are also more fragile. The presence of tubes for ventilation 
+or IVs into veins increases the risk of infection.
 
-Doctors and nurses watch for signs of sepsis such as very high or low temperature, changes in skin color and changes in behavior. Those are non-specific signs, and it would be great if we can develop an early-warning system that alerts doctors when the probability that a preemie might develop system exceeds a threshold.
+Doctors and nurses watch for signs of sepsis such as very high or low temperature, 
+changes in skin color and changes in behavior. Those are non-specific signs, and 
+it would be great if we can develop an early-warning system that alerts doctors 
+when the probability that a preemie might develop system exceeds a threshold.
 
-A statistical model is developed based on data that integrates sensor information from incubators in neonatal intensive care units (temperature, breathing, vitals, …), computer vision (movement, skin color, …), and clinical records. Data from these three sources was captured over a period of six months and formatted by the data engineering team into a large data frame for the data science team.
+A statistical model is developed based on data that integrates sensor information 
+from incubators in neonatal intensive care units (temperature, breathing, vitals, …), 
+computer vision (movement, skin color, …), and clinical records. Data from these 
+three sources was captured over a period of six months and formatted by the data 
+engineering team into a large data frame for the data science team.
 
-The model developed by the data scientists based on the provided data is a success in that it can predict the probability of sepsis in preemies based on the integrated data with greater accuracy and more quickly than one would be able based on the clinical records alone.
+The model developed by the data scientists based on the provided data is a success 
+in that it can predict the probability of sepsis in preemies based on the integrated 
+data with greater accuracy and more quickly than one would be able based on the 
+clinical records alone.
 
-What difficulties might have to be overcome to deploy the model in the NICU of a hospital?
+What difficulties might have to be overcome to deploy the model in the NICU of 
+an hospital?
 
-1.  The hospital has incubators from different manufacturers. Not all incubators are equipped with sensors and cameras.
+1.  The hospital has incubators from different manufacturers. Not all incubators
+are equipped with sensors and cameras.
 
-2.  The model was developed based on 6-month historical data. It will be deployed in a real-time system where data from sensors and cameras must be prepared and merged with clinical records on the fly. The data engineering pipeline needs to be integrated into the operations.
+2.  The model was developed based on 6-month historical data. It will be deployed 
+in a real-time system where data from sensors and cameras must be prepared and 
+merged with clinical records on the fly. The data engineering pipeline must 
+be integrated with the operations.
 
-3.  How is the sensor and camera data be made available? Is it part of an existing data flow from the NICU? Is it collected over WiFi, Bluetooth, or some other network technology?
+3.  How is the sensor and camera data be made available? Is it part of an existing 
+data flow from the NICU? Is it collected over WiFi, Bluetooth, or some other 
+network technology?
 
-4.  How does the data get to the model inference engine that calculates the predicted probabilities for sepsis?
+4.  How does the data get to the model inference engine that calculates the 
+predicted probabilities for sepsis?
 
-5.  How do the predicted probabilities of sepsis surface in the workflow of NICU nurses and doctors? A continuous real-time display added to the NICU machinery? Or is it accessed as a separate piece of information on a laptop or mobile device?
+5.  How do the predicted probabilities of sepsis surface in the workflow of NICU 
+nurses and doctors? A continuous real-time display added to the NICU machinery? 
+Or is it accessed as a separate piece of information on a laptop or mobile device?
 
 6.  How do predicted probabilities map to sepsis risk and medical intervention?
 :::
 :::
 
-This section is concerned with the more complex deployment alternatives and the shocking reality that roughly only half of all production-ready models are ever placed in production. Of those that are, many take three months or more to be deployed. If the model has a short shelf life due to seasonal variations it might already be obsolete when it finally sees the light of day.
+This section is concerned with the more complex deployment alternatives and the 
+shocking reality that roughly only half of all production-ready models are ever 
+placed in production. Of those that are, many take three months or more to be 
+deployed. If the model has a short shelf life due to seasonal variations it might 
+already be obsolete when it finally sees the light of day.
 
-Why is the success rate so low and why does it take so long to finally move into production?
+Why is the success rate so low and why does it take so long to finally move into 
+production?
 
-Many organizations have separate systems for development, testing, and production (dev-test-prod). Differences in architecture, operating systems, network support, language support, security, and access controls can cause delays. When a model is developed in Python or R and needs to run in production on a device that does not support their runtime or containers, then the model must be recoded. Translating a machine learning pipeline from Python or R into a language such as C/C++ or Rust is time-consuming and error prone, requiring testing and **verification** (confirmation that the model was correctly implemented). If, on the other hand, you are deploying on premises on standard hardware, then you can wrap the Python models in a web-service framework (Flask, Django) and deploy through a Docker container.
+Many organizations have separate systems for development, testing, and production 
+(dev-test-prod). Differences in architecture, operating systems, network support, 
+language support, security, and access controls can cause delays. When a model is 
+developed in Python or R and needs to run in production on a device that does not 
+support their runtime or containers, then the model must be recoded. Translating
+a machine learning pipeline from Python or R into a language such as C/C++ or Rust 
+is time-consuming and error prone, requiring testing and **verification** 
+(confirmation that the model was correctly implemented). If, on the other hand, 
+you are deploying on premises on standard hardware, then you can wrap the Python
+models in a web-service framework (Flask, Django) and deploy through a Docker 
+container.
 
-Most algorithms are trained in batch on historical data. Many algorithms are deployed in a real-time system online where they process data points as they arise or periodically in small batches. Technical choices need to be made about how the online system accesses the algorithm:
+Most algorithms are trained in batch on historical data. Many algorithms are deployed 
+in a real-time system online where they process data points as they arise or 
+periodically in small batches. Technical choices need to be made about how the 
+online system accesses the algorithm:
 
 -   Type of connection and communication
     -   one-way stateless webhooks over HTTP
@@ -256,199 +730,203 @@ Most algorithms are trained in batch on historical data. Many algorithms are dep
     -   Event-driven
     -   Flask
 
-Models can be large, neural networks can have millions or even billions of parameters (GPT-1 has 120 million, GPT-2 has 1.5 billion, GPT-3.5 has 175 billion parameters.) While such large models can be accurate, the process of applying the model to a new data point (a process known as scoring or inferencing the model) can be slow. Loading a large model into memory can require too many resources. Model compression techniques such as pruning, distillation, or quantization are then used to reduce the size of the model without sacrificing prediction or classification accuracy. A model modified in any form after its derivation needs to go through **validation**: confirming that the model still works as intended.
+Models can be large, neural networks can have millions or even billions of 
+parameters (see @tbl-gpt-parms for the GPT models). While such large models can be 
+accurate, the process of applying the model to a new data point (a process known
+as **scoring** or **inferencing** the model) can be slow. Loading a large model 
+into memory can require too many resources. Model compression techniques such as 
+pruning, distillation, or quantization are then used to reduce the size of the 
+model without sacrificing prediction or classification accuracy. A model modified 
+in any form after its derivation needs to go through **validation**: confirming 
+that the model still works as intended.
 
-At the operationalization stage the primary responsibility for the data science assets shifts from the data science team to the user-facing teams and the IT department. The model turns into a data product, a technological product that depends on data to function.
+During the operationalization stage the primary responsibility for the data science 
+assets shifts from the data science team to the user-facing teams and the IT 
+department. The model turns into a data product, a technological product that 
+depends on data to function.
 
-Many organizations have internal processes that examine and approve products (built in-house or by a third party) for
+Many organizations have internal processes that examine and approve products 
+(built in-house or by a third party) for
 
 -   Compliance with regulatory requirements: Payment Card Industry Data Security Standard (PCI DSS), Federal Information Security Management Act (FISMA), General Data Protection Regulation (GDPR) of the EU, Health Insurance Portability and Accountability Act (HIPAA), etc.
-
 -   Privacy
-
 -   Security
-
 -   Transparency
 
-The output of a data science project is also a product—a data product and has to go through these processes as well; that takes time.
+The output of a data science project is also a product—a data product and has to 
+go through these processes as well; that takes time.
 
-When the data product replaces an existing solution, **A/B testing** is common to verify that the new solution is indeed superior. Just because a model passes unit tests does not mean it is moving the needle for the business. When data scientists build models, they measure model performance against historical data sets based on statistical metrics such as mean-squared prediction error, mis-classification rate, sensitivity, specificity, area-under-the-curve, etc. The business measures success in terms of OKRs (Objectives and Key Results) and/or KPIs (Key Performance Indicators) such as customer conversion rates, subscriptions, click-thru rates, bookings, revenue. In an A/B test users are randomly divided into two cohorts, experiencing the current and the new solution, respectively. The solution performance is evaluated through business metrics and technical criteria (speed, resource requirements, scalability).
+When the data product replaces an existing solution, **A/B testing** is common 
+to verify that the new solution is indeed superior. Just because a model passes 
+unit tests does not mean it is moving the needle for the business. When data scientists 
+build models, they measure model performance against historical data sets based on 
+statistical metrics such as mean-squared prediction error, mis-classification rate, 
+sensitivity, specificity, area-under-the-curve, etc. The business measures success 
+in terms of OKRs (Objectives and Key Results) and/or KPIs (Key Performance Indicators) s
+uch as customer conversion rates, subscriptions, click-thru rates, bookings, revenue. 
+In an A/B test users are randomly divided into two cohorts, experiencing the current 
+and the new solution, respectively. The solution performance is evaluated through 
+business metrics and technical criteria (speed, resource requirements, scalability).
 
-## Management and Monitoring
+### Management and Monitoring
 
-Once a model is deployed in production it enters the second phase of ModelOps, lifecycle model management and model governance. Governance includes the application of DevOps engineering principles such as continuous integration and continuous deployment (CI/CD), versioning of model, data, and code, and automation. The newly deployed model might be challenged by a new solution in a few months and becomes itself the target of A/B testing.
+Once a model is deployed in production it enters the second phase of ModelOps, 
+lifecycle model management and model governance. Governance includes the application 
+of DevOps engineering principles such as continuous integration and continuous 
+deployment (CI/CD), versioning of model, data, and code, and automation. The newly 
+deployed model might be challenged by a new solution in a few months and becomes 
+itself the target of A/B testing.
 
-New data collected since the initial model deployment can be added to the training data and the model parameters can be re-estimated (continuous training); this leads to a situation where a more recent version of the model is A/B tested against an existing deployment of the same model.
+New data collected since the initial model deployment can be added to the training 
+data and the model parameters can be re-estimated (continuous training); this leads 
+to a situation where a more recent version of the model is A/B tested against an 
+existing deployment of the same model.
 
-Continuous monitoring of the model is necessary to detect **model drift**. This is the condition where model performance deteriorates over time. Performance is tracked using statistical measures (accuracy, sensitivity, mean-squared error, …) and KPIs. There are two primary causes for drift in analytical models:
+Continuous monitoring of the model is necessary to detect **model drift**. This 
+is the condition where model performance deteriorates over time. Performance is 
+tracked using statistical measures (accuracy, sensitivity, mean-squared error, …) 
+and KPIs. There are two primary causes for drift in analytical models:
 
--   **Concept drift**. The task the model was designed to perform changes over time. This happens when the nature of the target variable of the model changes or when fundamental assumptions of the model no longer hold. When the definition of the target changes, e.g., a new definition of spam email or changes in regulations that broaden the meaning of money laundering, a model derived under the previous definition might now be invalid. The distribution of the target can change over time or seasonally from symmetric to skewed, causing model drift. The COVID pandemic has fundamentally voided common assumptions that flow into many types of models: consumer behavior, liquidity of financial instruments, valuations of commercial real estate, gas and power consumption patterns, etc.\
+-   **Concept drift**. The task the model was designed to perform changes over time. 
+This happens when the nature of the target variable of the model changes or when 
+fundamental assumptions of the model no longer hold. When the definition of the 
+target changes, e.g., a new definition of spam email or changes in regulations 
+that broaden the meaning of money laundering, a model derived under the previous 
+definition might now be invalid. The distribution of the target can change over 
+time or seasonally from symmetric to skewed, causing model drift. The COVID pandemic 
+has fundamentally voided common assumptions that flow into many types of models: 
+consumer behavior, liquidity of financial instruments, valuations of commercial
+real estate, gas and power consumption patterns, etc.\
     \
-    In “Learning under Concept Drift: A Review”, Lu et al. ([Arxiv:2004.05785](#0), 2020) distinguish four types of concept drift depending on how the change over time takes place (@fig-proj-conceptdrift).
+@Lu_etal_2019 distinguish four types of concept drift depending on how the change 
+over time takes place (@fig-proj-conceptdrift).
 
-    ![The four types of concept drift according to Lu et al.](images/Concept%20Drift.png){#fig-proj-conceptdrift .lightbox width="80%"}
+![The four types of concept drift according to @Lu_etal_2019](images/Concept%20Drift.png){#fig-proj-conceptdrift .lightbox width="80%"}
 
--   **Data drift**. The data has drifted when the distributions of the input variables into a model change or when the relationships between the inputs change (@fig-proj-datadrift). The data to which the model is applied in production is then not representative of the data on which it was trained. Data drift is a major source of bias in models. The model itself remains correct and is possibly unbiased based on the training data set. Bias is introduced when it is applied to data that is systematically different from the training data.
+-   **Data drift**. The data has drifted when the distributions of the input 
+variables into a model change or when the relationships between the inputs change 
+(@fig-proj-datadrift). The data to which the model is applied in production is 
+then not representative of the data on which it was trained. Data drift is a major 
+source of bias in models. The model itself remains correct and is possibly unbiased 
+based on the training data set. Bias is introduced when it is applied to data 
+that is systematically different from the training data.
 
-    ![An example of data drift. The training data for input variable X has a symmetric distribution with a mean of 2. The data seen by the model in production has a right-skewed distribution and a mean of 5. The production model will see values of X with different frequencies as during training and will see values of X it never encountered during training. We do not know whether the model applies for X \> 10, for example.](images/DataDrift.png){#fig-proj-datadrift .lightbox width="85%"}
+![An example of data drift. The training data for input variable X has a symmetric distribution with a mean of 2. The data seen by the model in production has a right-skewed distribution and a mean of 5. The production model will see values of X with different frequencies as during training and will see values of X it never encountered during training. We do not know whether the model applies for X \> 10, for example.](images/DataDrift.png){#fig-proj-datadrift .lightbox width="85%"}
 
 ## Case Study: Airbnb’s Party Pooper
 
 This case study is based on a Sept 2023 [CNBC article](https://www-cnbc-com.cdn.ampproject.org/c/s/www.cnbc.com/amp/2023/09/19/airbnb-party-preventer-naba-banerjee-reduced-parties-55percent-in-two-years.html).
 
-Airbnb operates an online marketplace for short- and long-term stays at private homes. The company acts as a middleman to connect homeowners with renters and charges a commission for the bookings. Some years ago, Airbnb became concerned about party bookings that cause “significant disruption to neighbors and the surrounding community.” The COVID-19 pandemic made things worse as folks were looking for creative ways to get together. The pandemic and Airbnb hosts’ fears of property damage were main drivers behind the company taking a stand against party bookings.
+Airbnb operates an online marketplace for short- and long-term stays at private homes. 
+The company acts as a middleman to connect homeowners with renters and charges a 
+commission for the bookings. Some years ago, Airbnb became concerned about party 
+bookings that cause “significant disruption to neighbors and the surrounding community.” 
+The COVID-19 pandemic made things worse as folks were looking for creative ways 
+to get together. The pandemic and Airbnb hosts’ fears of property damage were 
+main drivers behind the company taking a stand against party bookings.
 
-### Discovery
+### Discovery and Business Understanding
 
-Naba Banerjee joined Airbnb’s trust and safety team in 2020 and was charged with finding a solution. The business problem was clear: Prevent party bookings by blocking reservations but avoid blocking legitimate bookings.
+Naba Banerjee joined Airbnb’s trust and safety team in 2020 and was charged with 
+finding a solution. The business problem was clear: Prevent party bookings by 
+blocking reservations but avoid blocking legitimate bookings.
 
-She approached it in three phases: What can be done right now, within the next year, and in the future. This hints at an iterative process; one that starts with an immediate simpler intervention, followed by more deeply developed solutions. It also hints at the fact that whatever solution is being put into place will need to be monitored for performance and updated. Some Airbnb guests will try to circumvent the solution and get past the party-blocking methodology.
+She approached it in three phases: What can be done right now, within the next 
+year, and in the future. This hints at an iterative process; one that starts with 
+an immediate simpler intervention, followed by more deeply developed solutions. 
+It also hints at the fact that whatever solution is being put into place will 
+need to be monitored for performance and updated. Some Airbnb guests will try to 
+circumvent the solution and get past the party-blocking methodology.
 
 ### Data Engineering & Model Planning
 
-All solution phases were driven by data. In the short term, for the right-now solution, they studied the patterns and signals of bookings that were reported as parties. The data for this effort was already available on their internal platform, it just needed to be analyzed. There was no modeling effort involved. It was about understanding the data they had on party bookings, profiling and describing the data, looking for signals that correlate highly with the booking label “party”. The data product of this phase was a simple business rule: ban high-risk reservations by users under age 25, in particular if they have received poor reviews from hosts or do not have much history on Airbnb. This measure, combined with removing the option for hosts to list their homes for gatherings of more than 16 people, was effective.
+All solution phases were driven by data. In the short term, for the right-now 
+solution, they studied the patterns and signals of bookings that were reported 
+as parties. The data for this effort was already available on their internal 
+platform, it just needed to be analyzed. There was no modeling effort involved. 
+It was about understanding the data they had on party bookings, profiling and 
+describing the data, looking for signals that correlate highly with the booking 
+label “party”. The data product of this phase was a simple business rule: ban 
+high-risk reservations by users under age 25, in particular if they have received 
+poor reviews from hosts or do not have much history on Airbnb. This measure, 
+combined with removing the option for hosts to list their homes for gatherings of 
+more than 16 people, was effective.
 
 ### Model Building
 
-Banerjee and her team had developed a classification model at this point. It was classifying booking attempts as high-risk party bookings or benign bookings based on a black-and-white categorization of bookings. The next step, the mid-term solution, was to build a more sophisticated analytic model that takes into account more factors and that produces a risk score, a probability that the booking is a party booking. Whether to block a booking based on the risk score can vary based on risk tolerance—regionally and temporally. For example, a risk score of *x*% might not lead to a reservation block during most periods, but around Halloween, New Year’s Eve and Fourth of July will deny the same reservation.
+Banerjee and her team had developed a classification model at this point. It was 
+classifying booking attempts as high-risk party bookings or benign bookings based 
+on a black-and-white categorization of bookings. The next step, the mid-term 
+solution, was to build a more sophisticated analytic model that takes into account 
+more factors and that produces a risk score, a probability that the booking is a 
+party booking. Whether to block a booking based on the risk score can vary based 
+on risk tolerance—regionally and temporally. For example, a risk score of *x*% 
+might not lead to a reservation block during most periods, but around Halloween, 
+New Year’s Eve and Fourth of July will deny the same reservation.
 
-The model developed at Airbnb takes into account many factors such as the closeness of the reservation to the user’s birthday, the user’s age, length of stay, proximity to where the user lives, day of the week, location of the listing, etc. The type of model selected was a neural network trained using supervised learning on bookings labeled as parties or property damage. The performance of the model was tested against past incidences as well as hypothetical test cases and normal, “good” behavior. Airbnb developed multiple models to predict the likelihood of a party booking, to predict property damage, etc.
+The model developed at Airbnb takes into account many factors such as the closeness 
+of the reservation to the user’s birthday, the user’s age, length of stay, proximity 
+to where the user lives, day of the week, location of the listing, etc. The type 
+of model selected was a neural network trained using supervised learning on bookings 
+labeled as parties or property damage. The performance of the model was tested 
+against past incidences as well as hypothetical test cases and normal, “good” 
+behavior. Airbnb developed multiple models to predict the likelihood of a party 
+booking, to predict property damage, etc.
 
 ### Operationalization
 
-This is a good example of the *data—analytics—decision* chain of intelligence. Building the predictive risk model was applying advanced analytics to data. The outcome of the *data—analytics* sequence was a machine learning model that can produce a risk score for any booking. But the machine learning model itself does not block a booking. It produces a risk score that—to complete the *analytics—decision* loop—must be translated into a decision: make the reservation or block the reservation. In Airbnb’s case the decision rule is nuanced temporally and geographically. The risk of parties is higher in the U.S. and Canada, followed by Australia, Europe, and Asia. It might also take other factors into account besides the likelihood of a party booking, e.g., the extent of property damage. Furthermore, in situations where the decision is not clear, the booking goes through human review to determine the party risk.
+This is a good example of the *data—analytics—decision* chain of intelligence. 
+Building the predictive risk model was applying advanced analytics to data. The 
+outcome of the *data—analytics* sequence was a machine learning model that can 
+produce a risk score for any booking. But the machine learning model itself does 
+not block a booking. It produces a risk score that—to complete the *analytics—decision* 
+loop—must be translated into a decision: make the reservation or block the reservation. 
+In Airbnb’s case the decision rule is nuanced temporally and geographically. The 
+risk of parties is higher in the U.S. and Canada, followed by Australia, Europe, 
+and Asia. It might also take other factors into account besides the likelihood 
+of a party booking, e.g., the extent of property damage. Furthermore, in situations 
+where the decision is not clear, the booking goes through human review to 
+determine the party risk.
 
-To implement the model the prediction logic and the decision logic (*analytics—decision*) had to be incorporated into the online booking system in real time. As soon as a reservation is attempted to be made, the system needs to calculate the risk score, make a decision and inform the user either by continuing the process or blocking it with the dialog (@fig-proj-airbnbblocker).
+To implement the model the prediction logic and the decision logic (*analytics—decision*) 
+had to be incorporated into the online booking system in real time. As soon as a 
+eservation is attempted to be made, the system needs to calculate the risk score, 
+make a decision and inform the user either by continuing the process or blocking 
+it with the dialog (@fig-proj-airbnbblocker).
 
 ![The Airbnb reservation system blocks a suspected party booking. [Source](https://www-cnbc-com.cdn.ampproject.org/c/s/www.cnbc.com/amp/2023/09/19/airbnb-party-preventer-naba-banerjee-reduced-parties-55percent-in-two-years.html).](images/AirbnbPartyBlocker.png){#fig-proj-airbnbblocker .lightbox fig-align="center"}
 
-The implementation was initially rolled out in Australia where Airbnb experienced an uptick in party bookings in early 2021 after travel had stopped because of the pandemic. The system was rolled out there as a pilot in October 2021 using A/B testing methods—some regions of Australia used the system while other regions did not. Party bookings dropped by 35% in the regions where the risk model was deployed.
+The implementation was initially rolled out in Australia where Airbnb experienced 
+an uptick in party bookings in early 2021 after travel had stopped because of the 
+pandemic. The system was rolled out there as a pilot in October 2021 using A/B 
+testing methods—some regions of Australia used the system while other regions 
+did not. Party bookings dropped by 35% in the regions where the risk model was 
+deployed.
 
-In Fall of 2022 the system went live globally. Over Labor Day weekend alone, the system blocked or redirected 5,000 potential party bookings.
+In Fall of 2022 the system went live globally. Over Labor Day weekend alone, the 
+system blocked or redirected 5,000 potential party bookings.
 
 ### Model Management and Monitoring
 
-Airbnb continuously monitors the performance of the model using statistics such as **precision** and **recall** for classification models. Recall, also called the sensitivity of the classification model, is the true positive rate of the model: the ratio of the actual party bookings that the model should have predicted as party bookings. Precision, on the other hand, is the ratio of the actual party bookings relative to any bookings that were predicted to be parties—which includes some false positives.
+Airbnb continuously monitors the performance of the model using statistics such 
+as **precision** and **recall** for classification models. Recall, also called 
+the sensitivity of the classification model, is the true positive rate of the model: 
+the ratio of the actual party bookings that the model should have predicted as
+party bookings. Precision, on the other hand, is the ratio of the actual party 
+bookings relative to any bookings that were predicted to be parties—which includes 
+some false positives.
 
-The model can drift as user’s behavior changes. Party-inclined users are trying to find ways to circumvent the booking block. The model has to be re-evaluated and cannot be static. A decline in the sensitivity of the model would suggest that the model is not as capable in detecting party bookings.
+The model can drift as user’s behavior changes. Party-inclined users are trying 
+to find ways to circumvent the booking block. The model has to be re-evaluated 
+and cannot be static. A decline in the sensitivity of the model would suggest 
+that the model is not as capable in detecting party bookings.
 
-Airbnb also points out that the system has been evaluated by the company’s anti-discrimination team for potential bias. You want to make sure that the system does not have unintended consequences such as unfairly disenfranchising bookings by one group over another.
+Airbnb also points out that the system has been evaluated by the company’s 
+anti-discrimination team for potential bias. You want to make sure that the system 
+does not have unintended consequences such as unfairly disenfranchising bookings 
+by one group over another.
 
-What is the next phase of solution development at Airbnb for this problem? You guessed it, something that has to do with large language models (LLMs) like ChatGPT.
+What is the next phase of solution development at Airbnb for this problem? You 
+guessed it, something that has to do with large language models (LLMs) like ChatGPT.
 
-## Thinking Data Science
 
-The data scientist takes on different roles and personas throughout the project. Whether you are writing analytic code or communicating with team members or working with the IT department on implementation, you always think like a data scientist. What does that mean?
-
-### Dealing with Uncertainty
-
-In “[Think Like a Data Scientist](https://learning.oreilly.com/library/view/think-like-a/9781633430273/)”, Brian Godsey lists awareness in the face of uncertainty as one of the biggest strengths of a data scientist [@Godsey_2017]. Once source of uncertainty is the inherent complexity of data science projects that involve many parts of the organization. A data science project is full of problems, the real-world problem that needs to be solved and problems that arise during the projects. Deadlines will be missed. Data will not be as available as expected or of lower quality as expected. Budgets can change and goals are reprioritized. Models that work well on paper fall apart when they get in contact with reality. The list goes on and on. The data scientist thinks through problems not from the perspective of the data but from the perspective what data can help us to accomplish. What matters is that we solve the business problem, not that we build a neural network.
-
-Another source of uncertainty is the inherent variability of the raw material, data. Variability is contagious, it makes everything produced from data also variable. The point of data processing is to separate the signal from the noise and to find the systematic patterns and relationships in the data, the insights that help make decisions.
-
-Data scientists are sometimes compared to software developers. They do share certain traits; both are using tools, languages, and frameworks to build complex systems with software. But analytic code is different from non-analytic code in that it is processing an uncertain input. A JSON parser also processes variability, each JSON document is different from the next. Does it not also deal with uncertain input? If the parser is free of bugs, the result of parsing is known with certainty. For example, we are convinced that the sentence “*this book is certainly concerned with uncertainty*” has been correctly extracted from the JSON file. Assessing the sentiment of the sentence, however, is a data science task: a sentiment model is applied to the text and returns a set of probabilities indicating how likely the model believes the sentiment of the text is negative, neutral, or positive. Subsequent steps taken in the software are based on interpreting what is probable.
-
-There is uncertainty about which method to use. Whether a software developer uses a quicksort or merge sort algorithm to order an array has impact on the performance of the code but not on the result. Whether you choose a decision tree or a support vector machine to classify the data in the array impacts the performance **and** the result of the code. A chosen value for a tuning parameter, e.g., the learning rate, can produce stable results with one data set and highly volatile results with another.
-
-Further uncertainty is introduced through analytic steps that are themselves random. Splitting data into training and test data sets, creating random folds for cross-validation, drawing bootstrap samples to estimate variability or to stabilize analytics through bagging, random starting values in clustering or neural networks, selecting the predictors in random forests, Monte Carlo estimation, are some examples where data analysis involves drawing random numbers. The data scientist needs to ensure that random number sequences that create different numerical results do not affect the quality of the answers. The results are frequently made repeatable by fixing the seed or starting value of the random number generator. While this makes the program flow repeatable, it is yet another quantity that affects the numerical results. It is also a potential source for misuse: “let me see if another seed value produces a smaller prediction error.”
-
-Data are messy and possibly full of errors. It contains missing values. There is uncertainty about how disparate data sources represent a feature (a customer, a region, a temperature) that affects how you integrate the data sources. These sources of uncertainty can be managed through proper data quality and data integration. As a data scientist you need to be aware and respectful of these issues; they can doom a project if not properly addressed. In an organization without a dedicated data engineering team resolving data quality issues might fall on your shoulders. If you are lucky to work with a data engineering team you still need to be mindful of these challenges and able to confirm that they have been addressed or deal with some of them (missing values).
-
-::: example
-::: example-header
-Example: Imputation through Principal Component Analysis (PCA)
-:::
-
-::: example-container
-| ID  | Type |  X1  |  X2  | X3  |
-|-----|:----:|:----:|:----:|:---:|
-| 1   |  A   | 3.71 | 5.93 | 55  |
-| 2   |  B   |  .   | 4.29 | 32  |
-| 3   |  A   | 0.98 | 5.86 | 55  |
-| 4   |  B   |  .   | 4.28 | 29  |
-| 5   |  A   | 6.04 | 5.94 | 48  |
-| 6   |  B   |  .   | 5.25 | 18  |
-| 7   |  A   | 1.52 | 4.01 | 61  |
-| 8   |  B   |  .   | 5.55 | 30  |
-
-: A missing value pattern.
-
-The table above shows eight observations on four features: Type, X1, X2, and X3.
-
-Whatever types A and B represent, we notice that values for X1 are missing whenever Type equals B. A complete-case analysis based on X1 through X3 would eliminate observations with missing values and leave us only with observations for Type A. This makes a comparison between the two types impossible. To facilitate such a comparison, we could limit any analysis to rely on only X1 and X2, or we could impute the missing values for X3.
-
-Such an imputation could be based on a matrix completion algorithm that uses principal component analysis (PCA) to iteratively fill in the missing information for X1 based on the observed data for X1, X2, and X3. That sounds awesome. But what if there are systematic differences between the two types? Does it then make sense to fill in values for X1, Type B with information derived from Type A? Could this possibly bias the analysis and be worse than not using X1 in the analysis at all?
-:::
-:::
-
-### Perspective about Data
-
-Maintaining proper perspective about data means knowing where the important issues are. This can be a moving target.
-
--   The volume of data can be unproblematic for one analytic method and becomes a limiting factor if you want to derive prediction intervals by way of bootstrapping.
-
--   A large but highly accurate model is being developed on historical training data in an Internet of Things (IoT) application. Due to the complexity of the model the scoring engine that applies the model in real time to data flowing off sensors cannot keep up.
-
--   A stacked ensemble of classification models improves the ability to segment customers but is not interpretable.
-
-There are many limiting factors in data-centric applications and many moving parts. The data scientist is in a unique position to have perspective and awareness of the factors related to data. It is unlikely that anyone else will have that 360-degree view about data.
-
-As Brian Godsey put it:
-
-> *As a data scientist, I have as my goal to make sure that no important aspect of a project goes awry unnoticed. When something goes wrong—and something will—I want to notice it so that I can fix it.*
-
-### Intuition for Data
-
-Intuition is the feeling of knowing something instinctively, without conscious reasoning. Developing intuition for data is one of the most valuable skills a data scientist can acquire. It will help to flag things that are surprising, curious, worth another look, or that do not pass the smell test. Developing intuition is helped by strong technical knowledge, it provides the foundation against which our conscious mind can judge surprise. Some intuition for data is innate, and it can be developed with experience and practice. Being curious, asking questions, requesting feedback, working with real data sets, and spending time exploring data go a long way in developing better intuition.
-
-Let’s test our intuition for data with a few examples.
-
-#### Outliers in Box and Whisker Plot
-
-The following graph shows a box plot constructed from 200 observations on a variable. What does your intuition tell you about the five data points on the right side in of @fig-proj-intuition-box?
-
-![Box plot of 200 observations for a variable.](images/Intuition_BoxPlot.png){#fig-proj-intuition-box .lightbox fig-align="center" width="80%"}
-
-Also called the box-and-whisker plot, this plot places a box that covers the central 50% of the data—called the interquartile range—and extends from the edge of the box whiskers to the observations within $\pm 1.5$ times the interquartile range. Points that fall outside the whiskers are labeled as outliers. Does knowing the details of box plot construction change your intuition about the data points on the right?
-
-After having seen many box plots you will look at this specimen as an example of a continuous random variable with a right-skewed (long right tail) distribution. Five “outliers” out of 200 is not alarming when the distribution has a long tail.
-
-#### Prediction Error in Test and Training Data
-
-@fig-proj-intuition-traintest shows graphs of the mean-squared prediction error, a measure of model performance, as a function of model complexity. The complexity is expressed in terms of the model’s ability to capture more wiggly structures (flexibility). The training data is the set of observations used to determine the model parameters. The test data is a separate set of observations used to evaluate how well the fitted (=trained) model generalizes to new data points.
-
-![The mean-squared prediction error for a set of training and test data as a function of model complexity.](images/Intuition_TestTrain.png){#fig-proj-intuition-traintest .lightbox fig-align="center" width="80%"}
-
-Something is off here. The prediction error on the test data set should not decrease steadily as the model flexibility increases. The performance of the model on the test data will be poor if the model is too flexible or too inflexible. The prediction error on the training data on the other hand will decline with greater model flexibility. Intuition for data suggests that measures of performance are optimized on the training data set and should be lower for the test data set. It is worth checking whether the labels in the legend are reversed.
-
-#### Storks and Babies {#sec-storks-babies}
-
-The next example of data intuition is shown in the following scatterplot based on data in Neyman (1952). Data on the birth rate in 54 counties, calculated as the number of babies born relative to the number of women of child-bearing age, and the density of storks, calculated as the number of storks relative to the same number of women, suggests a trend between the density of storks and the birth rate.
-
-![Scatterplot of stork density and birth rate along with a LOESS fit. The variables are calculated by dividing the number of babies and the number of storks in the county by the number of women of child-bearing age in the county (in 10,000).](images/Intuition_Storks.png){#fig-proj-intuition-storks .lightbox fig-align="center" width="80%"}
-
-Our intuition tells us that something does not seem quite right. The myth of storks bringing babies has been debunked—conclusively. The data seem to tell a different story, however. What does your *data* intuition tell you?
-
-There must be a different reason for the relationship that appears in the plot. Both variables plotted are divided by the same quantity, the number of women of child-bearing age. This number will be larger for larger counties, as will be the number of babies and, if the counties are comparable, the number of storks. In the absence of a relationship between the number of babies and the number of storks, a spurious relationship is introduced by dividing both with the same denominator.
-
-#### Cluster Assignment
-
-Clustering is an unsupervised learning technique where the goal is to find groups of observations (or groups of features) that are in some form alike. In statistical terms we try to assign data to groups such that the within-group variability is minimized, and the between-group variability is maximized. In this example of clustering, data on age, income, and a spending score were obtained for 200 shopping mall customers. The spending score is a value assigned by the mall, higher scores indicate a higher propensity of the customer to make purchases at the mall stores.
-
-A cluster analysis was performed to group similar customers into segments, so that a marketing campaign aimed at increasing mall revenue can target customers efficiently. A few observations are shown in the next table.
-
-|                 |         |            |                    |
-|-----------------|---------|------------|--------------------|
-| **Customer ID** | **Age** | **Income** | **Spending Score** |
-| **1**           | 19      | 15         | 39                 |
-| **2**           | 20      | 16         | 6                  |
-| **3**           | 35      | 120        | 79                 |
-| **4**           | 45      | 126        | 28                 |
-
-@fig-proj-intuition-cluster1 shows a scatter plot of the standardized income and spending score attributes, overlaid with the customer assignment to one of five clusters.
-
-![Results of hierarchical clustering with five clusters.](images/Intuition_Cluster.png){#fig-proj-intuition-cluster1 .lightbox fig-align="center" width="80%"}
-
-There are distinct groups of points with respect to (the standardized) spending and income. One group is near the center of the coordinate system, one group is in the upper-right quadrant, one group is in the lower-right quadrant. If the clustering algorithm worked properly, then these points should not be all assigned to the same cluster. This is an example where we need to take another look at the analysis. It turns out that the customer ID was erroneously included in the analysis. Unless that identifier is meaningful in distinguishing customers, it must be removed from the analysis. The results of the analysis without the customer ID are shown in @fig-proj-intuition-cluster2, confirming that the clustering algorithm indeed detected groups that have (nearly) distinct value ranges for spending score and income.
-
-![Corrected cluster analysis after removing the non-informative customer ID variable from the analysis. The detected clusters map more clearly to groups of points that are distinct with respect to spending and income.](images/Intuition_Cluster2.png){#fig-proj-intuition-cluster2 .lightbox fig-align="center" width="80%"}

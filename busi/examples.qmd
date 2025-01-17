@@ -1,0 +1,377 @@
+
+# Example: Email Campaign Optimization {#sec-busi-example-email}
+
+## Discovery Meeting Transcript
+
+**Participants:**
+
+- Sarah Chen (Data Scientist)
+- Michael Roberts (Chief Marketing Officer)
+- Jennifer Hayes (Director of Marketing)
+- David Kim (Marketing Manager)
+
+**Sarah:** Thank you all for meeting today. I'd like to understand the business context and specific challenges around your email campaigns to ensure our data science project delivers meaningful value. Could you start by describing the current situation?
+
+**Michael (CMO):** Our email marketing costs are eating up too much of our budget. We're paying per email sent through our vendor, ExactTarget, but our response rates are low. We need to be more strategic about who we're targeting and when.
+
+**Sarah:** Could you help me quantify the current situation? What are your current response rates and costs?
+
+**David (Marketing Manager):** Our average open rate is around 15%, and click-through rates hover around 2%. We're paying $0.008 per email sent, and we're sending about 500,000 emails per month across all campaigns. That's $4,000 monthly just in email costs.
+
+**Sarah:** What defines a successful email campaign for your team? What are your key performance indicators?
+
+**Jennifer (Director):** Ultimate success is conversion to sale, but we also track open rates, click-through rates, and unsubscribe rates. We have different goals for different campaign types - promotional campaigns aim for immediate sales, while nurture campaigns focus on engagement metrics.
+
+**Sarah:** Could you break down the different types of campaigns you run and their specific goals?
+
+**Jennifer:** We have three main types:
+1. Promotional campaigns for sales and special offers
+2. Nurture campaigns for leads who've shown interest
+3. Newsletter campaigns for general audience engagement
+
+**Sarah:** What are your target improvement goals? What would success look like for this project?
+
+**Michael:** We'd like to reduce our monthly email spend by 30% while maintaining or improving our current revenue from email campaigns. That means we need to be much more precise about who we target.
+
+**Sarah:** Do you have any constraints or requirements I should be aware of? For example, regulatory requirements or technical limitations?
+
+**David:** We need to comply with GDPR and CAN-SPAM Act. Also, our ESP (ExactTarget) has some technical limitations on segmentation and personalization. We can only use the fields available in their system.
+
+**Sarah:** What data do you currently have available about your customers and their email interactions?
+
+**David:** We have:
+
+- Customer demographics and purchase history
+- Email interaction data (opens, clicks, unsubscribes)
+- Website behavior for logged-in users
+- Campaign history and performance metrics
+- Customer service interaction records
+
+**Sarah:** Are there any specific time constraints or deadlines for this project?
+
+**Michael:** We're approaching our busy season in Q4. We'd like to have a solution implemented by the end of Q3 to maximize impact during the holiday season.
+
+**Sarah:** What's currently working well in your email campaigns that we should make sure to preserve?
+
+**Jennifer:** Our segmented promotional campaigns perform better than broad campaigns. When we target based on previous purchase behavior, we see about double the conversion rate.
+
+**Sarah:** Are there any past attempts at solving this problem that I should know about?
+
+**David:** We tried basic RFM (Recency, Frequency, Monetary) segmentation last year. It helped somewhat but wasn't sophisticated enough to give us the precision we need.
+
+**Sarah:** Who are the key stakeholders for this project, and how should we keep them informed?
+
+**Michael:** The marketing team here, plus our CFO will want to see the cost implications. Our technical team will need to be involved for implementation. Monthly updates to this group should work, with ad-hoc updates for significant findings.
+
+**Sarah:** Let me summarize the key points to ensure I've understood correctly:
+
+- Primary goal: 30% reduction in email costs while maintaining revenue
+- Current spend: $4,000/month on 500,000 emails
+- Current performance: 15% open rate, 2% CTR
+- Key constraints: GDPR compliance, ESP technical limitations
+- Timeline: Solution needed by end of Q3
+- Success metrics: Cost reduction and maintained revenue
+- Available data: Customer demographics, email interactions, purchase history, website behavior
+
+Is there anything I've missed or misunderstood?
+
+**Jennifer:** That's accurate. One additional point is that we'd like to understand which customer segments are most valuable for different types of campaigns. This could help us with content strategy as well as targeting.
+
+**Sarah:** Thank you, that's helpful. Last question: What risks should we be aware of?
+
+**Michael:** Our biggest concern is maintaining revenue while reducing email volume. We can't afford to cut off communication with valuable customers. Also, our email vendor contract renews in Q4, so any insights could help with negotiations.
+
+**Sarah:** Thank you all for your time. I'll document these requirements and come back with a project plan that addresses these goals and constraints. Would you like to schedule a follow-up meeting to review the project plan?
+
+**Michael:** Yes, please. Set something up for next week. And make sure to include any additional data requirements you identify --- we want to make sure you have everything you need to succeed.
+
+
+## Business Understanding Document
+
+### Overview of Strategic Alignment
+
+The Email Campaign Optimization initiative directly addresses critical business challenges in marketing efficiency and cost management. The primary business challenge is the high cost of email marketing campaigns relative to their performance, with current spending at $4,000 monthly for 500,000 emails. The organization seeks to optimize email marketing expenditure while maintaining revenue generation, specifically targeting a 30% reduction in email costs.
+
+Key strategic elements include:
+
+- Cost optimization without sacrificing revenue generation
+- Enhanced targeting precision for email campaigns
+- Improved campaign effectiveness through data-driven segmentation
+- Strategic timing for implementation before Q4 busy season
+- Vendor contract negotiation leverage through performance insights
+
+The project aligns with organizational capabilities through existing data infrastructure and marketing automation tools (ExactTarget), though technical limitations in segmentation and personalization have been identified as constraints.
+
+### Stakeholder Analysis
+
+#### Primary stakeholders
+
+1. Chief Marketing Officer (Michael Roberts)
+
+   - Role: Executive sponsor and strategic direction
+   - Decision Authority: High - final approval on strategic decisions
+   - Communication Needs: Monthly updates, critical milestone reviews
+   - Impact Level: High - accountable for marketing budget and performance
+
+2. Director of Marketing (Jennifer Hayes)
+
+   - Role: Operational oversight and campaign strategy
+   - Decision Authority: Medium - campaign strategy and execution decisions
+   - Communication Needs: Monthly updates, regular operational reviews
+   - Impact Level: High - responsible for campaign performance
+
+3. Marketing Manager (David Kim)
+
+   - Role: Technical implementation and campaign execution
+   - Decision Authority: Low-Medium - tactical decisions
+   - Communication Needs: Regular operational updates
+   - Impact Level: Medium - responsible for day-to-day execution
+
+4. CFO
+
+   - Role: Financial oversight
+   - Decision Authority: High - budget approval
+   - Communication Needs: Monthly cost-benefit updates
+   - Impact Level: Medium - monitors ROI and cost reduction
+
+5. Technical Team
+
+   - Role: Implementation support
+   - Decision Authority: Low - technical recommendations
+   - Communication Needs: Implementation requirements and technical updates
+   - Impact Level: Medium - responsible for technical execution
+
+### Requirements Documentation
+
+#### Data requirements
+
+1. Customer Data
+   - Demographics
+   - Purchase history
+   - Email interaction metrics
+   - Website behavior (logged-in users)
+   - Customer service interaction records  
+<br/>
+
+2. Campaign Data
+   - Historical campaign performance metrics
+   - Campaign type classification
+   - Response rates by segment
+   - Cost per campaign
+
+#### Technical requirements
+
+1. System Integration
+   - ExactTarget ESP integration
+   - Website tracking system integration
+   - CRM system integration for customer data  
+<br/>
+
+2. Security and Compliance
+   - GDPR compliance requirements
+   - CAN-SPAM Act compliance
+   - Data privacy and protection measures  
+<br/>
+
+3. Performance Requirements
+   - Campaign response tracking
+   - Real-time segmentation capabilities
+   - Automated reporting systems
+
+### Feasibility Assessment
+
+#### Technical feasibility
+
+- Available Data: Comprehensive customer and campaign data available
+- Tools: ExactTarget ESP with some segmentation limitations
+- Expertise: Marketing team with previous RFM segmentation experience
+- Assessment: MEDIUM-HIGH feasibility with some technical constraints
+
+#### Economic feasibility
+
+- Current Costs: $4,000 monthly in email costs
+- Target Reduction: 30% ($1,200 monthly)
+- Revenue Maintenance Required
+- Assessment: HIGH feasibility with clear ROI potential
+
+#### Operational feasibility
+
+- Existing Process Integration: Good alignment with current workflows
+- Team Capabilities: Experienced marketing team
+- Technical Support: Available implementation team
+- Assessment: HIGH feasibility with strong operational foundation
+
+### Legal and Ethical Considerations
+
+- GDPR Compliance: Required
+- CAN-SPAM Act Compliance: Required
+- Data Privacy: Essential consideration
+- Assessment: MEDIUM feasibility with clear compliance requirements
+
+### Business Process Impact Analysis
+
+#### Workflow changes
+
+1. Campaign Planning Process
+   - Implementation of data-driven segmentation
+   - Enhanced targeting criteria
+   - Modified campaign scheduling  
+<br/>
+
+2. Customer Segmentation Process
+   - New segmentation models
+   - Automated targeting rules
+   - Regular segment updates  
+<br/>
+
+3. Performance Monitoring
+   - Enhanced tracking systems
+   - New reporting workflows
+   - Regular performance reviews
+
+#### Training requirements
+
+1. Marketing Team
+   - New segmentation model understanding
+   - Enhanced targeting criteria usage
+   - Performance monitoring tools  
+<br/>
+
+2. Technical Team
+   - Implementation requirements
+   - System integration knowledge
+   - Maintenance procedures  
+
+### KPI and Metrics
+
+#### Business KPIs
+
+1. Cost Metrics
+   - Monthly email spend (Baseline: $4,000)
+   - Cost per email (Baseline: $0.008)
+   - Target: 30% reduction  
+<br/>
+
+2. Campaign Performance
+   - Open rate (Baseline: 15%)
+   - Click-through rate (Baseline: 2%)
+   - Conversion rate (Baseline: TBD by campaign type)  
+<br/>
+
+3. Revenue Metrics
+   - Revenue per campaign
+   - Overall email marketing revenue
+   - Revenue per customer segment  
+
+#### Technical KPIs
+
+1. Segmentation Effectiveness
+   - Segment response rates
+   - Segment conversion rates
+   - Segment revenue contribution  
+<br/>
+
+2. System Performance
+   - Segmentation accuracy
+   - Data quality metrics
+   - System integration efficiency
+
+### Success Criteria
+
+#### Business success criteria
+
+1. Primary Criteria
+   - 30% reduction in email marketing costs
+   - Maintained or improved revenue from email campaigns
+   - Improved campaign response rates  
+<br/>
+
+2. Secondary Criteria
+   - Enhanced customer segmentation understanding
+   - Improved targeting efficiency
+   - Better campaign type alignment with segments
+
+#### Technical success criteria
+
+1. Model Performance
+   - Accurate customer segmentation
+   - Reliable targeting recommendations
+   - Consistent system performance  
+<br/>
+
+2. Implementation Criteria
+   - Successful ESP integration
+   - Compliant data handling
+   - Efficient workflow integration
+
+### Project Plan
+
+#### Timeline
+
+- Project Start: Immediate
+- Phase 1: Data Analysis and Model Development (Q3)
+- Phase 2: Implementation and Testing (Q3)
+- Target Completion: End of Q3
+- Go-Live: Before Q4 busy season
+
+#### Resource requirements
+
+1. Human Resources
+   - Data Science Team
+   - Marketing Team
+   - Technical Implementation Team
+   - Project Management Support  
+<br/>
+
+2. Technical Resources
+   - Data Analysis Tools
+   - ESP System Access
+   - Testing Environment
+   - Reporting Tools
+
+#### Risk assessment
+
+1. Primary Risks
+   - Revenue maintenance during cost reduction
+   - Technical integration challenges
+   - Data quality issues
+   - Compliance violations  
+<br/>
+
+2. Mitigation Strategies
+   - Phased implementation approach
+   - Regular performance monitoring
+   - Compliance review checkpoints
+   - Stakeholder feedback loops
+
+#### Communication plan
+
+1. Regular Updates
+   - Monthly stakeholder meetings
+   - Weekly team updates
+   - Ad-hoc critical updates  
+<br/>
+
+2. Reporting Structure
+   - Executive dashboards
+   - Operational reports
+   - Technical status updates
+
+#### Quality assurance
+
+1. Testing Phases
+   - Model validation
+   - Integration testing
+   - User acceptance testing
+   - Performance monitoring  
+<br/>
+
+2. Success Metrics Tracking
+   - Regular KPI reviews
+   - Performance benchmarking
+   - Compliance audits
+
+## Assignment
+
+{{< include business_understanding_homework.qmd >}}
+
