@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Foundations of Data Science - 25&nbsp; Personal Information and Personal Data</title>
+<title>Foundations of Data Science - 9&nbsp; Introduction</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../ethics/genAI.html" rel="next">
-<link href="../ethics/bias_harm.html" rel="prev">
+<link href="../data/sources_and_files.html" rel="next">
+<link href="../busi/examples.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -43,9 +43,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -87,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ethics/intro.html">Module VII. Applied Ethics in Data Science</a></li><li class="breadcrumb-item"><a href="../ethics/privacy.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data/data_intro.html">Module III. Data Engineering</a></li><li class="breadcrumb-item"><a href="../data/data_intro.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -207,7 +204,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../data/data_intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../data/data_intro.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -340,7 +337,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../ethics/privacy.html" class="sidebar-item-text sidebar-link active">
+  <a href="../ethics/privacy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
   </div>
 </li>
@@ -387,31 +384,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#privacy-and-confidentiality" id="toc-privacy-and-confidentiality" class="nav-link active" data-scroll-target="#privacy-and-confidentiality"><span class="header-section-number">25.1</span> Privacy and Confidentiality</a></li>
-  <li><a href="#data-privacy-regulations" id="toc-data-privacy-regulations" class="nav-link" data-scroll-target="#data-privacy-regulations"><span class="header-section-number">25.2</span> Data Privacy Regulations</a></li>
-  <li><a href="#what-is-personal-data" id="toc-what-is-personal-data" class="nav-link" data-scroll-target="#what-is-personal-data"><span class="header-section-number">25.3</span> What is Personal Data?</a></li>
-  <li><a href="#safeguarding-personal-information" id="toc-safeguarding-personal-information" class="nav-link" data-scroll-target="#safeguarding-personal-information"><span class="header-section-number">25.4</span> Safeguarding Personal Information</a>
-  <ul>
-  <li><a href="#lawful-fair-and-transparent" id="toc-lawful-fair-and-transparent" class="nav-link" data-scroll-target="#lawful-fair-and-transparent">Lawful, Fair, and Transparent</a></li>
-  <li><a href="#data-minimization" id="toc-data-minimization" class="nav-link" data-scroll-target="#data-minimization">Data Minimization</a></li>
-  <li><a href="#confidentiality" id="toc-confidentiality" class="nav-link" data-scroll-target="#confidentiality">Confidentiality</a></li>
-  <li><a href="#storage-limitation" id="toc-storage-limitation" class="nav-link" data-scroll-target="#storage-limitation">Storage Limitation</a></li>
-  <li><a href="#purpose-limitation" id="toc-purpose-limitation" class="nav-link" data-scroll-target="#purpose-limitation">Purpose Limitation</a></li>
-  <li><a href="#anonymization-and-pseudonymization" id="toc-anonymization-and-pseudonymization" class="nav-link" data-scroll-target="#anonymization-and-pseudonymization">Anonymization and Pseudonymization</a></li>
-  </ul></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../ethics/intro.html">Module VII. Applied Ethics in Data Science</a></li><li class="breadcrumb-item"><a href="../ethics/privacy.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data/data_intro.html">Module III. Data Engineering</a></li><li class="breadcrumb-item"><a href="../data/data_intro.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-ethics-privacy" class="quarto-section-identifier"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></h1>
+<h1 class="title"><span id="sec-data-intro" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction</span></span></h1>
 </div>
 
 
@@ -428,170 +408,17 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="privacy-and-confidentiality" class="level2" data-number="25.1">
-<h2 data-number="25.1" class="anchored" data-anchor-id="privacy-and-confidentiality"><span class="header-section-number">25.1</span> Privacy and Confidentiality</h2>
-<p>Working with data requires compliance with data privacy regulations, an increasingly complex field. It is our job to safeguard <strong>all</strong> information, not just information about individuals. In the everyday use of the words, we might not make a distinction between <strong>privacy</strong> and <strong>confidentiality</strong>. Legally, and technically, there is an important distinction. Privacy is about people; it is about the individual’s <em>rights</em> regarding their information. Confidentiality is about an individual’s <em>data</em> and how it is protected from others.</p>
-<p>Confidentiality can be required explicitly: confidentiality clauses in employee agreements can limit information we are allowed to share about our employer. In the course of employment, we are learning trade secrets and proprietary information about products that constitute a competitive advantage. Data collection in research projects follows detailed protocols to ensure integrity and trust in the information. Non-disclosure agreements (NDAs) place restrictions on information that can be shared.</p>
-<p>Besides explicit confidentiality agreement, there is an expectation of confidentiality beyond privacy. Many consumers understand that organizations have access to their data. Their concern is how the organization uses the data, and ensures that it remains a secret. An organization that meets the letter of data privacy regulations can still run afoul of the confidentiality expectations of its employees and customers.</p>
-<p>The <a href="https://www.datascienceassn.org/code-of-conduct.html">Code of Conduct of the Data Science Association</a> has this to say about confidential information:</p>
-<blockquote class="blockquote">
-<p><em>(a) Confidential information is information that the data scientist creates, develops, receives, uses or learns in the course of employment as a data scientist for a client, either working directly in-house as an employee of an organization or as an independent professional. It includes information that is not generally known by the public about the client, including client affiliates, employees, customers or other parties with whom the client has a relationship and who have an expectation of confidentiality. The data scientist has a professional duty to protect all confidential information, regardless of its form or format, from the time of its creation or receipt until its authorized disposal.</em></p>
-</blockquote>
-<blockquote class="blockquote">
-<p><em>(b) Confidential information is a valuable asset. Protecting this information is critical to a data scientists reputation for integrity and relationship with clients, and ensures compliance with laws and regulations governing the client’s industry.</em></p>
-</blockquote>
-<blockquote class="blockquote">
-<p>…</p>
-</blockquote>
-<blockquote class="blockquote">
-<p><em>(h) A data scientist shall protect client confidential information after termination of work for the client.</em></p>
-</blockquote>
-<blockquote class="blockquote">
-<p><em>(i) A data scientist shall return any and all confidential information in possession or control upon termination of the data scientist - client relationship and, if requested, execute an affidavit affirming compliance with obligations relating to confidential information.</em></p>
-</blockquote>
-<hr>
-<p>Special safeguards and regulations apply to personal data and personal information—information that is about people or relatable to people. This is the realm of <strong>data privacy</strong>. Not safeguarding personal information can lead to harm for both sides: identity theft, fraud, violation of rights, etc., for the individual whose personal data is mishandled; fines, legal action, loss of license, embarrassment, loss of business, etc., for the individual mishandling the personal information.</p>
-<div class="example">
-<div class="example-header">
-<p>Example: Henrietta Lacks and the HeLa Cell Line</p>
-</div>
-<div class="example-container">
-<p>Henrietta Lacks was born on August 1, 1920, in Roanoke, VA. She is probably one of the most important medical pioneers of the 20<sup>th</sup> century, with contributions that study the effect of toxins, drugs, hormones, and viruses on the growth of cancer cells. Not through her own medical work, but through the cells that were taken from her—without consent.</p>
-<p>Mrs.&nbsp;Lacks had moved to Maryland and in 1951 visited Johns Hopkins Hospital in Baltimore complaining of vaginal bleeding. A malignant tumor was found on her cervix, and she started radiation therapy. On October 4, 1951, the cervical cancer took her life.</p>
-<p>Cancer cells retrieved from her through a biopsy were sent to the tissue lab of Dr.&nbsp;George Gey. To his astonishment, Dr.&nbsp;Gey found that Mrs.&nbsp;Lacks’ cells behaved differently than cancer cells from other patients. While other cells would die within days of culturing, Mrs.&nbsp;Lacks’s cells continued to live and doubled about once a day.</p>
-<p>The cells, called the HeLa cell line, is the first immortalized human cell line and continues to live to today. It has been used in countless medical research projects. As was practice at the time, no consent was required from the patient to culture the cells, and to distribute them. This would be unthinkable today. Even so, it was an unethical practice back then.</p>
-<p>After her death, Dr.&nbsp;Gey instructed his lab assistant to collect more cells while her body was in the autopsy facility.</p>
-<p><a href="https://www.hopkinsmedicine.org/henriettalacks/">Johns Hopkins claims</a> to have never sold or profited from the HeLa cell line and has given them away freely and widely for scientific research. Johns Hopkins admits that it could have done more to work with the Lacks family. They were not informed until 1975 about the existence of the HeLa cell line—another disturbing aspect about handling medical information without consent. The Lacks family found out about the cells because researchers contacted them and asked for blood samples hoping to use those to distinguish HeLa cells from other cell lines and through a conversation at a dinner party.</p>
-<p>More than 10,000 patents involve HeLa cells. They were used to develop the polio vaccine, and in everything from AIDS research to gene mapping to testing cosmetics.</p>
-<p>In October 2023, a statute of Henrietta Lacks was dedicated at Lacks Plaza in Roanoke. Small-scale statutes were <a href="https://news.vt.edu/articles/2023/10/fbri_vtcsom_lacksunveiling_1023.html">dedicated at the Fralin Biomedical Research Institute at VTC</a>, Virginia Tech Carilion School of Medicine, and Carilion Clinic. HeLa cells live at Fralin Biomedical Research Institute and in labs all over the world.</p>
-</div>
-</div>
-</section>
-<section id="data-privacy-regulations" class="level2" data-number="25.2">
-<h2 data-number="25.2" class="anchored" data-anchor-id="data-privacy-regulations"><span class="header-section-number">25.2</span> Data Privacy Regulations</h2>
-<p>Since the late 2010s, data privacy regulations have appeared in many parts of the world. They are often similar but frequently different enough to create a messy landscape of laws that can be difficult to navigate. The most important regulations are</p>
+<p>The goal of data engineering is to make raw data usable for consumption by data analysts, business analysts, data scientists, machine learning engineers, and so on. The CRISP-DM data science project cycle follows the business understanding (discovery) stage with two data-related phases:</p>
 <ul>
-<li><p><strong>GDPR</strong>: the <a href="https://gdpr-info.eu/">General Data Protection Regulations</a> of the European Union</p></li>
-<li><p><strong>CCPA</strong>: the <a href="https://oag.ca.gov/privacy/ccpa">California Consumer Privacy Act</a></p></li>
-<li><p><strong>CPRA</strong>: the California Privacy Rights Act</p></li>
-<li><p><strong>VCDPA</strong>: the Virginia Consumer Data Protection Act</p></li>
-<li><p><strong>CPA</strong>: the Colorado Privacy Act</p></li>
+<li><strong>Data understanding</strong>: identify, collect, and analyze data sets that help accomplish the project goals.</li>
+<li><strong>Data preparation</strong>: prepare the final data sets for the next stages of the project, in particular, the modeling stage.</li>
 </ul>
-<p><a href="https://pro.bloomberglaw.com/insights/privacy/privacy-laws-us-vs-eu-gdpr/#the-basics-of-each-law">This</a> article in Bloomberg Law provides a good overview of the four pieces of legislation.</p>
-<div id="fig-privacy-laws" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig.align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-privacy-laws-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/BasicsofPrivacyLaws.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1"><img src="images/BasicsofPrivacyLaws.png" class="img-fluid figure-img" style="width:80.0%" data-fig.align="center"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-privacy-laws-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;25.1: Basics of major data privay regulations. <a href="https://pro.bloomberglaw.com/insights/privacy/privacy-laws-us-vs-eu-gdpr/#the-basics-of-each-law">Source.</a>
-</figcaption>
-</figure>
-</div>
-<div id="fig-privacy-laws-data" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig.align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-privacy-laws-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/DataProtectedByPrivacyLaws.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2"><img src="images/DataProtectedByPrivacyLaws.png" class="img-fluid figure-img" style="width:80.0%" data-fig.align="center"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-privacy-laws-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;25.2: Data protected by major data privay regulations. <a href="https://pro.bloomberglaw.com/insights/privacy/privacy-laws-us-vs-eu-gdpr/#the-basics-of-each-law">Source.</a>
-</figcaption>
-</figure>
-</div>
-<p>There is substantial overlap between the regulations, and also important differences. For example, the U.S. laws, which are based on bottom-up common law, are <strong>opt-out</strong> laws, whereas the top-down GDPR is an <strong>opt-in</strong> law. Consider consent, for example. An opt-out law assumes that consent is automatically given unless someone opts out. Under GDPR, consent is automatically withheld unless someone opts in explicitly (<a href="#fig-privacy-laws" class="quarto-xref">Figure&nbsp;<span>25.1</span></a>).</p>
-<p>The type of personal data protected under the regulations differs as well. The California statutes extend personal data to data about a household. When modeling consumer behavior, for example, modeling at the aggregate household level does not relieve you from worrying about personal data privacy of California residents. The U.S. laws exclude publicly available data from the definition of personal data, while GDPR includes publicly available data (<a href="#fig-privacy-laws-data" class="quarto-xref">Figure&nbsp;<span>25.2</span></a>).</p>
-<div id="fig-privacy-laws-compliance" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig.align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-privacy-laws-compliance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/PrivacyLawsCompliance.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="quarto-lightbox-gallery-3"><img src="images/PrivacyLawsCompliance.png" class="img-fluid figure-img" style="width:80.0%" data-fig.align="center"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-privacy-laws-compliance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;25.3: Who must comply with major data privay regulations. <a href="https://pro.bloomberglaw.com/insights/privacy/privacy-laws-us-vs-eu-gdpr/#the-basics-of-each-law">Source.</a>
-</figcaption>
-</figure>
-</div>
-</section>
-<section id="what-is-personal-data" class="level2" data-number="25.3">
-<h2 data-number="25.3" class="anchored" data-anchor-id="what-is-personal-data"><span class="header-section-number">25.3</span> What is Personal Data?</h2>
-<p>Things get complicated quickly because the definition of personal data varies and because there are many regulations to pay attention to. The <a href="https://gdpr-info.eu/">General Data Protection Regulations</a> (GDPR) of the European Union applies a very broad and non-prescriptive definition of personal information. HIPAA, The U.S. Health Insurance Portability and Accountability Act defines items specifically as PII, personally identifiable information. The primary focus of HIPAA is to protect personal information related to health. The National Institute of Standards and Technology, NIST, applies a different definition to PII. For example, your computer’s IP address is not PII under NIST standards but is personal data under GDPR. In 2011, the California State Supreme Court ruled that a person’s ZIP code is PII. The <a href="https://oag.ca.gov/privacy/ccpa">California Consumer Privacy Protection Act</a> (CPPA) distinguishes personal information such as internet browsing history from sensitive personal information, for example, an account log-in or union membership.</p>
-<p>We can never cover all the bases and thus recommend taking a conservative stance and a broad definition of personal information. If in doubt, consider a piece of data that can be linked to a person as personal information that is protected and needs to be safeguarded. The broad coverage of GDPR is a good place to start. In addition, you need to know the data privacy regulations that apply in a particular domain or to data from a specific group. The following are some federal laws that govern specific types of data:</p>
-<ul>
-<li><p>The <a href="#0">Privacy Act of 1974</a> governs how federal agencies can collect and use data about individuals in its system of records.</p></li>
-<li><p>The <a href="#0">Health Insurance Portability and Accounting Act</a> (HIPAA) governs the collection of health information.</p></li>
-<li><p>The <a href="#0">Children’s Online Privacy Protection Act</a> (COPPA) governs the collection of information about minors.</p></li>
-<li><p>The <a href="#0">Gramm Leach Bliley Act</a> (GLBA) governs personal information collected by banks and financial institutions.</p></li>
-<li><p>The <a href="#0">Fair Credit Reporting Act</a> (FCRA), which regulates the collection and use of credit information.</p></li>
-<li><p>The <a href="#0">Family Educational Rights and Privacy Act</a> (FERPA), which protects the privacy of student education records.</p></li>
-</ul>
-<p>The GDPR defines personal data in Article 4:</p>
-<blockquote class="blockquote">
-<p><em>‘personal data’ means any information relating to an identified or identifiable natural person (‘data subject’);</em></p>
-</blockquote>
-<p>There is a lot to unpack here. What does “relating to” mean? What is the difference between an “identified” and an “identifiable” natural person?</p>
-<p>An identifiable person can be identified by reference to a name, ID, location data, or by one or more other attributes specific to the identity of that person, such as genetic, mental, physical, cultural, or social information. To be identifiable, it is sufficient that you can distinguish them from other individuals. Personal data is not just what makes us unique, it is sufficient for the data to distinguish us from others. Your online shopping cart makes you an identifiable person because it can be used to distinguish you from people with a different shopping cart. It does not matter that there could be other shoppers whose cart looks exactly like yours.</p>
-<p>The name is an identifier, but it might not make you identifiable—there are many “John Smiths”. It is still personal information.</p>
-<p>What is the meaning of “relating to”? A careful reading of the GDPR definition of personal data suggests that identifying data might not be personal data if it does not relate to the person. Wait, what? A few examples will make this clearer:</p>
-<ul>
-<li><p>Information about an individual or about their activities is obviously personal data, it explicitly relates to the individual. Your birthday is your personal data. However, March 28, 2003, is just a date. It is not personal data until it is someone’s birthday, anniversary, wedding day, arrest day, etc.</p></li>
-<li><p>Consider a job listing that includes salary information. The salary is not personal information, it relates to no specific individual. As soon as the position is filled, the salary information becomes personal information because it now relates to the new employee.</p></li>
-<li><p>An organization has an org chart with job titles. The job title in the org chart is not personal data until it is related to a specific individual or a group of employees.</p></li>
-<li><p>Data about a house is not, by itself, personal data. But an individual’s tax record or utility bill are personal data. As soon as the information about the house is tied to an owner, it becomes personal data—it now relates to the owner. You can conduct analyses of house values in a geographical area. The houses in the study are selected because of their properties—four bedrooms and a double garage—not because they are occupied by a specific entity. But if the data about the house is used with respect to an individual, then it is personal data.</p></li>
-<li><p>A factory collects information about a machine on the factory floor. This is not personal data if the purpose of analysis is to understand the operating characteristics of the machine. If the data is used to assess the productivity of the machine operator, then it is personal data.</p></li>
-</ul>
-<p>The definition of personal data in GDPR is non-prescriptive. The regulations do not explicitly state that a social security number is personal information—it is. Whether information is personal data depends on the context. Does it relate to distinguishable individuals? If so, it is personal data. GDPR is adaptable because of this approach, if we determine that an IP address is personal data in a context, then a MAC address is as well. The downside of a non-prescriptive definition is that context matters, and we need to know how to apply it.</p>
-<p>Data does not have to be correct to constitute personal data. A social-security number entered into a database is still personal data, even if someone fat-fingered some digits.</p>
-<div class="example">
-<div class="example-header">
-<p>Example: <a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/personal-information-what-is-it/what-is-personal-data/what-is-the-meaning-of-relates-to/">Inaccurate</a> Personal Data</p>
-</div>
-<div class="example-container">
-<p>John and William live in an apartment building; John lives on the ground floor and William lives on the top floor. They both wear glasses.</p>
-<p>The landlord receives a complaint that the man wearing glasses who lives on the ground floor has engaged in bad behavior. However, the complaint actually is about William’s activity.</p>
-<p>The landlord records the information about the behavior relating to John. The information is inaccurate, but it is nevertheless personal data related to John. At the same time, this is also personal data about William, even though it’s been recorded about John.</p>
-</div>
-</div>
-</section>
-<section id="safeguarding-personal-information" class="level2" data-number="25.4">
-<h2 data-number="25.4" class="anchored" data-anchor-id="safeguarding-personal-information"><span class="header-section-number">25.4</span> Safeguarding Personal Information</h2>
-<p>If you google how to safeguard personal information you get a wealth of similar responses—almost all of them are about how <strong>you</strong> can safeguard your personal information: use strong passwords, use two-factor authentication, don’t overshare online, turn off location services, watch out for phishing attempts, don’t follow unknown or suspicious links, keep your social security card in a safe place at home, …</p>
-<p>But how do we safeguard <strong>other</strong>’s personal information that makes it into data sets we work with? There are a number of principles you can follow as an ethical data scientist. These (and more) are enshrined as the data protection principles of GDPR.</p>
-<section id="lawful-fair-and-transparent" class="level3">
-<h3 class="anchored" data-anchor-id="lawful-fair-and-transparent">Lawful, Fair, and Transparent</h3>
-<p>Act in the best interest of the data subjects, always on a legal basis and with best intentions. That means you had consent to collect and analyze the data and the scope of analysis does not exceed what can reasonably be expected.</p>
-</section>
-<section id="data-minimization" class="level3">
-<h3 class="anchored" data-anchor-id="data-minimization">Data Minimization</h3>
-<p>Only collect and keep the amount of personal data that is needed, in terms of the number of records and the number of variables. If you gather data to deliver a newsletter electronically, then all you need is the name and email address. Maybe you do not even need to know the name of the subscriber. Having their job title might be an interesting piece of information but it is not necessary to send out the newsletter—it should not be collected.</p>
-<p>Suppose you analyze data on houses to develop a predictive model for residential real estate prices, and the data set contains information about the owners of the properties. This information is not necessary for the purpose and should be removed from the data frame you work with.</p>
-</section>
-<section id="confidentiality" class="level3">
-<h3 class="anchored" data-anchor-id="confidentiality">Confidentiality</h3>
-<p>Only people who should have access to data are working with the data. If you are in control of data, you have a responsibility to protect the personal data you are processing. A common means of violating this principle is sharing data with others not knowing that the data contains personal information. If you receive a request for access to data that you have access to, ask yourself whether the requestor is authorized to use the data. If in doubt, put security concerns ahead of trying to be helpful.</p>
-</section>
-<section id="storage-limitation" class="level3">
-<h3 class="anchored" data-anchor-id="storage-limitation">Storage Limitation</h3>
-<p>Do not store personal data you do not need anymore. This is related to the data minimization principle, do not keep what you do not need.</p>
-<p>Destroying data is trickier than you might think. There can be multiple copies of records, on multiple devices, including backups in the cloud, backups on tapes, etc. The same information can be stored at different levels of data preparation, for example in different layers of a data lake with medallion architecture. You can destroy data by removing it from storage devices using erasure, degaussing (destroying the magnetic field), or overwriting. Or you can destroy the storage device, for example by shredding hard drives.</p>
-<p>The GDPR include a right to data deletion, any data subject can ask that their personal data be deleted. You need to know what personal data you have on someone, where it is, and how to destroy that data.</p>
-<p>If you gather email addresses for the purpose of sending an electronic newsletter, and you decide to stop sending newsletter, you have to delete the email addresses because the purpose for which the personal data was given no longer exists.</p>
-</section>
-<section id="purpose-limitation" class="level3">
-<h3 class="anchored" data-anchor-id="purpose-limitation">Purpose Limitation</h3>
-<p>Use the data only for the purpose it was intended for. If the purpose expands or changes you need to re-secure consent. You cannot reuse personal data for other purposes. If you tell an online user that you store their IP address to document their consent, then you cannot use the IP address to send them marketing material.</p>
-</section>
-<section id="anonymization-and-pseudonymization" class="level3">
-<h3 class="anchored" data-anchor-id="anonymization-and-pseudonymization">Anonymization and Pseudonymization</h3>
-<p>Anonymization: remove personal information from a data set. The anonymized data should eliminate direct re-identification, for example, by combining other information in the data set.</p>
-<p>Pseudonymization: pseudonymizing data is a weaker safeguard than anonymizing it. Pseudonymization replaces the original value of personal information with a mask or by encryption. If the pseudonymization is reversible, for example with an encryption key, the data is still considered personal information.</p>
+<p>We combine both efforts under the umbrella of data engineering, the tasks of selecting and cleaning data (under data preparation) cannot be separated from the tasks of collecting, describing (exploring) data, and working on data quality (under data understanding).</p>
+<p>The discussion begins with a review of important file formats in data science, databases, and enterprise data architectures. <a href="data_access.html" class="quarto-xref"><span>Chapter 11</span></a> uses Python to ingest data in the major file formats and from a database. During data profiling, the first date with the data, we get a first impression of the content and quality of the data.</p>
+<p>Summarization (<a href="summarization.html" class="quarto-xref"><span>Chapter 13</span></a>) and visualization {<a href="visualization.html" class="quarto-xref"><span>Chapter 14</span></a>} distill the essence of the data and its patterns in numerical and graphical form.</p>
+<p>Because the declarative programming language SQL is very important in the daily work of data scientists, we present some basic SQL knowledge in <a href="sqlbasics.html" class="quarto-xref"><span>Chapter 15</span></a>.</p>
 
 
-<div class="hidden" aria-hidden="true">
-<span class="glightbox-desc lightbox-desc-1">Figure&nbsp;25.1: Basics of major data privay regulations. <a href="https://pro.bloomberglaw.com/insights/privacy/privacy-laws-us-vs-eu-gdpr/#the-basics-of-each-law">Source.</a></span>
-<span class="glightbox-desc lightbox-desc-2">Figure&nbsp;25.2: Data protected by major data privay regulations. <a href="https://pro.bloomberglaw.com/insights/privacy/privacy-laws-us-vs-eu-gdpr/#the-basics-of-each-law">Source.</a></span>
-<span class="glightbox-desc lightbox-desc-3">Figure&nbsp;25.3: Who must comply with major data privay regulations. <a href="https://pro.bloomberglaw.com/insights/privacy/privacy-laws-us-vs-eu-gdpr/#the-basics-of-each-law">Source.</a></span>
-</div>
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1149,13 +976,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../ethics/bias_harm.html" class="pagination-link" aria-label="Bias and Harm in Algorithms">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span>
+      <a href="../busi/examples.html" class="pagination-link" aria-label="Example: Email Campaign Optimization">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Example: Email Campaign Optimization</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../ethics/genAI.html" class="pagination-link" aria-label="Ethics of Generative AI">
-        <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Ethics of Generative AI</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../data/sources_and_files.html" class="pagination-link" aria-label="Data Sources and File Formats">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Sources and File Formats</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1173,31 +1000,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","loop":false,"selector":".lightbox","openEffect":"zoom"});
-window.onload = () => {
-  lightboxQuarto.on('slide_before_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    const href = trigger.getAttribute('href');
-    if (href !== null) {
-      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-      if (imgEl !== null) {
-        const srcAttr = imgEl.getAttribute("src");
-        if (srcAttr && srcAttr.startsWith("data:")) {
-          slideConfig.href = srcAttr;
-        }
-      }
-    } 
-  });
-
-  lightboxQuarto.on('slide_after_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    if (window.Quarto?.typesetMath) {
-      window.Quarto.typesetMath(slideNode);
-    }
-  });
-
-};
-          </script>
 
 
 

@@ -24,8 +24,6 @@
 
 [Meet Airbnb’s official party pooper, who reduced partying by 5% in two years](https://www-cnbc-com.cdn.ampproject.org/c/s/www.cnbc.com/amp/2023/09/19/airbnb-party-preventer-naba-banerjee-reduced-parties-55percent-in-two-years.html), CNBC, Sept. 19, 2023
 
-[Lectures and conferences on mathematical statistics and probability](http://cda.psych.uiuc.edu/Wallace/neyman_book.pdf). Jerzy Neyman, 1952
-
 ## From the data part
 
 
@@ -36,37 +34,18 @@
 
 [The science behind data visualization](https://www.creativebloq.com/design/science-behind-data-visualisation-8135496), by Graham Odds on Creative Blog, August 8, 2013
 
-[Choosing a good chart](https://extremepresentation.typepad.com/blog/2006/09/choosing_a_good.html), by Andrew Abela, blog, The Extreme Presentation Method, Sept. 15, 2020.
-
-The Grammar of Graphics, by Leland Wilkinson, Springer Verlag, 2005
 
 [Designing Against Bias in Machine Learning and AI](https://magazine.amstat.org/blog/2023/09/01/mlbias/) by David Corliss, AMSTAT News, September 2023
-
-[ASA Ethical Guidelines for Statistical Practice](https://www.amstat.org/your-career/ethical-guidelines-for-statistical-practice), American Statistical Association
-
-[Ethics and Data Science](https://resources.oreilly.com/examples/0636920203964/) by Mike Loukides, Hilary Mason, and DJ Patil, O’Reilly Media, 2018.
-
-[A Guide for Ethical Data Science](https://rss.org.uk/RSS/media/News-and-publications/Publications/Reports%20and%20guides/A-Guide-for-Ethical-Data-Science-Final-Oct-2019.pdf), Royal Statistical Society and Institute and Faculty of Actuaries
 
 
 [Big data ethics and 10 controversial data science experiments](https://datasciencedojo.com/blog/big-data-ethics-10-experiments/), by Sabrina Dominquez, Data Science Dojo, May 2018
 
-[Strava’s heatmap was a ‘clear risk’ to security, UK military warned](https://www.wired.co.uk/article/strava-heat-maps-military-app-uk-warning-security), by Matt Burgess, Wired Magazine, April 2018
-
-
-The Robodebt tragedy, by Trewin, D., Fisher, N., and Cressie, N. Significance, December 2023
-
-[Robodebt not only broke the laws of the land—it also broke the laws of mathematics](https://theconversation.com/robodebt-not-only-broke-the-laws-of-the-land-it-also-broke-laws-of-mathematics-201299), by Noel Cressie, *The Conversation*, March 16, 2023
 
 [University lecturer slams ‘sexist’ Google Translate as gender neutral languages are translated into English](https://www.dailymail.co.uk/news/article-9396937/University-lecturer-slams-sexist-Google-Translate.html), Daily Mail.com, March 24, 2021
 
 [Regression to the mean: what it is and how to deal with it](https://academic.oup.com/ije/article/34/1/215/638499), by Barnett, A.G., van der Pols, J.C., and Dobson, A.J., International Journal of Epidemiology, 34(1), 2005.
 
-[An Introduction to Statistical Learning](https://www.statlearning.com/), 2^nd^ ed., by James, G., Witten, D., Hastie, T., and Tibshirani, R., Springer Verlag, 2023
 
-[Lectures and conferences on mathematical statistics and probability](http://cda.psych.uiuc.edu/Wallace/neyman_book.pdf). Neyman, Jerzy, Washington, Graduate School, U.S. Dept. of Agriculture, 1952
-
-The Book of Why, Judea Pearl and Dana MacKenzie, Basic Books, New York, 2018
 
 Causality, 2^nd^ ed., Judea Pearl, Cambridge University Press, 2009
 

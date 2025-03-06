@@ -1,74 +1,106 @@
 # Introduction {sec-ethics-intro}
 
-Why should data science be concerned with ethics? Because our discipline, what we do, has impact on people's lives. And so it behooves us to make sure this impact does not cause harm by perpetuating stereotypes or mis-allocating/withholding resources.
+Why should data science be concerned with ethics? Because our discipline, what 
+we do, has impact on people's lives. And so it behooves us to make sure this impact 
+does not cause harm by perpetuating stereotypes or mis-allocating/withholding 
+resources.
 
 In their book "Ethics and Data Science", @Loukides_etal_2018 note that,
 
-> *The hard thing about being an ethical data scientist isn't understanding ethics. It's the junction between ethical ideas and practice. It's doing good data science.*
+:::{.quote}
+The hard thing about being an ethical data scientist isn't understanding ethics. 
+It's the junction between ethical ideas and practice. It's doing good data science.
+:::
 
-There is no shortage of ethics guidelines and principles for data professionals. The [Royal Statistical Society](https://rss.org.uk/RSS/media/News-and-publications/Publications/Reports%20and%20guides/A-Guide-for-Ethical-Data-Science-Final-Oct-2019.pdf) lists five principles:
+There is no shortage of ethics guidelines and principles for data professionals. 
+The [Royal Statistical Society](https://rss.org.uk/RSS/media/News-and-publications/Publications/Reports%20and%20guides/A-Guide-for-Ethical-Data-Science-Final-Oct-2019.pdf) lists five principles:
 
 -   Seek to enhance the value of data science for society
-
 -   Avoid harm
-
 -   Apply and maintain professional competence
-
 -   Seek to preserve or increase trustworthiness
-
 -   Maintain accountability and oversight
 
-The [American Statistical Society](https://www.amstat.org/your-career/ethical-guidelines-for-statistical-practice) lists eight principles for all those who engage in statistical practice, regardless of job title, profession, or degree. In other words, if you work with data, you should observe these principles:
+The [American Statistical Society](https://www.amstat.org/your-career/ethical-guidelines-for-statistical-practice) lists eight principles for all those who engage in statistical practice, 
+regardless of job title, profession, or degree. In other words, if you work with 
+data, you should observe these principles:
 
 -   Professional integrity and accountability
-
 -   Integrity of data and methods
-
 -   Responsibility to stakeholders
-
 -   Responsibilities to research and data subjects
-
 -   Responsibilities to members of multidisciplinary teams
-
 -   Responsibilities of leaders, supervisors, and mentors
-
 -   Responsibilities regarding potential misconduct
 
-Each of these principles describes behaviors and expectations for data scientists, their organizations, supervisors, and team members.
+Each of these principles describes behaviors and expectations for data scientists, 
+their organizations, supervisors, and team members.
 
-Most people want to be fair, most people do not want to do harm, most people want to behave ethically. The challenge is then not to follow *this* set of principle or *that* set of principles and to argue about the legalese—that is the domain of lawyers. The challenge is how to do good data science, how to conduct ourselves ethically and how to perform our work in a way that leads to ethical outcomes. It is one thing to follow the principle to get consent from data subjects before collecting or using their data—the ethical principle. It is another thing to do this at scale in a web application and with transparency that explains to data subjects exactly how their data will be handled and used—ethics in practice.
+Most people want to be fair, most people do not want to do harm, most people want 
+to behave ethically. The challenge is then not to follow *this* set of principle 
+or *that* set of principles and to argue about the legalese—that is the domain of 
+lawyers. The challenge is how to do good data science, how to conduct ourselves 
+ethically and how to perform our work in a way that leads to ethical outcomes. 
+It is one thing to follow the principle to get consent from data subjects before 
+collecting or using their data—the ethical principle. It is another thing to do 
+this at scale in a web application and with transparency that explains to data 
+subjects exactly how their data will be handled and used—ethics in practice.
 
 In the words of @Loukides_etal_2018,
 
-> *After the ethical principle, we have to think about the implementation of the ethical principle.*
 
-This is not solved by placing professional ethicists on data science teams. It is not solved by hiring people whose job is ethics, but by us behaving ethically and living ethical values. It is not solved by **talking** about how to use data ethically, but by **using** data ethically.
+:::{.quote}
+After the ethical principle, we have to think about the implementation of the 
+ethical principle.
+:::
+
+This is not solved by placing professional ethicists on data science teams. It is 
+not solved by hiring people whose job is ethics, but by us behaving ethically and 
+living ethical values. It is not solved by **talking** about how to use data ethically, 
+but by **using** data ethically.
 
 ## Why Now?
 
-The conversations about ethics, bias, and fairness in data science have intensified over the past decade. Yet, data analysis and decisions based on data are not a new phenomenon. What changed? Why is data ethics a hot button issue today?
+The conversations about ethics, bias, and fairness in data science have 
+intensified over the past decade. Yet, data analysis and decisions based on 
+data are not a new phenomenon. What changed? Why is data ethics a hot button 
+issue today?
 
--   More data is being collected and data owners want to know how their data is being used.
+-   More data is being collected and data owners want to know how their data is 
+being used.
 
--   More decisions are based on algorithms derived from data versus algorithms based on expert knowledge or business rules.
+-   More decisions are based on algorithms derived from data versus algorithms 
+based on expert knowledge or business rules.
 
 -   Automation enables us to apply algorithms at greater scale.
 
--   More data fall under the definition of personal data and it is easier to infer personal data by combining data sources.
+-   More data fall under the definition of personal data and it is easier to 
+infer personal data by combining data sources.
 
--   Artificial intelligence and machine learning has penetrated domains where it replaces sensing (reading, seeing, listening) rather than logic.
+-   Artificial intelligence and machine learning has penetrated domains where 
+it replaces sensing (reading, seeing, listening) rather than logic.
 
--   Artificial intelligence is now capable of generating content that can easily be mistaken for human-generated material, and it can fake and impersonate.
+-   Artificial intelligence is now capable of generating content that can easily 
+be mistaken for human-generated material, and it can fake and impersonate.
 
--   Data-driven models are used in situations where much is riding on the decisions: sentencing guidelines, credit approvals, medical diagnosis, identification, …
+-   Data-driven models are used in situations where much is riding on the 
+decisions: sentencing guidelines, credit approvals, medical diagnosis, identification, …
 
--   Greater complexity of data-based models leads to greater opaqueness; many models are inscrutable black boxes that are difficult to explain.
+-   Greater complexity of data-based models leads to greater opaqueness; many 
+models are inscrutable black boxes that are difficult to explain.
 
--   The consequences of bias or unfairness are severe. Beyond legal repercussions when organizations break the law, missteps are damaging to reputation and destructive to the business.
+-   The consequences of bias or unfairness are severe. Beyond legal repercussions 
+when organizations break the law, missteps are damaging to reputation and 
+destructive to the business.
 
--   Unintended consequences of using data. A well-intended application can have negative side effects that cause harm and jeopardize the business. See below for some examples.
+-   Unintended consequences of using data. A well-intended application can have 
+negative side effects that cause harm and jeopardize the business. We will see 
+several examples.
 
--   Internet-based data collection (web scraping, online questionnaires, social media feeds) can lead to large databases of unknown quality and representativeness. This raises questions about inherent bias in the data. It also raises questions about ownership and right to use these data.
+-   Internet-based data collection (web scraping, online questionnaires, social 
+media feeds) can lead to large databases of unknown quality and representativeness. 
+This raises questions about inherent bias in the data. It also raises questions 
+about ownership and right to use these data.
 
 ::: example
 ::: example-header
@@ -76,9 +108,19 @@ Example: Baker Institute: More Automation means More Inequality
 :::
 
 ::: example-container
-In a [2020 study](https://www.bakerinstitute.org/sites/default/files/2020-11/import/bi-report-110620-bipp-automation.pdf) by the Baker Institute for Public Policy at Rice University, the authors conclude that increased automation does not lead to a loss of jobs as much as it leads to an increase in inequality. They separate workers into three coarse groups: skilled workers that represent the top-10% of wages, medium-skilled workers that represent the next 40%, and low-skilled workers that represent the lower half of the wage distribution. The macroeconomic model used in the study is pretty simple, assuming that medium- and low-skilled workers can be replaced by automation and robotics, but not highly skilled workers. In that scenario, the wage share of skilled workers increases, and that of other workers, in particular medium-skilled workers decreases.
+In a [2020 study](https://www.bakerinstitute.org/sites/default/files/2020-11/import/bi-report-110620-bipp-automation.pdf) by the Baker Institute for Public Policy at Rice University, the 
+authors conclude that increased automation does not lead to a loss of jobs as 
+much as it leads to an increase in inequality. They separate workers into three 
+coarse groups: skilled workers that represent the top-10% of wages, medium-skilled 
+workers that represent the next 40%, and low-skilled workers that represent the 
+lower half of the wage distribution. The macroeconomic model used in the study 
+is pretty simple, assuming that medium- and low-skilled workers can be replaced 
+by automation and robotics, but not highly skilled workers. In that scenario, the 
+wage share of skilled workers increases, and that of other workers, in particular 
+medium-skilled workers decreases.
 
-Since 2020, things have changed. With the rise of generative AI, skills targeted for possible automation have reached a different, much higher, level.
+Since 2020, things have changed. With the rise of generative AI, skills targeted 
+for possible automation have reached a different, much higher, level.
 :::
 :::
 

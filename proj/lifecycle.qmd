@@ -172,9 +172,12 @@ topic of ethical decisioning with data.
 ## Data Engineering
 
 If the real-world problem translates into a data science activity, we progress to 
-the next stage.
+the next stage. In the CRISP-DM methodology, this phase comprises two steps: 
+data understanding and data preparation. We combine these into a single stage.
 
-During the **Data Engineering** stage these considerations are made concrete. 
+During the **Data Engineering** stage the translation of the business understanding
+into a data science activity is made concrete by identifying, collecting, and
+working with the data that will be used to build the data solution.
 Are the data available to us? What is their size and quality? Are additional 
 attributes required, if so, where do they come from? Do we need to collect more 
 data, or can we obtain data from a 3^rd^ party source (for free, for fee)?
@@ -213,7 +216,8 @@ here because not having the right data prepared in the right way can invalidate
 the subsequent steps and jeopardize the project. It is also true that in smaller
 organizations you might not find dedicated data engineering teams that could do 
 the heavy lifting in preparing high-quality data for analysis; some of that work 
-then falls to the data scientist.
+then falls to the data scientist. It is also true that many data scientists find
+themselves spending more time engineering data than they hoped or expected. 
 
 Imagine that you find a very strong relationship between patient well-being and 
 a health metric in a long-term study only to find out when you communicate the 
@@ -236,11 +240,20 @@ Some typical tasks during the **Data Engineering** stage involve
 
 -   **Data Sources**: Final selection of the data sources.
 
--   **Data Quality**: The result of this is clean and consistent data with known properties. Modifications to raw data are documented. Any remaining data quality issues are documented.
+-   **Data Exploration**: Profiling and exploring data tells us what we are
+dealing with, identifies relationships and patterns, and suggests further 
+questions to ask of the data.
 
--   **Data Integration**: Merging and joining of data sets, creation of new attributes (feature engineering), re-formatting of data, renaming of columns.
+-   **Data Quality**: The result of this is clean and consistent data with known 
+properties. Modifications to raw data are documented. Any remaining data quality 
+issues are documented.
 
--   **Data Delivery**: The result of data preparation is made available in an agreed-upon format, for example, as Parquet files stored in S3 or as tables in a database.
+-   **Data Integration**: Merging and joining of data sets, creation of new 
+attributes (feature engineering), re-formatting of data, renaming of columns.
+
+-   **Data Delivery**: The result of data preparation is made available in an 
+agreed-upon format, for example, as Parquet files stored in S3 or as tables in a database.
+
 
 ## Modeling
 

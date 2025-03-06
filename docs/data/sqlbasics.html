@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Foundations of Data Science - 14&nbsp; SQL Basics</title>
+<title>Foundations of Data Science - 15&nbsp; SQL Basics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -77,6 +77,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -118,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data/sources_and_files.html">Module III. Data Engineering</a></li><li class="breadcrumb-item"><a href="../data/sqlbasics.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">SQL Basics</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data/data_intro.html">Module III. Data Engineering</a></li><li class="breadcrumb-item"><a href="../data/sqlbasics.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">SQL Basics</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -238,44 +241,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../data/data_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../data/sources_and_files.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Sources and File Formats</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Sources and File Formats</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../data/data_access.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../data/quality.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data Quality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Data Quality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../data/summarization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Data Summarization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data Summarization</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../data/visualization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data Visualization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data Visualization</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../data/sqlbasics.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">SQL Basics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">SQL Basics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../data/integration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Integration</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Integration</span></span></a>
   </div>
 </li>
       </ul>
@@ -292,25 +301,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../statlearning/general.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">General Topics</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../statlearning/mathstat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../statlearning/linalg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">General Topics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../statlearning/featproc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Feature and Target Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Feature and Target Processing</span></span></a>
   </div>
 </li>
       </ul>
@@ -331,19 +328,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/ds_softwareeng.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Science versus Software Engineering,</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Science versus Software Engineering,</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/coding_practices.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/tools.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
   </div>
 </li>
       </ul>
@@ -360,31 +357,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/gonewrong.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">How Things Go Wrong</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">How Things Go Wrong</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/bias_harm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/privacy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/genAI.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ethics of Generative AI</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Ethics of Generative AI</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text">Module VIII. Review Topics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/mathstat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/linalg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
   </div>
 </li>
       </ul>
@@ -405,25 +425,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">14.1</span> Introduction</a></li>
-  <li><a href="#types-of-sql-commands" id="toc-types-of-sql-commands" class="nav-link" data-scroll-target="#types-of-sql-commands"><span class="header-section-number">14.2</span> Types of SQL Commands</a></li>
-  <li><a href="#most-common-sql-commands" id="toc-most-common-sql-commands" class="nav-link" data-scroll-target="#most-common-sql-commands"><span class="header-section-number">14.3</span> Most Common SQL Commands</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">15.1</span> Introduction</a></li>
+  <li><a href="#types-of-sql-commands" id="toc-types-of-sql-commands" class="nav-link" data-scroll-target="#types-of-sql-commands"><span class="header-section-number">15.2</span> Types of SQL Commands</a></li>
+  <li><a href="#most-common-sql-commands" id="toc-most-common-sql-commands" class="nav-link" data-scroll-target="#most-common-sql-commands"><span class="header-section-number">15.3</span> Most Common SQL Commands</a>
   <ul>
   <li><a href="#creating-and-modifying-a-table" id="toc-creating-and-modifying-a-table" class="nav-link" data-scroll-target="#creating-and-modifying-a-table">Creating and Modifying a Table</a></li>
   <li><a href="#pivoting-a-table" id="toc-pivoting-a-table" class="nav-link" data-scroll-target="#pivoting-a-table">Pivoting a Table</a></li>
   <li><a href="#dropping-a-table" id="toc-dropping-a-table" class="nav-link" data-scroll-target="#dropping-a-table">Dropping a Table</a></li>
   </ul></li>
-  <li><a href="#select-statement" id="toc-select-statement" class="nav-link" data-scroll-target="#select-statement"><span class="header-section-number">14.4</span> SELECT Statement</a></li>
-  <li><a href="#subqueries" id="toc-subqueries" class="nav-link" data-scroll-target="#subqueries"><span class="header-section-number">14.5</span> Subqueries</a></li>
+  <li><a href="#select-statement" id="toc-select-statement" class="nav-link" data-scroll-target="#select-statement"><span class="header-section-number">15.4</span> SELECT Statement</a></li>
+  <li><a href="#subqueries" id="toc-subqueries" class="nav-link" data-scroll-target="#subqueries"><span class="header-section-number">15.5</span> Subqueries</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data/sources_and_files.html">Module III. Data Engineering</a></li><li class="breadcrumb-item"><a href="../data/sqlbasics.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">SQL Basics</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../data/data_intro.html">Module III. Data Engineering</a></li><li class="breadcrumb-item"><a href="../data/sqlbasics.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">SQL Basics</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-sql-basics" class="quarto-section-identifier"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">SQL Basics</span></span></h1>
+<h1 class="title"><span id="sec-sql-basics" class="quarto-section-identifier"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">SQL Basics</span></span></h1>
 </div>
 
 
@@ -440,13 +460,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">14.1</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">15.1</span> Introduction</h2>
+<p>The question is often asked: “Why should I learn SQL as a data scientist?”. Part of the motivation for the question is that SQL has a reputation as difficult to master, is thought of as dated compared to newer languages like Python, Julia, or Go, and is believed to be the domain of the data base administrator and data engineer.</p>
+<p><a href="#fig-ms-survey1" class="quarto-xref">Figure&nbsp;<span>15.1</span></a> and <a href="#fig-ms-survey2" class="quarto-xref">Figure&nbsp;<span>15.2</span></a> show 2023 results of the annual survey of Master graduates in data science, statistics, and related disciplines, published in the November 2024 issue of Amstat News, the membership magazine of the American Statistical Association.</p>
+<div id="fig-ms-survey1" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ms-survey1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/MS_Survey1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1"><img src="images/MS_Survey1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ms-survey1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;15.1: Table 9 from the 2023 survey of Master graduates.
+</figcaption>
+</figure>
+</div>
+<div id="fig-ms-survey2" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ms-survey2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/MS_Survey2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2"><img src="images/MS_Survey2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ms-survey2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;15.2: Table 10 from the 2023 survey of Master graduates.
+</figcaption>
+</figure>
+</div>
+<p>According to <a href="#fig-ms-survey1" class="quarto-xref">Figure&nbsp;<span>15.1</span></a>, 44% of the respondents use SQL at least weekly or even daily to perform their work. A third (32%) of the respondents use SQL daily, presumably to interact with data stored in a database. On the flip side, 42% of the respondents sue SQL rarely or never. You either find yourself working for an organization where data scientists encounter no SQL at all or encounter SQL at least once a week.</p>
+<p>Table 10 of the survey in <a href="#fig-ms-survey2" class="quarto-xref">Figure&nbsp;<span>15.2</span></a> breaks the data down further by disciplines. A stunning 93% of the respondents in Statistics and ML and over 50% of the respondents in the Data Science discipline use SQL every day.</p>
+<p>In fact, after the primary programming language (R and Python) and Excel—presumably for receiving data that needs to be processed into a different format—SQL is the most frequently used tool for Master graduates.</p>
+<p>This should settle it. Like it or not, SQL is an important tool for (almost) anyone working with data.</p>
+<hr>
 <p>SQL is a <strong>declarative</strong> programming language, you express through programming statements what you want to happen, not how to control the flow of the program. Other examples of declarative languages are CSS, HTML, XML, and Prolog. To support writing scripts, functions, and procedures, database vendors have added flow-control statements (if-then, loops, switches, etc.), but these are extensions of the database and not of the SQL language.</p>
-<p>Is it pronounced “S-Q-L” or “sequel”? Both are acceptable but if you want to give a nod to its origin, then you would pronounce it ”sequel” like SEQUEL; the name given to the project by its inventors at IBM in the 1970s. The description as structured query language and the acronym SQL came later.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="S-Q-L or sequel?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+S-Q-L or sequel?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Is it pronounced “S-Q-L” or “sequel”? Both are acceptable but if you want to give a nod to its origin, then you would pronounce it ”sequel” like SEQUEL, the name given to the project by its inventors at IBM in the 1970s. The description as structured query language and the acronym SQL came later.</p>
+</div>
+</div>
 <p>The concept of a <em>query</em> in SQL is very general: any interaction with a (relational) database. A query in the narrow sense asks questions about the data in the database or retrieves data. Commands that create tables, alter databases, update or delete records, and so on, are also considered queries.</p>
 <p>SQL has been standardized and revised since 1986. SQL-92, for example, refers to the revision of the standard in 1992. However, SQL implementations are vendor-specific and do not necessarily comply with any standard. The SQL syntax between databases is similar enough that you can move your SQL code from one dialect to another without too much pain. Moving between databases you will find that the devil is not in the details of the SQL language, but in the details of how NULLs are represented, how date-time values are handled, how indexes work, how data are partitioned, whether foreign keys are supported, and so on. Since we use DuckDB in this chapter, we are following the DuckDB SQL syntax.</p>
-<p>SQL can be difficult to master.</p>
+<p>SQL has a reputation to be difficult to master. The reputation is not entirely unjustified.</p>
 <ul>
 <li><p>Many programmers are more familiar and comfortable with <strong>imperative</strong> languages that specify the program flow step by step.</p></li>
 <li><p>Declarative languages are domain specific, the domain for SQL is the manipulation of data in relational systems. This is associated with a lot of special terminology and domain-specific logic. The data scientist thinks in terms of rows and columns, the database engineer thinks in terms of predicates, projections, clauses, constraints, and relations.</p></li>
@@ -496,8 +555,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>│            4 │</span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>└──────────────┘ </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="types-of-sql-commands" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="types-of-sql-commands"><span class="header-section-number">14.2</span> Types of SQL Commands</h2>
+<section id="types-of-sql-commands" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="types-of-sql-commands"><span class="header-section-number">15.2</span> Types of SQL Commands</h2>
 <p>SQL commands are arranged in logical groups. The most important group for the data scientist is the Data Manipulation Language (DML) group, it consists of statements that change the data stored within a database table and traditionally also includes the most important SQL statement, SELECT. The second most important group of SQL commands is the Data Definition Language (DDL), it provides syntax to create and modify database objects.</p>
 <ul>
 <li><p><strong>Data Definition Language</strong> (DDL): syntax to create and modify database objects. The commands are about the objects themselves, not the data they contain. For example, the CREATE TABLE statement defines the schema of a table and creates it, but it does not populate the table with data. Commands in this group include CREATE, DROP, ALTER.</p></li>
@@ -508,17 +567,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>DENY UPDATE ON table_foo TO user1;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Not all databases support DCL. SQLite and DuckDB do not.</p>
 </section>
-<section id="most-common-sql-commands" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="most-common-sql-commands"><span class="header-section-number">14.3</span> Most Common SQL Commands</h2>
+<section id="most-common-sql-commands" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="most-common-sql-commands"><span class="header-section-number">15.3</span> Most Common SQL Commands</h2>
 <p>The most important SQL commands for a data scientist are the following:</p>
 <ul>
-<li><p>CREATE TABLE</p></li>
-<li><p>ALTER TABLE</p></li>
-<li><p>DROP TABLE</p></li>
-<li><p>SELECT</p></li>
-<li><p>INSERT INTO</p></li>
-<li><p>UPDATE</p></li>
-<li><p>DELETE FROM</p></li>
+<li>CREATE TABLE</li>
+<li>ALTER TABLE</li>
+<li>DROP TABLE</li>
+<li>SELECT</li>
+<li>INSERT INTO</li>
+<li>UPDATE</li>
+<li>DELETE FROM</li>
 </ul>
 <section id="creating-and-modifying-a-table" class="level3">
 <h3 class="anchored" data-anchor-id="creating-and-modifying-a-table">Creating and Modifying a Table</h3>
@@ -642,8 +701,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb26"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>DROP TABLE WorldCities;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="select-statement" class="level2" data-number="14.4">
-<h2 data-number="14.4" class="anchored" data-anchor-id="select-statement"><span class="header-section-number">14.4</span> SELECT Statement</h2>
+<section id="select-statement" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="select-statement"><span class="header-section-number">15.4</span> SELECT Statement</h2>
 <p>The SELECT statement is the workhorse for querying, analyzing, combining, and ordering data in database tables. The more important basic syntax elements of SELECT are</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>SELECT select_list</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>   FROM tables</span>
@@ -779,8 +838,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>│   618 │   200 │    20 │    98 │   110 │    62 │      8 │</span>
 <span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>└───────┴───────┴───────┴───────┴───────┴───────┴────────┘ </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="subqueries" class="level2" data-number="14.5">
-<h2 data-number="14.5" class="anchored" data-anchor-id="subqueries"><span class="header-section-number">14.5</span> Subqueries</h2>
+<section id="subqueries" class="level2" data-number="15.5">
+<h2 data-number="15.5" class="anchored" data-anchor-id="subqueries"><span class="header-section-number">15.5</span> Subqueries</h2>
 <p>A subquery is a query inside another query. The subquery is also called the inner query and the query containing it is referred to as the outer query. Subqueries are said to be <strong>uncorrelated</strong> if they are self-contained and can be run without the outer query. For example, the following SQL statement contains an uncorrelated subquery, <code>select min(weight) from auto</code>, which you can run as a stand-alone query</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>SELECT name FROM auto WHERE weight = (SELECT MIN(weight) FROM auto);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb45"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>┌─────────────┐</span>
@@ -846,6 +905,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The difference is that the correlated subquery returns actual records from the table whereas the SELECT with GROUP BY clause returns the result of aggregation. Put it another way: do you want to see the min reaction time for each subject or do you want to see the records that match the min reaction time for each subject?</p>
 
 
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Figure&nbsp;15.1: Table 9 from the 2023 survey of Master graduates.</span>
+<span class="glightbox-desc lightbox-desc-2">Figure&nbsp;15.2: Table 10 from the 2023 survey of Master graduates.</span>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -1405,12 +1468,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../data/visualization.html" class="pagination-link" aria-label="Data Visualization">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data Visualization</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data Visualization</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../data/integration.html" class="pagination-link" aria-label="Data Integration">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Integration</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Integration</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1428,6 +1491,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":false,"closeEffect":"zoom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
 
 
 

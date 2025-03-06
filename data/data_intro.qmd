@@ -1,0 +1,30 @@
+
+# Introduction {#sec-data-intro}
+
+The goal of data engineering is to make raw data usable for consumption by
+data analysts, business analysts, data scientists, machine learning engineers,
+and so on. The CRISP-DM data science project cycle follows the business understanding 
+(discovery) stage with two data-related phases:
+
+- **Data understanding**: identify,  collect, and analyze data sets that help
+accomplish the project goals.
+- **Data preparation**: prepare the final data sets for the next stages of the
+project, in particular, the modeling stage.
+
+We combine both efforts under the umbrella of data engineering, the tasks of
+selecting and cleaning data (under data preparation) cannot be separated from
+the tasks of collecting, describing (exploring) data, and working on data quality
+(under data understanding).
+
+The discussion begins with a review of important file formats in data science,
+databases, and enterprise data architectures. @sec-data-access uses Python to 
+ingest data in the major file formats and from a database. During data profiling,
+the first date with the data, we get a first impression of the content and 
+quality of the data. 
+
+Summarization (@sec-data-summary) and visualization {@sec-visualization} 
+distill the essence of the data and its patterns in numerical and graphical form.
+
+Because the declarative programming language SQL is very important in the daily
+work of data scientists, we present some basic SQL knowledge in @sec-sql-basics.
+

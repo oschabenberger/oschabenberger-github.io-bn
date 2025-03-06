@@ -208,31 +208,64 @@ Pre-attentive attributes are attributes such as length, width, size, shape, etc.
 
 ![Visual processing from light entering to comprehension. [Source](https://www.creativebloq.com/design/science-behind-data-visualisation-8135496).](images/VisualProcessing.png){#fid-data-visual-processing .lightbox fig-align="center"}
 
-When information (light) enters the retina, it is processed in iconic memory, a short-term buffer and processor that maintains an image of the world and enriches the information. This is where pre-attentive attributes are processed, rapid and massively parallel in the sub-conscious mind. The visual information is then passed on to visual working memory, short term storage that is combined with information form long-term memory for conscious processing.
+When information (light) enters the retina, it is processed in iconic memory, a 
+short-term buffer and processor that maintains an image of the world and enriches 
+the information. This is where pre-attentive attributes are processed, rapid and 
+massively parallel in the sub-conscious mind. The visual information is then passed 
+on to visual working memory, short term storage that is combined with information 
+from long-term memory for conscious processing.
 
-Effective data visualizations encode as much possible information through pre-attentive attributes.
+Effective data visualizations encode as much possible information through pre-attentive 
+attributes.
 
 ![Pre-attentive attributes of data visualization. [Source](https://help.tableau.com/current/blueprint/en-us/bp_why_visual_analytics.htm).](images/Pre_attentiveAttributes.png){#fig-data-preattentive .lightbox fig-align="center"}
 
-To encode quantitative values, length and position (in 2-dimensional space) are best as they are naturally interpreted as quantitative. Lines of different lengths are more easily interpreted as smaller and larger values than lines of different widths. Shapes are not useful as a pre-attentive attribute to encode quantitative values. Is a circle larger than a square? That takes more conscious processing to answer and slows down comprehension of the visualization.
+To encode quantitative values, length and position (in 2-dimensional space) are 
+best as they are naturally interpreted as quantitative. Lines of different lengths 
+are more easily interpreted as smaller and larger values than lines of different 
+widths. Shapes are not useful as a pre-attentive attribute to encode quantitative 
+values. Is a circle larger than a square? That takes more conscious processing to 
+answer and slows down comprehension of the visualization.
 
-On the other hand, if we want to identify groups of data points that belong together, then shape or color are very effective pre-attentive attributes, as well as proximity and connecting points.
+On the other hand, if we want to identify groups of data points that belong together, 
+then shape or color are very effective pre-attentive attributes, as well as proximity 
+and connecting points.
 
-You cannot infer actual values from pre-attentive attributes such as length or size, we only get a greater—lesser impression. Most of the times that is sufficient. Information about actual values has to be added through text, labels, grid lines. These are not pre-attentive attributes but learned symbols that require conscious processing. The effort to comprehend a visualization increases with the addition of non-pre-attentive attributes. You should weigh whether the additional processing effort is justified relative to the information gained. A labeled axis requires fewer annotations and mental processing than labeling every data point with its actual value.
+You cannot infer actual values from pre-attentive attributes such as length or size, 
+we only get a greater—lesser impression. Most of the times that is sufficient. 
+Information about actual values has to be added through text, labels, grid lines. 
+These are not pre-attentive attributes but learned symbols that require conscious 
+processing. The effort to comprehend a visualization increases with the addition 
+of non-pre-attentive attributes. You should weigh whether the additional processing 
+effort is justified relative to the information gained. A labeled axis requires 
+fewer annotations and mental processing than labeling every data point with its 
+actual value.
 
-If your visualization is used in a context where comparisons are required, the choice of attributes and features determines whether comparisons are more accurate or more generic. The most accurate comparisons are possible using 2-dimensional position and length attributes. Color intensity, color hue, area, and volume allow more generic comparisons but are not useful when accuracy is required.
+If your visualization is used in a context where comparisons are required, the 
+choice of attributes and features determines whether comparisons are more accurate 
+or more generic. The most accurate comparisons are possible using 2-dimensional 
+position and length attributes. Color intensity, color hue, area, and volume allow 
+more generic comparisons but are not useful when accuracy is required.
 
-A good example of the importance of pre-attentive attributes is displaying quantitative information in pie charts versus bar charts.
+A good example of the importance of pre-attentive attributes is displaying 
+quantitative information in pie charts versus bar charts.
 
-The pie chart in @fig-data-piechart1 displays five values and uses area to compare and color to differentiate. Can you tell from the chart whether `foo` is larger than `bar`? How does `ipsum` compare to `bar` and `lorem`?
+The pie chart in @fig-data-piechart1 displays five values and uses area to compare 
+and color to differentiate. Can you tell from the chart whether `foo` is larger 
+than `bar`? How does `ipsum` compare to `bar` and `lorem`?
 
 ![A pie chart displaying five values.](images/PieChart_1.png){#fig-data-piechart1 fig-align="center" width="75%"}
 
-Since it is difficult to make accurate comparisons based on area, why not add labels to the chart. While we are at it, we can also dress up the display by using more color and 3-dimensional plotting.
+Since it is difficult to make accurate comparisons based on area, why not add 
+labels to the chart. While we are at it, we can also dress up the display by using 
+more color and 3-dimensional plotting.
 
 ![A 3-dimensional pie chart. Yikes.](images/PieChart_2.png){fig-align="center" width="75%"}
 
-Adding percentages to the labels allows us to compare the values and conclude which slices of the pie are larger and which slices are smaller. But if we show the percentages, then why use a graphic in the first place? By using labels to show values the chart requires as much cognitive engagement as a table of values:
+Adding percentages to the labels allows us to compare the values and conclude
+which slices of the pie are larger and which slices are smaller. But if we show 
+the percentages, then why use a graphic in the first place? By using labels to 
+show values the chart requires as much cognitive engagement as a table of values:
 
 | Category       | foo | bar | baz | lorem | ipsum |
 |----------------|-----|-----|-----|-------|-------|
@@ -240,121 +273,291 @@ Adding percentages to the labels allows us to compare the values and conclude wh
 
 : The information from the pie chart as a tabular display.
 
-The more vibrant colors do not add to the comprehension of the data and the 3-dimensional display makes things worse: comparing values based on volume is more difficult than comparing values based on area which in turn is more difficult than comparing values based on length.
+The more vibrant colors do not add to the comprehension of the data and the 3-dimensional 
+display makes things worse: comparing values based on volume is more difficult 
+than comparing values based on area which in turn is more difficult than comparing 
+values based on length.
 
-Quantitative values can be encoded as pre-attentive attributes and comparisons are most accurate for lines and 2-dimensional positions. The following horizontal bar chart visualizes the data using pre-attentive attributes.
+Quantitative values can be encoded as pre-attentive attributes and comparisons 
+are most accurate for lines and 2-dimensional positions. @fig-data-bar-chart 
+visualizes the data using pre-attentive attributes. The values are easily distinguished 
+based on the length (height) of the bars. The categories have been ordered by 
+magnitude. No color is necessary to distinguish the categories, the labels are sufficient.
 
-![Bar chart. The values are easily distinguished based on the length (height) of the bars. The categories have been ordered by magnitude. No color is necessary to distinguish the categories, the labels are sufficient.](images/BarChart_1.png){#fig-dat-bar-chart .lightbox fig-align="center"}
+
+``` {r,echo=FALSE, fig.align="center", out.width="90%"}
+#| fig.cap: A nice bar chart using the pre-attentive attribute length to convey differences.
+#| label: fig-data-bar-chart
+#| lightbox:
+#| 
+slices <- c(32, 24, 20, 16, 8)
+lbls <- c("lorem", "bar", "foo", "ipsum", "baz")
+par(mar=c(4,4,0,2))
+barplot(sort(slices,decreasing=TRUE), 
+        horiz=TRUE, 
+        col="lightblue",
+        las=1,
+        space=0.5,
+        width=0.7,
+        ylim=c(0,6),
+        names.arg=lbls)
+```
+
 
 ### Chartjunk
 
-The term chartjunk was coined by Edward Tufte in his influential (cult) 1983 book “The Display of Quantitative Information” [@Tufte_1983; @Tufte_2001]. Chartjunk are the elements of a data visualization that are not necessary to comprehend the information. Chartjunk distracts from the information the graph wants to convey. Tufte, who taught at Princeton together with John W. Tukey, subscribed to minimalist design: if it does not add anything to the interpretation of the data, do not add it to the chart.
+The term chartjunk was coined by Edward Tufte in his influential (cult) 1983 book 
+“The Display of Quantitative Information” [@Tufte_1983; @Tufte_2001]. Chartjunk 
+are the elements of a data visualization that are not necessary to comprehend the 
+information. Chartjunk distracts from the information the graph wants to convey. 
+Tufte, who taught at Princeton together with John W. Tukey, subscribed to minimalist 
+design: if it does not add anything to the interpretation of the data, do not add 
+it to the chart.
 
-The excessive use of colors, heavy grid lines, ornamental shadings, unnecessary color gradients, excessive text, background images, excessive annotations and decorations are examples of chartjunk. Not all graphical elements are chartjunk—you should ask yourself before adding an element to a graphic: is it helpful? Text annotations can be extremely helpful, overdoing it can lead to busy charts that are not intelligible. By adding too many text labels, the label avoidance algorithm of graphing software might place labels in areas of the graph where they are misleading. If grid lines are not necessary for the interpretation of the graphic, leave them off. If grid lines are helpful, add them in a color or with transparency that does not distract from the data in the graph.
+The excessive use of colors, heavy grid lines, ornamental shadings, unnecessary 
+color gradients, excessive text, background images, excessive annotations and 
+decorations are examples of chartjunk. Not all graphical elements are chartjunk---you 
+should ask yourself before adding an element to a graphic: is it helpful? Text 
+annotations can be extremely helpful, but overdoing it can lead to busy charts 
+that are not intelligible. By adding too many text labels, the label avoidance 
+algorithm of graphing software might place labels in areas of the graph where 
+they are misleading. If grid lines are not necessary for the interpretation of the 
+graphic, leave them off. If grid lines are helpful, add them in a color or with 
+transparency that does not distract from the data in the graph.
 
-Unfortunately, it is all too easy to add colors, styles, annotations, grid lines, inserts, legends, etc. to graphics. Software makes it easy to overdo it.
+Unfortunately, it is all too easy to add colors, styles, annotations, grid lines, 
+inserts, legends, etc. to graphics. Software makes it easy to overdo it.
 
-Tufte’s war path on chartjunk needs to be moderated for our purposes. The minimalist view that anything that is unnecessary to comprehend the information is junk goes too far. We must keep the purpose of the data visualization in mind. In exploratory mode, you generate lots of graphics and different views of the data to learn about the data, find patterns, and stimulate thought—the audience is you. Naturally, we eschew adding too many elements to graphics, everything is about speed and flexibility—polish takes time. In presentation mode, the data visualization needs to grab attention and open the door for the audience to engage with the data. Annotations, colors, labels, headlines, titles, which would be chartjunk in exploratory mode, have a different role and place in presentation mode. They might not be necessary to comprehend the information but can reduce the cognitive burden the audience members have to expend.
+Tufte’s war path on chartjunk needs to be moderated for our purposes. The minimalist 
+view that anything that is unnecessary to comprehend the information is junk goes 
+too far. We must keep the purpose of the data visualization in mind. In exploratory
+mode, you generate lots of graphics and different views of the data to learn 
+about the data, find patterns, and stimulate thought—the audience is you. Naturally,
+we eschew adding too many elements to graphics, everything is about speed and 
+flexibility—polish takes time. In presentation mode, the data visualization needs 
+to grab attention and open the door for the audience to engage with the data. 
+Annotations, colors, labels, headlines, titles, which would be chartjunk in 
+exploratory mode, have a different role and place in presentation mode. They might 
+not be necessary to comprehend the information but can reduce the cognitive burden 
+the audience members have to expend.
 
-Tufte also introduced the concept of the **data-ink ratio**: a visualization should maximize the amount of ink it uses on displaying data and minimize the amount of ink used on embellishments and annotations.
+Tufte also introduced the concept of the **data-ink ratio**: a visualization should 
+maximize the amount of ink it uses on displaying data and minimize the amount of 
+ink used on embellishments and annotations.
 
-@fig-data-barchart2 is a version of the previous bar chart—this time full of chartjunk and too much ink devoted to things other than data:
+@fig-data-bar-chart2 is a junkified version of the bar chart in @fig-data-bar-chart---it 
+is full of chartjunk and devotes too much ink to things other than data:
 
--   The legend is not necessary, the categories are identified already through the labels.
+-   The **legend** is not necessary; categories are identified through the labels.
+-   The **axis label** “Category” is not necessary, it is clear what is being displayed. 
+-   The vertical **orientation** of the axis label and the horizontal orientation of the 
+categories is visually distracting.
+-   Varying the **colors** of the bars is distracting and does not add new information.
+The relevant information for comparison is the length of the bars.
+-   The **grid lines** are intrusive and add too much ink to the plot.
 
--   The axis label “Category” is not necessary, it is clear what is being displayed. The vertical orientation of the axis label and the horizontal orientation of the categories is visually distracting.
+``` {r,echo=FALSE, fig.align="center", out.width="90%"}
+#| fig.cap: A junkified bar chart. 
+#| label: fig-data-bar-chart2
+#| lightbox:
+#| 
+slices <- c(32, 24, 20, 16, 8)
+lbls <- c("lorem", "bar", "foo", "ipsum", "baz")
+par(mar=c(4,4,0,2))
+barplot(sort(slices,decreasing=TRUE),
+             xlab="Value",
+             ylab="Category",
+        horiz=TRUE, 
+        col=c(1,2,3,4,5),
+        legend.text=lbls,
+        las=1,
+        space=0.5,
+        width=0.7,
+        ylim=c(0,6),
+        names.arg=lbls)
+grid(nx = 16,
+     ny = NA,
+     lty = 2, col = "gray", lwd = 1)
 
--   Varying the colors of the bars is distracting and does not add new information.
+```
 
--   The grid lines are intrusive and add too much ink to the plot.
-
-![A junkified version of the horizontal bar chart from the previous subsection.](images/BarChart_2.png){#fig-data-barchart2 .lightbox fig-align="center"}
 
 ### The Trifecta checkup
 
-Kaiser Fung, a data visualization expert created a [framework](https://junkcharts.typepad.com/junk_charts/junk-charts-trifecta-checkup-the-definitive-guide.html)
-to criticize data visualizations. It is recommended that you run your visualizations through this checkup. It rests on three simple investigations:
+The data visualization expert Kaiser Fung created a [framework](https://junkcharts.typepad.com/junk_charts/junk-charts-trifecta-checkup-the-definitive-guide.html)
+to criticize data visualizations. It is recommended that you run your visualizations 
+through this checkup. It rests on three simple investigations:
 
--   What question are we trying to answer (**Q**)?
+1. What question are we trying to answer (**Q**)?
 
--   What do the data say (**D**)?
+2. What do the data say (**D**)?
 
--   What does the visualization say (**V**)?
+3. What does the visualization say (**V**)?
 
-Hopefully, the answers to the tree lines of inquiry are the same. The framework is arranged in a **Q**uestion—**D**ata—**V**isualization triangle, in what Fung calls the junk charts trifecta:
+Hopefully, the answers to the tree lines of inquiry are the same. The framework 
+is arranged in a **Q**uestion—**D**ata—**V**isualization triangle, in what Fung 
+calls the junk charts trifecta:
 
 ![The Junk Charts Trifecta Checkup according to Kaiser Fung. [Source](https://junkcharts.typepad.com/junk_charts/junk-charts-trifecta-checkup-the-definitive-guide.html).](images/JunkChartTrifecta.png){#fig-data-trifecta fig-align="center"}
 
-A good visualization scores on all three dimensions, Q—D—V. It poses an interesting question, uses quality data that are relevant to the question, and visualization techniques that follow best practices and bring out the relevant information (without adding chartjunk). Tufte’s concerns about chartjunk and maximizing the data-ink ratio fall mostly in the **V** corner of the trifecta. But even the best visualization techniques are useless when applied to bad or irrelevant data or attempting to answer an irrelevant or ill-formed question.
+A good visualization scores on all three dimensions, Q—D—V. It poses an interesting 
+question, uses quality data that are relevant to the question, and visualization 
+techniques that follow best practices and bring out the relevant information 
+(without adding chartjunk). Tufte’s concerns about chartjunk and maximizing the 
+data-ink ratio fall mostly in the **V** corner of the trifecta. But even the best 
+visualization techniques are useless when applied to bad or irrelevant data or 
+attempting to answer an irrelevant or ill-formed question.
 
-An example of a graphic that fails on all three dimensions is discussed by Fung [here](https://junkcharts.typepad.com/junk_charts/2014/04/the-numbers-guy-went-on-vacation.html) and shown below. This graphic appeared in the Wall Street Journal.
+An example of a graphic that fails on all three dimensions is discussed by Fung [here](https://junkcharts.typepad.com/junk_charts/2014/04/the-numbers-guy-went-on-vacation.html) 
+and shown below. This graphic appeared in the Wall Street Journal.
 
 ![Citi Bike riders.](images/CityBike_junk.jpeg){#fig-data-citybike fig-align="center"}
 
-**Q**-corner: What question does the graph address: how many riders use Citi Bike during a weekday? That is not a very interesting question, unless you are a city planner. Even then, you are more interested in when and where the bikes are used, rather than some overall number. The chart breaks the daily usage down over time. We see that most riders are in the morning and early evening—going to work and leaving work. That too is not very interesting and not at all surprising.
+1. **Q**---What question are we trying to answer? How many riders use Citi Bike 
+during a weekday? That is not a very interesting question, unless you are a city 
+planner. Even then, you are more interested in when and where the bikes are used, 
+rather than some overall number. The chart breaks the daily usage down over time. 
+We see that most riders are in the morning and early evening—going to work and 
+leaving work. That too is not very interesting and not at all surprising.
 
-**D**-corner: Are the data relevant to answer the question being posed? The data were taken on two days last autumn. What does this represent? Certainly not the average usage over the year. How were those two days selected? Where was the data collected? Randomly throughout the city, only downtown, in certain districts? What was sampled? The days of the months? The riders? The city districts?
+2. **D**---What do the data say? The data 
+were collected on two days in the fall. What does this represent? Certainly not the 
+average usage over the year. How were those two days selected? Where was the data 
+collected? Randomly throughout the city, only downtown, in certain districts? 
+What was sampled? The days of the months? The riders? The city districts?
 
-**V**-corner: Does the graphic answer the question using best practices for data visualization? There is much going wrong here.
+3. **V**---What does the visualization say? Does the graphic answer the question 
+using best practices for data visualization? There is much going wrong here.
 
--   The city background is chartjunk, an unnecessary embellishment that does not add any information.
+    - The city background is chartjunk, an unnecessary embellishment that does not 
+    add any information.
 
--   Similarly, the bicycle icon is unnecessary. It might be moderately helpful in clarifying that “Bike” refers to bicycle and not motorbike, but that could be made clear without adding a graphics element.
+    - Similarly, the bicycle icon is unnecessary. It might be moderately helpful in 
+    clarifying that “Bike” refers to bicycle and not motorbike, but that could be made 
+    clear without adding a graphics element.
 
--   The blue dots and the connecting lines are a real problem. How are the connections between the dots drawn? Are the segments (some curved, some jagged) based on observations taken at those times? If so, the data should be displayed. If not, what justifies connecting the dots in an irregular way?
+    - The blue dots and the connecting lines are a real problem. How are the connections 
+    between the dots drawn? Are the segments (some curved, some jagged) based on 
+    observations taken at those times? If so, the data should be displayed. If not, 
+    what justifies connecting the dots in an irregular way?
 
--   The scale of the data is misleading. If there was a vertical axis with labels, one could clearly see that the dots are not plotted along an even scale. The vertical distance between the points labeled 65 and 166.5 is about 100 units and is **greater** than the distance between the points labeled 166.5 and 366.5, about 200 units apart. Once we discover this, we can no longer trust the vertical placement of the dots. Instead, we must make mental arithmetic to interpret the data by value. Displaying the data in a table would have had the same effect.
+    - The scale of the data is misleading. If there was a vertical axis with labels, 
+    one could clearly see that the dots are not plotted along an even scale. The vertical 
+    distance between the points labeled 65 and 166.5 is about 100 units and is **greater**
+    than the distance between the points labeled 166.5 and 366.5, about 200 units apart.
+    Once we discover this, we can no longer trust the vertical placement of the dots. 
+    Instead, we must make mental arithmetic to interpret the data by value. Displaying 
+    the data in a table would have had the same effect.
 
 --- 
 
-@fig-tornado-freq is a screenshot from a local TV newscast in Virginia; it shows a histogram for the five most active years in terms of number of tornadoes. Does this graphic pass the trifecta checkup?
+@fig-tornado-freq is a screenshot from a local TV newscast in Virginia; it shows a 
+histogram for the five most active years in terms of number of tornadoes. Does this 
+graphic pass the trifecta checkup?
 
 ![Tornado frequency reported by local news in Virginia, June 2024.](images/tornado.png){#fig-tornado-freq .lightbox fig-align="center" width="90%"}
 
--   **Q**---What question are we trying to answer? Is 2024 an unusual year in terms of tornado activity?
+1. **Q**---What question are we trying to answer? Is 2024 an unusual year in terms 
+of tornado activity?
 
--   **D**---What do the data say? 2024 is among the top-5 years of tornado activity. But we do not know whether this is for the entire U.S., the entire world, or for the state of Virginia. It is probably not the latter, 1,000 reported tornadoes per year in Virginia is a bit much. How far along are we in 2024 when this was reported? 2024 might not be an unusual year compared to the top-5 if the report was issued at the end of tornado season; 2024 might be an outlier if the report was issued early on in the tornado season.
+2. **D**---What do the data say? 2024 is among the top-5 years of tornado activity. 
+But we do not know whether this is for the entire U.S., the entire world, or for 
+the state of Virginia? It is probably not the latter, 1,000 reported tornadoes per 
+year in Virginia is a bit much. How far along are we in 2024 when this was reported? 
+2024 might not be an unusual year compared to the top-5 if the report was issued at 
+the end of tornado season; 2024 might be an outlier if the report was issued early 
+on in the tornado season.
 
--   **V**---What does the visualization say? there is a lot going on in the visualization. The bars are ordered from high to low, which disrupts the ordering by time. The eye is naturally drawn to the year labels at the bottom of the bars and has to work overtime to make sense of the chronology. When data are presented in a temporal context our brain wants the data arranged by time (@fig-tornado-2). The asterisk near the number 1,109 for 2024 leads nowhere. We associate it with the text in the bar for that year anyway, so the asterisk is not necessary. The visualization does not tell us what geographic region the numbers belong to. Is this global data or U.S. data?
+3. **V**---What does the visualization say? There is a lot going on in the visualization. 
+The bars are ordered from high to low, which disrupts the ordering by time. The 
+eye is naturally drawn to the year labels at the bottom of the bars and has to 
+work overtime to make sense of the chronology. When data are presented in a temporal 
+context our brain wants the data arranged by time (@fig-tornado-2). The asterisk 
+near the number 1,109 for 2024 leads nowhere. We associate it with the text in the 
+bar for that year anyway, so the asterisk is not necessary. The visualization does not 
+tell us what geographic region the numbers belong to. Is this global data or U.S. data?
 
-```{r}
+```{r, echo=FALSE, fig.align='center'}
 #| fig.cap: Tornado frequencies arranged chronologically.
 #| label: fig-tornado-2
 tornadoes <- data.frame(Year=c(2008,2011,2017,2019,2024),
                         Number=c(1044,1304,930,971,1109))
 
-bp <- barplot(Number ~ Year, data=tornadoes)
+bp <- barplot(Number ~ Year, data=tornadoes,las=1,ylab="Frequency")
 text(bp,y=1000,cex=0.7,labels=c("","","","","Through June 4"))
 
 ```
 
-The problem with using a bar chart for select years only is not to give an accurate impression of how far the data points are separated in time. The first two bars are 3 years apart, the next two bars are 6 years apart.
+The problem with using a bar chart for select years only is not to give an accurate 
+impression of how far the data points are separated in time. The first two bars 
+are 3 years apart, the next two bars are 6 years apart. @fig-tornado-3 fixes
+that issue by spacing the bars approrpriately.
 
-Infographics are often guilty of adding extraneous information or displaying data in sub-optimal (nonsensical) ways. Below is another example from [Junk Charts](https://junkcharts.typepad.com/). The graphic visualizes the 2022 oil production measured in 1,000 barrels per day by country. The data are projected onto a barrel. Countries are grouped by geographic region and by an industry-specific classification into OPEC, non-OPEC, and OPEC+ countries. The geographic regions are delineated on the barrel surface with thick white lines. Thin white lines mark polygons associated with each country. Aggregations by geographic region are shown below the barrel. The industry-specific categorization is displayed as colored rings around the country flag.
+```{r, echo=FALSE, fig.align='center'}
+#| fig.cap: Tornado frequencies arranged chronologically and spaced correctly.
+#| label: fig-tornado-3
+tornadoes <- data.frame(Year=c(2008, 2009,2010, 2011, 2012,2013,2014,2015,2016, 2017, 2018, 2019, 2020,2021,2022,2023, 2024),
+                        Number=c(1044, 0,0, 1304, 0,0,0,0,0, 930, 0, 971, 0, 0, 0, 0, 1109))
 
-Shapes are not a good pre-attentive attribute to display values, and polygons are particularly difficult to comprehend. Presumably, the size of the country polygons is proportional to their oil production—but who knows, there is no way of validating this. The use of polygons increases the cognitive burden to comprehend the visualization.
+bp <- barplot(Number ~ Year, data=tornadoes,las=1,ylab="Frequency")
+text(bp,y=1000,cex=0.7,labels=c("","","","","","","","","","","","","","","","","Thr. June 4"))
+
+```
+
+
+### Infographics
+
+Infographics are often guilty of adding extraneous information or displaying data 
+in sub-optimal (nonsensical) ways. Below is another example from [Junk Charts](https://junkcharts.typepad.com/). 
+The graphic visualizes the 2022 oil production measured in 1,000 barrels per day 
+by country. The data are projected onto a barrel. Countries are grouped by geographic 
+region and by an industry-specific classification into OPEC, non-OPEC, and OPEC+ 
+countries. The geographic regions are delineated on the barrel surface with thick 
+white lines. Thin white lines mark polygons associated with each country. 
+Aggregations by geographic region are shown below the barrel. The industry-specific 
+categorization is displayed as colored rings around the country flag.
+
+Shapes are not a good pre-attentive attribute to display values, and polygons are 
+particularly difficult to comprehend. Presumably, the size of the country polygons 
+is proportional to their oil production—but who knows, there is no way of validating 
+this. The use of polygons increases the cognitive burden to comprehend the visualization.
 
 The visualization contains duplicated information:
 
--   Each polygon is labeled with the countries’ oil production; this information duplication is required to make sense of the data because the polygon area is difficult to interpret.
+-   Each polygon is labeled with the countries’ oil production; this information 
+duplication is required to make sense of the data because the polygon area is 
+difficult to interpret.
 
--   Greater/lesser oil production by country is also displayed through the size of the map inserts and the font (boldness and font size) of the country names.
+-   Greater/lesser oil production by country is also displayed through the size 
+of the map inserts and the font (boldness and font size) of the country names.
 
--   The country information is duplicated unnecessarily. Countries are shown by name and with their flags. Some country names are abbreviated, and this adds extra mental processing to identify the country. If you are not familiar with working with country codes, identifying the oil production for Angola is tricky (AGO).
+-   The country information is duplicated unnecessarily. Countries are shown by 
+name and with their flags. Some country names are abbreviated, and this adds extra 
+mental processing to identify the country. If you are not familiar with working 
+with country codes, identifying the oil production for Angola is tricky (AGO).
 
--   The geographic summaries display totals as labels and graphically by stacking barrel symbols; each barrel corresponds to 1,000 barrels of oil produced per day.
+-   The geographic summaries display totals as labels and graphically by stacking 
+barrel symbols; each barrel corresponds to 1,000 barrels of oil produced per day.
 
 ![A display of 2022 oil production by country; full of chartjunk. [Source](https://www.visualcapitalist.com/charted-worlds-biggest-oil-producers-in-2022/).](images/OilProduction_junk.jpeg){#fig-data-oil-production .lightbox fig-align="center" width="75%"}
 
 ## Choosing the Data Visualization
 
-[Andrew Abela](https://extremepresentation.typepad.com/blog/2006/09/choosing_a_good.html) published the *Chart Chooser*, a great visualization to help select the appropriate data visualization based on the data type and the goal of the visualization (@fig-data-chart-chooser-abela). An online version with templates for PowerPoint and Excel is available [here](https://www.juiceanalytics.com/chartchooser).
+[Andrew Abela](https://extremepresentation.typepad.com/blog/2006/09/choosing_a_good.html) 
+published the *Chart Chooser*, a great visualization to help select the appropriate 
+data visualization based on the data type and the goal of the visualization 
+(@fig-data-chart-chooser-abela, @Abela_2020). An online version with templates for PowerPoint 
+and Excel is available [here](https://www.juiceanalytics.com/chartchooser).
 
 ![Choosing a good chart type for data visualization. [Source](https://extremepresentation.typepad.com/blog/2006/09/choosing_a_good.html).](images/Chart_Chooser_Abela.png){#fig-data-chart-chooser-abela .lightbox fig-align="center"}
 
-To select a chart type, start in the center of the chooser with the purpose of the visualization. Do you want to compare items or variables? Do you want to see the distribution of one or more variables? Do you want to show the relationship between variables or how totals disaggregate?
+To select a chart type, start in the center of the chooser with the purpose of 
+the visualization. Do you want to compare items or variables? Do you want to see 
+the distribution of one or more variables? Do you want to show the relationship 
+between variables or how totals disaggregate?
 
-The next two figures show adaptations of the Chart Chooser for continuous and discrete target variables by Prof. Van Mullekom (Virginia Tech).
+The next two figures show adaptations of the Chart Chooser for continuous and 
+discrete target variables by Prof. Van Mullekom (Virginia Tech).
 
 ![Chart chooser for continuous target variable.](images/Chart_Chooser_Continuous.png){#fig-data-chartchooser-continuous .lightbox fig-align="center"}
 
@@ -571,9 +774,14 @@ fig.show()
 
 ### Grammar of Graphics (ggplot)
 
-The grammar of graphics was described by statistician Leland Wilkinson and conceptualizes data visualization as a series of layers, in an analogy with linguistic grammar. Just like a sentence has subject and predicates, a scientific graph has parts.
+The grammar of graphics was described by statistician Leland Wilkinson and 
+conceptualizes data visualization as a series of layers, in an analogy with 
+linguistic grammar [@Leland_2005]. Just like a sentence has subject and predicates, 
+a scientific graph has parts.
 
-The grammar of graphics is helpful because we associate data visualization not by the name of this plot or that chart type, but by a series of elements, depicted as layers.
+The grammar of graphics is helpful because we associate data visualization not 
+by the name of this plot or that chart type, but by a series of elements, depicted 
+as layers.
 
 Each graphic consists of at least the following layers:
 
@@ -583,17 +791,33 @@ Each graphic consists of at least the following layers:
 
 -   The geometrical objects that represent the data
 
-In addition, we might apply statistical transformations of the data, must place all objects in a 2-dimensional space and decide on presentation elements such as fonts and colors. And if the data consist of multiple groups, we need a faceting specification to organize the graphic or the page in multiple groups.
+In addition, we might apply statistical transformations of the data, must place 
+all objects in a 2-dimensional space and decide on presentation elements such as 
+fonts and colors. And if the data consist of multiple groups, we need a faceting 
+specification to organize the graphic or the page in multiple groups.
 
-@fig-data-grammar-of-graphics shows the layered representation of the grammar of graphics.
+@fig-data-grammar-of-graphics shows the layered representation of the grammar of 
+graphics.
 
 ![The grammar of graphics; a layered approach to building data visualizations.](images/GrammarOfGraphics.png){#fig-data-grammar-of-graphics .lightbox fig-align="center" width="80%"}
 
-Thinking about data visualization in these terms is helpful because we get away from thinking about pie charts and box plots and line charts, and instead about how to organize the basic elements of a visualization.
+Thinking about data visualization in these terms is helpful because we get away 
+from thinking about pie charts and box plots and line charts, and instead about 
+how to organize the basic elements of a visualization.
 
-R programmers are familiar with the grammar of graphics from the `ggplot2()` package. The grammar of graphics paradigm is implemented in Python in the [plotnine](https://plotnine.readthedocs.io/en/v0.12.3/) library.
+R programmers are familiar with the grammar of graphics from the `ggplot2()` package. 
+The grammar of graphics paradigm is implemented in Python in the [plotnine](https://plotnine.readthedocs.io/en/v0.12.3/) library.
 
-The following statements generate a data visualization from data frame df (layer 1). This data frame contains data from 196 observations of the optic nerve head from patients with and without glaucoma. The `aes()` function defines the aesthetics layer, associating variable `eag` with the $x$-axis and specifying variable Glaucoma as a grouping variable (`eag` is the global effective area of the optic nerve head measured on a confocal laser image). The geometries and statistics layers are added to the previous layers with the `geom_density()` function, requesting a kernel density plot. The `scale_x_log10()` function modifies the data-to-aesthetics mapping by applying a log10 scale to the $x$-axis. The result is a grouped density plot on the log10 scale.
+The following statements generate a data visualization from data frame df (layer 1). 
+This data frame contains data from 196 observations of the optic nerve head from 
+patients with and without glaucoma. The `aes()` function defines the aesthetics 
+layer, associating variable `eag` with the $x$-axis and specifying variable 
+Glaucoma as a grouping variable (`eag` is the global effective area of the optic 
+nerve head measured on a confocal laser image). The geometries and statistics 
+layers are added to the previous layers with the `geom_density()` function, 
+requesting a kernel density plot. The `scale_x_log10()` function modifies the 
+data-to-aesthetics mapping by applying a log10 scale to the $x$-axis. The result 
+is a grouped density plot on the log10 scale.
 
 ```{python}
 from plotnine import ggplot, aes, geom_density, scale_x_log10   
@@ -625,32 +849,57 @@ con.close()
 
 ## Snafu or Misinformation?
 
-Data visualizations are powerful tools, they allow the author to focus our attention on information. In choosing a visualization type, filling it with data, and annotating it, you exercise control over what is displayed and how it is interpreted. In 1954, Darrell Huff published one of the most widely sold statistics text, "How to Lie with Statistics" [@Huff_1954]. Huff covered such topics as how to introduce bias through sampling, how to cherry-pick statistics ("the well-chosen average"), how to misinterpret correlation for causation, and how to distort with statistical graphics. He said
+Data visualizations are powerful tools, they allow the author to focus our attention 
+on information. In choosing a visualization type, filling it with data, and annotating it, 
+you exercise control over what is displayed and how it is interpreted. In 1954, Darrell 
+Huff published one of the most widely sold statistics text, "How to Lie with Statistics" [@Huff_1954]. 
+Huff covered such topics as how to introduce bias through sampling, how to cherry-pick 
+statistics ("the well-chosen average"), how to misinterpret correlation for causation, 
+and how to distort with statistical graphics. He said
 
->*Many a statistic is false on its face. It gets by only because the magic of numbers brings about a suspension of common sense.*
+:::{.quote}
+Many a statistic is false on its face. It gets by only because the magic of numbers 
+brings about a suspension of common sense.
+:::
 
-Examples of poorly designed graphics and misleading graphics abound. The reasons might be malfeasance, chicanery, disingenuity, or incompetence. 
+Examples of poorly designed graphics and misleading graphics abound. The reasons 
+might be malfeasance, chicanery, disingenuity, or incompetence. 
 
 :::{.example}
 ::::{.example-header}
 Example: Covid-19 Statistics
 ::::
 ::::{.example-container}
-The following graphic aired on a local TV channel in North Carolina on April 5, 2020. It was the beginning of the Covid-19 pandemic and audiences were keen to hear about the local case counts. Is there anything wrong with the visualization?
+The following graphic aired on a local TV channel in North Carolina on April 5, 2020. 
+It was the beginning of the Covid-19 pandemic and audiences were keen to hear about 
+the local case counts. Is there anything wrong with the visualization?
 
 ![Covid-19 cases per day as reported on April 5, 2020 by a local TV station.](images/CovidCases.png){.lightbox fig-align="center" width="75%"}
 
-The number of daily cases has been more or less steadily increasing since March 18 (33 cases) and two weeks later stands at 376 cases per day. 
+The number of daily cases has been more or less steadily increasing since March 18 
+(33 cases) and two weeks later stands at 376 cases per day. 
 
-The placement of the bubbles seems odd. The first bubble, 33 cases, seem further away from the horizontal grid line than, say, the bubble for 112 cases on March 21 is distant from the grid line at 100 cases. Maybe it is the angle at which the graph is viewed, but 112 (March 21) and 116 (March 22) should be about 1/2 way between 100 and 130, they are drawn closer to the line at 100.
+The placement of the bubbles seems odd. The first bubble, 33 cases, seem further 
+away from the horizontal grid line than, say, the bubble for 112 cases on March 21 
+is distant from the grid line at 100 cases. Maybe it is the angle at which the graph 
+is viewed, but 112 (March 21) and 116 (March 22) should be about 1/2 way between 
+100 and 130, they are drawn closer to the line at 100.
 
-Spending a bit more time with the $y$-axis you notice that the grid lines are evenly spaced, but that the reference labels are not equi-distant. The differences between the grid labels are 30, 30, 10, 30, 30, 30, 50, 10, 50, 50, and 50 units. Why would someone do this?
+Spending a bit more time with the $y$-axis you notice that the grid lines are evenly 
+spaced, but that the reference labels are not equi-distant. The differences between 
+the grid labels are 30, 30, 10, 30, 30, 30, 50, 10, 50, 50, and 50 units. Why would
+someone do this?
 ::::
 :::
 
 
-In a [blog](https://flowingdata.com/2017/02/09/how-to-spot-visualization-lies/) entitled "How to Spot Visualization Lies", 
-Nathan Yau gives numerous examples how chart construction can mislead. For example, a common device to exaggerate differences between groups is to draw bar charts with a baseline different than zero. The height of the bar is **the** information conveyed by the bar chart so bars should always start at zero (@fig-noaa-tornadoes1, data from [NOAA](https://www.ncei.noaa.gov/access/monitoring/tornadoes/3/4?fatalities=false)).  
+In a [blog](https://flowingdata.com/2017/02/09/how-to-spot-visualization-lies/) entitled 
+"How to Spot Visualization Lies", Nathan Yau gives numerous examples how chart 
+construction can mislead. For example, a common device to exaggerate differences 
+between groups is to draw bar charts with a baseline different than zero. The height 
+of the bar is **the** information conveyed by the bar chart so bars should always 
+start at zero (@fig-noaa-tornadoes1, data from 
+[NOAA](https://www.ncei.noaa.gov/access/monitoring/tornadoes/3/4?fatalities=false)).  
 
 ```{r, noaa_tornadoes1, echo=FALSE, fig.align='center', out.width="90%"}
 #| fig.cap: Three-month (February--April) tornado occurrence in the U.S. from 1950--2023. 
@@ -667,7 +916,10 @@ barplot(Tornadoes~Year, data=tornadoes,
 
 ```
 
-When the baseline of the bar chart is changed, the length of the bars represent the difference from the baseline and the data need to be presented as such. The coloring of the bars in @fig-noaa-tornadoes2 draws extra attention to the fact that we are looking at deviations from a baseline.
+When the baseline of the bar chart is changed, the length of the bars represent 
+the difference from the baseline and the data need to be presented as such. The 
+coloring of the bars in @fig-noaa-tornadoes2 draws extra attention to the fact that 
+we are looking at deviations from a baseline.
 
 ```{r noaa_tornadoes2, echo=FALSE, fig.align='center', out.width="90%"}
 #| fig.cap: Three-month (February--April) tornado occurrence in the U.S. from 1950--2023 compared to 1980.
@@ -735,7 +987,7 @@ And now, without much commentary or warning, here are some truly terrible exampl
 
 ---
 
-![This was in the New York Times, apparently](images/BadGraph_NYT1.jpeg){fig-align="center" width=60%}
+![This was in the New York Times, apparently.](images/BadGraph_NYT1.jpeg){fig-align="center" width=60%}
 
 ---
 

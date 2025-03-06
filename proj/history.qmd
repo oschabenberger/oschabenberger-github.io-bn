@@ -25,17 +25,22 @@ What problems are we able to solve at the intersection of these disciplines?
 First, data is information collected about the real world. Data science then is 
 concerned with real-world problems and phenomena. We test hypotheses about 
 real-world problems, but we do not solve hypothetical problems or prove theorems. 
-Typical questions addressed by data scientists based on data are:
+Typical questions addressed by data scientists based on data and the types 
+of analysis invoked to answer the question are shown in @tbl-ds-questions.
 
--   **Description**: What is and what has been?
--   **Prediction**: What will be?
--   **Classification**: What category does this item belong to?
--   **Hypothesis Testing**: What can I say about X?
--   **Prescription**: What should I do?
--   **Clustering**: Which things are similar?
--   **Association**: Which things occur together?
--   **Optimization**: What is the best way to do something?
--   **Generation**: What novel content is there?
+| **Type of Analysis** | **Type of Question** |
+|:---|:-----|
+| **Description**        | What is and what has been?
+| **Prediction**         | What will be?
+| **Classification**     | What category does this item belong to?
+| **Hypothesis Testing** | What can I say about X?
+| **Prescription**       | What should I do?
+| **Clustering**         | Which things are similar?
+| **Association**        | Which things occur together?
+| **Optimization**       | What is the best way to do something?
+| **Generation**         | What novel content is there?
+
+: The relationship between data analysis types and the questions they address. {#tbl-ds-questions .striped}
 
 **Statistics** is concerned with describing the world and with drawing conclusions 
 about the world using incomplete information. The information—data—is incomplete 
@@ -461,7 +466,7 @@ sea change in natural language understanding that is believed to disrupt many
 occupations. Data scientists embrace such disruptions to draw better conclusions 
 from data.
 
-## Data Science versus Data in Science
+## Data Science and Data in Science
 
 The majority of data science projects and applications take place in non-academic 
 settings, often lumped together under the generic term *industry*. Most data 
@@ -582,7 +587,9 @@ with residents. Investigating on the ground, he found that nearly all deaths
 were in the vicinity of the Broad Street Pump or by people who had consumed water 
 from the pump [@Snow1855, p.47]:
 
->*It will be observed that the deaths either very much diminished, or ceased altogether, at every point where it becomes decidedly nearer to send to another pump than to the one in Broad street. It may also be noticed that the deaths are most numerous near to the pump where the water could be more readily obtained.*
+:::{.quote}
+It will be observed that the deaths either very much diminished, or ceased altogether, at every point where it becomes decidedly nearer to send to another pump than to the one in Broad street. It may also be noticed that the deaths are most numerous near to the pump where the water could be more readily obtained.
+:::
 
 He persuaded local authorities to remove the handle from the pump to prevent access
 to the water. The mortality rate declined after that, but it is believed that the
@@ -663,9 +670,18 @@ receiving water from either company were indistinguishable; in statistical terms
 they were comparable. The only thing that differentiated the two groups was the
 water supplier. @Snow1855 [p. 75] wrote 
 
->*In many cases a single house has a supply different from that on either side. Each company supplies both rich and poor, both large houses and small; there is no difference in the condition or occupation of the persons receiving the water of the different companies...\
+:::{.quote}
+In many cases a single house has a supply different from that on either side. 
+Each company supplies both rich and poor, both large houses and small; there is 
+no difference in the condition or occupation of the persons receiving the water 
+of the different companies...\
 \
-As there is no difference whatever either in the houses or the people receiving the supply of the two Water Companies, or in any of the physical conditions with which they are surrounded, it is obvious that no experiment could have been devised which would more thoroughly test the effect of water supply on the progress of Cholera than this, which circumstances placed ready made before the observer.*
+As there is no difference whatever either in the houses or the people receiving 
+the supply of the two Water Companies, or in any of the physical conditions with 
+which they are surrounded, it is obvious that no experiment could have been devised 
+which would more thoroughly test the effect of water supply on the progress of 
+Cholera than this, which circumstances placed ready made before the observer.
+:::
 
 @tbl-chol-rate is based on @Snow1855 [p. 80] and covers the period from 
 January 1 to December 12, 1853 leading up to the 1854 outbreak. The cholera death 

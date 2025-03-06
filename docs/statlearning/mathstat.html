@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Foundations of Data Science - 17&nbsp; Probability and Statistics</title>
+<title>Foundations of Data Science - 27&nbsp; Probability and Statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -51,7 +51,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../statlearning/linalg.html" rel="next">
-<link href="../statlearning/general.html" rel="prev">
+<link href="../ethics/genAI.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -133,7 +133,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../statlearning/general.html">Module IV. Modeling</a></li><li class="breadcrumb-item"><a href="../statlearning/mathstat.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../statlearning/mathstat.html">Module VIII. Review Topics</a></li><li class="breadcrumb-item"><a href="../statlearning/mathstat.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -253,44 +253,50 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../data/data_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../data/sources_and_files.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Sources and File Formats</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Sources and File Formats</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../data/data_access.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../data/quality.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data Quality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Data Quality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../data/summarization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Data Summarization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data Summarization</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../data/visualization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data Visualization</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data Visualization</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../data/sqlbasics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">SQL Basics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">SQL Basics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../data/integration.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Integration</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Integration</span></span></a>
   </div>
 </li>
       </ul>
@@ -307,25 +313,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../statlearning/general.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">General Topics</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../statlearning/mathstat.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../statlearning/linalg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">General Topics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../statlearning/featproc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Feature and Target Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Feature and Target Processing</span></span></a>
   </div>
 </li>
       </ul>
@@ -346,19 +340,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/ds_softwareeng.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Data Science versus Software Engineering,</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Data Science versus Software Engineering,</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/coding_practices.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/tools.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
   </div>
 </li>
       </ul>
@@ -375,31 +369,54 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/gonewrong.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">How Things Go Wrong</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">How Things Go Wrong</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/bias_harm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/privacy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/genAI.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ethics of Generative AI</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Ethics of Generative AI</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text">Module VIII. Review Topics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/mathstat.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statlearning/linalg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
   </div>
 </li>
       </ul>
@@ -420,7 +437,7 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-prob" id="toc-sec-prob" class="nav-link active" data-scroll-target="#sec-prob"><span class="header-section-number">17.1</span> Probability</a>
+  <li><a href="#sec-prob" id="toc-sec-prob" class="nav-link active" data-scroll-target="#sec-prob"><span class="header-section-number">27.1</span> Probability</a>
   <ul>
   <li><a href="#sample-space-and-events" id="toc-sample-space-and-events" class="nav-link" data-scroll-target="#sample-space-and-events">Sample Space and Events</a></li>
   <li><a href="#probability-measures" id="toc-probability-measures" class="nav-link" data-scroll-target="#probability-measures">Probability Measures</a>
@@ -436,12 +453,12 @@ window.Quarto = {
   <li><a href="#distribution-functions" id="toc-distribution-functions" class="nav-link" data-scroll-target="#distribution-functions">Distribution functions</a></li>
   <li><a href="#expected-value" id="toc-expected-value" class="nav-link" data-scroll-target="#expected-value">Expected value</a></li>
   <li><a href="#variance-and-standard-deviation" id="toc-variance-and-standard-deviation" class="nav-link" data-scroll-target="#variance-and-standard-deviation">Variance and standard deviation</a></li>
-  <li><a href="#centering-and-scaling" id="toc-centering-and-scaling" class="nav-link" data-scroll-target="#centering-and-scaling">Centering and Scaling</a></li>
+  <li><a href="#centering-and-scaling" id="toc-centering-and-scaling" class="nav-link" data-scroll-target="#centering-and-scaling">Centering and scaling</a></li>
   <li><a href="#covariance-and-correlation" id="toc-covariance-and-correlation" class="nav-link" data-scroll-target="#covariance-and-correlation">Covariance and correlation</a></li>
   <li><a href="#independence-1" id="toc-independence-1" class="nav-link" data-scroll-target="#independence-1">Independence</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#sec-prob-discrete-dist" id="toc-sec-prob-discrete-dist" class="nav-link" data-scroll-target="#sec-prob-discrete-dist"><span class="header-section-number">17.2</span> Discrete (Univariate) Distributions</a>
+  <li><a href="#sec-prob-discrete-dist" id="toc-sec-prob-discrete-dist" class="nav-link" data-scroll-target="#sec-prob-discrete-dist"><span class="header-section-number">27.2</span> Discrete (Univariate) Distributions</a>
   <ul>
   <li><a href="#bernoulli-binary-bernoullipi" id="toc-bernoulli-binary-bernoullipi" class="nav-link" data-scroll-target="#bernoulli-binary-bernoullipi">Bernoulli (Binary), Bernoulli<span class="math inline">\((\pi)\)</span></a></li>
   <li><a href="#binomial-binomialnpi" id="toc-binomial-binomialnpi" class="nav-link" data-scroll-target="#binomial-binomialnpi">Binomial, Binomial<span class="math inline">\((n,\pi)\)</span></a></li>
@@ -449,7 +466,7 @@ window.Quarto = {
   <li><a href="#negative-binomial-negbinkpi" id="toc-negative-binomial-negbinkpi" class="nav-link" data-scroll-target="#negative-binomial-negbinkpi">Negative Binomial, NegBin<span class="math inline">\((k,\pi)\)</span></a></li>
   <li><a href="#poisson-poissonlambda" id="toc-poisson-poissonlambda" class="nav-link" data-scroll-target="#poisson-poissonlambda">Poisson, Poisson<span class="math inline">\((\lambda)\)</span></a></li>
   </ul></li>
-  <li><a href="#sec-prob-cont-dist" id="toc-sec-prob-cont-dist" class="nav-link" data-scroll-target="#sec-prob-cont-dist"><span class="header-section-number">17.3</span> Continuous (Univariate) Distributions</a>
+  <li><a href="#sec-prob-cont-dist" id="toc-sec-prob-cont-dist" class="nav-link" data-scroll-target="#sec-prob-cont-dist"><span class="header-section-number">27.3</span> Continuous (Univariate) Distributions</a>
   <ul>
   <li><a href="#uniform-uab" id="toc-uniform-uab" class="nav-link" data-scroll-target="#uniform-uab">Uniform, U<span class="math inline">\((a,b)\)</span></a></li>
   <li><a href="#exponential-expolambda" id="toc-exponential-expolambda" class="nav-link" data-scroll-target="#exponential-expolambda">Exponential, Expo<span class="math inline">\((\lambda)\)</span></a></li>
@@ -457,7 +474,7 @@ window.Quarto = {
   <li><a href="#beta-betaalphabeta" id="toc-beta-betaalphabeta" class="nav-link" data-scroll-target="#beta-betaalphabeta">Beta, Beta<span class="math inline">\((\alpha,\beta)\)</span></a></li>
   <li><a href="#gaussian-normal-gmusigma2" id="toc-gaussian-normal-gmusigma2" class="nav-link" data-scroll-target="#gaussian-normal-gmusigma2">Gaussian (Normal), G<span class="math inline">\((\mu,\sigma^2)\)</span></a></li>
   </ul></li>
-  <li><a href="#sec-prob-sampling-dist" id="toc-sec-prob-sampling-dist" class="nav-link" data-scroll-target="#sec-prob-sampling-dist"><span class="header-section-number">17.4</span> Sampling Distributions</a>
+  <li><a href="#sec-prob-sampling-dist" id="toc-sec-prob-sampling-dist" class="nav-link" data-scroll-target="#sec-prob-sampling-dist"><span class="header-section-number">27.4</span> Sampling Distributions</a>
   <ul>
   <li><a href="#chi-square-chi2_nu" id="toc-chi-square-chi2_nu" class="nav-link" data-scroll-target="#chi-square-chi2_nu">Chi-Square, <span class="math inline">\(\chi^2_\nu\)</span></a></li>
   <li><a href="#students-t-t_nu" id="toc-students-t-t_nu" class="nav-link" data-scroll-target="#students-t-t_nu">Students’ t, <span class="math inline">\(t_\nu\)</span></a></li>
@@ -469,9 +486,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../statlearning/general.html">Module IV. Modeling</a></li><li class="breadcrumb-item"><a href="../statlearning/mathstat.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../statlearning/mathstat.html">Module VIII. Review Topics</a></li><li class="breadcrumb-item"><a href="../statlearning/mathstat.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-prob-stats" class="quarto-section-identifier"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></span></h1>
+<h1 class="title"><span id="sec-prob-stats" class="quarto-section-identifier"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></span></h1>
 </div>
 
 
@@ -489,8 +506,8 @@ window.Quarto = {
 
 
 <p>This chapter covers some basic topics in mathematical statistics that are relevant to understanding data science methodology related to modeling data. The topics are considered more review than exposition and are brought together here as a reference.</p>
-<section id="sec-prob" class="level2" data-number="17.1">
-<h2 data-number="17.1" class="anchored" data-anchor-id="sec-prob"><span class="header-section-number">17.1</span> Probability</h2>
+<section id="sec-prob" class="level2" data-number="27.1">
+<h2 data-number="27.1" class="anchored" data-anchor-id="sec-prob"><span class="header-section-number">27.1</span> Probability</h2>
 <p>Data are not deterministic; they have an element of uncertainty. Measurement errors, sampling variability, random assignment and selection, incomplete observation, are just some sources of random variability found in data. A solid understanding of probability concepts is necessary for any data professional. To separate signal from noise in data means separating systematic from random effects; to make statements about data requires the quantification of uncertainty.</p>
 <p>Situations in which the outcomes occur randomly are called generically <em>experiments</em> and probability theory is used to model such experiments.</p>
 <section id="sample-space-and-events" class="level3">
@@ -504,9 +521,14 @@ window.Quarto = {
 <p><span class="math display">\[A \cap B = \varnothing\]</span></p>
 <p><span class="math display">\[B^{c} = \left\{ rr,ry,yr,yy,gg \right\}\]</span></p>
 <p>The intersection of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> in this example is the empty set <span class="math inline">\(\varnothing\)</span>, the set without elements. <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are said to be <strong>disjoint</strong> events.</p>
-<p>Set theory teaches us about laws involving events.</p>
-<table class="table">
-<caption>Laws of set theory. These are useful in deriving probabilities.</caption>
+<p>Set theory teaches us about laws involving events (<a href="#tbl-prob-laws" class="quarto-xref">Table&nbsp;<span>27.1</span></a>).</p>
+<div id="tbl-prob-laws" class="striped quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-prob-laws-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;27.1: Laws of set theory. These are useful in deriving probabilities.
+</figcaption>
+<div aria-describedby="tbl-prob-laws-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped table">
 <thead>
 <tr class="header">
 <th>Law</th>
@@ -548,6 +570,9 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 </section>
 <section id="probability-measures" class="level3">
 <h3 class="anchored" data-anchor-id="probability-measures">Probability Measures</h3>
@@ -569,12 +594,12 @@ window.Quarto = {
 <h4 class="anchored" data-anchor-id="conditional-probability">Conditional probability</h4>
 <p>The <strong>conditional</strong> probability that event <span class="math inline">\(A\)</span> occurs given that event <span class="math inline">\(B\)</span> has occurred is</p>
 <p><span class="math display">\[\Pr{\left( A|B \right) = \frac{\Pr(A \cap B)}{\Pr(B)}}\]</span></p>
-<p>This requires that <span class="math inline">\(\Pr{(B) &gt; 0}\)</span>, we cannot condition on something that has zero probability of happening. The idea of the conditional probability is that for purpose of conditioning on <span class="math inline">\(B\)</span>, we change the relevant sample space from <span class="math inline">\(\Omega\)</span> to <span class="math inline">\(B\)</span>.</p>
+<p>This requires that <span class="math inline">\(\Pr{(B) &gt; 0}\)</span>, we cannot condition on something that cannot happen. The idea of the conditional probability is that for purpose of conditioning on <span class="math inline">\(B\)</span>, we change the relevant sample space from <span class="math inline">\(\Omega\)</span> to <span class="math inline">\(B\)</span>.</p>
 <p>Rearranging the probabilities in this expression, we find that the probability that two events occur together (the events intersect) can be written as</p>
 <p><span class="math display">\[\Pr(A \cap B) = \Pr{\left( A|B \right) \times \Pr(B)}\]</span></p>
-<p>This is known as the <strong>multiplication law</strong> of probabilities. Another way of putting this result is that the <strong>joint</strong> probability of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is the product of the conditional probability given <span class="math inline">\(B\)</span> and the marginal probability of <span class="math inline">\(B\)</span>. If <span class="math inline">\(\Pr{(A) &gt; 0}\)</span>, we can also use <span class="math inline">\(A\)</span> to condition the calculation:</p>
+<p>This is known as the <strong>multiplicative law</strong> of probabilities. Another way of putting this result is that the <strong>joint</strong> probability of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is the product of the conditional probability given <span class="math inline">\(B\)</span> and the marginal probability of <span class="math inline">\(B\)</span>. If <span class="math inline">\(\Pr{(A) &gt; 0}\)</span>, we can also use <span class="math inline">\(A\)</span> to condition the calculation:</p>
 <p><span class="math display">\[\Pr(A \cap B) = \Pr{\left( B|A \right) \times \Pr(A)}\]</span></p>
-<p>Suppose that the probability of rain <span class="math inline">\((A)\)</span> on a cloudy <span class="math inline">\((B)\)</span> day is <span class="math inline">\(\Pr{\left( A|B \right) = 0.3}\)</span>. The probability that it is cloudy is <span class="math inline">\(\Pr(B) = 0.2\)</span>. The probability that it is cloudy and raining is <span class="math inline">\(\Pr{\left( A|B \right) \times \Pr(B)} = 0.3 \times 0.2 = 0.06\)</span>. Notice the difference between the event <code>cloudy and raining</code> and the event <code>raining given that it is cloudy</code>.</p>
+<p>Suppose that the probability of rain <span class="math inline">\((A)\)</span> on a cloudy <span class="math inline">\((B)\)</span> day is <span class="math inline">\(\Pr{\left( A|B \right) = 0.3}\)</span>. The probability that it is cloudy is <span class="math inline">\(\Pr(B) = 0.2\)</span>. The probability that it is cloudy and raining is <span class="math inline">\(\Pr{\left( A|B \right) \times \Pr(B)} = 0.3 \times 0.2 = 0.06\)</span>. Notice the difference between the event <em>cloudy and raining</em>`* and the event <em>raining given that it is cloudy</em>.</p>
 </section>
 <section id="law-of-total-probability" class="level4">
 <h4 class="anchored" data-anchor-id="law-of-total-probability">Law of total probability</h4>
@@ -583,8 +608,10 @@ window.Quarto = {
 <p>Substituting the conditional and marginal probabilities this can be rewritten as</p>
 <p><span class="math display">\[\Pr{(A) = \Pr{\left( A|B \right)\Pr(B) + \Pr{\left( A|B^{c} \right)\Pr\left( B^{c} \right)}}}\]</span></p>
 <p>Each of the products on the right-hand side conditions on a different sample space, but since <span class="math inline">\(B\)</span> and <span class="math inline">\(B^{c}\)</span> are disjoint, the entire space <span class="math inline">\(\Omega\)</span> is covered. For example, the probability that it snows in Virginia is the sum of the probabilities that it snows in Montgomery County and that it snows in the other counties of the state.</p>
-<p>We can extend the decomposition from two disjoint sets to any number of disjoint sets. If <span class="math inline">\(B_{1},\cdots,\ B_{n}\)</span> are disjoint sets and <span class="math inline">\(\bigcup_{i = 1}^{n}B_{i} = \Omega\)</span>, and all $\Pr{\left( B_{i} \right) &gt; 0},\ $then</p>
-<p><span class="math display">\[\Pr(A) = \sum_{i = 1}^{n}{\Pr{\left( A|B_{i} \right)\Pr\left( B_{i} \right)}}\]</span></p>
+<p>We can extend the decomposition from two disjoint sets to any number of disjoint sets. If <span class="math inline">\(B_{1},\cdots,\ B_{n}\)</span> are disjoint sets and <span class="math inline">\(\bigcup_{i = 1}^{n}B_{i} = \Omega\)</span>, and all <span class="math inline">\(\Pr\left( B\_{i} \right) &gt; 0\)</span>, then</p>
+<p><span class="math display">\[
+\Pr(A) = \sum_{i = 1}^{n}{\Pr{\left( A|B_{i} \right)\Pr\left( B_{i} \right)}}
+\]</span></p>
 </section>
 <section id="bayes-rule" class="level4">
 <h4 class="anchored" data-anchor-id="bayes-rule">Bayes’ rule</h4>
@@ -592,11 +619,13 @@ window.Quarto = {
 <p><span class="math display">\[\Pr{\left( A|B \right) = \frac{\Pr(A \cap B)}{\Pr(B)}}\]</span></p>
 <p>The numerator, the probability that events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> occur together, can be written in terms of a conditional probability as well, <span class="math inline">\(\Pr(A \cap B) = \Pr{\left( B|A \right)\Pr(A)}\)</span>. Combining the two results yields Bayes’ rule:</p>
 <p><span class="math display">\[\Pr\left( A|B \right) = \frac{\Pr{\left( B|A \right)\Pr(A)}}{\Pr(B)}\]</span></p>
-<p>The conditional probability on the left-hand side, <span class="math inline">\(\Pr\left( A|B \right)\)</span>, is called the <strong>posterior} probability. The marginal probabilities</strong> <span class="math inline">\(\Pr(A)\)</span> and <span class="math inline">\(\Pr(B)\)</span> are also called the prior** probabilities. The Bayes rule allows us to express the probability of <span class="math inline">\(A|B\)</span> as a function of the probability of <span class="math inline">\(B|A\)</span> and vice versa.</p>
+<p>The conditional probability on the left-hand side, <span class="math inline">\(\Pr\left( A|B \right)\)</span>, is called the <strong>posterior</strong> probability. The probabilities <span class="math inline">\(\Pr(A)\)</span> and <span class="math inline">\(\Pr(B)\)</span> are also called the <strong>prior</strong> probabilities. The Bayes rule allows us to express the probability of <span class="math inline">\(A|B\)</span> as a function of the probability of <span class="math inline">\(B|A\)</span> and vice versa.</p>
 <p><span class="math display">\[\Pr\left( A|B \right) = \frac{\Pr{\left( B|A \right)\Pr(A)}}{\Pr(B)}\]</span></p>
 <p><span class="math display">\[\Pr\left( B|A \right) = \frac{\Pr{\left( A|B\  \right)\Pr(B)}}{\Pr(A)}\]</span></p>
 <p>You can combine Bayes’ formula as given here with the law of total probability to compute the marginal probability in the denominator. This makes it even more evident how Bayes’ rule allows us to reverse the conditioning:</p>
-<p><span class="math display">\[\Pr{\left( B_{j}|A \right) =}\frac{\Pr\left( A|B_{j} \right)\Pr\left( B_{j} \right)}{\sum_{i = 1}^{n}{\Pr\left( A|B_{i} \right)\Pr\left( B_{i} \right)}}\]</span></p>
+<p><span class="math display">\[
+\Pr{\left( B_{j}|A \right) =}\frac{\Pr\left( A|B_{j} \right)\Pr\left( B_{j} \right)}{\sum_{i = 1}^{n}{\Pr\left( A|B_{i} \right)\Pr\left( B_{i} \right)}}
+\]</span></p>
 <div class="example">
 <div class="example-header">
 <p>Example: Lie Detector Test</p>
@@ -620,7 +649,7 @@ window.Quarto = {
 <section id="independence" class="level4">
 <h4 class="anchored" data-anchor-id="independence">Independence</h4>
 <p>Independent and disjoint events are different concepts. Events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are disjoint if they cannot occur together. Their intersection is the empty set and thus <span class="math inline">\(\Pr{(A \cap B) = \Pr{(\varnothing) = 0}}\)</span>. Independent events are <strong>unrelated</strong> events, that means the outcome of one event does not affect the outcome of the other event—the events can occur together, however.</p>
-<p>Being a sophomore, junior, or senior student are disjoint events; you cannot be simultaneously a junior and a senior. On the other hand, the events <code>rain in Virginia'' and</code>winning the lottery ticket’’ are independent; they can occur together but whether it rains has no bearing on whether you win the lottery that day and winning the lottery has no effect on the weather.</p>
+<p>Being a sophomore, junior, or senior student are disjoint events; you cannot be simultaneously a junior and a senior. On the other hand, the events <em>rain in Virginia</em> and <em>winning the lottery ticket</em> are independent; they can occur together but whether it rains has no bearing on whether you win the lottery that day and winning the lottery has no effect on the weather.</p>
 <p>Formally, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent events if <span class="math inline">\(\Pr(A \cap B) = \Pr(A){\times Pr}(B)\)</span>. This should make intuitive sense: if knowing <span class="math inline">\(A\)</span> carries no information about the occurrence of <span class="math inline">\(B\)</span>, then the probability that they occur together is the product of the probabilities that they occur separately.</p>
 <p>Applying this to the definition of the conditional probability, the following holds for two independent events:</p>
 <p><span class="math display">\[\Pr\left( A|B \right) = \frac{\Pr(A \cap B)}{\Pr(B)} = \frac{\Pr{(A)\Pr(B)}}{\Pr(B)} = \Pr(A)\]</span></p>
@@ -637,7 +666,7 @@ window.Quarto = {
 <p><span class="math display">\[\Pr(X = 2) = \frac{1}{9}\]</span></p>
 <section id="distribution-functions" class="level4">
 <h4 class="anchored" data-anchor-id="distribution-functions">Distribution functions</h4>
-<p>The function <span class="math inline">\(p(x) = \Pr(X = x)\)</span>, that assigns probabilities to the discrete values of the random variable, is known as the <strong>probability mass function</strong> (p.m.f.). The possible values the random variable can take on are called its <strong>support</strong>. Discrete random variables can have infinitely large support when there is no limit, for example the number of coin tosses until 5 heads are observed has support <span class="math inline">\(5,\ 6,\ 7,\ \cdots\)</span>. The number of fish caught in a day at a lake has infinite support <span class="math inline">\(0,\ 1,\ 2,\ \cdots\)</span>; it might be highly unlikely to catch 1,000 fish per day, but it is not impossible.</p>
+<p>The function <span class="math inline">\(p(x) = \Pr(X = x)\)</span>, that assigns probabilities to the discrete values of the random variable, is known as the <strong>probability mass function</strong> (p.m.f.). The possible values the random variable can take on are called its <strong>support</strong>. Discrete random variables can have infinitely large support when there is no limit, for example the number of coin tosses until 5 heads are observed has support <span class="math inline">\(5, 6, 7, \cdots\)</span>. The number of fish caught in a day at a lake has infinite support <span class="math inline">\(0, 1, 2, \cdots\)</span>; it might be highly unlikely to catch 1,000 fish per day, but it is not impossible.</p>
 <p>If the number of possible values is not countable, the random variable is called <strong>continuous</strong>. The concept of a probability mass function then does not make sense. Instead, continuous random variables are characterized by their <strong>probability density function</strong> (p.d.f., <span class="math inline">\(f(x)\)</span>). Probabilities for continuous random variables are calculated by integrating the p.d.f.:</p>
 <p><span class="math display">\[\Pr(a &lt; X &lt; b) = \int_{a}^{b}{f(x)\ dx}\]</span></p>
 <p>The <strong>cumulative distribution function</strong> (c.d.f., <span class="math inline">\(F(x)\)</span> is defined for any random variable as</p>
@@ -653,8 +682,8 @@ window.Quarto = {
 <p>The <strong>expected value</strong> of a random variable, <span class="math inline">\(\text{E}\lbrack X\rbrack\)</span>, also known as the <strong>mean</strong> of <span class="math inline">\(X\)</span>, is the weighted average of the values of the random variable weighted by the mass or density. For a discrete random variable,</p>
 <p><span class="math display">\[\text{E}\lbrack X\rbrack = \sum_{}^{}{x\ p(x)}\]</span></p>
 <p>and for a continuous random variable,</p>
-<p><span class="math display">\[\text{E}\lbrack X\rbrack = \int_{}^{}{x\ f(x)\ dx}\]</span></p>
-<p>Technically, we need the conditions <span class="math inline">\(\sum |x|p(x) &lt; \infty\)</span> and <span class="math inline">\(\int|x|f(x)dx &lt; \infty\)</span>, respectively, for the expected values to be defined. Almost all random variables satisfy this condition. A famous example to the contrary is the ratio of two normal distributions with mean zero, known as the Cauchy distribution—its mean (and variance) are not defined.</p>
+<p><span class="math display">\[\text{E}\lbrack X\rbrack = \int_{}^{}{\,x\, f(x)\ dx}\]</span></p>
+<p>Technically, we need the conditions <span class="math inline">\(\sum |x|p(x) &lt; \infty\)</span> and <span class="math inline">\(\int|x|f(x)dx &lt; \infty\)</span>, respectively, for the expected values to be defined. Almost all random variables satisfy this condition. A famous example to the contrary is the ratio of two Gaussian distributions with mean zero, known as the Cauchy distribution—its mean (and variance) are not defined.</p>
 <p>We can think of the expected value as the center of mass of the distribution function (density or mass function), the point on which the distribution balances.</p>
 <p>The Greek symbol <span class="math inline">\(\mu\)</span> is often used to denote the expected value of a random variable.</p>
 <p>Randomness is contagious—a function of a random variable is a random variable. So, if <span class="math inline">\(X\)</span> is a random variable, the function <span class="math inline">\(h(X)\)</span> is a random variable as well. We can find the expected value of <span class="math inline">\(h(X)\)</span> through the mass or density function of <span class="math inline">\(X\)</span>:</p>
@@ -739,10 +768,10 @@ window.Quarto = {
 <p>It is sufficient for this result to hold that the random variables are mutually uncorrelated, a weaker condition than mutual independence. We are introducing independence below after discussing the concept of joint distribution functions.</p>
 </section>
 <section id="centering-and-scaling" class="level4">
-<h4 class="anchored" data-anchor-id="centering-and-scaling">Centering and Scaling</h4>
+<h4 class="anchored" data-anchor-id="centering-and-scaling">Centering and scaling</h4>
 <p>A random variable <span class="math inline">\(X\)</span> with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^{2}\)</span> is <strong>centered</strong> by subtracting its mean. A random variable is <strong>scaled</strong> by multiplying or dividing it by a factor. A random variable is <strong>standardized</strong> by centering and dividing by its standard deviation:</p>
 <p><span class="math display">\[Y = \frac{X - \mu}{\sigma}\]</span></p>
-<p>If <span class="math inline">\(X\)</span> has mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>, then <span class="math inline">\(Y\)</span> has mean 0 and variance 1. This follows by applying the properties of the expecation and variance operators: <span class="math display">\[
+<p>If <span class="math inline">\(X\)</span> has mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>, then <span class="math inline">\(Y\)</span> has mean 0 and variance 1. This follows by applying the properties of the expectation and variance operators: <span class="math display">\[
 \begin{align*}
 \text{E}[Y] &amp;= \text{E}\left[\frac{X-\mu}{\sigma}\right] = \frac{1}{\sigma}\text{E}[X-\mu] =\frac{1}{\sigma}(\mu-\mu) = 0\\
 \text{Var}[Y]
@@ -794,7 +823,7 @@ Note
 <p>If <span class="math inline">\(\text{Cov}\lbrack X,Y\rbrack = 0\)</span>, the random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>uncorrelated</strong>. The <strong>correlation</strong> between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is defined as</p>
 <p><span class="math display">\[\text{Corr}\lbrack X,Y\rbrack = \frac{\text{Cov}\lbrack X,Y\rbrack}{\sigma_{X}\sigma_{Y}}\]</span></p>
 <p>The correlation is often denoted <span class="math inline">\(\rho_{XY}\)</span> and takes on values <span class="math inline">\(-1 \leq \rho_{XY} \leq 1\)</span>. A zero correlation is a weaker condition than <strong>independence</strong> of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. A positive value of <span class="math inline">\(\rho_{XY}\)</span> means that an increase in the value of <span class="math inline">\(X\)</span> is associated with an increase in the value of <span class="math inline">\(Y\)</span>. Note that we are not stating that the increase in <span class="math inline">\(X\)</span> is caused by the increase in <span class="math inline">\(Y\)</span>. Correlation is a measure of association and does not imply causation.</p>
-<p>If <span class="math inline">\(\text{Corr}[X,Y] = 1\)</span> or <span class="math inline">\(\text{Corr}[X,Y] = -1\)</span>, then <span class="math inline">\(X\)</span> can be predicted perfectly from <span class="math inline">\(Y\)</span>; knowing <span class="math inline">\(Y\)</span> is equal to knowing <span class="math inline">\(X\)</span>. An example of a perfect positive correlation is when <span class="math inline">\(X\)</span> is a length measured in inches and <span class="math inline">\(Y\)</span> is measured in cm. When <span class="math inline">\(\text{Corr}[X,Y] = 0\)</span>, then <span class="math inline">\(X\)</span> carries no information about <span class="math inline">\(Y\)</span>, and vice versa. A person’s shoe size and tomorrow’s weather is an example of uncorrelated variables.</p>
+<p>If <span class="math inline">\(\text{Corr}[X,Y] = 1\)</span> or <span class="math inline">\(\text{Corr}[X,Y] = -1\)</span>, then <span class="math inline">\(X\)</span> can be predicted perfectly from <span class="math inline">\(Y\)</span>; knowing <span class="math inline">\(Y\)</span> is equal to knowing <span class="math inline">\(X\)</span>. An example of a perfect positive correlation is when <span class="math inline">\(X\)</span> is a length measured in inches and <span class="math inline">\(Y\)</span> is measured in cm. When <span class="math inline">\(\text{Corr}[X,Y] = 0\)</span>, then <span class="math inline">\(X\)</span> carries no information about <span class="math inline">\(Y\)</span>, and vice versa. A person’s shoe size and tomorrow’s weather is an example of uncorrelated (and most likely independent) variables.</p>
 </section>
 <section id="independence-1" class="level4">
 <h4 class="anchored" data-anchor-id="independence-1">Independence</h4>
@@ -829,8 +858,8 @@ Probability Playground
 </section>
 </section>
 </section>
-<section id="sec-prob-discrete-dist" class="level2" data-number="17.2">
-<h2 data-number="17.2" class="anchored" data-anchor-id="sec-prob-discrete-dist"><span class="header-section-number">17.2</span> Discrete (Univariate) Distributions</h2>
+<section id="sec-prob-discrete-dist" class="level2" data-number="27.2">
+<h2 data-number="27.2" class="anchored" data-anchor-id="sec-prob-discrete-dist"><span class="header-section-number">27.2</span> Discrete (Univariate) Distributions</h2>
 <section id="bernoulli-binary-bernoullipi" class="level3">
 <h3 class="anchored" data-anchor-id="bernoulli-binary-bernoullipi">Bernoulli (Binary), Bernoulli<span class="math inline">\((\pi)\)</span></h3>
 <p>A Bernoulli (or binary) experiment has two possible outcomes that occur with probabilities <span class="math inline">\(\pi\)</span> and <span class="math inline">\(1 - \pi\)</span>, respectively. The outcomes are coded numerically as <span class="math inline">\(Y = 1\)</span> (with probability <span class="math inline">\(\pi\)</span>) and <span class="math inline">\(Y = 0\)</span>, the subset of the sample space <span class="math inline">\(\Omega\)</span> that maps to <span class="math inline">\(Y = 1\)</span> is often called the “event” or the “success” outcome of the binary distribution, the complement is called the “non-event” or the “failure” outcome.</p>
@@ -904,14 +933,14 @@ y + k - 1 \\
 k - 1
 \end{pmatrix}\pi^{k}(1 - \pi)^{y},\ \ \ \ y = 0,1,\cdots\]</span></p>
 <p><span class="math display">\[\text{E}\lbrack Y\rbrack = \frac{k(1 - \pi)}{\pi}\ \ \ \ \text{Var}\lbrack Y\rbrack = \frac{k(1 - \pi)}{\pi^{2}}\]</span></p>
-<p>The p.m.f. for a NegBin(5,0.7) in this parameterization is shown in <a href="#fig-sl-negbin" class="quarto-xref">Figure&nbsp;<span>17.1</span></a>.</p>
+<p>The p.m.f. for a NegBin(5,0.7) in this parameterization is shown in <a href="#fig-sl-negbin" class="quarto-xref">Figure&nbsp;<span>27.1</span></a>.</p>
 <div id="fig-sl-negbin" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sl-negbin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/mathstat/NegativeBinomial.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sl-negbin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;17.1: Probability mass function of a NegBin(5,0.7) random variable.
+Figure&nbsp;27.1: Probability mass function of a NegBin(5,0.7) random variable.
 </figcaption>
 </figure>
 </div>
@@ -920,7 +949,7 @@ Figure&nbsp;17.1: Probability mass function of a NegBin(5,0.7) random variable.
 <section id="poisson-poissonlambda" class="level3">
 <h3 class="anchored" data-anchor-id="poisson-poissonlambda">Poisson, Poisson<span class="math inline">\((\lambda)\)</span></h3>
 <p>The Poisson distribution is a common probability model for count variables that represent counts per unit, rather than counts that can be converted to proportions. For example, the number of chocolate chips on a cookie, the number of defective parts per day on an assembly line or the number of fish caught per day can be modeled as Poisson random variables.</p>
-<p>For the Poisson assumption to be met when modeling event counts over some unit, e.g.&nbsp;time, the rate at which events occur cannot depend on the occurrence of any events and events have to occur independently. For example, if the number of customer calls to a service center increases sharply after the release of a new software product, then the rate of events (calls) per day is not constant across days. This can still be modeled as a Poisson process where <span class="math inline">\(\lambda\)</span> depends on other input variables such as the time since release of the new product. If one customer’s call makes it more likely that another customer calls into the service center, the Poisson assumption is not valid.</p>
+<p>For the Poisson assumption to be met when modeling event counts over some unit, e.g.&nbsp; time, the rate at which events occur cannot depend on the occurrence of any events and events have to occur independently. For example, if the number of customer calls to a service center increases sharply after the release of a new software product, then the rate of events (calls) per day is not constant across days. This can still be modeled as a Poisson process where <span class="math inline">\(\lambda\)</span> depends on other input variables such as the time since release of the new product. If one customer’s call makes it more likely that another customer calls into the service center, the Poisson assumption is not valid.</p>
 <p>The random variable <span class="math inline">\(Y\)</span> has a Poisson(<span class="math inline">\(\lambda\)</span>) distribution if its probability mass function is given by</p>
 <p><span class="math display">\[p(y) = \frac{e^{- \lambda\ }\lambda^{y}}{y!},\ \ \ \ y = 0,1,\cdots\]</span></p>
 <p>The mean and variance of a Poisson(<span class="math inline">\(\lambda\)</span>) variable are the same, <span class="math inline">\(\text{E}\lbrack Y\rbrack = \text{Var}\lbrack Y\rbrack = \lambda\)</span>. Although the random variable <span class="math inline">\(Y\)</span> takes on only non-negative integer value, the parameter <span class="math inline">\(\lambda\)</span> is a real number.</p>
@@ -944,33 +973,34 @@ Figure&nbsp;17.1: Probability mass function of a NegBin(5,0.7) random variable.
 <img src="images/mathstat/PoissonBinomial.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sl-poisson-approx-bin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;17.2: Poisson approximation to the Binomial, <span class="math inline">\(n\pi \rightarrow \lambda\)</span>.
+Figure&nbsp;27.2: Poisson approximation to the Binomial, <span class="math inline">\(n\pi \rightarrow \lambda\)</span>.
 </figcaption>
 </figure>
 </div>
 <p>For example, the probability that three sixes turn up when three dice are rolled is <span class="math inline">\(\frac{1}{216} = 0.00463\)</span>. If the three dice are rolled 200 times, what is the probability that at least one triple six shows up? If <span class="math inline">\(Y\)</span> is the number of triple sixes out of 200, then the binomial probability is calculated as</p>
-<p><span class="math display">\[1 - \begin{pmatrix}
+<p><span class="math display">\[
+1 - \begin{pmatrix}
 200 \\
 0
 \end{pmatrix}\left( \frac{1}{216} \right)^{0}\left( \frac{215}{216} \right)^{200} = 0.6046\]</span></p>
 <p>and the Poisson approximation is</p>
 <p><span class="math display">\[1 - \frac{\left( \frac{200}{216} \right)^{0}}{0!}\exp\left\{ - \frac{200}{216} \right\} = 0.6038\]</span></p>
-<p>As <span class="math inline">\(\lambda \rightarrow \infty\)</span>, the Poisson p.m.f. approaches the shape of a Gaussian (normal) distribution. The normal approximation is sometimes made for sufficiently large values of the Poisson parameter, <span class="math inline">\(\lambda &gt; 20\)</span>. <a href="#fig-sl-normal-approx-poi" class="quarto-xref">Figure&nbsp;<span>17.3</span></a> shows the empirical histogram and density for 10,000 random draws from a Poisson(20) distribution and a Gaussian distribution with the same mean and variance as the Poisson. Some folks recommend the Gaussian approximation for the Poisson for <span class="math inline">\(\lambda &gt; 100\)</span> or even <span class="math inline">\(\lambda &gt; 1000\)</span>.</p>
+<p>As <span class="math inline">\(\lambda \rightarrow \infty\)</span>, the Poisson p.m.f. approaches the shape of a Gaussian (normal) distribution. The normal approximation is sometimes made for sufficiently large values of the Poisson parameter, <span class="math inline">\(\lambda &gt; 20\)</span>. <a href="#fig-sl-normal-approx-poi" class="quarto-xref">Figure&nbsp;<span>27.3</span></a> shows the empirical histogram and density for 10,000 random draws from a Poisson(20) distribution and a Gaussian distribution with the same mean and variance as the Poisson. Some folks recommend the Gaussian approximation for the Poisson for <span class="math inline">\(\lambda &gt; 100\)</span> or even <span class="math inline">\(\lambda &gt; 1000\)</span>.</p>
 <div id="fig-sl-normal-approx-poi" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sl-normal-approx-poi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/mathstat/PoissonNormal.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sl-normal-approx-poi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;17.3: Normal approximation to the Poisson distribution for <span class="math inline">\(\lambda = 20\)</span>.
+Figure&nbsp;27.3: Normal approximation to the Poisson distribution for <span class="math inline">\(\lambda = 20\)</span>.
 </figcaption>
 </figure>
 </div>
 <p>Because the events being counted occur independently of each other, a Poisson distribution is divisible. You can think of a Poisson(<span class="math inline">\(\lambda = 5\)</span>) variable as the sum of five Poisson(1) variables. The result of one variable producing on average 5 events per time units or five variables each producing on average one event per unit is the same. More generally, if <span class="math inline">\(Y_{1},\cdots,Y_{n}\)</span> are independent random variables with respective Poisson(<span class="math inline">\(\lambda_{i}\)</span>) distributions, then their sum <span class="math inline">\(\sum_{i}^{}Y_{i}\)</span> follows a Poisson distribution with mean <span class="math inline">\(\lambda = \sum_{i}^{}\lambda_{i}\)</span>.</p>
 </section>
 </section>
-<section id="sec-prob-cont-dist" class="level2" data-number="17.3">
-<h2 data-number="17.3" class="anchored" data-anchor-id="sec-prob-cont-dist"><span class="header-section-number">17.3</span> Continuous (Univariate) Distributions</h2>
+<section id="sec-prob-cont-dist" class="level2" data-number="27.3">
+<h2 data-number="27.3" class="anchored" data-anchor-id="sec-prob-cont-dist"><span class="header-section-number">27.3</span> Continuous (Univariate) Distributions</h2>
 <p>For continuous random variables, the probability that the variable takes on any particular value is zero. To make meaningful probability statements we consider integration of the probability density function (p.d.f.) over sets, for example, intervals:</p>
 <p><span class="math display">\[\Pr{(a \leq X \leq b)} = \int_{a}^{b}{f(x)dx}\]</span></p>
 <p>The density function satisfies <span class="math inline">\(\int_{- \infty}^{\infty}{f(x)dx} = 1\)</span> and can be obtained by differentiating the c.d.f <span class="math inline">\(F(x) = \Pr{(X \leq x)}\)</span>; <span class="math inline">\(f(x) = \frac{dF(x)}{dx}\)</span>.</p>
@@ -1019,7 +1049,7 @@ Tip
 <p>Fun fact: if <span class="math inline">\(\alpha\)</span> is an integer, <span class="math inline">\(\Gamma(\alpha) = (\alpha - 1)!\)</span></p>
 </div>
 </div>
-<p>The exponential random variable introduced earlier is a special case of the Gamma family, the Expo(<span class="math inline">\(1/\beta\)</span>) is the same as the Gamma(1,<span class="math inline">\(\beta\)</span>). Gamma-distributed random variables occur in applications of waiting times. Suppose that cars arrive at an intersection at a rate of one every two minutes. The time you have to wait until the 5th car arrives at the intersection is a Gamma(<span class="math inline">\(\alpha=5,\beta=2\)</span>) random variable. If lightbulbs last 5 years on average and are replaced when they fail, the time a box of six lasts is a Gamma(<span class="math inline">\(\alpha=6, \beta=5\)</span>) random variable <span class="citation" data-cites="Cunningham24">(<a href="../references.html#ref-Cunningham24" role="doc-biblioref">Cunningham 2024</a>)</span>.</p>
+<p>The exponential random variable introduced earlier is a special case of the Gamma family, the Expo(<span class="math inline">\(1/\beta\)</span>) is the same as the Gamma(1,<span class="math inline">\(\beta\)</span>). Gamma-distributed random variables occur in applications of waiting times. Suppose that cars arrive at an intersection at a rate of one every two minutes. The time you have to wait until the 5th car arrives at the intersection is a Gamma(<span class="math inline">\(\alpha=5,\beta=2\)</span>) random variable. If lightbulbs last 5 years on average are replaced when they fail, the time a box of six lasts is a Gamma(<span class="math inline">\(\alpha=6, \beta=5\)</span>) random variable <span class="citation" data-cites="Cunningham24">(<a href="../references.html#ref-Cunningham24" role="doc-biblioref">Cunningham 2024</a>)</span>.</p>
 <p>Another special case of the gamma-type random variables is the chi-square random variable. A random variable <span class="math inline">\(Y\)</span> is said to have a chi-squared distribution with <span class="math inline">\(\nu\)</span> degrees of freedom, denoted <span class="math inline">\(\chi_{\nu}^{2}\)</span>, if <span class="math inline">\(Y\)</span> is a Gamma(<span class="math inline">\(\frac{\nu}{2},2\)</span>) random variable. More on <span class="math inline">\(\chi^{2}\)</span> random variables below after we introduced sampling from a Gaussian distribution.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1032,14 +1062,14 @@ Tip
 <h3 class="anchored" data-anchor-id="beta-betaalphabeta">Beta, Beta<span class="math inline">\((\alpha,\beta)\)</span></h3>
 <p>A random variable has a Beta distribution with parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, denoted <span class="math inline">\(Y \sim \text{Beta}(\alpha,\beta)\)</span>, if its density function is given by <span class="math display">\[
 f(y) = \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\, y^{\alpha-1}\,(1-y)^{\beta-1}\quad 0 &lt; y &lt; 1
-\]</span> The family of beta distributions takes on varied shapes as seen in <a href="#fig-sl-beta" class="quarto-xref">Figure&nbsp;<span>17.4</span></a>.</p>
+\]</span> The family of beta distributions takes on varied shapes as seen in <a href="#fig-sl-beta" class="quarto-xref">Figure&nbsp;<span>27.4</span></a>.</p>
 <div id="fig-sl-beta" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sl-beta-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/mathstat/Beta.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sl-beta-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;17.4: Densities of Beta(<span class="math inline">\(\alpha,\beta\)</span>) distributions
+Figure&nbsp;27.4: Densities of Beta(<span class="math inline">\(\alpha,\beta\)</span>) distributions
 </figcaption>
 </figure>
 </div>
@@ -1124,8 +1154,8 @@ What is normal?
 </div>
 </section>
 </section>
-<section id="sec-prob-sampling-dist" class="level2" data-number="17.4">
-<h2 data-number="17.4" class="anchored" data-anchor-id="sec-prob-sampling-dist"><span class="header-section-number">17.4</span> Sampling Distributions</h2>
+<section id="sec-prob-sampling-dist" class="level2" data-number="27.4">
+<h2 data-number="27.4" class="anchored" data-anchor-id="sec-prob-sampling-dist"><span class="header-section-number">27.4</span> Sampling Distributions</h2>
 <p>Many important probability distributions are related to sampling data from Gaussian processes, <span class="math inline">\(t\)</span>, <span class="math inline">\(\chi^{2}\)</span>, and <span class="math inline">\(F\)</span> distributions most importantly.</p>
 <section id="chi-square-chi2_nu" class="level3">
 <h3 class="anchored" data-anchor-id="chi-square-chi2_nu">Chi-Square, <span class="math inline">\(\chi^2_\nu\)</span></h3>
@@ -1757,13 +1787,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../statlearning/general.html" class="pagination-link" aria-label="General Topics">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">General Topics</span></span>
+      <a href="../ethics/genAI.html" class="pagination-link" aria-label="Ethics of Generative AI">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Ethics of Generative AI</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../statlearning/linalg.html" class="pagination-link" aria-label="Linear Algebra">
-        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

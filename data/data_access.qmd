@@ -1,6 +1,8 @@
-# Data Access
+# Data Access {#sec-data-access}
 
-In this section we use Python libraries to access data in the major file formats presented in a previous chapter and convert the files into DataFrames: CSV, JSON, Parquet, and ORC files. The Pandas DataFrame format is common but there are others to consider:
+In this section we use Python libraries to access data in the major file formats 
+presented in a previous chapter and convert the files into DataFrames: CSV, JSON, 
+Parquet, and ORC files. The Pandas DataFrame format is common but there are others to consider:
 
 -   Polars DataFrames are highly parallelized, support more efficient string handling than Pandas, and allow both lazy and eager execution.
 
@@ -24,7 +26,10 @@ Once you start working with DataFrames the syntax can be quite different, howeve
 
 ### CSV files
 
-To convert CSV files to a pandas DataFrame use the pandas `read_csv()` method. The default behavior is to look for a header line with column names, to interpret commas as field delimiters, to skip blank lines in the file, and to apply utf-8 encoding.
+To convert CSV files to a pandas DataFrame use the pandas `read_csv()` method. 
+The default behavior is to look for a header line with column names, to interpret 
+commas as field delimiters, to skip blank lines in the file, and to apply utf-8 
+encoding.
 
 Consider the following file, `fitness.csv`:
 
@@ -38,7 +43,9 @@ Age,Weight,Oxygen,RunTime,RestPulse,RunPulse,MaxPulse
 38,89.02,49.874, 9.22,55,178,180
 ```
 
-The first line contains comma-separated names for the columns. The following lines contain the data for the attributes, one record per line. To convert the CSV file to a pandas DataFrame use the `read_csv()` method:
+The first line contains comma-separated names for the columns. The following 
+lines contain the data for the attributes, one record per line. To convert the 
+CSV file to a pandas DataFrame use the `read_csv()` method:
 
 ```{python}
 import numpy as np
@@ -76,20 +83,25 @@ cats = pd.read_csv("../datasets/herding-cats.csv",
 print(cats.head())
 ```
 
-Pandas is smart about assigning data types to columns, note that string columns are stored as data type `object`.
+Pandas is smart about assigning data types to columns, note that string columns 
+are stored as data type `object`.
 
 ```{python}
 cats.info()
 ```
 
-You can overwrite the data types by supplying either a default type or a dictionary of types. To change the data type for the `fixed` column, for example:
+You can overwrite the data types by supplying either a default type or a dictionary 
+of types. To change the data type for the `fixed` column, for example:
 
 ```{python}
 cats = pd.read_csv("../datasets/herding-cats.csv",
                    dtype={'fixed':np.float16})
 ```
 
-Missing values (see below) can be indicated in CSV files in several ways. The common technique is to leave the entry for the unobserved value empty (no spaces). In the following file the value for `appraisal` is missing in the third row. The fifth row contains values for `land` and `appraisal` only.
+Missing values (see below) can be indicated in CSV files in several ways. The 
+common technique is to leave the entry for the unobserved value empty (no spaces). 
+In the following file the value for `appraisal` is missing in the third row. 
+The fifth row contains values for `land` and `appraisal` only.
 
 ```         
 data> head landsales2.csv
@@ -104,7 +116,8 @@ land, improve, total, sale, appraisal
 56658,153806,210464,255000,1.21
 ```
 
-`read_csv()` converts this file correctly to missing values using the NaN (not-a-number) sentinel for the unobserved data:
+`read_csv()` converts this file correctly to missing values using the NaN 
+(not-a-number) sentinel for the unobserved data:
 
 ```{python}
 land = pd.read_csv("../datasets/landsales2.csv")
@@ -112,7 +125,13 @@ land
 
 ```
 
-In addition to empty entries, read.csv() interprets a number of entries as missing (unobserved) values: “#N/A”, “#N/A N/A”, “#NA”, “-1.#IND”, “-1.#QNAN”, “-NaN”, “-nan”, “1.#IND”, “1.#QNAN”, “\<NA\>”, “N/A”, “NA”, “NULL”, “NaN”, “None”, “n/a”, “nan”, “null “. Despite those, CSV files might have special values to indicate missing values, for example, when they are exported from other software packages. Suppose that the missing values are indicated by a dot (“.”). Also, the columns in the CSV file are formatted with white space:
+In addition to empty entries, read.csv() interprets a number of entries as missing 
+(unobserved) values: “#N/A”, “#N/A N/A”, “#NA”, “-1.#IND”, “-1.#QNAN”, “-NaN”, 
+“-nan”, “1.#IND”, “1.#QNAN”, “\<NA\>”, “N/A”, “NA”, “NULL”, “NaN”, “None”, “n/a”, 
+“nan”, “null “. Despite those, CSV files might have special values to indicate 
+missing values, for example, when they are exported from other software packages.
+Suppose that the missing values are indicated by a dot (“.”). Also, the columns 
+in the CSV file are formatted with white space:
 
 ```         
 data> head landsales.csv
@@ -128,7 +147,8 @@ land, improve, total, sale, appraisal
 51428,     72451,    123879,         .,    .
 ```
 
-The file is much more human readable, but requires additional options to convert to the intended DataFrame:
+The file is much more human readable, but requires additional options to convert 
+to the intended DataFrame:
 
 ```{python}
 land2 = pd.read_csv("../datasets/landsales.csv", 
@@ -138,13 +158,19 @@ land2.head()
 
 ```
 
-The `na.values=` option specifies additional values that should be recognized as missing values. The `skipinitalspace=` option tells`read_csv()` to ignore spaces following the delimiters. The result is as intended.
+The `na.values=` option specifies additional values that should be recognized as 
+missing values. The `skipinitalspace=` option tells`read_csv()` to ignore spaces 
+following the delimiters. The result is as intended.
 
 ### JSON files
 
-Pandas has great support for reading and writing JSON files. A general issue is that JSON is a hierarchical data format that allows nested data structures whereas pandas DataFrames have a row—column layout. Fortunately, the pandas[`read_json()`](https://pandas.pydata.org/docs/reference/api/pandas.read_json.html) method has many options to shape nested JSON structures into DataFrames.
+Pandas has great support for reading and writing JSON files. A general issue is 
+that JSON is a hierarchical data format that allows nested data structures whereas 
+pandas DataFrames have a row—column layout. Fortunately, the pandas[`read_json()`](https://pandas.pydata.org/docs/reference/api/pandas.read_json.html) 
+method has many options to shape nested JSON structures into DataFrames.
 
-You can convert any JSON document into a Python dictionary with the load() function in the json library. Suppose we want to read this document, stored in `../datasets/JSON/simple1.json` into Python:
+You can convert any JSON document into a Python dictionary with the load() 
+function in the json library. Suppose we want to read this document, stored in `../datasets/JSON/simple1.json` into Python:
 
 ```         
 > cat ../datasets/JSON/simple1.json
@@ -176,7 +202,9 @@ data
 
 ```
 
-The next example reads a record-oriented JSON file (`../datasets/JSON/simple.json`) directly into a DataFrame. Each record consists of fields `id`, `name`, `math`, `statistics`, and `weight`.
+The next example reads a record-oriented JSON file (`../datasets/JSON/simple.json`) 
+directly into a DataFrame. Each record consists of fields `id`, `name`, `math`, 
+`statistics`, and `weight`.
 
 ```         
 cat simple.json 
@@ -212,7 +240,8 @@ df
 
 ```
 
-If you’d rather assign data type string to the `id` and `name` fields than data type object, you can set the data type with
+If you’d rather assign data type string to the `id` and `name` fields than data 
+type object, you can set the data type with
 
 ```{python}
 df2 = pd.read_json("../datasets/JSON/simple.json", 
@@ -253,7 +282,9 @@ data> cat nested_array.json
 }
 ```
 
-The `students` fields have a record structure but there are additional fields `school_name` and `class` that do not fit that structure. Converting the JSON file directly into a DataFrame does not produce the desired result:
+The `students` fields have a record structure but there are additional fields 
+`school_name` and `class` that do not fit that structure. Converting the JSON 
+file directly into a DataFrame does not produce the desired result:
 
 ```{python}
 df3 = pd.read_json('../datasets/JSON/nested_array.json')
@@ -261,7 +292,9 @@ df3
 
 ```
 
-To create the appropriate DataFrame we take two steps: convert the JSON file into a dictionary, then shape the dictionary into a DataFrame with `json_normalize()`:
+To create the appropriate DataFrame we take two steps: convert the JSON file 
+into a dictionary, then shape the dictionary into a DataFrame with 
+`json_normalize()`:
 
 ```{python}
 with open('../datasets/JSON/nested_array.json','r') as f:
@@ -274,9 +307,12 @@ df4
 
 ```
 
-The `meta=` option lists the JSON fields that are used as data that applies to each record in the result table. The `record_path=` option points at the field that contains the list of records.
+The `meta=` option lists the JSON fields that are used as data that applies to 
+each record in the result table. The `record_path=` option points at the field 
+that contains the list of records.
 
-Now suppose that in addition to the list of records the JSON metadata contains a more complex structure:
+Now suppose that in addition to the list of records the JSON metadata contains 
+a more complex structure:
 
 ```         
 cat nested_obj_array.json
@@ -304,7 +340,8 @@ cat nested_obj_array.json
 }
 ```
 
-You can specify which fields to extract from the metadata in the `meta=` option of `json_normalize()`:
+You can specify which fields to extract from the metadata in the `meta=` option 
+of `json_normalize()`:
 
 ```{python}
 with open('../datasets/JSON/nested_obj_array.json','r') as f:
@@ -319,7 +356,9 @@ df5
 
 ```
 
-How are missing values handled? In the next example, the first has a complete record. The second student misses a statistics score, the third student has no weight data. `pd.json_normalize()` fills in NaN for the unobserved data.
+How are missing values handled? In the next example, the first has a complete 
+record. The second student misses a statistics score, the third student has no 
+weight data. `pd.json_normalize()` fills in NaN for the unobserved data.
 
 ```{python}
 data = [
@@ -353,7 +392,10 @@ df6
 
 ```
 
-`json_normalize()` is less forgiving if fields in the metadata are unobserved; it will throw an error. To prevent the error and assign NaN values, use the `errors=’ignore’` option. In the following example the `teachers` meta data field does not always have a `l_name` entry.
+`json_normalize()` is less forgiving if fields in the metadata are unobserved; 
+it will throw an error. To prevent the error and assign NaN values, use the 
+`errors=’ignore’` option. In the following example the `teachers` meta data field 
+does not always have a `l_name` entry.
 
 ```{python}
 data = [
@@ -395,9 +437,11 @@ df7
 
 ### Parquet files
 
-To read parquet files into pandas DataFrames we have two choices: the [read_parquet()](https://pandas.pydata.org/docs/reference/api/pandas.read_parquet.html) pandas method or the `read_table()` method from pyarrow.parquet.
+To read parquet files into pandas DataFrames we have two choices: the [read_parquet()](https://pandas.pydata.org/docs/reference/api/pandas.read_parquet.html) 
+pandas method or the `read_table()` method from pyarrow.parquet.
 
-The data we work with in this section is stored in a parquet multi-file structure; that means the data are split into multiple files stored in a local directory:
+The data we work with in this section is stored in a parquet multi-file structure; 
+that means the data are split into multiple files stored in a local directory:
 
 ```         
 Parquet ll userdata
@@ -411,7 +455,8 @@ total 1120
 
 Each of the \*.parquet files in the directory contains 1,000 observations.
 
-Pandas’ `read_parquet()` reads the entire directory and combines the records from the multiple files into a single DataFrame.
+Pandas’ `read_parquet()` reads the entire directory and combines the records 
+from the multiple files into a single DataFrame.
 
 ```{python}
 df = pd.read_parquet("../datasets/Parquet/userdata", engine="pyarrow")
@@ -420,9 +465,11 @@ df.describe()
 
 ```
 
-The size of `df` confirms that all 5,000 observations were retrieved from the five component files.
+The size of `df` confirms that all 5,000 observations were retrieved from the 
+five component files.
 
-With pyarrow we have more control over the files, for example, we can inquire about the schema and metadata of the component files.
+With pyarrow we have more control over the files, for example, we can inquire 
+about the schema and metadata of the component files.
 
 ```{python}
 import pyarrow.parquet as pq
@@ -433,7 +480,8 @@ pq_file.schema
 
 ```
 
-To convert all component files into a pandas DataFrame with pyarrow, use the `read_table()` method and send the result `to_pandas()`:
+To convert all component files into a pandas DataFrame with pyarrow, use the 
+`read_table()` method and send the result `to_pandas()`:
 
 ```{python}
 df2 = pq.read_table(source="../datasets/Parquet/userdata/").to_pandas()
@@ -443,13 +491,17 @@ df2.describe()
 
 ### ORC files
 
-Pandas (and pyarrow) supports ORC files but working with ORC files is not quite as convenient as with parquet files. The `read_orc()` method reads one ORC file rather than an entire directory and it is not supported on Windows.
+Pandas (and pyarrow) supports ORC files but working with ORC files is not quite 
+as convenient as with parquet files. The `read_orc()` method reads one ORC file 
+rather than an entire directory and it is not supported on Windows.
 
 ```{python}
 df = pd.read_orc("../datasets/ORC/userdata/userdata1.orc")
 ```
 
-When data is stored in multi-file format, as in the parquet example, you need to concatenate the contents into a pandas DataFrame. The glob module is helpful to retrieve the list of file names that match a pattern.
+When data is stored in multi-file format, as in the parquet example, you need to 
+concatenate the contents into a pandas DataFrame. The glob module is helpful to 
+retrieve the list of file names that match a pattern.
 
 ```{python}
 import glob
@@ -464,7 +516,9 @@ for i in range(1,len(file_list)):
 
 ```
 
-You can also use the `read_table()` method for ORC files in pyarrow to read ORC an file into a pyarrow table and `to_pandas()` to convert the table to a pandas DataFrame:
+You can also use the `read_table()` method for ORC files in pyarrow to read ORC 
+an file into a pyarrow table and `to_pandas()` to convert the table to a pandas 
+DataFrame:
 
 ```{python}
 from pyarrow import orc
@@ -475,25 +529,51 @@ df = orc.read_table(source="../datasets/ORC/userdata/userdata1.orc").to_pandas()
 
 ## Working with a Database
 
-As a data scientist you need to be comfortable working with databases. In analytical work, you will encounter schema-centric relational OLAP databases that use SQL (structured query language) to interact with the database and the data. SQL interfaces are standard for data warehouses and common for many data platforms and tools.
+As a data scientist you need to be comfortable working with databases. In analytical 
+work, you will encounter schema-centric relational OLAP databases that use SQL 
+(structured query language) to interact with the database and the data. SQL interfaces 
+are standard for data warehouses and common for many data platforms and tools.
 
-Data scientists generally prefer writing Python or R code over SQL. SQL is extremely powerful to express relational concepts and can make some data processing tasks much easier than rolling your own code. Also, databases are optimized for joins, merges, deep queries, aggregations, indexes, handling JSON, etc. It would be a shame not to take advantage of that power or to lose it behind the syntactic sugar of a tool’s API. Many employers have voiced concerns that SQL ranks high among the technical skills data scientists often lack. As the founder and chairman of a data science research and consultancy company put it:
+Data scientists generally prefer writing Python or R code over SQL. SQL is 
+extremely powerful to express relational concepts and can make some data processing 
+tasks much easier than rolling your own code. Also, databases are optimized for 
+joins, merges, deep queries, aggregations, indexes, handling JSON, etc. It would
+be a shame not to take advantage of that power or to lose it behind the syntactic 
+sugar of a tool’s API. Many employers have voiced concerns that SQL ranks high 
+among the technical skills data scientists often lack. As the founder and 
+chairman of a data science research and consultancy company put it:
 
-> *There are a lot of things folks don’t agree on. But everyone agrees that as a data scientist you will need to retrieve data from a database, and you will need version control. Learn SQL and learn git.*
+:::{.quote}
+There are a lot of things folks don’t agree on. But everyone agrees that as a data 
+scientist you will need to retrieve data from a database, and you will need version 
+control. Learn SQL and learn git.
+:::
 
-We are covering SQL basics in @sec-sql-basics after sprinkling some SQL statements along the way.
+We are covering SQL basics in @sec-sql-basics after sprinkling some SQL statements 
+along the way.
 
 If you want to work with SQL directly from Python, there are several alternatives.
 
 ### SQLAlchemy
 
-[SQLAlchemy](https://www.sqlalchemy.org/) is a SQL toolkit for Python that gives Python developers the power of SQL. While some tools try to hide SQL and relational details behind syntactic sugar, SQLAlchemy’s philosophy is to fully expose the relational details of SQL within transparent tools. Specific databases, beyond those for which support is built into SQLAlchemy, are supported as [dialects](https://docs.sqlalchemy.org/en/20/dialects/index.html).
+[SQLAlchemy](https://www.sqlalchemy.org/) is a SQL toolkit for Python that gives 
+Python developers the power of SQL. While some tools try to hide SQL and relational 
+details behind syntactic sugar, SQLAlchemy’s philosophy is to fully expose the 
+relational details of SQL within transparent tools. Specific databases, beyond 
+those for which support is built into SQLAlchemy, are supported as [dialects](https://docs.sqlalchemy.org/en/20/dialects/index.html).
 
 ### Ibis
 
-[Ibis](https://ibis-project.org/) is a portable Python dataframe library that supports multiple database backends. After making a connection to a backend database, you interact with the data using Python syntax rather than SQL statements. The Ibis function calls are translated into SQL for the specific backend under the covers. For example, the first statement in the next code block creates a Python object named `penguins` through which you can interact with the database table of the same name. The second statement filters the data for a specific species.
+[Ibis](https://ibis-project.org/) is a portable Python dataframe library that 
+supports multiple database backends. After making a connection to a backend 
+database, you interact with the data using Python syntax rather than SQL statements. 
+The Ibis function calls are translated into SQL for the specific backend under 
+the covers. For example, the first statement in the next code block creates a 
+Python object named `penguins` through which you can interact with the database 
+table of the same name. The second statement filters the data for a specific species.
 
-```{default}
+```{python}
+#| eval: false
 penguins = con.table("penguins")
 penguins.filter(penguins.species == "Adelie")
 ```
@@ -504,17 +584,25 @@ The SQL equivalent would be a SELECT statement with a WHERE clause:
 SELECT * FROM penguins WHERE species = “Adelie”
 ```
 
-Having stable Python code for different database backends makes it easy to move from one database to another. During development of analytic code you might be working with SQLite and the production database is Oracle. The same Python code will work in both environments.
+Having stable Python code for different database backends makes it easy to move 
+from one database to another. During development of analytic code you might be 
+working with SQLite and the production database is Oracle. The same Python code 
+will work in both environments.
 
-The default backend of Ibis is the embedded database [DuckDB](https://duckdb.org/). If you are working with DuckDB you can issue SQL statements directly from Python or you can rely on its dedicated Python API.
+The default backend of Ibis is the embedded database [DuckDB](https://duckdb.org/). 
+If you are working with DuckDB you can issue SQL statements directly from Python 
+or you can rely on its dedicated Python API.
 
 ### DuckDB
 
 DuckDB has all the ingredients we are looking for in a database for data science work:
 
--   Designed to support analytical queries (OLAP workloads) characterized by complex queries that process large amounts of data.
+-   Designed to support analytical queries (OLAP workloads) characterized by 
+complex queries that process large amounts of data.
 
--   Columnar, vectorized storage engine. Columnar storage is more efficient for analytical queries, vectorized queries execute much faster than systems that process rows sequentially.
+-   Columnar, vectorized storage engine. Columnar storage is more efficient for 
+analytical queries, vectorized queries execute much faster than systems that 
+process rows sequentially.
 
 -   Provides transactional guarantees (ACID properties)
 
@@ -526,23 +614,31 @@ DuckDB has all the ingredients we are looking for in a database for data science
 
 -   Can query CSV, JSON, Parquet files and DataFrames directly.
 
--   Supports a streaming model for analyzing large data sets that exceed memory capacity, e.g., streaming from Parquet files.
+-   Supports a streaming model for analyzing large data sets that exceed memory 
+capacity, e.g., streaming from Parquet files.
 
 -   In-memory database with graceful on-disk operation.
 
 -   Easy transition to the cloud through partnership with MotherDuck.
 
--   SQL code can be submitted from the CLI or through the Python API, so you can take advantage of the power of SQL.
+-   SQL code can be submitted from the CLI or through the Python API, so you 
+can take advantage of the power of SQL.
 
 -   Runs as an embedded database within a host process.
 
-Because DuckDB is an embedded database, there is no database server to install and to maintain. Because the database runs within the host process, data can be transferred very quickly. And if you want to move the data to the cloud, you can do that easily with the [MotherDuck](https://motherduck.com/) serverless platform.
+Because DuckDB is an embedded database, there is no database server to install 
+and to maintain. Because the database runs within the host process, data can be 
+transferred very quickly. And if you want to move the data to the cloud, you can 
+do that easily with the [MotherDuck](https://motherduck.com/) serverless platform.
 
-The Python package for DuckDB can run queries directly from Pandas DataFrame without copying any data.
+The Python package for DuckDB can run queries directly from Pandas DataFrame 
+without copying any data.
 
 Why is it called DuckDB? We let the folks who created it [explain it](https://duckdb.org/faq#why-call-it-duckdb):
 
-> *Ducks are amazing animals. They can fly, walk and swim. They can also live off pretty much everything. They are quite resilient to environmental challenges. A duck’s song will bring people back from the dead and inspires database research. They are thus the perfect mascot for a versatile and resilient data management system. Also the logo designs itself.*
+:::{.quote}
+Ducks are amazing animals. They can fly, walk and swim. They can also live off pretty much everything. They are quite resilient to environmental challenges. A duck’s song will bring people back from the dead and inspires database research. They are thus the perfect mascot for a versatile and resilient data management system. Also the logo designs itself.
+:::
 
 For the Python user, installation is as simple as with any other Python package:
 
@@ -556,7 +652,12 @@ If you install with conda, the command is
 conda install python-duckdb -c conda-forge
 ```
 
-DuckDB is an in-memory database. If you want to persist the database across Python sessions, then you need to create a connection that stores the data in a single file on disk. Otherwise, the database will go away when the Python session ends. You can work without a connection to a database by using methods on the duckdb module. For example, the following statements directly query a CSV file using DuckDB:
+DuckDB is an in-memory database. If you want to persist the database across 
+Python sessions, then you need to create a connection that stores the data in a 
+single file on disk. Otherwise, the database will go away when the Python session 
+ends. You can work without a connection to a database by using methods on the 
+duckdb module. For example, the following statements directly query a CSV file 
+using DuckDB:
 
 ```{python}
 import duckdb
@@ -564,7 +665,9 @@ duckdb.sql('select * from "../datasets/fitness.csv" where Age > 50')
 
 ```
 
-The object returned by duckdb is a **relation**, a symbolic representation of the query that can be referenced in other queries. The next statements save the result of the previous query and reference the relation in the second query:
+The object returned by duckdb is a **relation**, a symbolic representation of 
+the query that can be referenced in other queries. The next statements save the 
+result of the previous query and reference the relation in the second query:
 
 ```{python}
 rel = duckdb.sql('select * from "../datasets/fitness.csv" where Age > 50')
@@ -572,7 +675,10 @@ duckdb.sql("select Oxygen, RunTime, RestPulse from rel where RestPulse < 49")
 
 ```
 
-The results of a DuckDB query can be easily converted into other formats. `fetchnumpy()` fetches data as a dictionary of NumPy arrays, `df()` fetches a Pandas DataFrame, `pl()` fetches a Polars DataFrame, and `arrow()` fetches an Arrow table.
+The results of a DuckDB query can be easily converted into other formats. 
+`fetchnumpy()` fetches data as a dictionary of NumPy arrays, `df()` fetches a 
+Pandas DataFrame, `pl()` fetches a Polars DataFrame, and `arrow()` fetches an 
+Arrow table.
 
 ```{python}
 duckdb.sql("select Oxygen, RunTime, RestPulse from rel where RestPulse < 49").df()
@@ -580,13 +686,16 @@ duckdb.sql("select Oxygen, RunTime, RestPulse from rel where RestPulse < 49").df
 
 #### Reading files
 
-To read the major data science file formats into DuckDB, use the `read_csv()`, `read_parquet()`, `read_json()`, and `read_arrow()` methods. For example, to read the simple JSON file from the previous section:
+To read the major data science file formats into DuckDB, use the `read_csv()`, 
+`read_parquet()`, `read_json()`, and `read_arrow()` methods. For example, to 
+read the simple JSON file from the previous section:
 
 ```{python}
 duckdb.read_json('../datasets/JSON/simple.json')
 ```
 
-To read a directory of Parquet files, you can use wildcard syntax in the path of the `read_parquet()` function:
+To read a directory of Parquet files, you can use wildcard syntax in the path 
+of the `read_parquet()` function:
 
 ```{python}
 duckdb.read_parquet('../datasets/Parquet/userdata/user*.parquet')
@@ -594,7 +703,10 @@ duckdb.read_parquet('../datasets/Parquet/userdata/user*.parquet')
 
 #### Connecting to the database
 
-If you make an explicit connection to the database with the `connect()` method, the arguments determine whether the database resides completely in memory—and is destroyed when the Python process exits—or whether the database persists on disk. The following statements are equivalent and create a non-persistent database:
+If you make an explicit connection to the database with the `connect()` method, 
+the arguments determine whether the database resides completely in memory—and is 
+destroyed when the Python process exits—or whether the database persists on disk. 
+The following statements are equivalent and create a non-persistent database:
 
 ```         
 conn = duckdb.connect(database=":default:")
@@ -603,29 +715,33 @@ conn = duckdb.connect(":memory:")
 conn = duckdb.connect()
 ```
 
-Once the connection is established you use the same methods on the connection object as on the duckdb object:
+Once the connection is established you use the same methods on the connection 
+object as on the duckdb object:
 
 ```{python}
 conn = duckdb.connect()
 conn.sql("select Oxygen, RunTime, RestPulse from rel where RestPulse < 49").df()
 ```
 
-To create or access a persisted database, specify the name of the database using a `.db`, `.ddb`, or `.duckdb` extension. The following statements create or open the database `ads5064.db`, read a CSV file into a Pandas DataFrame and create the table fitness from the DataFrame in the database.
+To create or access a persisted database, specify the name of the database using 
+a `.db`, `.ddb`, or `.duckdb` extension. The following statements create or open 
+the database `test.db`, read a CSV file into a Pandas DataFrame and create 
+the table fitness from the DataFrame in the database.
 
-```{default}
-conn = duckdb.connect(database="ads5064.db")
+```{python}
+conn = duckdb.connect(database="test.db")
 df = conn.read_csv('../datasets/fitness.csv').df()
-conn.execute('CREATE TABLE fitness AS SELECT * FROM df')
+conn.execute('CREATE OR REPLACE TABLE fitness AS SELECT * FROM df')
 
 ```
 
-You can see all the tables in a database by querying the information schema:
+You can see the tables in a database by querying the information schema:
 
 ```{python}
 conn.sql('select * from information_schema.tables')
 ```
 
-Or with
+or with
 
 ```{python}
 conn.sql("show tables")
@@ -639,43 +755,78 @@ conn.sql("show databases")
 
 You could have created the table in the database from the CSV file in a single step:
 
-```{default}
+```{python}
+#| eval: false
 conn = duckdb.connect(database="ads5064.db")
 conn.execute('CREATE TABLE fitness AS SELECT * FROM “../data/fitness.csv” ')
 
 ```
 
-Notice the use of single and double quotes to distinguish the string for the file name inside the SQL statement.
+Notice the use of single and double quotes to distinguish the string for the 
+file name inside the SQL statement.
+
+To close the connection from the Python session to the database, use
+
+```{python}
+conn.close()
+```
+
 
 ## Cloud Data Resources
 
-Cloud resources are increasingly important for data storage and analytics. The growth trends in the cloud are staggering. Storing data in cloud file, block, or object storage is a \$78.6 billion market with a compound annual growth rate (CAGR) of 18.5% (2022 numbers). Cloud databases in 2023 are a \$21.3 billion market that grows at 22%.
+Cloud resources are increasingly important for data storage and analytics. The 
+growth trends in the cloud are staggering. Storing data in cloud file, block, 
+or object storage is a \$78.6 billion market with a compound annual growth rate 
+(CAGR) of 18.5% (2022 numbers). Cloud databases in 2023 are a \$21.3 billion 
+market that grows at 22%.
 
-You will encounter cloud-based data in your data science work, and you will take advantage of cloud resources, especially for handling and analyzing large data sets.
+You will encounter cloud-based data in your data science work, and you will 
+take advantage of cloud resources, especially for handling and analyzing large 
+data sets.
 
 The most important cloud storage solutions for data are
 
 -   Object storage
-
 -   Cloud databases
-
 -   Cloud data warehouses (Snowflake, BigQuery)
-
 -   Cloud lakehouse (Databricks)
 
 ### Object storage
 
-Object, file, and block storage work differently. In object storage, data is managed as generic objects. These can be files or parts of files and combine the data to be stored with metadata about the object being stored. Metadata could be, for example, a unique identifier, size, creation date, time, and location for an image. Objects are stored in a flat structure; the object’s identifier is used to locate it in the storage system. Amazon Web Services (AWS) calls the container objects are stored in a **bucket** (rather than a directory).
+Object, file, and block storage work differently. In object storage, data is 
+managed as generic objects. These can be files or parts of files and combine the 
+data to be stored with metadata about the object being stored. Metadata could be, 
+for example, a unique identifier, size, creation date, time, and location for an 
+image. Objects are stored in a flat structure; the object’s identifier is used to 
+locate it in the storage system. Amazon Web Services (AWS) calls the container 
+objects are stored in a **bucket** (rather than a directory).
 
-File storage is what you are used to from a directory-based file system on your computer’s operating system. Data is stored in files, organized in hierarchical folders. You look up data by traversing the directory until you have located the file with the correct name.
+File storage is what you are used to from a directory-based file system on your 
+computer’s operating system. Data is stored in files, organized in hierarchical 
+folders. You look up data by traversing the directory until you have located 
+the file with the correct name.
 
-Block storage breaks data into fixed-sized blocks and stores the blocks as units. The Hadoop Distributed File System (HDFS) is a block-oriented storage system, where data is split into 16 MB blocks and the blocks are replicated on multiple machines in a distributed system for durability and high availability.
+Block storage breaks data into fixed-sized blocks and stores the blocks as units. 
+The Hadoop Distributed File System (HDFS) is a block-oriented storage system, 
+where data is split into 16 MB blocks and the blocks are replicated on multiple 
+machines in a distributed system for durability and high availability.
 
-Cloud object storage has nearly replaced other Big Data storage solutions such as Hadoop and HDFS. You can still find Hadoop environments in organizations—lots of money was invested in building those and organizations are slow to migrate off Hadoop. But the writing is on the wall: HDFS is replaced with cloud storage because it is cheaper and more durable, in particular cloud object storage. Since object storage supports storing files as objects, is the most economical storing alternative, and can scale out without limits, it is the primary storage form for fie-based data in the cloud. Even cloud data warehouses have been built with cloud object storage as the primary storage layer.
+Cloud object storage has nearly replaced other Big Data storage solutions such as 
+Hadoop and HDFS. You can still find Hadoop environments in organizations—lots of 
+money was invested in building those and organizations are slow to migrate off
+Hadoop. But the writing is on the wall: HDFS is replaced with cloud storage because 
+it is cheaper and more durable, in particular cloud object storage. Since object 
+storage supports storing files as objects, is the most economical storing alternative, 
+and can scale out without limits, it is the primary storage form for fie-based 
+data in the cloud. Even cloud data warehouses have been built with cloud object 
+storage as the primary storage layer.
 
 The object storage systems of the three major cloud providers are
 
-[Amazon S3](https://aws.amazon.com/s3/) (Simple Storage Service) from AWS, [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs), and [Google Cloud Storage](https://cloud.google.com/storage). Common file formats for you find in these storage systems are CSV, JSON, and Parquet.
+[Amazon S3](https://aws.amazon.com/s3/) (Simple Storage Service) from AWS, 
+[Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs), and 
+[Google Cloud Storage](https://cloud.google.com/storage). Common file formats for 
+you find in these storage systems are CSV, JSON, and Parquet.
 
 ### Managed cloud database
 
@@ -683,35 +834,60 @@ The object storage systems of the three major cloud providers are
 
 ### MotherDuck serverless cloud database
 
-The convenience of a serverless database is not having to worry about the cloud instances the database is running on. With a local, on-premises database, you manage the storage and compute infrastructure—the machines—the database is running on. With a managed service (DBaaS), this aspect is taken care of by the managed service provider. However, you still must manage your database instances. For example, during periods of low usage, you might want to scale down the database or even shut it down to reduce cloud expenses.
+The convenience of a serverless database is not having to worry about the cloud 
+instances the database is running on. With a local, on-premises database, you 
+manage the storage and compute infrastructure—the machines—the database is 
+running on. With a managed service (DBaaS), this aspect is taken care of by the 
+managed service provider. However, you still must manage your database instances. 
+For example, during periods of low usage, you might want to scale down the 
+database or even shut it down to reduce cloud expenses.
 
 ::: example
 ::: example-header
-Example: Please turn off your instances
+Example: Please Turn Off Your Instances
 :::
 
 ::: example-container
-A common mistake by cloud newbies is to assume that just because you are not actively using the cloud, you are not incurring expenses. When you start an instance in the cloud you need to stop it when it is not in use. Otherwise, it keeps running. Even if there is no workload on the instance, it will cost you money.
+A common mistake by cloud newbies is to assume that just because you are not 
+actively using the cloud, you are not incurring expenses. When you start an 
+instance in the cloud you need to stop it when it is not in use. Otherwise, it 
+keeps running. Even if there is no workload on the instance, it will cost you money.
 
-A class at a major university—which shall not be named—used cloud resources and the instructors forgot to tell students to shut down their cloud instances. Instead, the students started new instances every time they needed to do cloud computing. The academic unit conducting the class had allocated a \$40,000 cloud computing budget over the next three years. The class spent \$140,000 in one month.
+A class at a major university—which shall not be named—used cloud resources and 
+the instructors forgot to tell students to shut down their cloud instances. 
+Instead, the students started new instances every time they needed to do cloud
+computing. The academic unit conducting the class had allocated a \$40,000 cloud 
+computing budget over the next three years. The class spent \$140,000 in one month.
 :::
 :::
 
-A serverless system automatically scales to zero when not in use for a while. With serverless systems you tend to pay only for what you use, when you use it. An exception are charges for storing data, you cannot turn the storage off. The MotherDuck serverless database is a great complement to the DuckDB analytic database. In fact, MotherDuck is built on DuckDB and you can think of it as the cloud version of DuckDB. That makes MotherDuck a good choice for analytical workloads since DuckDB is a relational column-store, an analytic database.
+A serverless system automatically scales to zero when not in use for a while. 
+With serverless systems you tend to pay only for what you use, when you use it. 
+An exception are charges for storing data, you cannot turn the storage off. The 
+MotherDuck serverless database is a great complement to the DuckDB analytic database.
+In fact, MotherDuck is built on DuckDB and you can think of it as the cloud 
+version of DuckDB. That makes MotherDuck a good choice for analytical workloads 
+since DuckDB is a relational column-store, an analytic database.
 
-Another nice feature of MotherDuck is the ability to connect to local databases and to cloud databases at the same time. This hybrid mode is useful if you have large data sets in cloud storage and small-to-large data sets stored locally. Since we already know how to work with DuckDB from Python, working with MotherDuck is a snap. The following statements create a connection to a MotherDuck serverless database:
+Another nice feature of MotherDuck is the ability to connect to local databases 
+and to cloud databases at the same time. This hybrid mode is useful if you have 
+large data sets in cloud storage and small-to-large data sets stored locally. 
+Since we already know how to work with DuckDB from Python, working with MotherDuck 
+is a snap. The following statements create a connection to a MotherDuck serverless 
+database:
 
-```{default}
+```{python}
+#| eval: false
 import duckdb
 con = duckdb.connect('md:')
-
 ```
 
 Notice that we use the same duckdb library as previously. The special string `‘md:’` or `‘motherduck:’` inside the `connect()` function triggers a connection attempt to MotherDuck. Whether the connection attempt succeeds depends on whether you can authenticate to MotherDuck. By default, the `connect()` function will open a browser through which you can authenticate to the MotherDuck service using a previously established account.
 
 Alternatively, you can click on Settings in the UI of the MotherDuck console at <https://app.motherduck.com/> and download your authentication token. Store this token in the environment variable motherduck_token on your system and you can authenticate and connect directly to MotherDuck with the previous `duckdb.connect()` statement. It is also possible to list the authentication token directly in the `duckdb.connect()` function,
 
-```{default}
+```{python}
+#| eval: false
 con = duckdb.connect('md:?motherduck_token=<token>')
 ```
 
@@ -719,46 +895,62 @@ but this is discouraged. Access credentials should not be shown in clear text in
 
 DuckDB and MotherDuck are relational database management systems, they manage more than one database. You can see the list of databases with the SHOW DATABASES command:
 
-```{default}
+```{python}
+#| eval: false
 con.sql("SHOW DATABASES")
 ```
 
 By default, MotherDuck creates a database called `my_db` and a shared database with sample data. One of the cool features of MotherDuck is the ability to attach local databases to the instance. The following statement attaches a local version of the database for this course to MotherDuck.
 
-```{default}
+```{python}
+#| eval: false
 con.sql("ATTACH 'ads5064.ddb'")
 con.sql("SHOW DATABASES")
 
 ```
 
-Since MotherDuck manages multiple databases you have to tell it which database to work with. This is called the current database, by default this is `my_db` when you first connect. You can see which database is current with
+Since MotherDuck manages multiple databases you have to tell it which database 
+to work with. This is called the current database, by default this is `my_db`
+when you first connect. You can see which database is current with
 
-```{default}
+```{python}
+#| eval: false
 con.sql("SELECT current_database()").show()
 ```
 
 You can set any database as the current one with the USE statement:
 
-```{default}
+```{python}
+#| eval: false
 con.sql("USE ads5064")
 con.sql("SHOW TABLES")
 
 ```
 
-You can access a table in a database that is not the current database by using a two-level name (database.table). This even works if one table is local and the other is in a cloud database. Suppose that ads5064 is a local version of the database for the course and that `ads5064_md` is stored in the cloud.
+You can access a table in a database that is not the current database by using a 
+two-level name (database.table). This even works if one table is local and the 
+other is in a cloud database. Suppose that ads5064 is a local version of the 
+database for the course and that `ads5064_md` is stored in the cloud.
 
-```{default}
+```{python}
+#| eval: false
 con.sql("SELECT count(*) FROM ads5064.apples")
 con.sql("SELECT count(*) FROM ads5064_md.glaucoma")
 
 ```
 
-This comes in very handy if you want to process local and cloud data in the same query, for example when joining tables.
+This comes in very handy if you want to process local and cloud data in the 
+same query, for example when joining tables.
 
-MotherDuck also supports shared read-only databases, to which you connect through a URL. The URL is created by an administrator of the database with the CREATE SHARE command. You can then attach the database by using the URL:
+MotherDuck also supports shared read-only databases, to which you connect through 
+a URL. The URL is created by an administrator of the database with the CREATE SHARE 
+command. You can then attach the database by using the URL:
 
-```{default}
+```{python}
+#| eval: false
 con.sql("ATTACH 'md:_share/ads5064_md/e00063c9-568c-45ec-a372-dca85f6915fd' as course_db")
 ```
 
-The URL is a link to a point-in-time snapshot of the database when it was shared. The administrator can update the share of the database, the link will remain valid.
+The URL is a link to a point-in-time snapshot of the database when it was shared. 
+The administrator can update the share of the database, the link will remain valid.
+

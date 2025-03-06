@@ -1,5 +1,5 @@
 
-# How Things Go Wrong
+# How Things Go Wrong {#sec-ethics-gone-wrong}
 
 In this chapter we explore how ethical boundaries can get crossed. The sections
 provide only a sampling and the case studies and examples prove that this is not an
@@ -102,7 +102,9 @@ By analyzing data of customers who had a baby registry, they
 developed a predictive model for all shoppers. The algorithm performed so well that Target could determine the trimester and estimate the due date. This enabled all kinds of targeted, personalized marketing efforts. 
 From the New York Times:
 
->*... women on the baby registry were buying larger quantities of unscented lotion around the beginning of their second trimester. Another analyst noted that sometime in the first 20 weeks, pregnant women loaded up on supplements like calcium, magnesium and zinc. Many shoppers purchase soap and cotton balls, but when someone suddenly starts buying lots of scent-free soap and extra-big bags of cotton balls, in addition to hand sanitizers and washcloths, it signals they could be getting close to their delivery date.*
+:::{.quote}
+... women on the baby registry were buying larger quantities of unscented lotion around the beginning of their second trimester. Another analyst noted that sometime in the first 20 weeks, pregnant women loaded up on supplements like calcium, magnesium and zinc. Many shoppers purchase soap and cotton balls, but when someone suddenly starts buying lots of scent-free soap and extra-big bags of cotton balls, in addition to hand sanitizers and washcloths, it signals they could be getting close to their delivery date.
+:::
 
 Target did not run afoul of any laws, they used internal and public data available to them. They developed a model that performed well by statistical standards. But just because you can do something does not mean you should. You can learn something legally about someone and it can still be ethically questionable or even inappropriate to use that information.
 
@@ -130,13 +132,17 @@ When Facebook first rolled out the Year in Review feature, it was intended to di
 
 Author and designer Eric Meyer called it Inadvertent Algorithmic Cruelty in his [blog](https://meyerweb.com/eric/thoughts/2014/12/24/inadvertent-algorithmic-cruelty/), when Facebook invited him to celebrate the past year with an image of his daughter, who had died. He writes:
 
-> *This inadvertent algorithmic cruelty is the result of code that works in the overwhelming majority of cases, reminding people of the awesomeness of their years, showing them selfies at a party or whale spouts from sailing boats or the marina outside their vacation house.*
->
-> *But for those of us who lived through the death of loved ones, or spent extended time in the hospital, or were hit by divorce or losing a job or any one of a hundred crises, we might not want another look at this past year.*
+:::{.quote}
+This inadvertent algorithmic cruelty is the result of code that works in the overwhelming majority of cases, reminding people of the awesomeness of their years, showing them selfies at a party or whale spouts from sailing boats or the marina outside their vacation house.\
+\
+But for those of us who lived through the death of loved ones, or spent extended time in the hospital, or were hit by divorce or losing a job or any one of a hundred crises, we might not want another look at this past year.
+:::
 
 The application is designed with an ideal user in mind, someone who is happy, had a great year, and would like to see a summary. It does not consider the worst-case scenario and lacks empathy for the far-from-ideal users. Meyer concludes:
 
-> *If I could fix one thing about our industry, just one thing, it would be that: to increase awareness of and consideration for the failure modes, the edge cases, the worst-case scenarios.*
+:::{.quote}
+If I could fix one thing about our industry, just one thing, it would be that: to increase awareness of and consideration for the failure modes, the edge cases, the worst-case scenarios.
+:::
 :::
 :::
 
@@ -148,13 +154,33 @@ Example: Strava Exercise Maps
 :::
 
 ::: example-container
-Exercise app [Strava opened up its data](https://www.wired.co.uk/article/strava-heat-maps-military-app-uk-warning-security) on Strava.com in 2018 to allow users to find new places to exercise. The move was well-intended. Strava had collected at that time data on more than a billion runs, walks, bicycle rides, and swims all over the world. For someone looking for a place to exercise that information would be highly valuable. Maybe you can find a trail or bike path in your neighborhood that you were not aware of.
+Exercise app [Strava opened up its data](https://www.wired.co.uk/article/strava-heat-maps-military-app-uk-warning-security) 
+on Strava.com in 2018 to allow users to find new places to exercise. The move was well-intended. 
+Strava had collected at that time data on more than a billion runs, walks, bicycle
+rides, and swims all over the world. For someone looking for a place to exercise 
+that information would be highly valuable. Maybe you can find a trail or bike 
+path in your neighborhood that you were not aware of.
 
-However, the move turned into a privacy nightmare. Military researchers discovered that the heatmaps of exercise activity made it possible to study the workouts of military personnel around military bases. Although the data shared online was anonymized, it was possible to de-anonymize the data by requesting information for a specific geographic location. With this method it was even possible to see the names and heart rates of some individuals. If your daily run starts and ends at a military basis, then it is easy to infer that you are somehow connected to the military. By revealing common movements, someone with ill intent could use the information to figure out how a military basis operates.
+However, the move turned into a privacy nightmare [@Burgess_2018]. Military researchers discovered 
+that the heatmaps of exercise activity made it possible to study the workouts of 
+military personnel around military bases. Although the data shared online was 
+anonymized, it was possible to de-anonymize the data by requesting information 
+for a specific geographic location. With this method it was even possible to see 
+the names and heart rates of some individuals. If your daily run starts and ends 
+at a military basis, then it is easy to infer that you are somehow connected to 
+the military. By revealing common movements, someone with ill intent could use 
+the information to figure out how a military basis operates.
 
-The [Guardian](https://www.theguardian.com/technology/2018/jan/29/strava-secret-army-base-locations-heatmap-public-users-military-ban) determined that by drilling into the data at Strava.com, they were able to reveal the names of 50 U.S. service members stationed at an airbase in Afghanistan. From changes in running profiles one can also glean when service members are transferred.
+The [Guardian](https://www.theguardian.com/technology/2018/jan/29/strava-secret-army-base-locations-heatmap-public-users-military-ban) determined that by drilling into the data at Strava.com, 
+they were able to reveal the names of 50 U.S. service members stationed at an 
+airbase in Afghanistan. From changes in running profiles one can also glean when 
+service members are transferred.
 
-Revealing information about military operations was an unintended consequence of the release of information on Strava.com. It was not a data breach, it was done deliberately, with other goals in mind. According to the Guardian, the company argued that the information was already made public by the users who uploaded it. In hindsight, it was a foreseeable consequence of sharing geotagged data.
+Revealing information about military operations was an unintended consequence of 
+the release of information on Strava.com. It was not a data breach, it was done 
+deliberately, with other goals in mind. According to the Guardian, the company 
+argued that the information was already made public by the users who uploaded it. 
+In hindsight, it was a foreseeable consequence of sharing geotagged data.
 :::
 :::
 
@@ -281,7 +307,9 @@ For Blacks, the algorithm has a high false positive rate (44.8%). For Whites, th
 
 We automate processes to achieve greater efficiency and productivity, to scale up operations, and to reduce time spent on mundane repetitive tasks. As someone explained,
 
-> *when I do something for the second time, I think about how I did it last time. If I do it for the third time, I think about how to automate it and never do it again.*
+:::{.quote}
+when I do something for the second time, I think about how I did it last time. If I do it for the third time, I think about how to automate it and never do it again.
+:::
 
 Scaling a process through automation is wonderful if automation makes the process better or if the outcome is inherently good. If automation of tax refunds means that refunds reach taxpayers sooner, no one will complain. If automation of traffic signals means better traffic flow through the city and less time spent staring at brake lights, grumbling is unlikely.
 
@@ -309,23 +337,29 @@ After the government responsible for Robodebt was voted out of office, the incom
 
 In the article “The Robodebt strategy” in the December 2023 issue of Significance, @TrewinCressie_2023 note the following main statistical flaws of Robodebt:
 
-a\) Using annual tax income to match against bi-weekly self-reported income. Bi-weekly income can fluctuate greatly throughout the year and cannot be simply compared against distributing the annual income evenly.
+a) Using annual tax income to match against bi-weekly self-reported income. Bi-weekly income can fluctuate greatly throughout the year and cannot be simply compared against distributing the annual income evenly.
 
-b\) No documented understanding of error sources with the data or the data matching process.
+b) No documented understanding of error sources with the data or the data matching process.
 
-c\) No sensitivity analysis and inadequate testing of algorithms
+c) No sensitivity analysis and inadequate testing of algorithms
 
-d\) No understanding of error rates
+d) No understanding of error rates
 
-e\) No involvement of professional statisticians.
+e) No involvement of professional statisticians.
 
 A system that was supposed to save the government A\$300 million cost it A\$1.2 billion in repayments alone. The human toll was devastating: some recipients of debt notices had committed suicide.
 
 The statistician Noel Cressie called Robodebt
 
-> *a catastrophic program that was legally and ethically indefensible—an example of how technological overreach, coupled with dereliction of duty can amount to immense suffering for ordinary people.*
+:::{.quote}
+a catastrophic program that was legally and ethically indefensible—an example of 
+how technological overreach, coupled with dereliction of duty can amount to 
+immense suffering for ordinary people.
+:::
 
-He noted that Jensen’s inequality tells us that if the algorithm called out overpayments it should have also detected underpayments and issued credits (@Cressie2023). Robodebt never issued any credits.
+He noted that Jensen’s inequality tells us that if the algorithm called out 
+overpayments it should have also detected underpayments and issued credits 
+(@Cressie2023). Robodebt never issued any credits.
 :::
 :::
 

@@ -6,25 +6,45 @@ $$
 
 # Probability and Statistics {#sec-prob-stats}
 
-This chapter covers some basic topics in mathematical statistics that are relevant to understanding data science methodology related to modeling data. The topics are considered more review than exposition and are brought together here as a reference.
+This chapter covers some basic topics in mathematical statistics that are relevant 
+to understanding data science methodology related to modeling data. The topics are 
+considered more review than exposition and are brought together here as a reference.
 
 ## Probability {#sec-prob}
 
-Data are not deterministic; they have an element of uncertainty. Measurement errors, sampling variability, random assignment and selection, incomplete observation, are just some sources of random variability found in data. A solid understanding of probability concepts is necessary for any data professional. To separate signal from noise in data means separating systematic from random effects; to make statements about data requires the quantification of uncertainty.
+Data are not deterministic; they have an element of uncertainty. Measurement errors, 
+sampling variability, random assignment and selection, incomplete observation, are 
+just some sources of random variability found in data. A solid understanding of 
+probability concepts is necessary for any data professional. To separate signal 
+from noise in data means separating systematic from random effects; to make statements 
+about data requires the quantification of uncertainty.
 
-Situations in which the outcomes occur randomly are called generically *experiments* and probability theory is used to model such experiments.
+Situations in which the outcomes occur randomly are called generically *experiments* 
+and probability theory is used to model such experiments.
 
 ### Sample Space and Events
 
-The **sample space**, denoted $\Omega$, is the set of all possible outcomes of the experiment. If we model the number of calls queued in a customer service hotline as random, the sample space is the set of non-negative integers, $\Omega = \{ 0,\ 1,\ 2,\cdots,n\}$. On my way to work I pass through two traffic lights that are either red $(r)$, yellow $(y)$, or green $(g)$at the time I reach the light. The sample space is the set of all possible light combinations:
+The **sample space**, denoted $\Omega$, is the set of all possible outcomes of 
+the experiment. If we model the number of calls queued in a customer service hotline 
+as random, the sample space is the set of non-negative integers,
+$\Omega = \{ 0,\ 1,\ 2,\cdots,n\}$. On my way to work I pass through two traffic 
+lights that are either red $(r)$, yellow $(y)$, or green $(g)$at the time I reach 
+the light. The sample space is the set of all possible light combinations:
 
 $$\Omega = \left\{ rr,ry,rg,yr,yy,yg,gr,gy,gg \right\}$$
 
-An **event** is a subset of a sample space, denoted with uppercase letters. The event that less than 3 calls are queued is $A = \{ 0,\ 1,\ 2\}$. The event that both lights are green is $A = \left\{ gg \right\}$.
+An **event** is a subset of a sample space, denoted with uppercase letters. The 
+event that less than 3 calls are queued is $A = \{ 0,\ 1,\ 2\}$. The event that 
+both lights are green is $A = \left\{ gg \right\}$.
 
-Consider two events, $A$ and $B$. We can construct other events from $A$ and $B$. The **union** of the events, $A \cup B$, is the event that $A$ occurs or $B$ occurs or both occur. The **intersection** of $A$ and $B$, denoted $A \cap B$, is the event that both $A$ and $B$ occur. The complement of event $A$, denoted $A^{c}$, consists of all events in $\Omega$ that are not in $A$.
+Consider two events, $A$ and $B$. We can construct other events from $A$ and $B$. 
+The **union** of the events, $A \cup B$, is the event that $A$ occurs or $B$ occurs 
+or both occur. The **intersection** of $A$ and $B$, denoted $A \cap B$, is the event 
+that both $A$ and $B$ occur. The complement of event $A$, denoted $A^{c}$, consists 
+of all events in $\Omega$ that are not in $A$.
 
-Suppose $B$ is the event that exactly one light is green in the traffic example, $B = \left\{ rg,yg,gr,gy \right\}$. Then
+Suppose $B$ is the event that exactly one light is green in the traffic example, 
+$B = \left\{ rg,yg,gr,gy \right\}$. Then
 
 $$A \cup B = \left\{ gg,rg,yg,gr,gy \right\}$$
 
@@ -32,9 +52,10 @@ $$A \cap B = \varnothing$$
 
 $$B^{c} = \left\{ rr,ry,yr,yy,gg \right\}$$
 
-The intersection of $A$ and $B$ in this example is the empty set $\varnothing$, the set without elements. $A$ and $B$ are said to be **disjoint** events.
+The intersection of $A$ and $B$ in this example is the empty set $\varnothing$, 
+the set without elements. $A$ and $B$ are said to be **disjoint** events.
 
-Set theory teaches us about laws involving events.
+Set theory teaches us about laws involving events (@tbl-prob-laws).
 
 | Law              |                                                  |
 |------------------|--------------------------------------------------|
@@ -47,13 +68,15 @@ Set theory teaches us about laws involving events.
 | **De Morgan's**  | $(A \cup B)^{c} = A^{c} \cap B^{c}$              |
 |                  | $(A \cap B)^{c} = A^{c} \cup B^{c}$              |
 
-: Laws of set theory. These are useful in deriving probabilities.
+: Laws of set theory. These are useful in deriving probabilities. {#tbl-prob-laws .striped}
 
 ### Probability Measures
 
 #### Properties
 
-A probability measure is a function $\Pr( \cdot )$ that maps from subsets of a sample space $\Omega$ (from events) to real numbers between $0$ and $1$. We have the following axioms and properties:
+A probability measure is a function $\Pr( \cdot )$ that maps from subsets of a sample 
+space $\Omega$ (from events) to real numbers between $0$ and $1$. We have the 
+following axioms and properties:
 
 1.  $\Pr{(\Omega) = 1}$
 
@@ -77,21 +100,32 @@ The **conditional** probability that event $A$ occurs given that event $B$ has o
 
 $$\Pr{\left( A|B \right) = \frac{\Pr(A \cap B)}{\Pr(B)}}$$
 
-This requires that $\Pr{(B) > 0}$, we cannot condition on something that has zero probability of happening. The idea of the conditional probability is that for purpose of conditioning on $B$, we change the relevant sample space from $\Omega$ to $B$.
+This requires that $\Pr{(B) > 0}$, we cannot condition on something that cannot happen. 
+The idea of the conditional probability is that for purpose of conditioning on $B$, 
+we change the relevant sample space from $\Omega$ to $B$.
 
-Rearranging the probabilities in this expression, we find that the probability that two events occur together (the events intersect) can be written as
+Rearranging the probabilities in this expression, we find that the probability 
+that two events occur together (the events intersect) can be written as
 
 $$\Pr(A \cap B) = \Pr{\left( A|B \right) \times \Pr(B)}$$
 
-This is known as the **multiplication law** of probabilities. Another way of putting this result is that the **joint** probability of $A$ and $B$ is the product of the conditional probability given $B$ and the marginal probability of $B$. If $\Pr{(A) > 0}$, we can also use $A$ to condition the calculation:
+This is known as the **multiplicative law** of probabilities. Another way of putting 
+this result is that the **joint** probability of $A$ and $B$ is the product of the 
+conditional probability given $B$ and the marginal probability of $B$. If $\Pr{(A) > 0}$,
+we can also use $A$ to condition the calculation:
 
 $$\Pr(A \cap B) = \Pr{\left( B|A \right) \times \Pr(A)}$$
 
-Suppose that the probability of rain $(A)$ on a cloudy $(B)$ day is $\Pr{\left( A|B \right) = 0.3}$. The probability that it is cloudy is $\Pr(B) = 0.2$. The probability that it is cloudy and raining is $\Pr{\left( A|B \right) \times \Pr(B)} = 0.3 \times 0.2 = 0.06$. Notice the difference between the event `cloudy and raining` and the event `raining given that it is cloudy`.
+Suppose that the probability of rain $(A)$ on a cloudy $(B)$ day is $\Pr{\left( A|B \right) = 0.3}$.
+The probability that it is cloudy is $\Pr(B) = 0.2$. The probability that it is cloudy and 
+raining is $\Pr{\left( A|B \right) \times \Pr(B)} = 0.3 \times 0.2 = 0.06$. Notice 
+the difference between the event *cloudy and raining*`* and the event 
+*raining given that it is cloudy*.
 
 #### Law of total probability
 
-Suppose we divide the sample space into two disjoint events, $B$ and $B^{c}$. Then the probability that $A$ occurs can be decomposed as
+Suppose we divide the sample space into two disjoint events, $B$ and $B^{c}$. Then 
+the probability that $A$ occurs can be decomposed as
 
 $$\Pr{(A) = \Pr{(A \cap B) + \Pr\left( A \cap B^{c} \right)}}$$
 
@@ -99,31 +133,49 @@ Substituting the conditional and marginal probabilities this can be rewritten as
 
 $$\Pr{(A) = \Pr{\left( A|B \right)\Pr(B) + \Pr{\left( A|B^{c} \right)\Pr\left( B^{c} \right)}}}$$
 
-Each of the products on the right-hand side conditions on a different sample space, but since $B$ and $B^{c}$ are disjoint, the entire space $\Omega$ is covered. For example, the probability that it snows in Virginia is the sum of the probabilities that it snows in Montgomery County and that it snows in the other counties of the state.
+Each of the products on the right-hand side conditions on a different sample space, 
+but since $B$ and $B^{c}$ are disjoint, the entire space $\Omega$ is covered. For 
+example, the probability that it snows in Virginia is the sum of the probabilities 
+that it snows in Montgomery County and that it snows in the other counties of the state.
 
-We can extend the decomposition from two disjoint sets to any number of disjoint sets. If $B_{1},\cdots,\ B_{n}$ are disjoint sets and $\bigcup_{i = 1}^{n}B_{i} = \Omega$, and all \$\\Pr{\\left( B\_{i} \\right) \> 0},\\ \$then
+We can extend the decomposition from two disjoint sets to any number of disjoint 
+sets. If $B_{1},\cdots,\ B_{n}$ are disjoint sets and $\bigcup_{i = 1}^{n}B_{i} = \Omega$, 
+and all $\Pr\left( B\_{i} \right) > 0$, then
 
-$$\Pr(A) = \sum_{i = 1}^{n}{\Pr{\left( A|B_{i} \right)\Pr\left( B_{i} \right)}}$$
+$$
+\Pr(A) = \sum_{i = 1}^{n}{\Pr{\left( A|B_{i} \right)\Pr\left( B_{i} \right)}}
+$$
 
 #### Bayes' rule
 
-What is known as the Bayes rule, named after English mathematician Thomas Bayes, is on the surface another way of expressing conditional probabilities. Recall the definition of the conditional probability,
+What is known as the Bayes rule, named after English mathematician Thomas Bayes, 
+is on the surface another way of expressing conditional probabilities. Recall the 
+definition of the conditional probability,
 
 $$\Pr{\left( A|B \right) = \frac{\Pr(A \cap B)}{\Pr(B)}}$$
 
-The numerator, the probability that events $A$ and $B$ occur together, can be written in terms of a conditional probability as well, $\Pr(A \cap B) = \Pr{\left( B|A \right)\Pr(A)}$. Combining the two results yields Bayes' rule:
+The numerator, the probability that events $A$ and $B$ occur together, can be written 
+in terms of a conditional probability as well, $\Pr(A \cap B) = \Pr{\left( B|A \right)\Pr(A)}$. 
+Combining the two results yields Bayes' rule:
 
 $$\Pr\left( A|B \right) = \frac{\Pr{\left( B|A \right)\Pr(A)}}{\Pr(B)}$$
 
-The conditional probability on the left-hand side, $\Pr\left( A|B \right)$, is called the **posterior} probability. The marginal probabilities** $\Pr(A)$ and $\Pr(B)$ are also called the prior\*\* probabilities. The Bayes rule allows us to express the probability of $A|B$ as a function of the probability of $B|A$ and vice versa.
+The conditional probability on the left-hand side, $\Pr\left( A|B \right)$, is 
+called the **posterior** probability. The probabilities $\Pr(A)$ and $\Pr(B)$ are 
+also called the **prior** probabilities. The Bayes rule allows us to express the 
+probability of $A|B$ as a function of the probability of $B|A$ and vice versa.
 
 $$\Pr\left( A|B \right) = \frac{\Pr{\left( B|A \right)\Pr(A)}}{\Pr(B)}$$
 
 $$\Pr\left( B|A \right) = \frac{\Pr{\left( A|B\  \right)\Pr(B)}}{\Pr(A)}$$
 
-You can combine Bayes' formula as given here with the law of total probability to compute the marginal probability in the denominator. This makes it even more evident how Bayes' rule allows us to reverse the conditioning:
+You can combine Bayes' formula as given here with the law of total probability to 
+compute the marginal probability in the denominator. This makes it even more evident 
+how Bayes' rule allows us to reverse the conditioning:
 
-$$\Pr{\left( B_{j}|A \right) =}\frac{\Pr\left( A|B_{j} \right)\Pr\left( B_{j} \right)}{\sum_{i = 1}^{n}{\Pr\left( A|B_{i} \right)\Pr\left( B_{i} \right)}}$$
+$$
+\Pr{\left( B_{j}|A \right) =}\frac{\Pr\left( A|B_{j} \right)\Pr\left( B_{j} \right)}{\sum_{i = 1}^{n}{\Pr\left( A|B_{i} \right)\Pr\left( B_{i} \right)}}
+$$
 
 ::: example
 ::: example-header
@@ -131,7 +183,10 @@ Example: Lie Detector Test
 :::
 
 ::: example-container
-A lie detector test returns two possible readings, a positive reading $( \oplus )$ that the subject is lying, or a negative reading $( \ominus )$ that the subject is telling the truth. The subject of the test is indeed lying $(L)$ or is indeed telling the truth $(T)$.
+A lie detector test returns two possible readings, a positive reading $( \oplus )$ that
+the subject is lying, or a negative reading $( \ominus )$ that the subject is 
+telling the truth. The subject of the test is indeed lying $(L)$ or is indeed 
+telling the truth $(T)$.
 
 We can construct from this a number of events:
 
@@ -145,13 +200,24 @@ $T$: the test subject is telling the truth.
 
 $L$: the test subject is lying.
 
-Suppose that we know $\Pr\left( \oplus |L \right) = 0.88$ and thus $\Pr\left( \ominus |\ L \right) = 0.12$. The first probability is the true positive rate of the device. If a person is lying, the probability that the polygraph detects it is 0.88. Similarly, assume we know that the true negative rate, the probability that the lie detector indicates someone is telling the truth when they are indeed truthful, is $\Pr{\left( \ominus |T \right) = 0.86}.$
+Suppose that we know $\Pr\left( \oplus |L \right) = 0.88$ and thus 
+$\Pr\left( \ominus |\ L \right) = 0.12$. The first probability is the true positive 
+rate of the device. If a person is lying, the probability that the polygraph detects 
+it is 0.88. Similarly, assume we know that the true negative rate, the probability 
+that the lie detector indicates someone is telling the truth when they are indeed 
+truthful, is $\Pr{\left( \ominus |T \right) = 0.86}.$
 
-If we know the marginal (prior) probabilities that someone is telling the truth on a particular question, say, $\Pr{(T) = 0.99}$, then we can use Bayes' rule to ask the question: What is the probability the person is telling the truth when the polygraph says that they are lying, $\Pr{(T| \oplus )}$:
+If we know the marginal (prior) probabilities that someone is telling the truth 
+on a particular question, say, $\Pr{(T) = 0.99}$, then we can use Bayes' rule to 
+ask the question: What is the probability the person is telling the truth when 
+the polygraph says that they are lying, $\Pr{(T| \oplus )}$:
 
 $$\Pr{\left( T \middle| \oplus \right) = \frac{\Pr{\left( \oplus |T \right)\Pr(T)}}{\Pr{\left( \oplus |T \right)\Pr(T)} + \Pr{\left( \oplus |L \right)\Pr(L)}}} = \frac{0.14 \times \ 0.99}{0.14 \times 0.99 + 0.88 \times .01} = 0.94$$
 
-Despite the relatively large true positive and true negative rates, 94% of all positive readings will be incorrect---the subject answered truthfully. If the probability that someone lies on a particular question is $\Pr{(T) = 0.5}$, the chance of a polygraph to indict the innocent is much smaller:
+Despite the relatively large true positive and true negative rates, 94% of all 
+positive readings will be incorrect---the subject answered truthfully. If the 
+probability that someone lies on a particular question is $\Pr{(T) = 0.5}$, the 
+chance of a polygraph to indict the innocent is much smaller:
 
 $$\Pr\left( T \middle| \oplus \right) = \frac{0.14 \times \ 0.5}{0.14 \times 0.5 + 0.88 \times 0.5} = 0.13$$
 :::
@@ -159,25 +225,43 @@ $$\Pr\left( T \middle| \oplus \right) = \frac{0.14 \times \ 0.5}{0.14 \times 0.5
 
 #### Independence
 
-Independent and disjoint events are different concepts. Events $A$ and $B$ are disjoint if they cannot occur together. Their intersection is the empty set and thus $\Pr{(A \cap B) = \Pr{(\varnothing) = 0}}$. Independent events are **unrelated** events, that means the outcome of one event does not affect the outcome of the other event---the events can occur together, however.
+Independent and disjoint events are different concepts. Events $A$ and $B$ are
+disjoint if they cannot occur together. Their intersection is the empty set and 
+thus $\Pr{(A \cap B) = \Pr{(\varnothing) = 0}}$. Independent events are **unrelated** 
+events, that means the outcome of one event does not affect the outcome of the 
+other event---the events can occur together, however.
 
-Being a sophomore, junior, or senior student are disjoint events; you cannot be simultaneously a junior and a senior. On the other hand, the events `rain in Virginia'' and`winning the lottery ticket'' are independent; they can occur together but whether it rains has no bearing on whether you win the lottery that day and winning the lottery has no effect on the weather.
+Being a sophomore, junior, or senior student are disjoint events; you cannot be 
+simultaneously a junior and a senior. On the other hand, the events *rain in Virginia* 
+and *winning the lottery ticket* are independent; they can occur together but 
+whether it rains has no bearing on whether you win the lottery that day and 
+winning the lottery has no effect on the weather.
 
-Formally, $A$ and $B$ are independent events if $\Pr(A \cap B) = \Pr(A){\times Pr}(B)$. This should make intuitive sense: if knowing $A$ carries no information about the occurrence of $B$, then the probability that they occur together is the product of the probabilities that they occur separately.
+Formally, $A$ and $B$ are independent events if $\Pr(A \cap B) = \Pr(A){\times Pr}(B)$. 
+This should make intuitive sense: if knowing $A$ carries no information about 
+the occurrence of $B$, then the probability that they occur together is the 
+product of the probabilities that they occur separately.
 
-Applying this to the definition of the conditional probability, the following holds for two independent events:
+Applying this to the definition of the conditional probability, the following 
+holds for two independent events:
 
 $$\Pr\left( A|B \right) = \frac{\Pr(A \cap B)}{\Pr(B)} = \frac{\Pr{(A)\Pr(B)}}{\Pr(B)} = \Pr(A)$$
 
-In other words, when $A$ and $B$ are independent, the conditional probability equals the marginal probability---the occurrence of $B$ does not alter the probability of $A$.
+In other words, when $A$ and $B$ are independent, the conditional probability 
+equals the marginal probability---the occurrence of $B$ does not alter the 
+probability of $A$.
 
 ### Random Variables {#sec-prob-random-variables}
 
-Random variables are real-valued functions defined on sample spaces. Recall the sample space of the traffic lights encountered on the way to work:
+Random variables are real-valued functions defined on sample spaces. Recall the 
+sample space of the traffic lights encountered on the way to work:
 
 $$\Omega = \left\{ rr,ry,rg,yr,yy,yg,gr,gy,gg \right\}$$
 
-$X$, the number of green lights is a random variable. $X$ is a **discrete** random variable since it can take on a countable number of values, $X = 0,\ 1,\ 2$. If the nine traffic light configurations in $\Omega$ are equally likely, then the values of $X$ occur with probabilities
+$X$, the number of green lights is a random variable. $X$ is a **discrete** random 
+variable since it can take on a countable number of values, $X = 0,\ 1,\ 2$. 
+If the nine traffic light configurations in $\Omega$ are equally likely, then 
+the values of $X$ occur with probabilities
 
 $$\Pr(X = 0) = \frac{4}{9}$$
 
@@ -187,17 +271,29 @@ $$\Pr(X = 2) = \frac{1}{9}$$
 
 #### Distribution functions
 
-The function $p(x) = \Pr(X = x)$, that assigns probabilities to the discrete values of the random variable, is known as the **probability mass function** (p.m.f.). The possible values the random variable can take on are called its **support**. Discrete random variables can have infinitely large support when there is no limit, for example the number of coin tosses until 5 heads are observed has support $5,\ 6,\ 7,\ \cdots$. The number of fish caught in a day at a lake has infinite support $0,\ 1,\ 2,\ \cdots$; it might be highly unlikely to catch 1,000 fish per day, but it is not impossible.
+The function $p(x) = \Pr(X = x)$, that assigns probabilities to the discrete values 
+of the random variable, is known as the **probability mass function** (p.m.f.). 
+The possible values the random variable can take on are called its **support**. 
+Discrete random variables can have infinitely large support when there is no limit,
+for example the number of coin tosses until 5 heads are observed has support $5, 6, 7, \cdots$. 
+The number of fish caught in a day at a lake has infinite support $0, 1, 2, \cdots$; 
+it might be highly unlikely to catch 1,000 fish per day, but it is not impossible.
 
-If the number of possible values is not countable, the random variable is called **continuous**. The concept of a probability mass function then does not make sense. Instead, continuous random variables are characterized by their **probability density function** (p.d.f., $f(x)$). Probabilities for continuous random variables are calculated by integrating the p.d.f.:
+If the number of possible values is not countable, the random variable is called 
+**continuous**. The concept of a probability mass function then does not make 
+sense. Instead, continuous random variables are characterized by their 
+**probability density function** (p.d.f., $f(x)$). Probabilities for continuous
+random variables are calculated by integrating the p.d.f.:
 
 $$\Pr(a < X < b) = \int_{a}^{b}{f(x)\ dx}$$
 
-The **cumulative distribution function** (c.d.f., $F(x)$ is defined for any random variable as
+The **cumulative distribution function** (c.d.f., $F(x)$ is defined for any 
+random variable as
 
 $$F(x) = \Pr{(X \leq x)}$$
 
-In the case of a discrete random variable, this means summing the probabilities on the support up to and including $x$:
+In the case of a discrete random variable, this means summing the probabilities 
+on the support up to and including $x$:
 
 $$F(x) = \sum_{X:X \leq x}^{}{p(x)}$$
 
@@ -205,37 +301,54 @@ For a continuous random variable, the c.d.f. is the integral up to $x$:
 
 $$F(x) = \int_{- \infty}^{x}{f(x)\ dx}$$
 
-The $p$th **quantile** of a distribution is the value $x_{p}$ for which $F\left( x_{p} \right) = p$. For example, the 0.85^th^ quantile---also called the 85^th^ percentile---is $x_{.85}$ and satisfies $F\left( x_{.85} \right) = 0.85$. Special quantiles are obtained for $p = 0.25$, the first quartile, $p = 0.5$, the median (second quartile), and $p = 0.75$, the third quartile.
+The $p$th **quantile** of a distribution is the value $x_{p}$ for which 
+$F\left( x_{p} \right) = p$. For example, the 0.85^th^ quantile---also called 
+the 85^th^ percentile---is $x_{.85}$ and satisfies $F\left( x_{.85} \right) = 0.85$. 
+Special quantiles are obtained for $p = 0.25$, the first quartile, $p = 0.5$, the 
+median (second quartile), and $p = 0.75$, the third quartile.
 
 #### Expected value
 
-The **expected value** of a random variable, $\Exp\lbrack X\rbrack$, also known as the **mean** of $X$, is the weighted average of the values of the random variable weighted by the mass or density. For a discrete random variable,
+The **expected value** of a random variable, $\Exp\lbrack X\rbrack$, also known 
+as the **mean** of $X$, is the weighted average of the values of the random variable 
+weighted by the mass or density. For a discrete random variable,
 
 $$\Exp\lbrack X\rbrack = \sum_{}^{}{x\ p(x)}$$
 
 and for a continuous random variable,
 
-$$\Exp\lbrack X\rbrack = \int_{}^{}{x\ f(x)\ dx}$$
+$$\Exp\lbrack X\rbrack = \int_{}^{}{\,x\, f(x)\ dx}$$
 
-Technically, we need the conditions $\sum |x|p(x) < \infty$ and $\int|x|f(x)dx < \infty$, respectively, for the expected values to be defined. Almost all random variables satisfy this condition. A famous example to the contrary is the ratio of two normal distributions with mean zero, known as the Cauchy distribution---its mean (and variance) are not defined.
+Technically, we need the conditions $\sum |x|p(x) < \infty$ and $\int|x|f(x)dx < \infty$, 
+respectively, for the expected values to be defined. Almost all random variables 
+satisfy this condition. A famous example to the contrary is the ratio of two 
+Gaussian distributions with mean zero, known as the Cauchy distribution---its mean 
+(and variance) are not defined.
 
-We can think of the expected value as the center of mass of the distribution function (density or mass function), the point on which the distribution balances.
+We can think of the expected value as the center of mass of the distribution 
+function (density or mass function), the point on which the distribution balances.
 
 The Greek symbol $\mu$ is often used to denote the expected value of a random variable.
 
-Randomness is contagious---a function of a random variable is a random variable. So, if $X$ is a random variable, the function $h(X)$ is a random variable as well. We can find the expected value of $h(X)$ through the mass or density function of $X$:
+Randomness is contagious---a function of a random variable is a random variable. 
+So, if $X$ is a random variable, the function $h(X)$ is a random variable as well. 
+We can find the expected value of $h(X)$ through the mass or density function of $X$:
 
 $$\Exp\left\lbrack h(X) \right\rbrack = \sum_{x}^{}{h(x)p(x)}$$
 
 $$\Exp\left\lbrack h(X) \right\rbrack = \int_{- \infty}^{\infty}{h(x)f(x)dx}$$
 
-Note that the sum and interval are taken over the support of $X$, rather than $h(X)$. You can also compute the expected value over the support of $h(X)$, but then values of $h(x)$ need to be weighted with the probabilities (or densities) of $h(X)$.
+Note that the sum and interval are taken over the support of $X$, rather than $h(X)$.
+You can also compute the expected value over the support of $h(X)$, but then values 
+of $h(x)$ need to be weighted with the probabilities (or densities) of $h(X)$.
 
-An important case of the expectation of a function is $Y$ as a linear combination of $X$: $Y = aX + b$:
+An important case of the expectation of a function is $Y$ as a linear combination 
+of $X$: $Y = aX + b$:
 
 $$\Exp\lbrack Y\rbrack = \Exp\lbrack aX + b\rbrack = a\Exp\lbrack X\rbrack + b$$
 
-The expected value is a linear operator. For $k$ random variables $X_{1},\cdots,\ X_{k}$ and constants $a_{1},\cdots,a_{k}$,
+The expected value is a linear operator. For $k$ random variables $X_{1},\cdots,\ X_{k}$ 
+and constants $a_{1},\cdots,a_{k}$,
 
 $$\Exp\left\lbrack a_{1}X_{1} + a_{2}X_{2} + \cdots + a_{k}X_{k} \right\rbrack = a_{1}\Exp\left\lbrack X_{1} \right\rbrack + a_{2}\Exp\left\lbrack X_{2} \right\rbrack + \cdots + a_{k}\Exp\lbrack X_{k}\rbrack$$
 
@@ -249,17 +362,23 @@ A random variable $X$ with binomial distribution has p.m.f.
 
 $$\Pr(X = x) = \begin{pmatrix} n \\ x \end{pmatrix}\pi^{x}(1 - \pi)^{n - x}$$
 
-The support of $X$ is $0,\ 1,\ 2,\ \cdots,\ n$. The term $\begin{pmatrix} n \\ x \end{pmatrix}$ is known as the binomial coefficient,
+The support of $X$ is $0,\ 1,\ 2,\ \cdots,\ n$. The term 
+$\begin{pmatrix} n \\ x \end{pmatrix}$ is known as the binomial coefficient,
 
 $$\begin{pmatrix} n \\ x \end{pmatrix} = \frac{n!}{x!(n - x)!}$$
 
-The binomial random variable is the sum of $n$ independent Bernoulli experiments. A Bernoulli experiment can result in only two possible outcomes that occur with probabilities $\pi$ and $1 - \pi$.
+The binomial random variable is the sum of $n$ independent Bernoulli experiments. 
+A Bernoulli experiment can result in only two possible outcomes that occur with 
+probabilities $\pi$ and $1 - \pi$.
 
-Computing the expected value of the binomial random variable from the p.m.f. is messy, it requires evaluation of
+Computing the expected value of the binomial random variable from the p.m.f. is 
+messy, it requires evaluation of
 
 $$\Exp\lbrack X\rbrack = \sum_{x = 0}^{n}{\begin{pmatrix} n \\ x \end{pmatrix}x{\ \pi}^{x}}\ (1 - \pi)^{n - x}$$
 
-If we recognize the binomial random variable $X$ as the sum of $n$ Bernoulli variables $Y_{1},\cdots,Y_{n}$ with probability $\pi$, the expected value follows as
+If we recognize the binomial random variable $X$ as the sum of $n$ Bernoulli 
+variables $Y_{1},\cdots,Y_{n}$ with probability $\pi$, the expected value follows 
+as
 
 $$\Exp\lbrack X\rbrack = \Exp\left\lbrack \sum Y_{i} \right\rbrack = \sum \Exp\left\lbrack Y_{i} \right\rbrack = n\pi$$
 :::
@@ -267,21 +386,34 @@ $$\Exp\lbrack X\rbrack = \Exp\left\lbrack \sum Y_{i} \right\rbrack = \sum \Exp\l
 
 #### Variance and standard deviation
 
-Next to the mean, the most important expected value of a random variable, is the **variance**, the expected value of the squared deviation of a random variable from its mean:
+Next to the mean, the most important expected value of a random variable, is the 
+**variance**, the expected value of the squared deviation of a random variable 
+from its mean:
 
 $$\Var\lbrack X\rbrack = \Exp\left\lbrack \left( X - \Exp\lbrack X\rbrack \right)^{2} \right\rbrack = \Exp\left\lbrack X^{2} \right\rbrack -\Exp\lbrack X\rbrack^{2}$$
 
-The second expression states that the variance can also be written as the difference of the mean of the square of the random variable and the square of the mean of the random variable. The Greek symbol $\sigma^{2}$ is commonly used to denote the variance. The square is useful to remind us that the variance is in squared units. If the random variable $X$ is a length in feet, the variance represents an area in square feet.
+The second expression states that the variance can also be written as the difference
+of the mean of the square of the random variable and the square of the mean of the 
+random variable. The Greek symbol $\sigma^{2}$ is commonly used to denote the 
+variance. The square is useful to remind us that the variance is in squared units. 
+If the random variable $X$ is a length in feet, the variance represents an area
+in square feet.
 
-The square root of the variance is called the **standard deviation** of the random variable, frequently denoted $\sigma$. The standard deviation is measured in the same units as $X$.
+The square root of the variance is called the **standard deviation** of the 
+random variable, frequently denoted $\sigma$. The standard deviation is measured 
+in the same units as $X$.
 
-From the definition of expected values and functions of random values, the variance can be calculated from first principles as the expected value of $(X - \mu)^{2}$, where $\mu = E\lbrack X\rbrack:$
+From the definition of expected values and functions of random values, the 
+variance can be calculated from first principles as the expected value of 
+$(X - \mu)^{2}$, where $\mu = E\lbrack X\rbrack:$
 
 $$\Var\lbrack X\rbrack = \sum_{x}^{}(x - \mu)^{2}p(x)$$
 
 $$\Var\lbrack X\rbrack = \int_{- \infty}^{\infty}{(x - \mu)^2 \, f(x)dx} $$
 
-It is often easier to derive the variance of a random variable from the following properties. Suppose $a$ and $b$ are constants and $X$ is a random variable with variance $\sigma^{2}$
+It is often easier to derive the variance of a random variable from the following 
+properties. Suppose $a$ and $b$ are constants and $X$ is a random variable with 
+variance $\sigma^{2}$
 
 1.  $\Var\lbrack a\rbrack = 0$
 
@@ -291,23 +423,35 @@ It is often easier to derive the variance of a random variable from the followin
 
 4.  $\Var\lbrack aX + b\rbrack = a^2\sigma^2$
 
-The first property states that constants have no variability---this should make sense. A constant is equal to its expected value, $\Exp\lbrack a\rbrack = a$, so that deviations between value and mean are always 0.
+The first property states that constants have no variability---this should make sense. 
+A constant is equal to its expected value, $\Exp\lbrack a\rbrack = a$, so that 
+deviations between value and mean are always 0.
 
-The second property states that shifting a random variable by a fixed amount does not change its dispersion. That also should make intuitive sense: adding (or subtracting) a constant amount from every value does not change the shape of the distribution, it simply moves the distribution to a different location---the mean changes but the variance does not.
+The second property states that shifting a random variable by a fixed amount does 
+not change its dispersion. That also should make intuitive sense: adding (or 
+subtracting) a constant amount from every value does not change the shape of the 
+distribution, it simply moves the distribution to a different location---the mean 
+changes but the variance does not.
 
-The third property states that scaling a random variable with constant $a$ has a squared effect on the variance.
-This is also intuitive since the variance is in squared units. The effect of scaling on the standard deviation is linear: If you multiply every value with the constant $a$, the standard deviation of the product increases by 
-factor $a$.
+The third property states that scaling a random variable with constant $a$ has a 
+squared effect on the variance.
+This is also intuitive since the variance is in squared units. The effect of 
+scaling on the standard deviation is linear: If you multiply every value with 
+the constant $a$, the standard deviation of the product increases by factor $a$.
 
 The fourth property simply combines properties 1 and 3.
 
-The following result plays an important role in deriving the variance of linear functions of random variables. Many statistical estimators are of this form, from the sample mean to least-squares regression estimators.
+The following result plays an important role in deriving the variance of linear 
+functions of random variables. Many statistical estimators are of this form, from 
+the sample mean to least-squares regression estimators.
 
-If $X_{1},\cdots,X_{k}$ are independent random variables and $a_{1},\cdots,a_{k}$ are constants, then the variance of $a_{1}X_{1} + \cdots + a_{k}X_{k}$ is given by
+If $X_{1},\cdots,X_{k}$ are independent random variables and $a_{1},\cdots,a_{k}$ 
+are constants, then the variance of $a_{1}X_{1} + \cdots + a_{k}X_{k}$ is given by
 
 $$\Var\left\lbrack a_{1}X_{1} + \cdots + a_{k}X_{k} \right\rbrack = a_{1}^{2}\Var\left\lbrack X_{1} \right\rbrack + a_{2}^{2}\Var\left\lbrack X_{2} \right\rbrack + \cdots + a_{k}^{2}\Var\lbrack X_{k}\rbrack$$
 
-For this result to hold it is sufficient that the $X_i$ are **uncorrelated**, they do not have to be independent.
+For this result to hold it is sufficient that the $X_i$ are **uncorrelated**, they 
+do not have to be independent.
 
 ::: example
 ::: example-header
@@ -315,13 +459,16 @@ Example: Variance of Binomial Distribution
 :::
 
 ::: example-container
-We saw earlier that the sum of $n$ independent Bernoulli random variables with probability $\pi$ is a Binomial random variable. A Bernoulli($\pi$) random variable $Y_i$ takes on values 1 and 0 with p.m.f.
+We saw earlier that the sum of $n$ independent Bernoulli random variables with 
+probability $\pi$ is a Binomial random variable. A Bernoulli($\pi$) random 
+variable $Y_i$ takes on values 1 and 0 with p.m.f.
 
 $$\Pr\left( Y_{i} = 1 \right) = \pi$$
 
 $$\Pr\left( Y_{i} = 0 \right) = 1 - \pi$$
 
-The mean and variance of $Y$ are $E\left\lbrack Y_{i} \right\rbrack = \pi$ and $Var\left\lbrack Y_{i} \right\rbrack = \pi(1 - \pi)$, respectively.
+The mean and variance of $Y$ are $E\left\lbrack Y_{i} \right\rbrack = \pi$ and 
+$Var\left\lbrack Y_{i} \right\rbrack = \pi(1 - \pi)$, respectively.
 
 Since $X = \sum_{i = 1}^{n}Y_{i}$ and the $Y_{i}$s are independent,
 
@@ -337,11 +484,13 @@ Example: Variance of the Sample Mean
 ::::
 ::::{.example-container}
 Suppose that $Y_1, \cdots, Y_n$ are a random sample from a distribution with mean $\mu$ and 
-variance $\sigma^2$. What is the variance of the sample mean $\overline{Y} = \frac{1}{n}\sum_{i=1}^n Y_i$?
+variance $\sigma^2$. What is the variance of the sample mean 
+$\overline{Y} = \frac{1}{n}\sum_{i=1}^n Y_i$?
 
-The sample mean is the sum of the $Y_i$s, divided by the sample size $n$. By virtue of 
-drawing a random sample, independence of the $Y_i$ is guaranteed. We can thus apply the results about the
-variance of a sum of independent random variables and about the variance of a scaled random variable:
+The sample mean is the sum of the $Y_i$s, divided by the sample size $n$. By 
+virtue of drawing a random sample, independence of the $Y_i$ is guaranteed. We 
+can thus apply the results about the variance of a sum of independent random 
+variables and about the variance of a scaled random variable:
 $$
 \begin{align*}
 \Var[\overline{Y}] &= \Var\left[ \frac{1}{n}\sum_{i=1}^n Y_i\right] \\
@@ -353,16 +502,21 @@ $$
 ::::
 :::
 
-It is sufficient for this result to hold that the random variables are mutually uncorrelated, a weaker condition than mutual independence. We are introducing independence below after discussing the concept of joint distribution functions.
+It is sufficient for this result to hold that the random variables are mutually
+uncorrelated, a weaker condition than mutual independence. We are introducing 
+independence below after discussing the concept of joint distribution functions.
 
-#### Centering and Scaling
+#### Centering and scaling
 
-A random variable $X$ with mean $\mu$ and variance $\sigma^{2}$ is **centered** by subtracting its mean. A random variable is **scaled** by multiplying or dividing it by a factor. A random variable is
-**standardized** by centering and dividing by its standard deviation:
+A random variable $X$ with mean $\mu$ and variance $\sigma^{2}$ is **centered** 
+by subtracting its mean. A random variable is **scaled** by multiplying or dividing 
+it by a factor. A random variable is **standardized** by centering and dividing by 
+its standard deviation:
 
 $$Y = \frac{X - \mu}{\sigma}$$
 
-If $X$ has mean $\mu$ and variance $\sigma^2$, then $Y$ has mean 0 and variance 1. This follows by applying the properties of the expecation and variance operators:
+If $X$ has mean $\mu$ and variance $\sigma^2$, then $Y$ has mean 0 and variance 1. 
+This follows by applying the properties of the expectation and variance operators:
 $$
 \begin{align*}
 \Exp[Y] &= \Exp\left[\frac{X-\mu}{\sigma}\right] = \frac{1}{\sigma}\Exp[X-\mu] =\frac{1}{\sigma}(\mu-\mu) = 0\\
@@ -374,7 +528,11 @@ $$
 
 It is also called the centered-and-scaled version of $X$.
 
-A special type of scaling is **range scaling**. This form of scaling of the data transforms the data so it falls between a known lower and upper bound, often 0 and 1. Suppose that $\text{min}(X) \le X \le \text{max}(X)$  and we want to create a variable $z_\text{min} \le Z \le z_\text{max}$ from $X$. $Z$ can be computed by scaling and shifting a standardized form of $X$:
+A special type of scaling is **range scaling**. This form of scaling of the data 
+transforms the data so it falls between a known lower and upper bound, often 0 and 1. 
+Suppose that $\text{min}(X) \le X \le \text{max}(X)$  and we want to create a 
+variable $z_\text{min} \le Z \le z_\text{max}$ from $X$. $Z$ can be computed by 
+scaling and shifting a standardized form of $X$:
 $$
 \begin{align*}
   x^* &= \frac{x-\min(x)}{\max(x)-\min(x)} \\
@@ -385,16 +543,23 @@ If the bounds are $z_{\text{min}} = 0$ and $z_{\text{max}} = 1$, then $z = x^*$.
 
 
 :::{.callout-note}
-Technically, scaling refers to multiplication of a variable with a factor. Because standardization involves centering and scaling, and standardization is used frequently, you will find the term *scaling* applied to standardization. In fact, the `scale` function in `R` performs standardization (centering and scaling) by default.
+Technically, scaling refers to multiplication of a variable with a factor. Because 
+standardization involves centering and scaling, and standardization is used frequently, 
+you will find the term *scaling* applied to standardization. In fact, the `scale` 
+function in `R` performs standardization (centering and scaling) by default.
 :::
 
 #### Covariance and correlation
 
-Whereas the variance measures the dispersion of a random variable, the **covariance** measures how two random variables vary **together**. The covariance of $X$ and $Y$ is the expected value of the cross-product of two variables centered around their respective means, $\mu_{X}$ and $\mu_{Y}$:
+Whereas the variance measures the dispersion of a random variable, the **covariance** 
+measures how two random variables vary **together**. The covariance of $X$ and $Y$ 
+is the expected value of the cross-product of two variables centered around their 
+respective means, $\mu_{X}$ and $\mu_{Y}$:
 
 $$\Cov\lbrack X,Y\rbrack = \Exp\left\lbrack \left( X - \mu_{X} \right)\left( Y - \mu_{Y} \right) \right\rbrack = \Exp\lbrack XY\rbrack - \mu_{X}\mu_{Y}$$
 
-Similar to the variance, the covariance has properties that come in handy when working with random variables:
+Similar to the variance, the covariance has properties that come in handy when 
+working with random variables:
 
 1.  $\Cov\lbrack X,a\rbrack = 0$
 
@@ -404,11 +569,16 @@ Similar to the variance, the covariance has properties that come in handy when w
 
 4.  $\Cov\lbrack aY + bU,cW + dV\rbrack = ac \Cov\lbrack Y,W\rbrack + bc \Cov\lbrack U,W\rbrack + ad \Cov\lbrack Y,V\rbrack + bd \Cov\lbrack U,V\rbrack$
 
-Since the variance is a special case of the covariance of a random variable with itself, the properties of the covariance operator are general cases of the properties of the variance operator discussed earlier.
+Since the variance is a special case of the covariance of a random variable with 
+itself, the properties of the covariance operator are general cases of the 
+properties of the variance operator discussed earlier.
 
-Earlier we gave an expression for the variance of a linear combination of independent random variables. We can now generalize the result to linear combinations of correlated random variables. 
+Earlier we gave an expression for the variance of a linear combination of independent
+random variables. We can now generalize the result to linear combinations of 
+correlated random variables. 
 
-If $X$ and $Y$ are random variables with variance $\sigma_{X}^{2}$ and $\sigma_{Y}^{2}$, respectively, and $a, b$ are constants, then
+If $X$ and $Y$ are random variables with variance $\sigma_{X}^{2}$ and $\sigma_{Y}^{2}$, 
+respectively, and $a, b$ are constants, then
 
 $$
 \begin{align*}
@@ -417,17 +587,29 @@ $$
 \end{align*}
 $$
 
-If $\Cov\lbrack X,Y\rbrack = 0$, the random variables $X$ and $Y$ are **uncorrelated**. The **correlation** between $X$ and $Y$ is defined as
+If $\Cov\lbrack X,Y\rbrack = 0$, the random variables $X$ and $Y$ are **uncorrelated**. 
+The **correlation** between $X$ and $Y$ is defined as
 
 $$\Corr\lbrack X,Y\rbrack = \frac{\Cov\lbrack X,Y\rbrack}{\sigma_{X}\sigma_{Y}}$$
 
-The correlation is often denoted $\rho_{XY}$ and takes on values $-1 \leq \rho_{XY} \leq 1$. A zero correlation is a weaker condition than **independence** of $X$ and $Y$. A positive value of $\rho_{XY}$ means that an increase in the value of $X$ is associated with an increase in the value of $Y$. Note that we are not stating that the increase in $X$ is caused by the increase in $Y$. Correlation is a measure of association and does not imply causation.
+The correlation is often denoted $\rho_{XY}$ and takes on values $-1 \leq \rho_{XY} \leq 1$. 
+A zero correlation is a weaker condition than **independence** of $X$ and $Y$. 
+A positive value of $\rho_{XY}$ means that an increase in the value of $X$ is 
+associated with an increase in the value of $Y$. Note that we are not stating 
+that the increase in $X$ is caused by the increase in $Y$. Correlation is a 
+measure of association and does not imply causation.
 
-If $\Corr[X,Y] = 1$ or $\Corr[X,Y] = -1$, then $X$ can be predicted perfectly from $Y$; knowing $Y$ is equal to knowing $X$. An example of a perfect positive correlation is when $X$ is a length measured in inches and $Y$ is measured in cm. When $\Corr[X,Y] = 0$, then $X$ carries no information about $Y$, and vice versa. A person's shoe size and tomorrow's weather is an example of uncorrelated variables.
+If $\Corr[X,Y] = 1$ or $\Corr[X,Y] = -1$, then $X$ can be predicted perfectly from 
+$Y$; knowing $Y$ is equal to knowing $X$. An example of a perfect positive correlation 
+is when $X$ is a length measured in inches and $Y$ is measured in cm. When 
+$\Corr[X,Y] = 0$, then $X$ carries no information about $Y$, and vice versa. A 
+person's shoe size and tomorrow's weather is an example of uncorrelated 
+(and most likely independent) variables.
 
 #### Independence
 
-The joint behavior of random variables $X$ and $Y$ is described by their **joint** cumulative distribution function,
+The joint behavior of random variables $X$ and $Y$ is described by their **joint** 
+cumulative distribution function,
 
 $$F(x,y) = \Pr(X \leq x,Y \leq y)$$
 
@@ -439,7 +621,10 @@ The bivariate probability density is derived from $F(x,y)$ by differentiating,
 
 $$f(x,y) = \frac{\partial^{2}}{\partial x\partial y}F(x,y)$$
 
-Two random variables $X$ and $Y$ are independent if their joint c.d.f.s (or joint p.d.f.s) factor into the **marginal** distributions. The marginal density function of $X$ or $Y$ can be derived from the joint density by integrating over the other random variable:
+Two random variables $X$ and $Y$ are independent if their joint c.d.f.s (or joint 
+p.d.f.s) factor into the **marginal** distributions. The marginal density function 
+of $X$ or $Y$ can be derived from the joint density by integrating over the other 
+random variable:
 
 $$f_{X}(x) = \int_{- \infty}^{\infty}{f(x,y)dy}$$
 
@@ -451,7 +636,10 @@ If $X$ and $Y$ are independent, then
 
 $$\Exp\left\lbrack g(X)h(Y) \right\rbrack = \Exp\left\lbrack g(X) \right\rbrack \Exp\left\lbrack h(Y) \right\rbrack$$
 
-For example, $\Exp\lbrack XY\rbrack = \Exp\lbrack X\rbrack \Exp\lbrack Y\rbrack$ and it follows that the covariance between independent random variables is zero. That is, independent random variables are uncorrelated. The reverse does not have to be true. Lack of correlation (a zero covariance) does not imply independence.
+For example, $\Exp\lbrack XY\rbrack = \Exp\lbrack X\rbrack \Exp\lbrack Y\rbrack$ 
+and it follows that the covariance between independent random variables is zero. 
+That is, independent random variables are uncorrelated. The reverse does not have 
+to be true. Lack of correlation (a zero covariance) does not imply independence.
 
 :::{.callout-note title="Probability Playground"}
 Before we dive into some important discrete and continuous distributions in statistics,
@@ -474,59 +662,86 @@ And you can see how means and variances are derived from first principles.
 
 ### Bernoulli (Binary), Bernoulli$(\pi)$
 
-A Bernoulli (or binary) experiment has two possible outcomes that occur with probabilities $\pi$ and $1 - \pi$, respectively. The outcomes are coded numerically as $Y = 1$ (with probability $\pi$) and $Y = 0$, the subset of the sample space $\Omega$ that maps to $Y = 1$ is often called the "event" or the "success" outcome of the binary distribution, the complement is called the "non-event" or the "failure" outcome.
+A Bernoulli (or binary) experiment has two possible outcomes that occur with 
+probabilities $\pi$ and $1 - \pi$, respectively. The outcomes are coded numerically 
+as $Y = 1$ (with probability $\pi$) and $Y = 0$, the subset of the sample space 
+$\Omega$ that maps to $Y = 1$ is often called the "event" or the "success" outcome 
+of the binary distribution, the complement is called the "non-event" or the 
+"failure" outcome.
 
 For example, in the traffic light example the sample space is
 
 $$\Omega = \left\{ rr,ry,rg,yr,yy,yg,gr,gy,gg \right\}$$
 
-A binary random variable can be defined as $Y = 1$ if the first light is green. In other words, the event $A = \{ gr,gy,gg\}$ maps to $Y = 1$ and the complement $A^{c}$ maps to $Y = 0$. The p.m.f of the random variable is then given by the Bernoulli($\pi$) distribution as
+A binary random variable can be defined as $Y = 1$ if the first light is green. 
+In other words, the event $A = \{ gr,gy,gg\}$ maps to $Y = 1$ and the complement 
+$A^{c}$ maps to $Y = 0$. The p.m.f of the random variable is then given by the 
+Bernoulli($\pi$) distribution as
 
 $$p(y) = \left\{ \begin{matrix}
 \pi & Y = 1 \\
 1 - \pi & Y = 0
 \end{matrix} \right.\ $$
 
-Since binary data are often found in studies where events are detrimental---e.g., disease, fraud, death, disapproval---the "event" vernacular is preferred over the "success" vernacular.
+Since binary data are often found in studies where events are detrimental---e.g., 
+disease, fraud, death, disapproval---the "event" vernacular is preferred over 
+the "success" vernacular.
 
-The mean and variance of the Bernoulli($\pi$) random variable are $\pi$ and $\pi(1 - \pi)$, respectively. Notice that the variance is largest at $\pi = 0.5$, when there is greatest uncertainty about which of the two events will occur.
+The mean and variance of the Bernoulli($\pi$) random variable are $\pi$ and $\pi(1 - \pi)$, 
+respectively. Notice that the variance is largest at $\pi = 0.5$, when there is 
+greatest uncertainty about which of the two events will occur.
 
 ![Probability mass function of the Bernoulli(0.7) random variable.](images/mathstat/Bernoulli.png){fig-align="center" width="75%"}
 
 ### Binomial, Binomial$(n,\pi)$
 
-Let $Y_{1},\cdots,Y_{n}$ be independent binary experiments with the same event probability $\pi$. Then $X = \sum_{i = 1}^{n}Y_{i}$ has a Binomial($n,\pi$) distribution with p.m.f.
+Let $Y_{1},\cdots,Y_{n}$ be independent binary experiments with the same event 
+probability $\pi$. Then $X = \sum_{i = 1}^{n}Y_{i}$ has a Binomial($n,\pi$) 
+distribution with p.m.f.
 
 $$\Pr(X = x) = \begin{pmatrix}
 n \\
 x
 \end{pmatrix}\pi^{x}(1 - \pi)^{n - x},\ \ \ \ \ x = 0,1,\cdots,n$$
 
-The mean and variance of the Binomial($n,\pi$) variable can be found easily from its definition as a sum of independent Bernoulli($\pi$) variables:
+The mean and variance of the Binomial($n,\pi$) variable can be found easily from 
+its definition as a sum of independent Bernoulli($\pi$) variables:
 
 $$\Exp\lbrack X\rbrack = n\pi\ \ \ \ \ \Var\lbrack X\rbrack = n\pi(1 - \pi)$$
 
 ![Probability mass function of a Binomial(8,0.3) random variable.](images/mathstat/Binomial.png){fig-align="center" width="75%"}
 
-The Bernoulli($\pi$) distribution is the special case of the Binomial($1,\pi$) distribution.
+The Bernoulli($\pi$) distribution is the special case of the Binomial($1,\pi$) 
+distribution.
 
 ### Geometric, Geometric$(\pi)$
 
-The Binomial($n,\pi$) distribution is the number of events in a series of $n$ Bernoulli($\pi$) experiments. The Geometric($\pi$) distribution also can be defined in terms of independent Bernoulli($\pi$) experiments as the number of trials needed to obtain the first event. There is no theoretical upper bound for the support, as you might need infinitely many binary experiments to realize one event.
+The Binomial($n,\pi$) distribution is the number of events in a series of $n$ 
+Bernoulli($\pi$) experiments. The Geometric($\pi$) distribution also can be defined 
+in terms of independent Bernoulli($\pi$) experiments as the number of trials needed 
+to obtain the first event. There is no theoretical upper bound for the support, 
+as you might need infinitely many binary experiments to realize one event.
 
-The p.m.f. of a Geometric($\pi$) random variable, and its mean and variance, are given by
+The p.m.f. of a Geometric($\pi$) random variable, and its mean and variance, are 
+given by
 
 $$p(x) = \pi(1 - \pi)^{x - 1}\ \ \ \ \ \ x = 1,2,\cdots$$
 
 $$\Exp\lbrack X\rbrack = \frac{1}{\pi}\ \ \ \ \ \Var\lbrack X\rbrack = \frac{1 - \pi}{\pi^{2}}$$
 
-The following figure shows the p.m.f. of a Geometric(0.5) distribution. The probability to observe an event on the first try is 1/2, on the second try is 1/4, on the third try is 1/8, and so forth.
+The following figure shows the p.m.f. of a Geometric(0.5) distribution. The 
+probability to observe an event on the first try is 1/2, on the second try is 1/4, 
+on the third try is 1/8, and so forth.
 
 An interesting property of Geometric($\pi$) random variables is their lack of memory:
 
 $$\Pr\left( X > s + t|X > t \right) = \Pr(X > s)$$
 
-The probability that we have to try $s$ more times to see the first event is independent of how many times we have tried before ($t$). To prove this note that $\Pr(X > s)$ means the first event occurs after the $s$^th^ try which implies that the first $s$ tries were all non-events: $\Pr{(X > s) = (1 - \pi)^{s}}$. The conditional probability in question becomes
+The probability that we have to try $s$ more times to see the first event is 
+independent of how many times we have tried before ($t$). To prove this note that 
+$\Pr(X > s)$ means the first event occurs after the $s$^th^ try which implies that 
+the first $s$ tries were all non-events: $\Pr{(X > s) = (1 - \pi)^{s}}$. The 
+conditional probability in question becomes
 
 $$\Pr\left( X > s + t|X > t \right) = \frac{\Pr{(X > s + t,\ X > t)}}{\Pr{(X > t)}} = \frac{\Pr{(X > s + t)}}{\Pr{(X > t)}} = \frac{(1 - \pi)^{s + t}}{(1 - \pi)^{t}} = (1 - \pi)^{s}$$
 
@@ -534,7 +749,9 @@ But the last expression is just $\Pr{(X > s)}$.
 
 ![Probability mass function of the Geometric(0.5) distribution.](images/mathstat/Geometric.png){fig-align="center" width="75%"}
 
-Please note that there is a second definition of the Geometric($\pi$) distribution in terms of independent Bernoulli($\pi$) experiments, namely as the number of non-events before the first event occurs. The p.m.f. of this random variable is
+Please note that there is a second definition of the Geometric($\pi$) distribution 
+in terms of independent Bernoulli($\pi$) experiments, namely as the number of 
+non-events before the first event occurs. The p.m.f. of this random variable is
 
 $$p(y) = \pi(1 - \pi)^{y}\ \ \ \ \ y = 0,1,2,\cdots$$
 
@@ -542,9 +759,12 @@ With mean $\Exp\lbrack Y\rbrack = \frac{(1 - \pi)}{\pi}$ and variance $\Var\lbra
 
 ### Negative Binomial, NegBin$(k,\pi)$
 
-An extension of the Geometric($\pi$) distribution is the Negative Binomial (NegBin($k,\pi$)) distribution. In a series of independent Bernoulli($\pi$) trials, the number of experiments until the $k$^th^ event is observed is a NegBin($k,\pi$) random variable.
+An extension of the Geometric($\pi$) distribution is the Negative Binomial (NegBin($k,\pi$)) 
+distribution. In a series of independent Bernoulli($\pi$) trials, the number of 
+experiments until the $k$^th^ event is observed is a NegBin($k,\pi$) random variable.
 
-A NegBin($k,\pi$) random variable is thus the sum of $k$ Geometric($\pi$) random variables. The p.m.f., mean, and variance of $X \sim NegBin(k,\pi)$ are
+A NegBin($k,\pi$) random variable is thus the sum of $k$ Geometric($\pi$) random 
+variables. The p.m.f., mean, and variance of $X \sim NegBin(k,\pi)$ are
 
 $$p(x) = \begin{pmatrix}
 x - 1 \\
@@ -553,7 +773,10 @@ k - 1
 
 $$\Exp\lbrack X\rbrack = \frac{k}{\pi}\ \ \ \ \ \Var\lbrack X\rbrack = \frac{k(1 - \pi)}{\pi^{2}}$$
 
-The negative binomial distribution appears in many parameterizations. A popular form is in terms of the number of non-events before the $k$^th^ event occurs. This changes the support of the random variable from $x = k,k + 1,\cdots$ to $y = 0,1,\cdots.$ The p.m.f,. mean, and variance of that random variable are
+The negative binomial distribution appears in many parameterizations. A popular
+form is in terms of the number of non-events before the $k$^th^ event occurs. 
+This changes the support of the random variable from $x = k,k + 1,\cdots$ to 
+$y = 0,1,\cdots.$ The p.m.f,. mean, and variance of that random variable are
 
 $$p(y) = \begin{pmatrix}
 y + k - 1 \\
@@ -566,33 +789,71 @@ The p.m.f. for a NegBin(5,0.7) in this parameterization is shown in @fig-sl-negb
 
 ![Probability mass function of a NegBin(5,0.7) random variable.](images/mathstat/NegativeBinomial.png){#fig-sl-negbin fig-align="center" width="75%"}
 
-An important application of the negative binomial distribution is in mixing models. These are models where the parameters of a distribution are assumed to be random variables rather than constants. This mechanism introduces additional variability into the system and is applied when the observed data appear more dispersed than a distribution permits. This condition is called **overdispersion**. For example, a binomial random variable has variance $n\pi(1 - \pi)$; the variability is a function of the mean $n\pi$. When the observed data suggest that this relationship between mean and variance does not hold---and typically the observed variability is greater than the nominal variance---one can treat $n$ or $\pi$ as a random variable. If you assume that $n$ follows a Poisson distribution (see next), then the marginal distribution of the data is also Poisson. If you start with a Poisson distribution and assume that its parameter follows a Gamma distribution, the resulting marginal distribution of the data is negative binomial.
+An important application of the negative binomial distribution is in mixing models. 
+These are models where the parameters of a distribution are assumed to be random 
+variables rather than constants. This mechanism introduces additional variability 
+into the system and is applied when the observed data appear more dispersed than 
+a distribution permits. This condition is called **overdispersion**. For example,
+a binomial random variable has variance $n\pi(1 - \pi)$; the variability is a 
+function of the mean $n\pi$. When the observed data suggest that this relationship
+between mean and variance does not hold---and typically the observed variability 
+is greater than the nominal variance---one can treat $n$ or $\pi$ as a random 
+variable. If you assume that $n$ follows a Poisson distribution (see next), then 
+the marginal distribution of the data is also Poisson. If you start with a Poisson 
+distribution and assume that its parameter follows a Gamma distribution, the 
+resulting marginal distribution of the data is negative binomial.
 
 ### Poisson, Poisson$(\lambda)$
 
-The Poisson distribution is a common probability model for count variables that represent counts per unit, rather than counts that can be converted to proportions. For example, the number of chocolate chips on a cookie, the number of defective parts per day on an assembly line or the number of fish caught per day can be modeled as Poisson random variables.
+The Poisson distribution is a common probability model for count variables that 
+represent counts per unit, rather than counts that can be converted to proportions. 
+For example, the number of chocolate chips on a cookie, the number of defective 
+parts per day on an assembly line or the number of fish caught per day can be
+modeled as Poisson random variables.
 
-For the Poisson assumption to be met when modeling event counts over some unit, e.g. time, the rate at which events occur cannot depend on the occurrence of any events and events have to occur independently. For example, if the number of customer calls to a service center increases sharply after the release of a new software product, then the rate of events (calls) per day is not constant across days. This can still be modeled as a Poisson process where $\lambda$ depends on other input variables such as the time since release of the new product. If one customer's call makes it more likely that another customer calls into the service center, the Poisson assumption is not valid.
+For the Poisson assumption to be met when modeling event counts over some unit, e.g. 
+time, the rate at which events occur cannot depend on the occurrence of any events 
+and events have to occur independently. For example, if the number of customer 
+calls to a service center increases sharply after the release of a new software 
+product, then the rate of events (calls) per day is not constant across days. This 
+can still be modeled as a Poisson process where $\lambda$ depends on other input 
+variables such as the time since release of the new product. If one customer's 
+call makes it more likely that another customer calls into the service center, 
+the Poisson assumption is not valid.
 
-The random variable $Y$ has a Poisson($\lambda$) distribution if its probability mass function is given by
+The random variable $Y$ has a Poisson($\lambda$) distribution if its probability 
+mass function is given by
 
 $$p(y) = \frac{e^{- \lambda\ }\lambda^{y}}{y!},\ \ \ \ y = 0,1,\cdots$$
 
-The mean and variance of a Poisson($\lambda$) variable are the same, $\Exp\lbrack Y\rbrack = \Var\lbrack Y\rbrack = \lambda$. Although the random variable $Y$ takes on only non-negative integer value, the parameter $\lambda$ is a real number.
+The mean and variance of a Poisson($\lambda$) variable are the same, 
+$\Exp\lbrack Y\rbrack = \Var\lbrack Y\rbrack = \lambda$. Although the random 
+variable $Y$ takes on only non-negative integer value, the parameter $\lambda$ is a real number.
 
 ![Probability mass function of a Poisson(3) random variable.](images/mathstat/Poisson.png){width="75%"}
 
-For larger values of $\lambda$ the distribution shifts to the right and becomes more symmetric. For small values of $\lambda$ the mass function is very asymmetric and concentrated at small values of $Y$.
+For larger values of $\lambda$ the distribution shifts to the right and becomes 
+more symmetric. For small values of $\lambda$ the mass function is very asymmetric 
+and concentrated at small values of $Y$.
 
 ![Probability mass function of a Poisson(0.2) random variable.](images/mathstat/Poisson2.png){fig-align="center" width="75%"}
 
-This is the basis for the Poisson approximation to Binomial probabilities. In a Binomial($n,\pi$) process, if $n \rightarrow \infty$ and $\pi$ shrinks so that $n\pi$ converges to a constant $\lambda$, then the Binomial($n,\pi$) process can be approximated as a Poisson($\lambda$) process. The next figure compares a Binomial(200,0.05) mass function to the p.m.f. of the Poisson(10). At least visually, the histograms are almost indistinguishable.
+This is the basis for the Poisson approximation to Binomial probabilities. In a 
+Binomial($n,\pi$) process, if $n \rightarrow \infty$ and $\pi$ shrinks so that $n\pi$ 
+converges to a constant $\lambda$, then the Binomial($n,\pi$) process can be 
+approximated as a Poisson($\lambda$) process. The next figure compares a 
+Binomial(200,0.05) mass function to the p.m.f. of the Poisson(10). At least visually, 
+the histograms are almost indistinguishable.
 
 ![Poisson approximation to the Binomial, $n\pi \rightarrow \lambda$.](images/mathstat/PoissonBinomial.png){#fig-sl-poisson-approx-bin fig-align="center" width="75%"}
 
-For example, the probability that three sixes turn up when three dice are rolled is $\frac{1}{216} = 0.00463$. If the three dice are rolled 200 times, what is the probability that at least one triple six shows up? If $Y$ is the number of triple sixes out of 200, then the binomial probability is calculated as
+For example, the probability that three sixes turn up when three dice are rolled is 
+$\frac{1}{216} = 0.00463$. If the three dice are rolled 200 times, what is the 
+probability that at least one triple six shows up? If $Y$ is the number of triple 
+sixes out of 200, then the binomial probability is calculated as
 
-$$1 - \begin{pmatrix}
+$$
+1 - \begin{pmatrix}
 200 \\
 0
 \end{pmatrix}\left( \frac{1}{216} \right)^{0}\left( \frac{215}{216} \right)^{200} = 0.6046$$
@@ -601,23 +862,40 @@ and the Poisson approximation is
 
 $$1 - \frac{\left( \frac{200}{216} \right)^{0}}{0!}\exp\left\{ - \frac{200}{216} \right\} = 0.6038$$
 
-As $\lambda \rightarrow \infty$, the Poisson p.m.f. approaches the shape of a Gaussian (normal) distribution. The normal approximation is sometimes made for sufficiently large values of the Poisson parameter, $\lambda > 20$. @fig-sl-normal-approx-poi shows the empirical histogram and density for 10,000 random draws from a Poisson(20) distribution and a Gaussian distribution with the same mean and variance as the Poisson. Some folks recommend the Gaussian approximation for the Poisson for $\lambda > 100$ or even $\lambda > 1000$.
+As $\lambda \rightarrow \infty$, the Poisson p.m.f. approaches the shape of a 
+Gaussian (normal) distribution. The normal approximation is sometimes made for 
+sufficiently large values of the Poisson parameter, $\lambda > 20$. @fig-sl-normal-approx-poi 
+shows the empirical histogram and density for 10,000 random draws from a Poisson(20) 
+distribution and a Gaussian distribution with the same mean and variance as the
+Poisson. Some folks recommend the Gaussian approximation for the Poisson for 
+$\lambda > 100$ or even $\lambda > 1000$.
 
 ![Normal approximation to the Poisson distribution for $\lambda = 20$.](images/mathstat/PoissonNormal.png){#fig-sl-normal-approx-poi fig-align="center" width="75%"}
 
-Because the events being counted occur independently of each other, a Poisson distribution is divisible. You can think of a Poisson($\lambda = 5$) variable as the sum of five Poisson(1) variables. The result of one variable producing on average 5 events per time units or five variables each producing on average one event per unit is the same. More generally, if $Y_{1},\cdots,Y_{n}$ are independent random variables with respective Poisson($\lambda_{i}$) distributions, then their sum $\sum_{i}^{}Y_{i}$ follows a Poisson distribution with mean $\lambda = \sum_{i}^{}\lambda_{i}$.
+Because the events being counted occur independently of each other, a Poisson 
+distribution is divisible. You can think of a Poisson($\lambda = 5$) variable 
+as the sum of five Poisson(1) variables. The result of one variable producing on 
+average 5 events per time units or five variables each producing on average one 
+event per unit is the same. More generally, if $Y_{1},\cdots,Y_{n}$ are independent 
+random variables with respective Poisson($\lambda_{i}$) distributions, then their
+sum $\sum_{i}^{}Y_{i}$ follows a Poisson distribution with mean $\lambda = \sum_{i}^{}\lambda_{i}$.
 
 ## Continuous (Univariate) Distributions {#sec-prob-cont-dist}
 
-For continuous random variables, the probability that the variable takes on any particular value is zero. To make meaningful probability statements we consider integration of the probability density function (p.d.f.) over sets, for example, intervals:
+For continuous random variables, the probability that the variable takes on any 
+particular value is zero. To make meaningful probability statements we consider 
+integration of the probability density function (p.d.f.) over sets, for example, 
+intervals:
 
 $$\Pr{(a \leq X \leq b)} = \int_{a}^{b}{f(x)dx}$$
 
-The density function satisfies $\int_{- \infty}^{\infty}{f(x)dx} = 1$ and can be obtained by differentiating the c.d.f $F(x) = \Pr{(X \leq x)}$; $f(x) = \frac{dF(x)}{dx}$.
+The density function satisfies $\int_{- \infty}^{\infty}{f(x)dx} = 1$ and can be 
+obtained by differentiating the c.d.f $F(x) = \Pr{(X \leq x)}$; $f(x) = \frac{dF(x)}{dx}$.
 
 ### Uniform, U$(a,b)$
 
-If a random variable has a continuous uniform distribution on the interval $\lbrack a,b\rbrack$, denoted $Y \sim U(a,b)$, its p.d.f. is given by
+If a random variable has a continuous uniform distribution on the interval 
+$\lbrack a,b\rbrack$, denoted $Y \sim U(a,b)$, its p.d.f. is given by
 
 $$f(x) = \left\{ \begin{matrix}
 \frac{1}{(b - a)} & a \leq x \leq b \\
@@ -630,7 +908,11 @@ $$\Exp\lbrack Y\rbrack = \frac{a + b}{2}\ \ \ \ \ \ \Var\lbrack Y\rbrack = \frac
 
 ### Exponential, Expo$(\lambda)$
 
-The exponential distribution is a useful probability model for modeling continuous lifetimes. It is related to Poisson processes. If events occur continuously and independently at a constant rate $\lambda$, the number of events is a Poisson random variable. The time between the events is an exponential random variable, denoted $Y \sim$ Expo($\lambda$).
+The exponential distribution is a useful probability model for modeling continuous 
+lifetimes. It is related to Poisson processes. If events occur continuously and 
+independently at a constant rate $\lambda$, the number of events is a Poisson 
+random variable. The time between the events is an exponential random variable, 
+denoted $Y \sim$ Expo($\lambda$).
 
 $$p(y) = \lambda e^{- \lambda y},\ \ \ \ y \geq 0$$
 
@@ -638,23 +920,34 @@ $$F(y) = 1 - e^{- \lambda y},\ \ \ y \geq 0$$
 
 $$\Exp\lbrack Y\rbrack = \frac{1}{\lambda}\ \ \ \ \ \ \Var\lbrack Y\rbrack = \frac{1}{\lambda^{2}}$$
 
-Like the discrete Geometric($\pi$) distribution, the Expo($\lambda$) distribution is forgetful,
+Like the discrete Geometric($\pi$) distribution, the Expo($\lambda$) distribution is 
+forgetful,
 
 $$\Pr{(Y > s + t|Y > t)} = \Pr{(Y > s)}$$
 
-and it turns out that no other continuous function has this **memoryless** property. This property is easily proven using $\Pr(Y > y) = 1 - F(y) = e^{- \lambda y}$:
+and it turns out that no other continuous function has this **memoryless** property. 
+This property is easily proven using $\Pr(Y > y) = 1 - F(y) = e^{- \lambda y}$:
 
 $$\Pr\left( Y > t + s \middle| Y > t \right) = \frac{\Pr{(Y > t + s,Y > t)}}{\Pr{(Y > t)}} = \frac{Pr(Y > t + s)}{Pr(Y > t)} = \frac{e^{- \lambda(t + s)}}{e^{- \lambda t}} = e^{- \lambda s}$$
 
-The memoryless property of the exponential distribution makes it **not** a good model for human lifetimes. The probability that a 20-year-old will live another 10 years is not the same as the probability that a 75-year-old will live another 10 years. The exponential distribution implies that this would be the case. When modeling earthquakes, it might be reasonable that the probability of an earthquake in the next ten years is the same, regardless of when the last earthquake occurred---the exponential distribution would then be reasonable.
+The memoryless property of the exponential distribution makes it **not** a good 
+model for human lifetimes. The probability that a 20-year-old will live another 
+10 years is not the same as the probability that a 75-year-old will live another 
+10 years. The exponential distribution implies that this would be the case. 
+When modeling earthquakes, it might be reasonable that the probability of an 
+earthquake in the next ten years is the same, regardless of when the last 
+earthquake occurred---the exponential distribution would then be reasonable.
 
-You don't have to worry about whether other distributions have this memoryless property in applications where lack of memory would not be appropriate. The exponential distribution is defined by this property, it is the only continuous distribution with lack of memory.
+You don't have to worry about whether other distributions have this memoryless 
+property in applications where lack of memory would not be appropriate. The 
+exponential distribution is defined by this property, it is the only continuous
+distribution with lack of memory.
 
 ### Gamma, Gamma$(\alpha,\beta)$
 
-The Expo($\lambda$) distribution is a special case of a broader family of distributions, 
-the Gamma($\alpha,\beta$) distribution. A random variable $Y$ is said to have a Gamma($\alpha,\beta$) distribution 
-if its density function is
+The Expo($\lambda$) distribution is a special case of a broader family of 
+distributions, the Gamma($\alpha,\beta$) distribution. A random variable $Y$ is 
+said to have a Gamma($\alpha,\beta$) distribution if its density function is
 
 $$f(y) = \frac{1}{\beta^{\alpha}\Gamma(\alpha)}y^{\alpha - 1}e^{- y/\beta},\ \ \ \ \ y \geq 0,\ \alpha,\beta > 0$$
 
@@ -662,9 +955,12 @@ The mean and variance of a Gamma($\alpha,\beta$) random variable are given by
 
 $$\Exp\lbrack Y\rbrack = \alpha\beta\ \ \ \ \ \Var\lbrack Y\rbrack = \alpha\beta^{2}$$
 
-$\alpha$ is called the shape parameter of the distribution and $\beta$ is called the scale parameter. Varying $\alpha$ affects the shape and varying $\beta$ affects the units of measurement.
+$\alpha$ is called the shape parameter of the distribution and $\beta$ is called 
+the scale parameter. Varying $\alpha$ affects the shape and varying $\beta$ 
+affects the units of measurement.
 
-The term $\Gamma(\alpha)$ in the denominator of the density function is called the Gamma function,
+The term $\Gamma(\alpha)$ in the denominator of the density function is called the 
+Gamma function,
 
 $$\Gamma(\alpha) = \int_{0}^{\infty}{y^{\alpha - 1}e^{- y}}dy$$
 
@@ -672,11 +968,20 @@ $$\Gamma(\alpha) = \int_{0}^{\infty}{y^{\alpha - 1}e^{- y}}dy$$
 Fun fact: if $\alpha$ is an integer, $\Gamma(\alpha) = (\alpha - 1)!$
 :::
 
-The exponential random variable introduced earlier is a special case of the Gamma family, the Expo($1/\beta$) is the same as the Gamma(1,$\beta$).
-Gamma-distributed random variables occur in applications of waiting times. Suppose that cars arrive at an intersection at a rate of one every two minutes. The time you have to wait until the 5th car arrives at the intersection is a Gamma($\alpha=5,\beta=2$) random variable. If
-lightbulbs last 5 years on average and are replaced when they fail, the time a box of six lasts is a Gamma($\alpha=6, \beta=5$) random variable  [@Cunningham24].
+The exponential random variable introduced earlier is a special case of the Gamma 
+family, the Expo($1/\beta$) is the same as the Gamma(1,$\beta$).
+Gamma-distributed random variables occur in applications of waiting times. Suppose 
+that cars arrive at an intersection at a rate of one every two minutes. The time
+you have to wait until the 5th car arrives at the intersection is a 
+Gamma($\alpha=5,\beta=2$) random variable. If lightbulbs last 5 years on average 
+are replaced when they fail, the time a box of six lasts is a Gamma($\alpha=6, \beta=5$) 
+random variable  [@Cunningham24].
 
-Another special case of the gamma-type random variables is the chi-square random variable. A random variable $Y$ is said to have a chi-squared distribution with $\nu$ degrees of freedom, denoted $\chi_{\nu}^{2}$, if $Y$ is a Gamma($\frac{\nu}{2},2$) random variable. More on $\chi^{2}$ random variables below after we introduced sampling from a Gaussian distribution.
+Another special case of the gamma-type random variables is the chi-square random
+variable. A random variable $Y$ is said to have a chi-squared distribution with 
+$\nu$ degrees of freedom, denoted $\chi_{\nu}^{2}$, if $Y$ is a Gamma($\frac{\nu}{2},2$) 
+random variable. More on $\chi^{2}$ random variables below after we introduced 
+sampling from a Gaussian distribution.
 
 ![Densities of Gamma(3,1/2) (solid), Gamma(2,2) (dashed) and Gamma(1,1/2) random variables. The Gamma(2,2) is also a $\chi_{4}^{2}$ distribution. The Gamma(1,1/2) is a Expo(2) distribution.](images/mathstat/Gamma.png){fig-align="center" width="75%"}
 
@@ -745,7 +1050,10 @@ on rent by a homeowner is zero.
 
 ### Gaussian (Normal), G$(\mu,\sigma^2)$
 
-The Gaussian (or Normal) distribution is arguably the most important continuous distribution in all of probability and statistics. A random variable $Y$ has a Gaussian distribution with mean $\mu$ and variance $\sigma^{2}$ if its density function is
+The Gaussian (or Normal) distribution is arguably the most important continuous 
+distribution in all of probability and statistics. A random variable $Y$ has a 
+Gaussian distribution with mean $\mu$ and variance $\sigma^{2}$ if its density 
+function is
 
 $$f(y) = \frac{1}{\sqrt{2\pi\sigma^{2}}}\exp\left\{ - \frac{1}{2\sigma^{2}}(y - \mu)^{2} \right\},\ \ \ \ \text{-}\infty < y < \infty$$
 
@@ -755,29 +1063,43 @@ The Gaussian distribution has the famous bell shape, symmetric about the mean \$
 
 ![Gaussian distributions: $G(4,1)$ (solid), $G(5,4)$ (dashed), and $G(8, {0.75}^{2})$ (dotted).](images/mathstat/Gaussians.png){fig-align="center" width="75%"}
 
-A special version is the **standard** Gaussian (standard normal) distribution $Z \sim G(0,1)$ with density
+A special version is the **standard** Gaussian (standard normal) distribution 
+$Z \sim G(0,1)$ with density
 
 $$f(z) = \frac{1}{\sqrt{2\pi}}\exp\left\{ - \frac{1}{2}y^{2} \right\}$$
 
 The standard Gaussian is also referred to as the **unit** normal distribution.
 
-Gaussian random variables have some interesting properties. For example, linear combinations of Gaussian random variables are Gaussian distributed. If $Y\sim G\left( \mu,\sigma^{2} \right)$, then $X = aY + b$ has distribution $G(a\mu + b,a^{2}\sigma^{2})$. As an example, if $Y\sim G\left( \mu,\sigma^{2} \right)$, then
+Gaussian random variables have some interesting properties. For example, linear 
+combinations of Gaussian random variables are Gaussian distributed. If 
+$Y\sim G\left( \mu,\sigma^{2} \right)$, then $X = aY + b$ has distribution 
+$G(a\mu + b,a^{2}\sigma^{2})$. As an example, if $Y\sim G\left( \mu,\sigma^{2} \right)$, then
 
 $$Z = \frac{Y - \mu}{\sigma}$$
 
-has a standard Gaussian distribution. You can express probabilities about $Y$ in terms of probabilities about $Z$:
+has a standard Gaussian distribution. You can express probabilities about $Y$ in 
+terms of probabilities about $Z$:
 
 $$\Pr{(X \leq x)} = \Pr\left( Z \leq \frac{x - \mu}{\sigma} \right)$$
 
-Because linear functions of Gaussian random variables are Gaussian random variables, it is easy to establish the distribution of the sample mean $\overline{Y} = \frac{1}{n}\sum_{i}^{}Y_{i}$ in a random sample from a $G(\mu,\sigma^{2})$ distribution. First, if we take a random sample from **any** distribution with mean $\mu$ and variance $\sigma^{2}$, then the sample mean $\overline{Y}$ has mean and variance
+Because linear functions of Gaussian random variables are Gaussian random variables, 
+it is easy to establish the distribution of the sample mean $\overline{Y} = \frac{1}{n}\sum_{i}^{}Y_{i}$ 
+in a random sample from a $G(\mu,\sigma^{2})$ distribution. First, if we take a 
+random sample from **any** distribution with mean $\mu$ and variance $\sigma^{2}$, 
+then the sample mean $\overline{Y}$ has mean and variance
 
 $$\Exp\left\lbrack \overline{Y} \right\rbrack = \mu\ \ \ \ \ \ \ \ \ \Var\left\lbrack \overline{Y} \right\rbrack = \frac{\sigma^{2}}{n}$$
 
-This follows from the linearity of the expectation operator and the independence of the observations in the random sample. If, in addition, the $Y_{i} \sim G\left( \mu,\sigma^{2} \right)$, then
+This follows from the linearity of the expectation operator and the independence 
+of the observations in the random sample. If, in addition, the $Y_{i} \sim G\left( \mu,\sigma^{2} \right)$, 
+then
 
 $$\overline{Y} \sim G\left( \mu,\frac{\sigma^{2}}{n} \right)$$
 
-The sample mean of a random sample from a Gaussian distribution also has a Gaussian distribution. Do we know anything about the distribution of $\overline{Y}$ if we randomly sample a non-Gaussian distribution? Yes, we do. That is the domain of the **central limit theorem**.
+The sample mean of a random sample from a Gaussian distribution also has a Gaussian 
+distribution. Do we know anything about the distribution of $\overline{Y}$ if we 
+randomly sample a non-Gaussian distribution? Yes, we do. That is the domain of the 
+**central limit theorem**.
 
 ::: definition
 ::: definition-header
@@ -785,7 +1107,8 @@ Central Limit Theorem
 :::
 
 ::: definition-container
-Let $Y_{1},\cdots,Y_{n}$ be independent and identically distributed random variables with mean $\mu$ and variance $\sigma^{2} < \infty.$ The distribution of
+Let $Y_{1},\cdots,Y_{n}$ be independent and identically distributed random 
+variables with mean $\mu$ and variance $\sigma^{2} < \infty.$ The distribution of
 
 $$\frac{\overline{Y} - \mu}{\sigma/\sqrt{n}}$$
 
@@ -793,22 +1116,42 @@ converges to that of a standard normal random variable as $n \rightarrow \infty$
 :::
 :::
 
-These amazing properties contribute to the Gaussian distribution being the most important probability distribution.
-Most continuous attributes actually do not behave like Gaussian random variables at all, they often have a restricted
-range or are skewed or have heavier tails than a Gaussian random variable. There is really nothing *normal* about 
-this distribution, which is one reason why we prefer the name Gaussian over Normal distribution.
+These amazing properties contribute to the Gaussian distribution being the most 
+important probability distribution. Most continuous attributes actually do not 
+behave like Gaussian random variables at all, they often have a restricted
+range or are skewed or have heavier tails than a Gaussian random variable. 
+There is really nothing *normal* about this distribution, which is one reason 
+why we prefer the name Gaussian over Normal distribution.
 
 :::{.callout-note title="What is normal?" collapse="true"}
-We avoid the use of the term normal to describe the Gaussian distribution for another reason: the connection of the concept of normality and this distribution to eugenics. The Belgian astronomer, statistician and mathematician Adolphe Quetelet (1796--1847) introduced the generalized notion of the normal. He studied the distribution of physical attributes and determined that the normal, the most representative, value of an attribute is its average. Discrepancies above and below the average were considered "errors". Early applications of the Gaussian distribution were in the study of measurement errors. C.F. Gauss used the distribution to represent errors in the measurement of celestial bodies.
+We avoid the use of the term normal to describe the Gaussian distribution for 
+another reason: the connection of the concept of normality and this distribution 
+to eugenics. The Belgian astronomer, statistician and mathematician Adolphe Quetelet
+(1796--1847) introduced the generalized notion of the normal. He studied the 
+distribution of physical attributes and determined that the normal, the most
+representative, value of an attribute is its average. Discrepancies above and 
+below the average were considered "errors". Early applications of the Gaussian 
+distribution were in the study of measurement errors. C.F. Gauss used the 
+distribution to represent errors in the measurement of celestial bodies.
 
-Prior to Quetelet, the view of "norm" and "normality" was associated with carpentry. The carpenter square is also called the norm, and in normal construction everything is at right angles. With Quetelet, the middle of the distribution, the center, became the "new normal." There is nothing objectionable so far. 
+Prior to Quetelet, the view of "norm" and "normality" was associated with carpentry. 
+The carpenter square is also called the norm, and in normal construction everything 
+is at right angles. With Quetelet, the middle of the distribution, the center, 
+became the "new normal." There is nothing objectionable so far. 
 
-However, this view did not sit well with Francis Galton, who introduced the term eugenics. Galton replaced the term "error" with standard deviation and considered variability within a human population as potential for racial progress [@GrueHeiberg]. The bell shape of the normal distribution was not used to focus our attention on the average, as Quetelet did. Galton introduced quartiles to categorize the area under the normal into sections of greater and lesser genetic worth. That is not normal!
+However, this view did not sit well with Francis Galton, who introduced the term 
+eugenics. Galton replaced the term "error" with standard deviation and considered 
+variability within a human population as potential for racial progress [@GrueHeiberg]. 
+The bell shape of the normal distribution was not used to focus our attention on 
+the average, as Quetelet did. Galton introduced quartiles to categorize the area 
+under the normal into sections of greater and lesser genetic worth. That is not 
+normal!
 :::
 
 ## Sampling Distributions {#sec-prob-sampling-dist}
 
-Many important probability distributions are related to sampling data from Gaussian processes, $t$, $\chi^{2}$, and $F$ distributions most importantly.
+Many important probability distributions are related to sampling data from Gaussian 
+processes, $t$, $\chi^{2}$, and $F$ distributions most importantly.
 
 ### Chi-Square, $\chi^2_\nu$
 
@@ -820,17 +1163,26 @@ has p.d.f.
 
 $$f(x) = \frac{1}{2^{\frac{k}{2}}\Gamma\left( \frac{k}{2} \right)}x^{\frac{k}{2}}e^{- x/2},\ \ \ \ \ x \geq 0$$
 
-This is known as the Chi-square distribution with $k$ degrees of freedom, abbreviated $\chi_{k}^{2}$. The mean and variance of a $\chi_{k}^{2}$ random variable is $\Exp\lbrack X\rbrack = k$ and $\Var\lbrack X\rbrack = 2k$.
+This is known as the Chi-square distribution with $k$ degrees of freedom, abbreviated 
+$\chi_{k}^{2}$. The mean and variance of a $\chi_{k}^{2}$ random variable is 
+$\Exp\lbrack X\rbrack = k$ and $\Var\lbrack X\rbrack = 2k$.
 
-The degrees of freedom can be thought of as the number of independent pieces of information that contribute to the $\chi^{2}$ variable. Here, that is the number of independent $G(0,1)$ variables. Since the $\chi^{2}$ variable is the sum of their squared values, the density shifts more to the right as the degrees of freedom increase.
+The degrees of freedom can be thought of as the number of independent pieces of 
+information that contribute to the $\chi^{2}$ variable. Here, that is the number 
+of independent $G(0,1)$ variables. Since the $\chi^{2}$ variable is the sum of 
+their squared values, the density shifts more to the right as the degrees of 
+freedom increase.
 
 ![Probability density function of a $\chi_4^2$ and a $\chi_8^2$ random variable. $\chi^2$ variables are skewed to the right, the density shifts to the right with increasing degrees of freedom.](images/mathstat/ChiSquare.png){fig-align="center" width="75%"}
 
-$\chi^{2}$ distributions are important to capture the sample distributions of dispersion statistics. If $Y_{1},\cdots,Y_{n}$ are a random sample from a $G\left( \mu,\sigma^{2} \right)$ distribution, and the sample variance is
+$\chi^{2}$ distributions are important to capture the sample distributions of 
+dispersion statistics. If $Y_{1},\cdots,Y_{n}$ are a random sample from a 
+$G\left( \mu,\sigma^{2} \right)$ distribution, and the sample variance is
 
 $$S^{2} = \frac{1}{n - 1}\sum_{i = 1}^{n}\left( Y_{i} - \overline{Y} \right)^{2}$$
 
-Then the random variable $\frac{(n - 1)S^{2}}{\sigma^{2}}$ follows a $\chi_{n - 1}^{2}$ distribution. It follows immediately that $S^{2}$ is an unbiased estimator of $\sigma^{2}$:
+Then the random variable $\frac{(n - 1)S^{2}}{\sigma^{2}}$ follows a $\chi_{n - 1}^{2}$ 
+distribution. It follows immediately that $S^{2}$ is an unbiased estimator of $\sigma^{2}$:
 
 $$\Exp\left\lbrack \frac{(n - 1)S^{2}}{\sigma^{2}} \right\rbrack = n - 1$$
 
@@ -838,33 +1190,49 @@ $$\Exp\left\lbrack S^{2} \right\rbrack = \sigma^{2}$$
 
 ### Students' t, $t_\nu$
 
-In the Gaussian case you can also show that $\overline{Y}$ and $S^{2}$ are independent random variables. This is important because of another distributional result: if $Z \sim G(0,1)$ and $U \sim \chi_{\nu}^{2}$, and $Z$ and $U$ are independent, then the ratio
+In the Gaussian case you can also show that $\overline{Y}$ and $S^{2}$ are 
+independent random variables. This is important because of another distributional 
+result: if $Z \sim G(0,1)$ and $U \sim \chi_{\nu}^{2}$, and $Z$ and $U$ are 
+independent, then the ratio
 
 $$T = \frac{Z}{\sqrt{U/\nu}}$$
 
-has a $t$ distribution with $\nu$ degrees of freedom. In honor of Student, the pseudonym used by William Gosset for publishing statistical research while working at Guinness Breweries, the $t$ distribution is also known as Student's $t$ distribution or Student's distribution for short.
+has a $t$ distribution with $\nu$ degrees of freedom. In honor of Student, the 
+pseudonym used by William Gosset for publishing statistical research while working 
+at Guinness Breweries, the $t$ distribution is also known as Student's $t$ distribution 
+or Student's distribution for short.
 
-As with the $\chi_{\nu}^{2}$ distributions, the shape of the $t_{\nu}$ distribution depends on the degrees of freedom $\nu$. However, the $t_{\nu}$ distributions are all symmetric about zero and the degrees of freedom affect how heavy the tails are.
+As with the $\chi_{\nu}^{2}$ distributions, the shape of the $t_{\nu}$ distribution 
+depends on the degrees of freedom $\nu$. However, the $t_{\nu}$ distributions are 
+all symmetric about zero and the degrees of freedom affect how heavy the tails are.
 
 ![Densities for $t$ distributions with 2, 4, 10 degrees of freedom, and a standard normal density.](images/mathstat/Tdistributions.png){fig-align="center" width="75%"}
 
-As the degrees of freedom grow, the $t$ density approaches that of the standard normal distribution.
+As the degrees of freedom grow, the $t$ density approaches that of the standard 
+normal distribution.
 
-We can now combine the results about the sampling distributions of $\overline{Y}$ and $S^{2}$ to derive the distribution of
+We can now combine the results about the sampling distributions of $\overline{Y}$ 
+and $S^{2}$ to derive the distribution of
 
 $$\frac{\overline{Y} - \mu}{S/\sqrt{n}}$$
 
-We know that $\overline{Y} \sim G\left( \mu,\frac{\sigma^{2}}{n} \right)$ and that $\frac{(n - 1)S^{2}}{\sigma^{2}}$ follows a $\chi_{n - 1}^{2}$ distribution. Furthermore, $\overline{Y}$ and $S^{2}$ are independent. Taking ratios as required by the definition of a $t$ random variable yields
+We know that $\overline{Y} \sim G\left( \mu,\frac{\sigma^{2}}{n} \right)$ and 
+that $\frac{(n - 1)S^{2}}{\sigma^{2}}$ follows a $\chi_{n - 1}^{2}$ distribution. 
+Furthermore, $\overline{Y}$ and $S^{2}$ are independent. Taking ratios as 
+required by the definition of a $t$ random variable yields
 
 $$\frac{\frac{\overline{Y} - \mu}{\sigma/\sqrt{n}}}{\sqrt{S^{2}{/\sigma}^{2}}} = \frac{\overline{Y} - \mu}{S/\sqrt{n}} \sim t_{n - 1}$$
 
 ### F, $F_{\nu_1, \nu_2}$
 
-If $\chi_{1}^{2}$ and $\chi_{2}^{2}$ are independent chi-square random variables with $\nu_{1}$ and $\nu_{2}$ degrees of freedom, respectively, then the ratio
+If $\chi_{1}^{2}$ and $\chi_{2}^{2}$ are independent chi-square random variables
+with $\nu_{1}$ and $\nu_{2}$ degrees of freedom, respectively, then the ratio
 
 $$F = \frac{\chi_{1}^{2}/v_{1}}{\frac{\chi_{2}^{2}}{\nu_{2}}}$$
 
-follows an $F$ distribution with $\nu_{1}$ numerator and $\nu_{2}$ denominator degrees of freedom. We denote this fact $F\sim F_{\nu_{1},\nu_{2}}$. The mean and variance of the $F$ distribution are
+follows an $F$ distribution with $\nu_{1}$ numerator and $\nu_{2}$ denominator 
+degrees of freedom. We denote this fact $F\sim F_{\nu_{1},\nu_{2}}$. The mean 
+and variance of the $F$ distribution are
 
 $$\Exp\lbrack F\rbrack = \frac{\nu_{2}}{\nu_{2} - 2}\ \ \ \ \ \ \ \Var\lbrack F\rbrack = \frac{2\nu_{2}^{2}(\nu_{1} + \nu_{2} + 2)}{\nu_{1}\left( \nu_{2} - 2 \right)^{2}(\nu_{2} - 4)}$$
 
@@ -872,22 +1240,33 @@ The mean exists only if $\nu_{2} > 2$ and the variance exists onlu if $\nu_{2} >
 
 ![Density functions of an $F_{4,12}$ and an $F_{12,20}$ distribution.](images/mathstat/Fdistributions.png){fig-align="center" width="75%"}
 
-When sampling from a Gaussian distribution we established that $\frac{(n - 1)S^{2}}{\sigma^{2}}$ follows a $\chi_{n - 1}^{2}$ distribution. Suppose that we have two samples, one of size $n_{1}$ from a $G(\mu_{1},\sigma_{1}^{2})$ distribution and one of size $n_{2}$ from a $G(\mu_{2},\sigma_{2}^{2})$ distribution. If the estimators of the sample variances in the two samples are denoted $S_{1}^{2}$ and $S_{2}^{2}$, then the ratio
+When sampling from a Gaussian distribution we established that $\frac{(n - 1)S^{2}}{\sigma^{2}}$ 
+follows a $\chi_{n - 1}^{2}$ distribution. Suppose that we have two samples, 
+one of size $n_{1}$ from a $G(\mu_{1},\sigma_{1}^{2})$ distribution and one of 
+size $n_{2}$ from a $G(\mu_{2},\sigma_{2}^{2})$ distribution. If the estimators
+of the sample variances in the two samples are denoted $S_{1}^{2}$ and $S_{2}^{2}$, 
+then the ratio
 
 $$\frac{\frac{S_{1}^{2}}{\sigma_{1}^{2}}}{S_{2}^{2}/\sigma_{2}^{2}}$$
 
 has an $F_{n_{1} - 1,n_{2} - 1}$ distribution.
 
-$F$ distributions play an important role in the analysis of variance, where the ratios are ratios of mean squares.
+$F$ distributions play an important role in the analysis of variance, where the 
+ratios are ratios of mean squares.
 
 Recall that the $T$ random variable in the Gaussian case can be written as
 
 $$T = \frac{\frac{\overline{Y} - \mu}{\sigma/\sqrt{n}}}{\sqrt{S^{2}{/\sigma}^{2}}}$$
 
-The numerator is a $G(0,1)$ variable, so squaring it gives a $\chi_{1}^{2}$ variable. The square of the denominator is a scaled $\chi_{n - 1}^{2}$ variable, $S^{2}/\sigma^{2}$. Also, because $\overline{Y}$ and $S^{2}$ are independent, the squares of the numerator and denominator are independent. It thus follows that
+The numerator is a $G(0,1)$ variable, so squaring it gives a $\chi_{1}^{2}$ variable. 
+The square of the denominator is a scaled $\chi_{n - 1}^{2}$ variable, $S^{2}/\sigma^{2}$. 
+Also, because $\overline{Y}$ and $S^{2}$ are independent, the squares of the numerator 
+and denominator are independent. It thus follows that
 
 $$T^{2} = \frac{\left( \overline{Y} - \mu \right)^{2}}{S^{2}/n}$$
 
 follows an $F_{1,n - 1}$ distribution.
 
-This fact is used in software packages that might report the result of an $F$-test instead of the result of a two-sided $t$-test. The two are equivalent and the $p$-values are the same.
+This fact is used in software packages that might report the result of an $F$-test 
+instead of the result of a two-sided $t$-test. The two are equivalent and the $p$-values 
+are the same.
