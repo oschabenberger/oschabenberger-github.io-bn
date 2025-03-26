@@ -1,0 +1,1192 @@
+
+# The Bias-Variance Tradeoff {#sec-bias-var}
+
+
+:::{.callout-tip title="Quotes"}
+::: {.flushright}
+We love to predict things---and we aren't very good at it.\
+[Nate Silver, The Signal and the Noise]{.quoteauthor}\
+\
+It is difficult to predict, especially the future.\
+[Niels Bohr]{.quoteauthor}\
+\
+The best way to predict the future is to create it.\
+[Peter Drucker, often attributed to Abraham Lincoln]{.quoteauthor}
+:::
+:::
+
+## Introduction {#sec-bias-var--intro}
+
+In *The Signal and the Noise*, @Silver2012 [p. 52] cites a study at the University of
+Pennsylvania that found when political scientists claim that a political outcome
+had **no chance** of occurring, it happened about 15\% of the time. And of the absolutely
+sure things they proclaimed, 25\% failed to occur. Now we know that
+predictions are themselves uncertain, that is why polling results have margins
+of error. But when you predict that something has a zero chance of happening,
+then you ought to be pretty confident in that, the margin of error should be 
+small, definitely not 15\%.
+
+This is an example of a prediction that is not very good. 
+
+If a plane had a 29\% of crashing, you would probably consider the 
+risk of flying too high and stay on the ground. In the run-up to the 2016
+presidential election, FiveThirtyEight predicted a 71\% chance for Clinton to
+win the Electoral College and a 29\% chance for Trump to win. This was a much
+higher chance of a Trump victory than the 1\% to 15\% chance many other models 
+produced. As it turned out, the FiveThirtyEight model was much better than the
+models that treated the Clinton victory as a near certainty. But both models
+were wrong about the outcome of the election.
+
+@Silver2012 points out
+
+:::{.quote}
+Most people fail to recognize how much easier it is to understand an event
+after the fact when you have all the evidence at your disposal. [...] But making 
+better *first guesses* under conditions of uncertainty is an entirely different
+enterprise than second-guessing.
+:::
+
+It is much easier to sift through intelligence after a terrorist attack and to
+point out what was missed than it is finding the signals in the cacophony of 
+data before the attack.
+
+---
+
+It seems that we make a lot of predictions and are not very good at it.
+And even if our predictions are spot-on, we might not act on them or ignore them.
+Predictions that contradict our intuition or preferred narrative can be ignored 
+or explained away. Our personal judgment is not as good as you might think. We 
+tend to overvalue our own opinion and this trend increases the more we know. 
+80% of doctors believe they are in the top 20% of their profession. More than 
+half of them are clearly wrong!
+
+So when a prediction does not come true, does the fault lie with the model of the 
+world or the world itself? If there is a 80% chance of rain tomorrow, then you
+might see sunny skies. If, in fact, the long run ratio of days that have sunny
+skies when the forecast calls for an 80% chance of rain is 1 in 5, then the 
+forecast model is correct. We cannot fault the model that calls for a 80% chance
+of rain for the occasional sunny skies. 
+
+Now compare this scenario to the following. In the build-up of the the 2008 
+financial crisis, Standard \& Poor gave CDOs, a type of mortgage-backed securities, 
+a stellar AAA credit rating, meaning that there is only a 0.0012 probability that 
+they would fail to pay out over the next 5 years [@Silver2012, p. 20]. In reality, 
+28% of the AAA-rated CDOs defaulted. Had the world of financial markets drastically 
+changed to bring about such a massive change in default rates (200x!)? Or is it 
+more likely that the default models of the rating agencies were wrong? 
+It was the latter.
+
+---
+
+We predict all the time. On the drive to work we choose this route over that
+route because we predict it has less traffic, fewer red lights, or we are less
+likely to get caught behind a school bus. We probably make this choice instinctively,
+without much deliberation, based on experience, instantaneously processing information
+about the time of day, weather, etc.
+
+You might choose Netflix over Paramount+ one evening because you think (predict!) it is more 
+likely that you'll find content that interests you. This is a prediction problem.
+You are also on the receiving end of predictions every day. A company offers you a
+discount because it predicts that without an incentive you might shop at a
+competitor. We are being served weather forecasts (predictions!) on the local
+news and apps every day.
+
+---
+
+If we are not good at predicting, can we learn from what bad predictions have in 
+common? @Silver2012 [p. 20] lists attributes of bad predictions:
+
+1. Focus on the signals that tell a story about the world as we would like it to
+be, not how it really is.
+2. Ignore the risks that are most difficult to measure, although they pose the 
+greatest risk to our well-being.
+3. Make approximations and assumptions that are much cruder than we realize.
+4. Dislike (abhor) uncertainty, even if it is an integral part of the problem.
+
+If we want to avoid these mistakes with predictions based on modeling data we need to
+
+1. Build models that are useful abstractions, not too complicated and not too
+simple
+2. Find the signal that the data is trying to convey about the problem under
+study, allowing for generalization beyond the data at hand.
+3. Be honest about the quality of the data and the limitations to capture complex
+systems through quantification.
+4. Quantify the uncertainty in the conclusions drawn from the model.
+
+The **bias-variance** tradeoff in statistical learning is the tension between
+models that are overly simple and those that are overly complex, finding models
+that generalize well and do not follow the training data too closely. Resolving 
+the bias-variance tradeoff is our weapon to build models that satisfy 1. and 
+2. in the list.
+
+To demonstrate the tradeoff we use a simulation.
+
+## A Simulation
+
+Suppose that one hundred observations on variables $Y$ and $X$ are sampled from a
+population. We suspect that the variables are related and wish to predict the
+difficult-to-measure attribute $Y$ from the easy-to-measure attribute $X$.
+Figure @fig-gendata1 displays the data for the random sample, inspired by
+[Notes on Predictive Modeling](https://bookdown.org/egarpor/PM-UC3M/) by
+Eduardo García-Portugués at Carlos III University of Madrid.
+
+```{r, echo=FALSE}
+set.seed(12345)
+n <- 100
+eps <- rnorm(n, sd = 2)
+m <- function(x) x^2 * cos(x)
+X <- rnorm(n, sd = 2)
+Y <- m(X) + eps
+xGrid <- seq(-5, 6, l = 250)
+```
+
+```{r, fig.align="center", out.width="75%", fig.asp=0.8, echo=FALSE}
+#| fig.cap: 100 observations sampled from a population where $Y$ and $X$ are related.
+#| label: fig-gendata1
+#| lightbox:
+#| 
+plot(X, Y, las=1, bty="l")
+rug(X, side = 1); 
+rug(Y, side = 2)
+```
+
+There is noise in the data but there is also a signal, a systematic change in
+$Y$ with $X$. How should we go about extracting the signal? @fig-gendata-fit1 
+shows three possible models for the signal.
+
+```{r, message=FALSE, warning=FALSE, fig.align="center", out.width="75%", fig.asp=0.8, echo=FALSE}
+#| fig.cap: Observed data and three possible models for the signal.
+#| label: fig-gendata-fit1
+#| lightbox:
+#| 
+l_01 <- loess(Y ~ X,degree=1, span=0.075)
+l_03 <- loess(Y ~ X,degree=1, span=0.3)
+l_10 <- loess(Y ~ X,degree=1, span=1)
+
+plot(X,Y,las=1, bty="l")
+lines(xGrid,
+      predict(l_01, newdata=data.frame("X"=xGrid)), 
+      col="darkgreen", 
+      lty="dashed",
+      lwd=2)
+lines(xGrid,
+      predict(l_03, newdata=data.frame("X"=xGrid)), 
+      col="red", 
+      lty="dotted",
+      lwd=2)
+lines(xGrid,
+      predict(l_10, newdata=data.frame("X"=xGrid)), 
+      col="blue", 
+      lty="solid",
+      lwd=2)
+
+```
+
+The three models differ in their degree of **smoothness**. The solid (blue) line
+is the most smooth, followed by the dotted (red) line. The dashed (green) line is
+the least smooth, it follows the observed data points more closely. The solid (blue)
+line is probably not a good representation of the signal, it does not capture 
+the trend in the data for small or large values. This model exhibits **bias**; 
+it overestimates for small values of $X$ and underestimates for large values of
+$X$. On the other hand, the dashed (green) model exhibits a lot of **variability**.
+
+The question in modeling these data becomes: what is the appropriate degree of smoothness?
+In one extreme case the model interpolates the observed data points the 
+model reproduces the 100 data points. Such a model fits the observed data really
+well but you can imagine that it does not generalize well to a new data point
+that was not used in training the model. Such a model is said to be **overfitting**
+the data. The dashed (green) line in @fig-gendata-fit1 approaches this extreme.
+
+In another extreme case, the model is too rigid and does not extract sufficient
+signal from the noise. Such a model is said to be **underfitting** the data.
+The solid (blue) line in @fig-gendata-fit1 is likely a case in point.
+
+### More Simulations
+
+The concept of model bias and model variability relates not to the behavior of
+the model for the sample data at hand, although in practical applications this
+is all we have to judge a model. Conceptually, we imagine repeating the process
+that generated the sample. Imagine that we draw two more sets of 100 observations
+each. Now we have 300 observations, 3 sets of 100 each. @fig-gendata2 overlays
+the three samples an identifies observations belonging to the same sample with
+colors and symbols.
+
+
+```{r, echo=FALSE}
+m <- function(x) x^2 * cos(x)
+eps2 <- rnorm(n, sd = 2)
+X2 <- rnorm(n, sd = 2)
+Y2 <- m(X) + eps2
+
+eps3 <- rnorm(n, sd = 2)
+X3 <- rnorm(n, sd = 2)
+Y3 <- m(X) + eps3
+```
+
+```{r, fig.align="center", out.width="90%", fig.asp=0.8, echo=FALSE}
+#| fig.cap: Three realizations of 100 observations each.
+#| label: fig-gendata2
+#| lightbox:
+#| 
+plot(X, Y, las=1, bty="l", col="black", pch=1., ylim=c(-16,18))
+points(X2,Y2, col="red", pch=2)
+points(X3,Y3, col="blue", pch=3)
+```
+
+The process of fitting the three models displayed in @fig-gendata-fit1 can now
+be repeated for the two other samples. @fig-gendata-fit2_1 displays the three
+versions of the solid (blue) model. @fig-gendata-fit2_1 displays the three
+versions of the dotted (red) model and @fig-gendata-fit2_3 the versions of the
+dashed (green) model.
+
+```{r, message=FALSE, warning=FALSE, fig.align="center", out.width="65%", fig.asp=0.8, echo=FALSE}
+#| fig.cap: The solid (blue) model fit to each of the three samples.
+#| label: fig-gendata-fit2_1
+#| lightbox:
+#| 
+l_10 <- loess(Y ~ X,degree=1, span=1)
+l_102 <- loess(Y2 ~ X2,degree=1, span=1)
+l_103 <- loess(Y3 ~ X3,degree=1, span=1)
+
+plot(x=xGrid,
+     y=predict(l_10, newdata=data.frame("X"=xGrid)), 
+     xlab="X",
+     ylab="Y",
+     type="l",
+     las=1,
+     bty="l",
+     col="blue", 
+     lty="solid",
+     lwd=2,
+     ylim=c(-16,18))
+lines(xGrid,
+      predict(l_103, newdata=data.frame("X3"=xGrid)), 
+      col="blue", 
+      lty="solid",
+      lwd=2)
+lines(xGrid,
+      predict(l_102, newdata=data.frame("X2"=xGrid)), 
+      col="blue", 
+      lty="solid",
+      lwd=2)
+```
+
+
+```{r, message=FALSE, warning=FALSE, fig.align="center", out.width="65%", fig.asp=0.8, echo=FALSE}
+#| fig.cap: The dotted (red) model fit to each of the three samples.
+#| label: fig-gendata-fit2_2
+#| lightbox:
+#| 
+l_03 <- loess(Y ~ X,degree=1, span=0.3)
+l_032 <- loess(Y2 ~ X2,degree=1, span=0.3)
+l_033 <- loess(Y3 ~ X3,degree=1, span=0.3)
+
+plot(x=xGrid,
+     y=predict(l_03, newdata=data.frame("X"=xGrid)), 
+     xlab="X",
+     ylab="Y",
+     type="l",
+     las=1,
+     bty="l",
+     col="red", 
+     lty="dotted",
+     lwd=2,
+     ylim=c(-16,18))
+lines(xGrid,
+      predict(l_033, newdata=data.frame("X3"=xGrid)), 
+      col="red", 
+      lty="dotted",
+      lwd=2)
+lines(xGrid,
+      predict(l_032, newdata=data.frame("X2"=xGrid)), 
+      col="red", 
+      lty="dotted",
+      lwd=2)
+
+```
+
+```{r, message=FALSE, warning=FALSE, fig.align="center", out.width="65%", fig.asp=0.8, echo=FALSE}
+#| fig.cap: The dashed (green) model fit to each of the three samples.
+#| label: fig-gendata-fit2_3
+#| lightbox:
+#| 
+l_01 <- loess(Y ~ X,degree=1, span=0.075)
+l_012 <- loess(Y2 ~ X2,degree=1, span=0.075)
+l_013 <- loess(Y3 ~ X3,degree=1, span=0.075)
+
+plot(x=xGrid,
+     y=predict(l_01, newdata=data.frame("X"=xGrid)), 
+     xlab="X",
+     ylab="Y",
+     type="l",
+     las=1,
+     bty="l",
+     col="darkgreen", 
+     lty="dashed",
+     lwd=2,
+     ylim=c(-16,18))
+lines(xGrid,
+      predict(l_013, newdata=data.frame("X3"=xGrid)), 
+      col="darkgreen", 
+      lty="dashed",
+      lwd=2)
+lines(xGrid,
+      predict(l_012, newdata=data.frame("X2"=xGrid)), 
+      col="darkgreen", 
+      lty="dashed",
+      lwd=2)
+```
+
+Comparing the same model type for the three sets of 100 observations, it is clear
+that the blue model shows the most stability from set to set, the green model 
+shows the least stability (most variability), and the red model falls between
+the two.
+
+We also see now why the highly variable green model would not generalize well 
+to a new observation. It follows the training data too closely and is sensitive
+to small changes in the data. 
+
+### The True Model
+
+Since this is a simulation study we have the benefit of knowing the underlying
+signal around which the data were generated. This is the same signal for all 
+three sets of 100 observations and we can compare the models in @fig-gendata-fit2_1
+through @fig-gendata-fit2_3 against the true model (@fig-gendata-fit3_1 through
+@fig-gendata-fit3_3)
+
+```{r, message=FALSE, warning=FALSE, fig.align="center", out.width="65%", fig.asp=0.8, echo=FALSE}
+#| fig.cap: The solid (blue) model fit to each of the three samples and the true signal.
+#| label: fig-gendata-fit3_1
+#| lightbox:
+#| 
+plot(x=xGrid,
+     y=predict(l_10, newdata=data.frame("X"=xGrid)), 
+     xlab="X",
+     ylab="Y",
+     type="l",
+     las=1,
+     bty="l",
+     col="blue", 
+     lty="solid",
+     lwd=2,
+     ylim=c(-16,18))
+lines(xGrid, m(xGrid), col = "black",lwd=1.5)
+lines(xGrid,
+      predict(l_103, newdata=data.frame("X3"=xGrid)), 
+      col="blue", 
+      lty="solid",
+      lwd=2)
+lines(xGrid,
+      predict(l_102, newdata=data.frame("X2"=xGrid)), 
+      col="blue", 
+      lty="solid",
+      lwd=2)
+```
+
+
+```{r, message=FALSE, warning=FALSE, fig.align="center", out.width="65%", fig.asp=0.8, echo=FALSE}
+#| fig.cap: The dotted (red) model fit to each of the three samples and the true signal.
+#| label: fig-gendata-fit3_2
+#| lightbox:
+#| 
+plot(x=xGrid,
+     y=predict(l_03, newdata=data.frame("X"=xGrid)), 
+     xlab="X",
+     ylab="Y",
+     type="l",
+     las=1,
+     bty="l",
+     col="red", 
+     lty="dotted",
+     lwd=2,
+     ylim=c(-16,18))
+lines(xGrid, m(xGrid), col = "black",lwd=1.5)
+lines(xGrid,
+      predict(l_033, newdata=data.frame("X3"=xGrid)), 
+      col="red", 
+      lty="dotted",
+      lwd=2)
+lines(xGrid,
+      predict(l_032, newdata=data.frame("X2"=xGrid)), 
+      col="red", 
+      lty="dotted",
+      lwd=2)
+```
+
+
+```{r, message=FALSE, warning=FALSE, fig.align="center", out.width="65%", fig.asp=0.8, echo=FALSE}
+#| fig.cap: The dashed (green) model fit to each of the three samples and the true signal.
+#| label: fig-gendata-fit3_3
+#| lightbox:
+#| 
+plot(x=xGrid,
+     y=predict(l_01, newdata=data.frame("X"=xGrid)), 
+     xlab="X",
+     ylab="Y",
+     type="l",
+     las=1,
+     bty="l",
+     col="darkgreen", 
+     lty="dashed",
+     lwd=2,
+     ylim=c(-16,18))
+lines(xGrid, m(xGrid), col = "black",lwd=1.5)
+lines(xGrid,
+      predict(l_013, newdata=data.frame("X3"=xGrid)), 
+      col="darkgreen", 
+      lty="dashed",
+      lwd=2)
+lines(xGrid,
+      predict(l_012, newdata=data.frame("X2"=xGrid)), 
+      col="darkgreen", 
+      lty="dashed",
+      lwd=2)
+```
+
+Against the backdrop of the true signal, the solid (blue) and dashed (green) 
+models do not look good. The former is biased, it is not sufficiently flexible
+to capture the signal. The latter is too flexible and overfits the signal.
+
+## The Mean Squared Error
+
+The simulation is unrealistic for two reasons: 
+
+- We do not know the true signal in practice, otherwise there would not be a modeling problem.
+- We have only a single sample of $n$ observations and cannot study the behavior
+of the model under repetition of the data collection process.
+
+The considerations are the same, however. We do not want a model that has too
+much variability or a model that has too much bias. Somehow, the two need to be
+balanced based on a single sample of data. We need a method of measuring 
+bias and variance of a model and to balance the two.
+
+Mathematically, we can express the problem of predicting a new observation as 
+follows. Since the true function is unknown, it is also unknown at the new data 
+location $x_{0}$. However, we observed a value $y$ at $x_{0}$. Based on the chosen
+model we can predict at $x_{0}$. But since we do not know the 
+true function $f(x)$, we can only measure the discrepancy between the value we 
+observe and the value we predicted; this quantity is known as the 
+**error of prediction** (@tbl-pred-error).
+
++-----------------------------------------------------------+-----------------------------------------------------------------------------------------+------------+
+| Quantity                                                  | Meaning                                                                                 | Measurable |
++===========================================================+=========================================================================================+:==========:+
+| $f(x)$                                                    | The true but unknown function                                                           | No         |
++-----------------------------------------------------------+-----------------------------------------------------------------------------------------+------------+
+| $f\left( x_{0} \right)$                                   | The value of the function at a data point $x_{0}$ that was not part of fitting the model | No         |
++-----------------------------------------------------------+-----------------------------------------------------------------------------------------+------------+
+| $\widehat{f}\left( x_{0} \right)$                         | The estimated value of the function at the new data point $x_{0}$                       | Yes        |
++-----------------------------------------------------------+-----------------------------------------------------------------------------------------+------------+
+| $f\left( x_{0} \right) - \widehat{f}\left( x_{0} \right)$ | The function discrepancy                                                                | No         |
++-----------------------------------------------------------+-----------------------------------------------------------------------------------------+------------+
+| $y -\widehat{f}\left( x_{0} \right)$                      | The error of prediction                                                                 | Yes        |
++-----------------------------------------------------------+-----------------------------------------------------------------------------------------+------------+
+
+: Components that contribute to bias and variance of an estimator. The last column designates whether the quantity can be measured in data science applications. {#tbl-pred-error .striped}
+
+Multiple components contribute to the prediction error: the variability of the 
+data $y$, the discrepancy between $f\left( x_{0} \right)$ and 
+$\widehat{f}\left( x_{0} \right)$, and the variability of the function 
+$\widehat{f}\left( x_{0} \right)$. The variability of $y$ is also called the 
+**irreducible variability** or the **irreducible error** because the observations 
+will vary according to their natural variability. Once we have decided which 
+attribute to observe, how to sample it, and how to measure it, this variability 
+is a given. The other two sources relate to the **accuracy** and **precision** 
+of the prediction; or, to use statistical terms, the bias and the variance.
+
+### Accuracy and Precision
+
+In the context of measuring devices, accuracy and precision are defined as
+
+-   **Accuracy**: How close are measurements to the true value
+
+-   **Precision**: How close are measurements to each other
+
+To demonstrate the difference between accuracy and precision, the dart board bullseye 
+metaphor is helpful. The following figure shows four scenarios of shooting four 
+darts each at a dart board. The goal is to hit the bullseye in the center of the 
+board; the bullseye represents the true value we are trying to measure. **A** is 
+the result of a thrower who is neither accurate nor precise. The throws vary greatly 
+from each other (lack of precision), and the average location is far from the 
+bullseye. **B** is the result of a thrower who is inaccurate but precise. The 
+throws group tightly together (high precision) but the average location misses the 
+bullseye (the average distance from the bullseye is not zero). The thrower with 
+pattern **C** is not precise, but accurate. The throws vary widely (lack of precision) 
+but the average distance of the darts from the bullseye is close to zero---on average 
+the thrower hits the bullseye. Finally, the thrower in **D** is accurate and precise; 
+the darts group tightly together and are centered around the bullseye.
+
+![Accuracy and precision---the dart board bullseye metaphor.](images/Bullseye.png){#fig-sl-dartboard .lightbox fig-align="center"}
+
+We see that both accuracy and precision describe not a single throw, but a 
+pattern over many replications. The long-run behavior is described by the 
+**expected value**. The accuracy of a statistical estimator is the proximity 
+of its expected value from the target value. An estimator that is not accurate 
+is said to be **biased**.
+
+::: definition
+::: definition-header
+Definition: Bias
+:::
+
+::: definition-container
+An estimator $h\left( \text{Y} \right)$ of the parameter $\theta$ is said to be 
+biased if its expected value does not equal $\theta$.
+
+$$
+\text{Bias}\left\lbrack h\left( \textbf{Y} \right);\theta \right\rbrack = \text{E}\left\lbrack h\left( \textbf{Y} \right) - \theta \right\rbrack = \text{E}\left\lbrack h\left( \textbf{Y} \right) \right\rbrack - \theta
+$$
+:::
+:::
+
+The last equality in the definition follows because the expected value of a constant
+is identical to the constant. In the dartboard example, $\theta$ is the bullseye 
+and $h\left( \text{Y} \right)$ is the distance of the dart from the bullseye. The 
+bias is the expected value of that distance, the average across many repetitions 
+(dart throws).
+
+
+### Combining Accuracy and Precision 
+
+We can now combine the concepts of accuracy and precision of a prediction into 
+a single statistic, the **mean squared error**. But first we have to take another
+small detour to be clear about what we want to predict.
+
+Now consider a generic model of the form 
+$$
+Y = f(x) + \epsilon
+$$
+
+$\epsilon$ is a random variable with mean 0 and variance $\sigma^{2}$, the 
+irreducible variability. For a new observation with input value $x_0$ the model 
+looks the same
+$$
+Y_{0} = f\left( x_{0} \right) + \epsilon
+$$
+but only $x_{0}$ is known.
+
+If we make predictions under this model there are two possible targets: 
+
+- $f\left( x_{0} \right)$ 
+- $f\left( x_{0} \right) + \epsilon$. 
+
+The first is the expected value of $Y_{0}$: 
+$$
+\text{E}\left\lbrack Y_{0} \right\rbrack = f\left( x_{0} \right) + \text{E}\lbrack\epsilon\rbrack = f\left( x_{0} \right)
+$$
+
+This is a fixed quantity (a constant), not a random variable. The second is a random 
+variable. Interestingly, the estimator of both quantities is the same, 
+$\widehat{f}\left( x_{0} \right)$. The difference comes into play when we consider 
+the uncertainty associated with estimating $f\left( x_{0} \right)$ or with predicting 
+$f\left( x_{0} \right) + \epsilon$---more on this later.
+
+::: definition
+::: definition-header
+Definition: Mean Squared Error (MSE)
+:::
+
+::: definition-container
+The mean squared error of estimator $h\left( \textbf{Y} \right)$ for target $\theta$ is
+
+\begin{align*}
+\text{MSE}\left\lbrack h\left( \textbf{Y} \right);\ \theta \right\rbrack &= \text{E}\left\lbrack \left( h\left( \textbf{Y} \right) - \theta \right)^{2} \right\rbrack \\
+&= \text{E}\left\lbrack \left( h\left( \text{Y} \right) - \text{E}\left\lbrack h\left( \textbf{Y} \right) \right\rbrack \right)^{2} \right\rbrack + \left( \text{E}\left\lbrack h\left( \textbf{Y} \right) \right\rbrack - \theta \right)^{2}\\
+
+&= \text{Var}\left\lbrack h\left( \textbf{Y} \right) \right\rbrack + \text{Bias}\left\lbrack h\left( \textbf{Y} \right);\theta \right\rbrack^{2}
+\end{align*}
+
+:::
+:::
+
+The mean squared error is the expected square deviation between the estimator and 
+its target. That is akin to the definition of the variance, but the MSE is only 
+equal to the variance if the estimator is unbiased for the target. As the last line 
+of the definition shows, the MSE has two components, the variability of the estimator 
+and the squared bias. The bias enters in squared terms because the variance is 
+measured in squared units and because negative and positive bias discrepancies 
+should not balance out.
+
+If we apply the MSE definition to the problem of using estimator 
+$\widehat{f}\left( x_{0} \right)$ to predict $f\left( x_0 \right)$,
+
+$$
+\text{MSE}\left\lbrack \widehat{f}\left( x_{0} \right);f\left( x_{0} \right)\  \right\rbrack = \text{Var}\left\lbrack \widehat{f}\left( x_{0} \right) \right\rbrack + \text{Bias}\left\lbrack \widehat{f}\left( x_{0} \right);f\left( x_{0} \right) \right\rbrack^{2}
+$$
+
+we see how the variability of the estimator and its squared bias contribute to 
+the overall MSE. Similarly, if the target is to predict the new observation, 
+rather than its mean, the expression becomes
+
+$$
+\text{MSE}\left\lbrack \widehat{f}\left( x_{0} \right);Y_{0} \right\rbrack\text{ = MSE}\left\lbrack \widehat{f}\left( x_{0} \right);f\left( x_{0} \right) + \epsilon\  \right\rbrack = \text{Var}\left\lbrack \widehat{f}\left( x_{0} \right) \right\rbrack + \text{Bias}\left\lbrack \widehat{f}\left( x_{0} \right);f\left( x_{0} \right) \right\rbrack^{2} + \sigma^{2}
+$$
+
+You now see why $\sigma^{2}$ is called the irreducible error. Even if the estimator 
+$\widehat{f}\left( x_{0} \right)$ would have no variability and be unbiased, the 
+mean squared error in predicting $Y_{0}$ can never be smaller than $\sigma^{2}$.
+
+::: example
+::: example-header
+Example: $k$-Nearest Neighbor Regression
+:::
+
+::: example-container
+The $k$-nearest neighbor ($k$-NN for short) regression estimator is a simple 
+estimator of the local structure between a target variable $y$ and an input variable 
+$x$. The value $k$ represents the number of values in the neighborhood of some 
+target input $x_{0}$ that are used to predict $y$. The extreme case is $k = 1$, 
+the value of $f\left( x_{0} \right)$ is predicted as the $y$-value of the observation 
+closest to $x_{0}$.
+
+Suppose our data come from a distribution with mean $f(x)$ and variance $\sigma^{2}$. 
+The mean-square error decomposition for the $k$-NN estimator is then
+
+$$
+\text{MSE}\left\lbrack \widehat{f}\left( x_{0} \right);Y_{0} \right\rbrack\text{ = }\frac{\sigma^{2}}{k}{+ \left\lbrack f\left( x_{0} \right) - \frac{1}{k}\sum_{}^{}Y_{(i)} \right\rbrack}^{2} + \sigma^{2}
+$$
+
+where $y_{(i)}$ denotes the $k$ observations in the neighborhood of $x_{0}$.
+
+The three components of the MSE decomposition are easily identified:
+
+1.  $\sigma^{2}/k$ is the variance of the estimator, 
+$\text{Var}\left\lbrack \widehat{f}\left( x_{0} \right) \right\rbrack$. Not surprisingly,
+it is the variance of the sample mean of $k$ observations drawn at random from a 
+population with variance $\sigma^{2}$.
+
+2.  $\left\lbrack f\left( x_{0} \right) - \frac{1}{k}\sum Y_{(i)} \right\rbrack^{2}$ 
+is the squared bias component of the MSE.
+
+3.  $\sigma^2$ is the irreducible error, the variance in the population from 
+which the data are drawn.
+
+While we cannot affect the irreducible error $\sigma^{2}$, we can control the 
+magnitude of the other components through the choice of $k$. The variance 
+contribution will be largest for $k = 1$, when prediction relies on only the observation 
+closest to $x_{0}$. The bias contribution for this 1-NN estimator is
+$\left\lbrack f\left( x_{0} \right) - Y_{(1)} \right\rbrack^{2}$.
+
+As $k$ increases, the variance of the estimator decreases. For a large enough 
+value of $k$, all observations are included in the "neighborhood" and the estimator 
+is equal to $\overline{Y}$. If $f(x)$ changes with $x$, the nearest neighbor 
+method will then have smallest variance but large bias.
+:::
+:::
+
+### Striking the Balance
+
+If we want to minimize the mean-squared error, we can strive for estimators with 
+low bias and low variance. If we cannot have both, how do we balance between the 
+bias and variance component of an estimator? That is the bias-variance tradeoff.
+
+Statisticians resolve the tension with the UMVUE principle. Uniformly minimum-variance 
+unbiased estimation requires to first identify unbiased estimators, those which
+$$
+\text{Bias}\left\lbrack \widehat{f}\left( x_{0} \right);f\left( x_{0} \right) \right\rbrack = 0
+$$ 
+and to select the estimator with the smallest variance among the unbiased 
+estimators. According to the UMVUE principle, a biased estimator is not even
+considered. It is comforting to know that on average the estimator will be on target. 
+This principle would select estimator **C** in the dartboard example over estimator 
+**B** because the latter is biased. If you have only one dart left and you need 
+to get as close to the bullseye as possible, would you ask player **B** or player 
+**C** to take the shot for your team?
+
+UMVU estimators are not necessarily minimum mean-squared error estimators. It is 
+possible that a biased estimator has a sharply reduced variance so that the sum 
+of variance and squared bias is smaller than the variance of the best unbiased 
+estimator. If we want to achieve a small mean-square error, then we should consider 
+estimators with some bias and small variance. Resolving the bias-variance tradeoff 
+by eliminating all biased estimators does not lead to the "best" predictive models. 
+Of course, this depends on our definition of "best".
+
+### Estimated Mean Squared Error
+
+In practice, $f\left( x_{0} \right)$ is not known and the bias component 
+$\text{Bias}\left\lbrack \widehat{f}\left( x_{0} \right);f\left( x_{0} \right) \right\rbrack$ 
+cannot be evaluated by computing the difference of expected values. For many 
+modeling techniques we can calculate---or at least estimate---
+$\text{Var}\left\lbrack \widehat{f}\left( x_{0} \right) \right\rbrack$, the 
+variance component of the MSE. Those derivations depend on strong assumptions 
+about distributional properties and the correctness of the model. So, we essentially 
+need to treat the MSE as an unknown quantity. Fortunately, we can estimate it from data.
+
+::: definition
+::: definition-header
+Definition: Mean Squared Prediction Error (MSPE)
+:::
+
+::: definition-container
+The mean squared prediction error (MSPE) is the average squared prediction error 
+in a sample of $n$ observations,
+
+$$
+\widehat{\text{MSE}} = \frac{1}{n}\sum_{i=1}^n\left( y_i - \widehat{f}\left( x_i \right) \right)^{2}
+$${#eq-MSE-estimate}
+:::
+:::
+
+Taking the sample average replaces taking formal expectations over the distribution 
+of $( Y - \widehat{f}(x) )^2$.
+
+We have one more complication to resolve. By increasing the flexibility of the model the
+difference between observed and predicted values can be made arbitrarily small.
+In the extreme case where the model interpolates the observed data points the 
+differences $y_i - \widehat{y}_i$ are all zero and $\widehat{\text{MSE}}$ 
+computed for the training data is zero.
+If we were to choose to minimize @eq-MSE-estimate, we would end up
+with highly variable models. And this defeats the purpose.
+
+The remedy is to compute the estimated MSE not by comparing observed and 
+predicted values based on the values in the **training** data set, but to predict
+the values of observations that did not participate in training the model. This
+**test** data appears to the algorithm as new data it has not seen before and is
+a true measure for how well the model generalizes:
+
+$$
+\widehat{\text{MSE}}_\text{Test} = \frac{1}{m} \sum (\text{Observed} - \text{Predicted})^2
+$${#eq-MSE-test-estimate}
+
+The main difference between @eq-MSE-estimate and @eq-MSE-test-estimate is that
+the former is computed based on the $n$ observations in the training data and 
+the latter is computed based on $m$ observations in a separate test data set. We
+refer to mean squared errors calculated on test data sets as the **test error**.
+This quantity properly balances accuracy and precision, choosing the model with
+the smallest test error resolves the bias-variance tradeoff.
+
+### Cross-validation
+
+Because it is expensive to collect a separate data set to compute the test error 
+the collected data is often split randomly into a training set and a test set.
+For example, you might use split the data 50:50 or 80:20 or 90:10 into training:test
+sets. If you have a lot of data, then splitting into separate training and test sets
+is reasonable. 
+
+There is a clever way in which the same observations can be used sometimes for
+training and sometimes for testing, that uses the collected information more
+economically. This procedure is called **cross-validation**.
+
+We give here a brief introduction to a specific cross-validation method, $k$-fold
+cross-validation to round up the application in this chapter. More details about
+test and validation data sets and about cross-validation follow in the next chapter.
+
+During cross-validation, an observation is either part of the test set or
+part of the training set. The process repeats until each observation was used
+once in a test set. One technique of cross-validation randomly assigns observations
+to one of $k$ groups, called **folds**. @fig-CV-5 is an example of creating 5 folds
+from 100 observation for 5-fold cross-validation.
+
+![Example of 5-fold cross-validation for 100 observations. Numbers in the cells represent observation numbers. The records were randomly arranged prior to assigning the folds.](images/five_fold_CV.png){#fig-CV-5 fig-align="center" width=75%}
+
+The numbers in the cells of @fig-CV-5 are the observation numbers. For example,
+the first fold includes observations #4, #16, #90, etc. The second fold includes
+observations #31, #94, #38, etc.
+
+The process of calculating the test error through $k$-fold cross-validation 
+is as follows (@fig-cv-scheme):
+
+1. Set aside the data in the first fold. It serves as the test data. 
+2. Fit the model to the remaining data.
+3. Using the model trained in step 2., predict the values in the test data and
+calculate the test error
+4. Return the set-aside fold to the training data and set aside the next fold as
+the test data. 
+Return to step 2. and continue until each fold has been set aside once.
+
+![$k$-fold cross-validation scheme.](images/Crossvalidation.png){#fig-cv-scheme fig-align="center" width=50% .lightbox}
+
+At the end of the $k$-fold cross-validation procedure, the model has been trained 
+$k$ times, and we have $k$ estimates of the test error, one for each of the folds.
+These test errors are then combined into one overall test error.
+
+## Overfitting and Underfitting
+
+The preceding discussion might suggest that flexible models such as the smoothing 
+spline have high variability and that rigid models such as the simple linear 
+regression model have large bias. This generalization does not necessarily hold 
+although in practice it often works out this way. The reason for this is not that 
+simple linear regression models are biased---they can be unbiased. The reason why 
+flexible models tend to have high variance and low bias and rigid models tend to 
+have low variance and high bias has to do with **overfitting** and **underfitting**.
+
+An overfit model follows the observed data $Y_{i}$ too closely and does not capture 
+the mean trend $f(x)$. The overfit model memorizes the training data too much. 
+When you predict a new observation with an overfit model that memory causes high 
+variability. Remember that the variability we are focusing on here is the variability 
+across repetitions of the sample process. Imagine drawing 1,000 sets of $n$ observations, 
+repeating the model training and predicting from each model at the new location $x_{0}$. 
+We now have 1,000 predictions at $x_{0}$. Because the overfit model follows the 
+training data too closely, its predictions will be variable at $x_{0}$.
+
+An underfit model, on the other hand, lacks the flexibility to capture the mean 
+trend $f(x)$. Underfit models result, for example, when important predictor variables 
+are not included in the model.
+
+The most extreme case of overfitting a model is the **saturated** model. It 
+perfectly predicts the observed data. Suppose you collect only two pairs of $(x,y)$ 
+data: (1,0) and (2,1) (@fig-sl-saturated). A two-parameter straight line model will fit these data 
+perfectly. The straight line has an intercept of --1 and a slope of +1. It passes 
+through the observed points and the MSPE is zero.
+
+![A straight line model saturates a data set with two \$(x,y)\$ pairs. The difference between observed values (the dots) and the predicted values (values on the line) is zero at each point. The saturated model has a MSPE of zero.](images/Saturated.png){#fig-sl-saturated fig-align="center" width="75%"}
+
+Saturated models are not very interesting, they are just a re-parameterization 
+of the data, capturing both signal $f(x)$ **and** noise $\epsilon$. A useful model 
+separates the signal from the noise. Saturated models are used behind the scenes 
+of some statistical estimation methods, for example to measure how much of the 
+variability in the data is captured by a model---this type of model metric is 
+known as the deviance. Saturated models are never the end goal of data analytics.
+
+On the other extreme lies the constant model; it does not use any input variables. 
+It assumes that the mean of the target variable is the same everywhere:
+
+$$Y_{i} = \beta_0 + \epsilon_{i}$$
+
+This model, also known as the intercept-only model, is slightly more useful than 
+the saturated model. It is rarely the appropriate model in data science applications; 
+it expresses the signal as a flat line, the least flexible model of all.
+
+In our discussion of the model building process during the data science project life
+cycle we encountered an example of pharmacokinetic data, 500 observations on how 
+a drug is absorbed and eliminated by the body over time ($t$). The data are 
+replayed in the next figure along with the fit of the constant model. The constant 
+model under-predicts the drug concentration between times $t = 3$ and $t = 12$ 
+and overpredicts everywhere else.
+
+![Concentration of a drug in patient's bodies over time.](images/Underfit.png){#fig-sl-underfit-model fig-align="center" width="75%"}
+
+Suppose we draw 1,000 sets of $n = 500$ observations, fit the constant model to 
+each, and predict at the new time $t_{0}$. Because the constant model does not 
+depend on time, we get the same predicted value regardless of the value of $t_{0}$. 
+In each sample of size $n$, the predicted value will be the sample mean, 
+$\overline{y} = \frac{1}{500}\sum_{}^{}y_{i}$. The variability of the 1,000 predictions 
+will be small; it is the variance of the sample mean:
+
+$$
+\text{Var}\left\lbrack \widehat{f}\left( x_0 \right) \right\rbrack = \frac{\sigma^2}{500}
+$$
+
+If the true model does depend on $t$---and the plot of the data suggests this is 
+the case---the bias of the predictions will be large. The mean-squared prediction 
+error is dominated by the squared bias component in this case.
+
+Somewhere between the two extremes of a hopelessly overfit saturated model and a 
+hopelessly underfit constant model are models that capture the signal $f(x)$ well 
+enough without chasing the noisy signal $f(x) + \epsilon$ too much. Those models 
+permit a small amount of bias if that results in a reduction of the variance of 
+the predictions.
+
+To summarize,
+
+- **Overfit** models do not generalize well because they follow the training data 
+too closely. They tend to have low bias and a large variance.
+
+- **Underfit** models do not generalize well because they do not capture the 
+salient trend (signal) in the data. They tend to have high bias and low variance.
+
+- A large mean squared prediction error can result in either case but is due 
+to a different reason.
+
+- To achieve a small mean squared prediction error you need to have small bias and 
+small variance.
+
+- In practice, zero-bias methods with high variance are rarely the winning 
+approaches. The best MSPE is often achieved by allowing some bias if the variance
+of the method is decreased.
+
+The danger of overfitting is large when models contain many parameters, and when 
+the number of parameters $p$ is large relative to the sample size $n$. When many 
+attributes (inputs) are available and you throw them all into the model, the result 
+will likely be an overfit model that does not generalize well. It will have a 
+large prediction error. In other words, there is a cost to adding unimportant 
+information to a model. Methods for dealing with such high-dimensional problems 
+play an important role in statistics and machine learning and are discussed in 
+detail in a more advanced section. We mention here briefly:
+
+-   **Feature Selection**: Structured approaches that use algorithms to determine 
+which subset of the inputs should be in the model. The decision is binary in that 
+an input is either included or excluded. Also known as variable selection.
+
+-   **Regularization**: Deliberately introducing some bias in the estimation 
+through penalty terms that control the variability of the model parameters which 
+in turn controls the variability of the predictions. The parameters are shrunk 
+toward zero in absolute value compared to an unbiased estimator---regularization 
+is thus also known as shrinkage estimation. The Lasso methods can shrink parameters 
+to zero and thus combines regularization with feature selection. The Ridge 
+regression methods also applies a shrinkage penalty but allows all inputs to contribute.
+
+-   **Ensemble Methods**: Ensemble methods combine multiple methods into an overall, 
+averaged prediction or classification. Ensembles can be homogeneous, where the 
+methods are the same, or heterogeneous. An example of a homogeneous ensemble is a 
+bagged decision tree, where several hundred individual trees are trained independently
+and the predictions from the trees are averaged to obtain an overall predicted value.
+Due to averaging, the variance of the ensemble estimator is smaller than any 
+individual estimator. **Bagging** and **boosting** are common ensemble methods to 
+reduce variance.
+
+
+## Putting It All Together
+
+Let us now put together everything we have covered in this chapter about building a
+predictive model based on data for the simulated data set in @fig-gendata1.
+
+- We build a model that captures the relationship between $Y$ and $X$.
+
+- The result should be an algorithm that we can use to predict $Y$ based on 
+values of $X$ ($Y$ is the target variable, $X$ is the input variable).
+
+- The model should generalize well to new observations, that is, it should not
+**overfit** or **underfit**. Use cross-validation to determine the appropriate amount
+of flexibility in the model.
+
+- We should be able to quantify the uncertainty in predictions from the model.
+
+### Creating the Data (Quantification)
+
+The following `R` code creates the data frame shown in @fig-gendata1.
+
+```{r}
+set.seed(12345)                     # <1>
+n <- 100                            # <2>
+eps <- rnorm(n, sd = 2)             # <3>
+X <- rnorm(n, sd = 2)               # <4>
+Y <- X^2 * cos(X) + eps             # <5>
+
+simData <- data.frame(X=X, Y=Y)     # <6>
+```
+1. Setting a seed for the random number generator ensures that the program generates
+the same values every time it is run. The value for the seed is chosen here as `12345` 
+and can be any integer.
+2. The number of observations drawn is set to $n = 100$.
+3. `eps` is a vector of Gaussian (normal) random variables with mean 0 and variance 4 (std. dev 2). 
+This represents the noise in the system.
+4. The values of $X$ are drawn randomly from a Gaussian distribution with mean 0 and variance 4
+5. The signal is $x^2 \, \cos(x)$. The noise (`eps`) is added to the signal.
+6. A data frame is constructed from X and Y.
+
+### Cross-validating the Model
+
+The steps of training the model and selecting the best flexibility by cross-validation
+can be done in a single computational step using the `train` function in the 
+`caret` package. We need to decide on the general family of model we are going
+to entertain. Here we choose what is known as a **regression spline**. These
+model the relationship between two variables and their flexibility is governed
+by a single parameter, called the **degrees of freedom** of the model. With 
+increasing degrees of freedom the models become more flexible. Cross-validation
+is used to determine the best value for the degree of freedom parameter in this
+model family.
+
+```{r, message=FALSE, warning=FALSE}
+library(caret)          # <1>
+
+cv_results <- train(Y ~ X,                   # <2>
+                    data     =simData,       # <3>
+                    method   ="gamSpline",   # <4>
+                    tuneGrid =data.frame(df=seq(2, 25, by=1)),      # <5>
+                    trControl=trainControl(method="cv", number=10)) # <6>
+
+```
+
+1. The `caret` library is loaded into the `R` session. If `caret` is not yet
+installed in your system, execute the command `install.packages("caret")` once 
+from the Console prompt.
+2. The `train()` function in the `caret` library is called. `Y ~ X` specifies
+the model we wish to train. The target variable is placed on the left side of the
+`~` symbol and the input variable is placed on the right side.
+3. The data frame where the variables in the model specifications can be found.
+4. The `method=` parameter specifies the model family we wish to train. `gamTrain`
+is the specification for the regression spline family.
+5. The `tuneGrid` parameter provides a list of the values to be considered in
+the cross-validation. We vary only the degrees of freedom parameter (`df`) of the
+`gamSpline` function and we evaluate all values from 2 to 25.
+6. The `trControl=` parameter specifies the computational nuances of the `train`
+function. Here we choose 10-fold cross-validation.
+
+After running the code above we can examine the results:
+
+``` {r}
+print(cv_results)
+```
+
+The output lists the values of the cross-validation parameter (`df`) along with 
+three statistics computed for each. The statistic of interest to us is `RMSE`,
+the cross-validation root mean square error, the square root of our measure of 
+test error. Note that `caret` reports the square root of the $\widehat{\text{MSE}}_\text{Test}$. 
+In order to find the df with the smallest test error it does not matter whether
+we look at $\widehat{\text{MSE}}_\text{Test}$ or its square root. The minimum
+is achieved at the same value.
+
+We can see that the smallest value in the `RMSE` column occurs at `df`=14.
+This is confirmed in the sentence at the bottom of the output.
+
+It is customary to graph the cross-validation criterion (`RMSE`) against the
+values of the parameter. @fig-gendata-cv shows a typical pattern. The test
+error decreases to an optimal value and increases afterwards.
+
+```{r, fig.align="center", out.width="75%"}
+#| fig.cap: Cross-validation root mean squared error as a function of model flexibility (degrees of freedom).
+#| label: fig-gendata-cv
+plot(cv_results)
+```
+
+### Training the Final Model
+
+One final step remains. Now that we have chosen df=14 as the optimal parameter
+for this combination of data set and class of model, we train the model with
+those degrees of freedom on all the data to obtain the final model.
+
+```{r}
+
+final_model <- train(Y ~ X,                   
+                     data     =simData,       
+                     method   ="gamSpline",   
+                     tuneGrid =data.frame(df=cv_results$bestTune[1]),   # <1>
+                     trControl=trainControl(method="none"))             # <2>
+```
+1. Instead of a list of `df` values, we now pass only one value. The best
+value from cross-validation was stored automatically in the `bestTune` field
+of the result object in the previous step.
+2. Instead of cross-validation we request `none` as the training nuance. `train`
+will simply train the requested model on the data frame.
+
+### Making a Prediction
+
+Suppose we want to predict $Y$ (or more precisely the mean of $Y$) for a 
+series of $X$ values, say from $-5$ to $6$. 
+
+Computing the predicted values is easy with the `predict` function in `R`. You
+simply pass it the model object and a data frame with the values for which 
+you need predictions.
+
+```{r}
+xGrid <- data.frame(X=seq(-5, 6, length.out = 250))  # <1>
+predvals <- predict(final_model,newdata=xGrid)       # <2>
+
+predvals[1:10]   # <3>
+```
+1. Create a data frame with 250 values for $X$ ranging from $-5$ to $6$.
+2. Compute the 250 predicted values.
+3. Display the first 10 predicted values.
+
+At this point we would like to see how the predicted values of the signal 
+compare to the observed noisy data. @fig-gendata-final-spline overlays the
+predicted values and the data. Also displayed is the true signal. The model
+derived from the data does an excellent job capturing the signal without
+following the data points too closely or being too inflexible.
+
+```{r, fig.align="center", out.width="65%", fig.asp=0.8}
+#| fig.cap: Predictions of the cross-validated spline model and observed data.
+#| label: fig-gendata-final-spline
+#| lightbox:
+
+plot(simData$X, simData$Y, 
+     type="p", 
+     las =1,
+     bty ="l",
+     xlab="X",
+     ylab="Y")
+lines(xGrid$X,predvals,col="red",lwd=2)
+lines(xGrid$X,m(xGrid$X),col="black",lwd=2,lty="dashed")
+legend("topleft",
+       legend=c("Cross-validated","True"),
+       lty   =c("solid","dashed"),
+       col   =c("red","black"),
+       lwd   =2)
+```
+
+### Quantifying Uncertainty
+
+Recall the fourth antidote against bad predictions:
+
+4. Quantify the uncertainty in the conclusions drawn from the model.
+
+Conceptually, we think of the bias and variability of the model under repetition
+of the data collection. In an earlier section we looked at models for three
+data sets of 100 observations each. There are several factors contributing to
+our uncertainty about the predicted values in this analysis.
+
+We are not sure whether the regression spline is the correct model family to
+capature the relationship between $Y$ and $X$. Although the results of the 
+cross-validation and the comparison with the true signal (which in practice we
+would not know) give us comfort that this model family does a good job here.
+
+The second source of uncertainty comes from the fact that there is noise in
+the data. As we saw earlier, another set of data drawn from the same process
+gives slightly different data points that lead to a different best model. 
+Fortunately, we can quantify this uncertainty by computing **confidence intervals**
+for the predicted values.
+
+A 95% confidence interval for a parameter is a range that with 95% probability
+will cover the value of the parameter. For example, a 95% confidence interval
+for the predicted value at $X=2.5$ is the range into which the mean value of
+$Y$ will fall in 95% of the sample repetitions. 
+
+The `predict` functions in `R` can compute the basic ingredients for 
+confidence intervals for many models. Unfortunately, the `predict.train` function
+invoked by `caret` cannot do this. However, since we know that we fit a `gamSpline`
+model, and the `predict.Gam` function does compute the uncertainty of the 
+predicted values for the values in the training data, we can repeat the 
+final model fit with `gam` and use its `predict` function:
+
+```{r}
+library(gam)   # <1>
+
+final <- gam(Y ~ s(X,df=14), data=simData)  # <2>
+
+predvals <- predict(final,se.fit=TRUE) # <3>
+
+round(predvals$fit[1:10],4)                     # <4>
+
+round(predvals$se.fit[1:10],4)                  # <5>
+```
+1. Load the `gam` library.
+2. Fit the final model with the `gam` function. `Y ~ s(X,df=14)` is the formulation
+for a regression spline model with 14 degrees of freedom.
+3. Compute the predicted values and request that the standard errors of the
+predicted values are also computed.
+4. The predicted values for the first 10 observations.
+5. The standard errors of the predicted values for the first 10 observations.
+
+For example, the first predicted value is `{r} round(predvals$fit[1],4)` with
+a standard error of `{r} round(predvals$se.fit[1],4)`.
+
+To compute the 95% confidence interval for the predicted values, add and subtract
+`qnorm(0.975)` times the standard error from the predicted value. This is done
+in the following code and the results are plotted.
+
+```{r, fig.align="center", out.width="8k5%", fig.asp=0.8}
+#| fig.cap: Predictions and confidence intervals of the cross-validated spline model and observed data. The black line is the true signal in the data.
+#| label: fig-gendata-final-spline2
+#| lightbox:
+
+pred_df <- data.frame(X=simData$X, 
+                      pred=predvals$fit,
+                      se=predvals$se.fit)
+pred_df_sorted <- pred_df[order(pred_df$X),]
+pred_df_sorted$ci_up <- pred_df_sorted$pred + qnorm(0.975)*pred_df_sorted$se
+pred_df_sorted$ci_lo <- pred_df_sorted$pred - qnorm(0.975)*pred_df_sorted$se
+
+plot(simData$X, simData$Y, 
+     type="p", 
+     las =1,
+     bty ="l",
+     xlab="X",
+     ylab="Y")
+lines(xGrid$X,m(xGrid$X),col="black",lwd=2,lty="dashed")
+lines(pred_df_sorted$X,
+      pred_df_sorted$pred,col="red",lwd=2)
+lines(pred_df_sorted$X,
+      pred_df_sorted$ci_up,col="blue",lty="dotted",lwd=1.5)
+lines(pred_df_sorted$X,
+      pred_df_sorted$ci_lo,col="blue",lty="dotted",lwd=1.5)
+```
+
+The confidence intervals (dotted blue) are tracing the predicted values and
+are narrower in the center of the $X$-data than near the edges. The further out
+we move the more uncertain our predictions will be.
+The dashed black line shows the true signal in the data, the 95% confidence
+interval covers it.
+
+
+

@@ -1,0 +1,86 @@
+::: content-hidden
+$$
+{{< include ../latexmacros.tex >}}
+$$
+:::
+
+# General Topics {#sec-statlearn-general}
+
+## Introduction
+
+This chapter dives into selected topics to set the stage for a more rigorous mathematical treatment later. The goal is to understand the concepts and to become familiar with the notation and terminology of data analytics. The material depends more on formulas than previous chapter but is not very “mathy”.
+
+At the end of the chapter you will know about important classes of statistical models and how to express them mathematically. The difference between regression and classification models will be clear and how regression predictions are often the precursor to classifications. The bias-variance tradeoff is a balance every data science project needs to strike—you need to understand the origin of the tradeoff and how to measure model performance to find the balance between overfitting and underfitting. Training, test, and validation data sets are universal in data science to help build good models. We cover the basics in this chapter and the details of data splitting and cross-validation later.
+
+
+
+
+## Bias-Variance Tradeoff
+
+The Bias-Variance tradeoff describes a fundamental tension in data science projects. 
+The models we build are approximations because the true relationship between inputs 
+and outputs is not known. If we work with statistical models, then the data-generating 
+mechanism on which the model is based is also an approximation for the 
+true---and unknown---process. The data we work with is typically the result of 
+some selection mechanism. If we were to repeat the selection process different 
+observations result. Apply the same method to a different set of data you will 
+get different answers---there is variability in the results due to the inherent 
+variability in the data.
+
+### A Simulation
+
+To illustrate the concept, let's start with a simulated example where we know the true function and collect multiple samples.
+
+The following figure shows the relationship between an input variable $X$ and some output function $f(x)$. The function depicts the true relationship, the dots mark design points at which we collect observations. Because the data is inherently variable our sample observations will not fall on the black line. If the sample is unbiased, they should spread evenly about the true trend.
+
+![A response function of one input variable.](images/MSE_true_func.png){#fig-sl-true-func fig-align="center" width="75%"}
+
+Suppose that we repeat the sampling process four times, drawing eleven observations each time.
+
+![Four random samples of size eleven.](images/MSE_four_draws.png){#fig-sl-four-draws fig-align="center" width="75%"}
+
+This is an unrealistic situation. In real life, we do not know the solid function $f(x)$ and we draw only one set of data, for example, we would work with only the black triangles or the blue dots in the previous figure.
+
+Next, we train a model on the data and are considering two types of methods: a linear regression model and a smoothing spline.
+
+![Linear regression models fit to the four data sets.](images/MSE_four_reg.png){#fig-sl-four-reg fig-align="center" width="75%"}
+
+The linear regression model is not flexible. It has only two parameters, the intercept of the vertical line at $x = 0$ and the slope of the line. The lines do not follow the curved trend in the function $f(x)$. Because of this rigidity, the four lines are somewhat similar to each other, they do not show a high degree of variability from sample to sample.
+
+![Smoothing splines with 6 degrees of freedom fit to the four data sets.](images/MSE_four_splines.png){#fig-sl-four-splines fig-align="center" width="75%"}
+
+The splines show more flexibility than the linear regression lines and follow the observed data more closely. The curviness of the true function $f(x)$ is echoed in the curviness of the splines, but some splines seem to try to connect the dots more than they are picking up the true trend. Because the splines follow the observed data more closely, the four functions show more variability from sample to sample than the linear regression lines.
+
+Suppose the task is to develop a model that predicts a new observation well, one that did not participate in fitting the model. The model needs to generalize to previously unseen data. Should we choose linear regression or smoothing splines as our method? A method that is highly variable because it follows the data too closely will not generalize well---its predictions will be off because they are highly variable. A method that is not flexible enough also does not generalize well---its predictions will be off because the model is not correct.
+
+---
+
+Back to choosing between the regression and spline models. If we denote the two 
+approaches $\widehat{f}_{r}(x)$ and $\widehat{f}_{s}(x)$, respectively, selecting 
+the winning model based on the mean-squared prediction error reduces to picking 
+the model with the smaller MSPE:
+
+$$
+\frac{1}{n}\sum_{i = 1}^{n}\left( y_{i} - {\widehat{f}}_{r}\left( x_{i} \right) \right)^{2}
+$$
+
+or
+
+$$
+\frac{1}{n}\sum_{i = 1}^{n}\left( y_{i} - {\widehat{f}}_{s}\left( x_{i} \right) \right)^{2}
+$$
+
+As we will see, this is not without problems. These expressions are calculating the 
+MSPE by averaging over the data points used in training the model; we call this 
+the MSPE of the training set or MSE~Tr~ for short. To identify models that generalize
+well to new observations, it is recommended to calculate the MSPE across a test 
+set of observations that was not used to fit the model; this is called the MSPE 
+of the test set or the MSE~Te~ for short.
+
+We will discuss training, test, and validation data sets in more detail below.
+
+Whether you are working with MSPE in a regression context or MCR in a classification 
+problem, the goal is to develop a model that is neither too complex nor too simple. 
+We want to avoid over- and underfitting the model.
+
+

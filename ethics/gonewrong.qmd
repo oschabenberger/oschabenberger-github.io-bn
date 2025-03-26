@@ -186,68 +186,19 @@ In hindsight, it was a foreseeable consequence of sharing geotagged data.
 
 ## Measuring Performance
 
-Should we accept a more accurate approach over a less accurate approach? Many would say “Yes”, greater accuracy is better. The more accurate method can have other shortcomings, for example, it may be inscrutable or very difficult to implement and the nod might go to the less accurate method that is easier to implement. In this situation we are making a deliberate choice to prefer one approach over another despite its inferiority with respect to a specific metric. Other considerations also matter.
+Should we accept a more accurate approach over a less accurate approach? Many 
+would say “Yes”, greater accuracy is better. The more accurate method can have 
+other shortcomings, for example, it may be inscrutable or very difficult to implement 
+and the nod might go to the less accurate method that is easier to implement. 
+In this situation we are making a deliberate choice to prefer one approach over 
+another despite its inferiority with respect to a specific metric. Other 
+considerations also matter.
 
-All other things being equal, accuracy is not necessarily the appropriate measure by which to judge the performance of a decision rule. Consider a classification problem with two possible states, “Yes” and “No”. An algorithm is developed to classify an observation based on data. Since the model will not always predict correctly, there are four possible scenarios, commonly displayed in a **confusion matrix**.
+All things being equal, accuracy is not necessarily the appropriate measure 
+by which to judge the performance of a decision rule. The confusion matrix of 
+a binary classification leads to many performance measures for the model,
+see @sec-model-intro-confusion.
 
-::: definition
-::: definition-header
-Definition: Confusion Matrix
-:::
-
-::: definition-container
-The confusion matrix in a classification problem is the cross-classification between the observed and the predicted categories. In a problem with two categories, the confusion matrix is a 2 x 2 matrix.
-
-The cells of the matrix contain the number of data points that fall into the cross-classification when the model’s decision rule is applied to $n$ observations. If one of the categories is labeled positive and the other is labeled negative, the cells give the number of true positive (TP), true negative (TN), false positive (FP), and false negative (FN) predictions.
-:::
-:::
-
-The following table shows the layout of a typical confusion matrix for a 2-category classification problem. A false positive prediction, for example, is to predict a positive (“Yes”) result when the true state (the observed state) was negative. A false negative result is when the decision rule assigns a “No” to an observation with positive state.
-
-|                        |  Observed Category  |                     |
-|------------------------|:-------------------:|:-------------------:|
-| **Predicted Category** | **Yes (Positive)**  |  **No (Negative)**  |
-| **Yes (Positive)**     | True Positive (TP)  | False Positive (FP) |
-| **No (Negative)**      | False Negative (FN) | True Negative (TN)  |
-
-: Confusion matrix for a classification problem with two states.
-
-Based on the four cells in the confusion matrix we can calculate several statistics.
-
-| Statistic                     |               Calculation               | Notes                                                                  |
-|:------------------|:---------------------------:|:------------------------|
-| **False Positive Rate (FPR)** |             FP / (FP + TN)              | The rate of the true negative cases that were predicted to be positive |
-| **False Negative Rate (FNR)** |             FN / (TP + FN)              | The rate of the true positive cases that were predicted to be negative |
-| **Sensitivity**               |        TP / (TP + FN) = 1 – FNR         | This is the true positive rate; also called **Recall**                 |
-| **Specificity**               |         TN / (FP + TN) = 1— FPR         | This is the true negative rate                                         |
-|                               |                                         |                                                                        |
-| **Accuracy**                  |     (TP + TN) / (TP + TN + FP + FN)     | Overall proportion of correct classifications                          |
-| **Misclassification rate**    |     (FP + FN) / (TP + TN + FP + FN)     | Overall proportion of incorrect classifications, 1 – Accuracy          |
-| **Precision**                 |             TP / (TP + FP)              | Ratio of true positives to anything predicted as positive              |
-| **Detection Rate**            |        TP / (TP + TN + FP + FN)         |                                                                        |
-| **No Information Rate**       | $\frac{\max(TP+FN,FP+TN)}{TP+TN+FP+FN}$ | The proportion of observations in the larger observed class            |
-
-: Statistics calculated from a 2 x 2 confusion matrix. {#tbl-confusion-statistics .striped .hover}
-
-The model accuracy is measured by the ratio of observations that were correctly classified, the sum of the diagonal cells divided by the total number of observations. The misclassification rate, another common performance measure is the complement of the accuracy.
-
-The sensitivity is the ratio of true positives to what should have been predicted as positive. The specificity is the ratio of true negatives to what should have been predicted as negative. They are **not** complements of each other; they are calculated with different denominators.
-
-The problem with focusing solely on accuracy is that the two possible errors, false positives and false negatives might not be of equal consequence. For example, it might not matter how accurate a model is unless it achieves a certain sensitivity—the ability to correctly identify positives.
-
-Consider the data in the @tbl-confusion-example, representing 1,000 observations and predictions.
-
-|                        | Observed Category  |                   |
-|------------------------|:------------------:|:-----------------:|
-| **Predicted Category** | **Yes (Positive)** | **No (Negative)** |
-| **Yes (Positive)**     |         9          |         7         |
-| **No (Negative)**      |         26         |        958        |
-
-: Example of a confusion matrix for 1,000 observations. {#tbl-confusion-example .striped}
-
-The classification has an accuracy of 96.7%, which seems impressive. Its false positive and false negative rates are very different, however: FPR = 0.0073, FNR = 0.7429. The model is much less likely to predict a “Yes” when the true state is “No”, than it is to predict a “No” when the true state is “Yes”. Whether we can accept a model with such low sensitivity (100 – 74.29) = 25.71% is questionable, despite the high accuracy. An evaluation of this model should consider whether the two errors, false positive and false negative predictions, are of equal importance and consequence.
-
-It is also noteworthy that the accuracy of 96.7% is not as impressive if you check the no-information rate of the data. The proportion of observations in the larger observed class is (958 + 7)/1,000 = 0.965. The accuracy of the decision rule is only slightly larger. In other words, if you were to take a naïve approach and predict all observations as “No” without looking at the data, that naïve decision rule would have an accuracy of 96.5%.
 
 ::: example
 ::: example-header

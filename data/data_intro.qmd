@@ -1,4 +1,17 @@
 
+:::{.callout-tip title="Quotes"}
+
+::: {.flushright}
+Data engineering is the unsung hero of data science, \
+the foundation upon which great data analysis is built.\
+[Andrew Brust]{.quoteauthor}\
+\
+Data matures like wine, applications like fish.\
+[James Governor]{.quoteauthor}
+:::
+:::
+
+
 # Introduction {#sec-data-intro}
 
 The goal of data engineering is to make raw data usable for consumption by

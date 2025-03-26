@@ -1,42 +1,92 @@
+
 # Introduction
 
 ## How to Use This Material
 
 This material is intended for a regular 3-credit hour course at the graduate level. 
-At Virginia Tech, it is a first-semester core course in the Master of Science in Data Science program.
+At Virginia Tech, it is a first-semester core course in the Master of Science in 
+Data Science program.
 
-If you are self-studying this material, concentrate on the areas where you have a gap. The chapters do not have to be read sequentially. If the terms in the opening chapters are unfamiliar to you, maybe you need to work through  [@sec-statlearn-general] in Part III. If your background is in data engineering, Part II. *Data Preparation and Understanding* will be very familiar, spend your time elsewhere.
+If you are self-studying this material, concentrate on the areas where you have 
+a gap. The chapters do not have to be read sequentially. If the terms in the opening 
+chapters are unfamiliar to you, maybe you need to work through  Module VIII *Review Topics*.
+If your background is in data engineering, Module III *Data Engineering* 
+will be very familiar, spend your time elsewhere.
 
-The material is organized in parts. Part I discusses the history of data science as a cross-disciplinary activity that draws on mathematics, statistics, and computer science and applies the "mixture" to solve real-world problem in a specific domain. 
+The material is organized in modules. Module I discusses the history of data science 
+as a cross-disciplinary activity that draws on mathematics, statistics, and computer 
+science and applies the "mixture" to solve real-world problem in a specific domain. 
 
-This problem solution is viewed as an end-to-end process that starts with a business, research, or policy question and ends with implementation of a solution that uses data. The data science project life cycle, as we call it, describes the iterative process of working through these projects as a team sport.
-
----
-
-Part II introduces working with data. We discuss various data sources and formats and how to access them. Not everything comes as a CSV file. Then we go on a "first date" with the data using profiling tools that can highlight problems with data quality. Summarizing and visualizing data and analysis results are major activities that follow once the data is properly pre-processed. We would be remiss not covering SQL, the structured querying language that is the backbone of many database management systems. Paraphrasing an employer: "there is much we do not agree on in this field, but we agree that at some point you need to access data in a database and you need to use version control: learn SQL and learn Git."
-
----
-
-Part III of the material covers foundational topics in statistical learning, an amalgam of statistical modeling and machine learning. We deliberately placed it after basic data preparation and understanding. You can accomplish a lot with data before you need to know the difference between supervised and unsupervised learning or the intricacies of cross-validations.
-
-In the first chapter you learn about supervised and unsupervised learning, regression and classification, the bias-variance tradeoff, mean square error, cross-validation and other important concepts. The goal is to introduce these topics and to develop the vernacular of data science. We hope that you have had the prior exposure to probability, statistics, and linear algebra required to conduct data science. If not, or if you need a refresher, this part of the material offers several chapters.
-
-Exploring statistical learning in depth is a separate topic. You can check out [this](https://oschabenberger.github.io/oschabenberger-github.io-sl/) material as an example.
+This problem solution is viewed as an end-to-end process that starts with a business, 
+research, or policy question and ends with implementation of a solution that uses data. 
+The data science project life cycle, as we call it, describes the iterative process of 
+working through these projects as a team sport.
 
 ---
 
-Part IV dives into an increasingly important topic, working with data in a manner that does not perpetuate stereotypes, avoids harm, and honors privacy concerns. We wrap this up as *Applied Ethics in Data Science*. The introductory chapter is full of examples where things have gone wrong, due to unintended consequences, focus on the wrong performance metrics, bad data, and other reasons. How algorithms can introduce bias and cause harm is the subject of the following chapter. A separate chapter is dedicated to concerns around personal information and data privacy.
+The modules that follow cover specific steps in the data science project lifecycle
+more deeply.
+
+Module II introduces you to the discovery phase of the cycle where you develop
+business understanding and translate it into data science activities.
+
+Module III introduces working with data. We discuss various data sources and formats 
+and how to access them. Not everything comes as a CSV file. Then we go on a 
+"first date" with the data using profiling tools that can highlight problems 
+with data quality. Summarizing and visualizing data and analysis results are 
+major activities that follow once the data is properly pre-processed. We would be 
+remiss not covering SQL, the structured querying language that is the backbone of 
+many database management systems. Paraphrasing an employer: 
+
+:::{.quote}
+there is much we do 
+not agree on in this field, but we agree that at some point you need to access 
+data in a database and you need to use version control: learn SQL and learn Git.
+:::
 
 ---
 
-Part V of the material focuses on the latter parts of the end-to-end data science project lifecycle. How do you turn the project assets such as data and models into assets that can be used by others? Following coding best practices and using the right data science tools are a good beginning.
+Module IV *Modeling Data* takes up much space since this is a key activity of
+data scientists. After discussing some general concepts such as types of learning,
+types of models, bias-variance tradeoff, correlation and causation, and others
+you get an overview of the various models you build and deploy in data science
+projects.
 
+The goal is to introduce these topics and to develop the vernacular of data science
+and your thinking as a data scientist. Since the material is foundational we 
+cannot cover models and modeling to the extent necessary for a data science degree. 
+This is left to additional material, for example, the 
+[Statistical Learning](https://oschabenberger.github.io/oschabenberger-github.io-sl/) 
+methods course.
 
+---
 
+Module V *Evaluation & Communication* presents fundamental concepts and ideas
+about communicating as a member of a data science project team. The material is
+a pre-cursor to in-depth coverage in the 
+[Communications](https://oschabenberger.github.io/oschabenberger-github.io-com/)
+course.
 
+---
 
+In Module VI *Operationalization* you learn what it takes to take a data solution
+from the playpen to production. 
 
+---
 
+Module VII *Applied Ethics in Data Science* dives into an increasingly important topic: 
+working with data in a manner that does not perpetuate stereotypes, avoids harm, 
+and honors privacy concerns. We cover many case studies and examples where things 
+have gone wrong, due to unintended consequences, focus on the wrong performance metrics, 
+bad data, or for other reasons. 
 
+How algorithms can introduce bias and cause harm is the subject of the following chapter. 
+Separate chapters are dedicated to concerns around personal information and data privacy
+and to ethical considerations in generative artificial intelligence.
+
+---
+
+The final module of the material, *Review Topics* contains material that we 
+consider pre-requisites for the Foundation material. 
 
 

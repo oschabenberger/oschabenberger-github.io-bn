@@ -406,7 +406,7 @@ more likely to quit and to move on to other jobs. A **lagging** indicator is
 descriptive, it looks at what has happened in the past. Last month's resignation
 rate is a lagging indicator for the human resources department.
 
-### Types of Data
+### Types of Data {#sec-thinkingds-data-types}
 
 Data, the result of quantification, can be classified in a number of ways. The
 first distinction of quantified variables is by **data type**. 
@@ -813,7 +813,10 @@ with a single criminal.
 
 How does this generalize to larger groups of criminals? Assign a number from 1 to
 $n$ to the criminals and tell them that should any subgroup of them try to escape,
-the one with the highest number in the group will be shot.
+the one with the highest number in the group will be shot. Or you can tell all
+of them that the first criminal who tries to escape will be shot. Nobody can afford
+to be first because it would mean certain death. Since noone will be first, noone
+can be second and have a non-zero probability of surviving.
 :::
 
 ### Three Jars
@@ -821,7 +824,7 @@ the one with the highest number in the group will be shot.
 Three opaque jars are sitting on a table. The jars are labeled "Apples", "Oranges",
 and "Apples & Oranges". Unfortunately, all three are labeled incorrectly.
 
-![Three opaque jars.](images/ThreeJars.png){#file-three-jars fig-align="center" width=75%}
+![Three opaque jars.](images/ThreeJars.png){#file-three-jars fig-align="center" width=50%}
 
 Your task is to assign the labels correctly to the jars. 
 What is the smallest number of fruit you have to choose in order to correctly
@@ -836,6 +839,51 @@ labels just need to be flipped since you were told that all three jars are
 labeled incorrectly.
 :::
 
+
+### The Two Door Problem
+
+This puzzle has many variations: 
+
+* You are walking in the desert and come to a fork in the road. Choose the wrong
+road and you will get lost in the desert. Choose the right road and you will
+reach the destination.
+* You have to choose between two doors, one leads to a good outcome, the other
+leads to a bad outcome you want to avoid at all cost.
+* You are trapped in a room with two doors, only one leads to freedom.
+
+The trick is that each door or fork in the road is guarded by a separate guard. One of the
+guards is a liar who never tells the truth, the other guard always tells the truth.
+And, you get to ask **only one** question. What question do you ask to reveal 
+the right door (assuming you want to get to a good outcome)?
+
+::: {.callout-tip title="Solution" collapse=true}
+You should ask the following question of **either** of the guards:
+
+:::{.quote}
+If I would ask the other guard which road leads to my destination, what would
+they say?
+:::
+
+A variation for other setups would be "If I would ask the other guard which door leads to freedom, ..."
+
+Then, when you hear the answer, choose the **opposite** road or door.
+
+Why does this work?
+Regardless of which guard you ask you get the wrong answer, pointing out the
+fork in the road or the door you want to avoid.
+
+If you ask the guard who never lies, he knows that the liar would point you to 
+the wrong road. Since he speaks the truth, he will tell you that the other guard
+will lead you to the wrong road.
+
+If you ask the guard who always lies, he knows the other guard would point you 
+to the correct road. But since he always lies, he will tell you that the other
+guard will point you at the wrong road.
+
+Either way, the answer will be the road or door to avoid.
+:::
+
+
 ### Pattern Recognition \#1
 
 @fig-math-puzzle1 shows a logic reasoning puzzle. The first row makes sense if 
@@ -843,7 +891,7 @@ the strange operator is addition, but that does not work for the next rows.
 You have to find the meaning of that operator, then apply the pattern to solve
 the last equation.
 
-![Can you solve this?](images/LogicPuzzle1.png){#fig-math-puzzle1 fig-align="center" width=50%}
+![Can you solve this?](images/LogicPuzzle1.png){#fig-math-puzzle1 fig-align="center" width=45%}
 
 ::: {.callout-tip title="Solution" collapse=true}
 
@@ -900,6 +948,80 @@ $$
 13112221
 $$
 :::
+
+### Pattern Recognition \#3
+
+This could be called a math puzzle but it is just as much---maybe more---a 
+pattern recognition puzzle. Consider the 4 statements:
+
+$$
+\begin{align*}
+5^a &= 6\\
+6^b &= 7\\
+7^c &= 8\\
+8^d &= 625
+\end{align*}
+$$
+Given these statements, can you find
+$$
+\sqrt{abcd} = ??
+$$
+
+
+::: {.callout-tip title="Solution" collapse=true}
+Trying to solve this by brute force is going to be tricky,  
+$a \log(5) = \log(6)$, $b \log(6) = \log(7)$, and so forth.
+
+But by simply substituting the left hand side of the previous equation
+into the next equation we get:
+$$
+6^b = (5^a)^b = 5^{a\times b}=7
+$$
+Continuing along those lines we arrive at
+$$
+8^d = 5^{a \times b \times c \times d} = 625
+$$
+Now we know $abcd = 4$ and $\sqrt{abcd} = 2$.
+:::
+
+
+### Pattern Recognitiion \#4 
+
+@fig-rect-puzzle shows a matrix with 9 cells and eight of the cell values.
+Can you determine the relationship between the cells and their values to
+determine the value in the missing cell?
+
+
+![Rectangle with numbers. What is the number in the missing cell?](images/MathPuzzleRectangle.png){#fig-rect-puzzle fig-align=center width=50%}
+
+::: {.callout-tip title="Solution" collapse=true}
+Start by looking at the numbers in rows and columns, focusing on complete rows
+and columns. In the first colunm the numbers 7, 49, 46 do not stand in a 
+discernible relationship. It is easier for the numbers in the first row,
+going left to right:
+$$
+7 + 9 = 16 \qquad 16 + 8 = 24
+$$
+In the third column we see a similar pattern
+$$
+24 + 7 = 31 \qquad 31 + 6 = 37
+$$
+
+In the last row, going left to right, the pattern is
+$$
+46 - 4 = 42 \qquad 42 - 5 = 37
+$$
+If the left-to-right pattern uses subtraction, the right-to-left pattern in the
+row uses addition:
+$$
+37 + 5 = 42 \qquad 42 + 4 = 46
+$$
+@fig-rect-puzzle2 shows the numbers added to the previous cell when you navigate
+the matrix in a clock-wise pattern. The missing value is thus 51.
+
+![Walking the cells in clockwise direction.](images/MathPuzzleRectangleSolution.png){#fig-rect-puzzle2 fig-align=center width=50%}
+:::
+
 
 ### Birthday Problem
 
@@ -1325,3 +1447,180 @@ it is not alone with the item it would destroy.
 
 :::
 
+### Ten Coins
+
+You have ten coins in front of you, but you cannot see whether heads or tails
+are up on any of them. You are being told that five of them show heads, five
+of them show tails (@fig-coin-puzzle).
+
+![Setup of the coin puzzle](images/CoinPuzzle.png){#fig-coin-puzzle fig-align=center width=75%}
+
+Without looking at the face of the coins, your task is to divide the coins
+into two groups, each contains the same number of heads. The number of heads in 
+each group does not have to be five. For example, you can end
+up with two groups, each of which contains 2 heads. Or two groups, each of 
+which contains 3 heads. You cannot look at the coins but you can flip any coin
+as many times as you like.
+
+::: {.callout-tip title="Solution" collapse=true}
+Make two groups of five coins each. Whatever the number of heads or tails within
+the two groups, you know that originally five of the coins showed head.
+Now take the coins in one of the groups and turn them all over (@fig-coin-puzzle2). 
+Voilà.
+
+![Solution of the coin puzzle](images/CoinPuzzleSolution.png){#fig-coin-puzzle2 fig-align=center width=75%}
+
+:::
+
+### Russian Roulette
+
+You are engaged in a *game* of Russian Roulette with a six shooter. One bullet
+is placed in a chamber, the chamber is spun, and your opponent pulls the trigger.
+The gun does not fire. Now it is your turn and before you pull the trigger you
+are given the choice to spin the chamber one more time or leave the gun as is.
+
+How do you decide?
+
+::: {.callout-tip title="Solution" collapse=true}
+You should spin the chamber again, because it will give a 1/6 chance to fire
+the bullet. If you leave the gun as is, because the gun did not previously
+fire, you have a 1/5 chance to fire the bullet. 
+
+By spinning the chamber you have a higher likelihood to live after the shot.
+:::
+
+### Russian Roulette Again
+
+This is the same setup as the previous problem. But now there are two bullets
+in **consecutive** chambers of the gun. The first shot does not go off and it is 
+your turn to pull the trigger. Should you spin the chamber first?
+
+::: {.callout-tip title="Solution" collapse=true}
+If the chamber is spun, the probability to fire a bullet is 2/6 = 1/3.
+Since the previous shot did not go off, you know that the chamber is in one
+of four possible positions (@fig-gun-puzzle). One of those positions will be followed by a bullet
+in the chamber---the probability of a shot going off is 1/4. 
+
+Because 1/4 is less than 1/3 you do not want to spin the chamber again.
+
+![Chamber configurations after the first trigger pull. Black dot marks the hammer and the arrow the chamber rotation.](images/GunPuzzle.png){#fig-gun-puzzle fig-align=center width=75%}
+:::
+
+### Cat and Mouse
+
+If five cats catch five mice in five minutes, how long does it take one cat to 
+catch a mouse?
+
+::: {.callout-tip title="Solution" collapse=true}
+Five minutes. 
+:::
+
+### Glass (Barrel) Half Full or Half Empty?
+
+Two merchants quarrel about how much wine is left in a barrel that has no lid.
+The first merchant peers into the barrel and says "It is more than half full."
+The second merchant lookls into the barrel and says "Nonsense, it is more than
+half empty."
+
+How do you determine which merchant is correct?
+
+::: {.callout-tip title="Solution" collapse=true}
+Tip the barrel on its edge until the liquid comes up to the edge of the barrel.
+If you can see the bottom of the barrel, it is more than half empty. If you
+cannot see the bottom of the barrel, it is more than half full.
+:::
+
+
+### What is the Word?
+
+A teacher writes six words on a board:
+
+:::{.quote}
+cat $\quad$ dog $\quad$ has $\quad$ max $\quad$ dim $\quad$ tag
+:::
+
+The teacher chooses one of the words and writes each letter of the word on a 
+separate piece of paper. Three students, Tobias, Julian, and Amelie receive
+one of the papers each. These students are known to do well on their logic
+exams. The teacher asks
+
+"Tobias, do you know the word?"
+
+Tobias replies immediately, "Yes, I do."
+
+The teacher then asks 
+
+"Julian, do you know the word?"
+
+He thinks for a moment and replies, "Yes, I do."
+
+The teacher then asks
+
+"Amelie, do you know the word?"
+
+She thinks for a moment and replies, "Yes, I do."
+
+Which of the six words did the teacher choose?
+
+::: {.callout-tip title="Solution" collapse=true}
+The word is **dog**.
+
+Since Tobias knew immediately what the word was he must have received one of
+the unique letters that identifies a word:
+
+:::{.quote}
+c o h s x i
+:::
+
+This eliminates **tag** as a possibility. 
+Having heard Tobias' answer, Julian now looks at the remaining unique letters 
+that are left among the words
+
+:::{.quote}
+~~c~~at $\qquad$ d~~o~~g $\qquad$ ~~h~~a~~s~~ $\qquad$ ma~~x~~ $\qquad$ d~~i~~m
+:::
+
+This list is 
+
+:::{.quote}
+t g h s
+:::
+
+because "a", "d", and "m" appear more than once and the other letters were
+eliminated because Tobias knew immediately what the word was. Notice that "h"
+and "s" are still in the list because if Tobias had received "s", "h" would still
+be a possible letter and vice versa.
+
+This eliminates **max** and **dim** from consideration.
+Based on the remaining unique letters and the piece of paper he received Julian
+can now figure out the word.
+
+Amelie narrows it down the same way. Among the remaining words,
+
+:::{.quote}
+~~c~~ a ~~t~~ $\qquad$   d ~~o~~ ~~g~~  $\qquad$  ~~h~~a~~s~~
+:::
+
+there are only two letters left to consider, "a", and "d".
+The letter "a" appears in multiple words so it cannot be it; the only unique
+letter left is "d". The other letters are either not unique or were in the initial 
+list based on which Tobias knew immediately what the word was and in the list 
+eliminated by Julian.
+
+Tobias had received the letter "o", Julian had received the letter "g", and
+Amelie had received the letter "d".
+:::
+
+### Ducks in a Row 
+
+There are two ducks in front of a duck, two ducks behind a duck, and a duck in 
+the middle. How many ducks are there?
+
+::: {.callout-tip title="Solution" collapse=true}
+There are three ducks (@fig-three-ducks). 
+
+![Three ducks in a row](images/ThreeDucks.png){#fig-three-ducks fig-align=center width=50%}
+
+Two ducks are in front of the last duck.
+Two ducks are behind the first duck. There is one duck in the middle.
+:::
