@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.552">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Foundations of Data Science - 18&nbsp; General Concepts</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../models/correlation.html" rel="next">
+<link href="../models/model_intro.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../models/model_intro.html">Module IV. Modeling Data</a></li><li class="breadcrumb-item"><a href="../models/model_concepts.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">General Concepts</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Foundations of Data Science</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Module I. Data Science Projects</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">History and Evolution of Data Science</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/lifecycle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Data Science Project Lifecycle</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/thinkingds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Thinking Like a Data Scientist</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/teams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Roles on Data Science Teams</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Module II. Business Understanding: Discovery</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../busi/bus_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../busi/approach.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Approach and Methodology</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../busi/examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Example: Email Campaign Optimization</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Module III. Data Engineering</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/data_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/sources_and_files.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Sources and File Formats</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/data_access.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Data Quality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/summarization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data Summarization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data Visualization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/sqlbasics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">SQL Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Integration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Module IV. Modeling Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../models/model_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../models/model_concepts.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">General Concepts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../models/correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Correlation and Causation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../models/bias_variance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">The Bias-Variance Tradeoff</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../models/test_cv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Testing, Validation, Cross-Validation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../models/featproc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Feature and Target Processing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Module V. Evaluation &amp; Communication</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Module VI. Operationalization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../integ/ds_softwareeng.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Data Science versus Software Engineering,</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../integ/coding_practices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../integ/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text">Module VII. Applied Ethics in Data Science</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/gonewrong.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">How Things Go Wrong</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/bias_harm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/genAI.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Ethics of Generative AI</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text">Module VIII. Review Topics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reviewmaterial/mathstat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reviewmaterial/linalg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-model-signal-noise" id="toc-sec-model-signal-noise" class="nav-link active" data-scroll-target="#sec-model-signal-noise"><span class="header-section-number">18.1</span> Signal and Noise</a></li>
+  <li><a href="#types-of-statistical-learning" id="toc-types-of-statistical-learning" class="nav-link" data-scroll-target="#types-of-statistical-learning"><span class="header-section-number">18.2</span> Types of Statistical Learning</a>
+  <ul>
+  <li><a href="#supervised-learning" id="toc-supervised-learning" class="nav-link" data-scroll-target="#supervised-learning">Supervised Learning</a></li>
+  <li><a href="#unsupervised-learning" id="toc-unsupervised-learning" class="nav-link" data-scroll-target="#unsupervised-learning">Unsupervised Learning</a></li>
+  <li><a href="#self-supervised-learning" id="toc-self-supervised-learning" class="nav-link" data-scroll-target="#self-supervised-learning">Self-supervised Learning</a></li>
+  <li><a href="#reinforcement-learning" id="toc-reinforcement-learning" class="nav-link" data-scroll-target="#reinforcement-learning">Reinforcement Learning</a></li>
+  </ul></li>
+  <li><a href="#regression-and-classification" id="toc-regression-and-classification" class="nav-link" data-scroll-target="#regression-and-classification"><span class="header-section-number">18.3</span> Regression and Classification</a>
+  <ul>
+  <li><a href="#regression-and-the-regression-to-the-mean-fallacy" id="toc-regression-and-the-regression-to-the-mean-fallacy" class="nav-link" data-scroll-target="#regression-and-the-regression-to-the-mean-fallacy">Regression and the Regression to the Mean Fallacy</a></li>
+  <li><a href="#regression-problems" id="toc-regression-problems" class="nav-link" data-scroll-target="#regression-problems">Regression Problems</a></li>
+  <li><a href="#classification-problems" id="toc-classification-problems" class="nav-link" data-scroll-target="#classification-problems">Classification Problems</a>
+  <ul class="collapse">
+  <li><a href="#from-probabilities-to-classification" id="toc-from-probabilities-to-classification" class="nav-link" data-scroll-target="#from-probabilities-to-classification">From probabilities to classification</a></li>
+  <li><a href="#misclassification-rate" id="toc-misclassification-rate" class="nav-link" data-scroll-target="#misclassification-rate">Misclassification rate</a></li>
+  <li><a href="#sec-model-intro-confusion" id="toc-sec-model-intro-confusion" class="nav-link" data-scroll-target="#sec-model-intro-confusion">Confusion matrix</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#prediction-and-explanation" id="toc-prediction-and-explanation" class="nav-link" data-scroll-target="#prediction-and-explanation"><span class="header-section-number">18.4</span> Prediction and Explanation</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../models/model_intro.html">Module IV. Modeling Data</a></li><li class="breadcrumb-item"><a href="../models/model_concepts.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">General Concepts</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-model-concepts" class="quarto-section-identifier"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">General Concepts</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="sec-model-signal-noise" class="level2" data-number="18.1">
+<h2 data-number="18.1" class="anchored" data-anchor-id="sec-model-signal-noise"><span class="header-section-number">18.1</span> Signal and Noise</h2>
+<p>The <strong>signal</strong> represents the systematic, non-random effects in the data. The <strong>noise</strong> is the unpredictable, unstructured and non-systematic, randomness around the signal.</p>
+<p>A slightly different, and also useful, definition of noise stems from intelligence analysis. The signal is the information we are trying to find, the noise is the cacophony of other information that obscures the signal. That information might well be a signal for something else but it is irrelevant or useless for the event the intelligence analyst is trying to predict.</p>
+<p>Information not being relevant for the signal we are trying to find is the key. In the view of the data scientist, that information is due to random events.</p>
+<p>Finding the signal is not trivial, different analysts can arrive at different models to capture it. Signals can be obscured by noise. Multiple signals can hide in the data, for example, short-term and long-term cyclical trends in time series data. What appears to be a signal might just be random noise that we mistake for a systematic effect.</p>
+<div class="example">
+<div class="example-header">
+<p>Example: Theophylline Concentration</p>
+</div>
+<div class="example-container">
+<p><a href="#fig-theop-data" class="quarto-xref">Figure&nbsp;<span>18.1</span></a> shows the concentration of the drug theophylline over 24 hours after administration of the drug in two groups of patients. There are 98 data points of theophylline concentration and measurement time. What are the signals in the data? What is noise?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-theop-data" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-theop-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="model_concepts_files/figure-html/fig-theop-data-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-theop-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18.1: Theophylline concentration over time in two groups of patients.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The first observation is that the data points are not all the same over time, otherwise they would fall on a horizontal straight line: there is <strong>variability</strong> in the data. Separating signal and noise means attributing this variability to different sources: some systematic, some random.</p>
+<p>Focusing on either the open circles (group 1) or the triangles (group 2), you notice that points that are close in time are not necessarily close in the concentration measurement. Not all patients were measured at exactly the same time points, but at very similar time points. For example, concentrations were measured after about 7, 9, and 12 hours. The differences in the concentration measurements among the patients receiving the same dosage might be due to patient-to-patient variability or measurement error.</p>
+<p>Focusing on the general patterns of open circles and triangles, it seems that the triangles appear on average below the average circle a few hours after administration. Absorption of theophylline into the body and elimination from the body appear to be different in the two groups.</p>
+<p>Much of the variability in the data seems to be a function of time. Shortly after administering the drug the concentration rises, reaches a maximum level, and declines as the drug is eliminated from the body. Note that this sentence describes a general overall trend in the data.</p>
+<p>Which of these sources of variability are systematic—the signals in the data— and which are random noise?</p>
+<ul>
+<li><p>Patient-to-patient variability within a group at the same time of measurement: we attribute this to random variation among the participants.</p></li>
+<li><p>Possible measurement errors in determining the concentrations: random noise</p></li>
+<li><p>Overall trend of drug concentration over time: signal</p></li>
+<li><p>Differences among the groups: signal</p></li>
+</ul>
+<p>These assignments to signal and noise can be argued. For example, we might want to test the very hypothesis that there are no group-to-group differences. If that hypothesis is true, any differences between the groups we discern in <a href="#fig-theop-data" class="quarto-xref">Figure&nbsp;<span>18.1</span></a> would be due to chance; random noise in other words.</p>
+<p>The variability between patients could be due to factors such as age, gender, medical condition, etc. We do not have any data about these attributes. By treating these influences as noise, we are making important assumptions that their effects are irrelevant for conclusions derived from the data. Suppose that the groups refer to smokers and non-smokers but also that group 1 consists of mostly men and group 2 consists of mostly women. If we find differences in theophylline concentration over time among the groups, we could not attribute those to either smoking status or gender.</p>
+</div>
+</div>
+<p>Finding the signal in noisy data is not trivial. The opposite can also be difficult: not mistaking noise for a signal. <a href="#fig-random-walk" class="quarto-xref">Figure&nbsp;<span>18.2</span></a> is taken from <span class="citation" data-cites="Silver2012">Silver (<a href="../references.html#ref-Silver2012" role="doc-biblioref">2012, 341</a>)</span> and displays six “trends”. Four of them are simple random walks, the result of pure randomness. Two panels show the movement of the Dow Jones Industrial Average (DJIA) during the first 1,000 trading days of the 1970s and 1980s. Which of the panels are showing the DJIA and which are random noise?</p>
+<div id="fig-random-walk" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-random-walk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Figure11_4_Silver.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-random-walk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18.2: Figure 11-4 from <span class="citation" data-cites="Silver2012">Silver (<a href="../references.html#ref-Silver2012" role="doc-biblioref">2012</a>)</span>. Random walk or stock market data?
+</figcaption>
+</figure>
+</div>
+<p>What do we learn from this?</p>
+<ul>
+<li><p>Even purely random data can appear non-random over shorter sequences. We can easily fall into the trap of seeing a pattern (a signal) where there is none. Sometimes there is no signal at all. After drawing two unlikely poker hands in a row there is not a greater chance of a third unlikely hand unless there is some systematic effect (cards not properly shuffled, game rigged). Our brains ignore that fact and believe that we are more lucky than is expected by chance. <a href="https://en.wikipedia.org/wiki/Paul_the_Octopus">Paul the Octopus</a> predicted the winner of 12 out of 14 soccer matches correctly; I would argue purely by chance.</p></li>
+<li><p>Data that contains clear long-run signals—the stock market value is increasing over time—can appear quite random on shorter sequences. One a day-to-day basis predicting whether the market goes up or down is very difficult. In the long run ups and downs are almost equally likely. Upswings have a slight upper hand and are on average greater than the downswings, increasing the overall value in the long term. Traders who try to beat the market over the short run have their work cut out for them.</p></li>
+</ul>
+<p>By the way, panels D and F in <a href="#fig-random-walk" class="quarto-xref">Figure&nbsp;<span>18.2</span></a> are from actual stock market data. Panels A, B, C, and E are pure random walks. It would not be surprising if some investors would bet money on “trend” C.</p>
+<div class="{assignment}">
+<div class="assignment-header">
+<p>Exercise: Southern Oscillation Index (SOI)</p>
+</div>
+<div class="assignment-container">
+<p>The Southern Oscillation Index (SOI) is a standardized index based on the observed sea level pressure differences between Tahiti and Darwin, Australia. The SOI is one measure of the large-scale fluctuations in air pressure occurring between the western and eastern tropical Pacific (i.e., the state of the Southern Oscillation) during El Niño and La Niña episodes.</p>
+<p>In general, smoothed time series of the SOI correlate highly with changes in ocean temperatures across the eastern tropical Pacific. The negative phase of the SOI represents below-normal air pressure at Tahiti and above-normal air pressure at Darwin. Prolonged periods of negative (positive) SOI values coincide with abnormally warm (cold) ocean waters across the eastern tropical Pacific typical of El Niño (La Niña) episodes (<a href="#fig-soi-data" class="quarto-xref">Figure&nbsp;<span>18.3</span></a>).</p>
+<p>According to <a href="https://en.wikipedia.org/wiki/El_Ni%C3%B1o%E2%80%93Southern_Oscillation">Wikipedia</a>, there have been about 30 El Niño episodes since 1950 with strong El Niño events in 1982–83, 1997–98, and 2014–16. You recognize El Niño when the SOI dips negative for a period of time. La Niña is marked by periods of positive SOI values.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-soi-data" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-soi-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="model_concepts_files/figure-html/fig-soi-data-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-soi-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18.3: Monthly SOI data from 1951 to mid-2023 according to NOAA.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<ol type="1">
+<li>What is the signal and the noise in these data?</li>
+<li>Is it possible that there are multiple signals in these data, associated with different time horizons?</li>
+</ol>
+</div>
+</div>
+</section>
+<section id="types-of-statistical-learning" class="level2" data-number="18.2">
+<h2 data-number="18.2" class="anchored" data-anchor-id="types-of-statistical-learning"><span class="header-section-number">18.2</span> Types of Statistical Learning</h2>
+<p>The primary distinction of learning methods in data science is between <strong>supervised</strong> and <strong>unsupervised</strong> methods of learning (<a href="#fig-learning-mindmap" class="quarto-xref">Figure&nbsp;<span>18.4</span></a>). However, there are other important forms of learning from data, for example, self-supervised learning and reinforcement learning (RL), which are important for machine learning and artificial intelligence applications.</p>
+<div id="fig-learning-mindmap" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-learning-mindmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/LearningMethodsMindMap.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1"><img src="images/LearningMethodsMindMap.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-learning-mindmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18.4: Important types of statistical learning
+</figcaption>
+</figure>
+</div>
+<section id="supervised-learning" class="level3">
+<h3 class="anchored" data-anchor-id="supervised-learning">Supervised Learning</h3>
+<div class="definition">
+<div class="definition-header">
+<p>Definition: Supervised Learning</p>
+</div>
+<div class="definition-container">
+<p>Supervised learning trains statistical learning models through a target variable.</p>
+</div>
+</div>
+<p><strong>Supervised learning</strong> is characterized by the presence of a target variable (dependent variable, response variable, output variable); it is the attribute we wish to model. The training and test data sets contain values for the target variable, also called the <strong>labels</strong> in machine learning. The other variables in the data set are potentially input variables. This is the predominant form of learning in data science applications.</p>
+<p>Goals of supervised learning include to</p>
+<ul>
+<li>Predict the target variable from input variables.</li>
+<li>Classify observations into categories of the target variable based on the input variables.</li>
+<li>Develop a function that approximates the underlying relationship between inputs and outputs.</li>
+<li>Understand the relationship between inputs and outputs.</li>
+<li>Group the observations into sets of similar data based on the values of the target variable and based on values of the inputs.</li>
+<li>Reduce the dimensionality of the problem by transforming target and inputs from a high-dimensional to a lower-dimensional space.</li>
+<li>Test hypotheses about the target variable.</li>
+</ul>
+<p>Studies can pursue one or more of these goals. For example, you might be interested in understanding the relationship between target and input variables and use that relationship for predictions as well as testing of hypotheses.</p>
+<p>The name supervised learning comes from thinking of learning in an environment that is supervised by a teacher. The teacher asks questions for which they know the correct answer (the ground truth) and judge a student’s response to the questions. The goal is to increase students’ knowledge as measured by the quality of their answers. But we do not want students to just memorize answers, we want to teach them to be problem solvers, to apply the knowledge to new problems, to be able to <strong>generalize</strong>.</p>
+<p>The parallel between the description of supervised learning in a classroom and training an algorithm on data is obvious: the problems asked by the teacher, the learning algorithm, are the data points, <span class="math inline">\(Y\)</span> is the correct answer, the inputs <span class="math inline">\(x_{1},\cdots,x_{p}\)</span> are the information used by the students to answer the question. The discrepancy between question and answer is measured by a <strong>loss function</strong>: <span class="math display">\[
+(y - \widehat{y})^2 = (y - \widehat{f}\left( x_{1},\cdots x_{p} \right))^2
+\]</span> or some such metric. Teaching the students reduces the loss as their answers get closer to the correct answers, the ground truth. Training stops when the students can transfer knowledge to solve previously unseen problems. We are not interested in teaching students to memorize the answers to the questions asked in class. If that were the case we would just train until the loss function reaches zero. We do not know whether the students have learned the concepts or just memorized the answers. To avoid the latter, we need to validate the students’ knowledge on new questions and not overdo memorization.</p>
+<p><a href="#tbl-supervised-methods" class="quarto-xref">Table&nbsp;<span>18.1</span></a> contains a non-exhaustive list of algorithms and models you encounter in supervised learning.</p>
+<div id="tbl-supervised-methods" class="striped quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-supervised-methods-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;18.1: A sampling of supervised learning methods.
+</figcaption>
+<div aria-describedby="tbl-supervised-methods-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 33%">
+<col style="width: 36%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>Linear regression</td>
+<td>Nonlinear regression</td>
+<td>Regularized regression<br>
+(Lasso, Ridge, Elastic nets)</td>
+</tr>
+<tr class="even">
+<td>Local polynomial regression (LOESS)</td>
+<td>Smoothing splines</td>
+<td>Kernel methods</td>
+</tr>
+<tr class="odd">
+<td>Logistic regression (binary &amp; binomial)</td>
+<td>Multinomial regression (nominal and ordinal)</td>
+<td>Poisson regression (counts and rates)</td>
+</tr>
+<tr class="even">
+<td>Decision trees</td>
+<td>Random forests</td>
+<td>Bagged trees</td>
+</tr>
+<tr class="odd">
+<td>Adaptive boosting</td>
+<td>Gradient boosting machine</td>
+<td>Extreme gradient boosting</td>
+</tr>
+<tr class="even">
+<td>Naïve Bayes classifier</td>
+<td>Nearest-neighbor methods</td>
+<td>Discriminant analysis (linear and quadratic)</td>
+</tr>
+<tr class="odd">
+<td>Principal component regression</td>
+<td>Partial least squares</td>
+<td>Generalized linear models</td>
+</tr>
+<tr class="even">
+<td>Generalized additive models</td>
+<td>Mixed models (linear and nonlinear)</td>
+<td>Models for correlated data (spatial, time series)</td>
+</tr>
+<tr class="odd">
+<td>Support-vector machines</td>
+<td>Neural networks</td>
+<td>Extreme gradient boosting</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>There is a lot to choose from, and for good reason. The predominant application of data analytics is supervised learning with batch (or mini-batch) data. In batch data analysis the data already exist as a historical data source in one place. We can read all records at once or in segments (called mini-batches). If we have to read the data multiple times, for example, because an iterative algorithm passes through the data at each iteration, we can do so.</p>
+</section>
+<section id="unsupervised-learning" class="level3">
+<h3 class="anchored" data-anchor-id="unsupervised-learning">Unsupervised Learning</h3>
+<div class="definition">
+<div class="definition-header">
+<p>Definition: Unsupervised Learning</p>
+</div>
+<div class="definition-container">
+<p>In unsupervised learning methods a target variable is not present.</p>
+</div>
+</div>
+<p>Unsupervised learning does not utilize a target variable; hence it cannot predict or classify observations. However, we are still interested in discovering structure, patterns, and relationships in the data.</p>
+<p>The term unsupervised refers to the fact that we no longer know the ground truth because there is no target variable. The concept of a teacher who knows the correct answers and supervises the learning progress of the student does not apply. In unsupervised learning there are no clear error metrics by which to judge the quality of an analysis, which explains the proliferation of unsupervised methods and the reliance on heuristics. For example, a 5-means cluster analysis will find five groups of observations in the data, whether this is the correct number or not, and it is up to us to interpret what differentiates the groups and to assign group labels.</p>
+<p>Often, unsupervised learning is used in an exploratory fashion, improving our understanding of the joint distributional properties of the data and the relationships in the data. The findings then help lead us toward supervised approaches.</p>
+<p>A coarse categorization of unsupervised learning techniques also hints at their application:</p>
+<ul>
+<li><p><strong>Association analysis</strong>: which values of the variables <span class="math inline">\(x_{1},\cdots,x_{p}\)</span> tend to occur together in the data? An application is market basket analysis, where the <span class="math inline">\(X\)</span>s are items are in a shopping cart (or a basket in the market), and <span class="math inline">\(x_{i} = 1\)</span> if the <span class="math inline">\(i\)</span><sup>th</sup> item is present in the basket and <span class="math inline">\(x_{i} = 0\)</span> if the item is absent. If items frequently appear together, bread and butter, or beer and chips, for example, then maybe they should be located close together in the store. Association analysis is also useful to build recommender systems: shoppers who bought this item also bought the following items </p></li>
+<li><p><strong>Cluster analysis</strong>: can data be grouped based on <span class="math inline">\(x_{1},\cdots,x_{p}\)</span> into sets such that the observations within a set are more similar to each other than they are to observations in other sets? Applications of clustering include grouping customers into segments. Segmentation analysis is behind loyalty programs, lower APRs for customers with good credit rating, and churn models.</p></li>
+<li><p><strong>Dimension reduction</strong>: can we transform the inputs <span class="math inline">\(x_{1},\cdots,x_{p}\)</span> into a set <span class="math inline">\(c_{1},\cdots,c_{k}\)</span>, where <span class="math inline">\(k \ll p\)</span> without losing relevant information? Applications of dimension reduction are in high-dimensional problems where the number of inputs is large relative to the number of observations. In problems with wide data, the number of inputs <span class="math inline">\(p\)</span> can be much larger than <span class="math inline">\(n\)</span>, which eliminates many traditional methods of analysis from consideration.</p></li>
+</ul>
+<p>Methods of unsupervised learning often precede supervised learning; the output of an unsupervised learning method can serve as the input to a supervised method. An example is dimension reduction through principal component analysis (PCA) prior to supervised regression. Suppose you have <span class="math inline">\(n\)</span> observations on a target variable <span class="math inline">\(Y\)</span> and a large number of potential inputs <span class="math inline">\(x_{1},\cdots,x_{p}\)</span> where <span class="math inline">\(p\)</span> is large relative to <span class="math inline">\(n\)</span>. PCA computes linear combinations of the <span class="math inline">\(p\)</span> inputs that account for decreasing amounts of variability among the <span class="math inline">\(X\)</span>s. These linear combinations are called the principal components. For example, the first principal component explains 70% of the variability in the inputs, the second principal component explains 20% and the third principal component 5%. Rather than building a regression model with <span class="math inline">\(p\)</span> predictors, we use only the first three principal components as inputs in the regression model. The resulting regression model is called a principal component regression (PCR) because its inputs are the result of a PCA. The PCA is an unsupervised model because it does not use information about <span class="math inline">\(Y\)</span> in forming the principal components. If <span class="math inline">\(p = 250\)</span>, using the first three principal components replaces</p>
+<p><span class="math display">\[
+Y = \beta_{0} + \beta_{1}{\ x}_{1} + \beta_{2}x_{2} + \beta_{3}x_{3} + \beta_{4}x_{4} + \cdots + \beta_{250}x_{250} + \epsilon
+\]</span> with <span class="math display">\[
+Y = \alpha_{0} + \alpha_{1}c_{1} + \alpha_{2}c_{2} + \alpha_{3}c_{3} + \epsilon
+\]</span></p>
+<p>where <span class="math inline">\(c_{1}\)</span> denotes the first principal component, itself a linear combination of the 250 inputs</p>
+<p><span class="math display">\[
+c_{1} = \gamma_{1}x_{1} + \gamma_{2}x_{2} + \gamma_{3}x_{3} + \cdots + \gamma_{250}x_{250}
+\]</span></p>
+</section>
+<section id="self-supervised-learning" class="level3">
+<h3 class="anchored" data-anchor-id="self-supervised-learning">Self-supervised Learning</h3>
+<p><strong>Self-supervised learning</strong> (SSL) is a form of learning that combines elements of supervised and unsupervised learning. Like unsupervised learning, the data is not labeled, that is, there is no target variable. Like the majority of supervised learning applications, the goal is to predict or classify observations.</p>
+<p>SSL accomplishes these seemingly contradictory features by implicitly and autonomously extracting relationships, patterns, and knowledge from the training data. Generative pretrained transformers (GPT), for example, are trained in a self-supervised way as autoregressive language model. During training the model learns the relevant patterns and relationships in the text input data.</p>
+<p>In a second step, applications are built on top of the <strong>foundation models</strong> trained in a self-supervised fashion. For example, ChatGPT is a question-answer applications built on top of the GPT foundation model.</p>
+</section>
+<section id="reinforcement-learning" class="level3">
+<h3 class="anchored" data-anchor-id="reinforcement-learning">Reinforcement Learning</h3>
+<p>Reinforcement learning (RL) is unique to machine learning and does not fall neatly in the supervised/unsupervised learning categories. It is a powerful method that received much attention when algorithms were trained on data to play games.</p>
+<p>The approach, based on reinforcement learning, was fundamentally different from the expert system-based approach used so far to teach computers how to play games. An expert system translates the rules of the game into machine code and adds strategy logic. For example, the Stockfish open-source chess program, released first in 2008, has developed with community support into (one of) the best chess engines in the world. In 2017, Google’s DeepMind released AlphaZero, a chess system trained using reinforcement learning. After only 24 hours of training, the data-driven AlphaZero algorithm crushed Stockfish, the best chess engine humans have been able to build over 10 years.</p>
+<p>Previously, Google’s DeepMind had developed AlphaGo, a reinforcement-trained system that beat the best Go player in the world, Lee Sedol, four to one. This was a remarkable achievement as Go had been thought to be so complex and requiring intuition that would escape computerization at the level of expert players.</p>
+<p>In reinforcement learning, an agent (a player) is taking actions (makes moves) in an environment (the game). The agent learns by interacting with the environment by receiving feedback on the moves. Actions are judged by a reward function (a score) and the system is trained to maximize the sum of future rewards. In other words, given your current position in the game, choose the next move to maximize the score from here on out.</p>
+<p>An interesting difference between AlphaGo and AlphaZero is the nature of the training data. Both systems are trained using reinforcement learning. AlphaGo was trained on records of many expert-level games. It was trained to play against historic experts. Success was getting better compared to how human experts played. AlphaZero was trained by playing against itself. Success was beating its former self.</p>
+<p>Unlike supervised learning, inputs and outputs do not need to be present in reinforcement learning. The technique is commonly used in robotics, gaming, and recommendation systems.</p>
+<p>In 2017, when AlphaGo beat Lee Sedol, it was thought that reinforcement learning would change the world. Despite its remarkable achievement in gameplay and robotics, the impact of RL fell short of expectations.</p>
+<div id="fig-sl-Yann-leCun" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sl-Yann-leCun-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/YannLeCun_on_RL.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sl-Yann-leCun-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18.5: Yann LeCun weighs in on the impact of reinforcement learning (RL).
+</figcaption>
+</figure>
+</div>
+<p>Why did RL fall short? Developing and training reinforcement learning models is an expensive undertaking. The barrier to entry is very high, limiting RL research and development to large tech-savvy organizations. The main reason is the Sim2Real problem mentioned in the tweet above. Reinforcement learning trains an agent in a simulated, artificial environment. The real world is much more complex and transferring training based on simulation to reality is difficult. The RL agents end up performing poorly in real applications.</p>
+<hr>
+<p>Until recently, a limitation of RL was the need for a good reward function. It is important that actions in the environment are properly judged. In situation where the result of a move is difficult to judge, reinforcement learning was difficult to apply. For example, in natural language processing, where an action produces some prose, how do we rate the quality of the answer?</p>
+<p>This was the problem faced by systems like ChatGPT. How do you score the answer produced during training to make sure the algorithm continuously improves? The solution was a form of reinforcement learning modified by human intervention. RLHF, reinforcement learning with human feedback, uses human interpreters to assign scores to the actions (the Chat-GPT answers).</p>
+</section>
+</section>
+<section id="regression-and-classification" class="level2" data-number="18.3">
+<h2 data-number="18.3" class="anchored" data-anchor-id="regression-and-classification"><span class="header-section-number">18.3</span> Regression and Classification</h2>
+<section id="regression-and-the-regression-to-the-mean-fallacy" class="level3">
+<h3 class="anchored" data-anchor-id="regression-and-the-regression-to-the-mean-fallacy">Regression and the Regression to the Mean Fallacy</h3>
+<p>The term <em>regression</em> was coined by Sir Francis Galton in 1877 in his study of genetics. Galton observed a relationship between physical attributes of offspring and their parents. He found that offspring deviated less from the mean value of the population than their parents did. Taller parents tend to have taller children, but children of taller parents tend to be shorter than their parents and children of shorter parents tend to be taller than their parents.</p>
+<p>The cause Galton attributed to this phenomenon—which he called <em>regression toward mediocrity</em>—is controversial, his arguments had implications about natural selection and eugenics. As a statistical phenomenon, it is well understood. Attributes are distributed randomly; if you draw an extreme observation from a symmetric distribution, then a subsequent draw is likely to be less extreme, there is a <strong>regression to the mean</strong>.</p>
+<p><a href="#fig-sl-regression-to-the-mean" class="quarto-xref">Figure&nbsp;<span>18.6</span></a> displays this phenomenon for the distribution of HDL cholesterol values in a single person. Our cholesterol levels vary from day to day and if the distribution is normally distributed, it might look like the density in the figure, centered at a mean of 50 mg/dl. Suppose you measure a person’s HDL cholesterol, and it results in a first measurement of 30 mg/dl. The value is on the low side of the distribution, but it is not implausible. A follow-up measurement is more likely to be observed near the center of the distribution where most of the probability density is located. A second measurement might thus return a value of 55 mg/dl. A regression to the mean occurred between the first and second measurements.</p>
+<div id="fig-sl-regression-to-the-mean" class="lightbox quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sl-regression-to-the-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/Regression_to_the_mean.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2"><img src="images/Regression_to_the_mean.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sl-regression-to-the-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18.6: An example of regression to the mean. An extreme observation is more likely to be followed by a less extreme observation, one that falls near the center of the distribution.
+</figcaption>
+</figure>
+</div>
+<div class="assignment">
+<div class="assignment-header">
+<p>Assignment: Random Multiple-choice Answers</p>
+</div>
+<div class="assignment-container">
+<p>Suppose you administer a multiple-choice exam to a group of students who choose their answers completely at random.</p>
+<p>The students with the top 10% of the scores are asked to take the exam a second time. Again, they answer the multiple-choice questions at random.</p>
+<ul>
+<li><p>What percentage of the questions will the students taking the second exam get correct?</p></li>
+<li><p>How does this relate to the regression to the mean phenomenon? <!---
+Another fun example of regression to the mean is answering multiple-choice questions 
+on an exam at random. If you administer the exam, all students answer questions 
+completely at random, and you choose the students with the top 10% of scores to 
+take the exam again---choosing answers at random again---their scores will regress 
+to the mean. The top 10% in the first test will get about ½ the questions correct. 
+Their initial high scores were due to luck.
+---></p></li>
+</ul>
+</div>
+</div>
+<p>The term regression has evolved to describe statistical methods that model the mean behavior of an attribute and separate it from non-systematic, random behavior. The regression to the mean phenomenon does not mean regression methods are bad. It is a fact of random variation and a real fallacy when interpreting data. In the cholesterol example, is the change from 30 to 50 mg/dl of HDL due to natural variation or due to a systematic effect, for example, a medical intervention? Regression is intended to separate signal from noise. The regression to the mean fallacy is to misinterpret random variation as a signal.</p>
+<div class="example">
+<div class="example-header">
+<p>Example: Testing a Treatment Effect</p>
+</div>
+<div class="example-container">
+<p>You want to determine whether a change in diet reduces the risk of heart disease. From a group of individuals, you select those at greatest risk of heart disease and put them on the diet. After some time, you reassess their risk of heart disease.</p>
+<p>Because of regression to the mean, the follow-ups will likely show an improvement even if the diet has no effect at all.</p>
+<p>The correct way of studying whether the diet has an effect is to randomly divide the individuals into two groups and assign the diet to one group (the treated group) while the other group stays on their normal diet. If the individuals in the treated group improve more than the untreated group, to a degree that cannot be attributed just to chance, then we can make a statement that the diet is effective in reducing the risk of heart disease.</p>
+</div>
+</div>
+</section>
+<section id="regression-problems" class="level3">
+<h3 class="anchored" data-anchor-id="regression-problems">Regression Problems</h3>
+<div class="definition">
+<div class="definition-header">
+<p>Definition: Regression Model</p>
+</div>
+<div class="definition-container">
+<p>A <strong>regression model</strong> is a statistical model that describes how the mean of a random variable depends on other factors. The factors are often called inputs, predictor variables, or regressors.</p>
+<p>The variable whose mean is modeled is called the target variable, response variable, or dependent variable.</p>
+</div>
+</div>
+<p>Regression models are not just for continuous response data, they apply to all response types. The defining characteristic is to model the mean as a function of inputs:</p>
+<p><span class="math display">\[
+\text{E}\lbrack Y\rbrack = f\left( x_{1},\cdots,x_{p},\theta_{1},\cdots,\theta_{k} \right)
+\]</span></p>
+<p>This expression explicitly lists parameters <span class="math inline">\(\theta_{1},\cdots,\theta_{k}\)</span> in the mean function. All regression models involve the estimation of unknown, fixed quantities (=parameters). As seen in the non-linear regression example in the introduction, the number of parameters and the number of inputs do not have to be directly related.</p>
+<p>Even if the target variable is categorical, we might be interested in modeling the mean of the variable. The simplest case of categorical variables are binary variables with two levels (two categories). This is the domain of logistic regression. As seen earlier, if the categories are coded numerically as <span class="math inline">\(Y = 1\)</span> for the category of interest (the “event”) and <span class="math inline">\(Y = 0\)</span> for the “non-event” category, the mean of <span class="math inline">\(Y\)</span> is a probability. A regression model for a binary target variable is thus a model to predict probabilities. It is sufficient to predict one of the probabilities in the binary context, we call this the event probability <span class="math inline">\(\pi\)</span>. The complement can be obtained by subtraction, <span class="math inline">\(1 - \pi\)</span>.</p>
+<p>Extending this principle to more than two categories leads to regression models for <strong>multinomial</strong> data. If the category variable has <span class="math inline">\(k\)</span> levels with labels <span class="math inline">\(C_{1}, \cdots, C_{k}\)</span>, we are dealing with <span class="math inline">\(k\)</span> probabilities; <span class="math inline">\(\pi_{j}\)</span> is the probability to observe category <span class="math inline">\(C_{j}\)</span>. Suppose that we are collecting data on ice cream preferences on college campuses. A random sample of students are given three ice cream brands in a random order and report the taste as <span class="math inline">\(C_{1} =\)</span>’yuck’, <span class="math inline">\(C_{2} =\)</span>’meh’, and <span class="math inline">\(C_{3} =\)</span>’great’. Modeling these data with regression techniques, we develop a model for the probability to observe category <span class="math inline">\(j\)</span> as a function of inputs. A multinomial version of logistic regression looks like the following:</p>
+<p><span class="math display">\[
+\text{Pr}\left( Y = j \right) =
+\frac{\exp\left\{ \beta_{0j} + \beta_{1j}x_1 + \cdots + \beta_{pj}x_p \right\}}
+     {\sum_{l=1}^k \exp\{\beta_{0l} + \beta_{1l}x_1 + \cdots + \beta_{pl}x_p\}}
+\]</span></p>
+<p>This is a rather complicated model, but we will see later that it is a straightforward generalization of the two-level case. Instead of one linear predictor we now have separates predictors for the categories. The point of introducing the model here is to show that even in the categorical case we can apply regression methods—they predict category probabilities rather than the mean of a continuous variable.</p>
+</section>
+<section id="classification-problems" class="level3">
+<h3 class="anchored" data-anchor-id="classification-problems">Classification Problems</h3>
+<p>Classification applies to categorical target variables that take on a discrete number of categories, <span class="math inline">\(k\)</span>. In the binary case <span class="math inline">\(k = 2\)</span>, in the multinomial case <span class="math inline">\(k &gt; 2\)</span>.</p>
+<p>The classification problem is to predict not the mean of the variable but to assign a category to an observation. In image classification, for example, an algorithm is trained to assign the objects seen on an image to one of <span class="math inline">\(k\)</span> possible categories. In the ImageNet competition, <span class="math inline">\(k=1000\)</span>.</p>
+<p>The algorithm that maps from input variables to a category is called a <strong>classifier</strong>. The logic that turns the model output into a category assignment is called the <strong>classification rule</strong>. Applications of classifications occur in many domains, for example,</p>
+<ul>
+<li><strong>Medical diagnosis</strong>: Given a patient’s symptoms, assign a medical condition.</li>
+<li><strong>Financial services</strong>: Determine whether a payment transaction is fraudulent.</li>
+<li><strong>Customer intelligence</strong>: Assign a new customer to a customer profile (segmentation).</li>
+<li><strong>Computer vision</strong>: Detect defective items on an assembly line.</li>
+<li><strong>Computer vision</strong>: Identify objects in an image.</li>
+<li><strong>Text classification</strong>: Categorize incoming emails as spam.</li>
+<li><strong>Text classification</strong>: Categorize the sentiment of a document as positive, neutral, or negative.</li>
+<li><strong>Digital marketing</strong>: predict which advertisement a user is most likely to click.</li>
+<li><strong>Search engine</strong>: Given a user’s query and search history predict what link they will follow.</li>
+</ul>
+<p>Classification problems can be presented as prediction problems; rather than the mean of a random variable, they predict the membership in a category.</p>
+<section id="from-probabilities-to-classification" class="level4">
+<h4 class="anchored" data-anchor-id="from-probabilities-to-classification">From probabilities to classification</h4>
+<p>To determine category membership many classification models first go through a predictive step, predicting the probabilities that an observation belongs to the <span class="math inline">\(k\)</span> categories. The classification rule is then based to assign an observation to one category based on the predicted probabilities; usually the category with the highest predicted probability.</p>
+<p>Suppose we have a three-category problem with <span class="math inline">\(\pi_{1} = 0.7,\ \pi_{2} = 0.2,\pi_{3} = 0.1\)</span>, and you are asked to predict the category of the next randomly drawn observation. The most likely category to appear is <span class="math inline">\(C_{1}.\)</span></p>
+<p>This classification rule is known as the <strong>Bayes classifier</strong>.</p>
+<div class="definition">
+<div class="definition-header">
+<p>Definition: Bayes Classifier</p>
+</div>
+<div class="definition-container">
+<p>The Bayes classifier assigns an observation with inputs <span class="math inline">\(x_{1},\cdots,x_{p}\)</span> to the class <span class="math inline">\(C_{j}\)</span> for which</p>
+<p><span class="math display">\[
+\Pr(Y = j \, | \, x_{1},\cdots,x_{p})
+\]</span></p>
+<p>is largest.</p>
+</div>
+</div>
+<p>The Bayes classifier is written as a conditional probability, the probability to observe category <span class="math inline">\(C_{j}\)</span>, given the values of the input variables. The reason for this will become clearer when we cover different methods for estimating category probabilities. Some methods for deriving category probabilities assume that the <span class="math inline">\(X\)</span>s are random. In regression problems it is assumed that they are fixed, so there is no difference between the unconditional probability <span class="math inline">\(\Pr\left( Y = j \right)\)</span> and the conditional probability <span class="math inline">\(\Pr( Y = j \, | \, x_1,\cdots,x_p)\)</span>.</p>
+<p>We can now see the connection between regression and classification. Develop first a regression model that predicts the category probabilities <span class="math inline">\(\Pr( Y = j \, | \, x_1,\cdots,x_p)\)</span>. Then apply a classification rule to assign a category based on the predicted probabilities. If you side with the Bayes classifier, you choose the category that has the highest predicted probability. For a 2-category problem where events are coded as <span class="math inline">\(Y=1\)</span> and non-events are coded as <span class="math inline">\(Y=0\)</span>, this means classifying an observation as an event if</p>
+<p><span class="math display">\[
+\Pr\left( Y = 1\, | \,x_1,\cdots,x_p \right) \geq 0.5
+\]</span></p>
+</section>
+<section id="misclassification-rate" class="level4">
+<h4 class="anchored" data-anchor-id="misclassification-rate">Misclassification rate</h4>
+<p>While the mean-squared prediction error is the standard measure of model performance in regression models, the performance of a classification model is measured by statistics that contrast the number of correct and incorrect classifications. The most important of these metrics is the misclassification rate (MCR).</p>
+<div class="definition">
+<div class="definition-header">
+<p>Definition: Misclassification Rate</p>
+</div>
+<div class="definition-container">
+<p>The <strong>misclassification rate</strong> (MCR) of a classifier is the proportion of observations that are predicted to fall into the wrong category. If <span class="math inline">\(y_{i}\)</span> is the observed category of the <span class="math inline">\(i\)</span>th data point, and <span class="math inline">\({\widehat{y}}_{i}\)</span> is the predicted category, the MCR for a sample of <span class="math inline">\(n\)</span> observations is</p>
+<p><span class="math display">\[
+\text{MCR} = \frac{1}{n}\sum_{i = 1}^{n}{I\left( y_{i} \neq {\widehat{y}}_{i} \right)}
+\]</span></p>
+<p><span class="math inline">\(I(x)\)</span> is the indicator function,</p>
+<p><span class="math display">\[
+I(x) = \left\{ \begin{matrix} 1 &amp; \text{if }x\text{ is true} \\ 0 &amp; \text{otherwise} \end{matrix} \right.
+\]</span></p>
+</div>
+</div>
+<p>The misclassification rate is simply the proportion of observations we predicted incorrectly. Since the target is categorical we do not use differences <span class="math inline">\(y_i - \widehat{y}_i\)</span> to measure the closeness of target and prediction. Instead, we simply check whether the observed and predicted categories agree (<span class="math inline">\(y_i = \widehat{y}_i\)</span>). The term <span class="math inline">\(\sum_{i = 1}^{n}{I\left( y_{i} \neq {\widehat{y}}_{i} \right)}\)</span> counts the number of incorrect predictions. The complement of MCR, the proportion predicted correctly, is called the <strong>accuracy</strong> of the classification model.</p>
+</section>
+<section id="sec-model-intro-confusion" class="level4">
+<h4 class="anchored" data-anchor-id="sec-model-intro-confusion">Confusion matrix</h4>
+<p>The <strong>confusion matrix</strong> in a classification model with <span class="math inline">\(k=2\)</span> categories (a binary target) is a 2 x 2 matrix that contrasts the four possibilities of observed and predicted outcomes.</p>
+<div class="definition">
+<div class="definition-header">
+<p>Definition: Confusion Matrix</p>
+</div>
+<div class="definition-container">
+<p>The confusion matrix in a classification problem is the cross-classification between the observed and the predicted categories. In a problem with two categories, the confusion matrix is a 2 x 2 matrix.</p>
+<p>The cells of the matrix contain the number of data points that fall into the cross-classification when the model’s decision rule is applied to <span class="math inline">\(n\)</span> observations. If one of the categories is labeled positive and the other is labeled negative, the cells give the number of true positive (TP), true negative (TN), false positive (FP), and false negative (FN) predictions.</p>
+</div>
+</div>
+<p>The following table shows the layout of a typical confusion matrix for a 2-category classification problem. A false positive prediction, for example, is to predict a positive (“Yes”) result when the true state (the observed state) was negative. A false negative result is when the decision rule assigns a “No” to an observation with positive state.</p>
+<div id="tbl-conf-matrix" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-conf-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;18.2: Confusion matrix for a classification problem with two states.
+</figcaption>
+<div aria-describedby="tbl-conf-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Observed Category</th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Predicted Category</strong></td>
+<td style="text-align: center;"><strong>Yes (Positive)</strong></td>
+<td style="text-align: center;"><strong>No (Negative)</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Yes (Positive)</strong></td>
+<td style="text-align: center;">True Positive (TP)</td>
+<td style="text-align: center;">False Positive (FP)</td>
+</tr>
+<tr class="odd">
+<td><strong>No (Negative)</strong></td>
+<td style="text-align: center;">False Negative (FN)</td>
+<td style="text-align: center;">True Negative (TN)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><strong>Accuracy</strong> of the model is calculated as the proportion of observations that fall on the diagonal of the confusion matrix. The misclassification rate is the complement: the proportion of off-diagonal cells.</p>
+<p>Based on the four cells in the confusion matrix many statistics can be calculated (<a href="#tbl-confusion-statistics" class="quarto-xref">Table&nbsp;<span>18.3</span></a>).</p>
+<div id="tbl-confusion-statistics" class="striped hover quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-confusion-statistics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;18.3: Statistics calculated from a 2 x 2 confusion matrix.
+</figcaption>
+<div aria-describedby="tbl-confusion-statistics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped table-hover table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 39%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Statistic</th>
+<th style="text-align: center;">Calculation</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>False Positive Rate (FPR)</strong></td>
+<td style="text-align: center;">FP / (FP + TN)</td>
+<td style="text-align: left;">The rate of the true negative cases that were predicted to be positive</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>False Negative Rate (FNR)</strong></td>
+<td style="text-align: center;">FN / (TP + FN)</td>
+<td style="text-align: left;">The rate of the true positive cases that were predicted to be negative</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Sensitivity</strong></td>
+<td style="text-align: center;">TP / (TP + FN) = 1 – FNR</td>
+<td style="text-align: left;">This is the true positive rate; also called <strong>Recall</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Specificity</strong></td>
+<td style="text-align: center;">TN / (FP + TN) = 1— FPR</td>
+<td style="text-align: left;">This is the true negative rate</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Accuracy</strong></td>
+<td style="text-align: center;">(TP + TN) / (TP + TN + FP + FN)</td>
+<td style="text-align: left;">Overall proportion of correct classifications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Misclassification rate</strong></td>
+<td style="text-align: center;">(FP + FN) / (TP + TN + FP + FN)</td>
+<td style="text-align: left;">Overall proportion of incorrect classifications, 1 – Accuracy</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Precision</strong></td>
+<td style="text-align: center;">TP / (TP + FP)</td>
+<td style="text-align: left;">Ratio of true positives to anything predicted as positive</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Detection Rate</strong></td>
+<td style="text-align: center;">TP / (TP + TN + FP + FN)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>No Information Rate</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{\max(TP+FN,FP+TN)}{TP+TN+FP+FN}\)</span></td>
+<td style="text-align: left;">The proportion of observations in the larger observed class</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>F Score</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{2\text{TP}}{2\text{TP} + \text{FP} + \text{FN}}\)</span></td>
+<td style="text-align: left;">Harmonic mean of precision and recall</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The model <strong>accuracy</strong> is measured by the ratio of observations that were correctly classified, the sum of the diagonal cells divided by the total number of observations. The <strong>misclassification rate</strong> is the complement of the accuracy, the sum of the off-diagonal cells divided by the total number of observations.</p>
+<p>The <strong>sensitivity</strong> (<strong>recall</strong>) is the ratio of true positives to what should have been predicted as positive. The <strong>specificity</strong> is the ratio of true negatives to what should have been predicted as negative. These are <strong>not</strong> complements of each other; they are calculated with different denominators.</p>
+<p>The problem with focusing solely on accuracy to measure the quality of a classification model is that the two possible errors, false positives and false negatives might not be of equal consequence. For example, it might not matter how accurate a model is unless it achieves a certain sensitivity—the ability to correctly identify positives.</p>
+<p>Consider the data in the <a href="#tbl-confusion-example" class="quarto-xref">Table&nbsp;<span>18.4</span></a>, representing 1,000 observations and predictions.</p>
+<div id="tbl-confusion-example" class="striped quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-confusion-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;18.4: Example of a confusion matrix for 1,000 observations.
+</figcaption>
+<div aria-describedby="tbl-confusion-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Observed Category</th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Predicted Category</strong></td>
+<td style="text-align: center;"><strong>Yes (Positive)</strong></td>
+<td style="text-align: center;"><strong>No (Negative)</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Yes (Positive)</strong></td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">7</td>
+</tr>
+<tr class="odd">
+<td><strong>No (Negative)</strong></td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">958</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The classification has an accuracy of 96.7%, which seems impressive. Its false positive and false negative rates are very different, however: FPR = 0.0073, FNR = 0.7429. The model is much less likely to predict a “Yes” when the true state is “No”, than it is to predict a “No” when the true state is “Yes”. Whether we can accept a model with such low sensitivity (100 – 74.29) = 25.71% is questionable, despite the high accuracy. An evaluation of this model should consider whether the two errors, false positive and false negative predictions, are of equal importance and consequence.</p>
+<p>It is also noteworthy that the accuracy of 96.7% is not as impressive if you check the no-information rate of the data. The proportion of observations in the larger observed class is (958 + 7)/1,000 = 0.965. The accuracy of the decision rule is only slightly larger. In other words, if you were to take a naïve approach and predict all observations as “No” without looking at the data, that naïve decision rule would have an accuracy of 96.5%. The model did not buy ads much over the naïve decision rule.</p>
+<p>The <strong>precision</strong> of the binary classifier is the number of true positive predictions divided by all positive predictions.</p>
+<p>The <strong>F-score</strong> (also called the <span class="math inline">\(F_1\)</span> score) is the harmonic mean of precision and recall: <span class="math display">\[
+F_1 = \frac{2}{\text{Precision}^{-1} + \text{Recall}^{-1}} =
+\frac{2\text{TP}}{2\text{TP} + \text{FP} + \text{FN}}
+\]</span> The <span class="math inline">\(F\)</span> score is popular in natural language applications but is not without problems. The goal of the score is to balance both precision and recall, but the relative importance of the two depends on the problem. The <span class="math inline">\(F\)</span> score does not take into account true negatives and is problematic if positive and negative outcomes are unbalanced.</p>
+</section>
+</section>
+</section>
+<section id="prediction-and-explanation" class="level2" data-number="18.4">
+<h2 data-number="18.4" class="anchored" data-anchor-id="prediction-and-explanation"><span class="header-section-number">18.4</span> Prediction and Explanation</h2>
+<p>The goal in developing models is to perform inference, to reach conclusions and make decisions based on data. Broadly, the goals fall into two categories:</p>
+<ul>
+<li><p><strong>Predictive inference</strong>: concerned with developing an algorithm that predicts the target variable well and generalizes to observations not used in training the model.</p></li>
+<li><p><strong>Explanatory inference</strong>: also called <strong>confirmatory</strong> inference, it is concerned with understanding the relationship between target and input variables, understanding the relevance of the inputs, and testing hypotheses about the target variable.</p></li>
+</ul>
+<p>In machine learning, the term <em>inference</em> is used to describe the process of predicting new observations after training a model. Statisticians call this part of data analytics <strong>scoring</strong> the model. The predicted value is the “score” associated with the new observation. Our view of inference is broader than just predicting (scoring) observations. It includes any application of the trained model to derive information of interest: hypothesis testing, confidence and prediction intervals, predicted values, forecasts, etc.</p>
+<p>Data projects are not necessarily either predictive or confirmatory. Many projects have elements of both, as in the following example.</p>
+<div class="example">
+<div class="example-header">
+<p>Example: Dose-response Study of Insect Mortality</p>
+</div>
+<div class="example-container">
+<p><a href="#fig-sl-insect-mortality" class="quarto-xref">Figure&nbsp;<span>18.7</span></a> shows logits of sample proportions in a dose-response study of insect larvae mortality as a function of the concentration of an insecticide. Suppose <span class="math inline">\(y_{i}\)</span> denotes the number of larvae out of <span class="math inline">\(n_{i}\)</span> that succumb to the insecticide at concentration <span class="math inline">\(x_{i}\)</span>. The right panel of the figure shows the logit of the sample proportion <span class="math inline">\(p_{i} = \frac{y_{i}}{n_{i}}\)</span>,</p>
+<p><span class="math display">\[
+\log\left\{ \frac{p_{i}}{1 - p_{i}} \right\}
+\]</span></p>
+<p>as a function of the log insecticide concentration. A simple linear model seems appropriate,</p>
+<p><span class="math display">\[
+\log\left\{ \frac{\text{E}\lbrack p_{i}\rbrack}{1 - \text{T}\lbrack p_{i}\rbrack} \right\} = \beta_0 + \beta_1\log_{10}x_i
+\]</span></p>
+<p>Note that the expected value <span class="math inline">\(\text{E}\left\lbrack p_{i} \right\rbrack\)</span> is a probability. This model is a generalization of logistic regression for binary data (a 0/1 response) to binomial sample proportions. <span class="math inline">\(\text{E}\left\lbrack p_{i} \right\rbrack = \pi_{i}\)</span> is the probability that an insect dies when <span class="math inline">\(\log_{10}x_{i}\)</span> amount of insecticide is applied.</p>
+<div id="fig-sl-insect-mortality" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sl-insect-mortality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/InsectMortality.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sl-insect-mortality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18.7: Logits of larvae mortality sample proportion against insecticide concentration and log concentration.
+</figcaption>
+</figure>
+</div>
+<p>The investigators want to understand the relationship between larvae mortality and insecticide concentration. The parameter estimate for <span class="math inline">\(\beta_{1}\)</span> is of interest, it describes the change in logits that corresponds to a unit-level change in the log concentration. A hypothesis test for <span class="math inline">\(\beta_{1}\)</span> might compare the dose-response in this study with the known dose-response slope <span class="math inline">\(c\)</span> of a standard insecticide. The null hypothesis of this test specifies that the insecticide is as effective as the standard:</p>
+<p><span class="math display">\[
+H_{0}:\beta_{1} = c
+\]</span></p>
+<p>Another value of interest in dose-response studies is the concentration that achieves a specified effect. For example, the lethal dosage <span class="math inline">\(LD_{50}\)</span> is the concentration that kills 50% of the subjects. Determining the <span class="math inline">\(LD_{50}\)</span> value is known as an <strong>inverse prediction</strong> problem: rather than predicting <span class="math inline">\(\text{E}\lbrack Y\rbrack\)</span> for a given value of <span class="math inline">\(X\)</span>, we are interested in finding the value <span class="math inline">\(X\)</span> that corresponds to a given a value of <span class="math inline">\(\text{E}\lbrack Y\rbrack\)</span>.</p>
+<div id="fig-sl-insect-mortality2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sl-insect-mortality2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/InsectMortality_2.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sl-insect-mortality2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18.8: Fitted dose-response curve and inverse prediction of $LD_{50}$. The $LD_{50}$ is calculated from the value where the vertical line intersects the horizontal axis.
+</figcaption>
+</figure>
+</div>
+<p>The <span class="math inline">\(LD_{50}\)</span> value can be calculated from the model equation. More generally, we can find any value on the x-axis that corresponds to a particular mortality rate <span class="math inline">\(\alpha\)</span> by solving the following equation for <span class="math inline">\(\alpha\)</span>:</p>
+<p><span class="math display">\[
+\text{logit}(\alpha) = \log\left\{ \frac{\alpha}{1 - \alpha} \right\} = \beta_0 + \beta_1\log_{10}x_\alpha
+\]</span></p>
+<p>The solution is</p>
+<p><span class="math display">\[
+x_{\alpha} = 10^{\frac{\left( \text{logit}(\alpha) - \beta_{0} \right)}{\beta_{1}}}
+\]</span></p>
+<p>For the special value <span class="math inline">\(\alpha = 0.5\)</span>, the <span class="math inline">\(LD_{50}\)</span> results,</p>
+<p><span class="math display">\[
+LD_{50} = 10^{\frac{- \beta_{0}}{\beta_{1}}}
+\]</span></p>
+<p>In addition to hypothesis testing about <span class="math inline">\(\beta_{1}\)</span> and calculating the <span class="math inline">\(LD_{50}\)</span>, the investigators are also interested in predicting the mortality rate at concentrations not used in the study.</p>
+<p>The inference in the study has explanatory (confirmatory) and predictive elements.</p>
+</div>
+</div>
+<p>Many studies are not completely confirmatory or predictive, because models that are good at confirmatory inference are not necessarily good at predicting. Similarly, models that predict well are not necessarily good at testing hypotheses. Interpretability of the model parameters is important for confirmatory inference because hypotheses about the real world are cast as statements about the model parameters. Many disciplines place a premium on interpretability, e.g., biology, life sciences, economics, physical sciences, geosciences, natural resources, financial services. Experiments designed to answer specific questions rely on analytic methods designed for confirmatory inference.</p>
+<p>Interpretability of the model parameters might not be important for a predictive model. A biased estimator that reduces variability and leads to a lower mean squared prediction error (see the next section) can be appealing in a predictive model but can be unacceptable in a project where confirmatory inference is the primary focus.</p>
+
+
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Figure&nbsp;18.4: Important types of statistical learning</span>
+<span class="glightbox-desc lightbox-desc-2">Figure&nbsp;18.6: An example of regression to the mean. An extreme observation is more likely to be followed by a less extreme observation, one that falls near the center of the distribution.</span>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Silver2012" class="csl-entry" role="listitem">
+Silver, Nate. 2012. <em>The Signal and the Noise: Why so Many Predictions Fail–but Some Don’t</em>. Penguin Books.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../models/model_intro.html" class="pagination-link" aria-label="Introduction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../models/correlation.html" class="pagination-link" aria-label="Correlation and Causation">
+        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Correlation and Causation</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Foundations of Data Science by Oliver Schabenberger</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","loop":false});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
