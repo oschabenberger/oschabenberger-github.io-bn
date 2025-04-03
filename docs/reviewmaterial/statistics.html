@@ -1,0 +1,2053 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.552">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Foundations of Data Science - 33&nbsp; Statistics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../reviewmaterial/linalg.html" rel="next">
+<link href="../reviewmaterial/probability.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reviewmaterial/probability.html">Module VIII. Review Topics</a></li><li class="breadcrumb-item"><a href="../reviewmaterial/statistics.html"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Statistics</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Foundations of Data Science</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Module I. Data Science Projects</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">History and Evolution of Data Science</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/lifecycle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Data Science Project Lifecycle</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/thinkingds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Thinking Like a Data Scientist</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/teams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Roles on Data Science Teams</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Module II. Business Understanding: Discovery</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../busi/bus_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../busi/approach.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Approach and Methodology</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../busi/examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Example: Email Campaign Optimization</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Module III. Data Engineering</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/data_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/sources_and_files.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Sources and File Formats</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/data_access.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data Access</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Data Quality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/summarization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Data Summarization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Data Visualization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/sqlbasics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">SQL Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../data/integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Integration</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Module IV. Modeling Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../models/model_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../models/model_concepts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">General Concepts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../models/correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Correlation and Causation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../models/bias_variance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">The Bias-Variance Tradeoff</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../models/test_cv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Testing, Validation, Cross-Validation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../models/messydata.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Messy Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../models/featproc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Feature and Target Processing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Module V. Evaluation &amp; Communication</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Module VI. Operationalization</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../integ/ds_softwareeng.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Data Science versus Software Engineering,</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../integ/coding_practices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../integ/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text">Module VII. Applied Ethics in Data Science</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/gonewrong.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">How Things Go Wrong</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/bias_harm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../ethics/genAI.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Ethics of Generative AI</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text">Module VIII. Review Topics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reviewmaterial/probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Probability</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reviewmaterial/statistics.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reviewmaterial/linalg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reviewmaterial/estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Estimation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">33.1</span> Introduction</a>
+  <ul>
+  <li><a href="#parameters-statistics" id="toc-parameters-statistics" class="nav-link" data-scroll-target="#parameters-statistics">Parameters &amp; Statistics</a></li>
+  <li><a href="#random-variables-realizations" id="toc-random-variables-realizations" class="nav-link" data-scroll-target="#random-variables-realizations">Random Variables &amp; Realizations</a></li>
+  </ul></li>
+  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link" data-scroll-target="#descriptive-statistics"><span class="header-section-number">33.2</span> Descriptive Statistics</a>
+  <ul>
+  <li><a href="#numerical-summaries" id="toc-numerical-summaries" class="nav-link" data-scroll-target="#numerical-summaries">Numerical Summaries</a></li>
+  <li><a href="#graphical-summaries" id="toc-graphical-summaries" class="nav-link" data-scroll-target="#graphical-summaries">Graphical Summaries</a>
+  <ul class="collapse">
+  <li><a href="#histogram-frequency-distribution" id="toc-histogram-frequency-distribution" class="nav-link" data-scroll-target="#histogram-frequency-distribution">Histogram (Frequency Distribution)</a></li>
+  <li><a href="#boxplot" id="toc-boxplot" class="nav-link" data-scroll-target="#boxplot">Boxplot</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sec-prob-sampling-dist" id="toc-sec-prob-sampling-dist" class="nav-link" data-scroll-target="#sec-prob-sampling-dist"><span class="header-section-number">33.3</span> Sampling Distributions</a>
+  <ul>
+  <li><a href="#central-limit-theorem" id="toc-central-limit-theorem" class="nav-link" data-scroll-target="#central-limit-theorem">Central Limit Theorem</a></li>
+  <li><a href="#sampling-from-a-gaussian" id="toc-sampling-from-a-gaussian" class="nav-link" data-scroll-target="#sampling-from-a-gaussian">Sampling from a Gaussian</a></li>
+  <li><a href="#chi-square-distribution-chi2_nu" id="toc-chi-square-distribution-chi2_nu" class="nav-link" data-scroll-target="#chi-square-distribution-chi2_nu">Chi-Square Distribution, <span class="math inline">\(\chi^2_\nu\)</span></a></li>
+  <li><a href="#sec-sampledist-t" id="toc-sec-sampledist-t" class="nav-link" data-scroll-target="#sec-sampledist-t">Students’ t Distribution, <span class="math inline">\(t_\nu\)</span></a></li>
+  <li><a href="#f-distribution-f_nu_1-nu_2" id="toc-f-distribution-f_nu_1-nu_2" class="nav-link" data-scroll-target="#f-distribution-f_nu_1-nu_2">F Distribution, <span class="math inline">\(F_{\nu_1, \nu_2}\)</span></a></li>
+  </ul></li>
+  <li><a href="#inferential-statistics" id="toc-inferential-statistics" class="nav-link" data-scroll-target="#inferential-statistics"><span class="header-section-number">33.4</span> Inferential Statistics</a>
+  <ul>
+  <li><a href="#point-estimation" id="toc-point-estimation" class="nav-link" data-scroll-target="#point-estimation">Point Estimation</a></li>
+  <li><a href="#interval-estimation" id="toc-interval-estimation" class="nav-link" data-scroll-target="#interval-estimation">Interval Estimation</a>
+  <ul class="collapse">
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#constructing-confidence-intervals" id="toc-constructing-confidence-intervals" class="nav-link" data-scroll-target="#constructing-confidence-intervals">Constructing confidence intervals</a></li>
+  <li><a href="#confidence-intervals-based-on-the-clt" id="toc-confidence-intervals-based-on-the-clt" class="nav-link" data-scroll-target="#confidence-intervals-based-on-the-clt">Confidence intervals based on the CLT</a></li>
+  <li><a href="#confidence-interval-for-sigma2" id="toc-confidence-interval-for-sigma2" class="nav-link" data-scroll-target="#confidence-interval-for-sigma2">Confidence interval for <span class="math inline">\(\sigma^2\)</span></a></li>
+  <li><a href="#confidence-versus-prediction-interval" id="toc-confidence-versus-prediction-interval" class="nav-link" data-scroll-target="#confidence-versus-prediction-interval">Confidence versus prediction interval</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing"><span class="header-section-number">33.5</span> Hypothesis Testing</a>
+  <ul>
+  <li><a href="#the-procedure" id="toc-the-procedure" class="nav-link" data-scroll-target="#the-procedure">The Procedure</a>
+  <ul class="collapse">
+  <li><a href="#ingredients" id="toc-ingredients" class="nav-link" data-scroll-target="#ingredients">Ingredients</a></li>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example</a></li>
+  <li><a href="#decision-rule" id="toc-decision-rule" class="nav-link" data-scroll-target="#decision-rule">Decision rule</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  </ul></li>
+  <li><a href="#derivation-of-a-statistical-test" id="toc-derivation-of-a-statistical-test" class="nav-link" data-scroll-target="#derivation-of-a-statistical-test">Derivation of a Statistical Test</a></li>
+  <li><a href="#connection-to-confidence-intervals" id="toc-connection-to-confidence-intervals" class="nav-link" data-scroll-target="#connection-to-confidence-intervals">Connection to Confidence Intervals</a></li>
+  </ul></li>
+  <li><a href="#categorical-data" id="toc-categorical-data" class="nav-link" data-scroll-target="#categorical-data"><span class="header-section-number">33.6</span> Categorical Data</a></li>
+  <li><a href="#simple-and-multiple-linear-regression" id="toc-simple-and-multiple-linear-regression" class="nav-link" data-scroll-target="#simple-and-multiple-linear-regression"><span class="header-section-number">33.7</span> Simple and Multiple Linear Regression</a>
+  <ul>
+  <li><a href="#ordinary-least-squares-estimation" id="toc-ordinary-least-squares-estimation" class="nav-link" data-scroll-target="#ordinary-least-squares-estimation">Ordinary Least Squares Estimation</a></li>
+  <li><a href="#prediction-and-confidence-intervals" id="toc-prediction-and-confidence-intervals" class="nav-link" data-scroll-target="#prediction-and-confidence-intervals">Prediction and Confidence Intervals</a></li>
+  <li><a href="#model-diagnostics" id="toc-model-diagnostics" class="nav-link" data-scroll-target="#model-diagnostics">Model Diagnostics</a></li>
+  </ul></li>
+  <li><a href="#time-series-analysis" id="toc-time-series-analysis" class="nav-link" data-scroll-target="#time-series-analysis"><span class="header-section-number">33.8</span> Time Series Analysis</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reviewmaterial/probability.html">Module VIII. Review Topics</a></li><li class="breadcrumb-item"><a href="../reviewmaterial/statistics.html"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Statistics</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-stats" class="quarto-section-identifier"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Statistics</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2" data-number="33.1">
+<h2 data-number="33.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">33.1</span> Introduction</h2>
+<p><strong>Statistics</strong> is the science of uncertainty. The name of the discipline hails from the German word “Statistik”, a quantity describing a state or country. Statistics deals with the collection of data, the generation of data through experiments, the analysis of data and the drawing of conclusions from data.</p>
+<p>Here is a strange statement: statistics is concerned with <em>statistics</em>. Seems kind of obvious, but there is a trick. The first “statistic” in this sentence refers to the discipline, the second to a quantity computed from data. The sample mean or the sample standard deviation are statistics, as are the coefficients of a regression model. Because data are inherently uncertain, either because they have been sampled from a population, are measured with error, represent naturally variable phenomena, or are the result of randomized manipulation, statistics computed from data are random variables. And variability is contagious. The distributional properties of the data impart a certain random behavior on the quantities calculated from statistics.</p>
+<p>Statisticians thus worry a great deal about which statistical quantities are best to be used in different situations. What are their properties based on a sample of size <span class="math inline">\(n\)</span> and how do their properties change as the sample size increases? How do stochastic properties of the population being sampled transfer into properties of a statistic?</p>
+<section id="parameters-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="parameters-statistics">Parameters &amp; Statistics</h3>
+<p>Unknown quantities that describe the population we are interested in are called <strong>parameters</strong>. We sample elements of the population to collect data based on which we can compute statistics that estimate the paraemters (<a href="#fig-parm-stat" class="quarto-xref">Figure&nbsp;<span>33.1</span></a>).</p>
+<div id="fig-parm-stat" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-parm-stat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ParameterStatistic.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-parm-stat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.1: Sampling from as population to calculate statistics that estimate parameters of the population.
+</figcaption>
+</figure>
+</div>
+<p>The statistics are random variables because the attribute sampled from the population is not constant, it has variability. Depending on which elements of the population make it into the sample, the values of the statistics will differ. The only ways around the variability in statistics would be to either</p>
+<ol type="1">
+<li>observe (measure) all elements of the population, a procedure known as a <strong>census</strong></li>
+<li>observe an attribute that does not vary in the population (<span class="math inline">\(\text{Var}[Y] = 0\)</span>).</li>
+</ol>
+<p>In the first case there is no variability in the statistics because every repetition of the census yields the exact same data. In the second case there is no variability in the statistics because there is no variability in the values we observe. In situation 2 we might as well just sample a single observation and we know everything there is to know about the attribute in question.</p>
+</section>
+<section id="random-variables-realizations" class="level3">
+<h3 class="anchored" data-anchor-id="random-variables-realizations">Random Variables &amp; Realizations</h3>
+<p>When discussing statistics, the quantities computed from data, we must make a distinction between random quantities and their realizations. For example, suppose you draw <span class="math inline">\(n\)</span> observations from a Gaussian distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. This is the same as saying that there is a population where attribute <span class="math inline">\(Y\)</span> follows a <span class="math inline">\(G(\mu, \sigma^2)\)</span> distribution and we are pulling a random sample of <span class="math inline">\(n\)</span> elements of the population.</p>
+<p>What is the difference between the following quantities, <span class="math display">\[
+\begin{align*}
+\overline{Y} &amp;= \frac{1}{n} \sum_{i=1}^n Y_i \\
+\overline{y} &amp;= \frac{1}{n} \sum_{i=1}^n y_i
+\end{align*}
+\]</span></p>
+<p>The distributional properties of <span class="math inline">\(Y\)</span> in the population can be expressed as <span class="math inline">\(Y \sim G(\mu,\sigma^2)\)</span>. <span class="math inline">\(Y_1\)</span> is the first random variable in our sample. <span class="math inline">\(y_1\)</span> is the <strong>value</strong> we observe on the first draw, for example, <span class="math inline">\(y_1 = 5.6\)</span>.</p>
+<p>When we refer to the random variables, we use upper-case notation, when we refer to their realized (observed) values in a particular set of data we use lower-case notation. Both <span class="math inline">\(\overline{Y}\)</span> and <span class="math inline">\(\overline{y}\)</span> refer to the sample mean. <span class="math inline">\(\overline{Y}\)</span> is a <strong>random variable</strong>, <span class="math inline">\(\overline{y}\)</span> is the actual value of the sample mean in our data, it is a <strong>constant</strong>. <span class="math inline">\(\overline{Y}\)</span> has an expected value (the mean of the sample mean) and a variance that are functions of the mean and variance of the population from which the sample is drawn,</p>
+<p><span class="math display">\[
+\begin{align*}
+\text{E}\left[ \overline{Y}\right] &amp;= \mu \\
+\text{Var} \left[\overline{Y}\right] &amp;= \frac{\sigma^2}{n}
+\end{align*}
+\]</span></p>
+<p>The variance of <span class="math inline">\(\overline{y}\)</span> is zero, and its expected value is equal to the value we obtained for <span class="math inline">\(\overline{y}\)</span>, because it is a constant:</p>
+<p>$$ <span class="math display">\[\begin{align*}
+\text{E}\left[ \overline{y}\right] &amp;= \overline{y} \\
+\text{Var} \left[\overline{y}\right] &amp;= 0
+
+\end{align*}\]</span> $$</p>
+<hr>
+<p>It should always be clear from context whether we are talking about the random properties of a statistic or its realized value. Unfortunately, notation is not always clear. In statistical models, for example, it is common to use Greek letters for <strong>parameters</strong>. These are unknown constants. Based on data we find <strong>estimators</strong> for the parameters. For example, in the simple linear regression model <span class="math display">\[
+Y_i = \beta_0 + \beta_1 x_i + \epsilon_i
+\]</span> <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are the intercept and slope parameters of the model. The ordinary least squares estimator of <span class="math inline">\(\beta_1\)</span> is <span id="eq-slr-slope-estimator"><span class="math display">\[
+\widehat{\beta}_1 = \frac{S_{xY}}{S_{xx}} = \frac{\sum_{i=1}^n (x_i - \overline{x})(Y_i - \overline{Y})}{\sum_{i=1}^n(x_i - \overline{x})^2}
+\tag{33.1}\]</span></span></p>
+<p>The input variable is considered fixed in regression models, not a random variable. That is why we use lower-case notation for <span class="math inline">\(x_i\)</span> and <span class="math inline">\(\overline{x}\)</span> in <a href="#eq-slr-slope-estimator" class="quarto-xref">Equation&nbsp;<span>33.1</span></a>. With respect to the target variable we have two choices. <a href="#eq-slr-slope-estimator" class="quarto-xref">Equation&nbsp;<span>33.1</span></a> uses upper-case notation, referring to the random variables. <span class="math inline">\(\widehat{\beta}_1\)</span> in <a href="#eq-slr-slope-estimator" class="quarto-xref">Equation&nbsp;<span>33.1</span></a> is a random variable and we can study the distributional properties of <span class="math inline">\(\widehat{\beta}_1\)</span>.</p>
+<p>The expression for <span class="math inline">\(\widehat{\beta}_1\)</span> in <a href="#eq-slr-slope-estimate" class="quarto-xref">Equation&nbsp;<span>33.2</span></a> uses lower-case notation for <span class="math inline">\(y_i\)</span> and <span class="math inline">\(\overline{y}\)</span>, it is referring to the constants computed from a particular sample.</p>
+<p><span id="eq-slr-slope-estimate"><span class="math display">\[
+\widehat{\beta}_1 = \frac{S_{xy}}{S_{xx}} = \frac{\sum_{i=1}^n (x_i - \overline{x})(y_i - \overline{y})}{\sum_{i=1}^n(x_i - \overline{x})^2}
+\tag{33.2}\]</span></span></p>
+<p>The quantity <span class="math inline">\(\widehat{\beta}_1\)</span> in <a href="#eq-slr-slope-estimate" class="quarto-xref">Equation&nbsp;<span>33.2</span></a> is the realized value of the regression slope, for example, 12.456. Unfortunately, the notation <span class="math inline">\(\widehat{\beta}_1\)</span> does not tell us whether we are referring to the <strong>estimator</strong> of the slope—a random variable—or the <strong>estimate</strong> of the slope—a constant.</p>
+<hr>
+<p>Two primary lines of inquiry in statistics are the description of data—through quantitative and visual summaries—and the drawing of conclusions from data. These lines of inquiry are called <strong>descriptive</strong> and <strong>inferential</strong> statistics. Descriptive statistics—the discipline—describes the features of a population (a distribution) based on the data in a sample. Inferential statistics—the discipline—draws conclusions about one or more populations.</p>
+<p>Both lines of inquiry rely on statistics, quantities computed from data. The distinction lies in how the statistics are used. Descriptive statistics uses the sample mean to estimate the central tendency—the typical value—of a population. Inferential statistics uses the sample means in two groups to make conclude whether the means of the populations are different.</p>
+</section>
+</section>
+<section id="descriptive-statistics" class="level2" data-number="33.2">
+<h2 data-number="33.2" class="anchored" data-anchor-id="descriptive-statistics"><span class="header-section-number">33.2</span> Descriptive Statistics</h2>
+<p>Descriptive statistics capture the feature of a distribution (a population) in numerical or graphical summaries. The most important features of a distribution are its central tendency (<strong>location</strong>) and its variability (<strong>dispersion</strong>). The central tendency captures where the typical values are located, the dispersion expresses how much the distribution spreads around the typical values.</p>
+<section id="numerical-summaries" class="level3">
+<h3 class="anchored" data-anchor-id="numerical-summaries">Numerical Summaries</h3>
+<p><a href="#tbl-stat-location" class="quarto-xref">Table&nbsp;<span>33.1</span></a> shows important location statistics and <a href="#tbl-stat-dispersion" class="quarto-xref">Table&nbsp;<span>33.2</span></a> important dispersion statistics.</p>
+<div id="tbl-stat-location" class="striped quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-stat-location-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;33.1: Important statistics measuring location attributes of a distribution. Sample mean, sample median, and sample mode are measures of the central tendency of a variable. <span class="math inline">\(Y_{(k)}\)</span> denotes the value at the <span class="math inline">\(k\)</span><sup>th</sup> position when the values are arranged in ascending order; this is called the <span class="math inline">\(k\)</span><sup>th</sup> order statistic. The min is defined as the smallest non-missing values because NaNs often sort as smallest values in software packages.
+</figcaption>
+<div aria-describedby="tbl-stat-location-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Sample Statistic</th>
+<th>Symbol</th>
+<th>Computation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Min</td>
+<td></td>
+<td><span class="math inline">\(Y_{(1)}\)</span></td>
+<td>The smallest non-missing value</td>
+</tr>
+<tr class="even">
+<td>Max</td>
+<td></td>
+<td><span class="math inline">\(Y_{(n)}\)</span></td>
+<td>The largest value</td>
+</tr>
+<tr class="odd">
+<td>Mean</td>
+<td><span class="math inline">\(\overline{Y}\)</span></td>
+<td><span class="math inline">\(\frac{1}{n}\sum_{i=1}^n Y_i\)</span></td>
+<td>Most important location measure, but can be affected by outliers</td>
+</tr>
+<tr class="even">
+<td>Median</td>
+<td>Med</td>
+<td><span class="math inline">\(\left \{ \begin{array}{cc} Y_{\left(\frac{n+1}{2}\right)} &amp; n \text{ is even} \\
+\frac{1}{2} \left( Y_{\left(\frac{n}{2} \right)} + Y_{\left(\frac{n}{2}+1\right)} \right) &amp; n\text{ is odd} \end{array}\right .\)</span></td>
+<td>Half of the observations are smaller than the median; robust against outliers</td>
+</tr>
+<tr class="odd">
+<td>Mode</td>
+<td>Mode</td>
+<td></td>
+<td>The most frequent value; not useful when real numbers are unique</td>
+</tr>
+<tr class="even">
+<td>1st Quartile</td>
+<td><span class="math inline">\(Q_1\)</span></td>
+<td><span class="math inline">\(Y_{\left(\frac{1}{4}(n+1) \right)}\)</span></td>
+<td>25% of the observations are smaller than <span class="math inline">\(Q_1\)</span></td>
+</tr>
+<tr class="odd">
+<td>2nd Quartile</td>
+<td><span class="math inline">\(Q_2\)</span> = Med</td>
+<td>See Median</td>
+<td>50% of the observations are smaller than <span class="math inline">\(Q_2\)</span>. This is the median</td>
+</tr>
+<tr class="even">
+<td>3rd Quartile</td>
+<td><span class="math inline">\(Q_3\)</span></td>
+<td><span class="math inline">\(Y_{\left(\frac{3}{4}(n+1) \right)}\)</span></td>
+<td>75% of the observations are smaller than <span class="math inline">\(Q_3\)</span></td>
+</tr>
+<tr class="odd">
+<td>X% Percentile</td>
+<td></td>
+<td><span class="math inline">\(Y_{\left(\frac{X}{100}(n+1) \right)}\)</span></td>
+<td>For example, 5% of the observations are larger than <span class="math inline">\(P_{95}\)</span>, the 95% percentile</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The most important location measures are the sample mean <span class="math inline">\(\overline{Y}\)</span> and the median. The sample mean is the arithmetic average of the sample values. Because the sample mean can be affected by outliers—large values are pulling the sample mean up—the median is preferred in the presence of extreme observations. For example, when reporting central tendency of annual income, the median income is chosen over the arithmetic average so that extreme incomes like those of Elon Musk, Jeff Bezos, and Mark Zuckerberg do not distort the notion of the typical value.</p>
+<div id="tbl-stat-dispersion" class="striped quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-stat-dispersion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;33.2: Important statistics measuring dispersion (variability) of a variable.
+</figcaption>
+<div aria-describedby="tbl-stat-dispersion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Sample Statistic</th>
+<th>Symbol</th>
+<th>Computation</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Range</td>
+<td><span class="math inline">\(R\)</span></td>
+<td><span class="math inline">\(Y_{(n)} - Y_{(1)\)</span></td>
+<td><span class="math inline">\(n\)</span><sup>th</sup> order statistic (largest) minus first (smallest) order statistic</td>
+</tr>
+<tr class="even">
+<td>Inter-quartile Range</td>
+<td>IQR</td>
+<td><span class="math inline">\(Q_3 - Q_1\)</span></td>
+<td>Used in constructing box plots; covers the central 50% of the data</td>
+</tr>
+<tr class="odd">
+<td>Standard Deviation</td>
+<td><span class="math inline">\(S\)</span></td>
+<td><span class="math inline">\(\sqrt{\frac{1}{n-1}\sum_{i=1}^n\left( Y_i - \overline{Y}\right)^2}\)</span></td>
+<td>Most important dispersion measure; in the same units as the sample mean (the units of <span class="math inline">\(Y\)</span>)</td>
+</tr>
+<tr class="even">
+<td>Variance</td>
+<td><span class="math inline">\(S^2\)</span></td>
+<td><span class="math inline">\(\frac{1}{n-1}\sum_{i=1}^n \left( Y_i - \overline{Y} \right)^2\)</span></td>
+<td>Important statistical measure of dispersion; in squared units of <span class="math inline">\(Y\)</span></td>
+</tr>
+<tr class="odd">
+<td>Skewness</td>
+<td><span class="math inline">\(g_1\)</span></td>
+<td><span class="math inline">\(\frac{\frac{1}{n}\sum_{i=1}^n(Y_i - \overline{Y})^3}{S^3}\)</span></td>
+<td>Measures the symmetry of a distribution</td>
+</tr>
+<tr class="even">
+<td>Kurtosis</td>
+<td><span class="math inline">\(k\)</span></td>
+<td><span class="math inline">\(\frac{\frac{1}{n}\sum_{i=1}^n(Y_i - \overline{Y})^4}{S^4}\)</span></td>
+<td>Measures the peakedness of a distribution</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="graphical-summaries" class="level3">
+<h3 class="anchored" data-anchor-id="graphical-summaries">Graphical Summaries</h3>
+<p>We view a population as a distribution of values. Data visualizations thus lend themselves to the description of populations. The more important visual descriptive summaries are the frequency distribution (histogram) and the boxplot.</p>
+<section id="histogram-frequency-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="histogram-frequency-distribution">Histogram (Frequency Distribution)</h4>
+<p>The frequency distribution is constructed by binning the observed values into segments of equal width. <a href="#fig-college-hist1" class="quarto-xref">Figure&nbsp;<span>33.2</span></a> shows the (absolute) frequency distribution of out-of-state tuition for private universities in 1995. <a href="#fig-college-hist2" class="quarto-xref">Figure&nbsp;<span>33.3</span></a> displays the same data with a large number of frequency bins (30). Between 5 and 30 bins is typical for histograms. The number of bins should not be too small to obscure features of the distribution and it should not be too large to create artifacts in regions of low data density.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-college-hist1" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-college-hist1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="statistics_files/figure-html/fig-college-hist1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-college-hist1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.2: Histograms for out-of-state tuition for private universities in 1995.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-college-hist2" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-college-hist2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="statistics_files/figure-html/fig-college-hist2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-college-hist2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.3: Histograms with 30 breaks for out-of-state tuition for private universities in 1995.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>To compare frequency distributions between groups histograms can be plotted side by side or overlaid. When the histograms overlap a side-by-side display is preferred because bars from different groups can obscure it each other. Adding transparency to the bars helps but can still create confusing displays (<a href="#fig-college-hist3" class="quarto-xref">Figure&nbsp;<span>33.4</span></a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-college-hist3" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-college-hist3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="statistics_files/figure-html/fig-college-hist3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-college-hist3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.4: Overlaid histograms of out-of-state tuition for private and public universities in 1995.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In the side-by-side display attention needs to be paid to the scale of the horizontal and vertical axes. <a href="#fig-college-hist4" class="quarto-xref">Figure&nbsp;<span>33.5</span></a> forces the axes to be the same in both histograms to facilitate a direct comparison. Alternatively to forcing the vertical axes to the same frequency range you can express the frequencies in relative terms (<a href="#fig-college-hist5" class="quarto-xref">Figure&nbsp;<span>33.6</span></a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-college-hist4" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-college-hist4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="statistics_files/figure-html/fig-college-hist4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-college-hist4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.5: Histograms for out-of-state tuition for private and public universities in 1995.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-college-hist5" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-college-hist5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="statistics_files/figure-html/fig-college-hist5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-college-hist5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.6: Relative frequency distributions for out-of-state tuition for private and public universities in 1995.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="boxplot" class="level4">
+<h4 class="anchored" data-anchor-id="boxplot">Boxplot</h4>
+<p>The boxplot, also called the box-and-whisker plot, is a simple visualization of a distribution that combines information about location, dispersion, and extreme values. The standard box plot (<a href="#fig-boxplot-schema" class="quarto-xref">Figure&nbsp;<span>33.7</span></a>) comprises</p>
+<ol type="1">
+<li>a box that covers the inter-quartile range from <span class="math inline">\(Q_1\)</span> to <span class="math inline">\(Q_3\)</span>.</li>
+<li>a line through the box at the location of the median (<span class="math inline">\(Q_2\)</span>).</li>
+<li>Whiskers that extend from the edge of the box to the largest and smallest observations within <span class="math inline">\(1.5\times \text{IQR}\)</span>.</li>
+<li>Outliers that fall outside the whiskers.</li>
+</ol>
+<div id="fig-boxplot-schema" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplot-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/BoxplotSchema.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.7: Schema of a box plot.
+</figcaption>
+</figure>
+</div>
+<p>The idea of the boxplot is that the box covers the central 50% of the observation, the whiskers extend to the vast majority of the data. Data points that fall outside the whiskers are declared outliers.</p>
+<p>Note, however, that outlying observations in boxplots does not necessarily indicate observations that are inconsistent with the data. A boxplot for a sample from a normal distribution will likely show some outliers by this definition (<a href="#fig-gauss-boxplot" class="quarto-xref">Figure&nbsp;<span>33.8</span></a>). The probability to observe values outside of the whiskers for a <span class="math inline">\(G(\mu,\sigma^2)\)</span> distribution is 0.00697. In a sample of <span class="math inline">\(n=1000\)</span> you should expect to see 7 observations beyond the whiskers.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-gauss-boxplot" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gauss-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="statistics_files/figure-html/fig-gauss-boxplot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gauss-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.8: Box plot of 300 observations from a <span class="math inline">\(G(0,1)\)</span> distribution.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Boxplots are great visual devices to compare the distribution for different attributes (<a href="#fig-boxplot-vars" class="quarto-xref">Figure&nbsp;<span>33.9</span></a>) or to compare the same attribute across different groups (<a href="#fig-boxplot-grps" class="quarto-xref">Figure&nbsp;<span>33.10</span></a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-boxplot-vars" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplot-vars-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="statistics_files/figure-html/fig-boxplot-vars-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-vars-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.9: Comparing distributions of attributes with boxplots.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-boxplot-grps" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplot-grps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="statistics_files/figure-html/fig-boxplot-grps-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-grps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.10: Comparing distributions of attributes with boxplots.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="sec-prob-sampling-dist" class="level2" data-number="33.3">
+<h2 data-number="33.3" class="anchored" data-anchor-id="sec-prob-sampling-dist"><span class="header-section-number">33.3</span> Sampling Distributions</h2>
+<p><strong>Sampling distributions</strong> are probability distributions of statistics computed from random samples.</p>
+<p><a href="probability.html" class="quarto-xref"><span>Chapter 32</span></a> discussed probability distributions in general. If one draws a random sample from, say, a <span class="math inline">\(G(\mu,\sigma^2)\)</span> distribution, what are the distributional properties of statistics like <span class="math inline">\(\overline{Y}\)</span>, <span class="math inline">\(S^2\)</span>, and so on?</p>
+<p>We know that <span class="math inline">\(\overline{Y}\)</span> in a random sample from a distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> has mean <span class="math inline">\(\text{E}[\overline{Y}] = \mu\)</span> and variance <span class="math inline">\(\text{Var}[\overline{Y}] = \sigma^2/n\)</span>. This can be verified based on properties of expected values in <em>iid</em> samples. We do not need to mess with any density or mass functions.</p>
+<p><span id="eq-mean-samplemean"><span class="math display">\[
+\begin{align*}
+\text{E}\left[\overline{Y}\right] &amp;= \frac{1}{n}\text{E}\left[\sum_{i=1}^n Y_i\right]
+    = \frac{1}{n} \sum_{i=1}^n \text{E}\left[Y_i\right] \\
+&amp;= \frac{1}{n} \sum_{i=1}^n \mu = \frac{n\mu}{n} = \mu
+\end{align*}
+\tag{33.3}\]</span></span></p>
+<p><span id="eq-var-samplemean"><span class="math display">\[
+\begin{align*}
+\text{Var}\left[\overline{Y} \right] &amp;= \text{Var}\left[ \frac{1}{n}\sum_{i=1}^n Y_i \right]\\
+&amp;= \frac{1}{n^2} \text{Var} \left[ \sum_{i=1}^n Y_i \right]\\
+&amp;= \frac{1}{n^2} \sum_{i=1}^n \text{Var}\left[ Y_i \right]\\
+&amp;= \frac{1}{n^2} \sum_{i=1}^n \sigma^2 = \frac{n\sigma^2}{n^2} = \frac{\sigma^2}{n}
+\end{align*}
+\tag{33.4}\]</span></span></p>
+<p><a href="#eq-mean-samplemean" class="quarto-xref">Equation&nbsp;<span>33.3</span></a> and <a href="#eq-var-samplemean" class="quarto-xref">Equation&nbsp;<span>33.4</span></a> apply to any population, as long as we draw a random sample. What else can we say about the distribution of <span class="math inline">\(\overline{Y}\)</span>?</p>
+<section id="central-limit-theorem" class="level3">
+<h3 class="anchored" data-anchor-id="central-limit-theorem">Central Limit Theorem</h3>
+<p>By the <strong>central limit theorem</strong>, introduced at the end of the previous chapter, we can say that the distribution of <span class="math display">\[
+\frac{\overline{Y} - \mu}{\sigma/\sqrt{n}}
+\]</span> <strong>converges</strong> to a <span class="math inline">\(G(0,1)\)</span> distribution as <span class="math inline">\(n\)</span> grows to infinity. Another way of saying this is that the distribution of <span class="math inline">\(\overline{Y}\)</span> converges to a <span class="math inline">\(G(\mu,\sigma^2/n)\)</span> distribution.</p>
+<p>This is a pretty amazing result. Regardless of the shape of the population you are sampling from, whether the attribute is continuous or discrete, if you draw a large enough sample, the sample mean will behave like a Gaussian random variable where the mean is the same as that of the population and the variance is <span class="math inline">\(n\)</span>-times smaller than the population variance.</p>
+<div class="example">
+<div class="example-header">
+<p>Example: Distribution of Sample Mean of Bernoullis</p>
+</div>
+<div class="example-container">
+<p>The distribution furthest from a Gaussian distribution in some sense is the Bernoulli(<span class="math inline">\(\pi\)</span>) distribution. It is a discrete distribution with only two outcomes. Only for <span class="math inline">\(\pi=0.5\)</span> is the Bernoulli distribution symmetric <a href="#fig-bern-07" class="quarto-xref">Figure&nbsp;<span>33.11</span></a> shows the mass function of a Bernoulli distribution with <span class="math inline">\(\pi=0.7\)</span>. How do you get from that to a continuous, symmetric Gaussian distribution?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-bern-07" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bern-07-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="statistics_files/figure-html/fig-bern-07-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bern-07-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.11: Probability mass function of the Bernoulli(0.7) random variable.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Let’s study the distribution of the sample mean if we draw random samples of sizes <span class="math inline">\(n_1 = 10\)</span>, <span class="math inline">\(n_2=100\)</span>, <span class="math inline">\(n_3 = 1000\)</span>, and <span class="math inline">\(n_4=10000\)</span> from a Bernoulli(0.7). In order to get a good estimate of the sampling distribution of <span class="math inline">\(\overline{Y}\)</span> the process needs to be repeated a sufficient number of times. We choose <span class="math inline">\(m=2500\)</span> repetitions of the experiment to build up the distribution of <span class="math inline">\(\overline{Y}\)</span>.</p>
+<p><a href="#fig-samp-bern07" class="quarto-xref">Figure&nbsp;<span>33.12</span></a> shows the sampling distributions of <span class="math inline">\(\overline{Y}\)</span> for the four sample sizes. For <span class="math inline">\(n=10\)</span>, for example, a random sample of size 10 was drawn from a Bernoulli(0.7) and its sample mean was calculated. This was repeated another 2,499 times and the figure displays the estimated probability density of the 2,500 <span class="math inline">\(\overline{y}\)</span> values. A similar procedure for the other sample sizes leads to the other density estimates.</p>
+<p>With <span class="math inline">\(n=10\)</span>, the distribution is far from Gaussian. The sample mean can take on only 10 possible values, <span class="math inline">\(0, 0.1, 0.2, \cdots, 1.0\)</span>. As <span class="math inline">\(n\)</span> increases the number of possible values of <span class="math inline">\(\overline{Y}\)</span> increases, the distribution becomes more continuous. It also becomes more symmetric and approaches the Gaussian distribution. For a sample of size <span class="math inline">\(n=1000\)</span> the sample mean is very nearly Gaussian distributed and increasing the sample size to <span class="math inline">\(n=10,000\)</span> does not appear to improve the quality of the Gaussian approximation much. However, it does increase the <strong>precision</strong> of <span class="math inline">\(\overline{Y}\)</span> as an estimator; the variance of the sampling distribution for <span class="math inline">\(n=10,000\)</span> is less than the variance of the sampling distribution for <span class="math inline">\(n=1,000\)</span>. We can calculate the variance of the sample mean in this case based on <a href="#eq-var-samplemean" class="quarto-xref">Equation&nbsp;<span>33.4</span></a>:</p>
+<p><span class="math display">\[
+\text{Var}\left[\overline{Y}\right] = \frac{0.7 \times 0.3}{10000} = 0.000021
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-samp-bern07" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-samp-bern07-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="statistics_files/figure-html/fig-samp-bern07-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1"><img src="statistics_files/figure-html/fig-samp-bern07-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-samp-bern07-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.12: Sampling distribution of <span class="math inline">\(\overline{Y}\)</span> drawn from Bernoulli(0.7).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sampling-from-a-gaussian" class="level3">
+<h3 class="anchored" data-anchor-id="sampling-from-a-gaussian">Sampling from a Gaussian</h3>
+<p>The central limit theorem specifies how the distribution of <span class="math inline">\(\overline{Y}\)</span> evolves as more and more samples are drawn. If the distribution we sample from is itself Gaussian, we do not need a large-sample approximation to describe the distribution of <span class="math inline">\(\overline{Y}\)</span>.</p>
+<p>In a random sample of size <span class="math inline">\(n\)</span> from a <span class="math inline">\(G(\mu,\sigma^2)\)</span> distribution, the distribution of <span class="math inline">\(\overline{Y}\)</span> follows a <span class="math inline">\(G(\mu,\sigma^2/n)\)</span> distribution. In other words, the distribution of <span class="math inline">\(\overline{Y}\)</span> is known to be <strong>exactly</strong> Gaussian, regardless of the size of the sample. As long as we draw a random sample—that is, the random variables are <em>iid</em>.</p>
+<p>In parallel to how the central limit theorem was stated above, we can say that if <span class="math inline">\(Y_1, \cdots, Y_n\)</span> are <em>iid</em> <span class="math inline">\(G(\mu,\sigma^2)\)</span>, then <span id="eq-mean-from-Gauss"><span class="math display">\[
+\frac{\overline{Y}-\mu}{\sigma/\sqrt{n}} \sim G(0,1)
+\tag{33.5}\]</span></span></p>
+<hr>
+<p>The Gaussian distribution is just one of several important distributions we encounter when working with statistics computed from Gaussian samples, The <span class="math inline">\(t\)</span>, <span class="math inline">\(\chi^{2}\)</span>, and <span class="math inline">\(F\)</span> distributions are other important sampling distributions. These distributions play an important role in inferential statistics, for example in computing confidence intervals or testing hypotheses about parameters. Names such as <span class="math inline">\(t\)</span>-test, <span class="math inline">\(F\)</span>-test, or chi-square test stem from the distribution of statistics used to carry out the procedure.</p>
+</section>
+<section id="chi-square-distribution-chi2_nu" class="level3">
+<h3 class="anchored" data-anchor-id="chi-square-distribution-chi2_nu">Chi-Square Distribution, <span class="math inline">\(\chi^2_\nu\)</span></h3>
+<p>Let <span class="math inline">\(Z_{1},\cdots,Z_{k}\)</span> denote independent standard Gaussian random variables <span class="math inline">\(G(0,1)\)</span>. Then</p>
+<p><span class="math display">\[
+X = Z_{1}^{2} + Z_{2}^{2} + \cdots + Z_{k}^{2}
+\]</span></p>
+<p>has p.d.f.</p>
+<p><span class="math display">\[
+f(x) = \frac{1}{2^{\frac{k}{2}}\Gamma\left( \frac{k}{2} \right)}x^{\frac{k}{2}}e^{- x/2},\ \ \ \ \ x \geq 0
+\]</span></p>
+<p>This is known as the Chi-square distribution with <span class="math inline">\(k\)</span> degrees of freedom, abbreviated <span class="math inline">\(\chi_{k}^{2}\)</span>. The mean and variance of a <span class="math inline">\(\chi_{k}^{2}\)</span> random variable are <span class="math inline">\(\text{E}\lbrack X\rbrack = k\)</span> and <span class="math inline">\(\text{Var}\lbrack X\rbrack = 2k\)</span>.</p>
+<p>The degrees of freedom can be thought of as the number of independent pieces of information that contribute to the <span class="math inline">\(\chi^{2}\)</span> variable. Here, that is the number of independent <span class="math inline">\(G(0,1)\)</span> variables. Since the <span class="math inline">\(\chi^{2}\)</span> variable is the sum of their squared values, the density shifts more to the right as the degrees of freedom increase (<a href="#fig-chisquare" class="quarto-xref">Figure&nbsp;<span>33.13</span></a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-chisquare" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-chisquare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="statistics_files/figure-html/fig-chisquare-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-chisquare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.13: Probability density function of a <span class="math inline">\(\chi_4^2\)</span> and a <span class="math inline">\(\chi_8^2\)</span> random variable. <span class="math inline">\(\chi^2\)</span> variables are skewed to the right, the density shifts to the right with increasing degrees of freedom.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math inline">\(\chi^{2}\)</span> distributions are important to capture the sample distributions of dispersion statistics. If <span class="math inline">\(Y_{1},\cdots,Y_{n}\)</span> are a random sample from a <span class="math inline">\(G\left( \mu,\sigma^{2} \right)\)</span> distribution, and the sample variance is</p>
+<p><span class="math display">\[
+S^2 = \frac{1}{n-1}\sum_{i=1}^n\left( Y_i - \overline{Y} \right)^2
+\]</span> then the random variable <span class="math display">\[
+\frac{(n-1)S^2}{\sigma^2}
+\]</span> follows a <span class="math inline">\(\chi_{n-1}^2\)</span> distribution. It follows that <span class="math inline">\(S^2\)</span> is an unbiased estimator of <span class="math inline">\(\sigma^2\)</span>:</p>
+<p><span class="math display">\[
+\text{E}\left\lbrack \frac{(n-1)S^2}{\sigma^2} \right\rbrack = n - 1
+\]</span></p>
+<p><span class="math display">\[
+\text{E}\left\lbrack S^{2} \right\rbrack = \sigma^2
+\]</span></p>
+</section>
+<section id="sec-sampledist-t" class="level3">
+<h3 class="anchored" data-anchor-id="sec-sampledist-t">Students’ t Distribution, <span class="math inline">\(t_\nu\)</span></h3>
+<p>In the Gaussian case you can also show that <span class="math inline">\(\overline{Y}\)</span> and <span class="math inline">\(S^2\)</span> are independent random variables. This is important because of another distributional result: if <span class="math inline">\(Z \sim G(0,1)\)</span> and <span class="math inline">\(U \sim \chi_\nu^2\)</span>, and <span class="math inline">\(Z\)</span> and <span class="math inline">\(U\)</span> are independent, then the ratio</p>
+<p><span class="math display">\[
+T = \frac{Z}{\sqrt{U/\nu}}
+\]</span></p>
+<p>has a <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(\nu\)</span> degrees of freedom. In honor of Student, the pseudonym used by William Gosset for publishing statistical research while working at Guinness Breweries, the <span class="math inline">\(t\)</span> distribution is also known as Student’s <span class="math inline">\(t\)</span> distribution or Student’s distribution for short.</p>
+<p>As with the <span class="math inline">\(\chi_\nu^2\)</span> distributions, the shape of the <span class="math inline">\(t_\nu\)</span> distribution depends on the degrees of freedom <span class="math inline">\(\nu\)</span>. However, the <span class="math inline">\(t_\nu\)</span> distributions are symmetric about zero and the degrees of freedom affect how heavy the tails are. As the degrees of freedom grow, the <span class="math inline">\(t\)</span> density approaches that of the standard Gaussian distribution (<a href="#fig-gauss-and-t" class="quarto-xref">Figure&nbsp;<span>33.14</span></a>).</p>
+<p>We can now combine the results about the sampling distributions of <span class="math inline">\(\overline{Y}\)</span> and <span class="math inline">\(S^2\)</span> to derive the distribution of</p>
+<p><span id="eq-t-stat"><span class="math display">\[
+\frac{\overline{Y} - \mu}{S/\sqrt{n}}
+\tag{33.6}\]</span></span></p>
+<p>We know that <span class="math inline">\(\overline{Y} \sim G\left( \mu,\frac{\sigma^2}{n} \right)\)</span> and that <span class="math inline">\(\frac{(n-1)S^2}{\sigma^2}\)</span> follows a <span class="math inline">\(\chi_{n-1}^2\)</span> distribution. Furthermore, <span class="math inline">\(\overline{Y}\)</span> and <span class="math inline">\(S^2\)</span> are independent. Taking ratios as required by the definition of a <span class="math inline">\(t\)</span> random variable yields</p>
+<p><span class="math display">\[
+\frac{\frac{\overline{Y} - \mu}{\sigma/\sqrt{n}}}{\sqrt{S^2{/\sigma}^2}} =
+\frac{\overline{Y} - \mu}{S/\sqrt{n}} \sim t_{n - 1}
+\]</span></p>
+<p>Compare <a href="#eq-mean-from-Gauss" class="quarto-xref">Equation&nbsp;<span>33.5</span></a> to <a href="#eq-t-stat" class="quarto-xref">Equation&nbsp;<span>33.6</span></a>. The difference is subtle, the dispersion statistic in the denominator. If the population variance <span class="math inline">\(\sigma^2\)</span> is known, we use <a href="#eq-mean-from-Gauss" class="quarto-xref">Equation&nbsp;<span>33.5</span></a> and the distribution is Gaussian with mean 0 and variance 1. If <span class="math inline">\(\sigma^2\)</span> is unknown, we replace <span class="math inline">\(\sigma\)</span> in <a href="#eq-mean-from-Gauss" class="quarto-xref">Equation&nbsp;<span>33.5</span></a> with an estimator based on the sample, the sample standard deviation <span class="math inline">\(S\)</span>. The result is a <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n-1\)</span> degrees of freedom. As <span class="math inline">\(n\)</span> increases, the <span class="math inline">\(t\)</span> distribution approaches a <span class="math inline">\(G(0,1)\)</span> distribution because the estimator <span class="math inline">\(S\)</span> approaches a constant. For any given value <span class="math inline">\(n\)</span>, the <span class="math inline">\(t\)</span> distribution will be heavier in the tails than a <span class="math inline">\(G(0,1)\)</span> distribution because there is more uncertainty in the system when the random variable <span class="math inline">\(S\)</span> is used as an estimator of the constant <span class="math inline">\(\sigma\)</span> (<a href="#fig-gauss-and-t" class="quarto-xref">Figure&nbsp;<span>33.14</span></a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-gauss-and-t" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gauss-and-t-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="statistics_files/figure-html/fig-gauss-and-t-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gauss-and-t-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.14: Comparison of <span class="math inline">\(G(0,1)\)</span> (dashed line) and <span class="math inline">\(t\)</span> distributions with 2, 4, and 20 degrees of freedom. <span class="math inline">\(t\)</span> distributions have heavier tails than the <span class="math inline">\(G(0,1)\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="f-distribution-f_nu_1-nu_2" class="level3">
+<h3 class="anchored" data-anchor-id="f-distribution-f_nu_1-nu_2">F Distribution, <span class="math inline">\(F_{\nu_1, \nu_2}\)</span></h3>
+<p>If <span class="math inline">\(\chi_1^2\)</span> and <span class="math inline">\(\chi_2^2\)</span> are independent chi-square random variables with <span class="math inline">\(\nu_1\)</span> and <span class="math inline">\(\nu_2\)</span> degrees of freedom, respectively, then the ratio</p>
+<p><span class="math display">\[
+F = \frac{\chi_1^2/v_1}{\chi_2^2/\nu_2}
+\]</span></p>
+<p>follows an <span class="math inline">\(F\)</span> distribution with <span class="math inline">\(\nu_1\)</span> numerator and <span class="math inline">\(\nu_2\)</span> denominator degrees of freedom (<a href="#fig-f-dists" class="quarto-xref">Figure&nbsp;<span>33.15</span></a>). We denote this fact as <span class="math inline">\(F\sim F_{\nu_1,\nu_2}\)</span>. The mean and variance of the <span class="math inline">\(F\)</span> distribution are</p>
+<p><span class="math display">\[
+\begin{align*}
+\text{E}\lbrack F\rbrack &amp;= \frac{\nu_2}{\nu_{2} - 2} \\
+\text{Var}\lbrack F\rbrack &amp;= \frac{2\nu_2^2 (\nu_1 + \nu_2 + 2)}{\nu_1\left( \nu_2 - 2 \right)^2
+(\nu_2 - 4)}
+\end{align*}
+\]</span></p>
+<p>The mean exists only if <span class="math inline">\(\nu_{2} &gt; 2\)</span> and the variance exists only if <span class="math inline">\(\nu_{2} &gt; 4\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-f-dists" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-f-dists-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="statistics_files/figure-html/fig-f-dists-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-f-dists-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.15: Density functions of an <span class="math inline">\(F_{4,12}\)</span> and an <span class="math inline">\(F_{12,20}\)</span> distribution.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>When sampling from a Gaussian distribution we established that <span class="math inline">\(\frac{(n-1)S^2}{\sigma^2}\)</span> follows a <span class="math inline">\(\chi_{n-1}^{2}\)</span> distribution. Suppose we have two samples, one of size <span class="math inline">\(n_1\)</span> from a <span class="math inline">\(G(\mu_1,\sigma_1^2)\)</span> distribution and one of size <span class="math inline">\(n_2\)</span> from a <span class="math inline">\(G(\mu_2,\sigma_2^2)\)</span> distribution. If the estimators of the sample variances in the two samples are denoted <span class="math inline">\(S_1^2\)</span> and <span class="math inline">\(S_2^2\)</span>, respectively, then the ratio</p>
+<p><span class="math display">\[
+\frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2}
+\]</span></p>
+<p>has an <span class="math inline">\(F_{n_1-1,n_2-1}\)</span> distribution.</p>
+<p><span class="math inline">\(F\)</span> distributions play an important role in the analysis of variance, where the numerator and denominator are ratios of mean squares.</p>
+<p>Recall that the <span class="math inline">\(T\)</span> random variable in the Gaussian case can be written as</p>
+<p><span class="math display">\[
+T = \frac{\frac{\overline{Y} - \mu}{\sigma/\sqrt{n}}}{\sqrt{S^2{/\sigma}^2}}
+\]</span></p>
+<p>The numerator is a <span class="math inline">\(G(0,1)\)</span> variable, so squaring it yields a <span class="math inline">\(\chi_1^2\)</span> variable. The square of the denominator is a scaled <span class="math inline">\(\chi_{n-1}^2\)</span> variable, <span class="math inline">\(S^2/\sigma^2\)</span>. Also, because <span class="math inline">\(\overline{Y}\)</span> and <span class="math inline">\(S^2\)</span> are independent, the squares of the numerator and denominator are independent. It thus follows that</p>
+<p><span class="math display">\[
+T^2 = \frac{\left( \overline{Y} - \mu \right)^2}{S^2/n}\]</span></p>
+<p>follows an <span class="math inline">\(F_{1,n - 1}\)</span> distribution.</p>
+<p>This fact is used in software packages that report the result of an <span class="math inline">\(F\)</span>-test instead of the result of a two-sided <span class="math inline">\(t\)</span>-test. The two are equivalent and the <span class="math inline">\(p\)</span>-values are the same.</p>
+</section>
+</section>
+<section id="inferential-statistics" class="level2" data-number="33.4">
+<h2 data-number="33.4" class="anchored" data-anchor-id="inferential-statistics"><span class="header-section-number">33.4</span> Inferential Statistics</h2>
+<p>The process of statistical inference is to draw conclusions about the world based on data. The world is described in terms of populations and the probability distributions of attributes in the population. The data consists of observations drawn from those populations, random variables that follow the distribution laws that govern the populations. The goal is to infer properties of the populations based on the information captured in the data.</p>
+<p>Some of the statistics computed in inference procedures are the same used to describe populations (distributions). For example, the sample mean describes the central tendency of a distribution, it is also used to compute confidence intervals for the mean in the population. Statistical inference adds a further dimension to describing things; it investigates the properties of the statistics such as bias and variance.</p>
+<section id="point-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="point-estimation">Point Estimation</h3>
+<p>A <strong>point estimate</strong> is a single number to estimate a parameter. The corresponding statistic is the <strong>point estimator</strong>. <span class="math inline">\(\overline{y} = 10.4\)</span> in a random sample is the point estimate for the mean <span class="math inline">\(\mu\)</span>. <span class="math inline">\(\overline{Y} = \frac{1}{n}\sum_{i=1}^n Y_i\)</span> is the point estimator; a rule that tells how to calculate the estimate.</p>
+<p>Important properties of a point estimator are the <strong>bias</strong> and <strong>variance</strong>. The bias is a measure of its accuracy. An unbiased estimator is an accurate estimator. The variance is a measure of the uncertainty associated with the estimator; it is the reciprocal of the estimator’s precision. A highly variable estimator is not precise—and vice versa.</p>
+<p>Bias and variance are long-run properties of the estimator, they are expected values.</p>
+<div class="definition">
+<div class="definition-header">
+<p>Definition: Bias, Variance, and Mean Squared Error</p>
+</div>
+<div class="definition-container">
+<p>The <strong>bias</strong> of an estimator is the expected value of the difference between the estimator and the parameter it is estimating. If <span class="math inline">\(\theta\)</span> is the parameter of interest and <span class="math inline">\(h(\textbf{Y})\)</span> is an estimator—a function of <span class="math inline">\(\textbf{Y}=[Y_1,\cdots,Y_n]^\prime\)</span>—then <span class="math display">\[
+\text{Bias}\left[h(\textbf{Y});\theta\right] = \text{E}\left[h(\textbf{Y})-\theta\right] = \text{E}\left[h(\textbf{Y})\right]-\theta
+\]</span> The <strong>variance</strong> of an estimator is the usual expected squared difference between the estimator and its mean: <span class="math display">\[
+\text{Var}[h(\textbf{Y})] = \text{E}\left[\left(h(\textbf{Y})-\text{E}[h(\textbf{Y})]\right)^2\right]
+\]</span> The <strong>mean squared error</strong> of estimator <span class="math inline">\(h(\textbf{Y})\)</span> for the parameter <span class="math inline">\(\theta\)</span> is <span id="eq-mse-est-def"><span class="math display">\[
+\text{MSE}\left[h(\textbf{Y});\theta\right] = \text{E}\left[\left(h(\textbf{Y})-\theta\right)^2 \right] = \text{Var}[h(\textbf{Y})] + \text{Bias}\left[h(\textbf{Y});\theta\right]^2
+\tag{33.7}\]</span></span></p>
+</div>
+</div>
+<p>An estimator with <span class="math inline">\(\text{Bias}[h(\textbf{Y});\theta] = 0\)</span> is said to be <strong>unbiased</strong> for <span class="math inline">\(\theta\)</span>. An unbiased estimator that has the smallest variance among all unbiased estimators is said to be a uniform minimum variance unbiased estimator (UMVUE).</p>
+<p>Estimators with small bias and a sharply reduced variance—compared to the best unbiased estimator—can have a smaller mean squared error and can thus be preferred over an unbiased estimator.</p>
+<div class="example">
+<div class="example-header">
+<p>Example: Estimating the Parameter of an Exponential Distribution</p>
+</div>
+<div class="example-container">
+<p>Suppose that <span class="math inline">\(Y\)</span> has an exponential distribution with density <span class="math display">\[
+f(y) = \frac{1}{\theta} \, e^{-y/\theta}\qquad \text{for } y &gt; 0
+\]</span> This is a re-parameterization of the density in <a href="probability.html#sec-prob-exponential" class="quarto-xref"><span>Section 32.5.2</span></a> where <span class="math inline">\(\theta = 1/\)</span>$. The mean and variance of <span class="math inline">\(Y\)</span> are <span class="math inline">\(\text{E}[Y] = \theta\)</span> and <span class="math inline">\(\text{Var}[Y] = \theta^2\)</span>. You draw a random sample of size <span class="math inline">\(n=3\)</span>. Consider the following estimators:</p>
+<ol type="1">
+<li><span class="math inline">\(\widehat{\theta}_1 = Y_1\)</span></li>
+<li><span class="math inline">\(\widehat{\theta}_2 = \frac{Y1+Y2}{2}\)</span></li>
+<li><span class="math inline">\(\widehat{\theta}_3 = \frac{Y1+2Y2}{3}\)</span></li>
+<li><span class="math inline">\(\widehat{\theta}_4 = \overline{Y}\)</span></li>
+<li><span class="math inline">\(\widehat{\theta}_5 = \min\{Y1,Y2,Y3\}\)</span></li>
+</ol>
+<p>Which of these estimators are unbiased, which one has the smallest variance and mean squared error?</p>
+<hr>
+<p>It is easy to establish that <span class="math inline">\(\widehat{\theta}_1\)</span> through <span class="math inline">\(\widehat{\theta}_4\)</span> are unbiased: <span class="math display">\[
+\begin{align*}
+\text{E}\left[\widehat{\theta}_1\right] &amp;= \text{E}[Y_1] = \theta \\
+\text{E}\left[\widehat{\theta}_2\right] &amp;= \frac{1}{2}(\text{E}[Y_1]  + \text{E}[Y_2])= \frac{2\theta}{2} = \theta \\
+\text{E}\left[\widehat{\theta}_3\right] &amp;= \frac{1}{3}(\text{E}[Y_1]  + 2\text{E}[Y_2])= \frac{3\theta}{3} = \theta \\
+\text{E}\left[\widehat{\theta}_4\right] &amp;= \frac{1}{3}(\text{E}[Y_1]  + \text{E}[Y_2] + \text{E}[Y_3])= \frac{3\theta}{3} = \theta \\
+\end{align*}
+\]</span></p>
+<p>The variances of these estimators are <span class="math display">\[
+\begin{align*}
+\text{Var}\left[\widehat{\theta}_1\right] &amp;= \text{Var}[Y_1] = \theta^2 \\
+\text{Var}\left[\widehat{\theta}_2\right] &amp;= \frac{1}{4}(\text{Var}[Y_1]  + \text{Var}[Y_2])= \frac{2}{4}\theta^2 = \frac{1}{2}\theta^2 \\
+\text{Var}\left[\widehat{\theta}_3\right] &amp;= \frac{1}{9}(\text{Var}[Y_1]  + 4\text{Var}[Y_2])= \frac{5}{9}\theta^2 \\
+\text{Var}\left[\widehat{\theta}_4\right] &amp;= \frac{1}{3}\theta^2
+\end{align*}
+\]</span> The sample mean <span class="math inline">\(\widehat{\theta}_4\)</span> is the most precise (smallest variance) estimator among the first four.</p>
+<p>To find the properties of <span class="math inline">\(\widehat{\theta}_5 = \min\{Y_1,Y_2,Y_3\}\)</span> a bit more work is required. This is called the <strong>first order statistic</strong>, the smallest value in the sample. It is denoted as <span class="math inline">\(Y_{(1)}\)</span>. The largest value, the <span class="math inline">\(n\)</span><sup>th</sup> order statistic, is denoted <span class="math inline">\(Y_{(n)}\)</span>. You can show that the first order statistic in a random sample of size <span class="math inline">\(n\)</span> has density function <span class="math display">\[
+f_{(1)}(y) = n\left(1-F(y)\right)^{n-1}f(y)
+\]</span> where <span class="math inline">\(f(y)\)</span> and <span class="math inline">\(F(y)\)</span> are the density and cumulative distribution function of <span class="math inline">\(Y\)</span>. For the case of a sample of size <span class="math inline">\(n\)</span> from an exponential distribution we get <span class="math display">\[
+f_{(1)}(y) = n\left(1-F(y)\right)^{n-1}\,\frac{1}{\theta}e^{-y/\theta}
+\]</span> Plugging in <span class="math inline">\(F(y) = 1 - e^{-y/\theta}\)</span> we get <span class="math display">\[
+\begin{align*}
+f_{(1)}(y) &amp;= n\left(e^{-y/\theta}\right)^{n-1}\,\frac{1}{\theta}e^{-y/\theta} \\
+&amp;= \frac{n}{\theta}e^{yn/\theta}
+\end{align*}
+\]</span> The first order statistic from an exponential distribution with parameter <span class="math inline">\(\theta\)</span> has an exponential distribution with parameter <span class="math inline">\(\theta/n\)</span>.</p>
+<p>We can now evaluate the mean and variance of <span class="math inline">\(\widehat{\theta}_5\)</span>:</p>
+<p><span class="math display">\[
+\begin{align*}
+\text{E}\left[\widehat{\theta}_5\right] &amp;= \frac{\theta}{3} \\
+\text{Var}\left[\widehat{\theta}_5\right] &amp;= \frac{\theta^2}{9}
+\end{align*}
+\]</span> The bias of <span class="math inline">\(\widehat{\theta}_5\)</span> for <span class="math inline">\(\theta\)</span> is <span class="math display">\[
+\text{Bias}\left[\widehat{\theta}_5; \theta\right] = \frac{\theta}{3} - \theta = -\frac{2}{3}\theta
+\]</span> and the mean squared error is <span class="math display">\[
+\begin{align*}
+\text{MSE}\left[\widehat{\theta}_5; \theta\right] &amp;= \text{Var}\left[\widehat{\theta}_5\right] + \text{Bias}\left[\widehat{\theta}_5; \theta\right]^2 \\
+&amp;= \frac{1}{9}\theta^2 + \frac{4}{9}\theta^2 = \frac{5}{9}\theta^2
+\end{align*}
+\]</span></p>
+<p>In this case the biased estimator <span class="math inline">\(\widehat{\theta}_5\)</span> has the same mean squared error as the unbiased estimator <span class="math inline">\(\widehat{\theta}_3\)</span> but has a smaller mean squared error as the sample mean <span class="math inline">\(\widehat{\theta}_4\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="interval-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="interval-estimation">Interval Estimation</h3>
+<p>A <strong>confidence interval</strong> (CI) combines information on a point estimator with information about its precision to yield a range of values associated with a certain probability. For example, a 95% confidence for the mean of a population or a 99% confidence interval for the difference between two population means, e.g., comparing a placebo and a medical treatment.</p>
+<p>The probability associated with the confidence interval is called the <strong>confidence level</strong>. The complement of the confidence level is frequently denoted <span class="math inline">\(\alpha\)</span>, a nod to the relationship between confidence intervals and significance levels in hypothesis testing. The confidence level is then expressed as <span class="math inline">\((1-\alpha)\times 100\%\)</span>.</p>
+<section id="interpretation" class="level4">
+<h4 class="anchored" data-anchor-id="interpretation">Interpretation</h4>
+<p>Before going into the derivation of confidence intervals, a word about the proper interpretation of the interval. First, a confidence interval refers to a <strong>parameter</strong> or a function of parameters, not a statistic. Second, a confidence interval is associated with a probability (or percentage); typically a large value such as 90%, 95%, 99%. The result of estimating a <strong>two-sided</strong> confidence interval is a lower and an upper confidence bound, these are real numbers. For example, a 95% confidence interval for the population mean might be 5.3 to 12.0. A <strong>one-sided</strong> confidence interval has either an upper bound or a lower bound.</p>
+<p>The correct interpretation of a confidence interval is in terms of repetition of the sampling process, as a long-run frequency. If we were to repeat the sampling process over and over, in 95% of those repetitions the 95% confidence interval would include (cover) the true parameter. In 5% of those repetitions the parameter falls outside (is not covered by) the confidence interval.</p>
+<p>It is correct to interpret a 95% confidence interval as a random interval that contains the parameter with probability 0.95. The following interpretations of a confidence interval are <strong>not</strong> correct, although they are common:</p>
+<ul>
+<li><p>The probability that the interval [5.3, 12.0] covers the parameter is 95%.<br>
+This interpretation is incorrect because it assigns the probability to the confidence interval calculated from the specific sample.</p></li>
+<li><p>It does not mean that 95% of the data fall within the interval.<br>
+The confidence interval makes a statement about a parameter, it does not describe the distribution of the data.</p></li>
+</ul>
+<hr>
+</section>
+<section id="example" class="level4">
+<h4 class="anchored" data-anchor-id="example">Example</h4>
+<p><a href="#fig-95-confint" class="quarto-xref">Figure&nbsp;<span>33.16</span></a> displays the result of computing one hundred 95% confidence intervals for the mean of a distribution (population). Since the figure was obtained from a simulation, the value of the unknown mean is known; the mean is <span class="math inline">\(\mu = 4\)</span>.</p>
+<p>Under conceptual repetition of the sampling we expect 95% of the confidence intervals to cover the mean. In this particular simulation, computing 100 confidence intervals, 94 of them cover the value <span class="math inline">\(\mu = 4\)</span> (shown in black), and 6 of the intervals do not cover <span class="math inline">\(\mu=4\)</span> (shown in red). This is close to the expected, long-run frequency of 95% of intervals covering the parameter.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-95-confint" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-95-confint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="statistics_files/figure-html/fig-95-confint-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2"><img src="statistics_files/figure-html/fig-95-confint-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-95-confint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.16: One hundred 95% confidence intervals for the mean of a population. The true value of the unknown parameter is 4. Six of the 100 intervals do not cover the parameter, close to the expected nominal coverage rate of 95%.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="constructing-confidence-intervals" class="level4">
+<h4 class="anchored" data-anchor-id="constructing-confidence-intervals">Constructing confidence intervals</h4>
+<p>Constructing a confidence interval relies on a statistic and its distribution. The <strong>sampling distributions</strong> in <a href="#sec-prob-sampling-dist" class="quarto-xref"><span>Section 33.3</span></a> play an important role. If we can start from a <strong>pivot statistic</strong>, constructing confidence interval estimators is pretty easy.</p>
+<div class="definition">
+<div class="definition-header">
+<p>Definition: Pivot Statistic</p>
+</div>
+<div class="definition-container">
+<p>Pivot statistic: a statistic that involves the parameter of question and whose distribution is known and is free of the parameter.</p>
+</div>
+</div>
+<p>Suppose we want to construct a confidence interval for the mean of a <span class="math inline">\(G(\mu,\sigma^2)\)</span> distribution based on the random sample <span class="math inline">\(Y_1,\cdots,Y_n\)</span>. From <a href="#sec-sampledist-t" class="quarto-xref"><span>Section 33.3.4</span></a> we know that the statistic <span class="math display">\[
+T = \frac{\overline{Y}-\mu}{S/\sqrt{n}} \sim t_{n-1}
+\]</span> has a <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n-1\)</span> degree of freedom. <span class="math inline">\(T\)</span> is a proper pivot statistic for calculating a confidence interval for <span class="math inline">\(\mu\)</span>. It depends on <span class="math inline">\(\mu\)</span> and its distribution does not involve <span class="math inline">\(\mu\)</span>; it does involve <span class="math inline">\(n\)</span>, however, but that is a known quantity (since we know the size of our sample).</p>
+<p>The construction of a 95% confidence interval starts with a probability statement: <span class="math display">\[
+\Pr\left(t_{0.025,n-1}\leq T\leq t_{0.975,n-1}\right) = 0.95
+\]</span></p>
+<p>This simply states that the probability a <span class="math inline">\(T\)</span> random variable with <span class="math inline">\(n-1\)</span> degrees of freedom falls between the 2.5% and the 97.5% percentiles is 95%. There are other ways of carving out 95% of the area under the density. The following probability is also true, but it is customary to work with symmetric percentiles, in particular when the pivot distribution is symmetric.</p>
+<p><span class="math display">\[
+\Pr\left(t_{0.04,n-1}\leq T\leq t_{0.99,n-1}\right) = 0.95
+\]</span></p>
+<p>The next step is to substitute the formula for the statistic for <span class="math inline">\(T\)</span> and to isolate the parameter of interest inside the probability statement.</p>
+<p><span class="math display">\[\begin{align*}
+\Pr\left(t_{0.025,n-1}\leq T\leq t_{0.975,n-1}\right) &amp;= 0.95 \\
+\Pr\left(t_{0.025,n-1}\leq \frac{\overline{Y}-\mu}{S/\sqrt{n}}\leq t_{0.975,n-1}\right) &amp;= 0.95\\
+\Pr\left(t_{0.025,n-1}\frac{S}{\sqrt{n}}\leq \overline{Y}-\mu\leq t_{0.975,n-1}\frac{S}{\sqrt{n}}\right) &amp;= 0.95\\
+
+\Pr\left(\overline{Y}-t_{0.025,n-1}\frac{S}{\sqrt{n}}\leq \mu\leq \overline{Y}+t_{0.975,n-1}\frac{S}{\sqrt{n}}\right) &amp;= 0.95\\
+\end{align*}\]</span></p>
+<p>The 95% confidence interval for the mean of a <span class="math inline">\(G(\mu,\sigma^2)\)</span> distribution, based on a random sample <span class="math inline">\(Y_1,\cdots,Y_n\)</span>, is <span class="math display">\[
+\overline{Y} \pm t_{0.975,n-1}\times\frac{S}{\sqrt{n}}
+\]</span> More generally, the <span class="math inline">\((1-\alpha)\times 100\)</span>% confidence interval is <span class="math display">\[
+\overline{Y} \pm t_{\alpha/2,n-1}\times\frac{S}{\sqrt{n}}
+\]</span></p>
+</section>
+<section id="confidence-intervals-based-on-the-clt" class="level4">
+<h4 class="anchored" data-anchor-id="confidence-intervals-based-on-the-clt">Confidence intervals based on the CLT</h4>
+<p>The asymptotic distribution of a statistic can be used to construct confidence intervals when the sample size is sufficiently large. The Central Limit Theorem (CLT) plays an important role, it provides the distribution of the pivot statistic.</p>
+<p>Suppose <span class="math inline">\(Y_1,\cdots, Y_n\)</span> is a sample from a Bernoulli(<span class="math inline">\(\pi\)</span>) distribution and <span class="math inline">\(n\)</span> is large enough to invoke the CLT. The distribution of the sample mean <span class="math inline">\(\overline{Y} = 1/n \sum_{i=1}^n Y_i\)</span> converges to a Gaussian distribution with mean <span class="math inline">\(\pi\)</span> and variance <span class="math inline">\(\pi(1-\pi)/n\)</span>. The sample mean is an unbiased estimate of the event probability <span class="math inline">\(\pi\)</span>.</p>
+<p>If <span class="math inline">\(z_\alpha\)</span> denotes the <span class="math inline">\(\alpha\)</span> quantile of the <span class="math inline">\(G(0,1)\)</span> distribution we can state that asymptotically (as <span class="math inline">\(n\rightarrow\infty\)</span>) $$ (z_{/2} z_{1-/2}) -</p>
+<p>$$</p>
+<p>The problem with this interval is that <span class="math inline">\(\pi\)</span> appears in the numerator and the denominator of the pivot statistic. Proceeding as in the case of the <span class="math inline">\(t\)</span>-interval leads to $$ ( - + ) -</p>
+<p>$$</p>
+<p>The structure of the interval for <span class="math inline">\(\pi\)</span> is very similar to that of the <span class="math inline">\(t\)</span>-interval, except it uses quantiles from the <span class="math inline">\(G(0,1)\)</span> distribution instead of quantiles from the <span class="math inline">\(t_{n-1}\)</span>: <span class="math display">\[
+\overline{Y} \pm \frac{z_{\alpha/2}}{\sqrt{n}}\sqrt{\pi(1-\pi)}
+\]</span> The term <span class="math inline">\(\sqrt{\pi(1-\pi)}\)</span> is the standard deviation in the population. Since <span class="math inline">\(\pi\)</span> is unknown, we replace it with an estimate, which happens to be <span class="math inline">\(\widehat{\pi} = \overline{y}\)</span>. The approximate <span class="math inline">\((1-\alpha)\times 100\%\)</span> confidence interval for the event probability of a Bernoulli distribution is <span class="math display">\[
+\overline{Y} \pm \frac{z_{1-\alpha/2}}{\sqrt{n}}\sqrt{\widehat{\pi}(1-\widehat{\pi})}
+=
+\overline{Y} \pm \frac{z_{1-\alpha/2}}{\sqrt{n}}\sqrt{\overline{y}(1-\overline{y})}
+\]</span></p>
+</section>
+<section id="confidence-interval-for-sigma2" class="level4">
+<h4 class="anchored" data-anchor-id="confidence-interval-for-sigma2">Confidence interval for <span class="math inline">\(\sigma^2\)</span></h4>
+<p>To construct a confidence interval for the variance of a Gaussian distribution, based on a random sample, we use the pivot statistic <span class="math display">\[
+\frac{(n-1)S^2}{\sigma^2} \sim \chi^2_{n-1}
+\]</span></p>
+<p>When the distribution of the pivot statistic is symmetric, as in the case of the <span class="math inline">\(t\)</span>-interval or the <span class="math inline">\(z\)</span>-interval for the population mean, it is reasonable to use symmetric quantiles in interval construction. <span class="math inline">\(chi\)</span>-square distributions are not symmetric so there is some choice how to place <span class="math inline">\((1-\alpha)\)</span> probability between upper and lower bounds. The convention is again to use quantiles with the same tail areas, but that does not necessarily yield the shortest confidence intervals.</p>
+<p>If we accept the convention, the confidence interval for <span class="math inline">\(\sigma^2\)</span> is <span class="math display">\[
+\Pr\left( \chi^2_{\alpha/2} \leq \frac{(n-1)S^2}{\sigma^2} \leq \chi^2_{1-\alpha/2}\right) = 1-\alpha
+\]</span></p>
+<p>Rearranging terms and isolating <span class="math inline">\(\sigma^2\)</span> in the center of the probability statement: <span class="math display">\[
+\Pr\left( \frac{(n-1)S^2}{\chi^2_{1-\alpha/2}} \leq \sigma^2 \leq \frac{(n-1)S^2}{\chi^2_{\alpha/2}}\right) = 1-\alpha
+\]</span></p>
+</section>
+<section id="confidence-versus-prediction-interval" class="level4">
+<h4 class="anchored" data-anchor-id="confidence-versus-prediction-interval">Confidence versus prediction interval</h4>
+<p>A confidence interval is an interval estimate for a parameter. The preceding sections established confidence intervals for <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\pi\)</span>, and <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>Can we also produce an interval <em>estimate</em> if the target of the interval is a random variable rather than a constant?</p>
+<p>The procedure of <em>estimating</em> a random variable is called <strong>prediction</strong>. Unfortunately, the terminology can be confusing; in the context of regression and classification models we use the term prediction whether the target is a parameter (predicting the mean response) or a random variable (predicting a future observation).</p>
+<p>To illustrate the difference between inference about parameters and inference about random variables let’s express the sample observations in this form: <span class="math display">\[
+\begin{align*}
+Y_i &amp;= \mu + \epsilon_i \qquad i=1,\cdots,n\\
+\epsilon_i &amp;\sim \textit{iid } (0,\sigma^2)
+\end{align*}
+\]</span></p>
+<p>This simply states that <span class="math inline">\(Y_1,\cdots,Y_n\)</span> are <em>iid</em> draws from a distribution with mean <span class="math inline">\(\text{E}[Y_i] = \mu\)</span> and variance <span class="math inline">\(\text{Var}[Y_i] = \sigma^2\)</span>. The properties of the <strong>error</strong> terms <span class="math inline">\(\epsilon_i\)</span> translate into stochastic properties of the <span class="math inline">\(Y_i\)</span>.</p>
+<p>The obvious point estimator of <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\overline{Y}\)</span> with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2/n\)</span>. What is the best predictor of the random variable <span class="math display">\[
+\mu + \epsilon_0
+\]</span></p>
+<p>where <span class="math inline">\(\epsilon_0\)</span> is a new observation, not contained in the sample. A good predictor <span class="math inline">\(\widetilde{Y}\)</span> minimizes the prediction error. If <span class="math inline">\(\widetilde{Y}\)</span> is unbiased, this means minimizing the variance <span class="math display">\[
+\text{Var}[\widetilde{Y}-\mu-\epsilon_0] = \text{Var}[\widetilde{Y}-\epsilon_0]
+=\text{Var}[\widetilde{Y}]+\text{Var}[\epsilon_0] - 2\text{Cov}[\widetilde{Y},\epsilon_0]
+\]</span> Since <span class="math inline">\(\epsilon_0\)</span> is a new observation the covariance term <span class="math inline">\(\text{Cov}[\widetilde{Y},\epsilon_0]\)</span> is zero. The prediction variance reduces to <span class="math inline">\(\text{Var}[\widetilde{Y}]+\sigma^2\)</span>. If we choose <span class="math inline">\(\widetilde{Y} = \overline{Y}\)</span>, this prediction variance is <span class="math display">\[
+\frac{\sigma^2}{n}+\sigma^2
+\]</span> If the errors <span class="math inline">\(\epsilon_i\)</span> are Gaussian distributed, and $^2 is known, a <span class="math inline">\((1-\alpha)\times 100\%)\)</span> <strong>prediction interval</strong> for <span class="math inline">\(\mu+\epsilon_0\)</span> is <span class="math display">\[
+\overline{Y} \pm z_{\alpha/2}\sqrt{\frac{\sigma^2}{n}+\sigma^2}
+\]</span></p>
+<p>This interval is wider than the corresponding confidence interval <span class="math display">\[
+\overline{Y} \pm z_{\alpha/2}\sqrt{\frac{\sigma^2}{n}}
+\]</span> because of the extra term <span class="math inline">\(\sigma^2\)</span> under the square root. It measures the <strong>irreducible</strong> error in the observations, the inherent variability in the population.</p>
+<p>Prediction intervals for random variables are wider than confidence intervals for parameters because they accommodate variability beyond the constant parameters. This phenomenon comes into play in regression analysis. Predicting the mean function at some value <span class="math inline">\(x_0\)</span> is more precise than predicting the value of a new, unobserved, observation at <span class="math inline">\(x_0\)</span>. Confidence intervals might be preferred over prediction intervals because the former are more narrow. The desired interpretation of predictions often calls for the wider prediction intervals, however.</p>
+</section>
+</section>
+</section>
+<section id="hypothesis-testing" class="level2" data-number="33.5">
+<h2 data-number="33.5" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">33.5</span> Hypothesis Testing</h2>
+<section id="the-procedure" class="level3">
+<h3 class="anchored" data-anchor-id="the-procedure">The Procedure</h3>
+<p>A hypothesis is the formulation of a theory. We want to judge whether the theory holds water. What value is statistics in solving this problem? Statistics passes judgment on hypotheses by comparing the theory against what the data tell us. The yardstick is whether observing the data is likely or unlikely if the hypothesis (the theory) is true. If we observe something that practically should not have happened if a theory holds then either the observation is bad or the theory is wrong.</p>
+<section id="ingredients" class="level4">
+<h4 class="anchored" data-anchor-id="ingredients">Ingredients</h4>
+<p>The ingredients of a statistical hypothesis test are</p>
+<ol type="1">
+<li>A <strong>null hypothesis</strong> formulated in terms of one or more parameters.</li>
+<li>An <strong>alternative hypothesis</strong> that is the complement of the null hypothesis.</li>
+<li>A <strong>test statistic</strong> for which the sampling distribution under the null hypothesis can be derived.</li>
+<li>A <strong>decision rule</strong> that decides on the fate of the null hypothesis based on the (null) distribution and the realized value of the test statistic.</li>
+</ol>
+</section>
+<section id="example-1" class="level4">
+<h4 class="anchored" data-anchor-id="example-1">Example</h4>
+<p>An example will make the process tangible. Suppose we are wondering whether a drug cures more than 75% of the patients suffering from a disease. To answer the question we draw a random sample of patients and administer the drug. The theory we wish to test is that the drug is effective for more than 75% of patients. This theory is translated into a statement about a population parameter:</p>
+<p>If <span class="math inline">\(\pi\)</span> denotes the probability that a randomly selected patient is cured after taking the drug, then the null hypothesis of interest is <span class="math inline">\(H: \pi = 0.75\)</span> and the alternative hypothesis is <span class="math inline">\(H_a: \pi &gt; 0.75\)</span>.</p>
+<p>This is an example of a <strong>one-sided</strong> alternative hypothesis. We are only interested whether the probability of cure exceeds 0.75, not if the drug has an efficacy significantly less than the 0.75 threshold. A two-sided alternative hypothesis would be <span class="math inline">\(H_a: \pi \neq 0.75\)</span>.</p>
+<p>Based on the random sample of patients we can compute the sample proportion of cured patients, <span class="math inline">\(\widehat{\pi} = \overline{Y}\)</span>, where <span class="math inline">\(Y=1\)</span> if a patient is cured and <span class="math inline">\(Y=0\)</span> otherwise. The Central Limit Theorem tells us that if <span class="math inline">\(n\)</span> is sufficiently large, the distribution of <span class="math inline">\(\widehat{\pi}\)</span> converges to a <span class="math inline">\(G(\pi,\pi(1-\pi)/n)\)</span> distribution. If the null hypothesis is true, the sampling distribution of <span class="math inline">\(\widehat{\pi}\)</span> is a <span class="math inline">\(G(0.75,0.75\times 0.25/n)\)</span>.</p>
+<p>Suppose the sample proportion is <span class="math inline">\(\widehat{\pi} = 0.9\)</span>. The data point toward the alternative hypothesis, the proportion is larger than 0.75. But <span class="math inline">\(\widehat{\pi}\)</span> is a statistic with a distribution. Even if <span class="math inline">\(\pi = 0.75\)</span> there is a chance to observe a result as extreme or more extreme than <span class="math inline">\(\widehat{\pi} = 0.9\)</span>. The question is how unlikely is that outcome if the null hypothesis is true.</p>
+<p>If, for example, <span class="math inline">\(\Pr(\widehat{\pi} &gt; 0.9 | \pi = 0.75) = 0.2\)</span>, that is, the probability is 0.2 to observe a sample proportion greater than 0.9 if the true event probability is 0.75, we cannot dismiss the null hypothesis as a plausible explanation for what we have observed. If, on the other hand, <span class="math inline">\(\Pr(\widehat{\pi} &gt; 0.9 | \pi = 0.75) = 0.002\)</span>, then we should very surprised to observe a sample proportion of 0.9 or greater.</p>
+</section>
+<section id="decision-rule" class="level4">
+<h4 class="anchored" data-anchor-id="decision-rule">Decision rule</h4>
+<p>The decision rule of the statistical hypothesis test can be formulated in two equivalent ways. Both are based on the distribution of the test statistic under the null hypothesis.</p>
+<ol type="1">
+<li><p>Specify a probability level <span class="math inline">\(\alpha\)</span> that is sufficiently small that should an event occur with this probability (or less) we discount the possibility that the event is consistent with the null hypothesis. We adopt the alternative hypothesis as a plausible explanation of the observed data instead. The level <span class="math inline">\(\alpha\)</span> is called the <strong>significance level</strong> of the statistical test.</p></li>
+<li><p>We compute the probability under the null hypothesis to observe a result as least as extreme as the one we obtained. This probability is called the <strong><span class="math inline">\(p\)</span>-value</strong> of the statistical test. If the <span class="math inline">\(p\)</span>-value is less than the significance threshold <span class="math inline">\(\alpha\)</span> the null hypothesis is rejected.</p></li>
+</ol>
+<p>Computing a probability under the null hypothesis means that we consider the distribution of the test statistic assuming that the null hypothesis is true. Both decision approaches reject the null hypothesis as an explanation of the data if the observed event is highly unlikely under that distribution.</p>
+<p>The difference in the two approaches is whether we decide on the null hypothesis based on comparing the value of the statistic to the <strong>rejection region</strong> under the null hypothesis or based on the <span class="math inline">\(p\)</span>-value. The rejection region is the area under the null distribution that covers <span class="math inline">\(\alpha\)</span> probability. If the alternative is one-sided, the rejection region is in one tail of the distribution. If the alternative is two-sided, the rejection region can fall in separate tails of the distribution. (Some tests are implicitly two-sided and have a single rejection region, for example, <span class="math inline">\(F\)</span> tests).</p>
+<p>If you reject a test at the significance level <span class="math inline">\(\alpha\)</span> then you reject the test for all <span class="math inline">\(p\)</span>-values less than <span class="math inline">\(\alpha\)</span>.</p>
+<p><a href="#fig-hypo-test" class="quarto-xref">Figure&nbsp;<span>33.17</span></a> shows the <span class="math inline">\(p\)</span>-value for a one-sided test where the test statistic takes on larger value if the null hypothesis is not true. The <span class="math inline">\(p\)</span>-value corresponds to the shaded area, the probability of observing values of the test statistic a least as extreme as what we got. If the test would be two-sided and the test statistic would be inconsistent with <span class="math inline">\(H\)</span> for small values as well, a second region on the left side of the distribution would have to be considered.</p>
+<div id="fig-hypo-test" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-hypo-test-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/HypothesisTest.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hypo-test-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.17: One-sided hypothesis test.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-hypo-test2" class="quarto-xref">Figure&nbsp;<span>33.18</span></a> shows the decision procedure when we work with the significance level <span class="math inline">\(\alpha\)</span>. The shaded region in the tail of the null distribution is the rejection region for this one-sided test. The area under the density of the region is exactly <span class="math inline">\(\alpha\)</span>. If the test statistic falls into this region, the null hypothesis is rejected.</p>
+<div id="fig-hypo-test2" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-hypo-test2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/HypothesisTest2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hypo-test2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.18: One-sided hypothesis test.
+</figcaption>
+</figure>
+</div>
+<hr>
+<p>Returning to the previous example of testing <span class="math inline">\(H:\pi = 0.75\)</span> against <span class="math inline">\(H_a:\pi &gt; 0.75\)</span>, recall that by the CLT and under the null hypothesis <span class="math inline">\(\widehat{\pi} \sim G(0.75,0.75\times 0.25/n)\)</span>. The probability to observe a particular sample proportion (or a more extreme result) under the null hypothesis is a function of <span class="math inline">\(n\)</span>, since the variance of the sample statistic depends on <span class="math inline">\(n\)</span>.</p>
+<p>If the null hypothesis is very wrong then it should be easy to reject <span class="math inline">\(H\)</span> based on a small sample size; the test statistic will be far in the tail of the null distribution. If the null hypothesis is only a bit wrong, we can still reject <span class="math inline">\(H\)</span> when <span class="math inline">\(n\)</span> is sufficiently large, because we can control the variance of <span class="math inline">\(\widehat{\pi}\)</span> through the sample size. In other words, we can affect the dispersion of the null distribution through <span class="math inline">\(n\)</span> and create a situation where even tiny deviations from the value under the null hypothesis are significant.</p>
+<p>These considerations lead to an important point: there is a difference between <strong>statistical significance</strong> and <strong>practical importance</strong>. Just because a result is statistically significant—that is, it is not consistent with a null hypothesis, does not imply that we care about the magnitude of the detected difference. Suppose you compare two fertilizer treatments and reject the hypothesis that they produce the same crop yield per acre (<span class="math inline">\(H:\mu_1 = \mu_2\)</span>). The observed difference between the yields is 0.0025 bushels per acre. While statistically significant, it is not practically relevant and nobody would launch a marketing campaign to promote the fertilizer with the slightly higher yield. If, however, the statistical significant difference is 25 bushels/acre we feel much different about it.</p>
+</section>
+<section id="conclusions" class="level4">
+<h4 class="anchored" data-anchor-id="conclusions">Conclusions</h4>
+<p>The conclusion of a statistical test is whether the null hypothesis can be rejected or is failed to be rejected. We never know whether the alternative hypothesis is true. If we knew that ahead of time there would be no statistical problem.</p>
+<p>The test is performed under the assumption that <span class="math inline">\(H\)</span> is true and the best we can do is reject or not reject that hypothesis. Failing to reject the null hypothesis does not make it true. We only assumed that it was true for the purpose of calculating probabilities. You should avoid statements such as “We accept the null hypothesis”.</p>
+</section>
+</section>
+<section id="derivation-of-a-statistical-test" class="level3">
+<h3 class="anchored" data-anchor-id="derivation-of-a-statistical-test">Derivation of a Statistical Test</h3>
+<p>The derivation of a statistical test is similar to the derivation of a confidence interval. It starts with a <strong>pivot statistic</strong> for which the distribution is known if the null hypothesis is true. Depending on whether the alternative hypothesis is one- or two-sided, we then calculate the probability to observe the value of the test statistic—or a more extreme result—under <span class="math inline">\(H\)</span>. If that <span class="math inline">\(p\)</span>-value is sufficiently small, the null hypothesis is rejected.</p>
+<div class="example">
+<div class="example-header">
+<p>Example: Testing the Mean of a <span class="math inline">\(G(\mu,\sigma^2)\)</span></p>
+</div>
+<div class="example-container">
+<p>You are drawing a random sample of size <span class="math inline">\(n=15\)</span> from a <span class="math inline">\(G(\mu,\sigma^2)\)</span> distribution to test <span class="math inline">\(H: \mu = \mu_0 = 4\)</span> against <span class="math inline">\(H_a: \mu \neq 4\)</span>. The observed value of the sample mean is <span class="math inline">\(\overline{y} = 5.7\)</span> and the sample standard deviation is <span class="math inline">\(s=3.1\)</span>.</p>
+<p>To construct a test we use as the pivot statistic <span class="math display">\[
+T = \frac{\overline{Y}-\mu}{S/\sqrt{n}}
+\]</span> If the null hypothesis is true, then <span class="math display">\[
+T_0 = \frac{\overline{Y}-\mu_0}{S/\sqrt{n}} \sim t_{n-1}
+\]</span> The <span class="math inline">\(p\)</span>-value of the test is <span class="math inline">\(2\Pr(T_0 &gt; |t_0|)\)</span>. The absolute value and the doubling of the probability is done to compute probabilities in both tail areas of the null distribution.</p>
+<p>The value of the test statistic under the null hypothesis is <span class="math display">\[
+t_0 = \frac{5.7-4}{3.1/\sqrt{15}}=2.123
+\]</span> The probability <span class="math inline">\(2\Pr(t_14 &gt; 2.123) = 0.052\)</span> is the <span class="math inline">\(p\)</span>-value of the test.</p>
+<p>If the significance level at which we declare that events are inconsistent (they should not have happened because they are too unlikely) is <span class="math inline">\(\alpha = 0.05\)</span>, then we would fail to reject the null hypothesis because <span class="math inline">\(p &gt; 0.05\)</span>. If the signifiance level is <span class="math inline">\(\alpha = 0.1\)</span>, then we would reject <span class="math inline">\(H\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="connection-to-confidence-intervals" class="level3">
+<h3 class="anchored" data-anchor-id="connection-to-confidence-intervals">Connection to Confidence Intervals</h3>
+<p>There is a straightforward connection between testing a hypothesis and estimating a confidence interval. Both are based on pivot statistics and quantiles of their distribution. If the observed value of the pivot—under the null hypothesis—is extreme, the null hypothesis is rejected. Similarly, the confidence interval specifies the values of the parameters that are likely supported by the data.</p>
+<p>In other words, if you have a two-sided <span class="math inline">\((1-\alpha)\times 100\%\)</span> confidence interval for parameter <span class="math inline">\(\theta\)</span>, then the hypothesis <span class="math inline">\(H:\theta = 0\)</span> is rejected at the <span class="math inline">\(\alpha\)</span> significance level for all values outside of the confidence bounds. Similarly for one-sided confidence limits and one-sided hypothesis test.</p>
+<p>Starting with a null hypothesis <span class="math inline">\(H:\theta = \theta_0\)</span>, the hypothesis is rejected at the <span class="math inline">\(\alpha\)</span> significance level if a corresponding <span class="math inline">\((1-\alpha)\times 100\%\)</span> confidence interval covers <span class="math inline">\(\theta_0\)</span>.</p>
+</section>
+</section>
+<section id="categorical-data" class="level2" data-number="33.6">
+<h2 data-number="33.6" class="anchored" data-anchor-id="categorical-data"><span class="header-section-number">33.6</span> Categorical Data</h2>
+</section>
+<section id="simple-and-multiple-linear-regression" class="level2" data-number="33.7">
+<h2 data-number="33.7" class="anchored" data-anchor-id="simple-and-multiple-linear-regression"><span class="header-section-number">33.7</span> Simple and Multiple Linear Regression</h2>
+<section id="ordinary-least-squares-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="ordinary-least-squares-estimation">Ordinary Least Squares Estimation</h3>
+</section>
+<section id="prediction-and-confidence-intervals" class="level3">
+<h3 class="anchored" data-anchor-id="prediction-and-confidence-intervals">Prediction and Confidence Intervals</h3>
+</section>
+<section id="model-diagnostics" class="level3">
+<h3 class="anchored" data-anchor-id="model-diagnostics">Model Diagnostics</h3>
+</section>
+</section>
+<section id="time-series-analysis" class="level2" data-number="33.8">
+<h2 data-number="33.8" class="anchored" data-anchor-id="time-series-analysis"><span class="header-section-number">33.8</span> Time Series Analysis</h2>
+
+
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Figure&nbsp;33.12: Sampling distribution of <span class="math inline">\(\overline{Y}\)</span> drawn from Bernoulli(0.7).</span>
+<span class="glightbox-desc lightbox-desc-2">Figure&nbsp;33.16: One hundred 95% confidence intervals for the mean of a population. The true value of the unknown parameter is 4. Six of the 100 intervals do not cover the parameter, close to the expected nominal coverage rate of 95%.</span>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../reviewmaterial/probability.html" class="pagination-link" aria-label="Probability">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Probability</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../reviewmaterial/linalg.html" class="pagination-link" aria-label="Linear Algebra">
+        <span class="nav-page-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Foundations of Data Science by Oliver Schabenberger</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"zoom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
