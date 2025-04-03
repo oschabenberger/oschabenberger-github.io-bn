@@ -2,61 +2,144 @@
 
 Since data science appeared on the scene some decades ago it has been subject to constant change.
 In the beginning many were not quite sure what to make of data science. How was it a 
-scientific discipline and how was it different from statistics or data analytics? Was 
-data scientist not yet another description for the business analyst?
+scientific discipline and how was it different from statistics or data analytics? 
+Is the scientific method involved? Is the data scientist not another name for the 
+business analyst?
 
-In some ways the dust has settled by now and we have a much better handle on what data 
-scientists do and on the skills they need. On the other hand the data profession in general 
+The dust has settled and we have a much better handle on what data 
+scientists do, the skills they need, and how the role differentiates from other
+data professionals. On the other hand the data profession in general 
 has evolved and keeps expanding. At first, a data scientist was the all-round unicorn that
 was expert in engineering data, modeling data, writing code, and implementing data solutions.
 Those individuals were difficult to find and difficult to train. 
 
-In smaller organizations the workload of the data scientist continues to be fluid, simply because
-the number of folks who can perform data-related tasks is limited. In larger organizations with 
-dedicated data teams you can now find data engineers, data analysts, business analysts, machine learning engineers, 
-AI engineers, statistical programmers, and so on. Where does a **data scientist** fit into this picture and 
+In smaller organizations the workload of the data scientist continues to be fluid,
+simply because the number of folks who can perform data-related tasks is limited. 
+In larger organizations with dedicated data teams you can now find data engineers, 
+data analysts, business analysts, machine learning engineers, AI engineers, statistical programmers, and so on. Where does a **data scientist** fit into this picture and 
 what are the skills a data scientist should have to be and to remain competitive in this landscape?
 
-My own personal journey to data science took me from forestry to forest biometry to statistics to software development. 
-Like me, many will come to data science from a non-statistical and non-computational path. As educators we need to
-think about how to ensure the foundations of the discipline are being taught. Assuming that everyone who strives 
-for a career in data science will have a solid background in statistics, applied mathematics, and computer science is not helpful. We have to deal with varied backgrounds and strengths. Data science, like no other discipline I encountered in my 30+ year career, combines technical with non-technical skills, combines hard and "soft" (human) skills, and has a focus on solving real-world problems. 
+My personal journey to data science led from forestry to forest biometry 
+to statistics to analytical software development. Like me, many will come to data science from a non-statistical and non-computational path. As educators we need to think about 
+how to ensure the foundations of the discipline are being taught. Assuming that 
+everyone who strives for a career in data science comes to the discipline with a
+solid background in statistics, applied mathematics, and computer science is not 
+helpful. We have to expect varied backgrounds and strengths. Data science, like
+no other discipline I encountered over three decades working with data, combines 
+technical and non-technical skills, combines hard and "soft" (human) skills, and 
+has a focus on solving real-world problems. 
 
-It is OK to come to data science with strengths and weaknesses in different aspects of statistics, mathematics, computer science and domain knowledge. Those are the foundation **disciplines**. **Your foundation** lies in a genuine interest in these disciplines, the curiosity and drive to fill in the gaps, and a desire for lifelong learning. If you hate math and are not willing to learn the linear algebra concepts necessary to manipulate data science models---forget it. If you have not programmed before and think that you can pass that off to some software engineer---forget it. If you are afraid of public speaking and are not willing to work on improving communication skills---forget it. 
-
-If you are excited about learning principles of data engineering and statistical learning, about communicating data concepts to colleagues, customers and executives, if you are aching to write better software, and love managing complex projects, then welcome! Data science has been waiting for you.
+It is OK to come to data science with strengths and weaknesses in different aspects 
+of statistics, mathematics, computer science, and domain knowledge. Those are the foundation **disciplines**. **Your foundation** lies in a genuine interest in these disciplines, the curiosity and drive to fill in the gaps, a growth mindset, and a desire for lifelong
+learning. If you hate math and are not willing to learn the linear algebra concepts 
+necessary to manipulate data science models---forget it. If you have not programmed 
+before and think that you can pass that off to some software engineer---forget it. 
+If you are afraid of public speaking and are not willing to work on improving 
+communication skills---forget it. 
 
 ---
 
-The origin for this material lies in recognizing how data science as a discipline has evolved and continues to change. The foundational disciplines remain the same, but the demands on data scientists today are much more varied and complex than some courses and certifications would lead you to believe. 
+On the other hand ...
 
-In my own practical experience I have witnessed the transition from creating data/analytic teams in organizations---because that is what everyone else was doing---to measuring the success and justification of those teams in terms of value created for the business. Many projects are faltering in this respect, study after study reveals that the majority of data science projects do not succeed. There are many reasons for this sobering reality, how we educate and train for data science careers definitely plays a part. 
+If you are excited about learning principles of data engineering and statistical 
+learning, about communicating data concepts to colleagues, customers and executives, 
+if you are aching to write better software, and love managing complex projects, 
+then welcome! Data science has been waiting for you.
 
-Understanding data science begins with recognizing data science as a team sport. It is not about slinging code and developing a cool model. As someone said, 
+---
 
-> a data science model in a Jupyter notebook has $0.0 value. 
+The origin for this material lies in recognizing how data science as a discipline 
+has evolved and continues to change. The foundational disciplines remain the same, 
+but the demands on data scientists today are much more varied and complex than 
+some courses and certifications would lead you to believe. 
 
-Learning all the classical and modern methods of data analysis is table stakes. Your random forest is not going to be any better than your colleague's random forest. You are probably using the same software and are tuning the same hyperparameters. Everyone uses TensorFlow or CNTK or PyTorch to implement deep learning. You can implement LeNet-5 or AlexNet for image classification with a few lines of `R` of Python code---if you are not sure how, google it or ask ChatGPT. 
+In my own practical experience I have witnessed the transition from creating 
+data/analytic teams in organizations---because that is what everyone else was 
+doing---to measuring the success and justification of those teams in terms of 
+value created for the organizations. Many data science projects are faltering, 
+study after study reveals that the majority of data science projects do not succeed. 
+There are many reasons for this sobering reality, how we educate and train for 
+data science careers definitely plays a part. 
+
+We refer generically to *organizations* that practice data science. That can be
+an academic department at a university, a consulting company, a non-profit, a 
+local, state, or federal government agency, a university IT department, and so on. 
+In other words, almost every 
+type of organization today engages with data and practices some form of data
+science. Despite this diversity of organizations practicing data science, the 
+vast majority of jobs are found in commercial settings, sometimes lumped together as
+*industry*. Data science solves real-world problems, the problems companies are
+interested in solving are those that support the business model. Data for Good,
+data science in pursuit of making a better world, is a noble goal. A discretionary
+goal for most companies that places behind the primary goal of growing the
+company value and satisfying share holders. The reality of most jobs is Data
+for Money.
+
+---
+
+Understanding data science begins with recognizing data science as a team sport. 
+It is not about slinging code and developing a cool model. As someone said, 
+
+:::{.quote}
+a data science model in a Jupyter notebook has $0.0 value. 
+:::
+
+Understanding and applying all the classical and modern methods of data analysis is 
+table stakes. But your random forest is not going to be any better than your colleague's 
+random forest. You are probably using the same software and are tuning the same 
+hyperparameters. Everyone uses TensorFlow or CNTK or PyTorch to implement deep 
+learning. You can implement LeNet-5 or AlexNet for image classification with a 
+few lines of `R` of Python code---if you are not sure how, check Stack Exchange 
+or ask a large language model for help. 
 
 What are the differentiating factors in this competitive field?
 
-* Understanding how to take a business problem, research, or policy question and turn it into a data project, executing the data project as a team and translating it back into a business, research, or policy solution.
+* Understanding how to take a business problem, research, or policy question and 
+turn it into a data project, executing the data project as a team and translating 
+it back into a business, research, or policy solution.
 
-* Being able to communicate with business, information technology, marketing, finance, and legal to define, develop and implement a data-driven solution.
+* Being able to communicate with business, information technology, marketing, 
+finance, and legal to define, develop and implement a data-driven solution.
 
-* Being at times evangelist, programmer, project manager, instructor, presenter, and implementer.
+* Being at times evangelist, programmer, project manager, instructor, presenter, 
+and implementer.
 
-* Understanding the ethical, security, and privacy issues associated with data and data-driven decisions.
+* Understanding the ethical, security, and privacy issues associated with data 
+and data-driven decisions.
 
-* Cultivating a desire to learn as new tools and methods affect what can be done with data---GPT anyone?
+* Cultivating a desire to learn as new tools and methods affect what can be done 
+with data---GPT anyone?
 
 ---
 
-Lifelong learning is a mindset that has worked in my favor for decades. It is a growth mindset that builds on curiosity to push your boundaries further out. Faced with a formidable task you don't know how to accomplish you say to yourself "I don't know how to do this. *Not yet!*". Contrast this with a fixed mindset that views one's abilities as limited and stays within one's comfort zone, not pushing against the boundaries. With a fixed mindset, "Not yet!" turns into "Not now" or "Not ever".
+Lifelong learning is a mindset that has worked in my favor for decades. It is a 
+growth mindset that builds on curiosity to push your boundaries further out. Faced 
+with a formidable task you don't know how to accomplish you say to yourself 
 
-A growth mindset and joy of learning serves you well in data science. Any of the technology revolutions of the last decades had a profound effect on the way we collect, store, analyze, and use data: the internet, social media, cloud computing, artificial intelligence. You cannot just sit out cloud computing, for example, hoping that it will blow over. 
+:::{.quote}
+I don't know how to do this. *Not yet!*
+:::
 
-We might not know what the next disruption looks like, but we know it is coming. A few years ago, large language models were an interesting novelty, today they have changed our view of what is possible with data. At the same time, principal component analysis (PCA), one of the oldest statistical methods, continues to be one of the most important tools for summarization, visualization, and dimension reduction in statistics and machine learning. This tension between old and new is what makes data science such an exciting field.
+Contrast this with a fixed mindset that views your abilities as limited and 
+confines you to a comfort zone, not pushing against the boundaries. With a fixed 
+mindset, "Not yet!" turns into "Not now" or "Not ever".
+
+A growth mindset and a joy of learning serves you well in data science. Any of the 
+technology revolutions of the last decades had a profound effect on the way we 
+collect, store, analyze, and use data: the internet, social media, cloud computing, 
+artificial intelligence. You cannot just sit out any of these trends, hoping that 
+they will blow over. You have to engage, figure out what they are about, what
+works and what does not, and how they can help your organization be better at
+working with data. It takes an ongoing commitment to be curious, to be critical, 
+and to learn.
+
+We might not know what the next disruption looks like, but we know it is coming. 
+A few years ago, large language models were an interesting novelty, today they have 
+changed our view of what is possible with data. At the same time, principal 
+component analysis (PCA), one of the oldest statistical methods, continues to be 
+one of the most important tools for summarization, visualization, and dimension 
+reduction in statistics and machine learning. This tension between old and new 
+is what makes data science such an exciting field.
 
 Let's go.
 

@@ -573,7 +573,7 @@ $$
 \Exp\left\lbrack \bY^\prime\mathbf{AY} \right\rbrack = tr\left( \bA\Var\left\lbrack \bY \right\rbrack \right) + \Exp\left\lbrack \bY \right\rbrack^\prime\bA\ \Exp\lbrack\bY\rbrack
 $$
 
-## Matrix Differentiation
+## Matrix Differentiation {#sec-matrix-differentiation}
 
 Estimation of parameters in statistical models often requires minimization or 
 maximization of an objective function. For example, the ordinary least squares (OLS) 
@@ -666,7 +666,7 @@ $$
 \widehat{\bbeta}=\left( \bXpX \right)^{- 1}\bX^{\prime}\bY
 $$
 
-### The "Hat" Matrix
+### The "Hat" Matrix {#sec-hat-matrix}
 
 The ordinary least squares estimator is the orthogonal projection of $\bY$ onto 
 the sub-space created by the columns of $\bX$. To see the projection matrix at 

@@ -51,6 +51,7 @@ book:
         - models/correlation.qmd
         - models/bias_variance.qmd
         - models/test_cv.qmd
+        - models/messydata.qmd
 #        - statlearning/general.qmd
         - models/featproc.qmd
 
@@ -72,8 +73,10 @@ book:
 
     - part: "Module VIII. Review Topics"
       chapters:
-        - reviewmaterial/mathstat.qmd
+        - reviewmaterial/probability.qmd
+        - reviewmaterial/statistics.qmd
         - reviewmaterial/linalg.qmd
+        - reviewmaterial/estimation.qmd
 
     - references.qmd
 

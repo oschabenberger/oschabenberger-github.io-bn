@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Foundations of Data Science - 32&nbsp; Linear Algebra</title>
+<title>Foundations of Data Science - 34&nbsp; Linear Algebra</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../references.html" rel="next">
-<link href="../reviewmaterial/mathstat.html" rel="prev">
+<link href="../reviewmaterial/estimation.html" rel="next">
+<link href="../reviewmaterial/statistics.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -113,7 +113,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reviewmaterial/mathstat.html">Module VIII. Review Topics</a></li><li class="breadcrumb-item"><a href="../reviewmaterial/linalg.html"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Linear Algebra</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reviewmaterial/probability.html">Module VIII. Review Topics</a></li><li class="breadcrumb-item"><a href="../reviewmaterial/linalg.html"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Linear Algebra</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -322,8 +322,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../models/messydata.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Messy Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../models/featproc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Feature and Target Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Feature and Target Processing</span></span></a>
   </div>
 </li>
       </ul>
@@ -344,19 +350,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/ds_softwareeng.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Data Science versus Software Engineering,</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Data Science versus Software Engineering,</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/coding_practices.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/tools.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
   </div>
 </li>
       </ul>
@@ -373,31 +379,31 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/gonewrong.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">How Things Go Wrong</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">How Things Go Wrong</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/bias_harm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/privacy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/genAI.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Ethics of Generative AI</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Ethics of Generative AI</span></span></a>
   </div>
 </li>
       </ul>
@@ -413,14 +419,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reviewmaterial/mathstat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></span></a>
+  <a href="../reviewmaterial/probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Probability</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reviewmaterial/statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../reviewmaterial/linalg.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reviewmaterial/estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Estimation</span></span></a>
   </div>
 </li>
       </ul>
@@ -441,9 +459,9 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#basics" id="toc-basics" class="nav-link active" data-scroll-target="#basics"><span class="header-section-number">32.1</span> Basics</a></li>
-  <li><a href="#special-matrices" id="toc-special-matrices" class="nav-link" data-scroll-target="#special-matrices"><span class="header-section-number">32.2</span> Special Matrices</a></li>
-  <li><a href="#basic-operations-on-matrices-and-vectors" id="toc-basic-operations-on-matrices-and-vectors" class="nav-link" data-scroll-target="#basic-operations-on-matrices-and-vectors"><span class="header-section-number">32.3</span> Basic Operations on Matrices and Vectors</a>
+  <li><a href="#basics" id="toc-basics" class="nav-link active" data-scroll-target="#basics"><span class="header-section-number">34.1</span> Basics</a></li>
+  <li><a href="#special-matrices" id="toc-special-matrices" class="nav-link" data-scroll-target="#special-matrices"><span class="header-section-number">34.2</span> Special Matrices</a></li>
+  <li><a href="#basic-operations-on-matrices-and-vectors" id="toc-basic-operations-on-matrices-and-vectors" class="nav-link" data-scroll-target="#basic-operations-on-matrices-and-vectors"><span class="header-section-number">34.3</span> Basic Operations on Matrices and Vectors</a>
   <ul>
   <li><a href="#transpose" id="toc-transpose" class="nav-link" data-scroll-target="#transpose">Transpose</a></li>
   <li><a href="#addition-and-subtraction" id="toc-addition-and-subtraction" class="nav-link" data-scroll-target="#addition-and-subtraction">Addition and Subtraction</a></li>
@@ -452,20 +470,20 @@ window.Quarto = {
   <li><a href="#determinant" id="toc-determinant" class="nav-link" data-scroll-target="#determinant">Determinant</a></li>
   <li><a href="#trace" id="toc-trace" class="nav-link" data-scroll-target="#trace">Trace</a></li>
   </ul></li>
-  <li><a href="#random-vectors" id="toc-random-vectors" class="nav-link" data-scroll-target="#random-vectors"><span class="header-section-number">32.4</span> Random Vectors</a>
+  <li><a href="#random-vectors" id="toc-random-vectors" class="nav-link" data-scroll-target="#random-vectors"><span class="header-section-number">34.4</span> Random Vectors</a>
   <ul>
   <li><a href="#expected-value" id="toc-expected-value" class="nav-link" data-scroll-target="#expected-value">Expected Value</a></li>
   <li><a href="#covariance-matrix" id="toc-covariance-matrix" class="nav-link" data-scroll-target="#covariance-matrix">Covariance Matrix</a></li>
   <li><a href="#variance-covariance-matrix" id="toc-variance-covariance-matrix" class="nav-link" data-scroll-target="#variance-covariance-matrix">Variance-covariance Matrix</a></li>
   </ul></li>
-  <li><a href="#matrix-differentiation" id="toc-matrix-differentiation" class="nav-link" data-scroll-target="#matrix-differentiation"><span class="header-section-number">32.5</span> Matrix Differentiation</a></li>
-  <li><a href="#idempotent-matrices" id="toc-idempotent-matrices" class="nav-link" data-scroll-target="#idempotent-matrices"><span class="header-section-number">32.6</span> Idempotent Matrices</a>
+  <li><a href="#sec-matrix-differentiation" id="toc-sec-matrix-differentiation" class="nav-link" data-scroll-target="#sec-matrix-differentiation"><span class="header-section-number">34.5</span> Matrix Differentiation</a></li>
+  <li><a href="#idempotent-matrices" id="toc-idempotent-matrices" class="nav-link" data-scroll-target="#idempotent-matrices"><span class="header-section-number">34.6</span> Idempotent Matrices</a>
   <ul>
   <li><a href="#projections" id="toc-projections" class="nav-link" data-scroll-target="#projections">Projections</a></li>
-  <li><a href="#the-hat-matrix" id="toc-the-hat-matrix" class="nav-link" data-scroll-target="#the-hat-matrix">The “Hat” Matrix</a></li>
+  <li><a href="#sec-hat-matrix" id="toc-sec-hat-matrix" class="nav-link" data-scroll-target="#sec-hat-matrix">The “Hat” Matrix</a></li>
   <li><a href="#a-special-case" id="toc-a-special-case" class="nav-link" data-scroll-target="#a-special-case">A Special Case</a></li>
   </ul></li>
-  <li><a href="#sec-multi-gauss" id="toc-sec-multi-gauss" class="nav-link" data-scroll-target="#sec-multi-gauss"><span class="header-section-number">32.7</span> Multivariate Gaussian Distribution</a>
+  <li><a href="#sec-multi-gauss" id="toc-sec-multi-gauss" class="nav-link" data-scroll-target="#sec-multi-gauss"><span class="header-section-number">34.7</span> Multivariate Gaussian Distribution</a>
   <ul>
   <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition">Definition</a></li>
   <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties">Properties</a>
@@ -476,16 +494,16 @@ window.Quarto = {
   </ul></li>
   <li><a href="#maximum-likelihood-estimator" id="toc-maximum-likelihood-estimator" class="nav-link" data-scroll-target="#maximum-likelihood-estimator">Maximum Likelihood Estimator</a></li>
   </ul></li>
-  <li><a href="#sherman-morrison-woodbury-formula" id="toc-sherman-morrison-woodbury-formula" class="nav-link" data-scroll-target="#sherman-morrison-woodbury-formula"><span class="header-section-number">32.8</span> Sherman, Morrison, Woodbury Formula</a></li>
+  <li><a href="#sherman-morrison-woodbury-formula" id="toc-sherman-morrison-woodbury-formula" class="nav-link" data-scroll-target="#sherman-morrison-woodbury-formula"><span class="header-section-number">34.8</span> Sherman, Morrison, Woodbury Formula</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reviewmaterial/mathstat.html">Module VIII. Review Topics</a></li><li class="breadcrumb-item"><a href="../reviewmaterial/linalg.html"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Linear Algebra</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reviewmaterial/probability.html">Module VIII. Review Topics</a></li><li class="breadcrumb-item"><a href="../reviewmaterial/linalg.html"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Linear Algebra</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-linear-algebra" class="quarto-section-identifier"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></h1>
+<h1 class="title"><span id="sec-linear-algebra" class="quarto-section-identifier"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></h1>
 </div>
 
 
@@ -502,8 +520,8 @@ window.Quarto = {
 </header>
 
 
-<section id="basics" class="level2" data-number="32.1">
-<h2 data-number="32.1" class="anchored" data-anchor-id="basics"><span class="header-section-number">32.1</span> Basics</h2>
+<section id="basics" class="level2" data-number="34.1">
+<h2 data-number="34.1" class="anchored" data-anchor-id="basics"><span class="header-section-number">34.1</span> Basics</h2>
 <p>Command of linear algebra is essential in data science, models and estimators are often expressed in terms of tensors, matrices, and vectors. Using scalar-based arithmetic becomes tedious very quickly as models become more complex. For example, the simple linear regression model and a straight line through the intercept model can be written as</p>
 <p><span class="math display">\[Y_{i} = \beta_{0} + \beta_{1}x_{i} + \epsilon_{i}\]</span></p>
 <p><span class="math display">\[Y_{i} = \beta_{1}x_{i} + \epsilon_{i}\]</span></p>
@@ -559,8 +577,8 @@ y_{n}
 <p><span class="math display">\[\textbf{A}= \left\lbrack a_{ij} \right\rbrack\]</span></p>
 <p>says that matrix <span class="math inline">\(\textbf{A}\)</span> consists of the scalars <span class="math inline">\(a_{ij}\)</span>; for example, <span class="math inline">\(a_{23}\)</span> is the scalar in row 2, column 3 of the matrix.</p>
 </section>
-<section id="special-matrices" class="level2" data-number="32.2">
-<h2 data-number="32.2" class="anchored" data-anchor-id="special-matrices"><span class="header-section-number">32.2</span> Special Matrices</h2>
+<section id="special-matrices" class="level2" data-number="34.2">
+<h2 data-number="34.2" class="anchored" data-anchor-id="special-matrices"><span class="header-section-number">34.2</span> Special Matrices</h2>
 <p>A few special matrices, common in statistics and machine learning are</p>
 <ul>
 <li><p><span class="math inline">\(\textbf{1}_{n} = \begin{bmatrix} 1 \\ \vdots \\ 1 \end{bmatrix}\)</span>, the <strong>unit</strong> vector of size <span class="math inline">\(n\)</span>; all its elements are 1.</p></li>
@@ -571,8 +589,8 @@ y_{n}
 </ul>
 <p>If the order of these matrices is obvious from the context, the subscripts tend to be omitted.</p>
 </section>
-<section id="basic-operations-on-matrices-and-vectors" class="level2" data-number="32.3">
-<h2 data-number="32.3" class="anchored" data-anchor-id="basic-operations-on-matrices-and-vectors"><span class="header-section-number">32.3</span> Basic Operations on Matrices and Vectors</h2>
+<section id="basic-operations-on-matrices-and-vectors" class="level2" data-number="34.3">
+<h2 data-number="34.3" class="anchored" data-anchor-id="basic-operations-on-matrices-and-vectors"><span class="header-section-number">34.3</span> Basic Operations on Matrices and Vectors</h2>
 <p>The basic operations on matrices and vectors are addition, subtraction, multiplication, transposition, and inversion. These are standard operations in manipulating matrix and vector equations. Decompositions such as Cholesky roots, eigenvalue and singular value decompositions are more advanced operations that are important in solving estimation problems in statistics.</p>
 <section id="transpose" class="level3">
 <h3 class="anchored" data-anchor-id="transpose">Transpose</h3>
@@ -776,8 +794,8 @@ tr\left( \mathbf{ABC} \right) = tr\left( \mathbf{BCA} \right) = tr(\mathbf{CAB})
 </ol>
 </section>
 </section>
-<section id="random-vectors" class="level2" data-number="32.4">
-<h2 data-number="32.4" class="anchored" data-anchor-id="random-vectors"><span class="header-section-number">32.4</span> Random Vectors</h2>
+<section id="random-vectors" class="level2" data-number="34.4">
+<h2 data-number="34.4" class="anchored" data-anchor-id="random-vectors"><span class="header-section-number">34.4</span> Random Vectors</h2>
 <p>If the elements of a vector are random variables, the vector object itself is a random variable. You can think of random vectors as a convenient mechanism to collect random variables. Suppose we draw a random sample <span class="math inline">\(Y_{1},\cdots,Y_{n}\)</span>, then we can collect the <span class="math inline">\(n\)</span> random variables in a single random vector</p>
 $$ =
 <span class="math display">\[\begin{bmatrix}
@@ -854,8 +872,8 @@ Y_{n}
 \]</span></p>
 </section>
 </section>
-<section id="matrix-differentiation" class="level2" data-number="32.5">
-<h2 data-number="32.5" class="anchored" data-anchor-id="matrix-differentiation"><span class="header-section-number">32.5</span> Matrix Differentiation</h2>
+<section id="sec-matrix-differentiation" class="level2" data-number="34.5">
+<h2 data-number="34.5" class="anchored" data-anchor-id="sec-matrix-differentiation"><span class="header-section-number">34.5</span> Matrix Differentiation</h2>
 <p>Estimation of parameters in statistical models often requires minimization or maximization of an objective function. For example, the ordinary least squares (OLS) principle finds the OLS estimator as the function of the data that minimizes the error sum of squares of the model. Maximum likelihood finds estimators of the parameters as the functions of the data that maximizes the joint likelihood (the joint distribution function) of the data.</p>
 <p>The parameters of the models appear as elements of vectors and matrices. Finding estimators of the parameters thus requires calculus on vectors and matrices. Consider matrix <span class="math inline">\(\textbf{A}\)</span>, whose elements depend on a scalar parameter <span class="math inline">\(\theta\)</span>, <span class="math inline">\(\textbf{A}= \left\lbrack a_{ij}(\theta) \right\rbrack\)</span>. The derivative of <span class="math inline">\(\textbf{A}\)</span> with respect to <span class="math inline">\(\theta\)</span> is the matrix of the derivatives of the typical elements <span class="math inline">\(a_{ij}(\theta)\)</span> with respect to <span class="math inline">\(\theta\)</span>. We write this formally as</p>
 <p><span class="math display">\[
@@ -880,8 +898,8 @@ Y_{n}
 <li><p><span class="math inline">\(\frac{\partial\textbf{X}^\prime\textbf{A}}{\partial\textbf{X}} = \frac{\partial\textbf{A}^\prime\textbf{X}}{\partial\textbf{X}} = \textbf{A}\)</span></p></li>
 </ol>
 </section>
-<section id="idempotent-matrices" class="level2" data-number="32.6">
-<h2 data-number="32.6" class="anchored" data-anchor-id="idempotent-matrices"><span class="header-section-number">32.6</span> Idempotent Matrices</h2>
+<section id="idempotent-matrices" class="level2" data-number="34.6">
+<h2 data-number="34.6" class="anchored" data-anchor-id="idempotent-matrices"><span class="header-section-number">34.6</span> Idempotent Matrices</h2>
 <p>The class of (symmetric) idempotent matrices play an important role in statistical estimation. Idempotent matrices are <strong>projection</strong> matrices, that means they map a vector from a space to a sub-space.</p>
 <section id="projections" class="level3">
 <h3 class="anchored" data-anchor-id="projections">Projections</h3>
@@ -903,8 +921,8 @@ Y_{n}
 \widehat{\boldsymbol{\beta}}=\left( \textbf{X}^\prime\textbf{X}\right)^{- 1}\textbf{X}^{\prime}\textbf{Y}
 \]</span></p>
 </section>
-<section id="the-hat-matrix" class="level3">
-<h3 class="anchored" data-anchor-id="the-hat-matrix">The “Hat” Matrix</h3>
+<section id="sec-hat-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="sec-hat-matrix">The “Hat” Matrix</h3>
 <p>The ordinary least squares estimator is the orthogonal projection of <span class="math inline">\(\textbf{Y}\)</span> onto the sub-space created by the columns of <span class="math inline">\(\textbf{X}\)</span>. To see the projection matrix at work, compute the predicted values, <span class="math inline">\(\textbf{X}\widehat{\boldsymbol{\beta}}\)</span>:</p>
 <p><span class="math display">\[
 \textbf{X}\widehat{\boldsymbol{\beta}}=\textbf{X}\left( \textbf{X}^{\prime}\textbf{X}\right)^{- 1}\textbf{X}^{\prime}\textbf{Y}= \widehat{\textbf{Y}}
@@ -955,15 +973,15 @@ Y_{n}
 \]</span></p>
 </section>
 </section>
-<section id="sec-multi-gauss" class="level2" data-number="32.7">
-<h2 data-number="32.7" class="anchored" data-anchor-id="sec-multi-gauss"><span class="header-section-number">32.7</span> Multivariate Gaussian Distribution</h2>
+<section id="sec-multi-gauss" class="level2" data-number="34.7">
+<h2 data-number="34.7" class="anchored" data-anchor-id="sec-multi-gauss"><span class="header-section-number">34.7</span> Multivariate Gaussian Distribution</h2>
 <section id="definition" class="level3">
 <h3 class="anchored" data-anchor-id="definition">Definition</h3>
 <p>A scalar random variable <span class="math inline">\(Y\)</span> has a <strong>Gaussian</strong> distribution function with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^{2}\)</span> if its probability density function is given by</p>
 <p><span class="math display">\[
 f(y) = \frac{1}{\sqrt{2\pi\sigma^{2}}}\exp\left\{ - \frac{1}{2\sigma^{2}}(y - \mu)^{2} \right\}
 \]</span></p>
-<p>We also say that <span class="math inline">\(Y\)</span> is <strong>normally</strong> distributed with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^{2}\)</span> but prefer the name Gaussian over Normal for the reasons given in <a href="mathstat.html#sec-prob-cont-dist" class="quarto-xref"><span>Section 31.3</span></a>. The shorthand expressions <span class="math inline">\(Y \sim G(\mu,\sigma^{2})\)</span> or <span class="math inline">\(Y \sim N(\mu,\sigma^{2})\)</span> are common.</p>
+<p>We also say that <span class="math inline">\(Y\)</span> is <strong>normally</strong> distributed with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^{2}\)</span> but prefer the name Gaussian over Normal for the reasons given in <a href="probability.html#sec-prob-cont-dist" class="quarto-xref"><span>Section 32.5</span></a>. The shorthand expressions <span class="math inline">\(Y \sim G(\mu,\sigma^{2})\)</span> or <span class="math inline">\(Y \sim N(\mu,\sigma^{2})\)</span> are common.</p>
 <p>The generalization from a scalar random variable <span class="math inline">\(Y\)</span> to a random vector <span class="math inline">\(\textbf{Y}_{(n \times 1)}\)</span> with a <strong>multivariate Gaussian</strong> distribution is as follows. <span class="math inline">\(\textbf{Y}_{(n \times 1)}\)</span> has a multivariate Gaussian (normal) distribution with mean <span class="math inline">\(\boldsymbol{\mu}\)</span> and variance matrix <span class="math inline">\(\textbf{V}\)</span>, if its density is given by</p>
 <p><span class="math display">\[
 f\left( \textbf{Y}\right)=\frac{\left| \textbf{V}\right|^{- 1/2}}{(2\pi)^{\frac{n}{2}}}\exp\left\{ - \frac{1}{2}\left( \textbf{Y}- \boldsymbol{\mu}\right)^\prime\textbf{V}^{- 1}\left( \textbf{Y}- \boldsymbol{\mu}\right) \right\}
@@ -1073,8 +1091,8 @@ ln\mathcal{\{ l}\left( \boldsymbol{\beta};\textbf{Y}\right\} = l\left( \boldsymb
 <p>the ordinary least squares estimator. Notice that <span class="math inline">\(\sigma^{2}\)</span> cancels out of the formula; the value of the OLS estimator does not depend on the intrinsic variability of the data. However, the variability of the OLS estimator does depend on <span class="math inline">\(\sigma^{2}\)</span> (and on <span class="math inline">\(\textbf{X}\)</span>).</p>
 </section>
 </section>
-<section id="sherman-morrison-woodbury-formula" class="level2" data-number="32.8">
-<h2 data-number="32.8" class="anchored" data-anchor-id="sherman-morrison-woodbury-formula"><span class="header-section-number">32.8</span> Sherman, Morrison, Woodbury Formula</h2>
+<section id="sherman-morrison-woodbury-formula" class="level2" data-number="34.8">
+<h2 data-number="34.8" class="anchored" data-anchor-id="sherman-morrison-woodbury-formula"><span class="header-section-number">34.8</span> Sherman, Morrison, Woodbury Formula</h2>
 <p>This remarkable formula is at the heart of many regression-type diagnostics and cross-validation techniques. A version of this formula was first given by Gauss in 1821. Around 1950, it appeared in several papers by Sherman and Morrison, and Woodbury.</p>
 <p>Suppose we are in a full-rank linear modeling context with design matrix <span class="math inline">\(\textbf{X}_{(n \times p + 1)}\)</span>, so that the inverse <span class="math inline">\(\left( \textbf{X}^\prime\textbf{X}\right)^{-1}\)</span> exists. In diagnosing the quality of a model, we are interested in measuring the prediction error for the <span class="math inline">\(i\)</span><sup>th</sup> observation as if the data point had not contributed to the analysis. This is an example of a leave-one-out estimate: remove an observation from the data, redo the analysis, and measure how well the quantity of interest can be computed for the withheld observation.</p>
 <p>If you do this in turn for all <span class="math inline">\(n\)</span> observations, you must fit the model <span class="math inline">\(n + 1\)</span> times, an overall fit to the training data with <span class="math inline">\(n\)</span> observations, and <span class="math inline">\(n\)</span> additional fits with training data sets of size <span class="math inline">\(n - 1\)</span>, leaving out each observation in turn. The computationally expensive part of fitting the linear model is building the cross-product matrix <span class="math inline">\(\textbf{X}^\prime\textbf{X}\)</span> and computing its inverse <span class="math inline">\(\left( \textbf{X}^pX \right)^{-1}\)</span>.</p>
@@ -1648,13 +1666,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../reviewmaterial/mathstat.html" class="pagination-link" aria-label="Probability and Statistics">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Probability and Statistics</span></span>
+      <a href="../reviewmaterial/statistics.html" class="pagination-link" aria-label="Statistics">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Statistics</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../reviewmaterial/estimation.html" class="pagination-link" aria-label="Estimation">
+        <span class="nav-page-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Estimation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

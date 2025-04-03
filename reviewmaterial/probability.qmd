@@ -4,13 +4,11 @@ $$
 $$
 :::
 
-# Probability and Statistics {#sec-prob-stats}
+# Probability {#sec-probability}
 
 This chapter covers some basic topics in mathematical statistics that are relevant 
 to understanding data science methodology related to modeling data. The topics are 
 considered more review than exposition and are brought together here as a reference.
-
-## Probability {#sec-prob}
 
 Data are not deterministic; they have an element of uncertainty. Measurement errors, 
 sampling variability, random assignment and selection, incomplete observation, are 
@@ -22,7 +20,7 @@ about data requires the quantification of uncertainty.
 Situations in which the outcomes occur randomly are called generically *experiments* 
 and probability theory is used to model such experiments.
 
-### Sample Space and Events
+## Sample Space and Events
 
 The **sample space**, denoted $\Omega$, is the set of all possible outcomes of 
 the experiment. If we model the number of calls queued in a customer service hotline 
@@ -70,9 +68,9 @@ Set theory teaches us about laws involving events (@tbl-prob-laws).
 
 : Laws of set theory. These are useful in deriving probabilities. {#tbl-prob-laws .striped}
 
-### Probability Measures
+## Probability Measures
 
-#### Properties
+### Properties
 
 A probability measure is a function $\Pr( \cdot )$ that maps from subsets of a sample 
 space $\Omega$ (from events) to real numbers between $0$ and $1$. We have the 
@@ -94,11 +92,13 @@ following axioms and properties:
 
 8.  $\Pr{(\varnothing) = 0}$
 
-#### Conditional probability
+### Conditional Probability
 
 The **conditional** probability that event $A$ occurs given that event $B$ has occurred is
 
-$$\Pr{\left( A|B \right) = \frac{\Pr(A \cap B)}{\Pr(B)}}$$
+$$
+\Pr{\left( A|B \right) = \frac{\Pr(A \cap B)}{\Pr(B)}}
+$$
 
 This requires that $\Pr{(B) > 0}$, we cannot condition on something that cannot happen. 
 The idea of the conditional probability is that for purpose of conditioning on $B$, 
@@ -107,14 +107,18 @@ we change the relevant sample space from $\Omega$ to $B$.
 Rearranging the probabilities in this expression, we find that the probability 
 that two events occur together (the events intersect) can be written as
 
-$$\Pr(A \cap B) = \Pr{\left( A|B \right) \times \Pr(B)}$$
+$$
+\Pr(A \cap B) = \Pr{\left( A|B \right) \times \Pr(B)}
+$$
 
 This is known as the **multiplicative law** of probabilities. Another way of putting 
 this result is that the **joint** probability of $A$ and $B$ is the product of the 
 conditional probability given $B$ and the marginal probability of $B$. If $\Pr{(A) > 0}$,
 we can also use $A$ to condition the calculation:
 
-$$\Pr(A \cap B) = \Pr{\left( B|A \right) \times \Pr(A)}$$
+$$
+\Pr(A \cap B) = \Pr{\left( B|A \right) \times \Pr(A)}
+$$
 
 Suppose that the probability of rain $(A)$ on a cloudy $(B)$ day is $\Pr{\left( A|B \right) = 0.3}$.
 The probability that it is cloudy is $\Pr(B) = 0.2$. The probability that it is cloudy and 
@@ -122,16 +126,20 @@ raining is $\Pr{\left( A|B \right) \times \Pr(B)} = 0.3 \times 0.2 = 0.06$. Noti
 the difference between the event *cloudy and raining*`* and the event 
 *raining given that it is cloudy*.
 
-#### Law of total probability
+### Law of Total Probability
 
 Suppose we divide the sample space into two disjoint events, $B$ and $B^{c}$. Then 
 the probability that $A$ occurs can be decomposed as
 
-$$\Pr{(A) = \Pr{(A \cap B) + \Pr\left( A \cap B^{c} \right)}}$$
+$$
+\Pr{(A) = \Pr{(A \cap B) + \Pr\left( A \cap B^{c} \right)}}
+$$
 
 Substituting the conditional and marginal probabilities this can be rewritten as
 
-$$\Pr{(A) = \Pr{\left( A|B \right)\Pr(B) + \Pr{\left( A|B^{c} \right)\Pr\left( B^{c} \right)}}}$$
+$$
+\Pr(A) = \Pr\left( A|B \right)\Pr(B) + \Pr\left( A|B^{c} \right)\Pr\left( B^{c} \right)
+$$
 
 Each of the products on the right-hand side conditions on a different sample space, 
 but since $B$ and $B^{c}$ are disjoint, the entire space $\Omega$ is covered. For 
@@ -143,38 +151,47 @@ sets. If $B_{1},\cdots,\ B_{n}$ are disjoint sets and $\bigcup_{i = 1}^{n}B_{i} 
 and all $\Pr\left( B\_{i} \right) > 0$, then
 
 $$
-\Pr(A) = \sum_{i = 1}^{n}{\Pr{\left( A|B_{i} \right)\Pr\left( B_{i} \right)}}
+\Pr(A) = \sum_{i = 1}^{n}\Pr\left( A|B_{i} \right)\,\Pr\left( B_{i} \right)
 $$
 
-#### Bayes' rule
+### Bayes' Rule
 
 What is known as the Bayes rule, named after English mathematician Thomas Bayes, 
 is on the surface another way of expressing conditional probabilities. Recall the 
 definition of the conditional probability,
 
-$$\Pr{\left( A|B \right) = \frac{\Pr(A \cap B)}{\Pr(B)}}$$
+$$
+\Pr\left( A|B \right) = \frac{\Pr(A \cap B)}{\Pr(B)}
+$$
 
 The numerator, the probability that events $A$ and $B$ occur together, can be written 
 in terms of a conditional probability as well, $\Pr(A \cap B) = \Pr{\left( B|A \right)\Pr(A)}$. 
 Combining the two results yields Bayes' rule:
 
-$$\Pr\left( A|B \right) = \frac{\Pr{\left( B|A \right)\Pr(A)}}{\Pr(B)}$$
+$$
+\Pr\left( A|B \right) = \frac{\Pr{\left( B|A \right)\Pr(A)}}{\Pr(B)}
+$$
 
 The conditional probability on the left-hand side, $\Pr\left( A|B \right)$, is 
 called the **posterior** probability. The probabilities $\Pr(A)$ and $\Pr(B)$ are 
 also called the **prior** probabilities. The Bayes rule allows us to express the 
 probability of $A|B$ as a function of the probability of $B|A$ and vice versa.
 
-$$\Pr\left( A|B \right) = \frac{\Pr{\left( B|A \right)\Pr(A)}}{\Pr(B)}$$
+$$
+\Pr\left( A|B \right) = \frac{\Pr{\left( B|A \right)\Pr(A)}}{\Pr(B)}
+$$
 
-$$\Pr\left( B|A \right) = \frac{\Pr{\left( A|B\  \right)\Pr(B)}}{\Pr(A)}$$
+$$
+\Pr\left( B|A \right) = \frac{\Pr{\left( A|B\  \right)\Pr(B)}}{\Pr(A)}
+$$
 
 You can combine Bayes' formula as given here with the law of total probability to 
 compute the marginal probability in the denominator. This makes it even more evident 
 how Bayes' rule allows us to reverse the conditioning:
 
 $$
-\Pr{\left( B_{j}|A \right) =}\frac{\Pr\left( A|B_{j} \right)\Pr\left( B_{j} \right)}{\sum_{i = 1}^{n}{\Pr\left( A|B_{i} \right)\Pr\left( B_{i} \right)}}
+\Pr\left( B_{j}|A \right) =\frac{\Pr\left( A|B_{j} \right)\Pr\left( B_{j} \right)}{\sum_{i = 1}^{n}
+\Pr\left( A|B_{i} \right)\Pr\left( B_{i} \right)}
 $$
 
 ::: example
@@ -212,18 +229,23 @@ on a particular question, say, $\Pr{(T) = 0.99}$, then we can use Bayes' rule to
 ask the question: What is the probability the person is telling the truth when 
 the polygraph says that they are lying, $\Pr{(T| \oplus )}$:
 
-$$\Pr{\left( T \middle| \oplus \right) = \frac{\Pr{\left( \oplus |T \right)\Pr(T)}}{\Pr{\left( \oplus |T \right)\Pr(T)} + \Pr{\left( \oplus |L \right)\Pr(L)}}} = \frac{0.14 \times \ 0.99}{0.14 \times 0.99 + 0.88 \times .01} = 0.94$$
+$$
+\Pr\left( T \middle| \oplus \right) = \frac{\Pr\left( \oplus |T \right)\Pr(T)}{\Pr\left( \oplus |T \right)\Pr(T) 
++ \Pr\left( \oplus |L \right)\Pr(L)} = \frac{0.14 \times \ 0.99}{0.14 \times 0.99 + 0.88 \times .01} = 0.94
+$$
 
 Despite the relatively large true positive and true negative rates, 94% of all 
 positive readings will be incorrect---the subject answered truthfully. If the 
 probability that someone lies on a particular question is $\Pr{(T) = 0.5}$, the 
 chance of a polygraph to indict the innocent is much smaller:
 
-$$\Pr\left( T \middle| \oplus \right) = \frac{0.14 \times \ 0.5}{0.14 \times 0.5 + 0.88 \times 0.5} = 0.13$$
+$$
+\Pr\left( T \middle| \oplus \right) = \frac{0.14 \times  0.5}{0.14 \times 0.5 + 0.88 \times 0.5} = 0.13
+$$
 :::
 :::
 
-#### Independence
+### Independence
 
 Independent and disjoint events are different concepts. Events $A$ and $B$ are
 disjoint if they cannot occur together. Their intersection is the empty set and 
@@ -245,31 +267,39 @@ product of the probabilities that they occur separately.
 Applying this to the definition of the conditional probability, the following 
 holds for two independent events:
 
-$$\Pr\left( A|B \right) = \frac{\Pr(A \cap B)}{\Pr(B)} = \frac{\Pr{(A)\Pr(B)}}{\Pr(B)} = \Pr(A)$$
+$$
+\Pr\left( A|B \right) = \frac{\Pr(A \cap B)}{\Pr(B)} = \frac{\Pr(A)\Pr(B)}{\Pr(B)} = \Pr(A)
+$$
 
 In other words, when $A$ and $B$ are independent, the conditional probability 
 equals the marginal probability---the occurrence of $B$ does not alter the 
 probability of $A$.
 
-### Random Variables {#sec-prob-random-variables}
+## Random Variables {#sec-prob-random-variables}
 
 Random variables are real-valued functions defined on sample spaces. Recall the 
 sample space of the traffic lights encountered on the way to work:
 
-$$\Omega = \left\{ rr,ry,rg,yr,yy,yg,gr,gy,gg \right\}$$
+$$
+\Omega = \left\{ rr,ry,rg,yr,yy,yg,gr,gy,gg \right\}
+$$
 
 $X$, the number of green lights is a random variable. $X$ is a **discrete** random 
 variable since it can take on a countable number of values, $X = 0,\ 1,\ 2$. 
 If the nine traffic light configurations in $\Omega$ are equally likely, then 
 the values of $X$ occur with probabilities
 
-$$\Pr(X = 0) = \frac{4}{9}$$
+$$
+\Pr(X = 0) = \frac{4}{9}
+$$
 
 $$\Pr(X = 1) = \frac{4}{9}$$
 
-$$\Pr(X = 2) = \frac{1}{9}$$
+$$
+\Pr(X = 2) = \frac{1}{9}
+$$
 
-#### Distribution functions
+### Distribution Functions
 
 The function $p(x) = \Pr(X = x)$, that assigns probabilities to the discrete values 
 of the random variable, is known as the **probability mass function** (p.m.f.). 
@@ -290,16 +320,22 @@ $$\Pr(a < X < b) = \int_{a}^{b}{f(x)\ dx}$$
 The **cumulative distribution function** (c.d.f., $F(x)$ is defined for any 
 random variable as
 
-$$F(x) = \Pr{(X \leq x)}$$
+$$
+F(x) = \Pr{(X \leq x)}
+$$
 
 In the case of a discrete random variable, this means summing the probabilities 
 on the support up to and including $x$:
 
-$$F(x) = \sum_{X:X \leq x}^{}{p(x)}$$
+$$
+F(x) = \sum_{X:X \leq x}^{}{p(x)}
+$$
 
 For a continuous random variable, the c.d.f. is the integral up to $x$:
 
-$$F(x) = \int_{- \infty}^{x}{f(x)\ dx}$$
+$$
+F(x) = \int_{- \infty}^{x}{f(x)\ dx}
+$$
 
 The $p$th **quantile** of a distribution is the value $x_{p}$ for which 
 $F\left( x_{p} \right) = p$. For example, the 0.85^th^ quantile---also called 
@@ -307,17 +343,21 @@ the 85^th^ percentile---is $x_{.85}$ and satisfies $F\left( x_{.85} \right) = 0.
 Special quantiles are obtained for $p = 0.25$, the first quartile, $p = 0.5$, the 
 median (second quartile), and $p = 0.75$, the third quartile.
 
-#### Expected value
+### Expected Value
 
 The **expected value** of a random variable, $\Exp\lbrack X\rbrack$, also known 
 as the **mean** of $X$, is the weighted average of the values of the random variable 
 weighted by the mass or density. For a discrete random variable,
 
-$$\Exp\lbrack X\rbrack = \sum_{}^{}{x\ p(x)}$$
+$$
+\Exp\lbrack X\rbrack = \sum_{}^{}{x\ p(x)}
+$$
 
 and for a continuous random variable,
 
-$$\Exp\lbrack X\rbrack = \int_{}^{}{\,x\, f(x)\ dx}$$
+$$
+\Exp\lbrack X\rbrack = \int_{}^{}{\,x\, f(x)\ dx}
+$$
 
 Technically, we need the conditions $\sum |x|p(x) < \infty$ and $\int|x|f(x)dx < \infty$, 
 respectively, for the expected values to be defined. Almost all random variables 
@@ -334,9 +374,13 @@ Randomness is contagious---a function of a random variable is a random variable.
 So, if $X$ is a random variable, the function $h(X)$ is a random variable as well. 
 We can find the expected value of $h(X)$ through the mass or density function of $X$:
 
-$$\Exp\left\lbrack h(X) \right\rbrack = \sum_{x}^{}{h(x)p(x)}$$
+$$
+\Exp\left\lbrack h(X) \right\rbrack = \sum_{x}^{}{h(x)p(x)}
+$$
 
-$$\Exp\left\lbrack h(X) \right\rbrack = \int_{- \infty}^{\infty}{h(x)f(x)dx}$$
+$$
+\Exp\left\lbrack h(X) \right\rbrack = \int_{- \infty}^{\infty}{h(x)f(x)dx}
+$$
 
 Note that the sum and interval are taken over the support of $X$, rather than $h(X)$.
 You can also compute the expected value over the support of $h(X)$, but then values 
@@ -345,12 +389,16 @@ of $h(x)$ need to be weighted with the probabilities (or densities) of $h(X)$.
 An important case of the expectation of a function is $Y$ as a linear combination 
 of $X$: $Y = aX + b$:
 
-$$\Exp\lbrack Y\rbrack = \Exp\lbrack aX + b\rbrack = a\Exp\lbrack X\rbrack + b$$
+$$
+\Exp\lbrack Y\rbrack = \Exp\lbrack aX + b\rbrack = a\Exp\lbrack X\rbrack + b
+$$
 
 The expected value is a linear operator. For $k$ random variables $X_{1},\cdots,\ X_{k}$ 
 and constants $a_{1},\cdots,a_{k}$,
 
-$$\Exp\left\lbrack a_{1}X_{1} + a_{2}X_{2} + \cdots + a_{k}X_{k} \right\rbrack = a_{1}\Exp\left\lbrack X_{1} \right\rbrack + a_{2}\Exp\left\lbrack X_{2} \right\rbrack + \cdots + a_{k}\Exp\lbrack X_{k}\rbrack$$
+$$
+\Exp\left\lbrack a_{1}X_{1} + a_{2}X_{2} + \cdots + a_{k}X_{k} \right\rbrack = a_{1}\Exp\left\lbrack X_{1} \right\rbrack + a_{2}\Exp\left\lbrack X_{2} \right\rbrack + \cdots + a_{k}\Exp\lbrack X_{k}\rbrack
+$$
 
 ::: example
 ::: example-header
@@ -360,12 +408,16 @@ Example: Mean of Binomial Distribution
 ::: example-container
 A random variable $X$ with binomial distribution has p.m.f.
 
-$$\Pr(X = x) = \begin{pmatrix} n \\ x \end{pmatrix}\pi^{x}(1 - \pi)^{n - x}$$
+$$
+\Pr(X = x) = \begin{pmatrix} n \\ x \end{pmatrix}\pi^{x}(1 - \pi)^{n - x}
+$$
 
 The support of $X$ is $0,\ 1,\ 2,\ \cdots,\ n$. The term 
 $\begin{pmatrix} n \\ x \end{pmatrix}$ is known as the binomial coefficient,
 
-$$\begin{pmatrix} n \\ x \end{pmatrix} = \frac{n!}{x!(n - x)!}$$
+$$
+\begin{pmatrix} n \\ x \end{pmatrix} = \frac{n!}{x!(n - x)!}
+$$
 
 The binomial random variable is the sum of $n$ independent Bernoulli experiments. 
 A Bernoulli experiment can result in only two possible outcomes that occur with 
@@ -374,23 +426,29 @@ probabilities $\pi$ and $1 - \pi$.
 Computing the expected value of the binomial random variable from the p.m.f. is 
 messy, it requires evaluation of
 
-$$\Exp\lbrack X\rbrack = \sum_{x = 0}^{n}{\begin{pmatrix} n \\ x \end{pmatrix}x{\ \pi}^{x}}\ (1 - \pi)^{n - x}$$
+$$
+\Exp\lbrack X\rbrack = \sum_{x = 0}^{n}{\begin{pmatrix} n \\ x \end{pmatrix}x{\ \pi}^{x}}\ (1 - \pi)^{n - x}
+$$
 
 If we recognize the binomial random variable $X$ as the sum of $n$ Bernoulli 
 variables $Y_{1},\cdots,Y_{n}$ with probability $\pi$, the expected value follows 
 as
 
-$$\Exp\lbrack X\rbrack = \Exp\left\lbrack \sum Y_{i} \right\rbrack = \sum \Exp\left\lbrack Y_{i} \right\rbrack = n\pi$$
+$$
+\Exp\lbrack X\rbrack = \Exp\left\lbrack \sum Y_{i} \right\rbrack = \sum \Exp\left\lbrack Y_{i} \right\rbrack = n\p
+i$$
 :::
 :::
 
-#### Variance and standard deviation
+### Variance and Standard Deviation
 
 Next to the mean, the most important expected value of a random variable, is the 
 **variance**, the expected value of the squared deviation of a random variable 
 from its mean:
 
-$$\Var\lbrack X\rbrack = \Exp\left\lbrack \left( X - \Exp\lbrack X\rbrack \right)^{2} \right\rbrack = \Exp\left\lbrack X^{2} \right\rbrack -\Exp\lbrack X\rbrack^{2}$$
+$$
+\Var\lbrack X\rbrack = \Exp\left\lbrack \left( X - \Exp\lbrack X\rbrack \right)^{2} \right\rbrack = \Exp\left\lbrack X^{2} \right\rbrack -\Exp\lbrack X\rbrack^{2}
+$$
 
 The second expression states that the variance can also be written as the difference
 of the mean of the square of the random variable and the square of the mean of the 
@@ -407,9 +465,13 @@ From the definition of expected values and functions of random values, the
 variance can be calculated from first principles as the expected value of 
 $(X - \mu)^{2}$, where $\mu = E\lbrack X\rbrack:$
 
-$$\Var\lbrack X\rbrack = \sum_{x}^{}(x - \mu)^{2}p(x)$$
+$$
+\Var\lbrack X\rbrack = \sum_{x}^{}(x - \mu)^{2}p(x)
+$$
 
-$$\Var\lbrack X\rbrack = \int_{- \infty}^{\infty}{(x - \mu)^2 \, f(x)dx} $$
+$$
+\Var\lbrack X\rbrack = \int_{- \infty}^{\infty}{(x - \mu)^2 \, f(x)dx} 
+$$
 
 It is often easier to derive the variance of a random variable from the following 
 properties. Suppose $a$ and $b$ are constants and $X$ is a random variable with 
@@ -448,7 +510,9 @@ the sample mean to least-squares regression estimators.
 If $X_{1},\cdots,X_{k}$ are independent random variables and $a_{1},\cdots,a_{k}$ 
 are constants, then the variance of $a_{1}X_{1} + \cdots + a_{k}X_{k}$ is given by
 
-$$\Var\left\lbrack a_{1}X_{1} + \cdots + a_{k}X_{k} \right\rbrack = a_{1}^{2}\Var\left\lbrack X_{1} \right\rbrack + a_{2}^{2}\Var\left\lbrack X_{2} \right\rbrack + \cdots + a_{k}^{2}\Var\lbrack X_{k}\rbrack$$
+$$
+\Var\left\lbrack a_{1}X_{1} + \cdots + a_{k}X_{k} \right\rbrack = a_{1}^{2}\Var\left\lbrack X_{1} \right\rbrack + a_{2}^{2}\Var\left\lbrack X_{2} \right\rbrack + \cdots + a_{k}^{2}\Var\lbrack X_{k}\rbrack
+$$
 
 For this result to hold it is sufficient that the $X_i$ are **uncorrelated**, they 
 do not have to be independent.
@@ -506,7 +570,7 @@ It is sufficient for this result to hold that the random variables are mutually
 uncorrelated, a weaker condition than mutual independence. We are introducing 
 independence below after discussing the concept of joint distribution functions.
 
-#### Centering and scaling
+### Centering and Scaling
 
 A random variable $X$ with mean $\mu$ and variance $\sigma^{2}$ is **centered** 
 by subtracting its mean. A random variable is **scaled** by multiplying or dividing 
@@ -549,7 +613,7 @@ you will find the term *scaling* applied to standardization. In fact, the `scale
 function in `R` performs standardization (centering and scaling) by default.
 :::
 
-#### Covariance and correlation
+### Covariance and Correlation
 
 Whereas the variance measures the dispersion of a random variable, the **covariance** 
 measures how two random variables vary **together**. The covariance of $X$ and $Y$ 
@@ -606,35 +670,48 @@ $\Corr[X,Y] = 0$, then $X$ carries no information about $Y$, and vice versa. A
 person's shoe size and tomorrow's weather is an example of uncorrelated 
 (and most likely independent) variables.
 
-#### Independence
+### Independence
 
 The joint behavior of random variables $X$ and $Y$ is described by their **joint** 
 cumulative distribution function,
 
-$$F(x,y) = \Pr(X \leq x,Y \leq y)$$
+$$
+F(x,y) = \Pr(X \leq x,Y \leq y)
+$$
 
 If $X$ and $Y$ are continuous, this probability is calculated as
 
-$$F(x,y) = \int_{- \infty}^{x}{\int_{- \infty}^{y}{f(u,v)\ dvdu}}$$
+$$
+F(x,y) = \int_{- \infty}^{x}{\int_{- \infty}^{y}{f(u,v)\ dvdu}}
+$$
 
 The bivariate probability density is derived from $F(x,y)$ by differentiating,
 
-$$f(x,y) = \frac{\partial^{2}}{\partial x\partial y}F(x,y)$$
+$$
+f(x,y) = \frac{\partial^{2}}{\partial x\partial y}F(x,y)
+$$
 
 Two random variables $X$ and $Y$ are independent if their joint c.d.f.s (or joint 
 p.d.f.s) factor into the **marginal** distributions. The marginal density function 
 of $X$ or $Y$ can be derived from the joint density by integrating over the other 
 random variable:
 
-$$f_{X}(x) = \int_{- \infty}^{\infty}{f(x,y)dy}$$
+$$
+f_{X}(x) = \int_{- \infty}^{\infty}{f(x,y)dy}
+$$
 
-$$f_{Y}(y) = \int_{- \infty}^{\infty}{f(x,y)dx}$$
+$$
+f_{Y}(y) = \int_{- \infty}^{\infty}{f(x,y)dx}
+$$
 
-Finally, we can state that $X$ and $Y$ are independent if $f(x,y) = f_{X}(x)f_{Y}(y)$ (or $F(x,y) = F_{X}(x)F_{Y}(y)$).
+Finally, we can state that $X$ and $Y$ are independent if 
+$f(x,y) = f_{X}(x)f_{Y}(y)$ (or $F(x,y) = F_{X}(x)F_{Y}(y)$).
 
 If $X$ and $Y$ are independent, then
 
-$$\Exp\left\lbrack g(X)h(Y) \right\rbrack = \Exp\left\lbrack g(X) \right\rbrack \Exp\left\lbrack h(Y) \right\rbrack$$
+$$
+\Exp\left\lbrack g(X)h(Y) \right\rbrack = \Exp\left\lbrack g(X) \right\rbrack \Exp\left\lbrack h(Y) \right\rbrack
+$$
 
 For example, $\Exp\lbrack XY\rbrack = \Exp\lbrack X\rbrack \Exp\lbrack Y\rbrack$ 
 and it follows that the covariance between independent random variables is zero. 
@@ -684,14 +761,27 @@ $$p(y) = \left\{ \begin{matrix}
 \end{matrix} \right.\ $$
 
 Since binary data are often found in studies where events are detrimental---e.g., 
-disease, fraud, death, disapproval---the "event" vernacular is preferred over 
-the "success" vernacular.
+disease, fraud, death, disapproval---calling the outcomes "event" and "no event" 
+is preferred over the "success"/"failure" terminology.
 
 The mean and variance of the Bernoulli($\pi$) random variable are $\pi$ and $\pi(1 - \pi)$, 
 respectively. Notice that the variance is largest at $\pi = 0.5$, when there is 
 greatest uncertainty about which of the two events will occur.
 
-![Probability mass function of the Bernoulli(0.7) random variable.](images/mathstat/Bernoulli.png){fig-align="center" width="75%"}
+@fig-bernoulli-07 displays the probability mass function of a Bernoulli random
+variable with event probability $\pi = 0.7$.
+
+``` {r, echo=FALSE, fig.align='center', out.width="80%"}
+#| fig.cap: Probability mass function of the Bernoulli(0.7) random variable.
+#| label: fig-bernoulli-07
+barplot(dbinom(c(0,1),1,0.7), 
+        width=c(0.5,0.5),
+        space=0.2,
+        ylab="p(y)", 
+        xlab="y", 
+        names.arg=c("0","1"),
+        las=1)
+```
 
 ### Binomial, Binomial$(n,\pi)$
 
@@ -702,14 +792,27 @@ distribution with p.m.f.
 $$\Pr(X = x) = \begin{pmatrix}
 n \\
 x
-\end{pmatrix}\pi^{x}(1 - \pi)^{n - x},\ \ \ \ \ x = 0,1,\cdots,n$$
+\end{pmatrix}\pi^{x}(1 - \pi)^{n - x},\ \ \ \ \ x = 0,1,\cdots,n
+$$
 
 The mean and variance of the Binomial($n,\pi$) variable can be found easily from 
 its definition as a sum of independent Bernoulli($\pi$) variables:
 
 $$\Exp\lbrack X\rbrack = n\pi\ \ \ \ \ \Var\lbrack X\rbrack = n\pi(1 - \pi)$$
+``` {r, echo=FALSE, fig.align='center', out.width="80%"}
+#| fig.cap: Probability mass function of a Binomial(8,0.3) random variable.
+#| label: fig-binomial_8_03
 
-![Probability mass function of a Binomial(8,0.3) random variable.](images/mathstat/Binomial.png){fig-align="center" width="75%"}
+par(mai=c(1,1,0.5,0.5))
+barplot(dbinom(seq(0,8),8,0.3),
+        space=0.2,
+        ylab="p(x)", 
+        xlab="x", 
+        names.arg=c("0","1","2","3","4","5","6","7","8"),
+        las=1
+        )
+
+```
 
 The Bernoulli($\pi$) distribution is the special case of the Binomial($1,\pi$) 
 distribution.
@@ -743,11 +846,23 @@ $\Pr(X > s)$ means the first event occurs after the $s$^th^ try which implies th
 the first $s$ tries were all non-events: $\Pr{(X > s) = (1 - \pi)^{s}}$. The 
 conditional probability in question becomes
 
-$$\Pr\left( X > s + t|X > t \right) = \frac{\Pr{(X > s + t,\ X > t)}}{\Pr{(X > t)}} = \frac{\Pr{(X > s + t)}}{\Pr{(X > t)}} = \frac{(1 - \pi)^{s + t}}{(1 - \pi)^{t}} = (1 - \pi)^{s}$$
+$$
+\Pr\left( X > s + t|X > t \right) = \frac{\Pr{(X > s + t,\ X > t)}}{\Pr{(X > t)}} = \frac{\Pr{(X > s + t)}}{\Pr{(X > t)}} = \frac{(1 - \pi)^{s + t}}{(1 - \pi)^{t}} = (1 - \pi)^{s}
+$$
 
 But the last expression is just $\Pr{(X > s)}$.
 
-![Probability mass function of the Geometric(0.5) distribution.](images/mathstat/Geometric.png){fig-align="center" width="75%"}
+``` {r, echo=FALSE, fig.align='center', out.width="80%"}
+#| fig.cap: Probability mass function of the Geometric(0.5) distribution.
+#| label: fig-geometric-05
+par(mai=c(1,1,0.5,0.5))
+barplot(dgeom(seq(0,7),0.5),
+        ylab="p(x)", 
+        xlab="x", 
+        las=1,
+        names.arg=c("1","2","3","4","5","6","7","8")
+)
+```
 
 Please note that there is a second definition of the Geometric($\pi$) distribution 
 in terms of independent Bernoulli($\pi$) experiments, namely as the number of 
@@ -787,9 +902,18 @@ $$\Exp\lbrack Y\rbrack = \frac{k(1 - \pi)}{\pi}\ \ \ \ \Var\lbrack Y\rbrack = \f
 
 The p.m.f. for a NegBin(5,0.7) in this parameterization is shown in @fig-sl-negbin.
 
-![Probability mass function of a NegBin(5,0.7) random variable.](images/mathstat/NegativeBinomial.png){#fig-sl-negbin fig-align="center" width="75%"}
+```{r, echo=FALSE, fig.align='center', out.width="80%"}
+#| fig.cap: Probability mass function of a NegBin(5,0.7) random variable.
+#| label: fig-sl-negbin
+par(mai=c(1,1,0.5,0.5))
+barplot(dnbinom(seq(0,8),5,0.7),
+        ylab="p(y)",
+        xlab="y",
+        las=1,
+        names.arg=c("0","1","2","3","4","5","6","7","8"))
+```
 
-An important application of the negative binomial distribution is in mixing models. 
+An important application of the negative binomial distribution is in **mixing models**. 
 These are models where the parameters of a distribution are assumed to be random 
 variables rather than constants. This mechanism introduces additional variability 
 into the system and is applied when the observed data appear more dispersed than 
@@ -828,24 +952,55 @@ $$p(y) = \frac{e^{- \lambda\ }\lambda^{y}}{y!},\ \ \ \ y = 0,1,\cdots$$
 
 The mean and variance of a Poisson($\lambda$) variable are the same, 
 $\Exp\lbrack Y\rbrack = \Var\lbrack Y\rbrack = \lambda$. Although the random 
-variable $Y$ takes on only non-negative integer value, the parameter $\lambda$ is a real number.
-
-![Probability mass function of a Poisson(3) random variable.](images/mathstat/Poisson.png){width="75%"}
+variable $Y$ takes on only non-negative integer value, the parameter $\lambda$ is a 
+real number.
 
 For larger values of $\lambda$ the distribution shifts to the right and becomes 
-more symmetric. For small values of $\lambda$ the mass function is very asymmetric 
-and concentrated at small values of $Y$.
+more symmetric (@fig-sl-poisson_3). For small values of $\lambda$ the mass function 
+is very asymmetric and concentrated at small values of $Y$ (@fig-sl-poisson_02).
 
-![Probability mass function of a Poisson(0.2) random variable.](images/mathstat/Poisson2.png){fig-align="center" width="75%"}
+```{r, echo=FALSE, fig.align='center', out.width="80%"}
+#| fig.cap: Probability mass function of a Poisson(3) random variable.
+#| label: fig-sl-poisson_3
+par(mai=c(1,1,0.5,0.5))
+barplot(dpois(seq(0,10),3),
+        ylab="p(y)",
+        xlab="y",
+        las=1,
+        names.arg=c("0","1","2","3","4","5","6","7","8","9","10"))
+```
+
+
+```{r, echo=FALSE, fig.align='center', out.width="80%"}
+#| fig.cap: Probability mass function of a Poisson(0.2) random variable.
+#| label: fig-sl-poisson_02
+par(mai=c(1,1,0.5,0.5))
+barplot(dpois(seq(0,10),0.2),
+        ylab="p(y)",
+        xlab="y",
+        las=1,
+        names.arg=c("0","1","2","3","4","5","6","7","8","9","10"),
+        main="P.m.f. of a Poisson(0.2) random variable")
+```
+
 
 This is the basis for the Poisson approximation to Binomial probabilities. In a 
 Binomial($n,\pi$) process, if $n \rightarrow \infty$ and $\pi$ shrinks so that $n\pi$ 
 converges to a constant $\lambda$, then the Binomial($n,\pi$) process can be 
-approximated as a Poisson($\lambda$) process. The next figure compares a 
+approximated as a Poisson($\lambda$) process. @fig-binomial-poisson-approx compares a 
 Binomial(200,0.05) mass function to the p.m.f. of the Poisson(10). At least visually, 
 the histograms are almost indistinguishable.
 
-![Poisson approximation to the Binomial, $n\pi \rightarrow \lambda$.](images/mathstat/PoissonBinomial.png){#fig-sl-poisson-approx-bin fig-align="center" width="75%"}
+``` {r, echo=FALSE, fig.align='center', out.width="80%"}
+#| fig.cap: Poisson approximation to the Binomial, $n\pi \rightarrow \lambda$.
+#| label: fig-binomial-poisson-approx
+bnpi <- dbinom(seq(0,20),200,0.05)
+bpoi <- dpois(seq(0,20),10)
+
+par(mfrow=c(1,2), mai=c(0.5,1,1,0.5))
+barplot(bnpi,main="Binomial(200,0.05)",las=1)
+barplot(bpoi,main="Poisson(10)", las=1)
+```
 
 For example, the probability that three sixes turn up when three dice are rolled is 
 $\frac{1}{216} = 0.00463$. If the three dice are rolled 200 times, what is the 
@@ -860,7 +1015,9 @@ $$
 
 and the Poisson approximation is
 
-$$1 - \frac{\left( \frac{200}{216} \right)^{0}}{0!}\exp\left\{ - \frac{200}{216} \right\} = 0.6038$$
+$$
+1 - \frac{\left( \frac{200}{216} \right)^{0}}{0!}\exp\left\{ - \frac{200}{216} \right\} = 0.6038
+$$
 
 As $\lambda \rightarrow \infty$, the Poisson p.m.f. approaches the shape of a 
 Gaussian (normal) distribution. The normal approximation is sometimes made for 
@@ -870,7 +1027,19 @@ distribution and a Gaussian distribution with the same mean and variance as the
 Poisson. Some folks recommend the Gaussian approximation for the Poisson for 
 $\lambda > 100$ or even $\lambda > 1000$.
 
-![Normal approximation to the Poisson distribution for $\lambda = 20$.](images/mathstat/PoissonNormal.png){#fig-sl-normal-approx-poi fig-align="center" width="75%"}
+```{r poisson_normal_hist, out.width="80%", echo=FALSE, fig.align='center'}
+#| fig.cap: Normal approximation to the Poisson distribution for $\lambda = 20$.
+#| label: fig-sl-normal-approx-poi 
+set.seed(4532)
+norm <- rnorm(10000,mean=20,sd=sqrt(20))-0.5
+poi <- rpois(10000,20)
+hist(poi,breaks=40,freq=FALSE, 
+     xlab="", 
+     xlim=c(0,40),
+     las=1,
+     cex.main=0.8 )
+lines(density(norm, bw="nrd0"))
+```
 
 Because the events being counted occur independently of each other, a Poisson 
 distribution is divisible. You can think of a Poisson($\lambda = 5$) variable 
@@ -897,16 +1066,20 @@ obtained by differentiating the c.d.f $F(x) = \Pr{(X \leq x)}$; $f(x) = \frac{dF
 If a random variable has a continuous uniform distribution on the interval 
 $\lbrack a,b\rbrack$, denoted $Y \sim U(a,b)$, its p.d.f. is given by
 
-$$f(x) = \left\{ \begin{matrix}
+$$
+f(x) = \left\{ \begin{matrix}
 \frac{1}{(b - a)} & a \leq x \leq b \\
 0 & \text{otherwise}
-\end{matrix} \right.\ $$
+\end{matrix} \right.\ 
+$$
 
 The mean and variance of a $U(a,b)$ random variable are
 
-$$\Exp\lbrack Y\rbrack = \frac{a + b}{2}\ \ \ \ \ \ \Var\lbrack Y\rbrack = \frac{(b - a)^{2}}{12}$$
+$$
+\Exp\lbrack Y\rbrack = \frac{a + b}{2}\ \ \ \ \ \ \Var\lbrack Y\rbrack = \frac{(b - a)^{2}}{12}
+$$
 
-### Exponential, Expo$(\lambda)$
+### Exponential, Expo$(\lambda)$ {#sec-prob-exponential}
 
 The exponential distribution is a useful probability model for modeling continuous 
 lifetimes. It is related to Poisson processes. If events occur continuously and 
@@ -914,16 +1087,24 @@ independently at a constant rate $\lambda$, the number of events is a Poisson
 random variable. The time between the events is an exponential random variable, 
 denoted $Y \sim$ Expo($\lambda$).
 
-$$p(y) = \lambda e^{- \lambda y},\ \ \ \ y \geq 0$$
+$$
+p(y) = \lambda e^{- \lambda y},\ \ \ \ y \geq 0
+$$
 
-$$F(y) = 1 - e^{- \lambda y},\ \ \ y \geq 0$$
+$$
+F(y) = 1 - e^{- \lambda y},\ \ \ y \geq 0
+$$
 
-$$\Exp\lbrack Y\rbrack = \frac{1}{\lambda}\ \ \ \ \ \ \Var\lbrack Y\rbrack = \frac{1}{\lambda^{2}}$$
+$$
+\Exp\lbrack Y\rbrack = \frac{1}{\lambda}\ \ \ \ \ \ \Var\lbrack Y\rbrack = \frac{1}{\lambda^{2}}
+$$
 
 Like the discrete Geometric($\pi$) distribution, the Expo($\lambda$) distribution is 
 forgetful,
 
-$$\Pr{(Y > s + t|Y > t)} = \Pr{(Y > s)}$$
+$$
+\Pr{(Y > s + t|Y > t)} = \Pr{(Y > s)}
+$$
 
 and it turns out that no other continuous function has this **memoryless** property. 
 This property is easily proven using $\Pr(Y > y) = 1 - F(y) = e^{- \lambda y}$:
@@ -949,11 +1130,15 @@ The Expo($\lambda$) distribution is a special case of a broader family of
 distributions, the Gamma($\alpha,\beta$) distribution. A random variable $Y$ is 
 said to have a Gamma($\alpha,\beta$) distribution if its density function is
 
-$$f(y) = \frac{1}{\beta^{\alpha}\Gamma(\alpha)}y^{\alpha - 1}e^{- y/\beta},\ \ \ \ \ y \geq 0,\ \alpha,\beta > 0$$
+$$
+f(y) = \frac{1}{\beta^{\alpha}\Gamma(\alpha)}y^{\alpha - 1}e^{- y/\beta},\ \ \ \ \ y \geq 0,\ \alpha,\beta > 0
+$${#eq-gamma-density}
 
 The mean and variance of a Gamma($\alpha,\beta$) random variable are given by
 
-$$\Exp\lbrack Y\rbrack = \alpha\beta\ \ \ \ \ \Var\lbrack Y\rbrack = \alpha\beta^{2}$$
+$$
+\Exp\lbrack Y\rbrack = \alpha\beta\ \ \ \ \ \Var\lbrack Y\rbrack = \alpha\beta^{2}
+$$
 
 $\alpha$ is called the shape parameter of the distribution and $\beta$ is called 
 the scale parameter. Varying $\alpha$ affects the shape and varying $\beta$ 
@@ -983,7 +1168,25 @@ $\nu$ degrees of freedom, denoted $\chi_{\nu}^{2}$, if $Y$ is a Gamma($\frac{\nu
 random variable. More on $\chi^{2}$ random variables below after we introduced 
 sampling from a Gaussian distribution.
 
-![Densities of Gamma(3,1/2) (solid), Gamma(2,2) (dashed) and Gamma(1,1/2) random variables. The Gamma(2,2) is also a $\chi_{4}^{2}$ distribution. The Gamma(1,1/2) is a Expo(2) distribution.](images/mathstat/Gamma.png){fig-align="center" width="75%"}
+
+``` {r, echo=FALSE, fig.align='center', out.width="80%"}
+#| fig.cap: Densities of Gamma(3,1/2) (solid), Gamma(2,2) (dashed) and Gamma(1,1/2) random variables. The Gamma(2,2) is also a $\chi_{4}^{2}$ distribution. The Gamma(1,1/2) is a Expo(2) distribution.
+#| label: fig-gamma-densities
+x <- seq(0,7,0.05)
+f <- dgamma(x,shape=3,scale=0.5) # scale parameter is beta in my parameterization
+f2 <- dgamma(x,shape=2,scale=2)
+f3 <- dgamma(x,shape=1,scale=0.5)
+
+par(mai=c(1,1,0.5,0.5))
+plot(x,f,type="l",lwd=1.5,ylab="Density f(y)",xlab="y",ylim=c(0,0.6))
+lines(x,f2,lwd=1.5,lty="dashed")
+lines(x,f3,lwd=1.5,lty="dotted")
+legend("topright",
+       lwd=1.5,
+       legend=c("Gamma(3, 1/2)","Gamma(2, 2)","Gamma(1, 1/2)"),
+       lty=c("solid","dashed","dotted"))
+
+```
 
 ### Beta, Beta$(\alpha,\beta)$
 
@@ -995,7 +1198,29 @@ f(y) = \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\, y^{\alpha-1}\,
 $$
 The family of beta distributions takes on varied shapes as seen in @fig-sl-beta.
 
-![Densities of Beta($\alpha,\beta$) distributions](images/mathstat/Beta.png){#fig-sl-beta fig-align="center" width="75%"}
+```{r, echo=FALSE, fig.align="center", out.width="90%"}
+#| fig.cap: Densities of Beta($\alpha,\beta$) distributions.
+#| label: fig-sl-beta
+x <- seq(0,1,0.01)
+f1 <- dbeta(x,shape1=1,shape2=1) 
+f2 <- dbeta(x,shape1=1,shape2=3)
+f3 <- dbeta(x,shape1=0.5,shape2=0.2)
+f4 <- dbeta(x,shape1=5,shape2=10)
+
+par(mai=c(1,1,0.5,0.5))
+plot(x,f1,type="l",lwd=1.5,ylab="Density f(y)",
+     xlab="y",
+     las=1,
+     ylim=c(0,4))
+lines(x,f2,lwd=1.5,lty="dashed")
+lines(x,f3,lwd=1.5,lty="dotted")
+lines(x,f4,lwd=1.5,lty="dotdash")
+legend("topright",
+       lwd=1.5,
+       legend=c("Beta(1, 1)","Beta(1, 3)","Beta(0.,5, 0.2)","Beta(5,10)"),
+       lty=c("solid","dashed","dotted","dotdash"))
+```
+
 
 The ratio of Gamma functions is known as the Beta function and the density can
 also be written as $f(y) = y^{\alpha-1}(1-y)^{(\beta-1)} / B(\alpha,\beta)$ where
@@ -1055,18 +1280,37 @@ distribution in all of probability and statistics. A random variable $Y$ has a
 Gaussian distribution with mean $\mu$ and variance $\sigma^{2}$ if its density 
 function is
 
-$$f(y) = \frac{1}{\sqrt{2\pi\sigma^{2}}}\exp\left\{ - \frac{1}{2\sigma^{2}}(y - \mu)^{2} \right\},\ \ \ \ \text{-}\infty < y < \infty$$
+$$
+f(y) = \frac{1}{\sqrt{2\pi\sigma^{2}}}\exp\left\{ - \frac{1}{2\sigma^{2}}(y - \mu)^{2} \right\},\ \ \ \ \text{-}\infty < y < \infty
+$$
 
 The notation $Y \sim G\left( \mu,\sigma^{2} \right)$ or $Y \sim N\left( \mu,\sigma^{2} \right)$ is common.
 
-The Gaussian distribution has the famous bell shape, symmetric about the mean \$\\mu\$.
+The Gaussian distribution has the famous bell shape, symmetric about the mean $\mu$.
 
-![Gaussian distributions: $G(4,1)$ (solid), $G(5,4)$ (dashed), and $G(8, {0.75}^{2})$ (dotted).](images/mathstat/Gaussians.png){fig-align="center" width="75%"}
+``` {r, echo=FALSE, fig.align='center', out.width="90%"}
+#| fig.cap: Gaussian distributions. $G(4,1)$ (solid), $G(5,4)$ (dashed), and $G(8, {0.75}^{2})$ (dotted).
+#| label: fig-gaussian-densities
+x <- seq(0,10,0.1)
+x2 <- seq(5,11,0.1)
+y <- dnorm(x,mean=4,sd=1)
+y2 <- dnorm(x,mean=5,sd=2)
+y3 <- dnorm(x2,mean=8,sd=0.75)
+par(mai=c(1,1,0.5,0.5))
+plot(x,y,type="l",lwd=1.5,ylab="Density f(y)",xlab="y",
+     las=1,
+     ylim=c(0,0.55))
+lines(x,y2,lwd=1.5,lty="dashed")
+lines(x2,y3,lwd=1.5,lty="dotted")
+```
+
 
 A special version is the **standard** Gaussian (standard normal) distribution 
 $Z \sim G(0,1)$ with density
 
-$$f(z) = \frac{1}{\sqrt{2\pi}}\exp\left\{ - \frac{1}{2}y^{2} \right\}$$
+$$
+f(z) = \frac{1}{\sqrt{2\pi}}\exp\left\{ - \frac{1}{2}y^{2} \right\}
+$$
 
 The standard Gaussian is also referred to as the **unit** normal distribution.
 
@@ -1094,7 +1338,9 @@ This follows from the linearity of the expectation operator and the independence
 of the observations in the random sample. If, in addition, the $Y_{i} \sim G\left( \mu,\sigma^{2} \right)$, 
 then
 
-$$\overline{Y} \sim G\left( \mu,\frac{\sigma^{2}}{n} \right)$$
+$$
+\overline{Y} \sim G\left( \mu,\frac{\sigma^{2}}{n} \right)
+$$
 
 The sample mean of a random sample from a Gaussian distribution also has a Gaussian 
 distribution. Do we know anything about the distribution of $\overline{Y}$ if we 
@@ -1112,7 +1358,7 @@ variables with mean $\mu$ and variance $\sigma^{2} < \infty.$ The distribution o
 
 $$\frac{\overline{Y} - \mu}{\sigma/\sqrt{n}}$$
 
-converges to that of a standard normal random variable as $n \rightarrow \infty$.
+converges to that of a standard Gaussian random variable as $n \rightarrow \infty$.
 :::
 :::
 
@@ -1148,125 +1394,133 @@ under the normal into sections of greater and lesser genetic worth. That is not
 normal!
 :::
 
-## Sampling Distributions {#sec-prob-sampling-dist}
+## Functions of Random Variables
 
-Many important probability distributions are related to sampling data from Gaussian 
-processes, $t$, $\chi^{2}$, and $F$ distributions most importantly.
+If random variable $X$ has p.d.f. $f(x)$, how can we find the density function
+of a transformation $g(X)$ of $X$? Three methods are commonly employed, the 
+method of distribution functions, transformations, and moment-generating 
+functions. For a given problem, one often turns out to be simpler than the others,
+so it is good to know about all of them.
 
-### Chi-Square, $\chi^2_\nu$
+### Method of Distribution Functions
 
-Let $Z_{1},\cdots,Z_{k}$ denote independent standard normal random variables $G(0,1)$. Then
+This methods finds the cumulative distribution function by integrating the
+density of $X$ over the region for which $Y = g(X) \le y$. The density of $Y$
+is then found by differentiation.
 
-$$X = Z_{1}^{2} + Z_{2}^{2} + \cdots + Z_{k}^{2}$$
+We just learned about the famous property of
+Gaussian random variables: linear combinations of Gaussian r.v.s are also
+Gaussian distributed. We can prove that by deriving the distribution of $Y = aX + b$
+($a > 0$) from the distribution of $X \sim G(\mu,\sigma^2)$. Using $F_y$, $f_y$ and $F_x$, 
+$f_x$ to denote c.d.f. and p.d.f. for $Y$ and $X$, respectively, we can express 
+$F_y$ in terms of $F_x$:
 
-has p.d.f.
+$$
+\begin{align*}
+F_y(y) &= \Pr(Y \leq y) = \Pr(aX+b \leq y) \\
+  &= \Pr\left(X \leq \frac{y-b}{a}\right) \\
+  &= F_x\left(\frac{y-b}{a}\right)
+\end{align*}
+$$
+To find the density function $f_y$ in terms of the density of $X$, take derivatives
+with respect to $y$ of the right hand side:
 
-$$f(x) = \frac{1}{2^{\frac{k}{2}}\Gamma\left( \frac{k}{2} \right)}x^{\frac{k}{2}}e^{- x/2},\ \ \ \ \ x \geq 0$$
+$$
+f_y(y) = \frac{d\,F_y(y)}{d \, y} = \frac{d}{d\,y}F_x\left(\frac{y-b}{a}\right) = \frac{1}{a}f_x\left(\frac{y-b}{a}\right)
+$${#eq-pdf-trans}
 
-This is known as the Chi-square distribution with $k$ degrees of freedom, abbreviated 
-$\chi_{k}^{2}$. The mean and variance of a $\chi_{k}^{2}$ random variable is 
-$\Exp\lbrack X\rbrack = k$ and $\Var\lbrack X\rbrack = 2k$.
+So far, the Gaussian property of $X$ has not come into play; @eq-pdf-trans applies
+to all distribution functions, provided that $F_x$ can be differentiated. For the
+specific case where $X \sim G(\mu,\sigma^2)$, the p.d.f. of $X$ is
+$$
+f(x) = \frac{1}{\sqrt{2\pi}\sigma} \exp\left\{ -\frac{1}{2} \left( \frac{x-\mu}{\sigma}\right)^2\right\}
+$$
+and $\frac{1}{a} f_x((y-b)/a))$ is
+$$
+\begin{align*}
+f_y(y) &= \frac{1}{a\sqrt{2\pi}\sigma} \exp\left\{-\frac{1}{2} \left(\frac{(y-b)/a - \mu}{\sigma}\right)^2 \right\} \\
+     &= \frac{1}{\sqrt{2\pi}a\sigma} \exp\left\{-\frac{1}{2} \left(\frac{y-(a\mu + b)}{a\sigma}\right)^2 \right\}
+\end{align*}
+$$
+This is the density of a $G(a\mu + b,a^2\sigma^2)$ random variable.
 
-The degrees of freedom can be thought of as the number of independent pieces of 
-information that contribute to the $\chi^{2}$ variable. Here, that is the number 
-of independent $G(0,1)$ variables. Since the $\chi^{2}$ variable is the sum of 
-their squared values, the density shifts more to the right as the degrees of 
-freedom increase.
+---
 
-![Probability density function of a $\chi_4^2$ and a $\chi_8^2$ random variable. $\chi^2$ variables are skewed to the right, the density shifts to the right with increasing degrees of freedom.](images/mathstat/ChiSquare.png){fig-align="center" width="75%"}
+This technique for deriving the density of a transformation of a random variable
+directly is useful to establish other famous relationships between random variables.
+For example, if $X \sim G(0,1)$, what is the distribution of $Y = X^2$?
+To solve this we start with a probability statement about $Y$ and translate it 
+into a probability statement about $X$. (We use the notation $\Phi(x)$ and $\phi(x)$
+to denote the standard Gaussian c.d.f and p.d.f, respectively).
 
-$\chi^{2}$ distributions are important to capture the sample distributions of 
-dispersion statistics. If $Y_{1},\cdots,Y_{n}$ are a random sample from a 
-$G\left( \mu,\sigma^{2} \right)$ distribution, and the sample variance is
+$$
+\begin{align*}
+F_y(y) = \Pr(Y \leq y) &= \Pr(-\sqrt{y} \leq X \leq \sqrt{y}) \\
+&= \Phi(\sqrt{y}) - \Phi(-\sqrt{y})
+\end{align*}
+$$
+Taking derivatives with respect to $y$ yields the density of $Y$ in terms of the
+density of $X$:
+$$
+\begin{align*}
+f_y(y) &= \frac{1}{2}y^{-1/2}\phi\left(\sqrt{y}\right) + \frac{1}{2}y^{-1/2}\phi\left(-\sqrt{y}\right)\\
+ &= y^{-1/2}\phi\left(\sqrt{y}\right)
+\end{align*}
+$$
 
-$$S^{2} = \frac{1}{n - 1}\sum_{i = 1}^{n}\left( Y_{i} - \overline{Y} \right)^{2}$$
+Plugging into the formula for the standard Gaussian density, the density of $Y$
+becomes
+$$
+f_y(y) = \frac{y^{-1/2}}{\sqrt{2\pi}} \, \exp\{-y/2\}
+$$
+Compare this expression to @eq-gamma-density, it turns out that $Y$ has a Gamma 
+density with parameters $\alpha = 1/2$, $\beta=2$. This special case is also
+known as a **chi-square** distribution with one degree of freedom. More on 
+chi-square distributions in the review material on statistics. 
 
-Then the random variable $\frac{(n - 1)S^{2}}{\sigma^{2}}$ follows a $\chi_{n - 1}^{2}$ 
-distribution. It follows immediately that $S^{2}$ is an unbiased estimator of $\sigma^{2}$:
+### Method of Transformations
 
-$$\Exp\left\lbrack \frac{(n - 1)S^{2}}{\sigma^{2}} \right\rbrack = n - 1$$
+This method of finding the distribution of $Y = g(X)$, if the distribution of $X$
+is known is a variation of the method of distribution functions. If $g(X)$ is an 
+increasing or decreasing function of $X$, in the sense that if $x_1 < x_2$ then
+$g(x_1) < g(x_2)$ and if $x_1 > x_2$ then $g(x_1) > g(x_2)$.
 
-$$\Exp\left\lbrack S^{2} \right\rbrack = \sigma^{2}$$
+In that situation you can find the inverse function $X = g^{-1}(Y)$. After
+calculating the derivative $dx/dy$, the density of $Y$ is found as
+$$
+f_y(y) = f_x(y) \left | \frac{dx}{dy}  \right |
+$${#eq-method-transform}
 
-### Students' t, $t_\nu$
+An example will make the method of transformation clear.
 
-In the Gaussian case you can also show that $\overline{Y}$ and $S^{2}$ are 
-independent random variables. This is important because of another distributional 
-result: if $Z \sim G(0,1)$ and $U \sim \chi_{\nu}^{2}$, and $Z$ and $U$ are 
-independent, then the ratio
+:::{.example}
+::::{.example-header}
+Example: Method of Transformation
+::::
+::::{.example-container}
+Suppose that $X$ has density function
+$$
+ f_x(x) = \left \{ 
+ \begin{array}{ll} 
+     2x & 0 \leq x \leq 1 \\ 
+     0  & \text{otherwise} 
+ \end{array}\right .
+$$
+What is the distribution of $Y = 3X - 1$?
 
-$$T = \frac{Z}{\sqrt{U/\nu}}$$
-
-has a $t$ distribution with $\nu$ degrees of freedom. In honor of Student, the 
-pseudonym used by William Gosset for publishing statistical research while working 
-at Guinness Breweries, the $t$ distribution is also known as Student's $t$ distribution 
-or Student's distribution for short.
-
-As with the $\chi_{\nu}^{2}$ distributions, the shape of the $t_{\nu}$ distribution 
-depends on the degrees of freedom $\nu$. However, the $t_{\nu}$ distributions are 
-all symmetric about zero and the degrees of freedom affect how heavy the tails are.
-
-![Densities for $t$ distributions with 2, 4, 10 degrees of freedom, and a standard normal density.](images/mathstat/Tdistributions.png){fig-align="center" width="75%"}
-
-As the degrees of freedom grow, the $t$ density approaches that of the standard 
-normal distribution.
-
-We can now combine the results about the sampling distributions of $\overline{Y}$ 
-and $S^{2}$ to derive the distribution of
-
-$$\frac{\overline{Y} - \mu}{S/\sqrt{n}}$$
-
-We know that $\overline{Y} \sim G\left( \mu,\frac{\sigma^{2}}{n} \right)$ and 
-that $\frac{(n - 1)S^{2}}{\sigma^{2}}$ follows a $\chi_{n - 1}^{2}$ distribution. 
-Furthermore, $\overline{Y}$ and $S^{2}$ are independent. Taking ratios as 
-required by the definition of a $t$ random variable yields
-
-$$\frac{\frac{\overline{Y} - \mu}{\sigma/\sqrt{n}}}{\sqrt{S^{2}{/\sigma}^{2}}} = \frac{\overline{Y} - \mu}{S/\sqrt{n}} \sim t_{n - 1}$$
-
-### F, $F_{\nu_1, \nu_2}$
-
-If $\chi_{1}^{2}$ and $\chi_{2}^{2}$ are independent chi-square random variables
-with $\nu_{1}$ and $\nu_{2}$ degrees of freedom, respectively, then the ratio
-
-$$F = \frac{\chi_{1}^{2}/v_{1}}{\frac{\chi_{2}^{2}}{\nu_{2}}}$$
-
-follows an $F$ distribution with $\nu_{1}$ numerator and $\nu_{2}$ denominator 
-degrees of freedom. We denote this fact $F\sim F_{\nu_{1},\nu_{2}}$. The mean 
-and variance of the $F$ distribution are
-
-$$\Exp\lbrack F\rbrack = \frac{\nu_{2}}{\nu_{2} - 2}\ \ \ \ \ \ \ \Var\lbrack F\rbrack = \frac{2\nu_{2}^{2}(\nu_{1} + \nu_{2} + 2)}{\nu_{1}\left( \nu_{2} - 2 \right)^{2}(\nu_{2} - 4)}$$
-
-The mean exists only if $\nu_{2} > 2$ and the variance exists onlu if $\nu_{2} > 4$.
-
-![Density functions of an $F_{4,12}$ and an $F_{12,20}$ distribution.](images/mathstat/Fdistributions.png){fig-align="center" width="75%"}
-
-When sampling from a Gaussian distribution we established that $\frac{(n - 1)S^{2}}{\sigma^{2}}$ 
-follows a $\chi_{n - 1}^{2}$ distribution. Suppose that we have two samples, 
-one of size $n_{1}$ from a $G(\mu_{1},\sigma_{1}^{2})$ distribution and one of 
-size $n_{2}$ from a $G(\mu_{2},\sigma_{2}^{2})$ distribution. If the estimators
-of the sample variances in the two samples are denoted $S_{1}^{2}$ and $S_{2}^{2}$, 
-then the ratio
-
-$$\frac{\frac{S_{1}^{2}}{\sigma_{1}^{2}}}{S_{2}^{2}/\sigma_{2}^{2}}$$
-
-has an $F_{n_{1} - 1,n_{2} - 1}$ distribution.
-
-$F$ distributions play an important role in the analysis of variance, where the 
-ratios are ratios of mean squares.
-
-Recall that the $T$ random variable in the Gaussian case can be written as
-
-$$T = \frac{\frac{\overline{Y} - \mu}{\sigma/\sqrt{n}}}{\sqrt{S^{2}{/\sigma}^{2}}}$$
-
-The numerator is a $G(0,1)$ variable, so squaring it gives a $\chi_{1}^{2}$ variable. 
-The square of the denominator is a scaled $\chi_{n - 1}^{2}$ variable, $S^{2}/\sigma^{2}$. 
-Also, because $\overline{Y}$ and $S^{2}$ are independent, the squares of the numerator 
-and denominator are independent. It thus follows that
-
-$$T^{2} = \frac{\left( \overline{Y} - \mu \right)^{2}}{S^{2}/n}$$
-
-follows an $F_{1,n - 1}$ distribution.
-
-This fact is used in software packages that might report the result of an $F$-test 
-instead of the result of a two-sided $t$-test. The two are equivalent and the $p$-values 
-are the same.
+The function $g(x) = 3x-1$ increases montonically in $x$ for $0 \leq x \leq 1$.
+Inverting the relationship between $Y$ and $X$ yields
+$$
+x = g^{-1}(y) = \frac{y+1}{3}
+$$
+and
+$$
+\frac{dx}{dy} = \frac{1}{3}
+$$
+Plugging into @eq-method-transform and modifying the support according to the
+transformation leads to
+$$
+f_y(y) = 2x \frac{dx}{dy} = 2\left(\frac{y+1}{3}\right) \frac{1}{3} = \frac{2}{9}(y+1)\qquad -1 \leq y \leq 2
+$$
+::::
+:::

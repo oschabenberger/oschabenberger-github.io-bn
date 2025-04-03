@@ -16,30 +16,33 @@ The focus of summarization in this chapter is to produce numerical quantities an
 
 ## Location and Dispersion Statistics
 
-Common location and dispersion measures for quantitative variables are shown in the next tables.
+
+@tbl-stat-location shows important location statistics and @tbl-stat-dispersion
+important dispersion statistics.
+
 
 | Sample Statistic | Symbol | Computation | Notes |
-|-----------|-----------|---------------------------------------|-----------|
-| Min |  | $Y^*[1]$ | The smallest non-missing value |
-| Max |  | $Y^*[n]$ | The largest value |
+|----|----|----|---------|
+| Min |  | $Y_{(1)}$ | The smallest non-missing value |
+| Max |  | $Y_{(n)}$ | The largest value |
 | Mean | $\overline{Y}$ | $\frac{1}{n}\sum_{i=1}^n Y_i$ | Most important location measure, but can be affected by outliers |
-| Median | Med | $$= \left \{    \begin{array}{cc}       Y^* \left[ \frac{n+1}{2} \right ] & n \text{ is even} \\        \frac{1}{2} \left( Y^* \left[\frac{n}{2} \right] + Y^* \left[\frac{n}{2}+1\right] \right) & n\text{ is odd} \end{array}\right .$$ | Half of the observations are smaller than the median; robust against outliers |
+| Median | Med | $\left \{ \begin{array}{cc} Y_{\left(\frac{n+1}{2}\right)} & n \text{ is even} \\ 
+\frac{1}{2} \left( Y_{\left(\frac{n}{2} \right)} + Y_{\left(\frac{n}{2}+1\right)} \right) & n\text{ is odd} \end{array}\right .$ | Half of the observations are smaller than the median; robust against outliers |
 | Mode | Mode |  | The most frequent value; not useful when real numbers are unique |
-| 1st Quartile |  | $Y^*\left[\frac{1}{4}(n+1) \right]$ | 25% of the observations are smaller than $Q_1$ |
-| 2nd Quartile |  | See Median | 50% of the observations are smaller than $Q_2$. This is the median |
-| 3rd Quartile |  | $Y^*\left[\frac{3}{4}(n+1) \right]$ | 75% of the observations are smaller than $Q_3$ |
-| X% Percentile |  | $Y^*\left[\frac{X}{100}(n+1) \right]$ | For example, 5% of the observations are larger than $P_{95}$, the 95% percentile |
+| 1st Quartile | $Q_1$ | $Y_{\left(\frac{1}{4}(n+1) \right)}$ | 25% of the observations are smaller than $Q_1$ |
+| 2nd Quartile | $Q_2$ = Med | See Median | 50% of the observations are smaller than $Q_2$. This is the median |
+| 3rd Quartile | $Q_3$ | $Y_{\left(\frac{3}{4}(n+1) \right)}$ | 75% of the observations are smaller than $Q_3$ |
+| X% Percentile |  | $Y_{\left(\frac{X}{100}(n+1) \right)}$ | For example, 5% of the observations are larger than $P_{95}$, the 95% percentile |
 
-: Important statistics measuring location attributes of a variable. Sample mean, sample median, and sample mode are measures of the central tendency of a variable. $Y^*$ denotes the ordered sequence of observations and $Y^*[k]$ the value at the $k$th position in the ordered sequence. The min is defined as the smallest non-missing values because NaNs often sort as smallest values in software packages.
+: Important statistics measuring location attributes of a distribution. Sample mean, sample median, and sample mode are measures of the central tendency of a variable. $Y_{(k)}$ denotes the value at the $k$^th^ position when the values are arranged in ascending order; this is called the $k$^th^ order statistic. The min is defined as the smallest non-missing values because NaNs often sort as smallest values in software packages. {#tbl-stat-location .striped}
+ 
+The most important location measures are the sample mean $\overline{Y}$ and the
+median. The sample mean is the arithmetic average of the sample values.
+Because the sample mean can be affected by outliers---large values are
+pulling the sample mean up---the median is preferred in those situations. For 
+example, in reporting central tendency of annual income, the median income is 
+chosen over the arithmetic average.
 
-| Sample Statistic | Symbol | Computation | Notes |
-|------------|------------|--------------------|----------------------------|
-| Range | $R$ | $Y^*[n] - Y^*[1]$ | Simply largest minus smallest value |
-| Inter-quartile Range | IQR | $Q_3 - Q_1$ | Used in constructing box plots; covers the central 50% of the data |
-| Standard Deviation | $S$ | $\sqrt{\frac{1}{n-1}\sum_{i=1}^n\left( Y_i - \overline{Y}\right)^2}$ | Most important dispersion measure; in the same units as the sample mean (the units of $Y$) |
-| Variance | $S^2$ | $\frac{1}{n-1}\sum_{i=1}^n \left( Y_i - \overline{Y} \right)^2$ | Important statistical measure of dispersion; in squared units of $Y$ |
-
-: Important statistics measuring dispersion (variability) of a variable.
 
 In the parlance of databases, the descriptive statistics in the previous tables are called **aggregates**.
 

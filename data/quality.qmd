@@ -543,3 +543,10 @@ Bootstrapping is a statistical technique to derive the sample distribution of a 
 :::
 
 I hope you take away from this discussion that imputation is possible, imputation is not always necessary, and imputation must be done with care.
+
+## Outlier and Anomalies
+
+
+## Unbalanced Data
+
+

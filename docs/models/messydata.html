@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Foundations of Data Science - 7&nbsp; Approach and Methodology</title>
+<title>Foundations of Data Science - 22&nbsp; Messy Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../busi/examples.html" rel="next">
-<link href="../busi/bus_intro.html" rel="prev">
+<link href="../models/featproc.html" rel="next">
+<link href="../models/test_cv.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -84,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../busi/bus_intro.html">Module II. Business Understanding: Discovery</a></li><li class="breadcrumb-item"><a href="../busi/approach.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Approach and Methodology</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../models/model_intro.html">Module IV. Modeling Data</a></li><li class="breadcrumb-item"><a href="../models/messydata.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Messy Data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -181,7 +181,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../busi/approach.html" class="sidebar-item-text sidebar-link active">
+  <a href="../busi/approach.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Approach and Methodology</span></span></a>
   </div>
 </li>
@@ -293,7 +293,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../models/messydata.html" class="sidebar-item-text sidebar-link">
+  <a href="../models/messydata.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Messy Data</span></span></a>
   </div>
 </li>
@@ -430,67 +430,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#general-approach" id="toc-general-approach" class="nav-link active" data-scroll-target="#general-approach"><span class="header-section-number">7.1</span> General Approach</a>
-  <ul>
-  <li><a href="#inclusive-discovery" id="toc-inclusive-discovery" class="nav-link" data-scroll-target="#inclusive-discovery">Inclusive Discovery</a>
-  <ul class="collapse">
-  <li><a href="#strategic-stakeholders" id="toc-strategic-stakeholders" class="nav-link" data-scroll-target="#strategic-stakeholders">Strategic stakeholders</a></li>
-  <li><a href="#tactical-stakeholders" id="toc-tactical-stakeholders" class="nav-link" data-scroll-target="#tactical-stakeholders">Tactical stakeholders</a></li>
-  <li><a href="#data-subject-matter-experts" id="toc-data-subject-matter-experts" class="nav-link" data-scroll-target="#data-subject-matter-experts">Data subject matter experts</a></li>
-  <li><a href="#information-technology-it" id="toc-information-technology-it" class="nav-link" data-scroll-target="#information-technology-it">Information technology (IT)</a></li>
-  <li><a href="#data-science-team" id="toc-data-science-team" class="nav-link" data-scroll-target="#data-science-team">Data science team</a></li>
-  </ul></li>
-  <li><a href="#iterative-refinement" id="toc-iterative-refinement" class="nav-link" data-scroll-target="#iterative-refinement">Iterative Refinement</a></li>
-  <li><a href="#specific-deliverables-business-understanding-document" id="toc-specific-deliverables-business-understanding-document" class="nav-link" data-scroll-target="#specific-deliverables-business-understanding-document">Specific Deliverables: Business Understanding Document</a>
-  <ul class="collapse">
-  <li><a href="#overview-of-strategic-alignment" id="toc-overview-of-strategic-alignment" class="nav-link" data-scroll-target="#overview-of-strategic-alignment">Overview of strategic alignment</a></li>
-  <li><a href="#stakeholder-analysis" id="toc-stakeholder-analysis" class="nav-link" data-scroll-target="#stakeholder-analysis">Stakeholder analysis</a></li>
-  <li><a href="#requirements-documentation" id="toc-requirements-documentation" class="nav-link" data-scroll-target="#requirements-documentation">Requirements documentation</a></li>
-  <li><a href="#feasibility-assessment" id="toc-feasibility-assessment" class="nav-link" data-scroll-target="#feasibility-assessment">Feasibility assessment</a></li>
-  <li><a href="#business-process-impact-analysis" id="toc-business-process-impact-analysis" class="nav-link" data-scroll-target="#business-process-impact-analysis">Business process impact analysis</a></li>
-  <li><a href="#kpi-and-metrics" id="toc-kpi-and-metrics" class="nav-link" data-scroll-target="#kpi-and-metrics">KPI and metrics</a></li>
-  <li><a href="#success-criteria" id="toc-success-criteria" class="nav-link" data-scroll-target="#success-criteria">Success criteria</a></li>
-  <li><a href="#project-plan" id="toc-project-plan" class="nav-link" data-scroll-target="#project-plan">Project plan</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#sec-busi-methodology" id="toc-sec-busi-methodology" class="nav-link" data-scroll-target="#sec-busi-methodology"><span class="header-section-number">7.2</span> Methodology</a>
-  <ul>
-  <li><a href="#performing-business-discovery-and-framing-the-problem" id="toc-performing-business-discovery-and-framing-the-problem" class="nav-link" data-scroll-target="#performing-business-discovery-and-framing-the-problem">Performing Business Discovery and Framing the Problem</a>
-  <ul class="collapse">
-  <li><a href="#start-with-why" id="toc-start-with-why" class="nav-link" data-scroll-target="#start-with-why">Start with why</a></li>
-  <li><a href="#stakeholder-mapping" id="toc-stakeholder-mapping" class="nav-link" data-scroll-target="#stakeholder-mapping">Stakeholder mapping</a></li>
-  <li><a href="#current-state-analysis" id="toc-current-state-analysis" class="nav-link" data-scroll-target="#current-state-analysis">Current state analysis</a></li>
-  <li><a href="#problem-definition" id="toc-problem-definition" class="nav-link" data-scroll-target="#problem-definition">Problem definition</a></li>
-  <li><a href="#value-proposition" id="toc-value-proposition" class="nav-link" data-scroll-target="#value-proposition">Value proposition</a></li>
-  <li><a href="#data-science-goals" id="toc-data-science-goals" class="nav-link" data-scroll-target="#data-science-goals">Data science goals</a></li>
-  <li><a href="#risk-assessment" id="toc-risk-assessment" class="nav-link" data-scroll-target="#risk-assessment">Risk assessment</a></li>
-  <li><a href="#solution-exploration" id="toc-solution-exploration" class="nav-link" data-scroll-target="#solution-exploration">Solution exploration</a></li>
-  <li><a href="#change-management" id="toc-change-management" class="nav-link" data-scroll-target="#change-management">Change management</a></li>
-  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation">Documentation</a></li>
-  </ul></li>
-  <li><a href="#framingpresenting-a-data-science-based-solution-back-to-the-business-stakeholders" id="toc-framingpresenting-a-data-science-based-solution-back-to-the-business-stakeholders" class="nav-link" data-scroll-target="#framingpresenting-a-data-science-based-solution-back-to-the-business-stakeholders">Framing/Presenting a Data Science Based Solution Back to the Business Stakeholders</a>
-  <ul class="collapse">
-  <li><a href="#executive-summary-focus" id="toc-executive-summary-focus" class="nav-link" data-scroll-target="#executive-summary-focus">Executive summary focus</a></li>
-  <li><a href="#story-structure" id="toc-story-structure" class="nav-link" data-scroll-target="#story-structure">Story structure</a></li>
-  <li><a href="#business-metrics-first" id="toc-business-metrics-first" class="nav-link" data-scroll-target="#business-metrics-first">Business metrics first</a></li>
-  <li><a href="#visual-communication" id="toc-visual-communication" class="nav-link" data-scroll-target="#visual-communication">Visual communication</a></li>
-  <li><a href="#technical-translation" id="toc-technical-translation" class="nav-link" data-scroll-target="#technical-translation">Technical translation</a></li>
-  <li><a href="#implementation-plan" id="toc-implementation-plan" class="nav-link" data-scroll-target="#implementation-plan">Implementation plan</a></li>
-  <li><a href="#risk-management" id="toc-risk-management" class="nav-link" data-scroll-target="#risk-management">Risk management</a></li>
-  <li><a href="#adoption-strategy" id="toc-adoption-strategy" class="nav-link" data-scroll-target="#adoption-strategy">Adoption strategy</a></li>
-  <li><a href="#future-roadmap" id="toc-future-roadmap" class="nav-link" data-scroll-target="#future-roadmap">Future roadmap</a></li>
-  <li><a href="#stakeholder-engagement" id="toc-stakeholder-engagement" class="nav-link" data-scroll-target="#stakeholder-engagement">Stakeholder engagement</a></li>
-  </ul></li>
-  </ul></li>
+  <li><a href="#low-signal-to-noise" id="toc-low-signal-to-noise" class="nav-link active" data-scroll-target="#low-signal-to-noise"><span class="header-section-number">22.1</span> Low Signal to Noise</a></li>
+  <li><a href="#unbalanced-data" id="toc-unbalanced-data" class="nav-link" data-scroll-target="#unbalanced-data"><span class="header-section-number">22.2</span> Unbalanced Data</a></li>
+  <li><a href="#outliers" id="toc-outliers" class="nav-link" data-scroll-target="#outliers"><span class="header-section-number">22.3</span> Outliers</a></li>
+  <li><a href="#missing-data" id="toc-missing-data" class="nav-link" data-scroll-target="#missing-data"><span class="header-section-number">22.4</span> Missing Data</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../busi/bus_intro.html">Module II. Business Understanding: Discovery</a></li><li class="breadcrumb-item"><a href="../busi/approach.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Approach and Methodology</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../models/model_intro.html">Module IV. Modeling Data</a></li><li class="breadcrumb-item"><a href="../models/messydata.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Messy Data</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-busi-approach" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Approach and Methodology</span></span></h1>
+<h1 class="title"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Messy Data</span></h1>
 </div>
 
 
@@ -507,382 +459,19 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="general-approach" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="general-approach"><span class="header-section-number">7.1</span> General Approach</h2>
-<p>Because the Business Understanding phase is pivotal to a project’s ultimate success, it needs to be <strong>inclusive</strong>, <strong>iterative</strong>, and have <strong>specific deliverables</strong> that must be met to be effective.</p>
-<section id="inclusive-discovery" class="level3">
-<h3 class="anchored" data-anchor-id="inclusive-discovery">Inclusive Discovery</h3>
-<p>Here is a list of typical participants in the Business Understanding phase for a large-scale project. These are the people who will be directly affected by the project or have insights that will be used to inform the requirements and/or project design. Usually, there will be a multi-day kickoff to perform the Business Understanding discovery with the entire group present. This is important to ensure that business problem framing and solution framing are aligned and that roadblocks are identified quickly and addressed inline. While this appears to be a large number of participants, some of the roles outlined here can be filled by a single person. Many projects have ultimately been derailed because key participants were not included in the Business Understanding meetings, leading to unidentified roadblocks or business objectives.</p>
-<section id="strategic-stakeholders" class="level4">
-<h4 class="anchored" data-anchor-id="strategic-stakeholders">Strategic stakeholders</h4>
-<p>Generally, executives at the SVP level or higher focus on the strategic objectives of the company. In some organizations, Directors also fill this role. Higher-level executives want to ensure that projects align with strategic objectives.</p>
-<ul>
-<li>C-level executives (including CEO, CFO, etc.)</li>
-<li>Executive Vice Presidents (EVP-level) executives</li>
-<li>Senior Vice Presidents (SVP-level) executives</li>
-<li>Directors (in some organizations)</li>
-</ul>
+<section id="low-signal-to-noise" class="level2" data-number="22.1">
+<h2 data-number="22.1" class="anchored" data-anchor-id="low-signal-to-noise"><span class="header-section-number">22.1</span> Low Signal to Noise</h2>
 </section>
-<section id="tactical-stakeholders" class="level4">
-<h4 class="anchored" data-anchor-id="tactical-stakeholders">Tactical stakeholders</h4>
-<ul>
-<li>Managers</li>
-<li>Team members</li>
-</ul>
-<p>Tactical stakeholders are the process owners. They perform the “day-to-day” process work. Often, tactical stakeholders are the teams that will use the data science solutions to bring about change. They ensure continuity with current business processes and provide valuable feedback on how the data science-driven solution should work.</p>
+<section id="unbalanced-data" class="level2" data-number="22.2">
+<h2 data-number="22.2" class="anchored" data-anchor-id="unbalanced-data"><span class="header-section-number">22.2</span> Unbalanced Data</h2>
 </section>
-<section id="data-subject-matter-experts" class="level4">
-<h4 class="anchored" data-anchor-id="data-subject-matter-experts">Data subject matter experts</h4>
-<ul>
-<li>Business analysts</li>
-<li>Data engineers</li>
-</ul>
-<p>Data subject matter experts understand the structure, semantic meaning, and business importance of data in corporate data stores. They identify potential issues with data availability, quality, privacy, and other concerns.</p>
+<section id="outliers" class="level2" data-number="22.3">
+<h2 data-number="22.3" class="anchored" data-anchor-id="outliers"><span class="header-section-number">22.3</span> Outliers</h2>
 </section>
-<section id="information-technology-it" class="level4">
-<h4 class="anchored" data-anchor-id="information-technology-it">Information technology (IT)</h4>
-<ul>
-<li>Enterprise architects</li>
-<li>Software developers</li>
-</ul>
-<p>Enterprise architects understand the topology of hardware infrastructure and design of software systems and how they integrate to deliver business solutions. They ensure that the data science solution follows architectural and security standards. Software developers create the necessary middleware (software that contains business logic) and user interface elements of the data science solution.</p>
-</section>
-<section id="data-science-team" class="level4">
-<h4 class="anchored" data-anchor-id="data-science-team">Data science team</h4>
-<ul>
-<li>Data scientists</li>
-<li>Business analysts</li>
-</ul>
-<p>Data scientists build predictive and prescriptive models that drive both tactical and strategic decisions. Business analysts deliver business intelligence reporting, dashboarding of Key Performance Indicators (KPIs), and visualizations.</p>
-</section>
-</section>
-<section id="iterative-refinement" class="level3">
-<h3 class="anchored" data-anchor-id="iterative-refinement">Iterative Refinement</h3>
-<p>The CRISP-DM process was developed with iterative learning and continuous improvement in mind. The Business Understanding phase is iterative, meaning that it starts with an initial problem definition and evolves into a more refined problem and solution definition. It can be helpful to review the problem definition at each stage of the process to ensure business stakeholders remain aligned with your understanding of the opportunities and solutions. It is common for business stakeholders’ priorities to change as the project progresses. Multi-month (or even multi-year) projects can fail if priorities change, processes evolve, or new business problems are identified and the design is not updated accordingly.</p>
-</section>
-<section id="specific-deliverables-business-understanding-document" class="level3">
-<h3 class="anchored" data-anchor-id="specific-deliverables-business-understanding-document">Specific Deliverables: Business Understanding Document</h3>
-<p>The Business Understanding document serves as the foundational blueprint for any data science project, providing a comprehensive framework that connects business objectives with technical implementation. Its primary purpose is to ensure all stakeholders have a clear, shared understanding of what the project aims to achieve, how it will be executed, and how success will be measured. This document acts as both a strategic compass and an operational roadmap. Starting with strategic alignment and stakeholder analysis, it establishes the “why” and “who” of the project. The requirements documentation and feasibility assessment sections then build upon this foundation to define the “what” and “how possible.” The business process impact analysis ensures we understand the organizational changes needed, while the KPIs and success criteria establish how we’ll measure progress and success. Finally, the project plan transforms all these insights into actionable steps. Most importantly, this document serves as a single source of truth that teams can reference throughout the project lifecycle to maintain alignment, resolve disputes, and make informed decisions. It should be treated as a living document that can be updated as new information emerges or business conditions change while still maintaining its core purpose of keeping the project aligned with business objectives.</p>
-<section id="overview-of-strategic-alignment" class="level4">
-<h4 class="anchored" data-anchor-id="overview-of-strategic-alignment">Overview of strategic alignment</h4>
-<p>Strategic alignment focuses on ensuring the data mining initiative directly supports business objectives and strategy. This includes documenting current business challenges, identifying key stakeholders and their needs, and understanding how the project’s outcomes will drive business value. It also involves mapping organizational capabilities, constraints, and assumptions that could impact project success.</p>
-</section>
-<section id="stakeholder-analysis" class="level4">
-<h4 class="anchored" data-anchor-id="stakeholder-analysis">Stakeholder analysis</h4>
-<p>A detailed mapping of:</p>
-<ul>
-<li>Key stakeholders and their roles</li>
-<li>Communication requirements and preferences</li>
-<li>Decision-making authority levels</li>
-<li>Expected involvement and responsibilities</li>
-<li>Impact assessment for each stakeholder group</li>
-</ul>
-</section>
-<section id="requirements-documentation" class="level4">
-<h4 class="anchored" data-anchor-id="requirements-documentation">Requirements documentation</h4>
-<p>A comprehensive documentation of both functional and technical requirements, including:</p>
-<ul>
-<li>Data requirements and sources</li>
-<li>System integration needs</li>
-<li>Security and compliance requirements</li>
-<li>Stakeholder access and reporting needs</li>
-<li>Performance and scalability requirements</li>
-<li>Data governance and privacy considerations</li>
-</ul>
-</section>
-<section id="feasibility-assessment" class="level4">
-<h4 class="anchored" data-anchor-id="feasibility-assessment">Feasibility assessment</h4>
-<p>A thorough analysis that evaluates:</p>
-<ul>
-<li>Technical feasibility (available tools, data, expertise)</li>
-<li>Economic feasibility (ROI analysis, cost-benefit breakdown)</li>
-<li>Operational feasibility (organizational readiness)</li>
-<li>Legal and ethical considerations</li>
-<li>Data availability and quality assessment</li>
-<li>Resource availability and constraints</li>
-</ul>
-</section>
-<section id="business-process-impact-analysis" class="level4">
-<h4 class="anchored" data-anchor-id="business-process-impact-analysis">Business process impact analysis</h4>
-<p>Documentation of how the data mining project will affect:</p>
-<ul>
-<li>Current business processes</li>
-<li>Workflow changes needed</li>
-<li>Training requirements</li>
-<li>System integrations</li>
-<li>Organizational change management needs</li>
-<li>Dependencies on other systems or processes</li>
-</ul>
-</section>
-<section id="kpi-and-metrics" class="level4">
-<h4 class="anchored" data-anchor-id="kpi-and-metrics">KPI and metrics</h4>
-<p>The KPI and metrics deliverable establishes quantifiable measures that will be used to track project progress and success. This includes identifying both business KPIs (like revenue growth, customer retention, or cost reduction) and technical KPIs (model accuracy, precision, recall). Each metric should have a clear baseline, target value, and measurement methodology. The document should also explain how these metrics connect to broader business objectives.</p>
-</section>
-<section id="success-criteria" class="level4">
-<h4 class="anchored" data-anchor-id="success-criteria">Success criteria</h4>
-<p>Success criteria define the specific thresholds and conditions that must be met for the project to be considered successful. This deliverable includes both business and technical success criteria:</p>
-<ul>
-<li>Business criteria might specify required improvements in operational efficiency, revenue targets, or cost savings</li>
-<li>Technical criteria outline required model performance levels, data quality standards, and system performance requirements</li>
-</ul>
-<p>The document should also detail how success will be measured and validated throughout the project lifecycle.</p>
-</section>
-<section id="project-plan" class="level4">
-<h4 class="anchored" data-anchor-id="project-plan">Project plan</h4>
-<p>The project plan provides a comprehensive roadmap for executing the data science initiative. It includes:</p>
-<ul>
-<li>Detailed timeline with major milestones and dependencies</li>
-<li>Resource requirements (technical, human, and infrastructure)</li>
-<li>Risk assessment and mitigation strategies</li>
-<li>Budget allocation and tracking mechanisms</li>
-<li>Communication plan for stakeholders</li>
-<li>Quality assurance approach and checkpoints</li>
-<li>Change management strategy</li>
-<li>Contingency plans</li>
-</ul>
-<p>The plan should be realistic, accounting for available resources and organizational constraints while maintaining alignment with business objectives.</p>
-<hr>
-</section>
-</section>
-</section>
-<section id="sec-busi-methodology" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="sec-busi-methodology"><span class="header-section-number">7.2</span> Methodology</h2>
-<section id="performing-business-discovery-and-framing-the-problem" class="level3">
-<h3 class="anchored" data-anchor-id="performing-business-discovery-and-framing-the-problem">Performing Business Discovery and Framing the Problem</h3>
-<p>Here are some requirements for effectively performing discovery with business stakeholders:</p>
-<section id="start-with-why" class="level4">
-<h4 class="anchored" data-anchor-id="start-with-why">Start with why</h4>
-<ul>
-<li>Begin every discovery session by understanding the fundamental business drivers</li>
-<li>Ask “Why now?” to understand urgency and priority</li>
-<li>Connect the initiative to strategic business objectives</li>
-<li>Define clear, measurable success metrics aligned with business KPIs</li>
-</ul>
-</section>
-<section id="stakeholder-mapping" class="level4">
-<h4 class="anchored" data-anchor-id="stakeholder-mapping">Stakeholder mapping</h4>
-<ul>
-<li>Create a comprehensive stakeholder map early in the process</li>
-<li>Identify both direct and indirect stakeholders</li>
-<li>Include domain experts who understand the business context</li>
-<li>Document each stakeholder’s interests, influence, and concerns</li>
-<li>Map dependencies between stakeholder groups</li>
-</ul>
-</section>
-<section id="current-state-analysis" class="level4">
-<h4 class="anchored" data-anchor-id="current-state-analysis">Current state analysis</h4>
-<ul>
-<li>Document existing business processes and workflows</li>
-<li>Identify pain points and inefficiencies</li>
-<li>Map the current data landscape and systems</li>
-<li>Understand existing solutions and why they’re insufficient</li>
-<li>Analyze current performance metrics</li>
-</ul>
-</section>
-<section id="problem-definition" class="level4">
-<h4 class="anchored" data-anchor-id="problem-definition">Problem definition</h4>
-<ul>
-<li>Use root cause analysis to identify underlying issues</li>
-<li>Quantify the business impact of the problem</li>
-<li>Define clear boundaries and scope</li>
-<li>Distinguish between symptoms and core problems</li>
-<li>Identify interconnected challenges</li>
-</ul>
-</section>
-<section id="value-proposition" class="level4">
-<h4 class="anchored" data-anchor-id="value-proposition">Value proposition</h4>
-<ul>
-<li>Calculate potential ROI and business benefits</li>
-<li>Identify both tangible and intangible benefits</li>
-<li>Estimate resource requirements and costs</li>
-<li>Set realistic timeline expectations</li>
-<li>Consider long-term strategic value</li>
-</ul>
-</section>
-<section id="data-science-goals" class="level4">
-<h4 class="anchored" data-anchor-id="data-science-goals">Data science goals</h4>
-<ul>
-<li>Translate business objectives into specific data science goals</li>
-<li>Define clear success criteria for the analytical solution</li>
-<li>Identify technical objectives and requirements</li>
-<li>Document constraints and limitations</li>
-<li>Align with data governance policies</li>
-</ul>
-</section>
-<section id="risk-assessment" class="level4">
-<h4 class="anchored" data-anchor-id="risk-assessment">Risk assessment</h4>
-<ul>
-<li>Identify potential technical and business risks</li>
-<li>Assess data quality and availability risks</li>
-<li>Develop mitigation strategies</li>
-<li>Consider regulatory and compliance implications</li>
-<li>Evaluate security considerations</li>
-</ul>
-</section>
-<section id="solution-exploration" class="level4">
-<h4 class="anchored" data-anchor-id="solution-exploration">Solution exploration</h4>
-<ul>
-<li>Explore multiple potential approaches</li>
-<li>Conduct feasibility analysis for each option</li>
-<li>Identify quick wins and long-term solutions</li>
-<li>Analyze trade-offs between different approaches</li>
-<li>Consider scalability requirements</li>
-</ul>
-</section>
-<section id="change-management" class="level4">
-<h4 class="anchored" data-anchor-id="change-management">Change management</h4>
-<ul>
-<li>Develop a stakeholder communication plan</li>
-<li>Identify training and support needs</li>
-<li>Plan for organizational adoption</li>
-<li>Consider cultural impacts and resistance</li>
-<li>Create feedback mechanisms</li>
-</ul>
-</section>
-<section id="documentation" class="level4">
-<h4 class="anchored" data-anchor-id="documentation">Documentation</h4>
-<ul>
-<li>Maintain clear documentation of requirements</li>
-<li>Record assumptions and dependencies</li>
-<li>Create a glossary of business terms</li>
-<li>Document decisions and their rationale</li>
-<li>Establish version control</li>
-</ul>
-<p>Each of these steps should be applied iteratively throughout the business understanding phase. Remember to:</p>
-<ul>
-<li>Validate findings with stakeholders regularly</li>
-<li>Update documentation as new information emerges</li>
-<li>Keep focus on <strong>business value rather than technical solutions</strong></li>
-<li>Maintain clear communication channels with all stakeholders</li>
-<li>Foster collaborative problem-solving</li>
-</ul>
-</section>
-</section>
-<section id="framingpresenting-a-data-science-based-solution-back-to-the-business-stakeholders" class="level3">
-<h3 class="anchored" data-anchor-id="framingpresenting-a-data-science-based-solution-back-to-the-business-stakeholders">Framing/Presenting a Data Science Based Solution Back to the Business Stakeholders</h3>
-<p>Here are some requirements for effectively presenting data science solutions to business stakeholders:</p>
-<section id="executive-summary-focus" class="level4">
-<h4 class="anchored" data-anchor-id="executive-summary-focus">Executive summary focus</h4>
-<ul>
-<li>Begin with clear business value proposition</li>
-<li>Highlight key findings and recommendations</li>
-<li>Present ROI and business impact metrics upfront</li>
-<li>Keep technical details in appendices</li>
-<li>Address strategic alignment</li>
-</ul>
-</section>
-<section id="story-structure" class="level4">
-<h4 class="anchored" data-anchor-id="story-structure">Story structure</h4>
-<ul>
-<li>Start with the business problem context</li>
-<li>Narrate the analytical journey</li>
-<li>Show the solution evolution</li>
-<li>End with concrete impact and results</li>
-<li>Include real-world examples</li>
-</ul>
-</section>
-<section id="business-metrics-first" class="level4">
-<h4 class="anchored" data-anchor-id="business-metrics-first">Business metrics first</h4>
-<ul>
-<li>Lead with improvements to key business KPIs</li>
-<li>Quantify cost savings and efficiency gains</li>
-<li>Highlight new revenue or growth opportunities</li>
-<li>Compare results to initial success criteria</li>
-<li>Show trends and projections</li>
-</ul>
-</section>
-<section id="visual-communication" class="level4">
-<h4 class="anchored" data-anchor-id="visual-communication">Visual communication</h4>
-<ul>
-<li>Use clear, business-focused visualizations</li>
-<li>Create interactive demonstrations when possible</li>
-<li>Develop intuitive business dashboards</li>
-<li>Avoid complex technical plots</li>
-<li>Ensure accessibility</li>
-</ul>
-</section>
-<section id="technical-translation" class="level4">
-<h4 class="anchored" data-anchor-id="technical-translation">Technical translation</h4>
-<ul>
-<li>Convert technical concepts into business language</li>
-<li>Use relevant industry analogies</li>
-<li>Provide real-world examples</li>
-<li>Layer technical details based on audience</li>
-<li>Create relatable metaphors</li>
-</ul>
-</section>
-<section id="implementation-plan" class="level4">
-<h4 class="anchored" data-anchor-id="implementation-plan">Implementation plan</h4>
-<ul>
-<li>Outline clear deployment steps</li>
-<li>Detail resource requirements</li>
-<li>Present realistic timelines</li>
-<li>Include key milestones and dependencies</li>
-<li>Address operational impacts</li>
-</ul>
-</section>
-<section id="risk-management" class="level4">
-<h4 class="anchored" data-anchor-id="risk-management">Risk management</h4>
-<ul>
-<li>Be transparent about limitations</li>
-<li>Clarify key assumptions</li>
-<li>Present mitigation strategies</li>
-<li>Address potential failure modes</li>
-<li>Include contingency plans</li>
-</ul>
-</section>
-<section id="adoption-strategy" class="level4">
-<h4 class="anchored" data-anchor-id="adoption-strategy">Adoption strategy</h4>
-<ul>
-<li>Detail user training requirements</li>
-<li>Present change management approach</li>
-<li>Outline ongoing support plan</li>
-<li>Include feedback mechanisms</li>
-<li>Consider cultural factors</li>
-</ul>
-</section>
-<section id="future-roadmap" class="level4">
-<h4 class="anchored" data-anchor-id="future-roadmap">Future roadmap</h4>
-<ul>
-<li>Suggest next steps and phases</li>
-<li>Present scaling opportunities</li>
-<li>Identify potential enhancements</li>
-<li>Link to long-term business strategy</li>
-<li>Consider emerging technologies</li>
-</ul>
-</section>
-<section id="stakeholder-engagement" class="level4">
-<h4 class="anchored" data-anchor-id="stakeholder-engagement">Stakeholder engagement</h4>
-<ul>
-<li>Prepare for common questions</li>
-<li>Identify key decision points</li>
-<li>Define ongoing success metrics</li>
-<li>Plan for different audience levels</li>
-<li>Build consensus</li>
-</ul>
-<p>Key Presentation Principles:</p>
-<ul>
-<li>Tailor the depth based on audience</li>
-<li>Focus on outcomes over methods</li>
-<li>Use progressive disclosure for technical details</li>
-<li>Encourage interactive discussion</li>
-<li>Prepare multiple paths through the material</li>
-<li>Have technical details ready but not front-loaded</li>
-<li>Maintain engagement through storytelling</li>
-</ul>
-<p>Remember to:</p>
-<ul>
-<li>Prepare backup slides for detailed questions</li>
-<li><strong>Have specific examples ready</strong></li>
-<li><strong>Know your audience’s technical level</strong></li>
-<li><strong>Be ready to pivot based on stakeholder reactions</strong></li>
-<li>Document key decisions and next steps</li>
-<li>Follow up on action items promptly</li>
-</ul>
+<section id="missing-data" class="level2" data-number="22.4">
+<h2 data-number="22.4" class="anchored" data-anchor-id="missing-data"><span class="header-section-number">22.4</span> Missing Data</h2>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1441,13 +1030,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../busi/bus_intro.html" class="pagination-link" aria-label="Introduction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      <a href="../models/test_cv.html" class="pagination-link" aria-label="Testing, Validation, Cross-Validation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Testing, Validation, Cross-Validation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../busi/examples.html" class="pagination-link" aria-label="Example: Email Campaign Optimization">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Example: Email Campaign Optimization</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../models/featproc.html" class="pagination-link" aria-label="Feature and Target Processing">
+        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Feature and Target Processing</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

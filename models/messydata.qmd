@@ -1,0 +1,12 @@
+
+
+# Messy Data {@sec-messy-data}
+
+## Low Signal to Noise
+
+## Unbalanced Data
+
+## Outliers
+
+## Missing Data
+
