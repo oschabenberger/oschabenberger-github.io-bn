@@ -1431,7 +1431,7 @@ The value of the test statistic under the null hypothesis is
 $$
 t_0 = \frac{5.7-4}{3.1/\sqrt{15}}=2.123
 $$
-The probability $2\Pr(t_14 > 2.123) = 0.052$ is the $p$-value of the test.
+The probability $2\Pr(t_{14} > 2.123) = 0.052$ is the $p$-value of the test.
 
 If the significance level at which we declare that events are inconsistent (they
 should not have happened because they are too unlikely) is $\alpha = 0.05$, 

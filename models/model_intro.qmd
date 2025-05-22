@@ -343,8 +343,8 @@ $p$ and the specific input variables;
 - determine whether the logit function is the appropriate transformation that
 achieves linearity of the input effects.
 
-The effect of the inputs is called linear on $g(\pi)$ if $g(\pi)$ is a linear 
-function of the parameters. To test whether this is the case take derivatives 
+The effect of the inputs is called linear on $g(\pi)$, if $g(\pi)$ is a linear 
+function of the parameters. To test whether this is the case, take derivatives 
 of the function with respect to all parameters. If the derivatives do not depend 
 on parameters, the effect is linear.
 
@@ -357,8 +357,46 @@ $$
 $$ 
 
 None of the derivatives depends on any of the $(\beta_{0},\ldots,\beta_{p})$.
-We conclude that $g(\pi)$ is linear in the parameters. A non-linear function is
-non-linear in at least one parameter.
+We conclude that $g(\pi)$ is linear in the parameters. A nonlinear function is
+nonlinear in at least one parameter. While the effects of the inputs in the 
+logistic model are linear on $g(\pi)$, they are non-linear on $\pi$, the 
+mean of the binary distribution. To see this we apply the inverse of the logit function 
+on both sides of @eq-lin-predict:
+
+$$
+\begin{align*}
+g^{-1}\left(g(\pi)\right) &= g^{-1}\left(\beta_0 + \beta_1 x_1+\cdots + \beta_p x_p\right) \\
+\pi &= g^{-1}\left(\beta_0 + \beta_1 x_1+\cdots + \beta_p x_p\right)\\
+&= \frac{1}{1+\exp\left\{-\beta_0 - \beta_1 x_1-\cdots - \beta_p x_p \right\}}
+\end{align*}
+$$
+We do not have to work through all the derivatives to see that $\pi$ is nonlinear
+in the parameters since they appear in an exponent and in a denominator. The 
+consequence of linearity on one scale and nonlinearity on another scale is a
+change in interpretation. If $x_j$ changes by one unit, then $\beta_j$ measures
+the change in the logit of the event probability (known as the **log odds*); 
+it does not measure the change in the event probability.
+
+:::{.assignment}
+::::{.assignment-header}
+Exercise: Logit and Inverse Logit
+::::
+::::{.assignment-container}
+If $g(t) = \log(t/(1-t))=z$ is the logit transform of $t$, show that 
+$$
+g^{-1}(z) = \frac{\exp(z)}{1+\exp(z)} \qquad \text{and} \qquad g^{-1}(z) = \frac{1}{1+\exp(-z)}
+$$
+are inverse transforms.
+
+- How does the inverse relate to the cumulative distribution function of a standard 
+logistic random variable?
+- Graph $g(t)$ and $g^{-1}(z)$ for $0 < t < 1$ and $-6 < z < 6$. What is the 
+impact of a unit change in $z$?
+::::
+:::
+
+
+Here is an example of a nonlinear model with a continuous output.
 
 ::: example
 ::: example-header
@@ -383,7 +421,7 @@ $$
 \end{matrix} \right.
 $$ 
 
-If $\alpha$ is an unknown parameter, this is a non-linear model.
+If $\alpha$ is an unknown parameter, this is a nonlinear model.
 :::
 :::
 
@@ -760,7 +798,7 @@ A model has inputs that are processed by an algorithm to produce an output. When
 the output is a variable to be predicted, classified, or grouped, we refer to it 
 with different---but interchangeable---names as the **response** variable, or 
 the **target** variable, the **output** or the **dependent** variable. We are not 
-very particular =about what you call the variable, as long as we agree on what we 
+very particular about what you call the variable, as long as we agree on what we 
 are talking about---the left-hand side of the model.
 
 :::{.callout-note title="Dependent and Independent Variables"}

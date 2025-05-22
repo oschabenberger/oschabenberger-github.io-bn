@@ -974,7 +974,7 @@ Does that affect whether the results are applicable to U.S. children?
 :::
 
 
-#### Hill's Criteria
+#### Hill's Criteria  {#sec-hills-criteria}
 
 Establishing causality from observational data, as in the case of Snow's 
 water quality study, is a common problem in **epidemiology**, the study of the distribution

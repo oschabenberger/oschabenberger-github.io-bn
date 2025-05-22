@@ -183,3 +183,78 @@ A good example of emergent bias and harm is Microsoft’s Tay chatbot---discusse
 
 Emergent bias is also at work when we like things explicitly—hit the “Like” button—or implicitly—post about a topic—on social media. The algorithms analyzing our engagement are more likely to recommend to us similar topics and add those to our social media feed. A bias bubble emerges that over-emphasizes information we are likely to like.
 
+## Moral Hazard
+
+A **moral hazard** situation exists when someone's risky or deceptive behavior 
+is driven by knowing that someone else will bear the consequences of the 
+behavior. The other party might even benefit from the deceptive behavior. 
+Moral hazards often arise in situations of information asymmetry---one party
+knows more about a transaction than the other party.
+
+:::{.example}
+::::{.example-header}
+Example: Airbnb Listings
+::::
+::::{.example-container}
+It is not uncommon for Airbnb listings to be taken down after receiving poor
+reviews, only to be re-listed as a "newly listed" property under a different name.
+This cleans the slate for the host of the property and presents a moral hazard
+for Airbnb. The clean slate increases the bookings for the re-listed property and
+increases revenue for Airbnb. The host can engage in the deceptive practice 
+knowing that it is tolerated by Airbnb. 
+
+There is information asymmetry in that the host knows that the property has been
+listed before and has been performing poorly, the renter does not have this 
+information and will assume in good faith that this is indeed a new property that
+has never been rented before.
+::::
+:::
+
+Carrying insurance for damage or loss of property can present a moral hazard.
+A homeowner with insurance might be less diligent about removing trees in the 
+vicinity of the home, knowing that the insurance company will cover damages
+should a branch fall on the house. A moral hazard situation related to insurance 
+can also occur when others are handling your insured items.
+
+:::{.callout-tip title="Personal Experience"}
+When moving from North Carolina to Virginia we hired a professional moving company.
+On the advice of the company representative---and for our own peace of mind---we
+purchased an insurance policy for our items.
+
+When our goods were delivered in Virginia, we were appalled at the poor packaging
+and the rough handling our furniture and boxes had received. Some expensive items
+were stuffed without any protection in the hold of the truck. We saw items 
+falling off the truck and breaking. When I confronted the driver---who is 
+responsible for loading/unloading and protecting furniture---he simply said 
+"You have insurance, don't you?" The driver felt protected in his rough treatment
+of the cargo knowing that the insurance company will cover the damages.
+:::
+
+While the concept of moral hazard hails from economy, in particular financial
+transactions, we can identify moral hazard situations in many domains. Data
+science is no exception. Here are a few examples where risky behavior might 
+occur because someone is shielded from bearing the consequences of the behavior:
+
+1. **Performance metrics**. You might choose a metric such as accuracy that
+works well for balanced training and test data sets when when the deployed model 
+performs poorly on imbalanced real-world data sets. The moral hazard can be
+avoided by being responsible and accountable for the performance of a model 
+under real-world conditions.
+
+2. **Explainability tradeoffs**. You might choose a less interpretable model---possibly
+a black-box model---that performs well while downplaying concerns about 
+model interpretability and explainability because you do not have to explain
+the model to end users; you only need to "sell" it to stakeholders who are then
+responsible for implementation.
+
+3. **Prebuilt models**. A company selling or licensing machine learning models
+might rush a model into production because the risk of operating the model is
+borne by the client.
+
+4. **Data collection**. The data privacy terms and conditions of a company 
+might overstate data encryption practices and understate data-sharing practices
+in order for consumers to provide their data more willingly, with the intent
+to use or monetize the data. Collecting more user data can improve data science
+models while the user carries the data privacy risk.
+
+

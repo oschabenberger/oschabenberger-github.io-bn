@@ -28,7 +28,18 @@ The formulas get messier as we add another input variable to the model. Using
 matrix---vector notation, the estimator of all the regression coefficients takes 
 the same form, regardless of the size of the model:
 
-$$\widehat{\bbeta} = \left( \bX^{\prime}\bX \right)^{- 1}\bX^{\prime}\bY$$
+$$
+\widehat{\bbeta} = \left( \bX^{\prime}\bX \right)^{- 1}\bX^{\prime}\bY
+$$
+
+This chapter presents basic linear algebra concepts necessary to formulate and
+manipulate data science models and to perform basic operations on vectors of
+random variables. There are many great texts available that cover linear algebra
+for statisticians and data scientists in much greater depth---some of my favorites 
+are @Graybill1976 and @Graybill1983.
+
+
+---
 
 A scalar is a single real number, a vector is an array of scalars arranged in a 
 single column (a column vector) or a row (a row vector). A matrix is a two-dimensional 
@@ -972,8 +983,8 @@ depend on $\sigma^{2}$ (and on $\bX$).
 
 This remarkable formula is at the heart of many regression-type diagnostics and 
 cross-validation techniques. A version of this formula was first given by Gauss 
-in 1821. Around 1950, it appeared in several papers by Sherman and Morrison, 
-and Woodbury.
+in 1821. Around 1950, it appeared in papers by @ShermanMorrison and 
+@Woodbury.
 
 Suppose we are in a full-rank linear modeling context with design matrix 
 $\bX_{(n \times p + 1)}$, so that the inverse $\left( \bXpX \right)^{-1}$ exists. 

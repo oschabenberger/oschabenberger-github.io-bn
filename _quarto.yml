@@ -20,12 +20,12 @@ book:
     - index.qmd
     - intro.qmd
 
-    - part: "Module I. Data Science Projects"
+    - part: "Module I. Understanding Data Science"
       chapters:
         - proj/history.qmd
         - proj/lifecycle.qmd
-        - proj/thinkingds.qmd
         - proj/teams.qmd
+        - proj/thinkingds.qmd
 
     - part: "Module II. Business Understanding: Discovery"
       chapters:
@@ -59,8 +59,13 @@ book:
 
     - part: "Module VI. Operationalization"
       chapters:
+        - integ/integ_intro.qmd
+        - integ/offline_online.qmd
+        - integ/interfaces.qmd
+        - integ/orchestration.qmd
+        - integ/lead_scoring.qmd
+        - integ/test_experiment.qmd
         - integ/ds_softwareeng.qmd
-        - integ/coding_practices.qmd
         - integ/tools.qmd
 
     - part: "Module VII. Applied Ethics in Data Science"
@@ -87,6 +92,11 @@ format:
     theme:
         light: [cosmo,customstyle.scss]
         dark: [slate,customstyle.scss]
+    grid:
+      sidebar-width: 250px
+      body-width: 950px
+      margin-width: 250px
+      gutter-width: 1.5rem
     smooth-scroll: true
     number-sections: true
     number-depth: 2
@@ -95,4 +105,3 @@ format:
     pdf:
     documentclass: scrreprt
 
-# editor: visual

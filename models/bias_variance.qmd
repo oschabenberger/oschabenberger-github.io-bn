@@ -704,10 +704,10 @@ Of course, this depends on our definition of "best".
 ### Estimated Mean Squared Error
 
 In practice, $f\left( x_{0} \right)$ is not known and the bias component 
-$\text{Bias}\left\lbrack \widehat{f}\left( x_{0} \right);f\left( x_{0} \right) \right\rbrack$ 
+$\text{Bias} \lbrack \widehat{f}\left( x_{0} \right);f\left( x_{0} \right) \rbrack$ 
 cannot be evaluated by computing the difference of expected values. For many 
 modeling techniques we can calculate---or at least estimate---
-$\text{Var}\left\lbrack \widehat{f}\left( x_{0} \right) \right\rbrack$, the 
+$\text{Var}\lbrack \widehat{f}\left( x_{0} \right) \rbrack$, the 
 variance component of the MSE. Those derivations depend on strong assumptions 
 about distributional properties and the correctness of the model. So, we essentially 
 need to treat the MSE as an unknown quantity. Fortunately, we can estimate it from data.

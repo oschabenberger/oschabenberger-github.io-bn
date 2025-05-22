@@ -637,7 +637,11 @@ without copying any data.
 Why is it called DuckDB? We let the folks who created it [explain it](https://duckdb.org/faq#why-call-it-duckdb):
 
 :::{.quote}
-Ducks are amazing animals. They can fly, walk and swim. They can also live off pretty much everything. They are quite resilient to environmental challenges. A duck’s song will bring people back from the dead and inspires database research. They are thus the perfect mascot for a versatile and resilient data management system. Also the logo designs itself.
+Ducks are amazing animals. They can fly, walk and swim. They can also live off 
+pretty much everything. They are quite resilient to environmental challenges. 
+A duck’s song will bring people back from the dead and inspires database research. 
+They are thus the perfect mascot for a versatile and resilient data management
+system. Also the logo designs itself.
 :::
 
 For the Python user, installation is as simple as with any other Python package:
@@ -665,14 +669,14 @@ duckdb.sql('select * from "../datasets/fitness.csv" where Age > 50')
 
 ```
 
-The object returned by duckdb is a **relation**, a symbolic representation of 
+The object returned by `duckdb.sql` is a **relation**, a symbolic representation of 
 the query that can be referenced in other queries. The next statements save the 
 result of the previous query and reference the relation in the second query:
 
-```{python}
-rel = duckdb.sql('select * from "../datasets/fitness.csv" where Age > 50')
-duckdb.sql("select Oxygen, RunTime, RestPulse from rel where RestPulse < 49")
-
+```{python, message=FALSE, warning=FALSE}
+#| error: true
+rel = duckdb.sql('select * from "../datasets/fitness.csv" where Age > 50;')
+duckdb.sql("select Oxygen, RunTime, RestPulse from rel where RestPulse < 49;")
 ```
 
 The results of a DuckDB query can be easily converted into other formats. 
@@ -682,6 +686,7 @@ Arrow table.
 
 ```{python}
 duckdb.sql("select Oxygen, RunTime, RestPulse from rel where RestPulse < 49").df()
+del rel
 ```
 
 #### Reading files
@@ -720,6 +725,7 @@ object as on the duckdb object:
 
 ```{python}
 conn = duckdb.connect()
+rel = conn.sql('select * from "../datasets/fitness.csv" where Age > 50;')
 conn.sql("select Oxygen, RunTime, RestPulse from rel where RestPulse < 49").df()
 ```
 
@@ -757,8 +763,8 @@ You could have created the table in the database from the CSV file in a single s
 
 ```{python}
 #| eval: false
-conn = duckdb.connect(database="ads5064.db")
-conn.execute('CREATE TABLE fitness AS SELECT * FROM “../data/fitness.csv” ')
+conn = duckdb.connect(database="ads.ddb")
+conn.execute('CREATE TABLE fitness AS SELECT * FROM “../datasets/fitness.csv” ')
 
 ```
 
@@ -904,7 +910,7 @@ By default, MotherDuck creates a database called `my_db` and a shared database w
 
 ```{python}
 #| eval: false
-con.sql("ATTACH 'ads5064.ddb'")
+con.sql("ATTACH 'ads.ddb'")
 con.sql("SHOW DATABASES")
 
 ```
@@ -922,7 +928,7 @@ You can set any database as the current one with the USE statement:
 
 ```{python}
 #| eval: false
-con.sql("USE ads5064")
+con.sql("USE ads")
 con.sql("SHOW TABLES")
 
 ```
@@ -934,8 +940,8 @@ database for the course and that `ads5064_md` is stored in the cloud.
 
 ```{python}
 #| eval: false
-con.sql("SELECT count(*) FROM ads5064.apples")
-con.sql("SELECT count(*) FROM ads5064_md.glaucoma")
+con.sql("SELECT count(*) FROM ads.apples")
+con.sql("SELECT count(*) FROM ads_md.glaucoma")
 
 ```
 
@@ -948,7 +954,7 @@ command. You can then attach the database by using the URL:
 
 ```{python}
 #| eval: false
-con.sql("ATTACH 'md:_share/ads5064_md/e00063c9-568c-45ec-a372-dca85f6915fd' as course_db")
+con.sql("ATTACH 'md:_share/ads_md/e00063c9-568c-45ec-a372-dca85f6915fd' as course_db")
 ```
 
 The URL is a link to a point-in-time snapshot of the database when it was shared. 

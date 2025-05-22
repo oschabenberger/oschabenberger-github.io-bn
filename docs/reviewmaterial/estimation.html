@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Foundations of Data Science - 35&nbsp; Estimation</title>
+<title>Foundations of Data Science - 40&nbsp; Estimation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -147,7 +147,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reviewmaterial/probability.html">Module VIII. Review Topics</a></li><li class="breadcrumb-item"><a href="../reviewmaterial/estimation.html"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Estimation</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reviewmaterial/probability.html">Module VIII. Review Topics</a></li><li class="breadcrumb-item"><a href="../reviewmaterial/estimation.html"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Estimation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -195,7 +195,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Module I. Data Science Projects</span></a>
+ <span class="menu-text">Module I. Understanding Data Science</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -204,25 +204,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../proj/history.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">History and Evolution of Data Science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">History and Evolution</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../proj/lifecycle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Data Science Project Lifecycle</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../proj/thinkingds.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Thinking Like a Data Scientist</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The Project Lifecycle</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../proj/teams.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Roles on Data Science Teams</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data Science Teams</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../proj/thinkingds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Thinking Like a Data Scientist</span></span></a>
   </div>
 </li>
       </ul>
@@ -383,20 +383,50 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../integ/ds_softwareeng.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Data Science versus Software Engineering,</span></span></a>
+  <a href="../integ/integ_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../integ/coding_practices.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Coding Best Practices</span></span></a>
+  <a href="../integ/offline_online.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Offline and Online Deployments</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../integ/interfaces.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Software Interfaces</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../integ/orchestration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Orchestration</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../integ/lead_scoring.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Lead Scoring Tutorial</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../integ/test_experiment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Testing and Experimentation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../integ/ds_softwareeng.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Data Science Software Engineering</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../integ/tools.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Data Science Tools</span></span></a>
   </div>
 </li>
       </ul>
@@ -413,31 +443,31 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/gonewrong.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">How Things Go Wrong</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">How Things Go Wrong</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/bias_harm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Bias and Harm in Algorithms</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/privacy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Personal Information and Personal Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ethics/genAI.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Ethics of Generative AI</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Ethics of Generative AI</span></span></a>
   </div>
 </li>
       </ul>
@@ -454,25 +484,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../reviewmaterial/probability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Probability</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Probability</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../reviewmaterial/statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../reviewmaterial/linalg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../reviewmaterial/estimation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Estimation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Estimation</span></span></a>
   </div>
 </li>
       </ul>
@@ -493,8 +523,8 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">35.1</span> Introduction</a></li>
-  <li><a href="#least-squares-estimation" id="toc-least-squares-estimation" class="nav-link" data-scroll-target="#least-squares-estimation"><span class="header-section-number">35.2</span> Least Squares Estimation</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">40.1</span> Introduction</a></li>
+  <li><a href="#least-squares-estimation" id="toc-least-squares-estimation" class="nav-link" data-scroll-target="#least-squares-estimation"><span class="header-section-number">40.2</span> Least Squares Estimation</a>
   <ul>
   <li><a href="#sec-ols" id="toc-sec-ols" class="nav-link" data-scroll-target="#sec-ols">Ordinary Least Squares (OLS)</a>
   <ul class="collapse">
@@ -506,7 +536,7 @@ window.Quarto = {
   <li><a href="#gauss-newton-from-scratch" id="toc-gauss-newton-from-scratch" class="nav-link" data-scroll-target="#gauss-newton-from-scratch">Gauss-Newton from scratch</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation"><span class="header-section-number">35.3</span> Maximum Likelihood Estimation</a>
+  <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation"><span class="header-section-number">40.3</span> Maximum Likelihood Estimation</a>
   <ul>
   <li><a href="#linear-model-with-gaussian-errors" id="toc-linear-model-with-gaussian-errors" class="nav-link" data-scroll-target="#linear-model-with-gaussian-errors">Linear Model with Gaussian Errors</a></li>
   </ul></li>
@@ -516,9 +546,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reviewmaterial/probability.html">Module VIII. Review Topics</a></li><li class="breadcrumb-item"><a href="../reviewmaterial/estimation.html"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Estimation</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reviewmaterial/probability.html">Module VIII. Review Topics</a></li><li class="breadcrumb-item"><a href="../reviewmaterial/estimation.html"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Estimation</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-estimation" class="quarto-section-identifier"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Estimation</span></span></h1>
+<h1 class="title"><span id="sec-estimation" class="quarto-section-identifier"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">Estimation</span></span></h1>
 </div>
 
 
@@ -535,8 +565,8 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction" class="level2" data-number="35.1">
-<h2 data-number="35.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">35.1</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="40.1">
+<h2 data-number="40.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">40.1</span> Introduction</h2>
 <p>Statistical models contain two types of unknown quantities, <strong>parameters</strong> and <strong>hyperparameters</strong>. Parameters describe the distributional properties of the data; they are part of the mean function or the variance-covariance structure of the model. They are estimated from the data.</p>
 <p>This chapter is not concerned with tuning hyperparameters but with the principles we use to estimate parameters of a model’s mean function from data—that is, estimating the internal parameters of the model.</p>
 <p>Finding parameter estimates can be expressed as a numerical problem: find the values that minimize some metric of discrepancy between data and the model. The discrepancy can be some measure of <strong>loss</strong> such as squared error between observed and predicted target values <span class="math display">\[\left( y_i - \widehat{f}_i(\textbf{x};\boldsymbol{\theta}) \right)^2\]</span> or the misclassification error <span class="math display">\[
@@ -563,8 +593,8 @@ Note
 </div>
 </div>
 </section>
-<section id="least-squares-estimation" class="level2" data-number="35.2">
-<h2 data-number="35.2" class="anchored" data-anchor-id="least-squares-estimation"><span class="header-section-number">35.2</span> Least Squares Estimation</h2>
+<section id="least-squares-estimation" class="level2" data-number="40.2">
+<h2 data-number="40.2" class="anchored" data-anchor-id="least-squares-estimation"><span class="header-section-number">40.2</span> Least Squares Estimation</h2>
 <p>Least squares estimation is arguably one of the most important estimation principles and rests on a geometric concept. Suppose we have a model with additive errors, <span class="math inline">\(\textbf{Y}= \mathbf{f}(\textbf{x}; \boldsymbol{\theta}) + \boldsymbol{\epsilon}\)</span>. The function <span class="math inline">\(\mathbf{f}()\)</span> is an <span class="math inline">\((n \times 1)\)</span> vector of the mean function evaluations, the <span class="math inline">\(i\)</span><sup>th</sup> value is <span class="math inline">\(f(\textbf{x}_i;\boldsymbol{\theta})\)</span>. The least squares estimate <span class="math inline">\(\widehat{\boldsymbol{\theta}}\)</span> of <span class="math inline">\(\boldsymbol{\theta}\)</span> is the value that is closest to <span class="math inline">\(\textbf{Y}\)</span> among all possible values <span class="math inline">\(\tilde{\boldsymbol{\theta}}\)</span>.</p>
 <section id="sec-ols" class="level3">
 <h3 class="anchored" data-anchor-id="sec-ols">Ordinary Least Squares (OLS)</h3>
@@ -591,7 +621,7 @@ Note
 <p>To find the minimum we set to zero the derivative of <span class="math inline">\(\text{SSE}(\boldsymbol{\beta})\)</span> with respect to <span class="math inline">\(\boldsymbol{\beta}\)</span>. Expanding the residual sum of squares yields <span class="math display">\[
 SSE(\boldsymbol{\beta}) = \textbf{Y}^\prime\textbf{Y}- 2\boldsymbol{\beta}^\prime\textbf{X}^\prime\textbf{Y}+ \boldsymbol{\beta}^\prime\textbf{X}^\prime\textbf{X}\boldsymbol{\beta}
 \]</span></p>
-<p>The derivative (<a href="linalg.html#sec-matrix-differentiation" class="quarto-xref"><span>Section 34.5</span></a>) with respect to <span class="math inline">\(\boldsymbol{\beta}\)</span> is <span class="math display">\[
+<p>The derivative (<a href="linalg.html#sec-matrix-differentiation" class="quarto-xref"><span>Section 39.5</span></a>) with respect to <span class="math inline">\(\boldsymbol{\beta}\)</span> is <span class="math display">\[
 \frac{\partial\,\text{SSE}(\boldsymbol{\beta})}{\partial\boldsymbol{\beta}} = -2\textbf{X}^\prime\textbf{Y}+ 2\textbf{X}^\prime\textbf{X}\boldsymbol{\beta}
 \]</span></p>
 <p>Setting the derivative to zero and solving yields the <strong>normal equations</strong> as above: <span class="math display">\[
@@ -603,7 +633,7 @@ SSE(\boldsymbol{\beta}) = \textbf{Y}^\prime\textbf{Y}- 2\boldsymbol{\beta}^\prim
     \widehat{\textbf{Y}} &amp;= \textbf{X}^\prime\widehat{\boldsymbol{\beta}} = (\textbf{X}^\prime\textbf{X})^{-1}\textbf{X}^\prime\textbf{Y}\\
                   &amp;= \textbf{H}\textbf{Y}
 \end{align*}\]</span></p>
-<p>The matrix <span class="math inline">\(\textbf{H}\)</span> is called the “Hat” matrix, because pre-multiplying <span class="math inline">\(\textbf{Y}\)</span> with <span class="math inline">\(\textbf{H}\)</span> “puts hats on the <span class="math inline">\(y\)</span>s” (<a href="linalg.html#sec-hat-matrix" class="quarto-xref"><span>Section 34.6.2</span></a>). The last equation shows that the OLS estimator is a linear estimator, <span class="math inline">\(\widehat{y}_i\)</span> is a linear combination of all <span class="math inline">\(y_i\)</span>, the weights of the linear combination are given by the entries of the hat matrix.</p>
+<p>The matrix <span class="math inline">\(\textbf{H}\)</span> is called the “Hat” matrix, because pre-multiplying <span class="math inline">\(\textbf{Y}\)</span> with <span class="math inline">\(\textbf{H}\)</span> “puts hats on the <span class="math inline">\(y\)</span>s” (<a href="linalg.html#sec-hat-matrix" class="quarto-xref"><span>Section 39.6.2</span></a>). The last equation shows that the OLS estimator is a linear estimator, <span class="math inline">\(\widehat{y}_i\)</span> is a linear combination of all <span class="math inline">\(y_i\)</span>, the weights of the linear combination are given by the entries of the hat matrix.</p>
 <p>The statistical properties of the OLS estimator depend on the nature of the random error process. The most common assumption is that the <span class="math inline">\(\epsilon_i\)</span> have zero mean and are <em>iid</em>, independently and identically distributed, formally, <span class="math inline">\(\boldsymbol{\epsilon}\sim (\textbf{0},\sigma^2\textbf{I})\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -865,14 +895,14 @@ Tip
 <p>When the model is nonlinear in the parameters, <span class="math inline">\(\textbf{Y}= \bf(\textbf{x};\boldsymbol{\theta}) + \boldsymbol{\epsilon}\)</span>, finding the solution that minimizes</p>
 <p><span id="eq-nonlin-sse"><span class="math display">\[
 \text{SSE} = \left(\textbf{Y}- \bf(\textbf{x};\boldsymbol{\theta})\right)^\prime \left(\textbf{Y}- \bf(\textbf{x};\boldsymbol{\theta})\right)
-\tag{35.1}\]</span></span></p>
+\tag{40.1}\]</span></span></p>
 <p>is not so straightforward, it requires an iterative approach. Starting from some initial guess for <span class="math inline">\(\boldsymbol{\theta}\)</span>, call it <span class="math inline">\(\widehat{\boldsymbol{\theta}}^{(0)}\)</span>, we iteratively update the guess until we have arrived at step <span class="math inline">\(t\)</span> at <span class="math inline">\(\widehat{\boldsymbol{\theta}}^{(t)}\)</span> such that <span class="math display">\[
 \frac{\partial \,\text{SSE}}{\partial\boldsymbol{\theta}} \lvert_{\widehat{\boldsymbol{\theta}}^{(t)}} = \textbf{0}
 \]</span> The left hand side of the previous expression is read as the derivative of SSE with respect to <span class="math inline">\(\boldsymbol{\theta}\)</span>, evaluated at <span class="math inline">\(\widehat{\boldsymbol{\theta}}^{t}\)</span>.</p>
 <p>Common iterative approaches to solve this optimization problem involve the Gauss-Newton and Newton-Raphson algorithms. We introduce the <strong>Gauss-Newton</strong> method here. The basic idea is that we can approximate the nonlinear mean function with a linear version that depends on some current values for <span class="math inline">\(\boldsymbol{\theta}\)</span>. Linear least squares can be applied to the linearized form to compute an update of the estimate for <span class="math inline">\(\boldsymbol{\theta}\)</span>. With the updated estimate the approximation can be refined and another least squares step is performed. This sequence is repeated until some convergence criterion is met.</p>
 <p>We start by approximating <span class="math inline">\(\bf(\textbf{x};\boldsymbol{\theta})\)</span> with a first-order Taylor series about <span class="math inline">\(\boldsymbol{\theta}^{(0)}\)</span> <span class="math display">\[
     \bf(\textbf{x}; \boldsymbol{\theta}) \approx \bf(\textbf{x};\boldsymbol{\theta}^{(0)}) + \textbf{F}^{(0)}(\boldsymbol{\theta}-\boldsymbol{\theta}^{(0)})
-\]</span> where <span class="math inline">\(\textbf{F}^{(0)}\)</span> is a matrix of derivatives of <span class="math inline">\(\bf(\textbf{x};\boldsymbol{\theta})\)</span> evaluated at the value <span class="math inline">\(\boldsymbol{\theta}^{(0)}\)</span>. The residual <span class="math inline">\(\textbf{y}- \bf(\textbf{x};\boldsymbol{\theta})\)</span> can now be approximated as <span class="math inline">\(\textbf{r}(\boldsymbol{\theta}^{(0)}) = \textbf{y}- \bf(\textbf{x};\boldsymbol{\theta}^{(0)}) - \textbf{F}^{(0)}(\boldsymbol{\theta}- \boldsymbol{\theta}^{(0)})\)</span>. Substitute this expression into <a href="#eq-nonlin-sse" class="quarto-xref">Equation&nbsp;<span>35.1</span></a> we get an approximate error sums of squares</p>
+\]</span> where <span class="math inline">\(\textbf{F}^{(0)}\)</span> is a matrix of derivatives of <span class="math inline">\(\bf(\textbf{x};\boldsymbol{\theta})\)</span> evaluated at the value <span class="math inline">\(\boldsymbol{\theta}^{(0)}\)</span>. The residual <span class="math inline">\(\textbf{y}- \bf(\textbf{x};\boldsymbol{\theta})\)</span> can now be approximated as <span class="math inline">\(\textbf{r}(\boldsymbol{\theta}^{(0)}) = \textbf{y}- \bf(\textbf{x};\boldsymbol{\theta}^{(0)}) - \textbf{F}^{(0)}(\boldsymbol{\theta}- \boldsymbol{\theta}^{(0)})\)</span>. Substitute this expression into <a href="#eq-nonlin-sse" class="quarto-xref">Equation&nbsp;<span>40.1</span></a> we get an approximate error sums of squares</p>
 <p><span class="math display">\[
 \text{SSE} \approx \textbf{r}(\boldsymbol{\theta}^{(0)})^\prime \textbf{r}(\boldsymbol{\theta}^{(0)}) - 2 \textbf{r}(\boldsymbol{\theta}^{(0)})\textbf{F}^{(0)}(\boldsymbol{\theta}- \boldsymbol{\theta}^{(0)}) +
 (\boldsymbol{\theta}- \boldsymbol{\theta}^{(0)})^\prime \textbf{F}^{(0)\prime}\textbf{F}^{(0)} (\boldsymbol{\theta}- \boldsymbol{\theta}^{(0)})
@@ -988,8 +1018,8 @@ Achieved convergence tolerance: 6.109e-06</code></pre>
 </section>
 </section>
 </section>
-<section id="maximum-likelihood-estimation" class="level2" data-number="35.3">
-<h2 data-number="35.3" class="anchored" data-anchor-id="maximum-likelihood-estimation"><span class="header-section-number">35.3</span> Maximum Likelihood Estimation</h2>
+<section id="maximum-likelihood-estimation" class="level2" data-number="40.3">
+<h2 data-number="40.3" class="anchored" data-anchor-id="maximum-likelihood-estimation"><span class="header-section-number">40.3</span> Maximum Likelihood Estimation</h2>
 <p>Maximum likelihood estimation (MLE) is an intuitive and important estimation principle in statistics. It is based on the distributional properties of the data, hence it applies to stochastic data modeling. If the observed data <span class="math inline">\(\textbf{y}\)</span> are the realization of a data-generating random mechanism, then it makes sense to examine the probability distribution of the data and choose as parameter estimates those values that make it most likely to have observed the data. In other words, we use the probability distribution to find the most likely explanation for the data–hence the name <strong>maximum likelihood</strong>.</p>
 <p>Making progress with MLE requires that we know the joint distribution of the random vector <span class="math inline">\(\textbf{Y}\)</span>, an <span class="math inline">\(n\)</span>-dimensional distribution. The distribution depends on a vector <span class="math inline">\(\boldsymbol{\theta}\)</span> of unknown parameters and we denote it as <span class="math inline">\(f(\textbf{y}; \boldsymbol{\theta})\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -1019,12 +1049,16 @@ f(\textbf{y}; \boldsymbol{\theta}) = \prod_{i=1}^n \, f(y_i; \boldsymbol{\theta}
 <div class="example-container">
 <p>If <span class="math inline">\(Y_1, \cdots, Y_n\)</span> are a random sample from a Poisson(<span class="math inline">\(\lambda\)</span>) distribution, the log-likelihood function is</p>
 <p><span class="math display">\[
-    \mathcal{l}(\lambda; \textbf{y}) = \sum_{i=1}^n \left( y_i \log(\lambda) - \lambda - \log(y_i!) \right ) =
+\mathcal{l}(\lambda; \textbf{y}) = \sum_{i=1}^n \left( y_i \log(\lambda) - \lambda - \log(y_i!) \right ) =
     \log(\lambda)\sum_{i=1}^n y_i - n\lambda - \sum_{i=1}^n \log(y_i!)
 \]</span> Setting the derivative with respect to <span class="math inline">\(\lambda\)</span> to zero yields <span class="math display">\[
     \frac{1}{\lambda}\sum_{i=1}^n y_i = n
 \]</span> The MLE of <span class="math inline">\(\lambda\)</span> is <span class="math inline">\(\widehat{\lambda} = \overline{y}\)</span>, the sample mean.</p>
-<p>Suppose that <span class="math inline">\(n=4\)</span> and we observe <span class="math inline">\(\textbf{y}= [3, 4, 2, 2]\)</span>. The sample mean is <span class="math inline">\(\overline{y} = 2.75\)</span>. The following <code>R</code> code computes the log-likelihood function <span class="math inline">\(\mathcal{l}(\lambda; \textbf{y})\)</span> for different values of <span class="math inline">\(\lambda\)</span>. The log-likelihood function has a maximum at <span class="math inline">\(\overline{y} = 2.75\)</span>.</p>
+<p>Suppose that <span class="math inline">\(n=4\)</span> and we observe <span class="math inline">\(\textbf{y}= [3, 4, 2, 2]\)</span>. The sample mean is <span class="math inline">\(\overline{y} = 2.75\)</span>. The following code computes the log-likelihood function <span class="math inline">\(\mathcal{l}(\lambda; \textbf{y})\)</span> for different values of <span class="math inline">\(\lambda\)</span>. The log-likelihood function has a maximum at <span class="math inline">\(\overline{y} = 2.75\)</span>.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
@@ -1042,6 +1076,45 @@ f(\textbf{y}; \boldsymbol{\theta}) = \prod_{i=1}^n \, f(y_i; \boldsymbol{\theta}
 <figure class="figure">
 <p><img src="estimation_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%"></p>
 </figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> factorial</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the original data</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>])</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">len</span>(y)</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>sumy <span class="op">=</span> np.<span class="bu">sum</span>(y)</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>sumlogfac <span class="op">=</span> np.<span class="bu">sum</span>(np.log(factorial(y)))</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a range of lambda values</span></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>lambda_values <span class="op">=</span> np.arange(<span class="fl">0.1</span>, <span class="fl">5.1</span>, <span class="fl">0.1</span>)</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate log likelihood for each lambda</span></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>loglike <span class="op">=</span> sumy <span class="op">*</span> np.log(lambda_values) <span class="op">-</span> n <span class="op">*</span> lambda_values <span class="op">-</span> sumlogfac</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>plt.plot(lambda_values, loglike, linewidth<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span>np.mean(y), linestyle<span class="op">=</span><span class="st">'dotted'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'λ'</span>)</span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'log likelihood'</span>)</span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.box(False)</span></span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="estimation_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1093,7 +1166,7 @@ f(\textbf{y}; \boldsymbol{\theta}) = \prod_{i=1}^n \, f(y_i; \boldsymbol{\theta}
 </ul>
 <section id="linear-model-with-gaussian-errors" class="level3">
 <h3 class="anchored" data-anchor-id="linear-model-with-gaussian-errors">Linear Model with Gaussian Errors</h3>
-<p>Suppose we want to find an estimator for <span class="math inline">\(\boldsymbol{\beta}\)</span> in the linear model <span class="math inline">\(\textbf{Y}= \textbf{X}\boldsymbol{\beta}+ \boldsymbol{\epsilon}\)</span> where the model errors follow a Gaussian distribution with mean <span class="math inline">\(\textbf{0}\)</span> and variance <span class="math inline">\(\textbf{V}\)</span>. <span class="math inline">\(\textbf{Y}\)</span> then follows a Gaussian distribution because it is a linear function of <span class="math inline">\(\boldsymbol{\epsilon}\)</span> (see <a href="linalg.html#sec-multi-gauss" class="quarto-xref"><span>Section 34.7</span></a>). The probability density function of <span class="math inline">\(\textbf{Y}\)</span> is</p>
+<p>Suppose we want to find an estimator for <span class="math inline">\(\boldsymbol{\beta}\)</span> in the linear model <span class="math inline">\(\textbf{Y}= \textbf{X}\boldsymbol{\beta}+ \boldsymbol{\epsilon}\)</span> where the model errors follow a Gaussian distribution with mean <span class="math inline">\(\textbf{0}\)</span> and variance <span class="math inline">\(\textbf{V}\)</span>. <span class="math inline">\(\textbf{Y}\)</span> then follows a Gaussian distribution because it is a linear function of <span class="math inline">\(\boldsymbol{\epsilon}\)</span> (see <a href="linalg.html#sec-multi-gauss" class="quarto-xref"><span>Section 39.7</span></a>). The probability density function of <span class="math inline">\(\textbf{Y}\)</span> is</p>
 <p><span class="math display">\[
 f\left( \textbf{Y}\right)=\frac{\left| \textbf{V}\right|^{- 1/2}}{(2\pi)^{\frac{n}{2}}}\exp\left\{ - \frac{1}{2}\left( \textbf{Y}- \textbf{X}\boldsymbol{\beta}\right)^\prime\textbf{V}^{- 1}\left( \textbf{Y}- \textbf{X}\boldsymbol{\beta}\right) \right\}
 \]</span></p>
@@ -1103,7 +1176,7 @@ f\left( \textbf{Y}\right)=\frac{\left| \textbf{V}\right|^{- 1/2}}{(2\pi)^{\frac{
 \]</span></p>
 <p>Finding the maximum of this function with respect to <span class="math inline">\(\boldsymbol{\beta}\)</span> is equivalent to minimizing the quadratic form <span class="math display">\[
 \left( \textbf{Y}- \textbf{X}\boldsymbol{\beta}\right)^\prime\textbf{V}^{-1}\left( \textbf{Y}- \textbf{X}\boldsymbol{\beta}\right)
-\]</span> with respect to <span class="math inline">\(\boldsymbol{\beta}\)</span>. Applying the results about matrix differentiation in <a href="linalg.html#sec-matrix-differentiation" class="quarto-xref"><span>Section 34.5</span></a> leads to</p>
+\]</span> with respect to <span class="math inline">\(\boldsymbol{\beta}\)</span>. Applying the results about matrix differentiation in <a href="linalg.html#sec-matrix-differentiation" class="quarto-xref"><span>Section 39.5</span></a> leads to</p>
 <p><span class="math display">\[\begin{align*}
 \frac{\partial}{\partial\boldsymbol{\beta}}\left( \textbf{Y}- \textbf{X}\boldsymbol{\beta}\right)^\prime\textbf{V}^{- 1}\left( \textbf{Y}- \textbf{X}\boldsymbol{\beta}\right) &amp;= \frac{\partial}{\partial\boldsymbol{\beta}}\left\{ \textbf{Y}^\prime\textbf{V}^{- 1}\textbf{Y}- 2\textbf{Y}^\prime\textbf{V}^{- 1}\textbf{X}\boldsymbol{\beta}+ \boldsymbol{\beta}^\prime\textbf{X}^\prime\textbf{V}^{- 1}\textbf{X}\boldsymbol{\beta}\right\} \\
 
@@ -1720,7 +1793,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../reviewmaterial/linalg.html" class="pagination-link" aria-label="Linear Algebra">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Linear Algebra</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

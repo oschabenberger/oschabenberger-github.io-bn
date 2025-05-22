@@ -38,11 +38,17 @@ $col-vt-black: black;
 .quote {
     color: $col-vt-maroon;
     font-size: 1em;
-    text-align: center;
-    font-weight: 600;
+    text-align: left; /* center; */
+    padding-inline: 75px;
+    font-weight: 550;
     font-style: italic;
-    
 }
+
+.centered {
+    font-size: 1em;
+    text-align: center;
+}
+
 
 .assignment {
   margin: 1em 0;

@@ -1,0 +1,30 @@
+
+# Testing and Experimentation {#sec-test-experiment}
+
+
+## Testing
+
+
+### Test-driven Development
+
+Yes, in test-driven development (TDD), you write the test before you write the function. This is the fundamental principle that defines TDD.
+The standard TDD workflow follows this pattern:
+
+Write a test for functionality that doesn't exist yet
+Run the test and watch it fail (since the code doesn't exist)
+Write the minimal code needed to make the test pass
+Run the test and see it pass
+Refactor the code while ensuring tests continue to pass
+
+This "red-green-refactor" cycle (fail-pass-improve) is the core of TDD. The approach has several benefits:
+
+Forces you to think about requirements and interfaces before implementation
+Ensures all code is testable by design
+Provides immediate feedback when code changes break functionality
+Creates a comprehensive test suite as a by-product of development
+Encourages simpler designs and smaller, more focused functions
+
+Many developers find that writing tests first helps them clarify exactly what they're trying to build before diving into implementation details.
+
+## A/B Experimentation
+

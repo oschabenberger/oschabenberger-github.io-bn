@@ -16,11 +16,13 @@ Those individuals were difficult to find and difficult to train.
 In smaller organizations the workload of the data scientist continues to be fluid,
 simply because the number of folks who can perform data-related tasks is limited. 
 In larger organizations with dedicated data teams you can now find data engineers, 
-data analysts, business analysts, machine learning engineers, AI engineers, statistical programmers, and so on. Where does a **data scientist** fit into this picture and 
+data analysts, business analysts, machine learning engineers, AI engineers, statistical 
+programmers, and so on. Where does a **data scientist** fit into this picture and 
 what are the skills a data scientist should have to be and to remain competitive in this landscape?
 
 My personal journey to data science led from forestry to forest biometry 
-to statistics to analytical software development. Like me, many will come to data science from a non-statistical and non-computational path. As educators we need to think about 
+to statistics to analytical software development. Like me, many will come to data 
+science from a non-statistical and non-computational path. As educators we need to think about 
 how to ensure the foundations of the discipline are being taught. Assuming that 
 everyone who strives for a career in data science comes to the discipline with a
 solid background in statistics, applied mathematics, and computer science is not 
@@ -30,12 +32,14 @@ technical and non-technical skills, combines hard and "soft" (human) skills, and
 has a focus on solving real-world problems. 
 
 It is OK to come to data science with strengths and weaknesses in different aspects 
-of statistics, mathematics, computer science, and domain knowledge. Those are the foundation **disciplines**. **Your foundation** lies in a genuine interest in these disciplines, the curiosity and drive to fill in the gaps, a growth mindset, and a desire for lifelong
-learning. If you hate math and are not willing to learn the linear algebra concepts 
-necessary to manipulate data science models---forget it. If you have not programmed 
-before and think that you can pass that off to some software engineer---forget it. 
-If you are afraid of public speaking and are not willing to work on improving 
-communication skills---forget it. 
+of statistics, mathematics, computer science, and domain knowledge. Those are the 
+foundation **disciplines**. **Your foundation** lies in a genuine interest in these 
+disciplines, the curiosity and drive to fill in the gaps, a growth mindset, and a 
+desire for lifelong learning. If you hate math and are not willing to learn the 
+linear algebra concepts necessary to manipulate data science models---forget it. 
+If you have not programmed before and think that you can pass that off to some 
+software engineer---forget it. If you are afraid of public speaking and are not 
+willing to work on improving communication skills---forget it. 
 
 ---
 
@@ -69,11 +73,11 @@ type of organization today engages with data and practices some form of data
 science. Despite this diversity of organizations practicing data science, the 
 vast majority of jobs are found in commercial settings, sometimes lumped together as
 *industry*. Data science solves real-world problems, the problems companies are
-interested in solving are those that support the business model. Data for Good,
+interested in solving are those that support the business model. **Data for Good**,
 data science in pursuit of making a better world, is a noble goal. A discretionary
 goal for most companies that places behind the primary goal of growing the
-company value and satisfying share holders. The reality of most jobs is Data
-for Money.
+company value and satisfying share holders. The reality of most jobs is **Data
+for Money**.
 
 ---
 
@@ -99,7 +103,7 @@ turn it into a data project, executing the data project as a team and translatin
 it back into a business, research, or policy solution.
 
 * Being able to communicate with business, information technology, marketing, 
-finance, and legal to define, develop and implement a data-driven solution.
+sales, finance, and legal to define, develop and implement a data-driven solution.
 
 * Being at times evangelist, programmer, project manager, instructor, presenter, 
 and implementer.

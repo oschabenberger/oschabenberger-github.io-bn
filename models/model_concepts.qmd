@@ -38,7 +38,7 @@ theop  <- read.csv("../datasets/theophylline.csv")
 attach(theop)
 ```
 
-```{r, echo=FALSE, fig.align="center", out.width="90%"}
+```{r, echo=FALSE, fig.align="center", out.width="70%"}
 #| label: fig-theop-data
 #| fig.cap: Theophylline concentration over time in two groups of patients.
 plot(time,conc, 
@@ -113,7 +113,7 @@ show the movement of the Dow Jones Industrial Average (DJIA) during the first
 1,000 trading days of the 1970s and 1980s. Which of the panels are showing the DJIA 
 and which are random noise?
 
-![Figure 11-4 from @Silver2012. Random walk or stock market data?](images/Figure11_4_Silver.png){#fig-random-walk fig-align="center" width=80%}
+![Figure 11-4 from @Silver2012. Random walk or stock market data?](images/Figure11_4_Silver.png){#fig-random-walk fig-align="center" width=70%}
 
 What do we learn from this?
 
@@ -164,7 +164,7 @@ there have been about 30 El Niño episodes since 1950 with strong El Niño event
 in 1982--83, 1997--98, and 2014--16. You recognize El Niño when the SOI dips
 negative for a period of time. La Niña is marked by periods of positive SOI values.
 
-```{r, echo=FALSE, out.width="80%", fig.align="center"}
+```{r, echo=FALSE, out.width="70%", fig.align="center"}
 #| fig.cap: Monthly SOI data from 1951 to mid-2023 according to NOAA.
 #| label: fig-soi-data
 soi_data <- read.csv(file="../datasets/southern_oscillation.csv")
@@ -187,8 +187,8 @@ with different time horizons?
 The primary distinction of learning methods in data science is between 
 **supervised** and **unsupervised** methods of learning (@fig-learning-mindmap).
 However, there are other important forms of learning from data, for example,
-self-supervised learning and reinforcement learning (RL), which are important
-for machine learning and artificial intelligence applications. 
+self-supervised learning, active learning, and reinforcement learning (RL), 
+which are important for machine learning and artificial intelligence applications. 
 
 ![Important types of statistical learning](images/LearningMethodsMindMap.png){#fig-learning-mindmap fig-align=center width=80% .lightbox}
 
@@ -205,11 +205,14 @@ Supervised learning trains statistical learning models through a target variable
 :::
 
 **Supervised learning** is characterized by the presence of a target variable 
-(dependent variable, response variable, output variable); it is the attribute we 
-wish to model. The training and test data sets contain values for the target 
-variable, also called the **labels** in machine learning. The other variables in 
-the data set are potentially input variables. This is the predominant form of 
-learning in data science applications.
+(dependent variable, response variable, output variable); it is the attribute about
+which we want to draw inferences (predict, classify, estimate. test hypotheses). 
+The training and test data sets contain values for the target 
+variable, also called the **labels** in machine learning. Data for supervised
+learning is often called labeled data (see @fig-learning-mindmap).
+The other variables in the data set are potentially input variables. Other commonly 
+used names for the inputs are independent variables, predictor variables, regression variables.
+Supervised learning is the predominant form of learning in data science applications.
 
 Goals of supervised learning include to
 
@@ -227,7 +230,7 @@ from a high-dimensional to a lower-dimensional space.
 
 Studies can pursue one or more of these goals. For example, you might be interested 
 in understanding the relationship between target and input variables and use that 
-relationship for predictions as well as testing of hypotheses.
+relationship to predict and to test hypotheses.
 
 The name supervised learning comes from thinking of learning in an environment 
 that is supervised by a teacher. The teacher asks questions for which they know 
@@ -239,7 +242,7 @@ to **generalize**.
 
 The parallel between the description of supervised learning in a classroom and 
 training an algorithm on data is obvious: the problems asked by the teacher, 
-the learning algorithm, are the data points, $Y$ is the correct answer, the 
+the learning algorithm, are the data points, the target $Y$ is the correct answer, the 
 inputs $x_{1},\cdots,x_{p}$ are the information used by the students to answer 
 the question. The discrepancy between question and answer is measured by a
 **loss function**: 
@@ -250,8 +253,9 @@ or some such metric. Teaching the students reduces the loss as their answers get
 closer to the correct answers, the ground truth. Training stops when the students
 can transfer knowledge to solve previously unseen problems. We are not interested 
 in teaching students to memorize the answers to the questions asked in class. If
-that were the case we would just train until the loss function reaches zero. We
-do not know whether the students have learned the concepts or just memorized the
+that were the case we would just train until the loss function reaches zero on
+the training data. We
+would not know whether the students have learned the concepts or just memorized the
 answers. To avoid the latter, we need to validate the students' knowledge on
 new questions and not overdo memorization.
 
@@ -276,7 +280,7 @@ you encounter in supervised learning.
 +-----------------------------------------+----------------------------------------------+---------------------------------------------------+
 | Generalized additive models             | Mixed models (linear and nonlinear)          | Models for correlated data (spatial, time series) |
 +-----------------------------------------+----------------------------------------------+---------------------------------------------------+
-| Support-vector machines                 | Neural networks                              | Extreme gradient boosting                         |
+| Support vector machines                 | Neural networks                              | Extreme gradient boosting                         |
 +-----------------------------------------+----------------------------------------------+---------------------------------------------------+
 
 : A sampling of supervised learning methods. {#tbl-supervised-methods .striped}
@@ -301,8 +305,14 @@ In unsupervised learning methods a target variable is not present.
 :::
 
 Unsupervised learning does not utilize a target variable; hence it cannot 
-predict or classify observations. However, we are still interested in discovering 
-structure, patterns, and relationships in the data.
+predict or classify observations in the usual sense. However, we are still interested 
+in discovering structure, patterns, and relationships in the data. When data are
+grouped into sets of similar data points by an unsupervised algorithm, we might
+want to predict which group a new observation belongs to. This sounds like 
+a prediction in a classification model. The difference is that in a supervised
+context we know the class memberships during training. In an unsupervised
+context the definition of the classes (the clusters) is the output of the 
+learning method.
 
 The term unsupervised refers to the fact that we no longer know the ground truth
 because there is no target variable. The concept of a teacher who knows the
@@ -378,11 +388,15 @@ $$
 **Self-supervised learning** (SSL) is a form of learning that combines elements of supervised
 and unsupervised learning. Like unsupervised learning, the data is not labeled,
 that is, there is no target variable. Like the majority of supervised learning
-applications, the goal is to predict or classify observations. 
+applications, the goal is to predict or classify. 
 
 SSL accomplishes these seemingly contradictory features by implicitly and 
 autonomously extracting relationships, patterns, and knowledge from the training
-data. Generative pretrained transformers (GPT), for example, are trained in a
+data. It creates its own supervisory signals from unlabeled data; the model learns 
+to predict parts of its input from other parts. For example, a language model
+trained on text can predict more text. 
+
+Transformer models such as GPTs (generative pretrained transformers), are trained in a
 self-supervised way as autoregressive language model. During training the model
 learns the relevant patterns and relationships in the text input data.
 
@@ -390,16 +404,41 @@ In a second step, applications are built on top of the **foundation models**
 trained in a self-supervised fashion. For example, ChatGPT is a question-answer
 applications built on top of the GPT foundation model.
 
+### Active Learning
+
+**Active learning** is another technique to make use of limited amounts of labeled 
+data. Consider the situation where some data are labeled and some data are
+not yet labeled. This situation can arise when creating the labels is done 
+by human interpreters and is time consuming (labeling images, extracting information
+from video or audio data, ...).
+
+An active learning algorithm begins training on the available labeled data and
+strategically suggests which of the unlabeled data to best add to the training set. 
+Human interpreters then label the suggested data and add it to the training data.
+The model is then retrained on the enlarged data set.
+
+The key distinction between self-supervised and active learning is that SSL
+creates its own labels from unlabeled data, while active learning intelligently 
+requests human-provided labels for specific examples.
+
+
 ### Reinforcement Learning
 
 Reinforcement learning (RL) is unique to machine learning and does not fall neatly 
 in the supervised/unsupervised learning categories. It is a powerful method that 
 received much attention when algorithms were trained on data to play games.
 
-The approach, based on reinforcement learning, was fundamentally different from 
-the expert system-based approach used so far to teach computers how to play games. 
+In reinforcement learning, an agent (a player) is taking actions (makes moves) 
+in an environment (the game). The agent learns by interacting with the environment 
+by receiving feedback on the moves. Actions are judged by a reward function 
+(a score) and the system is trained to maximize the sum of future rewards. In 
+other words, given your current position in the game, choose the next move to 
+maximize the score from here on out.
+
+Training computers to play games based on reinforcement learning is fundamentally 
+different from the expert system-based approach that had been used previously. 
 An expert system translates the rules of the game into machine code and adds 
-strategy logic. For example, the Stockfish open-source chess program, released 
+game strategy. For example, the Stockfish open-source chess program, released 
 first in 2008, has developed with community support into (one of) the best chess 
 engines in the world. In 2017, Google's DeepMind released AlphaZero, a chess system 
 trained using reinforcement learning. After only 24 hours of training, the 
@@ -411,16 +450,9 @@ system that beat the best Go player in the world, Lee Sedol, four to one. This
 was a remarkable achievement as Go had been thought to be so complex and requiring 
 intuition that would escape computerization at the level of expert players.
 
-In reinforcement learning, an agent (a player) is taking actions (makes moves) 
-in an environment (the game). The agent learns by interacting with the environment 
-by receiving feedback on the moves. Actions are judged by a reward function 
-(a score) and the system is trained to maximize the sum of future rewards. In 
-other words, given your current position in the game, choose the next move to 
-maximize the score from here on out.
-
 An interesting difference between AlphaGo and AlphaZero is the nature of the 
 training data. Both systems are trained using reinforcement learning. AlphaGo 
-was trained on records of many expert-level games. It was trained to play against 
+was trained on many records of expert-level games. It was trained to play against 
 historic experts. Success was getting better compared to how human experts played. 
 AlphaZero was trained by playing against itself. Success was beating its former self.
 
@@ -445,7 +477,7 @@ performing poorly in real applications.
 ---
 
 Until recently, a limitation of RL was the need for a good reward function. It 
-is important that actions in the environment are properly judged. In situation 
+is important that actions in the environment are properly judged. In situations 
 where the result of a move is difficult to judge, reinforcement learning was 
 difficult to apply. For example, in natural language processing, where an action 
 produces some prose, how do we rate the quality of the answer?
@@ -454,12 +486,10 @@ This was the problem faced by systems like ChatGPT. How do you score the answer
 produced during training to make sure the algorithm continuously improves? The 
 solution was a form of reinforcement learning modified by human intervention. 
 RLHF, reinforcement learning with human feedback, uses human interpreters to 
-assign scores to the actions (the Chat-GPT answers).
+assign scores to the actions (the ChatGPT answers).
 
 
 ## Regression and Classification
-
-### Regression and the Regression to the Mean Fallacy
 
 The term *regression* was coined by Sir Francis Galton in 1877 in his study of 
 genetics. Galton observed a relationship between physical attributes of offspring 
@@ -467,6 +497,8 @@ and their parents. He found that offspring deviated less from the mean value of
 the population than their parents did. Taller parents tend to have 
 taller children, but children of taller parents tend to be shorter than their 
 parents and children of shorter parents tend to be taller than their parents.
+
+### Regression to the Mean
 
 The cause Galton attributed to this phenomenon---which he called 
 *regression toward mediocrity*---is controversial, his arguments had implications 
@@ -477,7 +509,7 @@ there is a **regression to the mean**.
 
 @fig-sl-regression-to-the-mean displays this phenomenon for the distribution 
 of HDL cholesterol values in a single person. Our cholesterol levels vary from 
-day to day and if the distribution is normally distributed, it might look like 
+day to day and if their distribution is Gaussian, it might look like 
 the density in the figure, centered at a mean of 50 mg/dl. Suppose you measure a 
 person’s HDL cholesterol, and it results in a first measurement of 30 mg/dl. The 
 value is on the low side of the distribution, but it is not implausible. A follow-up 
@@ -486,11 +518,11 @@ where most of the probability density is located. A second measurement might thu
 return a value of 55 mg/dl. A regression to the mean occurred between the first 
 and second measurements.
 
-![An example of regression to the mean. An extreme observation is more likely to be followed by a less extreme observation, one that falls near the center of the distribution.](images/Regression_to_the_mean.png){#fig-sl-regression-to-the-mean .lightbox fig-align="center" width="80%"}
+![An example of regression to the mean. An extreme observation is more likely to be followed by a less extreme observation, one that falls near the center of the distribution.](images/Regression_to_the_mean.png){#fig-sl-regression-to-the-mean .lightbox fig-align="center" width="70%"}
 
 :::{.assignment}
 ::::{.assignment-header}
-Assignment: Random Multiple-choice Answers
+Exercise: Random Multiple-choice Answers
 ::::
 ::::{.assignment-container}
 Suppose you administer a multiple-choice exam to a group of students who choose
@@ -514,14 +546,11 @@ Their initial high scores were due to luck.
 ::::
 :::
 
-The term regression has evolved to describe statistical methods that model the 
-mean behavior of an attribute and separate it from non-systematic, random behavior. 
 The regression to the mean phenomenon does not mean regression methods are bad. 
 It is a fact of random variation and a real fallacy when interpreting data. In 
 the cholesterol example, is the change from 30 to 50 mg/dl of HDL due to natural 
 variation or due to a systematic effect, for example, a medical intervention? 
-Regression is intended to separate signal from noise. The regression to the mean 
-fallacy is to misinterpret random variation as a signal.
+The regression to the mean fallacy is to misinterpret random variation as a signal.
 
 ::: example
 ::: example-header
@@ -547,6 +576,10 @@ effective in reducing the risk of heart disease.
 
 ### Regression Problems
 
+The term regression has larger meaning today than the regression to the mean
+phenomenon. Regression problems are those where we study the mean behavior of an 
+attribute and separate it from non-systematic, random behavior. 
+
 ::: definition
 ::: definition-header
 Definition: Regression Model
@@ -555,11 +588,17 @@ Definition: Regression Model
 ::: definition-container
 A **regression model** is a statistical model that describes how the mean of a 
 random variable depends on other factors. The factors are often called inputs, 
-predictor variables, or regressors.
+predictor variables, independent variables, or regressors.
 
-The variable whose mean is modeled is called the target variable, response variable, 
-or dependent variable.
+The variable whose mean is modeled is called the target variable, output variable,
+response variable, or dependent variable.
 :::
+:::
+
+:::{.callout-note}
+It is sometimes assumed that regression models are only for continuous target
+variables. That is not correct. You can model the mean of a count variable (a
+discrete variable) or the mean of a categorical variable. 
 :::
 
 Regression models are not just for continuous response data, they apply to all 
@@ -576,7 +615,7 @@ introduction, the number of parameters and the number of inputs do not have to
 be directly related.
 
 Even if the target variable is categorical, we might be interested in modeling 
-the mean of the variable. The simplest case of categorical variables are binary 
+the mean of the variable. The simplest case of categorical variables are **binary** 
 variables with two levels (two categories). This is the domain of logistic regression. 
 As seen earlier, if the categories are coded numerically as $Y = 1$ for the 
 category of interest (the "event") and $Y = 0$ for the "non-event" category, the 
@@ -604,10 +643,9 @@ $$
 
 This is a rather complicated model, but we will see later that it is a 
 straightforward generalization of the two-level case. Instead of one linear predictor 
-we now have separates predictors for the categories. The point of introducing the 
+we now have separate predictors for the categories. The point of introducing the 
 model here is to show that even in the categorical case we can apply regression 
-methods---they predict category probabilities rather than the mean of a continuous 
-variable.
+methods---they predict category probabilities.
 
 ### Classification Problems
 
@@ -779,14 +817,14 @@ Based on the four cells in the confusion matrix many statistics can be calculate
 |:------------------|:---------------------------:|:------------------------|
 | **False Positive Rate (FPR)** |             FP / (FP + TN)              | The rate of the true negative cases that were predicted to be positive |
 | **False Negative Rate (FNR)** |             FN / (TP + FN)              | The rate of the true positive cases that were predicted to be negative |
-| **Sensitivity**               |        TP / (TP + FN) = 1 – FNR         | This is the true positive rate; also called **Recall**                 |
-| **Specificity**               |         TN / (FP + TN) = 1— FPR         | This is the true negative rate                                         |
-|                               |                                         |                                                                        |
-| **Accuracy**                  |     (TP + TN) / (TP + TN + FP + FN)     | Overall proportion of correct classifications                          |
-| **Misclassification rate**    |     (FP + FN) / (TP + TN + FP + FN)     | Overall proportion of incorrect classifications, 1 – Accuracy          |
+| **Sensitivity**               |        TP / (TP + FN) = 1 – FNR         | This is the true positive rate; also called **Recall**   |
+| **Specificity**               |         TN / (FP + TN) = 1— FPR         | This is the true negative rate              |
+| **Accuracy**                  |     (TP + TN) / (TP + TN + FP + FN)     | Overall proportion of correct classifications |
+| **Balanced Accuracy**         |  (TP / (TP + FN) + TN / (TN + FP)) / 2  | Average of sensitivity and specificity |
+| **Misclassification rate**    |     (FP + FN) / (TP + TN + FP + FN)     | Overall proportion of incorrect classifications, 1 – Accuracy   |
 | **Precision**                 |             TP / (TP + FP)              | Ratio of true positives to anything predicted as positive              |
-| **Detection Rate**            |        TP / (TP + TN + FP + FN)         |                                                                        |
-| **No Information Rate**       | $\frac{\max(TP+FN,FP+TN)}{TP+TN+FP+FN}$ | The proportion of observations in the larger observed class            |
+| **Detection Rate**            |        TP / (TP + TN + FP + FN)         | |
+| **No Information Rate**       | $\frac{\max(TP+FN,FP+TN)}{TP+TN+FP+FN}$ | The proportion of observations in the larger observed class |
 | **F Score** | $\frac{2\text{TP}}{2\text{TP} + \text{FP} + \text{FN}}$ | Harmonic mean of precision and recall |
 
 : Statistics calculated from a 2 x 2 confusion matrix. {#tbl-confusion-statistics .striped .hover}
@@ -794,14 +832,14 @@ Based on the four cells in the confusion matrix many statistics can be calculate
 The model **accuracy** is measured by the ratio of observations that were correctly 
 classified, the sum of the diagonal cells divided by the total number of observations. 
 The **misclassification rate** is the complement of the accuracy, the sum of 
-the off-diagonal cells divided by the total number of observations.
+the off-diagonal cells divided by the total number of observations. 
 
 The **sensitivity** (**recall**) is the ratio of true positives to what should 
 have been predicted as positive. The **specificity** is the ratio of true negatives 
 to what should have been predicted as negative. These are **not** complements of 
 each other; they are calculated with different denominators.
 
-The problem with focusing solely on accuracy to measure the quality of a classification
+One problem with focusing solely on accuracy to measure the quality of a classification
 model is that the two possible errors, false positives and false negatives might 
 not be of equal consequence. For example, it might not matter how accurate a 
 model is unless it achieves a certain sensitivity---the ability to correctly identify positives.
@@ -831,8 +869,14 @@ check the no-information rate of the data. The proportion of observations in the
 larger observed class is (958 + 7)/1,000 = 0.965. The accuracy of the decision 
 rule is only slightly larger. In other words, if you were to take a naïve approach 
 and predict all observations as “No” without looking at the data, that naïve 
-decision rule would have an accuracy of 96.5%. The model did not buy ads much 
+decision rule would have an accuracy of 96.5%. The model did not buy us much 
 over the naïve decision rule.
+
+Accuracy is not a reliable measure when the data are highly unbalanced with respect
+to the event and non-event categories (see next section). **Unbalanced accuracy**,
+the average of sensitivity and specificity, gives equal weight to the performance 
+on both positive and negative classes, regardless of their proportions in the data 
+set. It prevents the metric from being dominated by the majority class.
 
 The **precision** of the binary classifier is the number of true positive predictions
 divided by all positive predictions. 
@@ -847,6 +891,90 @@ problems. The goal of the score is to balance both precision and recall, but the
 relative importance of the two depends on the problem. The $F$ score does not 
 take into account true negatives and is problematic if positive and negative
 outcomes are unbalanced.
+
+#### Imbalanced data sets
+
+<!---
+A good tutorial with a simulation, also discusses weighted analysis.
+https://dpmartin42.github.io/posts/r/imbalanced-classes-part-1
+--->
+
+Suppose we have a two-category classification problem. If the two classes appear
+with roughly the same frequencies we refer to a **balanced** situation. Imbalance
+exists when the two classes have very different sample frequencies. The confusion
+matrix in @tbl-confusion-example is an example of a highly imbalanced data set.
+(958 + 7)/1,000 = 0.965 of the observations fall into the **majority** class,
+only 0.035 fall into the **minority** class.
+
+The problem with highly unbalanced data sets is that they tend to favor the 
+majority class in training. Even a completely uninformative model that would
+always predict the majority class (without looking at any data) would have a
+very high accuracy. Such a model would predict most observations correctly simply
+because almost all observations fall into that class. This is a problem because
+in most applications where data are imbalanced with respect to the target variable,
+the category of interest (the *event* category) is the minority category. When we 
+investigate equipment failures, fraud cases, manufacturing defects, rare diseases, 
+etc., we model **rare** events. Algorithms need to learn to find needles in a haystack. 
+Furthermore, accuracy is often not the relevant model performance criterion. 
+Sensitivity (recall), specificity, and precision are then more relevant.
+
+To help the algorithm better learn the minority class of interest, you can adjust 
+its focus on the minority class by using a weighted analysis or by adjusting
+the proportion of events to non-events. You can think of this as a data pre-processing
+step and it involves reducing the number of cases in the majority class (downsampling)
+or increasing the number of cases in the minority class (upsampling).
+
+**Downsampling** eliminates at random observations in the majority class until the 
+ratio of events and non-events meets a target value. It is not necessary to 
+downsample to a 50:50 ratio between events and non-events. You have to achieve
+an event ratio where the algorithm can properly learn the minority class. You
+can monitor how balanced accuracy (or AUC) changes with the downsampling rate.
+
+Problems with downsampling are the loss of information and the reduction in 
+sample size. When working with qualitative input variables you need to ensure
+that downsampling does not drop levels of the input variable. For example, 
+if you have three age groups in the data set and only two remain after downsampling,
+the model will not be able to make predictions for the eliminated age group.
+Downsampling reduces computational cost since it reduces the size of the training 
+set and should be considered when you have large sample sizes to begin with.
+
+**Upsampling** (also known as oversampling) the minority class avoids the problem
+of information loss. Here we ad d observations in the minority class to the 
+training data until a target ratio of events and non-events (not necessarily 50:50)
+is achieved. While it preserves information in the data, simply randomly 
+duplicating observations in the minority class can lead to overfitting. By duplicating
+data you are enticing the algorithm to learn the training data too closely.
+
+To avoid the overfitting problem with random upsampling, methods have been 
+developed that add not just duplicate data points. SMOTE (Synthetic Minority 
+Oversampling Technique) is an interpolation technique that generates new data
+points in the minority class [@Chawla_SMOTE]. SMOTE works as follows:
+
+* Select an observation in the minority class at random.
+* Find its $k$ nearest neighbors, this if often based on a $k$-NN analysis of the
+minority observations with $k$=5.
+* Choose one of the $k$ nearest neighbors at random. 
+* Interpolate between the randomly chosen observation (in step 1) and the chosen
+nearest neighbor, taking a random step toward the neighbor in feature space
+* Generate the new data point as a convex (weighted) combination between observation
+and the neighbor.
+
+You can think of SMOTE as a **data augmentation** technique.
+
+<!---
+Good walkthrough with Python code:
+https://machinelearningmastery.com/smote-oversampling-for-imbalanced-classification/
+--->
+
+---
+
+If data sets are highly unbalanced, upsampling will increase the computational
+burden. This effect is exacerbated if the target event ratio is close to 50:50
+or if the data set is large to begin with. To avoid this problem and the 
+respective pitfalls of upsampling and downsampling, the methods can be combined: 
+downsample some observations in the majority class without sacrificing information and
+upsampling observations in the minority class using SMOTE. This is the procedure
+suggested in @Chawla_SMOTE.
 
 
 ## Prediction and Explanation
@@ -903,7 +1031,7 @@ to binomial sample proportions. $\text{E}\left\lbrack p_{i} \right\rbrack = \pi_
 is the probability that an insect dies when $\log_{10}x_{i}$ amount of insecticide 
 is applied.
 
-![Logits of larvae mortality sample proportion against insecticide concentration and log concentration.](images/InsectMortality.png){#fig-sl-insect-mortality}
+![Logits of larvae mortality sample proportion against insecticide concentration and log concentration.](images/InsectMortality.png){#fig-sl-insect-mortality width=75%}
 
 The investigators want to understand the relationship between larvae mortality 
 and insecticide concentration. The parameter estimate for $\beta_{1}$ is of 
@@ -924,7 +1052,7 @@ known as an **inverse prediction** problem: rather than predicting $\text{E}\lbr
 for a given value of $X$, we are interested in finding the value $X$ that 
 corresponds to a given a value of $\text{E}\lbrack Y\rbrack$.
 
-![Fitted dose-response curve and inverse prediction of \$LD\_{50}\$. The \$LD\_{50}\$ is calculated from the value where the vertical line intersects the horizontal axis.](images/InsectMortality_2.png){#fig-sl-insect-mortality2 width="80%"}
+![Fitted dose-response curve and inverse prediction of $LD_{50}$. The $LD_{50}$ is calculated from the value where the vertical line intersects the horizontal axis.](images/InsectMortality_2.png){#fig-sl-insect-mortality2 width=75%}
 
 The $LD_{50}$ value can be calculated from the model equation. More generally,
 we can find any value on the x-axis that corresponds to a particular mortality 

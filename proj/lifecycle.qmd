@@ -1,4 +1,15 @@
-# The Data Science Project Lifecycle {#sec-proj-lifecycle}
+# The Project Lifecycle {#sec-proj-lifecycle}
+
+:::{.callout-tip title="Quotes"}
+:::{.flushright}
+How does a project get to be a year late? One day at a time.\
+[Fred Brooks]{.quoteauthor}\
+
+I have a secret project which adds four hours every day to the 24 hours we have. \
+There's a bit of time travel involved.\
+[Sundar Pichai, CEO, Alphabet]{.quoteauthor}
+:::
+:::
 
 ## Introduction
 
@@ -10,8 +21,7 @@ in the real world. At least not most of them; almost none of them. In this secti
 we examine the typical structure of data science projects in non-research settings---that is, 
 a project to solve a specific problem in an organization. Let’s call it the 
 *business* problem, acknowledging that such problems arise in industry, government, 
-and non-profit organizations alike. The next chapter takes a closer look at data 
-science in research settings.
+and non-profit organizations alike. 
 
 Data science models play a big part in this, but it is not where we start. Building 
 a model is just one step in the lifecycle of a data science project.
@@ -41,7 +51,7 @@ system through which customers and representatives interact.
 
 It is best to recognize the reality that data science projects will likely fail 
 unless they are carefully planned and executed. Successful projects combine technical 
-skills with soft skills such as communication, trust building, transparency, and 
+skills with human skills such as communication, trust building, transparency, and 
 empathy. Successful projects are a team sport that incorporate collaboration and 
 communication throughout the project cycle with data scientists taking on multiple 
 roles. The data scientist is at times evangelist, planner, presenter, data wrangler, 
@@ -55,7 +65,7 @@ requirements, communicate insights, manage projects, etc. In the terminology of
 people management, data scientists are “T-shaped people” who combine depth of 
 expertise with broad cross-functional competencies (@fig-proj-tshaped).
 
-![The concept of “T-shaped” competencies, combining deep expertise in one area with breadth in multiple disciplines and systems.](images/TShapedPeople.png){#fig-proj-tshaped .lightbox fig-alt="Breadth and depth of experience displayed in the shape of a \"T\"" fig-align="center" width="85%"}
+![The concept of “T-shaped” competencies, combining deep expertise in one area with breadth in multiple disciplines and systems.](images/TShapedPeople.png){#fig-proj-tshaped .lightbox fig-alt="Breadth and depth of experience displayed in the shape of a T" fig-align="center" width="85%"}
 
 This allows data scientists to understand and communicate about many disciplines 
 and systems (the horizontal bar of the generalist) combined with deep expertise 
@@ -66,7 +76,8 @@ collaboratively.
 The associated skill sets are exercised during the key stages in the 
 data science project lifecycle.
 
-Our methodology calls out seven phases in the project: discovery, data engineering, model planning, model building, communication, deployment, and monitoring (@fig-proj-lifecycle).
+Our methodology calls out seven phases in the project: discovery, data engineering, 
+model planning, model building, communication, deployment, and monitoring (@fig-proj-lifecycle).
 
 ![The stages of the data science project lifecycle.](images/DSProjectLifeCycle.png){#fig-proj-lifecycle .lightbox fig-alt="Diagram of a process" fig-align="center" width="55%"}
 
@@ -76,26 +87,35 @@ standard process for data mining is the foundation of the data science process
 model according to the [Data Science Process Alliance](https://www.datascience-pm.com/).
 CRISP-DM is shown in @fig-proj-crispdm.
 
-![The CRISP-DM model for the data science process.](images/CRISP-DM.png){#fig-proj-crispdm .lightbox fig-align="center" width="75%"}
+![The CRISP-DM model for the data science process.](images/CRISP-DM.png){#fig-proj-crispdm .lightbox fig-align="center" width="60%"}
 
-The process models use similar terms and stages, what matters is not the labels but 
-the general flow that results in a data-driven solution to a real-world problem, 
-that the stages are iterative, and that a project does not start with modeling data. 
-To deliver a production data project that is used repeatably by an organization 
-requires many steps before and after the data modeling phase.
+
+@fig-ml-cycle is another example of a machine learning project life cycle [@Patruno_MLOPS].
+
+![Machine learning life cycle example from @Patruno_MLOPS.](images/ml_lifecycle.webp){#fig-ml-cycle fig=align=center width=65% .lightbox}
+
+The lifecycle models use similar terms and stages, what matters is not the labels but 
+
+- the general flow that results in a data-driven solution to a real-world problem, 
+- the stages are iterative, 
+- a project does not start with modeling data,
+- deployment and monitoring are part of the project cycle.
+
+To deliver a production data project that is used by an organization at scale
+on new data requires many steps before and after the data modeling phase.
 
 The modules of this book are organized according to the flows in @fig-proj-lifecycle
-and @fig-proj-crispdm. During the discovery phase we develop an understanding
+and @fig-proj-crispdm. During the **discovery** phase we develop an understanding
 of the business problem and whether it can be solved with data technology. 
-The data engineering phase develops our understanding of available and needed
-data sources and how to prepare the data for the modeling phase. Modeling
+The **data engineering** phase develops our understanding of available and needed
+data sources and how to prepare the data for the **modeling** phase. Modeling
 comprises planning and building of statistical, machine learning, and AI models
 to address the core of the business problem. The models need to be evaluated
 against metrics that map back to the business problem. Models that perform well
 on statistical grounds but do not move the needle on key business metrics are
-not helpful. This step also involves communicating the data science solutions to
+not helpful. This step also involves **communicating** the data science solutions to
 stakeholders outside of the immediate team. If the project is accepted at this stage,
-the model needs to be integrated and deployed and its performance monitored.
+the model needs to be integrated and **deployed** and its performance **monitored**.
 
 In the following paragraphs we introduce the phases of the project life cycle
 a bit further, then dedicate entire modules to the steps.

@@ -604,15 +604,19 @@ If $Y_1, \cdots, Y_n$ are a random sample from a Poisson($\lambda$) distribution
 the log-likelihood function is
 
 $$
-    \mathcal{l}(\lambda; \by) = \sum_{i=1}^n \left( y_i \log(\lambda) - \lambda - \log(y_i!) \right ) = 
+\mathcal{l}(\lambda; \by) = \sum_{i=1}^n \left( y_i \log(\lambda) - \lambda - \log(y_i!) \right ) = 
     \log(\lambda)\sum_{i=1}^n y_i - n\lambda - \sum_{i=1}^n \log(y_i!)
 $$ Setting the derivative with respect to $\lambda$ to zero yields $$
     \frac{1}{\lambda}\sum_{i=1}^n y_i = n
 $$ The MLE of $\lambda$ is $\widehat{\lambda} = \overline{y}$, the sample mean.
 
 Suppose that $n=4$ and we observe $\by = [3, 4, 2, 2]$. The sample mean is $\overline{y} = 2.75$. 
-The following `R` code computes the log-likelihood function $\mathcal{l}(\lambda; \by)$ for 
+The following code computes the log-likelihood function $\mathcal{l}(\lambda; \by)$ for 
 different values of $\lambda$. The log-likelihood function has a maximum at $\overline{y} = 2.75$.
+
+:::{.panel-tabset group="language"}
+
+## R
 
 ```{r, out.width="75%", fig.align="center"}
 y <- c(3, 4, 2, 2)
@@ -628,6 +632,38 @@ plot(lambda,loglike,type="l",bty="l",lwd=1.5,
 abline(v=mean(y),lty="dotted",lwd=1.5,col="red")
 
 ```
+
+## Python
+
+```{python, out.width="75%", fig.align="center"}
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+from scipy.special import factorial
+
+# Define the original data
+y = np.array([3, 4, 2, 2])
+n = len(y)
+sumy = np.sum(y)
+sumlogfac = np.sum(np.log(factorial(y)))
+
+# Create a range of lambda values
+lambda_values = np.arange(0.1, 5.1, 0.1)
+
+# Calculate log likelihood for each lambda
+loglike = sumy * np.log(lambda_values) - n * lambda_values - sumlogfac
+
+plt.figure(figsize=(8, 5))
+plt.plot(lambda_values, loglike, linewidth=1.5)
+plt.axvline(x=np.mean(y), linestyle='dotted', linewidth=1.5, color='red')
+plt.xlabel('λ')
+plt.ylabel('log likelihood')
+#plt.box(False)
+
+plt.show()
+```
+
+:::
 :::
 :::::
 

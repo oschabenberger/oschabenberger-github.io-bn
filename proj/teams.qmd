@@ -1,24 +1,15 @@
 
-```{=html}
-<style>
-.flushright {
-   text-align: right;
-}
-</style>
-```
-
-
-# Roles on Data Science Teams {#sec-teams}
+# Data Science Teams {#sec-teams}
 
 ::: {.callout-tip title="Quotes"}
 ::: {.flushright data-latex=""}
-*Group culture is one of the most powerful forces on the planet.*\
-Daniel Coyle, The Culture Code\
+Group culture is one of the most powerful forces on the planet.\
+[Daniel Coyle, The Culture Code]{.quoteauthor}\
 
-*Not finance. Not strategy. Not technology. It is teamwork that\
+Not finance. Not strategy. Not technology. It is teamwork that\
 remains the ultimate competitive advantage, because it is so\
-powerful and so rare.*\
-Patrick M. Lencioni, The Five Dysfunctions of a Team
+powerful and so rare.\
+[Patrick M. Lencioni, The Five Dysfunctions of a Team]{.quoteauthor}
 :::
 :::
 
@@ -33,10 +24,15 @@ video.
 Claire Sullivan at github.com/cj2001
 --->
 
-{{< video https://youtu.be/zIx6ueR2Zx4?si=S2-pqNMhh3b9KR1J&t=180 >}}
+:::{.centered}
+{{< video https://youtu.be/zIx6ueR2Zx4?si=S2-pqNMhh3b9KR1J&t=180 
+    width="600" height="450"
+>}}
+:::
 
 Here are the Cliffs notes:\
-The CEO hears about data as the new oil, the competitors all create data strategies,
+
+* The CEO hears about data as the new oil, the competitors all create data strategies,
 data science teams, and have a Chief Data Officer. The CEO develops a serious case
 of FOMO (fear of missing out). Worried about remaining competitive, the CEO
 directs his people to "hire me some data scientists". The HR department has no 
@@ -44,17 +40,17 @@ experience in hiring data scientists since the company does not have any yet. Th
 do some background work, maybe engage a recruiting company, and hire a bunch 
 of data scientist.
 
-The data scientists start but there is no data culture in the company yet. 
+* The data scientists start but there is no data culture in the company yet. 
 There are no projects for them to work on, no product managers to guide any
 data product development. Since these are creative people, the data scientists
 look around and figure out what projects to work on. However, IT does not give
 them access to the data because the projects they invented are not tied to a 
 business need. IT hands the data science team some Excel spreadsheets to make 
-them go away--sigh. Since these are creative people, the data scientists start
+them go away---sigh. Since these are creative people, the data scientists start
 pulling some data together, building on their own some sub-optimal data pipeline
 that should have been built under normal circumstances by a data engineer. 
 
-Finally armed with some data, the data scientists engage in what they do best,
+* Finally armed with some data, the data scientists engage in what they do best,
 building models. Once they have results they are anxious to show them to the
 mover and shakers in the company but have a hard time getting on people's 
 calendars; they are lacking a champion. Meanwhile, the CEO is getting impatient
@@ -84,7 +80,7 @@ absence of data culture.
 
 Starting by focusing on hiring people without first figuring out what they 
 will do once they are on the job, not having a clue about what data you have
-and need and which problems can be solved with it, is the upside-down model of
+and need and which problems can be solved with it, is the **upside-down model** of
 running data initiatives. It will likely fail.
 
 The better way to start is to identify a problem (business problem, research question,
@@ -100,7 +96,7 @@ replacing a bunch of Excel spreadsheets into a data pipeline that feeds a dashbo
 You cannot properly staff a team if you do not know which tasks need to be 
 accomplished. So let's look at some common roles on data science teams.
 
-## Team Roles
+## Roles on Teams
 
 <!---
 https://www.datascience-pm.com/lessons-from-20-data-science-teams/
@@ -121,7 +117,10 @@ science team(s). More on that below.
 Drawing on [this](https://www.datascience-pm.com/team-roles/) and 
 [this](https://www.datascience-pm.com/data-science-roles/) blog by the Data 
 Science Process Alliance, the following roles and tasks are typically associated 
-with data science teams.
+with data science teams. The role titles are not used consistently. If you see
+a job announcement for Data Scientist, Data Analyst, Data Science Architect, 
+and so forth, check the list of responsibilities to see which role the announcement 
+has in mind.
 
 ### Data Scientist
 
@@ -200,8 +199,7 @@ applications and is a key role in deploying data science models into production.
 In some organizations, this role is also called the **machine learning engineer**.
 
 The data science developer integrates data science solutions but is keenly aware
-of the differences between developing data applications and software development
-(see below).
+of the differences between developing data applications and software development.
 
 Compared to the data scientist, a data science developer is weaker in statistics
 and mathematics but stronger in writing production code and in building and
@@ -229,7 +227,7 @@ organization. Tasks and responsibilities of the product manager include
 
 ### Project Manager
 
-While the product manager is responsible for the deliverable of a team the 
+While the product manager is responsible for the deliverable of a team, the 
 **project manager** is responsible for the project execution. The roles get
 often confused. The project manager is a coach, facilitator, obstacle remover,
 and cheerleader. Responsibilities and tasks include
@@ -267,11 +265,11 @@ of the team. Tasks and responsibilities include
 
 - Leading the data science team.
 - Directing and mentoring the team members.
-- Managing team resources (personnel, eqiupment, tools, vendor)
+- Managing team resources (personnel, equipment, tools, vendor)
 - Reporting on the team's performance
 
 
-## Centralization or Decentralization
+## Organizational Structure
 
 <!---
 https://www.datascience-pm.com/centralized-vs-decentralized-data-science-teams/
@@ -281,18 +279,17 @@ The question whether to operate data science team(s) as a centralized team---als
 known as a data science center of excellence (COE)---or as separate decentralized
 teams in the units of the organization, is irrelevant for small organizations
 with a single team or possibly a single data scientist.
-
 In larger organizations the question is relevant. As data science grows in
 importance in those places and more data related roles are hired, it matters
 how to structure the team. 
 
-### Centralized structure (COE)
+### Centralized (COE)
 
 In the centralized structure all data roles are in one organization. Business units
 such as Sales, Marketing, Product, Human Resources, or Finance draw on the 
 data professional in that COE (@fig-team-central).
 
-![Centralized data team.](images/TeamCentralized.png){#fig-team-central fig-align="center" width="70%" .lightbox}
+![Centralized data team.](images/TeamCentralized.png){#fig-team-central fig-align="center" width="65%" .lightbox}
 
 This structure has many advantages:
 
@@ -313,34 +310,34 @@ This gives exposure to different domains and enriches the data scientist experie
 This opportunity for growth and learning can lead to promotions without having
 to change organizations.
 
-A centralized structure is not without disadvantages. The domain knowledge (SMEs)
-are in the business units, the data teams are removed from that. The centralized
-structure creates a wall between domain and data teams. The resources of a COE are
-not unlimited and every unit in the organization calls on them. It can be 
-challenging to serve the needs of all units equitably. Units that have more 
-data or that are closer to customers and revenue might get priority.
+A centralized structure is not without disadvantages:
 
-Some business units are hesitant to provide access to sensitive data to employees
+- The data teams are removed from the business units where the domain knowledge 
+(SMEs) resides. 
+- The centralized structure creates a wall between domain and data teams.
+- The resources of a COE are not unlimited and every unit in the organization 
+calls on them. It can be challenging to serve the needs of all units equitably. 
+- Units that have more data or that are closer to customers and revenue might get priority.
+- Some business units are hesitant to provide access to sensitive data to employees
 outside of their control. Finance and Human Resources departments prefer to have
 their own employees work on finance or personnel data.
-
-Finally, the centralized structure, because of its size and central operation
+- The centralized structure, because of its size and central operation
 tends to be more bureaucratic and slower than a small agile team within a business
 unit. 
 
-### Decentralized Structure
+### Decentralized 
 
 In this organizational structure, Marketing, Sales, Finance, Human Resources,
 and so on, have their own data science teams. Advantages of this structure are
 data science teams that are aligned with the specific business unit and its 
 domain (@fig-team-decentralized).
 
-![Decentralized data teams in the business units.](images/TeamDecentralized.png){#fig-team-decentralized fig-align="center" width="70%" .lightbox}
+![Decentralized data teams in the business units.](images/TeamDecentralized.png){#fig-team-decentralized fig-align="center" width="65%" .lightbox}
 
 
 
 The Finance data science team knows how to work with finance data and what 
-problems matter to the Finance org. The data roles sit right next to the domain
+problems matter to the Finance organization. The data roles sit right next to the domain
 experts. The teams are smaller and more agile, able to respond to to requests more 
 quickly. Prioritization is not much of a problem if a request comes from within
 the hierarchy.
@@ -356,7 +353,7 @@ approaches, inconsistent environments, and duplication. The teams report into
 domain experts such as a Director of Marketing or a VP of Finance who do not 
 have a data science background. 
 
-### Hybrid Structure
+### Hybrid 
 
 The advantages of the centralized structure are the disadvantages of the
 decentralized structure and vice versa. Is there a middle ground? 
@@ -368,7 +365,7 @@ the individual business units, work on domain-specific problems by using the
 central data infrastructure (@fig-team-hybrid).
 
 
-![A hybrid organizational structure for data science teams. Central services are augmented by business unit-specific teams.](images/TeamHybrid.png){#fig-team-hybrid fig-align="center" width="70%" .lightbox}
+![A hybrid organizational structure for data science teams. Central services are augmented by business unit-specific teams.](images/TeamHybrid.png){#fig-team-hybrid fig-align="center" width="65%" .lightbox}
 
 Key for the success of the hybrid strategy is that business (decentral) and data 
 science management (central) need to be closely aligned. Otherwise the data 

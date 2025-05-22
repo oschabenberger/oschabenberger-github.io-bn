@@ -20,8 +20,6 @@
 
 [Solving the Last Mile Problem for Data Science Project Success](https://www.forbes.com/sites/forbestechcouncil/2019/07/23/solving-the-last-mile-problem-for-data-science-project-success/?sh=255737625493), Bill Waid, Forbes, 2019
 
-[The Ultimate Guide to Deploying Machine Learning Models](https://mlinproduction.com/deploying-machine-learning-models/), Luigi Patruno, 2020
-
 [Meet Airbnb’s official party pooper, who reduced partying by 5% in two years](https://www-cnbc-com.cdn.ampproject.org/c/s/www.cnbc.com/amp/2023/09/19/airbnb-party-preventer-naba-banerjee-reduced-parties-55percent-in-two-years.html), CNBC, Sept. 19, 2023
 
 ## From the data part
@@ -46,15 +44,5 @@
 [Regression to the mean: what it is and how to deal with it](https://academic.oup.com/ije/article/34/1/215/638499), by Barnett, A.G., van der Pols, J.C., and Dobson, A.J., International Journal of Epidemiology, 34(1), 2005.
 
 
-
-Causality, 2^nd^ ed., Judea Pearl, Cambridge University Press, 2009
-
-Matrices with Applications in Statistics, 2^nd^ ed., Franklin A. Graybill, Wadsworth International Group, Belmont, CA., 1983
-
-Theory and Application of the Linear Model, Franklin A. Graybill, Duxbury Press, North Scituate, Massachusetts, 1976
-
-Adjustments of an inverse matrix corresponding to changes in the elements of a given column or a given row of the original matrix. Sherman, J., and Morrison, W.J. Ann. Math. Stat., 20, 621, 1949
-
-Inverting modified matrices. Woodbury, M., Memorandum No. 42, Statistical Research Group, Princeton University, 1950.
 
 Mathematical Statistics and Data Analysis, 2^nd^ ed. John A. Rice, Duxbury Press, Belmont, CA, 1995
